@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import { ColorModeContext, useMode } from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
+import { SessionProvider } from 'next-auth/react';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -16,16 +18,23 @@ export default function MyApp(props) {
 	const handleDarkModeButton = () => {
 		colorMode.toggleColorMode();
 	};
-	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+	const {
+		Component,
+		emotionCache = clientSideEmotionCache,
+		pageProps: { session, ...pageProps },
+	} = props;
 	return (
 		<CacheProvider value={emotionCache}>
 			<Head>
 				<meta name='viewport' content='initial-scale=1, width=device-width' />
+				<link rel='icon' href='./icons8-connect.svg' />
 			</Head>
 			<ColorModeContext.Provider value={colorMode}>
 				<ThemeProvider theme={theme}>
 					<CssBaseline />
-					<Component {...pageProps} />
+					<SessionProvider session={session}>
+						<Component {...pageProps} />
+					</SessionProvider>
 				</ThemeProvider>
 			</ColorModeContext.Provider>
 		</CacheProvider>
