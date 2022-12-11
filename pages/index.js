@@ -1,18 +1,26 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button, IconButton } from '@mui/material';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useColors } from '../hooks';
+import NavBar from '../components/global/NavBar';
+import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 export default function Home() {
+	const { data: session } = useSession();
+	const { colors } = useColors();
+	console.log(session);
+
 	return (
-		<div className={styles.container}>
+		<Box className={styles.container}>
 			<Head>
-				<title>Create Next App</title>
+				<title>Leftovers</title>
 				<meta name='description' content='The largest food sharing app' />
-				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
 			<main className={styles.main}>
+				<NavBar />
 				<h1 className={styles.title}>Welcome to Leftovers!</h1>
 				<p>The largest food sharing app in the world</p>
 			</main>
@@ -28,6 +36,6 @@ export default function Home() {
 					</span>
 				</a>
 			</footer>
-		</div>
+		</Box>
 	);
 }
