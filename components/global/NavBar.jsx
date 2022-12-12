@@ -7,6 +7,7 @@ import { useColors } from '../../hooks';
 import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import UserMenu from '../UserMenu';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -20,10 +21,6 @@ const NavBar = () => {
 	const handleSignIn = () => {
 		console.log('clicked sign in');
 		signIn();
-	};
-	const handleSignOut = () => {
-		console.log('clicked sign out');
-		signOut();
 	};
 
 	const handleDarkMode = () => {
@@ -67,6 +64,7 @@ const NavBar = () => {
 				</Tooltip>
 				{session && (
 					<Tooltip
+						placement={showUserMenu ? 'left' : 'bottom'}
 						title={
 							<Box>
 								<Typography>{userEmail}</Typography>
@@ -78,32 +76,7 @@ const NavBar = () => {
 						</IconButton>
 					</Tooltip>
 				)}
-				{showUserMenu && (
-					<Box
-						position={'fixed'}
-						mr='10px'
-						top={'70px'}
-						right={'0'}
-						width='200px'
-						borderRadius='4px'
-						boxShadow={3}
-						backgroundColor={colors.primary[100]}>
-						<Box
-							width='100%'
-							borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
-							<Button sx={{ width: '100%' }}>
-								<Typography color={colors.primary[900]}>Profile</Typography>
-							</Button>
-						</Box>
-						<Box
-							width='100%'
-							borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
-							<Button onClick={handleSignOut} sx={{ width: '100%' }}>
-								<Typography color={colors.primary[900]}>Sign Out</Typography>
-							</Button>
-						</Box>
-					</Box>
-				)}
+				{showUserMenu && <UserMenu />}
 				<Box>
 					{!session && (
 						<Button onClick={handleSignIn}>
