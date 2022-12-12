@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,6 +15,7 @@ const NavBar = () => {
 	const userName = session?.user?.name;
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
+	const [showUserMenu, setShowUserMenu] = useState();
 
 	const handleSignIn = () => {
 		console.log('clicked sign in');
@@ -29,9 +30,13 @@ const NavBar = () => {
 		toggleColorMode();
 	};
 
+	const handleUserIcon = () => {
+		setShowUserMenu((bool) => !bool);
+	};
+
 	return (
 		<Box
-			padding='10px 50px'
+			padding='10px 20px'
 			display='flex'
 			justifyContent='space-between'
 			alignItems='center'
@@ -49,15 +54,17 @@ const NavBar = () => {
 				</Link>
 			</Box>
 			<Box display='flex' alignItems='center'>
-				<Box>
-					<IconButton onClick={handleDarkMode}>
-						{palette.mode === 'light' ? (
-							<DarkModeOutlinedIcon />
-						) : (
-							<DarkModeIcon />
-						)}
-					</IconButton>
-				</Box>
+				<Tooltip title='darkmode'>
+					<Box>
+						<IconButton onClick={handleDarkMode}>
+							{palette.mode === 'light' ? (
+								<DarkModeOutlinedIcon />
+							) : (
+								<DarkModeIcon />
+							)}
+						</IconButton>
+					</Box>
+				</Tooltip>
 				{session && (
 					<Tooltip
 						title={
@@ -66,16 +73,42 @@ const NavBar = () => {
 								<Typography>{userName}</Typography>
 							</Box>
 						}>
-						<IconButton>
-							<Image src={userIcon} width={30} height={30} alt='user icon' />
+						<IconButton onClick={handleUserIcon}>
+							<Image src={userIcon} width={24} height={24} alt='user icon' />
 						</IconButton>
 					</Tooltip>
 				)}
+				{showUserMenu && (
+					<Box
+						position={'fixed'}
+						mr='10px'
+						top={'70px'}
+						right={'0'}
+						width='200px'
+						borderRadius='4px'
+						boxShadow={3}
+						backgroundColor={colors.primary[100]}>
+						<Box
+							width='100%'
+							borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
+							<Button sx={{ width: '100%' }}>
+								<Typography color={colors.primary[900]}>Profile</Typography>
+							</Button>
+						</Box>
+						<Box
+							width='100%'
+							borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
+							<Button onClick={handleSignOut} sx={{ width: '100%' }}>
+								<Typography color={colors.primary[900]}>Sign Out</Typography>
+							</Button>
+						</Box>
+					</Box>
+				)}
 				<Box>
-					{session ? (
-						<Button onClick={handleSignOut}>Sign Out</Button>
-					) : (
-						<Button onClick={handleSignIn}>Sign In</Button>
+					{!session && (
+						<Button onClick={handleSignIn}>
+							<Typography color={colors.orangeAccent[900]}>Sign In</Typography>
+						</Button>
 					)}
 				</Box>
 			</Box>
