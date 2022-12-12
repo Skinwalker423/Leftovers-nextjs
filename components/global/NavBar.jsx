@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { useColors } from '../../hooks';
 import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import UserMenu from '../UserMenu';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -15,23 +16,24 @@ const NavBar = () => {
 	const userName = session?.user?.name;
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
+	const [showUserMenu, setShowUserMenu] = useState();
 
 	const handleSignIn = () => {
 		console.log('clicked sign in');
 		signIn();
-	};
-	const handleSignOut = () => {
-		console.log('clicked sign out');
-		signOut();
 	};
 
 	const handleDarkMode = () => {
 		toggleColorMode();
 	};
 
+	const handleUserIcon = () => {
+		setShowUserMenu((bool) => !bool);
+	};
+
 	return (
 		<Box
-			padding='10px 50px'
+			padding='10px 20px'
 			display='flex'
 			justifyContent='space-between'
 			alignItems='center'
@@ -49,33 +51,37 @@ const NavBar = () => {
 				</Link>
 			</Box>
 			<Box display='flex' alignItems='center'>
-				<Box>
-					<IconButton onClick={handleDarkMode}>
-						{palette.mode === 'light' ? (
-							<DarkModeOutlinedIcon />
-						) : (
-							<DarkModeIcon />
-						)}
-					</IconButton>
-				</Box>
+				<Tooltip title='darkmode'>
+					<Box>
+						<IconButton onClick={handleDarkMode}>
+							{palette.mode === 'light' ? (
+								<DarkModeOutlinedIcon />
+							) : (
+								<DarkModeIcon />
+							)}
+						</IconButton>
+					</Box>
+				</Tooltip>
 				{session && (
 					<Tooltip
+						placement={showUserMenu ? 'left' : 'bottom'}
 						title={
 							<Box>
 								<Typography>{userEmail}</Typography>
 								<Typography>{userName}</Typography>
 							</Box>
 						}>
-						<IconButton>
-							<Image src={userIcon} width={30} height={30} alt='user icon' />
+						<IconButton onClick={handleUserIcon}>
+							<Image src={userIcon} width={24} height={24} alt='user icon' />
 						</IconButton>
 					</Tooltip>
 				)}
+				{showUserMenu && <UserMenu />}
 				<Box>
-					{session ? (
-						<Button onClick={handleSignOut}>Sign Out</Button>
-					) : (
-						<Button onClick={handleSignIn}>Sign In</Button>
+					{!session && (
+						<Button onClick={handleSignIn}>
+							<Typography color={colors.orangeAccent[900]}>Sign In</Typography>
+						</Button>
 					)}
 				</Box>
 			</Box>

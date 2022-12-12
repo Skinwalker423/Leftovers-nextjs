@@ -25,7 +25,7 @@ export default function Home() {
 						variant='h1'
 						lineHeight={1.15}
 						fontSize='4rem'
-						color={colors.orangeAccent[400]}>
+						color={colors.orangeAccent[900]}>
 						Welcome to Leftovers!
 					</Typography>
 				</Box>
