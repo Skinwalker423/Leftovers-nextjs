@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useColors } from '../../hooks';
+import { ColorModeContext } from '../../config/theme';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const NavBar = () => {
 	const { data: session } = useSession();
-	console.log(session);
 	const userEmail = session?.user?.email;
 	const userIcon = session?.user?.image;
 	const userName = session?.user?.name;
-	const { colors } = useColors();
+	const { colors, palette } = useColors();
+	const { toggleColorMode } = useContext(ColorModeContext);
 
 	const handleSignIn = () => {
 		console.log('clicked sign in');
@@ -20,6 +23,10 @@ const NavBar = () => {
 	const handleSignOut = () => {
 		console.log('clicked sign out');
 		signOut();
+	};
+
+	const handleDarkMode = () => {
+		toggleColorMode();
 	};
 
 	return (
@@ -34,13 +41,23 @@ const NavBar = () => {
 			<Box>
 				<Link href={'/'}>
 					<Image
-						src='https://img.icons8.com/material-rounded/48/000000/share-2.png'
+						src='/icons8-connect.svg'
 						width={50}
 						height={50}
+						alt='Leftovers icon'
 					/>
 				</Link>
 			</Box>
 			<Box display='flex' alignItems='center'>
+				<Box>
+					<IconButton onClick={handleDarkMode}>
+						{palette.mode === 'light' ? (
+							<DarkModeOutlinedIcon />
+						) : (
+							<DarkModeIcon />
+						)}
+					</IconButton>
+				</Box>
 				{session && (
 					<Tooltip
 						title={
@@ -50,7 +67,7 @@ const NavBar = () => {
 							</Box>
 						}>
 						<IconButton>
-							<Image src={userIcon} width={30} height={30} />
+							<Image src={userIcon} width={30} height={30} alt='user icon' />
 						</IconButton>
 					</Tooltip>
 				)}

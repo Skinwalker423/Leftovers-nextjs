@@ -7,7 +7,6 @@ import { CacheProvider } from '@emotion/react';
 import { ColorModeContext, useMode } from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
 import { SessionProvider } from 'next-auth/react';
-import FoodBankIcon from '@mui/icons-material/FoodBank';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
