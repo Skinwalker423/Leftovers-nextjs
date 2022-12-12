@@ -10,19 +10,26 @@ import FoodBankIcon from '@mui/icons-material/FoodBank';
 export default function Home() {
 	const { data: session } = useSession();
 	const { colors } = useColors();
-	console.log(session);
 
 	return (
 		<Box className={styles.container}>
 			<Head>
 				<title>Leftovers</title>
-				<meta name='description' content='The largest food sharing app' />
+				<meta name='description' content='The largest meal sharing app' />
 			</Head>
 
 			<main className={styles.main}>
 				<NavBar />
-				<h1 className={styles.title}>Welcome to Leftovers!</h1>
-				<p>The largest food sharing app in the world</p>
+				<Box className={styles.title}>
+					<Typography
+						variant='h1'
+						lineHeight={1.15}
+						fontSize='4rem'
+						color={colors.orangeAccent[400]}>
+						Welcome to Leftovers!
+					</Typography>
+				</Box>
+				<p>The largest meal sharing app in the world</p>
 			</main>
 
 			<footer className={styles.footer}>

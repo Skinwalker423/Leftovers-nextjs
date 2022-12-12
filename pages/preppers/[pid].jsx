@@ -23,7 +23,6 @@ const Prepper = () => {
 			</Box>
 		);
 	}
-	console.log(prepperId);
 
 	return (
 		<Box
