@@ -8,6 +8,7 @@ import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import UserMenu from '../UserMenu';
+import NavItem from '../NavItem.js';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -39,8 +40,9 @@ const NavBar = () => {
 			alignItems='center'
 			position='fixed'
 			top='0'
+			backgroundColor={colors.primary[400]}
 			width='100%'>
-			<Box>
+			<Box display='flex' width='50%' justifyContent={'space-between'}>
 				<Link href={'/'}>
 					<Image
 						src='/icons8-connect.svg'
@@ -49,6 +51,19 @@ const NavBar = () => {
 						alt='Leftovers icon'
 					/>
 				</Link>
+				<Box>
+					<nav>
+						<ul
+							style={{
+								listStyle: 'none',
+								display: 'flex',
+							}}>
+							<NavItem title='Preppers' href='/preppers' />
+							<NavItem title='My Favs' href='/' />
+							<NavItem title='About' href='/about' />
+						</ul>
+					</nav>
+				</Box>
 			</Box>
 			<Box display='flex' alignItems='center'>
 				<Tooltip title='darkmode'>
