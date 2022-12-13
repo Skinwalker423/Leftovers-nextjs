@@ -72,7 +72,13 @@ const NavBar = () => {
 							</Box>
 						}>
 						<IconButton onClick={handleUserIcon}>
-							<Image src={userIcon} width={24} height={24} alt='user icon' />
+							<Image
+								style={{ borderRadius: '50%' }}
+								src={userIcon}
+								width={25}
+								height={25}
+								alt='user icon'
+							/>
 						</IconButton>
 					</Tooltip>
 				)}

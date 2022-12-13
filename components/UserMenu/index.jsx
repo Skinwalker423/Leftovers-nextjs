@@ -1,10 +1,27 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import {
+	Box,
+	Typography,
+	Button,
+	MenuList,
+	MenuItem,
+	Paper,
+	Stack,
+	Popper,
+	Grow,
+} from '@mui/material';
 import { useColors } from '../../hooks';
 import { signOut } from 'next-auth/react';
+// import MenuItem from './MenuItem';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const UserMenu = () => {
 	const { colors } = useColors();
+	const { data: session } = useSession();
+	const userIcon = session.user.image;
+	const userEmail = session.user.email;
+	const userName = session.user.name;
 
 	const handleSignOut = () => {
 		console.log('clicked sign out');
@@ -12,26 +29,42 @@ const UserMenu = () => {
 	};
 
 	return (
-		<Box
-			position={'fixed'}
-			mr='10px'
-			top={'70px'}
-			right={'0'}
-			width='200px'
-			borderRadius='4px'
-			boxShadow={3}
-			backgroundColor={colors.primary[100]}>
-			<Box width='100%' borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
-				<Button sx={{ width: '100%' }}>
-					<Typography color={colors.primary[900]}>Profile</Typography>
-				</Button>
+		<Paper
+			sx={{
+				position: 'fixed',
+				mr: '10px',
+				top: '70px',
+				right: '0',
+				width: '200px',
+			}}>
+			<Box
+				display={'flex'}
+				flexDirection='column'
+				justifyContent={'center'}
+				alignItems='center'
+				m={'20px 0'}>
+				<Box>
+					<Image
+						style={{ borderRadius: '50%' }}
+						src={userIcon}
+						width={50}
+						height={50}
+						alt='user icon'
+					/>
+				</Box>
+				<Box color={colors.primary[100]}>
+					<Typography>{userEmail}</Typography>
+				</Box>
+				<Box color={colors.primary[100]}>
+					<Typography>{userName}</Typography>
+				</Box>
 			</Box>
-			<Box width='100%' borderBottom={`1px solid ${colors.orangeAccent[900]}`}>
-				<Button onClick={handleSignOut} sx={{ width: '100%' }}>
-					<Typography color={colors.primary[900]}>Sign Out</Typography>
-				</Button>
-			</Box>
-		</Box>
+			<MenuList>
+				<MenuItem>Profile</MenuItem>
+				<MenuItem>My account</MenuItem>
+				<MenuItem onClick={handleSignOut}>Logout</MenuItem>
+			</MenuList>
+		</Paper>
 	);
 };
 
