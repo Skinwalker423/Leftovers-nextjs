@@ -31,11 +31,11 @@ const UserMenu = () => {
 	return (
 		<Paper
 			sx={{
-				position: 'fixed',
-				mr: '10px',
+				position: 'absolute',
+				mr: '20px',
 				top: '70px',
 				right: '0',
-				width: '200px',
+				width: '15rem',
 			}}>
 			<Box
 				display={'flex'}
@@ -60,9 +60,17 @@ const UserMenu = () => {
 				</Box>
 			</Box>
 			<MenuList>
-				<MenuItem>Profile</MenuItem>
-				<MenuItem>My account</MenuItem>
-				<MenuItem onClick={handleSignOut}>Logout</MenuItem>
+				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
+					Profile
+				</MenuItem>
+				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
+					My account
+				</MenuItem>
+				<MenuItem
+					sx={{ height: '50px', justifyContent: 'center' }}
+					onClick={handleSignOut}>
+					Logout
+				</MenuItem>
 			</MenuList>
 		</Paper>
 	);

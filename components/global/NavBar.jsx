@@ -68,7 +68,6 @@ const NavBar = () => {
 						title={
 							<Box>
 								<Typography>{userEmail}</Typography>
-								<Typography>{userName}</Typography>
 							</Box>
 						}>
 						<IconButton onClick={handleUserIcon}>
