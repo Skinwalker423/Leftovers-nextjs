@@ -26,7 +26,7 @@ export default function MyApp(props) {
 		<CacheProvider value={emotionCache}>
 			<Head>
 				<meta name='viewport' content='initial-scale=1, width=device-width' />
-				<link rel='icon' href='./icons8-connect.svg' />
+				<link rel='icon' href='/icons8-connect.svg' />
 			</Head>
 			<ColorModeContext.Provider value={colorMode}>
 				<ThemeProvider theme={theme}>

@@ -4,19 +4,21 @@ import { Box, Typography } from '@mui/material';
 import NavBar from '../../components/global/NavBar';
 import CustomLoader from '../../components/Loader';
 import { mockDataContacts } from '../../data/mockData';
+import { fetchPrepper } from '../../utils/fetchPrepper';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
-	console.log(prepperId);
-	// const videoList = await getVideoById(vidId);
-	const findPrepper = mockDataContacts.find(
-		(prepper) => prepperId == prepper.id
-	);
-	console.log(findPrepper);
+
+	const prepperData = await fetchPrepper(prepperId);
+	console.log({ prepperData });
+
+	// const findPrepper = mockDataContacts.find(
+	// 	(prepper) => prepperId == prepper.id
+	// );
 
 	return {
 		props: {
-			prepper: findPrepper ? findPrepper : [],
+			prepper: prepperData ? prepperData : [],
 		},
 
 		revalidate: 60, // In seconds
@@ -53,9 +55,16 @@ const Prepper = ({ prepper }) => {
 			<Box
 				m='100px 0'
 				display='flex'
+				flexDirection={'column'}
 				justifyContent='center'
 				alignItems='center'>
 				<Typography variant='h1'>Prepper id: {prepperId}</Typography>
+				<Typography variant='h1'> name: {prepper.name}</Typography>
+				<Typography variant='h1'> email: {prepper.email}</Typography>
+				<Typography variant='h1'> address: {prepper.address}</Typography>
+				<Typography variant='h1'> city: {prepper.city}</Typography>
+				<Typography variant='h1'> state: {prepper.state}</Typography>
+				<Typography variant='h1'> phone: {prepper.phone}</Typography>
 			</Box>
 		</Box>
 	);
