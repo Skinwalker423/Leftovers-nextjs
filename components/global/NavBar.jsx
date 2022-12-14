@@ -40,6 +40,7 @@ const NavBar = () => {
 			alignItems='center'
 			position='fixed'
 			top='0'
+			zIndex={99}
 			backgroundColor={colors.primary[400]}
 			width='100%'>
 			<Box display='flex' width='50%' justifyContent={'space-between'}>

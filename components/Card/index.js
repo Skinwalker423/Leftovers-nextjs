@@ -10,8 +10,19 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Image from 'next/image';
+import { useColors } from '../../hooks';
 
-export default function PrepperCard() {
+export default function PrepperCard({
+	avatar = 'https://i.pravatar.cc/300',
+	title,
+	subTitle,
+	description,
+	kitchen,
+	id,
+}) {
+	const { colors } = useColors();
+
 	return (
 		<Card
 			sx={{
@@ -20,8 +31,16 @@ export default function PrepperCard() {
 			}}>
 			<CardHeader
 				avatar={
-					<Avatar sx={{ bgcolor: red[500] }} aria-label='recipe'>
-						R
+					<Avatar
+						sx={{ bgcolor: colors.orangeAccent[500] }}
+						aria-label='prepper'>
+						<Image
+							style={{ objectFit: 'fill', borderRadius: '50%' }}
+							src={avatar}
+							width={37}
+							height={37}
+							alt={`avatar for ${title}`}
+						/>
 					</Avatar>
 				}
 				action={
@@ -29,14 +48,14 @@ export default function PrepperCard() {
 						<MoreVertIcon />
 					</IconButton>
 				}
-				title='Shrimp and Chorizo Paella'
-				subheader='September 14, 2016'
+				title={title}
+				subheader={subTitle}
 			/>
 			<CardMedia
 				component='img'
 				height='194'
-				image='/art.jpg'
-				alt='Paella dish'
+				image={(kitchen = '/art.jpg')}
+				alt={title}
 			/>
 			<CardContent>
 				<Typography variant='body2' color='text.secondary'>
