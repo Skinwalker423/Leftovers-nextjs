@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import FormDialog from '../components/modal/ToDoList';
 import {
 	Box,
@@ -19,9 +19,19 @@ const mockToDoList = [
 ];
 
 const toDoList = () => {
-	const [selected, setSelected] = useState(false);
-	const [currentIndex, setCurrentIndex] = useState('');
+	const [currentIndex, setCurrentIndex] = useState(null);
 	const [toDoList, setToDoList] = useState(mockToDoList);
+	const eventRef = useRef();
+
+	const handleSelected = (index) => {
+		setCurrentIndex(index);
+	};
+	const handleRemoveToDo = () => {
+		const newTodo = toDoList.filter((event, index) => currentIndex !== index);
+		setToDoList(newTodo);
+		setCurrentIndex(null);
+	};
+	const handleEdit = () => {};
 
 	return (
 		<Box
@@ -35,30 +45,20 @@ const toDoList = () => {
 				<Paper>
 					<MenuList>
 						{toDoList.map((event, index) => {
-							const handleSelected = () => {
-								setCurrentIndex(event);
-								setSelected(true);
-							};
-							const handleRemoveToDo = () => {
-								const newTodo = toDoList.filter(
-									(event) => currentIndex !== event
-								);
-								setToDoList(newTodo);
-								setCurrentIndex(null);
-							};
-							const handleEdit = () => {};
 							return (
 								<MenuItem
 									key={'event' + index}
-									selected={event === currentIndex}
-									onClick={handleSelected}
+									selected={index === currentIndex}
+									onClick={() => {
+										handleSelected(index);
+									}}
 									sx={{
 										display: 'flex',
 										justifyContent: 'space-between',
 										height: '50px',
 									}}>
 									<Typography>{event}</Typography>
-									{event === currentIndex && (
+									{index === currentIndex && (
 										<Box>
 											<IconButton onClick={handleEdit}>
 												<EditIcon />
