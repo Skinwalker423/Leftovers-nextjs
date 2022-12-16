@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import Button from '@mui/material/Button';
+import { Button, Box } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -32,9 +32,9 @@ export default function FormDialog({ setToDoList }) {
 	};
 
 	return (
-		<div>
-			<Button variant='outlined' onClick={handleClickOpen}>
-				Open form dialog
+		<Box>
+			<Button variant='contained' color='success' onClick={handleClickOpen}>
+				Add a ToDo
 			</Button>
 			<Dialog
 				maxWidth={'md'}
@@ -65,6 +65,6 @@ export default function FormDialog({ setToDoList }) {
 					</Button>
 				</DialogActions>
 			</Dialog>
-		</div>
+		</Box>
 	);
 }
