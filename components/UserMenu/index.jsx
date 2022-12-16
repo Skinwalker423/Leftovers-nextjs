@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-	Box,
-	Typography,
-	Button,
-	MenuList,
-	MenuItem,
-	Paper,
-	Stack,
-	Popper,
-	Grow,
-} from '@mui/material';
+import { Box, Typography, MenuList, MenuItem, Paper } from '@mui/material';
 import { useColors } from '../../hooks';
 import { signOut } from 'next-auth/react';
 // import MenuItem from './MenuItem';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const UserMenu = () => {
 	const { colors } = useColors();
@@ -64,7 +55,9 @@ const UserMenu = () => {
 					Profile
 				</MenuItem>
 				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-					My account
+					<Link style={{ textDecoration: 'none' }} href={'/toDoList'}>
+						To-Do List
+					</Link>
 				</MenuItem>
 				<MenuItem
 					sx={{ height: '50px', justifyContent: 'center' }}
