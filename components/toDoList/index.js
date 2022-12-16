@@ -43,7 +43,7 @@ const ToDoList = () => {
 			alignItems='center'
 			height='100vh'>
 			<Box width='500px'>
-				<Paper>
+				<Paper sx={{ minHeight: '300px' }}>
 					<Box
 						display='flex'
 						alignItems='center'
