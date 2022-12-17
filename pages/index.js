@@ -6,10 +6,34 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 import { useColors } from '../hooks';
 import NavBar from '../components/global/NavBar';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
+import { mockDataContacts } from '../data/mockData';
+import useTrackLocation from '../hooks/useTrackLocation';
+import { useEffect } from 'react';
+import { useContext } from 'react';
+import { UserContext } from '../store/UserContext';
+
+export async function getServerSideProps(context) {
+	const token = context.req.cookies['next-auth.session-token'];
+
+	return {
+		props: {
+			mockDataContacts,
+		},
+	};
+}
 
 export default function Home() {
 	const { data: session } = useSession();
 	const { colors } = useColors();
+
+	const { state } = useContext(UserContext);
+	console.log(state);
+
+	const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
+		useTrackLocation();
+	useEffect(() => {
+		handleTrackLocation();
+	}, []);
 
 	return (
 		<Box className={styles.container}>
@@ -30,6 +54,10 @@ export default function Home() {
 					</Typography>
 				</Box>
 				<p>The largest meal sharing app in the world</p>
+				<Box>
+					<Typography>{locationErrorMsg && locationErrorMsg}</Typography>
+					<Typography>{state.latLong}</Typography>
+				</Box>
 			</main>
 
 			<footer className={styles.footer}>

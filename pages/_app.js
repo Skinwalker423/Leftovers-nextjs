@@ -7,6 +7,7 @@ import { CacheProvider } from '@emotion/react';
 import { ColorModeContext, useMode } from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
 import { SessionProvider } from 'next-auth/react';
+import UserProvider from '../store/UserContext';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -23,19 +24,21 @@ export default function MyApp(props) {
 		pageProps: { session, ...pageProps },
 	} = props;
 	return (
-		<CacheProvider value={emotionCache}>
-			<Head>
-				<meta name='viewport' content='initial-scale=1, width=device-width' />
-				<link rel='icon' href='/icons8-connect.svg' />
-			</Head>
-			<ColorModeContext.Provider value={colorMode}>
-				<ThemeProvider theme={theme}>
-					<CssBaseline />
-					<SessionProvider session={session}>
-						<Component {...pageProps} />
-					</SessionProvider>
-				</ThemeProvider>
-			</ColorModeContext.Provider>
-		</CacheProvider>
+		<UserProvider>
+			<CacheProvider value={emotionCache}>
+				<Head>
+					<meta name='viewport' content='initial-scale=1, width=device-width' />
+					<link rel='icon' href='/icons8-connect.svg' />
+				</Head>
+				<ColorModeContext.Provider value={colorMode}>
+					<ThemeProvider theme={theme}>
+						<CssBaseline />
+						<SessionProvider session={session}>
+							<Component {...pageProps} />
+						</SessionProvider>
+					</ThemeProvider>
+				</ColorModeContext.Provider>
+			</CacheProvider>
+		</UserProvider>
 	);
 }
