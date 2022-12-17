@@ -11,6 +11,7 @@ import useTrackLocation from '../hooks/useTrackLocation';
 import { useEffect } from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../store/UserContext';
+import CustomLoader from '../components/Loader';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -57,6 +58,7 @@ export default function Home() {
 				<Box>
 					<Typography>{locationErrorMsg && locationErrorMsg}</Typography>
 					<Typography>{state.latLong}</Typography>
+					{isFindingLocation && <CustomLoader />}
 				</Box>
 			</main>
 

@@ -40,8 +40,23 @@ const Prepper = ({ prepper }) => {
 	console.log(prepper);
 
 	const prepperId = router.query.pid;
-	if (!prepperId) {
-		return <CustomLoader size={75} progress={50} color={'error'} />;
+	if (prepperId) {
+		return (
+			<Box
+				width='100%'
+				height='100vh'
+				display='flex'
+				justifyContent='center'
+				alignItems='center'>
+				<CustomLoader
+					size={75}
+					progress={50}
+					color={'error'}
+					title='Loading...'
+				/>
+				;
+			</Box>
+		);
 	}
 
 	return (

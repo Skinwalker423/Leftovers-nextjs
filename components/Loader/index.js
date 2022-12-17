@@ -9,8 +9,6 @@ const CustomLoader = ({
 }) => {
 	return (
 		<Box
-			height='100vh'
-			width='100%'
 			sx={{
 				display: 'flex',
 				justifyContent: 'center',
