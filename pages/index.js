@@ -8,10 +8,15 @@ import NavBar from '../components/global/NavBar';
 import FoodBankIcon from '@mui/icons-material/FoodBank';
 import { mockDataContacts } from '../data/mockData';
 import useTrackLocation from '../hooks/useTrackLocation';
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import { useEffect, useContext, useState, useRef } from 'react';
+
 import { UserContext } from '../store/UserContext';
 import CustomLoader from '../components/Loader';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from '!mapbox-gl';
+
+mapboxgl.accessToken =
+	'pk.eyJ1IjoibGdvbnphbGV6MjMiLCJhIjoiY2wwenZhamR0MmV0NDNqcG5hMWU2M2s0cyJ9.Mjxgu8Y0_Bow8OmWuGDWwg';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -24,17 +29,44 @@ export async function getServerSideProps(context) {
 }
 
 export default function Home() {
+	const mapContainer = useRef(null);
+	const map = useRef(null);
+	const [lng, setLng] = useState(-118.12864);
+	const [lat, setLat] = useState(33.9017728);
+	const [zoom, setZoom] = useState(9);
 	const { data: session } = useSession();
 	const { colors } = useColors();
 
-	const { state } = useContext(UserContext);
+	const { state, dispatch } = useContext(UserContext);
 	console.log(state);
 
 	const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
 		useTrackLocation();
+
 	useEffect(() => {
 		handleTrackLocation();
+		setLat(state.coords.lat);
+		setLng(state.coords.long);
 	}, []);
+
+	useEffect(() => {
+		if (map.current) return; // initialize map only once
+		map.current = new mapboxgl.Map({
+			container: mapContainer.current,
+			style: 'mapbox://styles/mapbox/streets-v12',
+			center: [lng, lat],
+			zoom: zoom,
+		});
+	});
+
+	useEffect(() => {
+		if (!map.current) return; // wait for map to initialize
+		map.current.on('move', () => {
+			setLng(map.current.getCenter().lng.toFixed(4));
+			setLat(map.current.getCenter().lat.toFixed(4));
+			setZoom(map.current.getZoom().toFixed(2));
+		});
+	});
 
 	return (
 		<Box className={styles.container}>
@@ -57,8 +89,19 @@ export default function Home() {
 				<p>The largest meal sharing app in the world</p>
 				<Box>
 					<Typography>{locationErrorMsg && locationErrorMsg}</Typography>
-					<Typography>{state.latLong}</Typography>
+					<Typography>{state.coords.latlong}</Typography>
 					{isFindingLocation && <CustomLoader />}
+					<Box className={styles.mapc}>
+						{/* <div className={styles.sidebar}>
+						Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+					</div> */}
+						<Box
+							width={'800px'}
+							height='400px'
+							className={styles.mapContainer}
+							ref={mapContainer}
+						/>
+					</Box>
 				</Box>
 			</main>
 
