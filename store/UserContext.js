@@ -11,7 +11,7 @@ export const ACTION_TYPES = {
 const userReducer = (state, action) => {
 	switch (action.type) {
 		case ACTION_TYPES.SET_LATLONG:
-			return { ...state, latLong: action.payload };
+			return { ...state, coords: action.payload };
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
 	}
@@ -19,7 +19,11 @@ const userReducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
 	const initialState = {
-		latLong: '',
+		coords: {
+			latlong: '',
+			lat: 33.9017728,
+			long: -118.12864,
+		},
 		setLatLong: () => {},
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
