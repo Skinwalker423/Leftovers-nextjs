@@ -21,8 +21,8 @@ export const UserProvider = ({ children }) => {
 	const initialState = {
 		coords: {
 			latlong: '',
-			lat: 33.9017728,
-			long: -118.12864,
+			lat: null,
+			long: null,
 		},
 		setLatLong: () => {},
 	};
