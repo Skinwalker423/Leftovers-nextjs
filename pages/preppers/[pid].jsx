@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Box, Typography } from '@mui/material';
 import NavBar from '../../components/global/NavBar';
 import CustomLoader from '../../components/Loader';
-import { mockDataContacts } from '../../data/mockData';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 
 export async function getStaticProps({ params }) {
@@ -11,10 +10,6 @@ export async function getStaticProps({ params }) {
 
 	const prepperData = await fetchPrepper(prepperId);
 	console.log({ prepperData });
-
-	// const findPrepper = mockDataContacts.find(
-	// 	(prepper) => prepperId == prepper.id
-	// );
 
 	return {
 		props: {

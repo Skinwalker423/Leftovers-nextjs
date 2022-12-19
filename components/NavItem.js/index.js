@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Typography } from '@mui/material';
-import { useColors } from '../../hooks';
+import { useColors } from '../../hooks/useColors';
 
 const NavItem = ({ title = 'nav item', href = '/' }) => {
 	const { colors } = useColors();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, MenuList, MenuItem, Paper } from '@mui/material';
-import { useColors } from '../../hooks';
+import { useColors } from '../../hooks/useColors';
 import { signOut } from 'next-auth/react';
 // import MenuItem from './MenuItem';
 import { useSession } from 'next-auth/react';

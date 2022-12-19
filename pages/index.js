@@ -1,11 +1,10 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Box, Typography, Button, IconButton } from '@mui/material';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useColors } from '../hooks';
+import { Box, Typography } from '@mui/material';
+import { useSession } from 'next-auth/react';
+import { useColors } from '../hooks/useColors';
 import NavBar from '../components/global/NavBar';
-import FoodBankIcon from '@mui/icons-material/FoodBank';
 import { mockDataContacts } from '../data/mockData';
 import useTrackLocation from '../hooks/useTrackLocation';
 import { useEffect, useContext, useState, useRef } from 'react';
@@ -69,8 +68,6 @@ export default function Home() {
 	});
 
 	useEffect(() => {
-		// setLng(map.current.getCenter().long.toFixed(4));
-		// setLat(map.current.getCenter().lat.toFixed(4));
 		if (!map.current) return; // wait for map to initialize
 		map.current.on('move', () => {
 			dispatch({

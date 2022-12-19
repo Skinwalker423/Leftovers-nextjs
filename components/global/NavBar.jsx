@@ -3,7 +3,7 @@ import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
-import { useColors } from '../../hooks';
+import { useColors } from '../../hooks/useColors';
 import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';

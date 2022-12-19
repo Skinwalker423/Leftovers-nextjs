@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
-import { useColors } from '../../hooks';
+import { useColors } from '../../hooks/useColors';
 
 const mockToDoList = [
 	'buy grocieries',

@@ -11,7 +11,7 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
-import { useColors } from '../../hooks';
+import { useColors } from '../../hooks/useColors';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
