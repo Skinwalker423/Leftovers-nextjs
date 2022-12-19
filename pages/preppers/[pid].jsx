@@ -40,7 +40,7 @@ const Prepper = ({ prepper }) => {
 	console.log(prepper);
 
 	const prepperId = router.query.pid;
-	if (prepperId) {
+	if (!prepperId) {
 		return (
 			<Box
 				width='100%'

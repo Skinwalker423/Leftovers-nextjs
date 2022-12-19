@@ -9,7 +9,7 @@ import FoodBankIcon from '@mui/icons-material/FoodBank';
 import { mockDataContacts } from '../data/mockData';
 import useTrackLocation from '../hooks/useTrackLocation';
 import { useEffect, useContext, useState, useRef } from 'react';
-
+import { ACTION_TYPES } from '../store/UserContext';
 import { UserContext } from '../store/UserContext';
 import CustomLoader from '../components/Loader';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -31,39 +31,56 @@ export async function getServerSideProps(context) {
 export default function Home() {
 	const mapContainer = useRef(null);
 	const map = useRef(null);
-	const [lng, setLng] = useState(-118.12864);
-	const [lat, setLat] = useState(33.9017728);
+	// const [lng, setLng] = useState(null);
+	// const [lat, setLat] = useState(null);
 	const [zoom, setZoom] = useState(9);
 	const { data: session } = useSession();
 	const { colors } = useColors();
 
 	const { state, dispatch } = useContext(UserContext);
-	console.log(state);
+	const { lat, long } = state.coords;
 
 	const { handleTrackLocation, locationErrorMsg, isFindingLocation } =
 		useTrackLocation();
 
 	useEffect(() => {
 		handleTrackLocation();
-		setLat(state.coords.lat);
-		setLng(state.coords.long);
+		// setLat(state.coords.lat);
+		// setLng(state.coords.long);
+		dispatch({
+			type: ACTION_TYPES.SET_LATLONG,
+			payload: {
+				latlong: `${long},${lat}`,
+				lat: lat,
+				long: long,
+			},
+		});
 	}, []);
 
 	useEffect(() => {
+		if (!lat || !long) return;
 		if (map.current) return; // initialize map only once
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current,
 			style: 'mapbox://styles/mapbox/streets-v12',
-			center: [lng, lat],
+			center: [long, lat],
 			zoom: zoom,
 		});
 	});
 
 	useEffect(() => {
+		// setLng(map.current.getCenter().long.toFixed(4));
+		// setLat(map.current.getCenter().lat.toFixed(4));
 		if (!map.current) return; // wait for map to initialize
 		map.current.on('move', () => {
-			setLng(map.current.getCenter().lng.toFixed(4));
-			setLat(map.current.getCenter().lat.toFixed(4));
+			dispatch({
+				type: ACTION_TYPES.SET_LATLONG,
+				payload: {
+					latlong: `${long},${lat}`,
+					lat: map.current.getCenter().lat.toFixed(4),
+					long: map.current.getCenter().lng.toFixed(4),
+				},
+			});
 			setZoom(map.current.getZoom().toFixed(2));
 		});
 	});
@@ -89,7 +106,11 @@ export default function Home() {
 				<p>The largest meal sharing app in the world</p>
 				<Box>
 					<Typography>{locationErrorMsg && locationErrorMsg}</Typography>
-					<Typography>{state.coords.latlong}</Typography>
+					<Typography>
+						{state.coords.latlong !== null
+							? state.coords.latlong
+							: 'no coords available'}
+					</Typography>
 					{isFindingLocation && <CustomLoader />}
 					<Box className={styles.mapc}>
 						{/* <div className={styles.sidebar}>
