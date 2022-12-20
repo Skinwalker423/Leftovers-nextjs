@@ -1,9 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import NavBar from '../../components/global/NavBar';
 import CustomLoader from '../../components/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
+import FoodItemCard from '../../components/Card/foodItemCard';
+
+const foodItems = [
+	{
+		id: 1,
+		item: 'Tacos',
+		image: '/art.jpg',
+		description: 'homemade tacos',
+		price: 4.99,
+	},
+	{
+		id: 2,
+		item: 'Pan con Pavo',
+		image: '/art.jpg',
+		description: 'Delicious homemade chicken sandwiches',
+		price: 4.99,
+	},
+	{
+		id: 3,
+		item: 'Manjar Blanco',
+		image: '/art.jpg',
+		description:
+			'Authentic Salvadorian sweet and creamy vanilla desert topped with cinnamon',
+		price: 4.99,
+	},
+];
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -59,6 +85,7 @@ const Prepper = ({ prepper }) => {
 			display='flex'
 			justifyContent='center'
 			alignItems='center'
+			flexDirection={'column'}
 			width={'100%'}
 			height='100%'>
 			<NavBar />
@@ -66,15 +93,33 @@ const Prepper = ({ prepper }) => {
 				m='100px 0'
 				display='flex'
 				flexDirection={'column'}
+				width='100%'
 				justifyContent='center'
 				alignItems='center'>
-				<Typography variant='h1'>Prepper id: {prepperId}</Typography>
-				<Typography variant='h1'> name: {prepper.name}</Typography>
-				<Typography variant='h1'> email: {prepper.email}</Typography>
-				<Typography variant='h1'> address: {prepper.address}</Typography>
-				<Typography variant='h1'> city: {prepper.city}</Typography>
-				<Typography variant='h1'> state: {prepper.state}</Typography>
-				<Typography variant='h1'> phone: {prepper.phone}</Typography>
+				<Paper sx={{ width: '70%' }}>
+					<Typography variant='h1'>Prepper id: {prepperId}</Typography>
+					<Typography variant='h1'> name: {prepper.name}</Typography>
+					<Typography variant='h1'> email: {prepper.email}</Typography>
+					<Typography variant='h1'> address: {prepper.address}</Typography>
+					<Typography variant='h1'> city: {prepper.city}</Typography>
+					<Typography variant='h1'> state: {prepper.state}</Typography>
+					<Typography variant='h1'> phone: {prepper.phone}</Typography>
+				</Paper>
+			</Box>
+			<Box display={'flex'} width='70%'>
+				{foodItems.map(({ id, item, price, image, description }) => {
+					return (
+						<Box width='100%' height={'500px'}>
+							<FoodItemCard
+								key={id}
+								foodItem={item}
+								image={image}
+								price={price}
+								description={description}
+							/>
+						</Box>
+					);
+				})}
 			</Box>
 		</Box>
 	);
