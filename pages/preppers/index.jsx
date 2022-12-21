@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card';
 import Link from 'next/link';
 import { mockDataContacts } from '../../data/mockData';
+import styles from './index.module.css';
 
 const Home = () => {
 	return (
@@ -20,7 +21,10 @@ const Home = () => {
 				{mockDataContacts.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
 					return (
-						<Link key={prepper.id} href={`/preppers/${prepper.id}`}>
+						<Link
+							className={styles.prepCard}
+							key={prepper.id}
+							href={`/preppers/${prepper.id}`}>
 							<PrepperCard
 								title={prepper.name}
 								subTitle={prepper.email}
