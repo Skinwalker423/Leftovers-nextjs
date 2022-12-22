@@ -5,6 +5,7 @@ import NavBar from '../../components/global/NavBar';
 import CustomLoader from '../../components/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
+import styles from './index.module.css';
 
 const foodItems = [
 	{
@@ -109,7 +110,7 @@ const Prepper = ({ prepper }) => {
 			<Box display={'flex'} width='70%'>
 				{foodItems.map(({ id, item, price, image, description }) => {
 					return (
-						<Box width='100%' height={'500px'}>
+						<Box className={styles.prepCard} width='100%' height={'500px'}>
 							<FoodItemCard
 								key={id}
 								foodItem={item}
