@@ -9,6 +9,9 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import UserMenu from '../UserMenu';
 import NavItem from '../NavItem.js';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationMenu from '../notifications/notificationMenu';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -18,6 +21,7 @@ const NavBar = () => {
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
 	const [showUserMenu, setShowUserMenu] = useState();
+	const [showNotifictions, setShowNotifications] = useState(false);
 
 	const handleSignIn = () => {
 		console.log('clicked sign in');
@@ -30,6 +34,12 @@ const NavBar = () => {
 
 	const handleUserIcon = () => {
 		setShowUserMenu((bool) => !bool);
+		setShowNotifications(false);
+	};
+
+	const handleNotificationButton = () => {
+		setShowNotifications((bool) => !bool);
+		setShowUserMenu(false);
 	};
 
 	return (
@@ -78,6 +88,17 @@ const NavBar = () => {
 						</IconButton>
 					</Box>
 				</Tooltip>
+				<Tooltip title='notifications'>
+					<Box>
+						<IconButton onClick={handleNotificationButton}>
+							{showNotifictions ? (
+								<NotificationsIcon />
+							) : (
+								<NotificationsNoneIcon />
+							)}
+						</IconButton>
+					</Box>
+				</Tooltip>
 				{session && (
 					<Tooltip
 						placement={showUserMenu ? 'left' : 'bottom'}
@@ -98,6 +119,7 @@ const NavBar = () => {
 					</Tooltip>
 				)}
 				{showUserMenu && <UserMenu />}
+				{showNotifictions && <NotificationMenu />}
 				<Box>
 					{!session && (
 						<Button onClick={handleSignIn}>
