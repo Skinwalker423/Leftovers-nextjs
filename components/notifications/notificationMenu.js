@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
+import NotificationList from './notificationList';
 
 const NotificationMenu = () => {
 	return (
@@ -9,10 +10,10 @@ const NotificationMenu = () => {
 				top: '90%',
 				right: '4%',
 				zIndex: 99,
-				width: '200px',
-				height: '200px',
+				width: '300px',
+				height: '300px',
 			}}>
-			Messages
+			<NotificationList />
 		</Paper>
 	);
 };
