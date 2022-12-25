@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import {
@@ -21,6 +23,8 @@ import { UserContext } from '../store/UserContext';
 import CustomLoader from '../components/Loader';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from '!mapbox-gl';
+import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
+import PrepperCard from '../components/Card';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -35,10 +39,29 @@ export async function getServerSideProps(context) {
 export default function Home() {
 	const { colors } = useColors();
 	const { data: session } = useSession();
+	const router = useRouter();
+	const [zipCode, setZipCode] = useState('');
+	const [localPreppers, setLocalPreppers] = useState([]);
+	const [errorMsg, setErrorMsg] = useState('');
 
-	const handleZipSearch = (e) => {
+	useEffect(() => {}, []);
+
+	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
 		console.log('submitted');
+		const findPreppers = await fetchLocalPreppers(zipCode);
+		console.log(findPreppers);
+		if (findPreppers) {
+			setLocalPreppers(findPreppers);
+		} else {
+			setErrorMsg('could not find local preppers. Try another zip code');
+		}
+	};
+
+	const handleZipChange = (e) => {
+		const zip = e.target.value;
+		console.log(zip);
+		setZipCode(zip);
 	};
 
 	return (
@@ -60,15 +83,44 @@ export default function Home() {
 					</Typography>
 				</Box>
 				<p>The largest meal sharing app in the world</p>
-				<form onSubmit={handleZipSearch}>
+				<form onSubmit={handleZipSearchForm}>
 					<FormControl>
 						<InputLabel htmlFor='my-input'>Zip Code</InputLabel>
 						<Box display={'flex'}>
-							<Input id='my-input' aria-describedby='my-helper-text' />
+							<Input
+								value={zipCode}
+								onChange={handleZipChange}
+								id='my-input'
+								aria-describedby='my-helper-text'
+							/>
 							<IconButton type='submit'>S</IconButton>
 						</Box>
 					</FormControl>
 				</form>
+				<Box
+					m={'50px'}
+					width={'100%'}
+					display={'flex'}
+					justifyContent='center'
+					flexWrap='wrap'>
+					{localPreppers &&
+						localPreppers.map((prepper) => {
+							const avatar = 'https://i.pravatar.cc/300';
+							return (
+								<Link
+									className={styles.prepCard}
+									key={prepper.id}
+									href={`/preppers/${prepper.id}`}>
+									<PrepperCard
+										title={prepper.name}
+										subTitle={prepper.email}
+										avatar={avatar}
+										id={prepper.id}
+									/>
+								</Link>
+							);
+						})}
+				</Box>
 			</main>
 
 			<footer className={styles.footer}>
