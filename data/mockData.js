@@ -84,7 +84,7 @@ export const mockDataContacts = [
 		phone: '(665)121-5454',
 		address: '0912 Won Street, Alabama, SY 10001',
 		city: 'New York',
-		zipCode: '10001',
+		zipCode: '90706',
 		registrarId: 123512,
 	},
 	{
@@ -95,7 +95,7 @@ export const mockDataContacts = [
 		phone: '(421)314-2288',
 		address: '1234 Main Street, New York, NY 10001',
 		city: 'New York',
-		zipCode: '13151',
+		zipCode: '90706',
 		registrarId: 123512,
 	},
 	{
@@ -106,7 +106,7 @@ export const mockDataContacts = [
 		phone: '(422)982-6739',
 		address: '3333 Want Blvd, Estanza, NAY 42125',
 		city: 'New York',
-		zipCode: '87281',
+		zipCode: '90706',
 		registrarId: 4132513,
 	},
 	{
@@ -117,7 +117,7 @@ export const mockDataContacts = [
 		phone: '(921)425-6742',
 		address: '1514 Main Street, New York, NY 22298',
 		city: 'New York',
-		zipCode: '15551',
+		zipCode: '90706',
 		registrarId: 123512,
 	},
 	{
@@ -128,7 +128,7 @@ export const mockDataContacts = [
 		phone: '(421)445-1189',
 		address: '11122 Welping Ave, Tenting, CD 21321',
 		city: 'Tenting',
-		zipCode: '14215',
+		zipCode: '90706',
 		registrarId: 123512,
 	},
 	{
@@ -139,7 +139,7 @@ export const mockDataContacts = [
 		phone: '(232)545-6483',
 		address: '1234 Canvile Street, Esvazark, NY 10001',
 		city: 'Esvazark',
-		zipCode: '10001',
+		zipCode: '90706',
 		registrarId: 123512,
 	},
 	{
