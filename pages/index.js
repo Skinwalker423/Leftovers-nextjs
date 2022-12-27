@@ -11,6 +11,7 @@ import {
 	IconButton,
 	FormControl,
 	InputLabel,
+	TextField,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useSession } from 'next-auth/react';
@@ -25,6 +26,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from '!mapbox-gl';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import PrepperCard from '../components/Card';
+import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -70,35 +73,65 @@ export default function Home() {
 				<title>Leftovers</title>
 				<meta name='description' content='The largest meal sharing app' />
 			</Head>
-
 			<main className={styles.main}>
 				<NavBar />
-				<Box className={styles.title}>
-					<Typography
-						variant='h1'
-						lineHeight={1.15}
-						fontSize='4rem'
-						color={colors.orangeAccent[900]}>
-						Welcome to Leftovers!
-					</Typography>
-				</Box>
-				<p>The largest meal sharing app in the world</p>
-				<form onSubmit={handleZipSearchForm}>
-					<FormControl>
-						<InputLabel htmlFor='my-input'>Zip Code</InputLabel>
-						<Box display={'flex'}>
-							<Input
-								value={zipCode}
-								onChange={handleZipChange}
-								id='my-input'
-								aria-describedby='my-helper-text'
-							/>
-							<IconButton type='submit'>S</IconButton>
-						</Box>
-					</FormControl>
-				</form>
 				<Box
-					m={'50px'}
+					position={'absolute'}
+					top='0'
+					height={'75vh'}
+					width='100%'
+					className={styles.title}
+					back>
+					<Image fill src={'/ball-park.jpg'} alt='landing page image' />
+				</Box>
+				<Typography
+					variant='h1'
+					zIndex={10}
+					lineHeight={1.15}
+					fontSize='4rem'
+					color='white'>
+					Welcome to Leftovers!
+				</Typography>
+				<Box mt='100px'>
+					<form onSubmit={handleZipSearchForm}>
+						<FormControl>
+							<Box
+								className={styles.searchBox}
+								sx={{
+									display: 'flex',
+									alignItems: 'flex-end',
+									backgroundColor: colors.blueAccent[900],
+									justifyContent: 'center',
+									alignItems: 'center',
+									borderRadius: '5px',
+									width: '600px',
+									height: '70px',
+									padding: '20px',
+								}}>
+								<AccountCircle
+									sx={{
+										color: 'action.active',
+										mr: 3,
+										my: 0.5,
+									}}
+								/>
+								<TextField
+									id='input-with-sx'
+									label='Enter your current zip code'
+									variant='standard'
+									fullWidth
+									color='warning'
+									onChange={handleZipChange}
+								/>
+								<ArrowForwardOutlinedIcon
+									sx={{ color: 'action.active', mr: 1, my: 0.5 }}
+								/>
+							</Box>
+						</FormControl>
+					</form>
+				</Box>
+				<Box
+					m={'300px 50px'}
 					width={'100%'}
 					display={'flex'}
 					justifyContent='center'
@@ -122,7 +155,6 @@ export default function Home() {
 						})}
 				</Box>
 			</main>
-
 			<footer className={styles.footer}>
 				<a
 					href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
