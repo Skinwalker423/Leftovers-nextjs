@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
 	};
 }
 
-export default function Home() {
+export default function Home({ mockDataContacts }) {
 	const { colors } = useColors();
 	const { data: session } = useSession();
 	const router = useRouter();
@@ -47,14 +47,18 @@ export default function Home() {
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 
-	useEffect(() => {}, []);
-
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
+		const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+		if (!isValidZip) {
+			setErrorMsg('Invalid zip code');
+			return;
+		}
 		console.log('submitted');
+		setErrorMsg('');
 		const findPreppers = await fetchLocalPreppers(zipCode);
 		console.log(findPreppers);
-		if (findPreppers) {
+		if (findPreppers.length !== 0) {
 			setLocalPreppers(findPreppers);
 		} else {
 			setErrorMsg('could not find local preppers. Try another zip code');
@@ -63,7 +67,6 @@ export default function Home() {
 
 	const handleZipChange = (e) => {
 		const zip = e.target.value;
-		console.log(zip);
 		setZipCode(zip);
 	};
 
@@ -80,8 +83,7 @@ export default function Home() {
 					top='0'
 					height={'75vh'}
 					width='100%'
-					className={styles.title}
-					back>
+					className={styles.title}>
 					<Image fill src={'/ball-park.jpg'} alt='landing page image' />
 				</Box>
 				<Typography
@@ -122,6 +124,7 @@ export default function Home() {
 									fullWidth
 									color='warning'
 									onChange={handleZipChange}
+									helperText={errorMsg ? errorMsg : ''}
 								/>
 								<ArrowForwardOutlinedIcon
 									sx={{ color: 'action.active', mr: 1, my: 0.5 }}
@@ -137,6 +140,7 @@ export default function Home() {
 					justifyContent='center'
 					flexWrap='wrap'>
 					{localPreppers &&
+						localPreppers.length !== 0 &&
 						localPreppers.map((prepper) => {
 							const avatar = 'https://i.pravatar.cc/300';
 							return (
