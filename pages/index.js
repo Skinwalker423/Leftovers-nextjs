@@ -29,6 +29,7 @@ import PrepperCard from '../components/Card';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
+import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -95,45 +96,11 @@ export default function Home({ mockDataContacts }) {
 					color='white'>
 					Welcome to Leftovers!
 				</Typography>
-				<Box mt='100px'>
-					<form onSubmit={handleZipSearchForm}>
-						<FormControl>
-							<Box
-								className={styles.searchBox}
-								sx={{
-									display: 'flex',
-									alignItems: 'flex-end',
-									backgroundColor: colors.blueAccent[900],
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: '5px',
-									width: '600px',
-									height: '70px',
-									padding: '20px',
-								}}>
-								<AccountCircle
-									sx={{
-										color: 'action.active',
-										mr: 3,
-										my: 0.5,
-									}}
-								/>
-								<TextField
-									id='input-with-sx'
-									label='Enter your current zip code'
-									variant='standard'
-									fullWidth
-									color='warning'
-									onChange={handleZipChange}
-									helperText={errorMsg ? errorMsg : ''}
-								/>
-								<ArrowForwardOutlinedIcon
-									sx={{ color: 'action.active', mr: 1, my: 0.5 }}
-								/>
-							</Box>
-						</FormControl>
-					</form>
-				</Box>
+				<FindLocalPreppersSearchBar
+					handleZipChange={handleZipChange}
+					handleZipSearchForm={handleZipSearchForm}
+					errorMsg={errorMsg}
+				/>
 				<LocalPreppersList localPreppers={localPreppers} />
 			</main>
 			<footer className={styles.footer}>
