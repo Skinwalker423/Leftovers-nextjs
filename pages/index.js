@@ -28,6 +28,7 @@ import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import PrepperCard from '../components/Card';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import LocalPreppersList from '../components/prepperLists/localPreppersList';
 
 export async function getServerSideProps(context) {
 	const token = context.req.cookies['next-auth.session-token'];
@@ -133,31 +134,7 @@ export default function Home({ mockDataContacts }) {
 						</FormControl>
 					</form>
 				</Box>
-				<Box
-					m={'300px 50px'}
-					width={'100%'}
-					display={'flex'}
-					justifyContent='center'
-					flexWrap='wrap'>
-					{localPreppers &&
-						localPreppers.length !== 0 &&
-						localPreppers.map((prepper) => {
-							const avatar = 'https://i.pravatar.cc/300';
-							return (
-								<Link
-									className={styles.prepCard}
-									key={prepper.id}
-									href={`/preppers/${prepper.id}`}>
-									<PrepperCard
-										title={prepper.name}
-										subTitle={prepper.email}
-										avatar={avatar}
-										id={prepper.id}
-									/>
-								</Link>
-							);
-						})}
-				</Box>
+				<LocalPreppersList localPreppers={localPreppers} />
 			</main>
 			<footer className={styles.footer}>
 				<a
