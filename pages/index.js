@@ -1,50 +1,20 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import {
-	Box,
-	Typography,
-	Input,
-	Paper,
-	IconButton,
-	FormControl,
-	InputLabel,
-	TextField,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { Box, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { useColors } from '../hooks/useColors';
-import NavBar from '../components/global/NavBar';
+import NavBar from '../components/navbar/NavBar';
 import { mockDataContacts } from '../data/mockData';
-import { useEffect, useContext, useState, useRef } from 'react';
-import { ACTION_TYPES } from '../store/UserContext';
-import { UserContext } from '../store/UserContext';
-import CustomLoader from '../components/Loader';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import mapboxgl from '!mapbox-gl';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
-import PrepperCard from '../components/Card';
-import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
+import LandingHeader from '../components/header/landingHeader';
 
-export async function getServerSideProps(context) {
-	const token = context.req.cookies['next-auth.session-token'];
-
-	return {
-		props: {
-			mockDataContacts,
-		},
-	};
-}
-
-export default function Home({ mockDataContacts }) {
-	const { colors } = useColors();
-	const { data: session } = useSession();
-	const router = useRouter();
+export default function Home() {
 	const [zipCode, setZipCode] = useState('');
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
@@ -80,7 +50,8 @@ export default function Home({ mockDataContacts }) {
 			</Head>
 			<main className={styles.main}>
 				<NavBar />
-				<Box
+				<LandingHeader />
+				{/* <Box
 					position={'absolute'}
 					top='0'
 					height={'75vh'}
@@ -95,7 +66,7 @@ export default function Home({ mockDataContacts }) {
 					fontSize='4rem'
 					color='white'>
 					Welcome to Leftovers!
-				</Typography>
+				</Typography> */}
 				<FindLocalPreppersSearchBar
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
