@@ -50,23 +50,8 @@ export default function Home() {
 			</Head>
 			<main className={styles.main}>
 				<NavBar />
-				<LandingHeader />
-				{/* <Box
-					position={'absolute'}
-					top='0'
-					height={'75vh'}
-					width='100%'
-					className={styles.title}>
-					<Image fill src={'/ball-park.jpg'} alt='landing page image' />
-				</Box>
-				<Typography
-					variant='h1'
-					zIndex={10}
-					lineHeight={1.15}
-					fontSize='4rem'
-					color='white'>
-					Welcome to Leftovers!
-				</Typography> */}
+				<LandingHeader title='Welcome to Leftovers!' img='ball-park.jpg' />
+
 				<FindLocalPreppersSearchBar
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
