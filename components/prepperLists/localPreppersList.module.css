@@ -2,3 +2,9 @@
 	scale: 1.1;
 	transition: all 0.5s ease-in;
 }
+
+@media screen and (max-width: 800px) {
+	.prepCardContainer {
+		margin: -50px;
+	}
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Typography, Paper } from '@mui/material';
-import NavBar from '../../components/global/NavBar';
+import NavBar from '../../components/navbar/NavBar';
 import CustomLoader from '../../components/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';

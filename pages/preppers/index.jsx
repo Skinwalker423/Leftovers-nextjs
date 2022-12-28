@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../components/global/NavBar';
+import NavBar from '../../components/navbar/NavBar';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card';
 import Link from 'next/link';

@@ -3,6 +3,7 @@ import { Box, FormControl, TextField } from '@mui/material';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useColors } from '../../hooks/useColors';
+import styles from './findLocalPreppers.module.css';
 
 const FindLocalPreppersSearchBar = ({
 	handleZipSearchForm,
@@ -12,7 +13,7 @@ const FindLocalPreppersSearchBar = ({
 	const { colors } = useColors();
 
 	return (
-		<Box mt='100px'>
+		<Box mt='100px' className={styles.searchContainer}>
 			<form onSubmit={handleZipSearchForm}>
 				<FormControl>
 					<Box
@@ -23,7 +24,7 @@ const FindLocalPreppersSearchBar = ({
 							justifyContent: 'center',
 							alignItems: 'center',
 							borderRadius: '5px',
-							width: '600px',
+							width: '400px',
 							height: '70px',
 							padding: '20px',
 						}}>
