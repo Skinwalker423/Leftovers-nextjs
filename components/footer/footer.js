@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, IconButton } from '@mui/material';
+import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
 import Copyright from './copyright';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -28,25 +29,60 @@ export default function Footer() {
 				component='main'
 				sx={{ mt: 8, mb: 2, justifyContent: 'center', alignItems: 'center' }}
 				maxWidth='sm'>
-				<Typography
-					textAlign={'center'}
-					variant='h2'
-					component='h1'
-					gutterBottom>
-					<Image src={'/icons8-connect.svg'} width={26} height={26} />
-					Leftovers
-				</Typography>
-				<Box display={'flex'} justifyContent='center'>
-					<FacebookIcon
-						sx={{ color: colors.blueAccent[500] }}
-						fontSize='large'
-					/>
-					<GitHubIcon fontSize='large' />
-					<TwitterIcon
-						sx={{ color: colors.blueAccent[500] }}
-						fontSize='large'
-					/>
-					<LinkedInIcon fontSize='large' />
+				<Box display={'flex'} justifyContent='center' alignItems='center'>
+					<Image src={'/icons8-connect.svg'} width={50} height={50} />
+					<Typography
+						px={'20px'}
+						textAlign={'center'}
+						variant='h2'
+						component='h1'
+						gutterBottom>
+						Leftovers
+					</Typography>
+				</Box>
+				<Box
+					display={'flex'}
+					justifyContent='space-evenly'
+					mt='50px'
+					alignItems={'center'}>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href={'https://www.facebook.com'}>
+						<IconButton>
+							<FacebookIcon
+								sx={{ color: colors.blueAccent[500] }}
+								fontSize='large'
+							/>
+						</IconButton>
+					</a>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href={'https://www.github.com'}>
+						<IconButton>
+							<GitHubIcon fontSize='large' />
+						</IconButton>
+					</a>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href={'https://www.twitter.com'}>
+						<IconButton>
+							<TwitterIcon
+								sx={{ color: colors.blueAccent[500] }}
+								fontSize='large'
+							/>
+						</IconButton>
+					</a>
+					<a
+						target='_blank'
+						rel='noopener noreferrer'
+						href={'https://www.linkedin.com'}>
+						<IconButton>
+							<LinkedInIcon fontSize='large' />
+						</IconButton>
+					</a>
 				</Box>
 			</Container>
 			<Box
