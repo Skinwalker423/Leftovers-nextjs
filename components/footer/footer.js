@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useColors } from '../../hooks/useColors';
 import Copyright from './copyright';
 import ProfessionalIconList from './ProfessionalIconList';
-
-import Image from 'next/image';
+import LogoTitle from './logoTitle';
 
 export default function Footer() {
 	const { colors } = useColors();
@@ -26,17 +25,7 @@ export default function Footer() {
 				component='main'
 				sx={{ mt: 8, mb: 2, justifyContent: 'center', alignItems: 'center' }}
 				maxWidth='sm'>
-				<Box display={'flex'} justifyContent='center' alignItems='center'>
-					<Image src={'/icons8-connect.svg'} width={50} height={50} />
-					<Typography
-						px={'20px'}
-						textAlign={'center'}
-						variant='h2'
-						component='h1'
-						gutterBottom>
-						Leftovers
-					</Typography>
-				</Box>
+				<LogoTitle title='Leftovers' img={'/icons8-connect.svg'} />
 				<ProfessionalIconList />
 			</Container>
 			<Box
