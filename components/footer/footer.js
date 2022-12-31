@@ -1,12 +1,9 @@
 import * as React from 'react';
-import { Box, Typography, Container, IconButton } from '@mui/material';
-import Link from 'next/link';
+import { Box, Typography, Container } from '@mui/material';
 import { useColors } from '../../hooks/useColors';
 import Copyright from './copyright';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import ProfessionalIconList from './ProfessionalIconList';
+
 import Image from 'next/image';
 
 export default function Footer() {
@@ -40,50 +37,7 @@ export default function Footer() {
 						Leftovers
 					</Typography>
 				</Box>
-				<Box
-					display={'flex'}
-					justifyContent='space-evenly'
-					mt='50px'
-					alignItems={'center'}>
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href={'https://www.facebook.com'}>
-						<IconButton>
-							<FacebookIcon
-								sx={{ color: colors.blueAccent[500] }}
-								fontSize='large'
-							/>
-						</IconButton>
-					</a>
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href={'https://www.github.com'}>
-						<IconButton>
-							<GitHubIcon fontSize='large' />
-						</IconButton>
-					</a>
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href={'https://www.twitter.com'}>
-						<IconButton>
-							<TwitterIcon
-								sx={{ color: colors.blueAccent[500] }}
-								fontSize='large'
-							/>
-						</IconButton>
-					</a>
-					<a
-						target='_blank'
-						rel='noopener noreferrer'
-						href={'https://www.linkedin.com'}>
-						<IconButton>
-							<LinkedInIcon fontSize='large' />
-						</IconButton>
-					</a>
-				</Box>
+				<ProfessionalIconList />
 			</Container>
 			<Box
 				component='footer'
