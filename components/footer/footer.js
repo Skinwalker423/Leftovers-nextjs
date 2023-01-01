@@ -5,7 +5,7 @@ import Copyright from './copyright';
 import ProfessionalIconList from './ProfessionalIconList';
 import LogoTitle from './logoTitle';
 
-export default function Footer() {
+export default function Footer({ img = '/favicon.ico', title = 'Title' }) {
 	const { colors } = useColors();
 
 	return (
@@ -25,7 +25,7 @@ export default function Footer() {
 				component='main'
 				sx={{ mt: 8, mb: 2, justifyContent: 'center', alignItems: 'center' }}
 				maxWidth='sm'>
-				<LogoTitle title='Leftovers' img={'/icons8-connect.svg'} />
+				<LogoTitle title={title} img={img} />
 				<ProfessionalIconList />
 			</Container>
 			<Box
@@ -37,7 +37,7 @@ export default function Footer() {
 					backgroundColor: colors.primary[400],
 				}}>
 				<Container>
-					<Copyright link='/' />
+					<Copyright company={title} link='/' />
 				</Container>
 			</Box>
 		</Box>

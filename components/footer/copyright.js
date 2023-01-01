@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import styles from './copyright.module.css';
 
-function Copyright({ link = 'https://mui.com/', company = 'Leftovers' }) {
+function Copyright({ link = '/about', company = 'Company Name here' }) {
 	return (
 		<Box display='flex' justifyContent={'center'} alignItems='center'>
 			<Typography color='text.secondary' px={'10px'}>
