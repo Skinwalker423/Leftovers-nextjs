@@ -11,6 +11,7 @@ import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/header/landingHeader';
+import { isValidZipCode } from '../utils/isValidZipCode';
 
 export default function Home() {
 	const [zipCode, setZipCode] = useState('');
@@ -19,7 +20,7 @@ export default function Home() {
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
-		const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipCode);
+		const isValidZip = isValidZipCode(zipCode);
 		if (!isValidZip) {
 			setErrorMsg('Invalid zip code');
 			return;
