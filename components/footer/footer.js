@@ -15,7 +15,7 @@ export default function Footer({ img = '/favicon.ico', title = 'Title' }) {
 				flexDirection: 'column',
 				justifyContent: 'center',
 				alignItems: 'center',
-				minHeight: '50vh',
+				minHeight: '10vh',
 				backgroundColor: colors.primary[400],
 				width: '100%',
 				padding: '0',
