@@ -18,13 +18,14 @@ const ProfessionalIconList = () => {
 			<IconLinkItem link={'https://www.facebook.com'}>
 				<FacebookIcon sx={{ color: colors.blueAccent[500] }} fontSize='large' />
 			</IconLinkItem>
-			<IconLinkItem link={'https://www.github.com'}>
+			<IconLinkItem link={'https://github.com/Skinwalker423'}>
 				<GitHubIcon fontSize='large' />
 			</IconLinkItem>
-			<IconLinkItem link={'https://www.twitter.com'}>
+			<IconLinkItem link={'https://twitter.com/artgonzalez423'}>
 				<TwitterIcon sx={{ color: colors.blueAccent[500] }} fontSize='large' />
 			</IconLinkItem>
-			<IconLinkItem link={'https://www.linkedin.com'}>
+			<IconLinkItem
+				link={'https://www.linkedin.com/in/luis-gonzalez-a33799235/'}>
 				<LinkedInIcon fontSize='large' />
 			</IconLinkItem>
 		</Box>
