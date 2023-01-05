@@ -1,4 +1,5 @@
 import { Paper } from '@mui/material';
+import CaritItem from './caritItem';
 
 const MealCart = () => {
 	return (
@@ -10,8 +11,14 @@ const MealCart = () => {
 				zIndex: 99,
 				width: '300px',
 				height: '300px',
+				overflowY: 'auto',
 			}}>
-			Food items
+			<CaritItem price='4.99' item='Burrito' img='/vercel.svg' />
+			<CaritItem price='4.99' item='Burrito' />
+			<CaritItem price='4.99' item='Burrito' />
+			<CaritItem price='4.99' item='Burrito' />
+			<CaritItem price='4.99' item='Burrito' />
+			<CaritItem price='4.99' item='Burrito' />
 		</Paper>
 	);
 };
