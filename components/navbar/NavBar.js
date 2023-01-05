@@ -13,6 +13,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationMenu from '../notifications/notificationMenu';
 import styles from './NavBar.module.css';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MealCart from '../mealCart/mealCart';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -23,6 +25,7 @@ const NavBar = () => {
 	const { toggleColorMode } = useContext(ColorModeContext);
 	const [showUserMenu, setShowUserMenu] = useState();
 	const [showNotifictions, setShowNotifications] = useState(false);
+	const [showMealCart, setShowMealCart] = useState(false);
 
 	const handleSignIn = () => {
 		console.log('clicked sign in');
@@ -41,6 +44,12 @@ const NavBar = () => {
 	const handleNotificationButton = () => {
 		setShowNotifications((bool) => !bool);
 		setShowUserMenu(false);
+	};
+
+	const handleMealCart = () => {
+		setShowMealCart((bool) => !bool);
+		setShowUserMenu(false);
+		setShowNotifications(false);
 	};
 
 	return (
@@ -101,6 +110,13 @@ const NavBar = () => {
 						</IconButton>
 					</Box>
 				</Tooltip>
+				<Tooltip title='meal cart'>
+					<Box>
+						<IconButton onClick={handleMealCart}>
+							<ShoppingCartOutlinedIcon />
+						</IconButton>
+					</Box>
+				</Tooltip>
 				{session && (
 					<Tooltip
 						placement={showUserMenu ? 'left' : 'bottom'}
@@ -122,6 +138,7 @@ const NavBar = () => {
 				)}
 				{showUserMenu && <UserMenu />}
 				{showNotifictions && <NotificationMenu />}
+				{showMealCart && <MealCart />}
 				<Box>
 					{!session && (
 						<Button onClick={handleSignIn}>

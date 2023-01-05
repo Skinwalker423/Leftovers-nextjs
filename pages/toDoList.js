@@ -1,5 +1,5 @@
 import ToDoList from '../components/toDoList';
-import NavBar from '../components/global/NavBar';
+import NavBar from '../components/navbar/NavBar';
 import { Box } from '@mui/material';
 import Head from 'next/head';
 
