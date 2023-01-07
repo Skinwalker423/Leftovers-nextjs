@@ -8,13 +8,32 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
 import { Box, Typography, Stack } from '@mui/material';
+import { UserContext } from '../../store/UserContext';
+import { useContext } from 'react';
+import { ACTION_TYPES } from '../../store/UserContext';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
 	description = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
 	image = '/art.jpg',
 	price,
+	id,
 }) {
+	const { state, dispatch } = useContext(UserContext);
+	console.log(state);
+
+	const meal = {
+		id,
+		price,
+		image,
+		description,
+		foodItem,
+	};
+
+	const handleAddCartItem = () => {
+		dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
+	};
+
 	return (
 		<Card sx={{ maxWidth: 345, height: '300px' }}>
 			<CardMedia sx={{ height: '50%' }} image={image} title='green iguana' />
@@ -40,7 +59,9 @@ export default function FoodItemCard({
 					<IconButton size='small'>
 						<FavoriteBorderOutlinedIcon />
 					</IconButton>
-					<Button size='small'>Add to Cart</Button>
+					<Button onClick={handleAddCartItem} size='small'>
+						Add to Cart
+					</Button>
 				</CardActions>
 			</Stack>
 		</Card>

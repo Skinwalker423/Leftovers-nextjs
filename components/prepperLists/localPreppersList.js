@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import PrepperCard from '../Card';
+import PrepperCard from '../Card/prepperCard';
 import Link from 'next/link';
 import styles from './localPreppersList.module.css';
 
