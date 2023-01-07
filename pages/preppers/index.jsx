@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../../components/navbar/NavBar';
 import { Box, Typography } from '@mui/material';
-import PrepperCard from '../../components/Card';
+import PrepperCard from '../../components/Card/prepperCard';
 import Link from 'next/link';
 import { mockDataContacts } from '../../data/mockData';
 import styles from './index.module.css';
