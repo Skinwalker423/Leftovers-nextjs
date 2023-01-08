@@ -9,7 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { IconButton } from '@mui/material';
 import { Box, Typography, Stack } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ACTION_TYPES } from '../../store/UserContext';
 
 export default function FoodItemCard({
@@ -18,9 +18,9 @@ export default function FoodItemCard({
 	image = '/art.jpg',
 	price,
 	id,
+	qty,
 }) {
 	const { state, dispatch } = useContext(UserContext);
-	console.log(state);
 
 	const meal = {
 		id,
@@ -28,10 +28,30 @@ export default function FoodItemCard({
 		image,
 		description,
 		foodItem,
+		qty,
 	};
 
 	const handleAddCartItem = () => {
-		dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
+		const findExistingFoodItem = state.userCartlist.find(
+			(item) => item.id === id
+		);
+
+		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
+			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
+			return;
+		}
+		console.log(findExistingFoodItem);
+		dispatch({
+			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+			payload: {
+				id,
+				price,
+				image,
+				foodItem,
+				description,
+				qty: findExistingFoodItem.qty + 1,
+			},
+		});
 	};
 
 	return (
@@ -47,6 +67,7 @@ export default function FoodItemCard({
 							component='div'>
 							{foodItem}
 						</Typography>
+
 						<Typography gutterBottom variant='h5' component='div'>
 							${price}
 						</Typography>
