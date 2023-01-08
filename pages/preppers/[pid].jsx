@@ -14,6 +14,7 @@ const foodItems = [
 		image: '/art.jpg',
 		description: 'homemade tacos',
 		price: 4.99,
+		qty: 1,
 	},
 	{
 		id: 2,
@@ -21,6 +22,7 @@ const foodItems = [
 		image: '/art.jpg',
 		description: 'Delicious homemade chicken sandwiches',
 		price: 4.99,
+		qty: 1,
 	},
 	{
 		id: 3,
@@ -29,6 +31,7 @@ const foodItems = [
 		description:
 			'Authentic Salvadorian sweet and creamy vanilla desert topped with cinnamon',
 		price: 4.99,
+		qty: 1,
 	},
 ];
 
@@ -108,7 +111,7 @@ const Prepper = ({ prepper }) => {
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
-				{foodItems.map(({ id, item, price, image, description }) => {
+				{foodItems.map(({ id, item, price, image, description, qty }) => {
 					return (
 						<Box
 							key={id}
@@ -122,6 +125,7 @@ const Prepper = ({ prepper }) => {
 								price={price}
 								description={description}
 								id={id}
+								qty={qty}
 							/>
 						</Box>
 					);

@@ -9,7 +9,7 @@ const MealCart = () => {
 				top: '90%',
 				right: '4%',
 				zIndex: 99,
-				width: '300px',
+				width: '25%',
 				height: '300px',
 				overflowY: 'auto',
 			}}>

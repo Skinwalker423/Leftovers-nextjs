@@ -7,6 +7,7 @@ export const ACTION_TYPES = {
 	SET_LATLONG: 'SET_LATLONG',
 	SET_LOCAL_COFFEE_STORES: 'SET_LOCAL_COFFEE_STORES',
 	ADD_FOOD_TO_CART: 'ADD_FOOD_TO_CART',
+	INCREMENT_FOOD_ITEM: 'INCREMENT_FOOD_ITEM',
 };
 
 const userReducer = (state, action) => {
@@ -17,6 +18,15 @@ const userReducer = (state, action) => {
 			return {
 				...state,
 				userCartlist: [...state.userCartlist, action.payload],
+			};
+		case ACTION_TYPES.INCREMENT_FOOD_ITEM:
+			const filteredList = state.userCartlist.filter(
+				(item) => item.id !== action.payload.id
+			);
+			console.log(filteredList);
+			return {
+				...state,
+				userCartlist: [...filteredList, action.payload],
 			};
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
