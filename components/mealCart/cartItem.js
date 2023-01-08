@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Stack, IconButton } from '@mui/material';
 import Image from 'next/image';
 import { UserContext } from '../../store/UserContext';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const CartItem = ({ foodItem, price, img = '/pixzolo.jpg', id, qty }) => {
 	const { state, dispatch } = useContext(UserContext);
@@ -25,6 +27,14 @@ const CartItem = ({ foodItem, price, img = '/pixzolo.jpg', id, qty }) => {
 			<Box>
 				<Typography>qty: {qty}</Typography>
 			</Box>
+			<Stack>
+				<IconButton>
+					<KeyboardArrowUpIcon />
+				</IconButton>
+				<IconButton>
+					<KeyboardArrowDownIcon />
+				</IconButton>
+			</Stack>
 			<Box>
 				<Typography>${Math.round(price * qty * 100) / 100}</Typography>
 			</Box>

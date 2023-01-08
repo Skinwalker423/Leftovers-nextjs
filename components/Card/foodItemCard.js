@@ -20,6 +20,7 @@ export default function FoodItemCard({
 	id,
 	qty,
 }) {
+	const [favorited, setFavorited] = useState(false);
 	const { state, dispatch } = useContext(UserContext);
 
 	const meal = {
@@ -29,6 +30,11 @@ export default function FoodItemCard({
 		description,
 		foodItem,
 		qty,
+	};
+
+	const handleFavorite = () => {
+		setFavorited((bool) => !bool);
+		console.log(`favorited ${foodItem}`);
 	};
 
 	const handleAddCartItem = () => {
@@ -41,9 +47,11 @@ export default function FoodItemCard({
 			return;
 		}
 		console.log(findExistingFoodItem);
-		dispatch({
-			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
-			payload: {
+		const filteredList = state.userCartlist.filter((item) => item.id !== id);
+		const newCartList = [
+			...filteredList,
+
+			{
 				id,
 				price,
 				image,
@@ -51,6 +59,11 @@ export default function FoodItemCard({
 				description,
 				qty: findExistingFoodItem.qty + 1,
 			},
+		];
+		console.log(newCartList);
+		dispatch({
+			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+			payload: newCartList,
 		});
 	};
 
@@ -77,8 +90,12 @@ export default function FoodItemCard({
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<IconButton size='small'>
-						<FavoriteBorderOutlinedIcon />
+					<IconButton onClick={handleFavorite} size='small'>
+						{favorited ? (
+							<FavoriteIcon color='error' />
+						) : (
+							<FavoriteBorderOutlinedIcon />
+						)}
 					</IconButton>
 					<Button onClick={handleAddCartItem} size='small'>
 						Add to Cart

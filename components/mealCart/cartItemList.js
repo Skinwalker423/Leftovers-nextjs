@@ -1,17 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import CartItem from './cartItem';
 
 const CartItemList = () => {
 	const { state } = useContext(UserContext);
 	const { userCartlist } = state;
-	const [totatPrice, setTotalPrice] = useState(0);
 	if (!userCartlist) {
 		return 'Loading...';
 	}
 
-	console.log('this is cart items array', userCartlist);
 	let total = 0;
 	const cartList = userCartlist.map(
 		({ id, foodItem, price, img, description, qty }) => {
@@ -30,14 +28,32 @@ const CartItemList = () => {
 	);
 
 	return (
-		<Box>
-			{cartList}
-			<Typography
-				textAlign={'end'}
-				p={'20px'}
-				sx={{ borderTop: '1px solid orange' }}>
-				Total: ${Math.round(total * 100) / 100}
-			</Typography>
+		<Box
+			height='100%'
+			display={'flex'}
+			flexDirection='column'
+			justifyContent='space-between'>
+			<Box>
+				{cartList.length ? (
+					cartList
+				) : (
+					<Typography textAlign='center' variant='h2'>
+						No items in the cart
+					</Typography>
+				)}
+			</Box>
+			<Box
+				sx={{ borderTop: '1px solid orange' }}
+				display={'flex'}
+				alignItems='center'
+				justifyContent='space-between'>
+				<Button variant='contained' color='error'>
+					Checkout
+				</Button>
+				<Typography textAlign={'end'} p={'20px'}>
+					Total: ${Math.round(total * 100) / 100}
+				</Typography>
+			</Box>
 		</Box>
 	);
 };

@@ -20,13 +20,9 @@ const userReducer = (state, action) => {
 				userCartlist: [...state.userCartlist, action.payload],
 			};
 		case ACTION_TYPES.INCREMENT_FOOD_ITEM:
-			const filteredList = state.userCartlist.filter(
-				(item) => item.id !== action.payload.id
-			);
-			console.log(filteredList);
 			return {
 				...state,
-				userCartlist: [...filteredList, action.payload],
+				userCartlist: action.payload,
 			};
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);

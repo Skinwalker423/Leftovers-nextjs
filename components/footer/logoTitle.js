@@ -5,7 +5,7 @@ import Image from 'next/image';
 const LogoTitle = ({ img, title }) => {
 	return (
 		<Box display={'flex'} justifyContent='center' alignItems='center'>
-			<Image src={img} width={50} height={50} />
+			<Image src={img} width={50} height={50} alt={title} />
 			<Typography
 				px={'20px'}
 				textAlign={'center'}
