@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Box, Typography, Stack, IconButton } from '@mui/material';
 import Image from 'next/image';
 import { UserContext } from '../../store/UserContext';
@@ -7,10 +7,13 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const CartItem = ({ meal }) => {
 	const { foodItem, price, img = '/pixzolo.jpg', id, qty } = meal;
-	const { state, dispatch, incrementFoodItem } = useContext(UserContext);
+	const { incrementFoodItem, decrementFoodItem } = useContext(UserContext);
 
 	const handleIncrementArrow = () => {
 		incrementFoodItem(meal);
+	};
+	const handleDecrementArrow = () => {
+		decrementFoodItem(meal);
 	};
 
 	return (
@@ -36,7 +39,7 @@ const CartItem = ({ meal }) => {
 				<IconButton onClick={handleIncrementArrow}>
 					<KeyboardArrowUpIcon />
 				</IconButton>
-				<IconButton>
+				<IconButton onClick={handleDecrementArrow}>
 					<KeyboardArrowDownIcon />
 				</IconButton>
 			</Stack>
