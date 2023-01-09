@@ -9,9 +9,10 @@ const MealCart = () => {
 				top: '90%',
 				right: '4%',
 				zIndex: 99,
-				width: '25%',
-				height: '300px',
+				width: '450px',
+				height: '400px',
 				overflowY: 'auto',
+				p: '20px',
 			}}>
 			<CartItemList />
 		</Paper>

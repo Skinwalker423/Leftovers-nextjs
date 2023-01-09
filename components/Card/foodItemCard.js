@@ -20,7 +20,8 @@ export default function FoodItemCard({
 	id,
 	qty,
 }) {
-	const { state, dispatch } = useContext(UserContext);
+	const [favorited, setFavorited] = useState(false);
+	const { state, dispatch, incrementFoodItem } = useContext(UserContext);
 
 	const meal = {
 		id,
@@ -31,27 +32,40 @@ export default function FoodItemCard({
 		qty,
 	};
 
-	const handleAddCartItem = () => {
-		const findExistingFoodItem = state.userCartlist.find(
-			(item) => item.id === id
-		);
+	const handleFavorite = () => {
+		setFavorited((bool) => !bool);
+		console.log(`favorited ${foodItem}`);
+	};
 
-		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
-			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
-			return;
-		}
-		console.log(findExistingFoodItem);
-		dispatch({
-			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
-			payload: {
-				id,
-				price,
-				image,
-				foodItem,
-				description,
-				qty: findExistingFoodItem.qty + 1,
-			},
-		});
+	const handleAddCartItem = () => {
+		incrementFoodItem(meal);
+		// const findExistingFoodItem = state.userCartlist.find(
+		// 	(item) => item.id === id
+		// );
+
+		// if (findExistingFoodItem === undefined || !findExistingFoodItem) {
+		// 	dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
+		// 	return;
+		// }
+		// console.log(findExistingFoodItem);
+		// const filteredList = state.userCartlist.filter((item) => item.id !== id);
+		// const newCartList = [
+		// 	...filteredList,
+
+		// 	{
+		// 		id,
+		// 		price,
+		// 		image,
+		// 		foodItem,
+		// 		description,
+		// 		qty: findExistingFoodItem.qty + 1,
+		// 	},
+		// ];
+		// console.log(newCartList);
+		// dispatch({
+		// 	type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+		// 	payload: newCartList,
+		// });
 	};
 
 	return (
@@ -77,8 +91,12 @@ export default function FoodItemCard({
 					</Typography>
 				</CardContent>
 				<CardActions>
-					<IconButton size='small'>
-						<FavoriteBorderOutlinedIcon />
+					<IconButton onClick={handleFavorite} size='small'>
+						{favorited ? (
+							<FavoriteIcon color='error' />
+						) : (
+							<FavoriteBorderOutlinedIcon />
+						)}
 					</IconButton>
 					<Button onClick={handleAddCartItem} size='small'>
 						Add to Cart

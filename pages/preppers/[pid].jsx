@@ -106,7 +106,6 @@ const Prepper = ({ prepper }) => {
 					<Typography variant='h1'> email: {prepper.email}</Typography>
 					<Typography variant='h1'> address: {prepper.address}</Typography>
 					<Typography variant='h1'> city: {prepper.city}</Typography>
-					<Typography variant='h1'> state: {prepper.state}</Typography>
 					<Typography variant='h1'> phone: {prepper.phone}</Typography>
 				</Paper>
 			</Box>
