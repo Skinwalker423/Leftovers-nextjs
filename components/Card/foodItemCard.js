@@ -21,7 +21,7 @@ export default function FoodItemCard({
 	qty,
 }) {
 	const [favorited, setFavorited] = useState(false);
-	const { state, dispatch } = useContext(UserContext);
+	const { state, dispatch, incrementFoodItem } = useContext(UserContext);
 
 	const meal = {
 		id,
@@ -38,33 +38,34 @@ export default function FoodItemCard({
 	};
 
 	const handleAddCartItem = () => {
-		const findExistingFoodItem = state.userCartlist.find(
-			(item) => item.id === id
-		);
+		incrementFoodItem(meal);
+		// const findExistingFoodItem = state.userCartlist.find(
+		// 	(item) => item.id === id
+		// );
 
-		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
-			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
-			return;
-		}
-		console.log(findExistingFoodItem);
-		const filteredList = state.userCartlist.filter((item) => item.id !== id);
-		const newCartList = [
-			...filteredList,
+		// if (findExistingFoodItem === undefined || !findExistingFoodItem) {
+		// 	dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: meal });
+		// 	return;
+		// }
+		// console.log(findExistingFoodItem);
+		// const filteredList = state.userCartlist.filter((item) => item.id !== id);
+		// const newCartList = [
+		// 	...filteredList,
 
-			{
-				id,
-				price,
-				image,
-				foodItem,
-				description,
-				qty: findExistingFoodItem.qty + 1,
-			},
-		];
-		console.log(newCartList);
-		dispatch({
-			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
-			payload: newCartList,
-		});
+		// 	{
+		// 		id,
+		// 		price,
+		// 		image,
+		// 		foodItem,
+		// 		description,
+		// 		qty: findExistingFoodItem.qty + 1,
+		// 	},
+		// ];
+		// console.log(newCartList);
+		// dispatch({
+		// 	type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+		// 	payload: newCartList,
+		// });
 	};
 
 	return (

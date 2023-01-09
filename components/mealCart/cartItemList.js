@@ -9,23 +9,16 @@ const CartItemList = () => {
 	if (!userCartlist) {
 		return 'Loading...';
 	}
-
+	//sorting the meal items to keep the list consitent when adding/removing items.
+	//mapping the sorted cart items
+	//calculating the totals at the same time
 	let total = 0;
-	const cartList = userCartlist.map(
-		({ id, foodItem, price, img, description, qty }) => {
-			total += price * qty;
-			return (
-				<CartItem
-					key={id}
-					foodItem={foodItem}
-					img={img}
-					price={price}
-					description={description}
-					qty={qty}
-				/>
-			);
-		}
-	);
+	const cartList = userCartlist
+		.sort((a, b) => a.id - b.id)
+		.map((item) => {
+			total += item.price * item.qty;
+			return <CartItem key={item.id} meal={item} />;
+		});
 
 	return (
 		<Box

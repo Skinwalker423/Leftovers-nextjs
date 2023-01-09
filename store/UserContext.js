@@ -41,7 +41,38 @@ export const UserProvider = ({ children }) => {
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
-	const value = { state, dispatch };
+	const incrementFoodItem = (mealItem) => {
+		const { id, price, image, foodItem, description } = mealItem;
+		const findExistingFoodItem = state.userCartlist.find(
+			(item) => item.id === id
+		);
+
+		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
+			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: mealItem });
+			return;
+		}
+		console.log(findExistingFoodItem);
+		const filteredList = state.userCartlist.filter((item) => item.id !== id);
+		const newCartList = [
+			...filteredList,
+
+			{
+				id,
+				price,
+				image,
+				foodItem,
+				description,
+				qty: findExistingFoodItem.qty + 1,
+			},
+		];
+		console.log(newCartList);
+		dispatch({
+			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+			payload: newCartList,
+		});
+	};
+
+	const value = { state, dispatch, incrementFoodItem };
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

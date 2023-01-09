@@ -5,8 +5,13 @@ import { UserContext } from '../../store/UserContext';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-const CartItem = ({ foodItem, price, img = '/pixzolo.jpg', id, qty }) => {
-	const { state, dispatch } = useContext(UserContext);
+const CartItem = ({ meal }) => {
+	const { foodItem, price, img = '/pixzolo.jpg', id, qty } = meal;
+	const { state, dispatch, incrementFoodItem } = useContext(UserContext);
+
+	const handleIncrementArrow = () => {
+		incrementFoodItem(meal);
+	};
 
 	return (
 		<Box
@@ -28,7 +33,7 @@ const CartItem = ({ foodItem, price, img = '/pixzolo.jpg', id, qty }) => {
 				<Typography>qty: {qty}</Typography>
 			</Box>
 			<Stack>
-				<IconButton>
+				<IconButton onClick={handleIncrementArrow}>
 					<KeyboardArrowUpIcon />
 				</IconButton>
 				<IconButton>
