@@ -7,13 +7,16 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const CartItem = ({ meal }) => {
 	const { foodItem, price, img = '/pixzolo.jpg', id, qty } = meal;
-	const { incrementFoodItem, decrementFoodItem } = useContext(UserContext);
+	const { incrementFoodItem, decrementFoodItem, calculateTotalPrice } =
+		useContext(UserContext);
 
 	const handleIncrementArrow = () => {
 		incrementFoodItem(meal);
+		calculateTotalPrice();
 	};
 	const handleDecrementArrow = () => {
 		decrementFoodItem(meal);
+		calculateTotalPrice();
 	};
 
 	return (
@@ -24,7 +27,7 @@ const CartItem = ({ meal }) => {
 			width={'100%'}
 			px='20px'
 			alignItems='center'
-			borderBottom={'1px solid black'}
+			borderTop={'1px solid black'}
 			height='100px'>
 			<Box>
 				<Image src={img} alt={foodItem} width={50} height={50} />

@@ -12,20 +12,21 @@ const CartItemList = () => {
 	//sorting the meal items to keep the list consitent when adding/removing items.
 	//mapping the sorted cart items
 	//calculating the totals at the same time
-	let total = 0;
 	const cartList = userCartlist
 		.sort((a, b) => a.id - b.id)
 		.map((item) => {
-			total += item.price * item.qty;
 			return <CartItem key={item.id} meal={item} />;
 		});
 
 	return (
 		<Box
-			height='100%'
+			height='80%'
 			display={'flex'}
 			flexDirection='column'
 			justifyContent='space-between'>
+			<Typography sx={{ mb: '10px' }} textAlign={'center'} variant='h2'>
+				Meals
+			</Typography>
 			<Box>
 				{cartList.length ? (
 					cartList
@@ -34,18 +35,6 @@ const CartItemList = () => {
 						No items in the cart
 					</Typography>
 				)}
-			</Box>
-			<Box
-				sx={{ borderTop: '1px solid orange' }}
-				display={'flex'}
-				alignItems='center'
-				justifyContent='space-between'>
-				<Button variant='contained' color='error'>
-					Checkout
-				</Button>
-				<Typography textAlign={'end'} p={'20px'}>
-					Total: ${Math.round(total * 100) / 100}
-				</Typography>
 			</Box>
 		</Box>
 	);

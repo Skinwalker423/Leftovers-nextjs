@@ -9,6 +9,7 @@ export const ACTION_TYPES = {
 	ADD_FOOD_TO_CART: 'ADD_FOOD_TO_CART',
 	INCREMENT_FOOD_ITEM: 'INCREMENT_FOOD_ITEM',
 	DECREMENT_FOOD_ITEM: 'DECREMENT_FOOD_ITEM',
+	SET_TOTAL_PRICE: 'SET_TOTAL_PRICE',
 };
 
 const userReducer = (state, action) => {
@@ -30,6 +31,11 @@ const userReducer = (state, action) => {
 				...state,
 				userCartlist: action.payload,
 			};
+		case ACTION_TYPES.SET_TOTAL_PRICE:
+			return {
+				...state,
+				cartTotalPrice: action.payload,
+			};
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
 	}
@@ -42,10 +48,22 @@ export const UserProvider = ({ children }) => {
 			lat: null,
 			long: null,
 		},
-		userCartlist: [],
 		setLatLong: () => {},
+		userCartlist: [],
+		cartTotalPrice: 0,
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
+
+	const calculateTotalPrice = () => {
+		const { userCartlist } = state;
+		let totals = 0;
+		const totalPrice = userCartlist.forEach((meal) => {
+			totals += meal.price * meal.qty;
+		});
+		console.log('total price is', totals);
+		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
+		return totalPrice;
+	};
 
 	const incrementFoodItem = (mealItem) => {
 		const { id, price, image, foodItem, description } = mealItem;
@@ -114,7 +132,13 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	const value = { state, dispatch, incrementFoodItem, decrementFoodItem };
+	const value = {
+		state,
+		dispatch,
+		incrementFoodItem,
+		decrementFoodItem,
+		calculateTotalPrice,
+	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
