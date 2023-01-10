@@ -3,9 +3,11 @@ import CartItemList from './cartItemList';
 import { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
 import Link from 'next/link';
+import { useColors } from '../../hooks/useColors';
 
 const MealCart = () => {
 	const { state } = useContext(UserContext);
+	const { colors } = useColors();
 	return (
 		<Paper
 			sx={{
@@ -20,7 +22,11 @@ const MealCart = () => {
 			}}>
 			<CartItemList />
 			<Box
-				sx={{ borderTop: '1px solid orange', mt: '15px', pt: '20px' }}
+				sx={{
+					borderTop: `1px solid ${colors.orangeAccent[900]}`,
+					mt: '15px',
+					pt: '20px',
+				}}
 				display={'flex'}
 				width='100%'>
 				<Box

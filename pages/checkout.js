@@ -2,19 +2,19 @@ import React, { useContext } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import CartItemList from '../components/mealCart/cartItemList';
 import { UserContext } from '../store/UserContext';
-import NavBar from '../components/navbar/NavBar';
+import { useColors } from '../hooks/useColors';
+import CheckoutList from '../components/checkout/checkoutList';
 
 const Checkout = () => {
 	const { state } = useContext(UserContext);
+	const { colors } = useColors();
 	return (
 		<Box
 			display='flex'
 			width={'100%'}
 			height='100vh'
 			justifyContent={'space-evenly'}>
-			<Box width={'100%'} p='20px'>
-				<CartItemList />
-			</Box>
+			<CheckoutList />
 			<Box
 				display='flex'
 				flexDirection={'column'}
@@ -30,7 +30,10 @@ const Checkout = () => {
 					<Typography>details</Typography>
 				</Box>
 				<Box
-					sx={{ borderTop: '1px solid orange', pt: '20px' }}
+					sx={{
+						borderTop: `1px solid ${colors.orangeAccent[900]}`,
+						pt: '20px',
+					}}
 					display={'flex'}
 					width='100%'>
 					<Box
