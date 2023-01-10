@@ -4,11 +4,13 @@ import Image from 'next/image';
 import { UserContext } from '../../store/UserContext';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useColors } from '../../hooks/useColors';
 
 const CartItem = ({ meal }) => {
 	const { foodItem, price, img = '/pixzolo.jpg', id, qty } = meal;
 	const { incrementFoodItem, decrementFoodItem, calculateTotalPrice } =
 		useContext(UserContext);
+	const { colors } = useColors();
 
 	const handleIncrementArrow = () => {
 		incrementFoodItem(meal);
@@ -27,7 +29,7 @@ const CartItem = ({ meal }) => {
 			width={'100%'}
 			px='20px'
 			alignItems='center'
-			borderTop={'1px solid black'}
+			borderTop={`1px solid ${colors.primary[100]}`}
 			height='100px'>
 			<Box>
 				<Image src={img} alt={foodItem} width={50} height={50} />

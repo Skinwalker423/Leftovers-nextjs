@@ -1,30 +1,28 @@
-import { Paper, Box, Button, Typography } from '@mui/material';
-import CartItemList from './cartItemList';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import { Box, Typography, Button } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
-import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
 
-const MealCart = () => {
+const CheckoutTotals = () => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
 	return (
-		<Paper
-			sx={{
-				position: 'absolute',
-				top: '90%',
-				right: '4%',
-				zIndex: 99,
-				width: '450px',
-				height: '450px',
-				overflowY: 'auto',
-				p: '20px',
-			}}>
-			<CartItemList />
+		<Box
+			display='flex'
+			flexDirection={'column'}
+			alignItems='center'
+			justifyContent='flex-start'
+			width='100%'
+			p='20px'>
+			<Box>
+				<Typography variant='h2'>
+					Total costs with shipping and handling
+				</Typography>
+				<Typography>details</Typography>
+			</Box>
 			<Box
 				sx={{
 					borderTop: `1px solid ${colors.orangeAccent[900]}`,
-					mt: '15px',
 					pt: '20px',
 				}}
 				display={'flex'}
@@ -34,18 +32,16 @@ const MealCart = () => {
 					width='100%'
 					alignItems='center'
 					justifyContent='space-between'>
-					<Link href={'/checkout'}>
-						<Button variant='contained' color='error'>
-							Checkout
-						</Button>
-					</Link>
+					<Button variant='contained' color='success'>
+						Pay
+					</Button>
 					<Typography textAlign={'end'}>
 						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
 					</Typography>
 				</Box>
 			</Box>
-		</Paper>
+		</Box>
 	);
 };
 
-export default MealCart;
+export default CheckoutTotals;

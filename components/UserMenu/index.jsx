@@ -55,7 +55,9 @@ const UserMenu = () => {
 					Profile
 				</MenuItem>
 				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-					<Link style={{ textDecoration: 'none' }} href={'/toDoList'}>
+					<Link
+						style={{ textDecoration: 'none', color: colors.primary[100] }}
+						href={'/toDoList'}>
 						To-Do List
 					</Link>
 				</MenuItem>
