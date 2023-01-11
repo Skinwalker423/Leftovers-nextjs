@@ -15,9 +15,6 @@ const clientSideEmotionCache = createEmotionCache();
 export default function MyApp(props) {
 	const [theme, colorMode] = useMode();
 
-	const handleDarkModeButton = () => {
-		colorMode.toggleColorMode();
-	};
 	const {
 		Component,
 		emotionCache = clientSideEmotionCache,
