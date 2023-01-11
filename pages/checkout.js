@@ -1,14 +1,9 @@
-import React, { useContext } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import CartItemList from '../components/mealCart/cartItemList';
-import { UserContext } from '../store/UserContext';
-import { useColors } from '../hooks/useColors';
+import React from 'react';
+import { Box } from '@mui/material';
 import CheckoutList from '../components/checkout/checkoutList';
 import CheckoutTotals from '../components/checkout/checkoutTotals';
 
 const Checkout = () => {
-	const { state } = useContext(UserContext);
-	const { colors } = useColors();
 	return (
 		<Box
 			display='flex'
