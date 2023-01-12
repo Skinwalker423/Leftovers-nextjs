@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Typography, Paper } from '@mui/material';
-import NavBar from '../../components/navbar/NavBar';
 import CustomLoader from '../../components/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
@@ -92,7 +91,6 @@ const Prepper = ({ prepper }) => {
 			flexDirection={'column'}
 			width={'100%'}
 			height='100%'>
-			<NavBar />
 			<Box
 				m='100px 0'
 				display='flex'

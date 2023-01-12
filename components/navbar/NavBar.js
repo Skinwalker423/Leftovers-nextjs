@@ -58,7 +58,6 @@ const NavBar = () => {
 			display='flex'
 			justifyContent='space-between'
 			alignItems='center'
-			position='fixed'
 			top='0'
 			zIndex={99}
 			backgroundColor={colors.primary[400]}

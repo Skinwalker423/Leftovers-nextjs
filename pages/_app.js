@@ -8,6 +8,7 @@ import { ColorModeContext, useMode } from '../config/theme';
 import createEmotionCache from '../config/createEmotionCache';
 import { SessionProvider } from 'next-auth/react';
 import UserProvider from '../store/UserContext';
+import Layout from './layout/layout';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -31,7 +32,9 @@ export default function MyApp(props) {
 					<ThemeProvider theme={theme}>
 						<CssBaseline />
 						<SessionProvider session={session}>
-							<Component {...pageProps} />
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
 						</SessionProvider>
 					</ThemeProvider>
 				</ColorModeContext.Provider>
