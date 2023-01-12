@@ -51,7 +51,6 @@ export default function Home() {
 				/>
 			</Head>
 			<main className={styles.main}>
-				<NavBar />
 				<LandingHeader title='Welcome to Leftovers!' img='ball-park.jpg' />
 				<FindLocalPreppersSearchBar
 					handleZipChange={handleZipChange}

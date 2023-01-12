@@ -13,7 +13,7 @@ const FindLocalPreppersSearchBar = ({
 	const { colors } = useColors();
 
 	return (
-		<Box mt='100px' className={styles.searchContainer}>
+		<Box position={'absolute'} top='42%' className={styles.searchContainer}>
 			<form onSubmit={handleZipSearchForm}>
 				<FormControl>
 					<Box

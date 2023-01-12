@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../../components/navbar/NavBar';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card/prepperCard';
 import Link from 'next/link';
@@ -23,7 +22,6 @@ const Home = ({ preppers }) => {
 			display='flex'
 			justifyContent='center'
 			alignItems='center'>
-			<NavBar />
 			<Typography variant='h1'>List of all preppers in your area</Typography>
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper) => {
