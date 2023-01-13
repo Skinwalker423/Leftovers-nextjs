@@ -80,7 +80,7 @@ const NavBar = () => {
 								justifyContent: 'space-evenly',
 							}}>
 							<NavItem title='Preppers' href='/preppers' />
-							<NavItem title='Favs' href='/' />
+							<NavItem title='Favs' href='/favorites' />
 							<NavItem title='About' href='/about' />
 						</ul>
 					</nav>
