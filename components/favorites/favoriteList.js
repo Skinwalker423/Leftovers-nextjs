@@ -4,18 +4,24 @@ import PrepperCard from '../Card/prepperCard';
 import styles from './FavoriteList.module.css';
 import Link from 'next/link';
 import CustomLoader from '../Loader';
+import { useColors } from '../../hooks/useColors';
 
 const FavoriteList = ({ favoriteList }) => {
+	const { colors } = useColors();
 	const avatar = 'https://i.pravatar.cc/300';
 	if (!favoriteList) {
 		return <CustomLoader />;
 	}
 	return (
 		<Box
-			width={'100%'}
+			// width={'80%'}
 			display={'flex'}
-			flexWrap='wrap'
-			justifyContent='space-evenly'
+			overflow='auto'
+			sx={{ overflowY: 'hidden' }}
+			mx='50px'
+			// p='50px'
+			// backgroundColor={colors.blueAccent[800]}
+
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {
 				return (

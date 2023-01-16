@@ -26,8 +26,9 @@ export default function PrepperCard({
 	return (
 		<Card
 			sx={{
-				maxWidth: 345,
-				m: '20px',
+				maxWidth: 500,
+				minWidth: 345,
+				m: '50px',
 			}}>
 			<CardHeader
 				avatar={

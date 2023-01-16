@@ -28,7 +28,6 @@ const LocalPreppersList = ({ localPreppers }) => {
 	return (
 		<Box
 			className={styles.prepCardContainer}
-			m={'400px 50px'}
 			width={'100%'}
 			display={'flex'}
 			justifyContent='center'
