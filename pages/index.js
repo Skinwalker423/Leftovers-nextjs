@@ -70,16 +70,19 @@ export default function Home({ favoriteList }) {
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
 				/>
-				<CategoryBanner
-					title='Favorite Preppers'
-					bgColor={colors.blueAccent[700]}>
-					<FavoriteList favoriteList={favoriteList} />
-				</CategoryBanner>
+
 				{localPreppers.length && (
 					<CategoryBanner
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
 						<LocalPreppersList localPreppers={localPreppers} />
+					</CategoryBanner>
+				)}
+				{favoriteList.length && (
+					<CategoryBanner
+						title='Favorite Preppers'
+						bgColor={colors.blueAccent[700]}>
+						<FavoriteList favoriteList={favoriteList} />
 					</CategoryBanner>
 				)}
 			</main>
