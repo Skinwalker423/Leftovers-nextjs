@@ -3,6 +3,10 @@
 	transition: all 0.5s ease-out;
 }
 
+.prepCardContainer {
+	background-color: red;
+}
+
 @media screen and (max-width: 800px) {
 	.prepCardContainer {
 		margin: -50px;

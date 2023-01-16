@@ -56,6 +56,7 @@ const NavBar = () => {
 		<Box
 			padding='10px 20px'
 			display='flex'
+			position={'fixed'}
 			justifyContent='space-between'
 			alignItems='center'
 			top='0'

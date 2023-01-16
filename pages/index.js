@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import styles from '../styles/Home.module.css';
-import { Box } from '@mui/material';
-import NavBar from '../components/navbar/NavBar';
+import { Box, Typography } from '@mui/material';
 import Footer from '../components/footer/footer';
+import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
+import FavoriteList from '../components/favorites/favoriteList';
+import { useColors } from '../hooks/useColors';
+import CategoryBanner from '../components/category/categoryBanner';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
@@ -13,10 +15,21 @@ import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPrepper
 import LandingHeader from '../components/header/landingHeader';
 import { isValidZipCode } from '../utils/isValidZipCode';
 
-export default function Home() {
+export async function getServerSideProps() {
+	const fetchedFavs = await fetchFavoritePreppers();
+
+	return {
+		props: {
+			favoriteList: fetchedFavs ? fetchedFavs : [],
+		},
+	};
+}
+
+export default function Home({ favoriteList }) {
 	const [zipCode, setZipCode] = useState('');
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
+	const { colors } = useColors();
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
@@ -57,7 +70,18 @@ export default function Home() {
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
 				/>
-				<LocalPreppersList localPreppers={localPreppers} />
+				<CategoryBanner
+					title='Favorite Preppers'
+					bgColor={colors.blueAccent[700]}>
+					<FavoriteList favoriteList={favoriteList} />
+				</CategoryBanner>
+				{localPreppers.length && (
+					<CategoryBanner
+						title='Local Preppers'
+						bgColor={colors.orangeAccent[700]}>
+						<LocalPreppersList localPreppers={localPreppers} />
+					</CategoryBanner>
+				)}
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title='Leftovers' />
