@@ -1,14 +1,11 @@
-.prepCard:hover {
-	scale: 1.1;
-	transition: all 0.5s ease-out;
-}
-
-.prepCardContainer {
-	background-color: red;
-}
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
 	.prepCardContainer {
-		margin: -50px;
+		/* margin: -50px; */
+		overflow-x: auto;
+		overflow-y: hidden;
+		flex-direction: column;
+		height: 30rem;
+		padding: 10px;
+		margin-bottom: 10px;
 	}
 }

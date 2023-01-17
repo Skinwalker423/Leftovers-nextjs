@@ -5,6 +5,9 @@
 
 @media screen and (max-width: 800px) {
 	.prepCardContainer {
-		margin: -50px;
+		height: 30rem;
+		padding: 10px;
+		margin-bottom: 10px;
+		flex-direction: column;
 	}
 }

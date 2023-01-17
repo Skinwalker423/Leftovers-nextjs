@@ -17,14 +17,15 @@ const FindLocalPreppersSearchBar = ({
 			<form onSubmit={handleZipSearchForm}>
 				<FormControl>
 					<Box
+						className={styles.searchBox}
 						sx={{
 							display: 'flex',
 							alignItems: 'flex-end',
-							backgroundColor: colors.blueAccent[900],
+							backgroundColor: colors.blueAccent[700],
 							justifyContent: 'center',
 							alignItems: 'center',
 							borderRadius: '5px',
-							width: '400px',
+							width: '300px',
 							height: '70px',
 							padding: '20px',
 						}}>
