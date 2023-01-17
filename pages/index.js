@@ -63,14 +63,15 @@ export default function Home({ favoriteList }) {
 					content='The largest meal sharing app in the world'
 				/>
 			</Head>
-			<main className={styles.main}>
+			<header className={styles.header}>
 				<LandingHeader title='Welcome to Leftovers!' img='ball-park.jpg' />
 				<FindLocalPreppersSearchBar
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
 				/>
-
+			</header>
+			<main className={styles.main}>
 				{localPreppers.length && (
 					<CategoryBanner
 						title='Local Preppers'

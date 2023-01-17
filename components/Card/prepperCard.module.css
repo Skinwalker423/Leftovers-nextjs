@@ -1,0 +1,14 @@
+.prepCard:hover {
+	scale: 1.1;
+	transition: all 0.5s ease-out;
+}
+
+.prepCard {
+	margin: 50px;
+}
+
+@media screen and (max-width: 800px) {
+	.prepCard {
+		margin: 5px;
+	}
+}
