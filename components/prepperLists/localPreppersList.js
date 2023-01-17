@@ -21,12 +21,7 @@ const LocalPreppersList = ({ localPreppers }) => {
 	});
 
 	return (
-		<Box
-			className={styles.prepCardContainer}
-			width={'100%'}
-			display={'flex'}
-			justifyContent='center'
-			flexWrap='wrap'>
+		<Box className={styles.prepCardContainer} display={'flex'} flexWrap='wrap'>
 			{localPreppers && localPreppers.length !== 0 && preppers}
 		</Box>
 	);

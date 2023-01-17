@@ -8,8 +8,7 @@ const CategoryBanner = ({ title = 'Title here', bgColor, children }) => {
 	return (
 		<Box
 			width={'95%'}
-			// m='1em'
-			// pb='8em'
+			m='1em'
 			borderRadius={'2em'}
 			sx={{ overflowY: 'hidden' }}
 			backgroundColor={bgColor}>

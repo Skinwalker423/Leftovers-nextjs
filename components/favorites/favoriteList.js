@@ -17,7 +17,7 @@ const FavoriteList = ({ favoriteList }) => {
 			display={'flex'}
 			overflow='auto'
 			sx={{ overflowY: 'hidden' }}
-			// mx='50px'
+			flexWrap='wrap'
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {
 				return (
