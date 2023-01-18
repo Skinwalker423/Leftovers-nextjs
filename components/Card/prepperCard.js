@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -25,49 +26,52 @@ export default function PrepperCard({
 	const { colors } = useColors();
 
 	return (
-		<Link className={styles.prepCard} key={id} href={`/preppers/${id}`}>
-			<Card>
-				<CardHeader
-					avatar={
-						<Avatar
-							sx={{ bgcolor: colors.orangeAccent[500] }}
-							aria-label='prepper'>
-							<Image
-								style={{ objectFit: 'fill', borderRadius: '50%' }}
-								src={avatar}
-								width={37}
-								height={37}
-								alt={`avatar for ${title}`}
-							/>
-						</Avatar>
-					}
-					action={
-						<IconButton aria-label='settings'>
-							<MoreVertIcon />
-						</IconButton>
-					}
-					title={title}
-					subheader={subTitle}
-				/>
-				<CardMedia
-					component='img'
-					height='194'
-					image={(kitchen = '/art.jpg')}
-					alt={title}
-				/>
-				<CardContent>
-					<Typography variant='body2' color='text.secondary'>
-						This impressive paella is a perfect party dish and a fun meal to
-						cook together with your guests. Add 1 cup of frozen peas along with
-						the mussels, if you like.
-					</Typography>
-				</CardContent>
-				<CardActions disableSpacing>
-					<IconButton aria-label='add to favorites'>
-						<FavoriteIcon />
+		<Card className={styles.prepCard} key={id}>
+			<CardHeader
+				avatar={
+					<Avatar
+						sx={{ bgcolor: colors.orangeAccent[500] }}
+						aria-label='prepper'>
+						<Image
+							style={{ objectFit: 'fill', borderRadius: '50%' }}
+							src={avatar}
+							width={37}
+							height={37}
+							alt={`avatar for ${title}`}
+						/>
+					</Avatar>
+				}
+				action={
+					<IconButton aria-label='settings'>
+						<MoreVertIcon />
 					</IconButton>
-				</CardActions>
-			</Card>
-		</Link>
+				}
+				title={title}
+				subheader={subTitle}
+			/>
+			<CardMedia
+				component='img'
+				height='194'
+				image={(kitchen = '/art.jpg')}
+				alt={title}
+			/>
+			<CardContent>
+				<Typography variant='body2' color='text.secondary'>
+					This impressive paella is a perfect party dish and a fun meal to cook
+					together with your guests. Add 1 cup of frozen peas along with the
+					mussels, if you like.
+				</Typography>
+			</CardContent>
+			<CardActions
+				sx={{ display: 'flex', justifyContent: 'space-between' }}
+				disableSpacing>
+				<IconButton aria-label='add to favorites'>
+					<FavoriteIcon />
+				</IconButton>
+				<Link className={styles.link} href={`/preppers/${id}`}>
+					<Button>View Details</Button>
+				</Link>
+			</CardActions>
+		</Card>
 	);
 }
