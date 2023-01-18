@@ -27,17 +27,14 @@ const Home = ({ preppers }) => {
 				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
 					return (
-						<Link
+						<PrepperCard
 							className={styles.prepCard}
 							key={prepper.id}
-							href={`/preppers/${prepper.id}`}>
-							<PrepperCard
-								title={prepper.name}
-								subTitle={prepper.email}
-								avatar={avatar}
-								id={prepper.id}
-							/>
-						</Link>
+							title={prepper.name}
+							subTitle={prepper.email}
+							avatar={avatar}
+							id={prepper.id}
+						/>
 					);
 				})}
 			</Box>

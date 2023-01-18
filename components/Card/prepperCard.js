@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
 import styles from './prepperCard.module.css';
@@ -24,6 +25,11 @@ export default function PrepperCard({
 	id,
 }) {
 	const { colors } = useColors();
+	const [favorited, setFavorited] = useState(false);
+
+	function handleFavBtn() {
+		setFavorited((bool) => !bool);
+	}
 
 	return (
 		<Card className={styles.prepCard} key={id}>
@@ -63,13 +69,31 @@ export default function PrepperCard({
 				</Typography>
 			</CardContent>
 			<CardActions
-				sx={{ display: 'flex', justifyContent: 'space-between' }}
+				sx={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+				}}
 				disableSpacing>
-				<IconButton aria-label='add to favorites'>
-					<FavoriteIcon />
+				<IconButton onClick={handleFavBtn} aria-label='add to favorites'>
+					{favorited ? (
+						<FavoriteIcon color='error' />
+					) : (
+						<FavoriteBorderOutlinedIcon color='error' />
+					)}
 				</IconButton>
 				<Link className={styles.link} href={`/preppers/${id}`}>
-					<Button>View Details</Button>
+					<Button
+						sx={{
+							border: `1px solid ${colors.orangeAccent[900]}`,
+							color: colors.orangeAccent[400],
+							'&:hover': {
+								backgroundColor: colors.orangeAccent[900],
+								color: 'white',
+							},
+						}}>
+						View Details
+					</Button>
 				</Link>
 			</CardActions>
 		</Card>
