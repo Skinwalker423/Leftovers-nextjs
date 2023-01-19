@@ -72,7 +72,7 @@ const NavBar = () => {
 						alt='Leftovers icon'
 					/>
 				</Link>
-				<Box width={'500px'}>
+				<Box width={'500px'} className={styles.navBar}>
 					<nav>
 						<ul
 							style={{
@@ -81,8 +81,9 @@ const NavBar = () => {
 								justifyContent: 'space-evenly',
 							}}>
 							<NavItem title='Preppers' href='/preppers' />
-							<NavItem title='Favs' href='/favorites' />
+							{session && <NavItem title='Favs' href='/favorites' />}
 							<NavItem title='About' href='/about' />
+							<NavItem title='MyKitchen' href='/mykitchen' />
 						</ul>
 					</nav>
 				</Box>
@@ -99,17 +100,19 @@ const NavBar = () => {
 						</IconButton>
 					</Box>
 				</Tooltip>
-				<Tooltip title='notifications'>
-					<Box>
-						<IconButton onClick={handleNotificationButton}>
-							{showNotifictions ? (
-								<NotificationsIcon />
-							) : (
-								<NotificationsNoneIcon />
-							)}
-						</IconButton>
-					</Box>
-				</Tooltip>
+				{session && (
+					<Tooltip title='notifications'>
+						<Box>
+							<IconButton onClick={handleNotificationButton}>
+								{showNotifictions ? (
+									<NotificationsIcon />
+								) : (
+									<NotificationsNoneIcon />
+								)}
+							</IconButton>
+						</Box>
+					</Tooltip>
+				)}
 				<Tooltip title='meal cart'>
 					<Box>
 						<IconButton onClick={handleMealCart}>

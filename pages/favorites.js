@@ -5,6 +5,8 @@ import Head from 'next/head';
 import { Box } from '@mui/material';
 import styles from '/styles/Home.module.css';
 import Footer from '../components/footer/footer';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps() {
 	const favoritePreppersList = await fetchFavoritePreppers();
@@ -16,6 +18,13 @@ export async function getServerSideProps() {
 }
 
 const Favorites = ({ favoriteList }) => {
+	const { data: session } = useSession();
+	const router = useRouter();
+
+	if (!session) {
+		router.push('/');
+	}
+
 	return (
 		<Box className={styles.container}>
 			<Head>
