@@ -138,7 +138,7 @@ const NavBar = () => {
 				)}
 				{showUserMenu && <UserMenu />}
 				{showNotifictions && <NotificationMenu />}
-				{showMealCart && <MealCart />}
+				{showMealCart && <MealCart setShowMealCart={setShowMealCart} />}
 				<Box>
 					{!session && (
 						<Button onClick={handleSignIn}>
