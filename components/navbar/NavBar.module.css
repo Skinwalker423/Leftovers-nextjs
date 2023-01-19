@@ -1,5 +1,16 @@
-@media screen and (max-width: 800px) {
+.collapsedNavBar {
+	display: none;
+}
+
+@media screen and (max-width: 610px) {
 	.navContainer {
 		line-height: normal;
+	}
+
+	.navBar {
+		display: none;
+	}
+	.collapsedNavBar {
+		display: unset;
 	}
 }

@@ -7,7 +7,7 @@ import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
-
+import { useSession } from 'next-auth/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
@@ -30,6 +30,7 @@ export default function Home({ favoriteList }) {
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
+	const { data: session } = useSession();
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
@@ -79,7 +80,7 @@ export default function Home({ favoriteList }) {
 						<LocalPreppersList localPreppers={localPreppers} />
 					</CategoryBanner>
 				)}
-				{favoriteList.length && (
+				{favoriteList.length && session && (
 					<CategoryBanner
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
