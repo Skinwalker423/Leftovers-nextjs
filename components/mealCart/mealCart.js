@@ -5,9 +5,14 @@ import { UserContext } from '../../store/UserContext';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
 
-const MealCart = () => {
+const MealCart = ({ setShowMealCart }) => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
+
+	function handleCheckoutBtn() {
+		setShowMealCart(false);
+	}
+
 	return (
 		<Paper
 			sx={{
@@ -35,7 +40,10 @@ const MealCart = () => {
 					alignItems='center'
 					justifyContent='space-between'>
 					<Link href={'/checkout'}>
-						<Button variant='contained' color='error'>
+						<Button
+							onClick={handleCheckoutBtn}
+							variant='contained'
+							color='error'>
 							Checkout
 						</Button>
 					</Link>
