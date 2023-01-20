@@ -7,7 +7,7 @@ import { useColors } from '../../hooks/useColors';
 import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import UserMenu from '../UserMenu';
+import UserMenu from '../UI/menu/navMenu/UserMenu';
 import NavItem from './NavItem.js/index.js';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -15,6 +15,8 @@ import NotificationMenu from '../notifications/notificationMenu';
 import styles from './NavBar.module.css';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import MealCart from '../mealCart/mealCart';
+import MenuIcon from '@mui/icons-material/Menu';
+import CollapsedNavMenu from '../UI/menu/navMenu/collapsedNavMenu';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -52,6 +54,11 @@ const NavBar = () => {
 		setShowNotifications(false);
 	};
 
+	const handleCollapsedNavBar = () => {
+		console.log('nav menu opened');
+		//create navbar menu
+	};
+
 	return (
 		<Box
 			padding='10px 20px'
@@ -63,7 +70,11 @@ const NavBar = () => {
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
 			width='100%'>
-			<Box display='flex' width='50%' justifyContent={'space-between'}>
+			<Box
+				display='flex'
+				width='50%'
+				justifyContent={'space-between'}
+				alignItems='center'>
 				<Link href={'/'}>
 					<Image
 						src='/icons8-connect.svg'
@@ -86,6 +97,9 @@ const NavBar = () => {
 							<NavItem title='MyKitchen' href='/mykitchen' />
 						</ul>
 					</nav>
+				</Box>
+				<Box className={styles.collapsedNavBar}>
+					<CollapsedNavMenu />
 				</Box>
 			</Box>
 			<Box display='flex' alignItems='center'>
