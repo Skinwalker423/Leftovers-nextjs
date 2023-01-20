@@ -23,8 +23,8 @@ export default function CollapsedNavMenu() {
 		<div>
 			<Tooltip title='Navagation Menu'>
 				<IconButton
-					id='demo-positioned-button'
-					aria-controls={open ? 'demo-positioned-menu' : undefined}
+					id='nav-button'
+					aria-controls={open ? 'nav-menu' : undefined}
 					aria-haspopup='true'
 					aria-expanded={open ? 'true' : undefined}
 					onClick={handleClick}>
@@ -32,18 +32,18 @@ export default function CollapsedNavMenu() {
 				</IconButton>
 			</Tooltip>
 			<Menu
-				id='demo-positioned-menu'
-				aria-labelledby='demo-positioned-button'
+				id='nav-menu'
+				aria-labelledby='nav-button'
 				anchorEl={anchorEl}
 				open={open}
 				onClose={handleClose}
 				anchorOrigin={{
-					vertical: 'top',
-					horizontal: 'left',
+					vertical: 'bottom',
+					horizontal: 'center',
 				}}
 				transformOrigin={{
 					vertical: 'top',
-					horizontal: 'left',
+					horizontal: 'center',
 				}}>
 				<Link className={styles.link} href={'/preppers'}>
 					<MenuItem
