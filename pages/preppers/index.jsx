@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card/prepperCard';
 import Link from 'next/link';
-import { mockDataContacts } from '../../data/mockData';
+import { mockDataContacts } from '../../db/mockData';
 import styles from './index.module.css';
 
 export async function getStaticProps() {

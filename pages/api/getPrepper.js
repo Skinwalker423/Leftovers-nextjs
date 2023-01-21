@@ -1,5 +1,5 @@
 import React from 'react';
-import { mockDataContacts } from '../../data/mockData';
+import { mockDataContacts } from '../../db/mockData';
 
 async function getPrepper(req, res) {
 	if (req.method === 'POST') {

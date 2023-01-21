@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
-import { mockDataTeam } from '../../data/mockData';
+import { mockDataTeam } from '../../db/mockData';
 import styles from './notificationList.module.css';
 
 const NotificationList = () => {
