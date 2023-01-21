@@ -13,7 +13,7 @@ import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/header/landingHeader';
-import { isValidZipCode } from '../utils/isValidZipCode';
+import { isValidZipCode } from '../utils/form-validation';
 
 export async function getServerSideProps() {
 	const fetchedFavs = await fetchFavoritePreppers();
