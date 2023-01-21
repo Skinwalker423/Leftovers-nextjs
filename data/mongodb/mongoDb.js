@@ -1,8 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 export async function connectMongoDb() {
-	const uri =
-		'mongodb+srv://skinwalker423:<password>@cluster23.nlaxbsz.mongodb.net/leftovers?retryWrites=true&w=majority';
+	const uri = `mongodb+srv://skinwalker423:${process.env.MONGO_DB_KEY}@cluster23.nlaxbsz.mongodb.net/leftovers?retryWrites=true&w=majority`;
 	const client = await MongoClient.connect(uri);
 	console.log('client connected');
 	return client;
