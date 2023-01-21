@@ -7,7 +7,7 @@ import { useColors } from '../../hooks/useColors';
 import { ColorModeContext } from '../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import UserMenu from '../UI/menu/navMenu/UserMenu';
+import UserMenu from '../UI/menu/UserMenu';
 import NavItem from './NavItem.js/index.js';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import NotificationsIcon from '@mui/icons-material/Notifications';

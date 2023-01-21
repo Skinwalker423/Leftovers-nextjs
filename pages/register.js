@@ -14,16 +14,36 @@ import {
 
 const Register = () => {
 	const [errorMsg, setErrorMsg] = useState('');
+	const [msg, setMsg] = useState('');
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
 	const emailRef = useRef();
+	const streetAddressRef = useRef();
+	const cityRef = useRef();
+	const stateRef = useRef();
+	const zipcodeRef = useRef();
 
-	const handleRegistraionFormSubmit = (e) => {
+	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log('registration submitted');
-		console.log(firstNameRef.current.value);
-		console.log(lastNameRef.current.value);
-		console.log(emailRef.current.value);
+		const formBody = {
+			firstName: firstNameRef.current.value,
+			lastName: lastNameRef.current.value,
+			email: emailRef.current.value,
+		};
+		try {
+			const response = await fetch('/api/register/prepper', {
+				headers: {
+					'Content-type': 'application/json',
+				},
+				method: 'POST',
+				body: JSON.stringify(formBody),
+			});
+			const data = await response.json();
+			setMsg(data.message);
+		} catch (err) {
+			setErrorMsg(err);
+		}
 	};
 
 	return (
@@ -42,12 +62,12 @@ const Register = () => {
 						<Box width={'100%'} display='flex' justifyContent={'space-between'}>
 							<TextField
 								type='text'
+								required
 								id='first-name'
 								inputRef={firstNameRef}
 								label='First Name'
 								color='secondary'
 								helperText={errorMsg && errorMsg}
-								error={errorMsg}
 							/>
 							<TextField
 								id='last-name'
@@ -55,7 +75,6 @@ const Register = () => {
 								inputRef={lastNameRef}
 								label='Last Name'
 								color='secondary'
-								helperText={'error'}
 							/>
 						</Box>
 						<Box width='100%'>
@@ -66,7 +85,6 @@ const Register = () => {
 								inputRef={emailRef}
 								color='secondary'
 								fullWidth
-								helperText={'error'}
 							/>
 						</Box>
 						<Button
@@ -81,6 +99,7 @@ const Register = () => {
 					</form>
 				</Box>
 			</Paper>
+			{msg && <div>{msg}</div>}
 		</Box>
 	);
 };
