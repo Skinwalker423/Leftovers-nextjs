@@ -1,5 +1,5 @@
 import React from 'react';
-import { connectMongoDb, addDocToDb } from '../../../data/mongodb/mongoDb';
+import { connectMongoDb, addDocToDb } from '../../../data/mongodb/mongoDbUtils';
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
 
 const prepper = async (req, res) => {
