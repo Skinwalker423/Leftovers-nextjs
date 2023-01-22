@@ -2,11 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import PrepperCard from '../Card/prepperCard';
 import styles from './favoriteList.module.css';
-import Link from 'next/link';
-import CustomLoader from '../Loader';
+import CustomLoader from '../UI/Loader';
 import { useColors } from '../../hooks/useColors';
 
-const FavoriteList = ({ favoriteList }) => {
+const FavoriteList = ({ favoriteList, favRow }) => {
 	const { colors } = useColors();
 	const avatar = 'https://i.pravatar.cc/300';
 	if (!favoriteList) {
@@ -16,7 +15,15 @@ const FavoriteList = ({ favoriteList }) => {
 		<Box
 			display={'flex'}
 			overflow='auto'
-			sx={{ overflowY: 'hidden' }}
+			sx={{
+				overflowY: 'hidden',
+				height: {
+					xs: favRow ? '' : '30rem',
+					sm: favRow ? '' : '30rem',
+					md: '',
+					lg: '',
+				},
+			}}
 			flexWrap='wrap'
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {

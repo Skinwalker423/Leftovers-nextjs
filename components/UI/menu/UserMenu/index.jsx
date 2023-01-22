@@ -54,13 +54,13 @@ const UserMenu = () => {
 				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
 					Profile
 				</MenuItem>
-				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-					<Link
-						style={{ textDecoration: 'none', color: colors.primary[100] }}
-						href={'/toDoList'}>
+				<Link
+					style={{ textDecoration: 'none', color: colors.primary[100] }}
+					href={'/toDoList'}>
+					<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
 						To-Do List
-					</Link>
-				</MenuItem>
+					</MenuItem>
+				</Link>
 				<MenuItem
 					sx={{ height: '50px', justifyContent: 'center' }}
 					onClick={handleSignOut}>
