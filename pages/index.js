@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Box, Typography } from '@mui/material';
-import Footer from '../components/footer/footer';
+import Footer from '../components/layout/footer/footer';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
@@ -12,7 +12,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
-import LandingHeader from '../components/header/landingHeader';
+import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
 
 export async function getServerSideProps() {

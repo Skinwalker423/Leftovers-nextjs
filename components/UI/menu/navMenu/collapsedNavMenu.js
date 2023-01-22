@@ -66,11 +66,11 @@ export default function CollapsedNavMenu() {
 						About
 					</MenuItem>
 				</Link>
-				<Link className={styles.link} href={'/mykitchen'}>
+				<Link className={styles.link} href={'/register'}>
 					<MenuItem
 						sx={{ color: colors.orangeAccent[900] }}
 						onClick={handleClose}>
-						MyKitchen
+						Register
 					</MenuItem>
 				</Link>
 			</Menu>
