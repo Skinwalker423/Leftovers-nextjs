@@ -12,3 +12,22 @@ export async function addDocToDb(client, collectionArg, doc) {
 	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
+export async function findAllInCollection(client, collectionArg) {
+	const collection = client.db('leftovers').collection(collectionArg);
+	const document = await collection.find({}).toArray();
+
+	console.log(`document found for collection ${collectionArg}:`);
+	if (!document) {
+		return [];
+	}
+
+	const mappedDoc = document.map(({ _id, firstName, lastName, email }) => {
+		return {
+			name: `${firstName} ${lastName}`,
+			email: email,
+			id: _id.toString(),
+		};
+	});
+	console.log(mappedDoc);
+	return mappedDoc;
+}
