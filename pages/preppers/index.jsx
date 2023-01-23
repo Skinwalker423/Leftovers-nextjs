@@ -4,13 +4,30 @@ import PrepperCard from '../../components/Card/prepperCard';
 import Link from 'next/link';
 import { mockDataContacts } from '../../db/mockData';
 import styles from './index.module.css';
+import {
+	findAllInCollection,
+	connectMongoDb,
+} from '../../db/mongodb/mongoDbUtils';
 
-export async function getStaticProps() {
-	return {
-		props: {
-			preppers: mockDataContacts,
-		},
-	};
+export async function getServerSideProps() {
+	try {
+		const client = await connectMongoDb();
+		const allPreppers = await findAllInCollection(client, 'preppers');
+
+		console.log({ allPreppers });
+		return {
+			props: {
+				preppers: allPreppers || [],
+			},
+		};
+	} catch (err) {
+		console.error('could not find preppers', err);
+		return {
+			props: {
+				preppers: mockDataContacts || [],
+			},
+		};
+	}
 }
 
 const Home = ({ preppers }) => {
@@ -26,6 +43,7 @@ const Home = ({ preppers }) => {
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
+
 					return (
 						<PrepperCard
 							className={styles.prepCard}
