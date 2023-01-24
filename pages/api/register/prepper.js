@@ -3,10 +3,16 @@ import { connectMongoDb, addDocToDb } from '../../../db/mongodb/mongoDbUtils';
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
 
 const prepper = async (req, res) => {
-	const { email, firstName, lastName } = req.body;
+	const { email, firstName, lastName, location } = req.body;
+	const { address, city, state, zipcode } = location;
 	const isValidEmail = validateEmail(email);
+	const isValidZip = isValidZipCode(zipcode);
 	if (!isValidEmail) {
 		res.status(422).json({ message: 'invalid email' });
+		return;
+	}
+	if (!isValidZip) {
+		res.status(422).json({ message: 'invalid zipcode' });
 		return;
 	}
 
@@ -23,6 +29,9 @@ const prepper = async (req, res) => {
 		email,
 		firstName,
 		lastName,
+		location,
+		favorites: [],
+		meals: [],
 	};
 	if (req.method === 'POST') {
 		try {

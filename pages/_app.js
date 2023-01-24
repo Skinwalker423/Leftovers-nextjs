@@ -25,6 +25,7 @@ export default function MyApp(props) {
 		<UserProvider>
 			<CacheProvider value={emotionCache}>
 				<Head>
+					<meta name='description' content='Lefovers' />
 					<meta name='viewport' content='initial-scale=1, width=device-width' />
 					<link rel='icon' href='/icons8-connect.svg' />
 				</Head>
