@@ -11,6 +11,7 @@ import {
 	Typography,
 	Button,
 } from '@mui/material';
+import { isValidZipCode, validateEmail } from '../utils/form-validation';
 
 const Register = () => {
 	const [errorMsg, setErrorMsg] = useState('');
@@ -25,11 +26,34 @@ const Register = () => {
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
-		console.log('registration submitted');
+		console.log('registration pending');
+		const firstName = firstNameRef.current.value;
+		const lastName = lastNameRef.current.value;
+		const email = emailRef.current.value;
+		const zipcode = zipcodeRef.current.value;
+
+		const isValidZip = isValidZipCode(zipcode);
+		const isValidEmail = validateEmail(email);
+
+		if (!isValidZip) {
+			setErrorMsg('Invalid zipcode');
+			return;
+		}
+		if (!isValidEmail) {
+			setErrorMsg('Invalid email');
+			return;
+		}
+
 		const formBody = {
-			firstName: firstNameRef.current.value,
-			lastName: lastNameRef.current.value,
+			firstName,
+			lastName,
 			email: emailRef.current.value,
+			location: {
+				address: streetAddressRef.current.value,
+				city: cityRef.current.value,
+				state: stateRef.current.value,
+				zipcode: zipcodeRef.current.value,
+			},
 		};
 		try {
 			const response = await fetch('/api/register/prepper', {
@@ -51,10 +75,11 @@ const Register = () => {
 			width='100%'
 			height='100vh'
 			display='flex'
+			flexDirection='column'
 			justifyContent='center'
 			alignItems='center'>
 			<Paper>
-				<Typography textAlign='center' variant='h2'>
+				<Typography pt={'1em'} textAlign='center' variant='h1'>
 					Prepper Registration
 				</Typography>
 				<Box width={'600px'} height='500px' p='80px'>
@@ -72,17 +97,60 @@ const Register = () => {
 							<TextField
 								id='last-name'
 								type='text'
+								required
 								inputRef={lastNameRef}
 								label='Last Name'
 								color='secondary'
 							/>
 						</Box>
-						<Box width='100%'>
+						<Box width='100%' mt='1em'>
 							<TextField
 								id='email'
 								type='email'
 								label='Email'
+								required
 								inputRef={emailRef}
+								color='secondary'
+								fullWidth
+							/>
+						</Box>
+						<Box width='100%' mt='1em'>
+							<TextField
+								id='address'
+								type='text'
+								label='Address'
+								required
+								inputRef={streetAddressRef}
+								color='secondary'
+								fullWidth
+							/>
+						</Box>
+						<Box width='100%' display={'flex'} mt='1em'>
+							<TextField
+								id='city'
+								type='text'
+								label='City'
+								required
+								inputRef={cityRef}
+								color='secondary'
+								fullWidth
+							/>
+							<TextField
+								id='state'
+								type='text'
+								label='State'
+								required
+								inputRef={stateRef}
+								color='secondary'
+								fullWidth
+							/>
+							<TextField
+								id='zipcode'
+								type='number'
+								inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
+								label='Zipcode'
+								required
+								inputRef={zipcodeRef}
 								color='secondary'
 								fullWidth
 							/>
@@ -93,6 +161,7 @@ const Register = () => {
 							fullWidth
 							color='secondary'
 							type='submit'
+							required
 							size='large'>
 							Submit
 						</Button>
@@ -100,6 +169,7 @@ const Register = () => {
 				</Box>
 			</Paper>
 			{msg && <div>{msg}</div>}
+			{errorMsg && <div>{errorMsg}</div>}
 		</Box>
 	);
 };

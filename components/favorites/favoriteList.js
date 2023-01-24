@@ -29,6 +29,7 @@ const FavoriteList = ({ favoriteList, favRow }) => {
 			{favoriteList.map((prepper) => {
 				return (
 					<PrepperCard
+						key={prepper.id}
 						title={prepper.name}
 						subTitle={prepper.email}
 						avatar={avatar}
