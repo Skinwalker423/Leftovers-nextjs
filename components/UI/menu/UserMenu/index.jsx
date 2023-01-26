@@ -10,9 +10,14 @@ import Link from 'next/link';
 const UserMenu = () => {
 	const { colors } = useColors();
 	const { data: session } = useSession();
-	const userIcon = session.user.image;
-	const userEmail = session.user.email;
-	const userName = session.user.name;
+
+	if (!session) {
+		return;
+	}
+
+	const userIcon = session?.user?.image;
+	const userEmail = session?.user?.email;
+	const userName = session?.user?.name;
 
 	const handleSignOut = () => {
 		console.log('clicked sign out');

@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useColors } from '../../../hooks/useColors';
 import { ColorModeContext } from '../../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -21,7 +21,7 @@ const NavBar = () => {
 	const { data: session } = useSession();
 	const userEmail = session?.user?.email;
 	const userIcon = session?.user?.image;
-	const userName = session?.user?.name;
+
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
 	const [showUserMenu, setShowUserMenu] = useState();
