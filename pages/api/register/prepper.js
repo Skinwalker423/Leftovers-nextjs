@@ -1,5 +1,9 @@
 import React from 'react';
-import { connectMongoDb, addDocToDb } from '../../../db/mongodb/mongoDbUtils';
+import {
+	connectMongoDb,
+	addDocToDb,
+	findExistingPrepperEmail,
+} from '../../../db/mongodb/mongoDbUtils';
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
 
 const prepper = async (req, res) => {
@@ -36,6 +40,17 @@ const prepper = async (req, res) => {
 	if (req.method === 'POST') {
 		try {
 			const client = await connectMongoDb();
+
+			//check for existing prepper email
+
+			const prepperFound = await findExistingPrepperEmail(client, email);
+			console.log('prepperFound:', prepperFound);
+
+			if (prepperFound) {
+				res.status(400).json({ error: 'Email already in use' });
+				return;
+			}
+
 			const doc = await addDocToDb(client, 'preppers', prepperDetails);
 			client.close();
 			res.status(200).json({ message: 'Succesfully registered!' });
