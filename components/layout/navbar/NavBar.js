@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { Box, Typography, IconButton, Button, Tooltip } from '@mui/material';
+import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useColors } from '../../../hooks/useColors';
 import { ColorModeContext } from '../../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -28,11 +28,6 @@ const NavBar = () => {
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [showMealCart, setShowMealCart] = useState(false);
 
-	const handleSignIn = () => {
-		console.log('clicked sign in');
-		signIn();
-	};
-
 	const handleDarkMode = () => {
 		toggleColorMode();
 	};
@@ -51,11 +46,6 @@ const NavBar = () => {
 		setShowMealCart((bool) => !bool);
 		setShowUserMenu(false);
 		setShowNotifications(false);
-	};
-
-	const handleCollapsedNavBar = () => {
-		console.log('nav menu opened');
-		//create navbar menu
 	};
 
 	return (
@@ -157,9 +147,20 @@ const NavBar = () => {
 				{showMealCart && <MealCart setShowMealCart={setShowMealCart} />}
 				<Box>
 					{!session && (
-						<Button onClick={handleSignIn}>
-							<Typography color={colors.orangeAccent[900]}>Sign In</Typography>
-						</Button>
+						<Link className={styles.link} href={'/signin'}>
+							<Typography
+								sx={{
+									'&:hover': {
+										borderBottom: `1px solid ${colors.orangeAccent[900]}`,
+									},
+								}}
+								px='.5em'
+								fontSize={'large'}
+								variant='button'
+								color={colors.orangeAccent[900]}>
+								Sign In
+							</Typography>
+						</Link>
 					)}
 				</Box>
 			</Box>
