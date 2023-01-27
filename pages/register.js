@@ -21,8 +21,28 @@ const Register = () => {
 				title={'Prepper Registration'}
 			/>
 
-			{msg && <Alert severity='success'>{msg}</Alert>}
-			{errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
+			{msg && (
+				<Alert
+					sx={{
+						width: '50%',
+						fontSize: 'larger',
+						mt: '5em',
+					}}
+					severity='success'>
+					{msg}
+				</Alert>
+			)}
+			{errorMsg && (
+				<Alert
+					sx={{
+						width: '50%',
+						fontSize: 'larger',
+						mt: '5em',
+					}}
+					severity='error'>
+					{errorMsg}
+				</Alert>
+			)}
 		</Box>
 	);
 };

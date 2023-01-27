@@ -31,3 +31,22 @@ export async function findAllInCollection(client, collectionArg) {
 	console.log(mappedDoc);
 	return mappedDoc;
 }
+export async function findExistingPrepperEmail(client, email) {
+	const collection = client.db('leftovers').collection('preppers');
+	const document = await collection.findOne({ email });
+
+	console.log(`user email found: ${document}:`);
+	// if (!document) {
+	// 	return [];
+	// }
+
+	// const mappedDoc = document.map(({ _id, firstName, lastName, email }) => {
+	// 	return {
+	// 		name: `${firstName} ${lastName}`,
+	// 		email: email,
+	// 		id: _id.toString(),
+	// 	};
+	// });
+	// console.log(mappedDoc);
+	return document;
+}

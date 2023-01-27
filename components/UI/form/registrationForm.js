@@ -14,6 +14,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log('registration pending');
+		setErrorMsg('');
+		setMsg('');
 		const firstName = firstNameRef.current.value;
 		const lastName = lastNameRef.current.value;
 		const email = emailRef.current.value;
@@ -51,7 +53,12 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
 				body: JSON.stringify(formBody),
 			});
 			const data = await response.json();
-			setMsg(data.message);
+
+			if (data.error) {
+				setErrorMsg(data.error);
+			} else {
+				setMsg(data.message);
+			}
 		} catch (err) {
 			setErrorMsg(err);
 		}
