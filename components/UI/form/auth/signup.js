@@ -68,7 +68,7 @@ const SignUpForm = ({ title }) => {
 			<Typography pt={'1em'} textAlign='center' variant='h1'>
 				Sign Up
 			</Typography>
-			<Box width={'600px'} height='500px' p='80px'>
+			<Box width={'600px'} height='60%' p='50px'>
 				<form onSubmit={handleSignUpFormSubmit}>
 					<Box width='100%' mt='1em'>
 						<TextField
@@ -116,28 +116,33 @@ const SignUpForm = ({ title }) => {
 					</Button>
 				</form>
 			</Box>
-			{msg && (
-				<Alert
-					sx={{
-						width: '50%',
-						fontSize: 'larger',
-						mt: '5em',
-					}}
-					severity='success'>
-					{msg}
-				</Alert>
-			)}
-			{errorMsg && (
-				<Alert
-					sx={{
-						width: '50%',
-						fontSize: 'larger',
-						mt: '5em',
-					}}
-					severity='error'>
-					{errorMsg}
-				</Alert>
-			)}
+			<Box
+				display={'flex'}
+				justifyContent='center'
+				width={'100%'}
+				pb='2em'
+				alignItems='center'>
+				{msg && (
+					<Alert
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+						}}
+						severity='success'>
+						{msg}
+					</Alert>
+				)}
+				{errorMsg && (
+					<Alert
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+						}}
+						severity='error'>
+						{errorMsg}
+					</Alert>
+				)}
+			</Box>
 		</Paper>
 	);
 };

@@ -29,7 +29,7 @@ const signin = () => {
 			alignItems={'center'}
 			width='100%'
 			height='100vh'>
-			<Box>
+			<Box display={'flex'} justifyContent='center' alignItems={'center'}>
 				<SignIn />
 				<SignUpForm />
 			</Box>
