@@ -2,6 +2,7 @@ import { getSession } from 'next-auth/react';
 import React from 'react';
 import { Box } from '@mui/material';
 import SignIn from '../components/UI/form/auth/signin';
+import SignUpForm from '../components/UI/form/auth/signup';
 
 export async function getServerSideProps({ req }) {
 	const session = await getSession({ req });
@@ -30,6 +31,7 @@ const signin = () => {
 			height='100vh'>
 			<Box>
 				<SignIn />
+				<SignUpForm />
 			</Box>
 		</Box>
 	);
