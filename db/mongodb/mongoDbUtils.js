@@ -36,17 +36,12 @@ export async function findExistingPrepperEmail(client, email) {
 	const document = await collection.findOne({ email });
 
 	console.log(`user email found: ${document}:`);
-	// if (!document) {
-	// 	return [];
-	// }
+	return document;
+}
+export async function findExistingUserEmail(client, email) {
+	const collection = client.db('leftovers').collection('users');
+	const document = await collection.findOne({ email });
 
-	// const mappedDoc = document.map(({ _id, firstName, lastName, email }) => {
-	// 	return {
-	// 		name: `${firstName} ${lastName}`,
-	// 		email: email,
-	// 		id: _id.toString(),
-	// 	};
-	// });
-	// console.log(mappedDoc);
+	console.log(`user email found: ${document}:`);
 	return document;
 }
