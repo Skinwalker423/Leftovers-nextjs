@@ -20,7 +20,7 @@ import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 const NavBar = () => {
 	const { data: session } = useSession();
 	const userEmail = session?.user?.email;
-	const userIcon = session?.user?.image;
+	const userIcon = session?.user?.image || '/favicon.ico';
 
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);

@@ -24,7 +24,7 @@ export async function getServerSideProps({ req }) {
 }
 
 const myKitchen = ({ userData }) => {
-	const { name, email, image } = userData.user;
+	const { name = 'User', email, image = '/icons8-connect.svg' } = userData.user;
 	return (
 		<Box
 			width='100%'
@@ -41,6 +41,7 @@ const myKitchen = ({ userData }) => {
 				src={image}
 				width={300}
 				height={300}
+				priority
 			/>
 		</Box>
 	);

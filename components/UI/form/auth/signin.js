@@ -6,21 +6,27 @@ import { useColors } from '../../../../hooks/useColors';
 
 const SignIn = () => {
 	const { colors } = useColors();
-	function handleSignIn() {
+	function handleSignInGoogle() {
 		signIn('google');
+	}
+
+	function handleSignInCredentials() {
+		signIn();
 	}
 	return (
 		<Paper
 			sx={{
 				width: {
 					xs: '100%',
-					md: '47%',
+					md: '45%',
 				},
 				height: {
 					xs: '35vh',
+					md: '50vh',
 				},
 				mt: {
 					xs: '5em',
+					md: '0',
 				},
 
 				display: 'flex',
@@ -31,11 +37,26 @@ const SignIn = () => {
 			<Box>
 				<Typography variant='h1'>Sign In Using</Typography>
 			</Box>
-			<Button size='large' color='secondary' variant='contained'>
+			<Button
+				onClick={handleSignInCredentials}
+				size='large'
+				sx={{ width: '250px', height: '50px' }}
+				color='secondary'
+				variant='contained'>
 				Email and Password
 			</Button>
-			<Typography variant='h3'>or</Typography>
-			<GoogleButton onClick={handleSignIn}>Sign In With Google</GoogleButton>
+			<Typography
+				variant='h3'
+				sx={{
+					borderTop: `1px solid ${colors.orangeAccent[900]}`,
+					width: '90%',
+					textAlign: 'center',
+				}}>
+				or
+			</Typography>
+			<GoogleButton onClick={handleSignInGoogle}>
+				Sign In With Google
+			</GoogleButton>
 		</Paper>
 	);
 };
