@@ -64,11 +64,29 @@ const SignUpForm = ({ title }) => {
 	};
 
 	return (
-		<Paper>
-			<Typography pt={'1em'} textAlign='center' variant='h1'>
+		<Paper
+			sx={{
+				width: {
+					xs: '100%',
+					md: '50%',
+				},
+				height: {
+					xs: '50vh',
+				},
+				my: '1em',
+			}}>
+			<Typography pt={'.5em'} textAlign='center' variant='h1'>
 				Sign Up
 			</Typography>
-			<Box width={'600px'} height='60%' p='50px'>
+			<Box
+				width={'100%'}
+				sx={{
+					px: {
+						xs: '2em',
+						md: '5em',
+						lg: '8em',
+					},
+				}}>
 				<form onSubmit={handleSignUpFormSubmit}>
 					<Box width='100%' mt='1em'>
 						<TextField
@@ -76,6 +94,7 @@ const SignUpForm = ({ title }) => {
 							type='email'
 							label='Email'
 							required
+							autoComplete='on'
 							inputRef={emailRef}
 							color='secondary'
 							fullWidth
@@ -87,6 +106,7 @@ const SignUpForm = ({ title }) => {
 							type='password'
 							label='Password'
 							required
+							autoComplete='on'
 							inputRef={passwordRef}
 							color='secondary'
 							fullWidth
@@ -98,6 +118,7 @@ const SignUpForm = ({ title }) => {
 							type='password'
 							label='Confirm Password'
 							required
+							autoComplete='on'
 							inputRef={confirmPasswordRef}
 							color='secondary'
 							fullWidth
@@ -118,10 +139,10 @@ const SignUpForm = ({ title }) => {
 			</Box>
 			<Box
 				display={'flex'}
-				justifyContent='center'
 				width={'100%'}
-				pb='2em'
-				alignItems='center'>
+				justifyContent='center'
+				alignItems='center'
+				mt='3em'>
 				{msg && (
 					<Alert
 						sx={{

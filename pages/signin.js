@@ -29,7 +29,18 @@ const signin = () => {
 			alignItems={'center'}
 			width='100%'
 			height='100vh'>
-			<Box display={'flex'} justifyContent='center' alignItems={'center'}>
+			<Box
+				width={'90%'}
+				display={'flex'}
+				justifyContent='space-around'
+				alignItems={'center'}
+				sx={{
+					flexDirection: {
+						sm: 'column',
+						xs: 'column',
+						md: 'row',
+					},
+				}}>
 				<SignIn />
 				<SignUpForm />
 			</Box>
