@@ -29,6 +29,7 @@ const CartItem = ({ meal }) => {
 			width={'100%'}
 			px='20px'
 			alignItems='center'
+			my={'2em'}
 			borderTop={`1px solid ${colors.primary[100]}`}
 			height='100px'>
 			<Box>
