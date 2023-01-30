@@ -14,7 +14,6 @@ export async function getServerSideProps() {
 		const client = await connectMongoDb();
 		const allPreppers = await findAllInCollection(client, 'preppers');
 
-		console.log({ allPreppers });
 		return {
 			props: {
 				preppers: allPreppers || [],

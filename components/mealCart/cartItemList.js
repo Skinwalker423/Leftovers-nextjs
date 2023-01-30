@@ -21,13 +21,28 @@ const CartItemList = () => {
 	return (
 		<Box
 			height='80%'
+			sx={{
+				width: {
+					xs: '400px',
+					sm: '450px',
+					md: '600px',
+					lg: '1000px',
+				},
+			}}
 			display={'flex'}
+			overflow='auto'
 			flexDirection='column'
-			justifyContent='space-between'>
-			<Typography sx={{ mb: '10px' }} textAlign={'center'} variant='h2'>
+			justifyContent='flex-start'>
+			<Typography sx={{ my: '2em' }} textAlign={'center'} variant='h2'>
 				Meals
 			</Typography>
-			<Box>
+			<Box
+				sx={{
+					px: {
+						xs: '2em',
+						md: '5em',
+					},
+				}}>
 				{cartList.length ? (
 					cartList
 				) : (

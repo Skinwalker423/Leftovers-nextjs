@@ -14,8 +14,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import NotificationMenu from '../../notifications/notificationMenu';
 import styles from './NavBar.module.css';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import MealCart from '../../mealCart/mealCart';
 import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
+import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -26,7 +26,20 @@ const NavBar = () => {
 	const { toggleColorMode } = useContext(ColorModeContext);
 	const [showUserMenu, setShowUserMenu] = useState();
 	const [showNotifictions, setShowNotifications] = useState(false);
-	const [showMealCart, setShowMealCart] = useState(false);
+	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+	const toggleDrawer = (event) => {
+		if (
+			event.type === 'keydown' &&
+			(event.key === 'Tab' || event.key === 'Shift')
+		) {
+			return;
+		}
+
+		setIsDrawerOpen((bool) => !bool);
+		setShowUserMenu(false);
+		setShowNotifications(false);
+	};
 
 	const handleDarkMode = () => {
 		toggleColorMode();
@@ -40,12 +53,6 @@ const NavBar = () => {
 	const handleNotificationButton = () => {
 		setShowNotifications((bool) => !bool);
 		setShowUserMenu(false);
-	};
-
-	const handleMealCart = () => {
-		setShowMealCart((bool) => !bool);
-		setShowUserMenu(false);
-		setShowNotifications(false);
 	};
 
 	return (
@@ -118,7 +125,7 @@ const NavBar = () => {
 				)}
 				<Tooltip title='meal cart'>
 					<Box>
-						<IconButton onClick={handleMealCart}>
+						<IconButton onClick={toggleDrawer}>
 							<ShoppingCartOutlinedIcon />
 						</IconButton>
 					</Box>
@@ -144,7 +151,11 @@ const NavBar = () => {
 				)}
 				{showUserMenu && <UserMenu />}
 				{showNotifictions && <NotificationMenu />}
-				{showMealCart && <MealCart setShowMealCart={setShowMealCart} />}
+
+				<MealCartDrawer
+					isDrawerOpen={isDrawerOpen}
+					toggleDrawer={toggleDrawer}
+				/>
 				<Box>
 					{!session && (
 						<Link className={styles.link} href={'/signin'}>
