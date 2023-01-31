@@ -1,8 +1,19 @@
-import React, { useRef } from 'react';
-import { Box, Paper, TextField, Typography, Button } from '@mui/material';
+import React, { useRef, useState } from 'react';
+import {
+	Box,
+	Paper,
+	TextField,
+	Typography,
+	Button,
+	CircularProgress,
+} from '@mui/material';
 import { isValidZipCode, validateEmail } from '../../../utils/form-validation';
+import { useRouter } from 'next/router';
+import CustomLoader from '../Loader';
 
 const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
+	const [isFormLoading, setIsFormLoading] = useState(false);
+	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
 	const emailRef = useRef();
@@ -14,6 +25,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log('registration pending');
+		setIsFormLoading(true);
 		setErrorMsg('');
 		setMsg('');
 		const firstName = firstNameRef.current.value;
@@ -56,11 +68,15 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
 
 			if (data.error) {
 				setErrorMsg(data.error);
+				setIsFormLoading(false);
 			} else {
+				router.push('/');
+				setIsFormLoading(false);
 				setMsg(data.message);
 			}
 		} catch (err) {
 			setErrorMsg(err);
+			setIsFormLoading(false);
 		}
 	};
 
@@ -142,14 +158,21 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg }) => {
 						/>
 					</Box>
 					<Button
-						sx={{ mt: '3rem' }}
+						sx={{ mt: '3rem', p: '1em' }}
 						variant='contained'
 						fullWidth
+						disabled={isFormLoading}
 						color='success'
 						type='submit'
 						required
 						size='large'>
-						Submit
+						{isFormLoading ? (
+							<CircularProgress />
+						) : (
+							<Typography fontSize={'larger'} lineHeight={'2.5em'}>
+								Submit
+							</Typography>
+						)}
 					</Button>
 				</form>
 			</Box>
