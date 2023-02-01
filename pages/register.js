@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
-import RegistrationForm from '../components/UI/form/registrationForm';
+import RegistrationForm from '../components/UI/form/registration/registrationForm';
 
 const Register = () => {
 	const [errorMsg, setErrorMsg] = useState('');
