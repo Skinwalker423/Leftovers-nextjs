@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import Footer from '../components/layout/footer/footer';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
-import { useSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from './api/auth/[...nextauth]';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
@@ -15,22 +16,26 @@ import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPrepper
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
 	const fetchedFavs = await fetchFavoritePreppers();
+	const session = await unstable_getServerSession(req, res, authOptions);
+	console.log('this is the session:', session);
+
+	const foundSession = session ? session : null;
 
 	return {
 		props: {
 			favoriteList: fetchedFavs ? fetchedFavs : [],
+			session: foundSession,
 		},
 	};
 }
 
-export default function Home({ favoriteList }) {
+export default function Home({ favoriteList, session }) {
 	const [zipCode, setZipCode] = useState('');
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
-	const { data: session } = useSession();
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();

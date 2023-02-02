@@ -1,10 +1,11 @@
 import React from 'react';
-import { getSession } from 'next-auth/react';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-export async function getServerSideProps({ req }) {
-	const session = await getSession({ req });
+export async function getServerSideProps({ req, res }) {
+	const session = await unstable_getServerSession(req, res, authOptions);
 	console.log({ session });
 
 	if (!session) {
