@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 import { useColors } from '../../../hooks/useColors';
 import { ColorModeContext } from '../../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -90,7 +90,11 @@ const NavBar = () => {
 							<NavItem title='Preppers' href='/preppers' />
 							{session && <NavItem title='Favs' href='/favorites' />}
 							<NavItem title='About' href='/about' />
-							<NavItem title='Register' href='register' />
+							{session ? (
+								<NavItem title='My Kitchen' href='myKitchen' />
+							) : (
+								<NavItem title='Register' href='register' />
+							)}
 						</ul>
 					</nav>
 				</Box>
