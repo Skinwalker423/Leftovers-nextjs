@@ -35,7 +35,7 @@ export async function findExistingPrepperEmail(client, email) {
 	const collection = client.db('leftovers').collection('preppers');
 	const document = await collection.findOne({ email });
 
-	console.log(`user email found: ${document}:`);
+	console.log(`prepper email found: ${document}:`);
 	return document;
 }
 export async function findExistingUserEmail(client, email) {
