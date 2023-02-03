@@ -26,7 +26,17 @@ const prepper = async (req, res) => {
 		firstName.trim() === '' ||
 		lastName.trim() === ''
 	) {
-		res.status(422).json({ message: 'invalid names' });
+		res.status(422).json({ error: 'invalid names' });
+		return;
+	}
+	if (
+		!state ||
+		!address ||
+		!city ||
+		address.trim() === '' ||
+		city.trim() === ''
+	) {
+		res.status(422).json({ error: 'select a valid State and address' });
 		return;
 	}
 	const prepperDetails = {

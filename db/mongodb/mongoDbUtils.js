@@ -32,11 +32,29 @@ export async function findAllInCollection(client, collectionArg) {
 	return mappedDoc;
 }
 export async function findExistingPrepperEmail(client, email) {
-	const collection = client.db('leftovers').collection('preppers');
-	const document = await collection.findOne({ email });
-
-	console.log(`prepper email found: ${document}:`);
-	return document;
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.findOne({ email });
+		if (!document) {
+			return null;
+		}
+		console.log(`prepper email found: ${document}:`);
+		const formattedDoc = {
+			id: document?._id.toString(),
+			email: document.email,
+			location: {
+				address: document.location.address,
+				city: document.location.city,
+				state: document.location.state,
+				zipcode: document.location.zipcode,
+			},
+			favorites: document.favorites,
+			meals: document.meals,
+		};
+		return formattedDoc;
+	} catch (err) {
+		console.error('problem retrieving user from db', err);
+	}
 }
 export async function findExistingUserEmail(client, email) {
 	const collection = client.db('leftovers').collection('users');

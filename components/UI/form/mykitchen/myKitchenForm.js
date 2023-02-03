@@ -13,15 +13,16 @@ import {
 	validateEmail,
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
-import StateInput from './stateInput';
+import StateInput from '../registration/stateInput';
 
-const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
+const MyKitchenForm = ({ title, sessionEmail }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
+	const [errorMsg, setErrorMsg] = useState();
+	const [msg, setMsg] = useState();
 	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
-	const emailRef = useRef();
 	const streetAddressRef = useRef();
 	const cityRef = useRef();
 	const zipcodeRef = useRef();
@@ -34,7 +35,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		setMsg('');
 		const firstName = firstNameRef.current.value;
 		const lastName = lastNameRef.current.value;
-		const email = emailRef.current.value;
+		const email = sessionEmail;
 		const zipcode = zipcodeRef.current.value;
 
 		const isValidZip = isValidZipCode(zipcode);
@@ -42,17 +43,26 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 
 		if (!isValidZip) {
 			setErrorMsg('Invalid zipcode');
+			setIsFormLoading(false);
 			return;
 		}
 		if (!isValidEmail) {
 			setErrorMsg('Invalid email');
+			setIsFormLoading(false);
+			return;
+		}
+
+		if (!state) {
+			setErrorMsg('please select a State');
+			setIsFormLoading(false);
+
 			return;
 		}
 
 		const formBody = {
 			firstName,
 			lastName,
-			email: emailRef.current.value,
+			email,
 			location: {
 				address: streetAddressRef.current.value,
 				city: cityRef.current.value,
@@ -109,18 +119,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							color='secondary'
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
-						<TextField
-							id='email'
-							type='email'
-							label='Email'
-							value={sessionEmail}
-							required
-							inputRef={emailRef}
-							color='secondary'
-							fullWidth
-						/>
-					</Box>
+
 					<Box width='100%' mt='1em'>
 						<TextField
 							id='address'
@@ -143,15 +142,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							fullWidth
 						/>
 						<StateInput state={state} setState={setState} />
-						{/* <TextField
-							id='state'
-							type='text'
-							label='State'
-							required
-							inputRef={stateRef}
-							color='secondary'
-							fullWidth
-						/> */}
+
 						<TextField
 							id='zipcode'
 							type='number'
@@ -180,10 +171,32 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							</Typography>
 						)}
 					</Button>
+					{msg && (
+						<Alert
+							sx={{
+								width: '100%',
+								fontSize: 'larger',
+								mt: '1.5em',
+							}}
+							severity='success'>
+							{msg}
+						</Alert>
+					)}
+					{errorMsg && (
+						<Alert
+							sx={{
+								width: '100%',
+								fontSize: 'larger',
+								mt: '1.5em',
+							}}
+							severity='error'>
+							{errorMsg}
+						</Alert>
+					)}
 				</form>
 			</Box>
 		</Paper>
 	);
 };
 
-export default RegistrationForm;
+export default MyKitchenForm;
