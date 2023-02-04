@@ -143,15 +143,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							fullWidth
 						/>
 						<StateInput state={state} setState={setState} />
-						{/* <TextField
-							id='state'
-							type='text'
-							label='State'
-							required
-							inputRef={stateRef}
-							color='secondary'
-							fullWidth
-						/> */}
+
 						<TextField
 							id='zipcode'
 							type='number'

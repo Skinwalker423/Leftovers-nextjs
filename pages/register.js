@@ -1,7 +1,26 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 import RegistrationForm from '../components/UI/form/registration/registrationForm';
+
+export async function getServerSideProps({ req, res }) {
+	const session = await unstable_getServerSession(req, res, authOptions);
+
+	if (session) {
+		return {
+			redirect: {
+				destination: '/myKitchen',
+				permanent: false,
+			},
+		};
+	}
+
+	return {
+		props: {},
+	};
+}
 
 const Register = () => {
 	const [errorMsg, setErrorMsg] = useState('');
