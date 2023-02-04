@@ -26,20 +26,21 @@ const user = async (req, res) => {
 	const userDetails = {
 		email,
 		favorites: [],
-		meals: [],
 		password: hashedPassword,
 	};
 	if (req.method === 'POST') {
 		try {
 			const client = await connectMongoDb();
 
-			//check for existing prepper email
+			//check for existing user email
 
 			const userFound = await findExistingUserEmail(client, email);
 
 			if (userFound) {
 				console.log('prepperFound:', userFound);
-				res.status(400).json({ error: 'Email already in use' });
+				res.status(400).json({
+					error: 'Email already in use. Choose another email or please sign in',
+				});
 				return;
 			}
 

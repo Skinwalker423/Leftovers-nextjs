@@ -44,7 +44,6 @@ const prepper = async (req, res) => {
 		firstName,
 		lastName,
 		location,
-		favorites: [],
 		meals: [],
 	};
 	if (req.method === 'POST') {

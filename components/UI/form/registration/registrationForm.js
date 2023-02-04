@@ -25,6 +25,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const streetAddressRef = useRef();
 	const cityRef = useRef();
 	const zipcodeRef = useRef();
+	const passwordRef = useRef();
+	const confirmPasswordRef = useRef();
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
@@ -36,6 +38,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		const lastName = lastNameRef.current.value;
 		const email = emailRef.current.value;
 		const zipcode = zipcodeRef.current.value;
+		const password = passwordRef.current.value;
+		const confirmPassword = confirmPasswordRef.current.value;
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
@@ -48,11 +52,15 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			setErrorMsg('Invalid email');
 			return;
 		}
+		if (password !== confirmPassword) {
+			setErrorMsg('password does not match');
+			return;
+		}
 
 		const formBody = {
 			firstName,
 			lastName,
-			email: emailRef.current.value,
+			email,
 			location: {
 				address: streetAddressRef.current.value,
 				city: cityRef.current.value,
@@ -60,6 +68,33 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				zipcode: zipcodeRef.current.value,
 			},
 		};
+
+		const userformBody = {
+			email,
+			password,
+			confirmPassword,
+		};
+		try {
+			const response = await fetch('/api/register/user', {
+				headers: {
+					'Content-type': 'application/json',
+				},
+				method: 'POST',
+				body: JSON.stringify(userformBody),
+			});
+			const data = await response.json();
+			console.log(data);
+
+			if (data.error) {
+				setErrorMsg(data.error);
+				setIsFormLoading(false);
+				return;
+			}
+		} catch (err) {
+			setErrorMsg(err);
+			setIsFormLoading(false);
+			return;
+		}
 		try {
 			const response = await fetch('/api/register/prepper', {
 				headers: {
@@ -89,7 +124,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			<Typography pt={'1em'} textAlign='center' variant='h1'>
 				{title}
 			</Typography>
-			<Box width={'600px'} height='500px' p='80px'>
+			<Box width={'600px'} height='700px' p='80px'>
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box width={'100%'} display='flex' justifyContent={'space-between'}>
 						<TextField
@@ -117,6 +152,30 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							value={sessionEmail}
 							required
 							inputRef={emailRef}
+							color='secondary'
+							fullWidth
+						/>
+					</Box>
+					<Box width='100%' mt='1em'>
+						<TextField
+							id='password'
+							type='password'
+							label='Password'
+							required
+							autoComplete='on'
+							inputRef={passwordRef}
+							color='secondary'
+							fullWidth
+						/>
+					</Box>
+					<Box width='100%' mt='1em'>
+						<TextField
+							id='confirmPassword'
+							type='password'
+							label='Confirm Password'
+							required
+							autoComplete='on'
+							inputRef={confirmPasswordRef}
 							color='secondary'
 							fullWidth
 						/>
