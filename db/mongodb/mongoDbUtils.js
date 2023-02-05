@@ -48,7 +48,6 @@ export async function findExistingPrepperEmail(client, email) {
 				state: document.location.state,
 				zipcode: document.location.zipcode,
 			},
-			favorites: document.favorites,
 			meals: document.meals,
 		};
 		return formattedDoc;
