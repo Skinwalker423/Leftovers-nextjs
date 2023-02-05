@@ -6,6 +6,7 @@ import { signOut } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import DefaultAvatar from '../../icon/defaultAvatar';
 
 const UserMenu = () => {
 	const { colors } = useColors();
@@ -39,15 +40,19 @@ const UserMenu = () => {
 				justifyContent={'center'}
 				alignItems='center'
 				m={'20px 0'}>
-				<Box>
-					<Image
-						style={{ borderRadius: '50%' }}
-						src={userIcon}
-						width={50}
-						height={50}
-						alt='user icon'
-					/>
-				</Box>
+				{userIcon ? (
+					<Box>
+						<Image
+							style={{ borderRadius: '50%' }}
+							src={userIcon}
+							width={50}
+							height={50}
+							alt='user icon'
+						/>
+					</Box>
+				) : (
+					<DefaultAvatar firstEmailLetter={userEmail[0]} />
+				)}
 				<Box color={colors.primary[100]}>
 					<Typography>{userEmail}</Typography>
 				</Box>

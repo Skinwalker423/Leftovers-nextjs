@@ -59,6 +59,14 @@ export async function findExistingUserEmail(client, email) {
 	const collection = client.db('leftovers').collection('users');
 	const document = await collection.findOne({ email });
 
+	if (!document) {
+		return null;
+	}
 	console.log(`user email found: ${document}:`);
+	// const formattedDoc = {
+	// 	id: document?._id.toString(),
+	// 	email: document.email,
+	// 	favorites: document.meals,
+	// };
 	return document;
 }
