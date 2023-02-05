@@ -16,11 +16,12 @@ import styles from './NavBar.module.css';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
+import DefaultAvatar from '../../UI/icon/defaultAvatar';
 
 const NavBar = () => {
 	const { data: session } = useSession();
 	const userEmail = session?.user?.email;
-	const userIcon = session?.user?.image || '/favicon.ico';
+	const userIcon = session?.user?.image;
 
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
@@ -143,13 +144,17 @@ const NavBar = () => {
 							</Box>
 						}>
 						<IconButton onClick={handleUserIcon}>
-							<Image
-								style={{ borderRadius: '50%' }}
-								src={userIcon}
-								width={25}
-								height={25}
-								alt='user icon'
-							/>
+							{userIcon ? (
+								<Image
+									style={{ borderRadius: '50%' }}
+									src={userIcon}
+									width={25}
+									height={25}
+									alt='user icon'
+								/>
+							) : (
+								<DefaultAvatar avatar firstEmailLetter={userEmail[0]} />
+							)}
 						</IconButton>
 					</Tooltip>
 				)}

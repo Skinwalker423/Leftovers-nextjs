@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { registerPrepper, registerUser } from '../../../../utils/registration';
 import {
 	Box,
 	Paper,
@@ -75,15 +76,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			confirmPassword,
 		};
 		try {
-			const response = await fetch('/api/register/user', {
-				headers: {
-					'Content-type': 'application/json',
-				},
-				method: 'POST',
-				body: JSON.stringify(userformBody),
-			});
-			const data = await response.json();
-			console.log(data);
+			const data = await registerUser(userformBody);
 
 			if (data.error) {
 				setErrorMsg(data.error);
@@ -96,14 +89,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			return;
 		}
 		try {
-			const response = await fetch('/api/register/prepper', {
-				headers: {
-					'Content-type': 'application/json',
-				},
-				method: 'POST',
-				body: JSON.stringify(formBody),
-			});
-			const data = await response.json();
+			const data = await registerPrepper(formBody);
 
 			if (data.error) {
 				setErrorMsg(data.error);
