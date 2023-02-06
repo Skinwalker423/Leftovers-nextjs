@@ -48,7 +48,8 @@ const Home = ({ preppers }) => {
 							className={styles.prepCard}
 							key={prepper.id}
 							title={prepper.name}
-							subTitle={prepper.email}
+							email={prepper.email}
+							subTitle={'Homecooking genius'}
 							avatar={avatar}
 							id={prepper.id}
 						/>

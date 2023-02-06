@@ -45,6 +45,7 @@ const prepper = async (req, res) => {
 		lastName,
 		location,
 		meals: [],
+		description: '',
 	};
 	if (req.method === 'POST') {
 		try {
@@ -57,6 +58,7 @@ const prepper = async (req, res) => {
 
 			if (prepperFound) {
 				res.status(400).json({ error: 'Email already in use' });
+				client.close();
 				return;
 			}
 

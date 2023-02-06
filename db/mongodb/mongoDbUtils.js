@@ -12,6 +12,14 @@ export async function addDocToDb(client, collectionArg, doc) {
 	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
+export async function addPrepperToFavoritesListDb(client, prepper) {
+	const collection = client.db('leftovers').collection('users');
+	const document = await collection.updateOne({
+		$push: { favorites: prepper },
+	});
+	console.log(`document added to favorites`, document);
+	return document;
+}
 export async function findAllInCollection(client, collectionArg) {
 	const collection = client.db('leftovers').collection(collectionArg);
 	const document = await collection.find({}).toArray();
