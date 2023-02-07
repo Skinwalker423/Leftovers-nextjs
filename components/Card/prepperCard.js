@@ -19,20 +19,28 @@ import { addFavoritePrepperToDb } from '../../utils/favorites';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
-	title,
+	name,
 	email,
 	subTitle,
 	kitchenImg = '/art.jpg',
 	description,
+	userEmail,
 	id,
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
 
+	const prepperDetails = {
+		id,
+		name,
+		email,
+	};
+
 	async function handleAddFavBtn() {
 		setFavorited(true);
-		const data = await addFavoritePrepperToDb(email);
+		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
 		console.log(data);
+		return data;
 	}
 
 	function handleRemoveFavBtn() {
@@ -52,7 +60,7 @@ export default function PrepperCard({
 							src={avatar}
 							width={37}
 							height={37}
-							alt={`avatar for ${title}`}
+							alt={`avatar for ${name}`}
 						/>
 					</Avatar>
 				}
@@ -61,10 +69,10 @@ export default function PrepperCard({
 						<MoreVertIcon />
 					</IconButton>
 				}
-				title={title}
+				title={name}
 				subheader={subTitle}
 			/>
-			<CardMedia component='img' height='194' image={kitchenImg} alt={title} />
+			<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
 			<CardContent>
 				<Typography variant='body2' color='text.secondary'>
 					This impressive paella is a perfect party dish and a fun meal to cook

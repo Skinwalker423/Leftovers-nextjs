@@ -1,13 +1,15 @@
-export async function addFavoritePrepperToDb(email) {
-	console.log(email);
-
+export async function addFavoritePrepperToDb(prepper, userEmail) {
+	const favBody = {
+		prepper: prepper,
+		userEmail: userEmail,
+	};
 	try {
 		const response = await fetch('/api/favorites/addPrepper', {
 			method: 'PATCH',
 			headers: {
 				'Application-Type': 'application/json',
 			},
-			body: JSON.stringify({ email }),
+			body: JSON.stringify(favBody),
 		});
 		const data = await response.json();
 		console.log(data);
