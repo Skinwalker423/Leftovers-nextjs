@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card/prepperCard';
 import Link from 'next/link';
+import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]';
 import { mockDataContacts } from '../../db/mockData';
 import styles from './index.module.css';
 import {
@@ -9,14 +11,17 @@ import {
 	connectMongoDb,
 } from '../../db/mongodb/mongoDbUtils';
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
 	try {
 		const client = await connectMongoDb();
 		const allPreppers = await findAllInCollection(client, 'preppers');
+		const session = await unstable_getServerSession(req, res, authOptions);
+		const userEmail = session?.user?.email;
 
 		return {
 			props: {
 				preppers: allPreppers || [],
+				userEmail,
 			},
 		};
 	} catch (err) {
@@ -29,7 +34,7 @@ export async function getServerSideProps() {
 	}
 }
 
-const Home = ({ preppers }) => {
+const Home = ({ preppers, userEmail }) => {
 	return (
 		<Box
 			height='100%'
@@ -47,10 +52,12 @@ const Home = ({ preppers }) => {
 						<PrepperCard
 							className={styles.prepCard}
 							key={prepper.id}
-							title={prepper.name}
-							subTitle={prepper.email}
+							name={prepper.name}
+							email={prepper.email}
+							subTitle={'Homecooking genius'}
 							avatar={avatar}
 							id={prepper.id}
+							userEmail={userEmail}
 						/>
 					);
 				})}
