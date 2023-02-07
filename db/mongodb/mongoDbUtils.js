@@ -12,6 +12,25 @@ export async function addDocToDb(client, collectionArg, doc) {
 	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
+export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
+	try {
+		const collection = client.db('leftovers').collection('users');
+		const document = await collection.updateOne(
+			{ email: userEmail },
+			{
+				$push: { favorites: prepper },
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log(`document added to favorites`, document);
+		return document;
+	} catch (err) {
+		console.error('problem updating document', err);
+	}
+}
 export async function findAllInCollection(client, collectionArg) {
 	const collection = client.db('leftovers').collection(collectionArg);
 	const document = await collection.find({}).toArray();
