@@ -22,6 +22,7 @@ export async function getServerSideProps({ req, res }) {
 			props: {
 				preppers: allPreppers || [],
 				userEmail: userEmail ? userEmail : null,
+
 			},
 		};
 	} catch (err) {
