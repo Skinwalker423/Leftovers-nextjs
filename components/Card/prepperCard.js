@@ -16,6 +16,7 @@ import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
 import { addFavoritePrepperToDb } from '../../utils/favorites';
+import { useSession } from 'next-auth/react';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
@@ -29,6 +30,7 @@ export default function PrepperCard({
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
+	const { data: session } = useSession();
 
 	const prepperDetails = {
 		id,
@@ -39,7 +41,6 @@ export default function PrepperCard({
 	async function handleAddFavBtn() {
 		setFavorited(true);
 		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
-		console.log(data);
 		return data;
 	}
 
@@ -83,19 +84,21 @@ export default function PrepperCard({
 			<CardActions
 				sx={{
 					display: 'flex',
-					justifyContent: 'space-between',
+					justifyContent: session ? 'space-between' : 'flex-end',
 					alignItems: 'center',
 				}}
 				disableSpacing>
-				<IconButton
-					onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
-					aria-label='add to favorites'>
-					{favorited ? (
-						<FavoriteIcon color='error' />
-					) : (
-						<FavoriteBorderOutlinedIcon color='error' />
-					)}
-				</IconButton>
+				{session && (
+					<IconButton
+						onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
+						aria-label='add to favorites'>
+						{favorited ? (
+							<FavoriteIcon color='error' />
+						) : (
+							<FavoriteBorderOutlinedIcon color='error' />
+						)}
+					</IconButton>
+				)}
 				<Link className={styles.link} href={`/preppers/${id}`}>
 					<Button
 						sx={{
