@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -25,12 +25,17 @@ export default function PrepperCard({
 	subTitle,
 	kitchenImg = '/art.jpg',
 	description,
+	isFavorited,
 	userEmail,
 	id,
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
 	const { data: session } = useSession();
+
+	useEffect(() => {
+		setFavorited(isFavorited);
+	}, []);
 
 	const prepperDetails = {
 		id,

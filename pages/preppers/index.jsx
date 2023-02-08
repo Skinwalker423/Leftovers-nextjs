@@ -22,6 +22,7 @@ export async function getServerSideProps({ req, res }) {
 			props: {
 				preppers: allPreppers || [],
 				userEmail: userEmail ? userEmail : null,
+				favoritesList: [],
 			},
 		};
 	} catch (err) {
@@ -34,7 +35,7 @@ export async function getServerSideProps({ req, res }) {
 	}
 }
 
-const Home = ({ preppers, userEmail }) => {
+const Home = ({ preppers, userEmail, favoritesList }) => {
 	return (
 		<Box
 			height='100%'
@@ -47,9 +48,11 @@ const Home = ({ preppers, userEmail }) => {
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
-
+					const favorited =
+						favoritesList && favoritesList[prepper.id] ? true : false;
 					return (
 						<PrepperCard
+							isFavorited={favorited}
 							className={styles.prepCard}
 							key={prepper.id}
 							name={prepper.name}
