@@ -124,17 +124,18 @@ const SignUpForm = ({ title }) => {
 							fullWidth
 						/>
 					</Box>
-
-					<Button
-						sx={{ mt: '3rem' }}
-						variant='contained'
-						fullWidth
-						color='success'
-						type='submit'
-						required
-						size='large'>
-						Submit
-					</Button>
+					<Box>
+						<Button
+							sx={{ mt: '3rem', height: '4em' }}
+							variant='contained'
+							fullWidth
+							color='success'
+							type='submit'
+							required
+							size='large'>
+							<Typography fontSize={'large'}>Submit</Typography>
+						</Button>
+					</Box>
 				</form>
 			</Box>
 			<Box

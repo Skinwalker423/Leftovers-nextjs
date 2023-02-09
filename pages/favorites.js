@@ -1,27 +1,42 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import FavoriteList from '../components/favorites/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
 import { Box } from '@mui/material';
 import styles from '/styles/Home.module.css';
 import Footer from '../components/layout/footer/footer';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import CustomLoader from '../components/UI/Loader';
 
-export async function getServerSideProps() {
+import {
+	connectMongoDb,
+	findExistingUserEmail,
+} from '../db/mongodb/mongoDbUtils';
+import { unstable_getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
+
+export async function getServerSideProps({ req, res }) {
+	const session = await unstable_getServerSession(req, res, authOptions);
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/myKitchen',
+				permanent: false,
+			},
+		};
+	}
+
+	const client = await connectMongoDb();
+	const document = await findExistingUserEmail(client, session.user.email);
 	const favoritePreppersList = await fetchFavoritePreppers();
+
 	return {
 		props: {
-			favoriteList: favoritePreppersList || [],
+			favoriteList: document.favorites || favoritePreppersList,
+			userSession: session,
 		},
 	};
 }
 
-const Favorites = ({ favoriteList }) => {
-	const { data: session } = useSession();
-	const router = useRouter();
-
+const Favorites = ({ favoriteList, userSession }) => {
 	return (
 		<Box className={styles.container}>
 			<Head>
@@ -29,7 +44,11 @@ const Favorites = ({ favoriteList }) => {
 				<meta name='description' content='Your favorite preppers' />
 			</Head>
 			<main style={{ marginTop: '80px' }} className={styles.main}>
-				<FavoriteList favRow={true} favoriteList={favoriteList} />
+				<FavoriteList
+					favRow={true}
+					isFavorited={true}
+					favoriteList={favoriteList}
+				/>
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title='Leftovers' />
