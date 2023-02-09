@@ -55,6 +55,7 @@ export async function findExistingPrepperEmail(client, email) {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.findOne({ email });
 		if (!document) {
+			client.close();
 			return null;
 		}
 		console.log(`prepper email found: ${document}:`);
@@ -69,23 +70,33 @@ export async function findExistingPrepperEmail(client, email) {
 			},
 			meals: document.meals,
 		};
+		client.close();
 		return formattedDoc;
 	} catch (err) {
+		client.close();
 		console.error('problem retrieving user from db', err);
 	}
 }
 export async function findExistingUserEmail(client, email) {
-	const collection = client.db('leftovers').collection('users');
-	const document = await collection.findOne({ email });
+	try {
+		const collection = client.db('leftovers').collection('users');
+		const document = await collection.findOne({ email });
 
-	if (!document) {
-		return null;
+		if (!document) {
+			client.close();
+			return null;
+		}
+
+		const formattedDoc = {
+			id: document?._id.toString(),
+			email: document?.email,
+			favorites: document?.favorites,
+		};
+		console.log(`user email found: ${document}:`);
+		client.close();
+		return formattedDoc;
+	} catch (err) {
+		client.close();
+		console.error('problem retrieving favorites list from user', err);
 	}
-	console.log(`user email found: ${document}:`);
-	// const formattedDoc = {
-	// 	id: document?._id.toString(),
-	// 	email: document.email,
-	// 	favorites: document.meals,
-	// };
-	return document;
 }
