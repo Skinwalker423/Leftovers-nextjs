@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { Box } from '@mui/material';
+import { Alert, Box } from '@mui/material';
 import Footer from '../components/layout/footer/footer';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import FavoriteList from '../components/favorites/favoriteList';
@@ -48,9 +48,10 @@ export async function getServerSideProps({ req, res }) {
 		} catch (err) {
 			console.error('could not establish Google auth user');
 			return {
-				redirect: {
-					destination: '/',
-					permanent: false,
+				props: {
+					favoriteList: [],
+					session: foundSession,
+					error: err,
 				},
 			};
 		}
@@ -64,7 +65,7 @@ export async function getServerSideProps({ req, res }) {
 	};
 }
 
-export default function Home({ favoriteList, foundSession }) {
+export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
@@ -127,6 +128,17 @@ export default function Home({ favoriteList, foundSession }) {
 						bgColor={colors.blueAccent[700]}>
 						<FavoriteList favoriteList={favoriteList} />
 					</CategoryBanner>
+				)}
+				{error && (
+					<Alert
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+							mt: '5em',
+						}}
+						severity='error'>
+						{error}
+					</Alert>
 				)}
 			</main>
 			<footer className={styles.footer}>
