@@ -15,27 +15,63 @@ import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
+import {
+	connectMongoDb,
+	findExistingUserEmail,
+	addDocToDb,
+} from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
 	const fetchedFavs = await fetchFavoritePreppers();
 	const session = await unstable_getServerSession(req, res, authOptions);
-	console.log('this is the session:', session);
-
 	const foundSession = session ? session : null;
+	console.log('this is the session:', session);
+	const client = session && (await connectMongoDb());
+	const user =
+		session &&
+		client &&
+		(await findExistingUserEmail(client, session.user.email));
+
+	if (!user && session) {
+		const userDetails = {
+			...session.user,
+			favorites: [],
+		};
+		try {
+			const doc = await addDocToDb(client, 'users', userDetails);
+			return {
+				props: {
+					favoriteList: [],
+					session: foundSession,
+				},
+			};
+		} catch (err) {
+			console.error('could not establish Google auth user');
+			return {
+				redirect: {
+					destination: '/',
+					permanent: false,
+				},
+			};
+		}
+	}
 
 	return {
 		props: {
-			favoriteList: fetchedFavs ? fetchedFavs : [],
-			session: foundSession,
+			favoriteList: session && user?.favorites ? user?.favorites : [],
+			foundSession,
 		},
 	};
 }
 
-export default function Home({ favoriteList, session }) {
+export default function Home({ favoriteList, foundSession }) {
 	const [zipCode, setZipCode] = useState('');
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
+
+	console.log(favoriteList);
+	console.log(foundSession);
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
@@ -85,7 +121,7 @@ export default function Home({ favoriteList, session }) {
 						<LocalPreppersList localPreppers={localPreppers} />
 					</CategoryBanner>
 				)}
-				{favoriteList.length && session && (
+				{favoriteList.length && foundSession && (
 					<CategoryBanner
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>

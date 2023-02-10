@@ -35,7 +35,7 @@ export default function PrepperCard({
 
 	useEffect(() => {
 		setFavorited(isFavorited);
-	}, [favorited]);
+	}, []);
 
 	const prepperDetails = {
 		id,

@@ -10,6 +10,8 @@ export const ACTION_TYPES = {
 	INCREMENT_FOOD_ITEM: 'INCREMENT_FOOD_ITEM',
 	DECREMENT_FOOD_ITEM: 'DECREMENT_FOOD_ITEM',
 	SET_TOTAL_PRICE: 'SET_TOTAL_PRICE',
+	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
+	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
 };
 
 const userReducer = (state, action) => {
@@ -36,6 +38,8 @@ const userReducer = (state, action) => {
 				...state,
 				cartTotalPrice: action.payload,
 			};
+		case ADD_PREPPER_FAVORITES:
+			return { ...state, favorites: action.payload };
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
 	}
@@ -51,6 +55,7 @@ export const UserProvider = ({ children }) => {
 		setLatLong: () => {},
 		userCartlist: [],
 		cartTotalPrice: 0,
+		favorites: [],
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 

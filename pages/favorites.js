@@ -18,7 +18,7 @@ export async function getServerSideProps({ req, res }) {
 	if (!session) {
 		return {
 			redirect: {
-				destination: '/myKitchen',
+				destination: '/signin',
 				permanent: false,
 			},
 		};
@@ -44,11 +44,7 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<meta name='description' content='Your favorite preppers' />
 			</Head>
 			<main style={{ marginTop: '80px' }} className={styles.main}>
-				<FavoriteList
-					favRow={true}
-					isFavorited={true}
-					favoriteList={favoriteList}
-				/>
+				<FavoriteList favRow={true} favoriteList={favoriteList} />
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title='Leftovers' />

@@ -7,7 +7,7 @@ import { useColors } from '../../../../hooks/useColors';
 const SignIn = () => {
 	const { colors } = useColors();
 	function handleSignInGoogle() {
-		signIn('google');
+		signIn('google', { callbackUrl: '/' });
 	}
 
 	function handleSignInCredentials() {
