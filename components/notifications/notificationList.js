@@ -16,7 +16,7 @@ const NotificationList = () => {
 			<ul>
 				{mockDataTeam.map(({ name, email, id }) => {
 					return (
-						<Link className={styles.link} href={`/messages/${id}`}>
+						<Link key={id} className={styles.link} href={`/messages/${id}`}>
 							<li className={styles.listItem}>
 								<p>{name}</p>
 								<p>{email}</p>

@@ -55,7 +55,6 @@ export const UserProvider = ({ children }) => {
 		setLatLong: () => {},
 		userCartlist: [],
 		cartTotalPrice: 0,
-		favorites: [],
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
