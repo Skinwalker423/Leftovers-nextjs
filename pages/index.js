@@ -22,7 +22,7 @@ import {
 } from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
-	const fetchedFavs = await fetchFavoritePreppers();
+	// const fetchedFavs = await fetchFavoritePreppers();
 	const session = await unstable_getServerSession(req, res, authOptions);
 	const foundSession = session ? session : null;
 	console.log('this is the session:', session);
@@ -70,9 +70,6 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
-
-	console.log(favoriteList);
-	console.log(foundSession);
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
