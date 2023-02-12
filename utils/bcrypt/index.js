@@ -5,7 +5,11 @@ export async function hashPassword(password) {
 	return hashedPassword;
 }
 export async function comparePassword(password, hashedPassword) {
-	const response = await compare(password, hashedPassword);
+	try {
+		const response = await compare(password, hashedPassword);
 
-	return response;
+		return response;
+	} catch (err) {
+		console.error('problem comparing passwords', err);
+	}
 }
