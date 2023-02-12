@@ -10,7 +10,6 @@ const removePrepper = async (req, res) => {
 	console.log('body', body.userEmail);
 	console.log('This is the prepperDetails:');
 
-	//find prepper using email, then pass prepper to the db
 	try {
 		const client = await connectMongoDb();
 		const document = await removePrepperFromFavoritesListDb(
