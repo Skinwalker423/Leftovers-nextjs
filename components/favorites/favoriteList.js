@@ -5,7 +5,7 @@ import styles from './favoriteList.module.css';
 import CustomLoader from '../UI/Loader';
 import { useColors } from '../../hooks/useColors';
 
-const FavoriteList = ({ favoriteList, favRow }) => {
+const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 	const { colors } = useColors();
 	const avatar = 'https://i.pravatar.cc/300';
 	if (!favoriteList) {
@@ -31,10 +31,11 @@ const FavoriteList = ({ favoriteList, favRow }) => {
 					<PrepperCard
 						key={prepper.id}
 						isFavorited={true}
-						title={prepper.name}
+						name={prepper.name}
 						subTitle={prepper.email}
 						avatar={avatar}
 						id={prepper.id}
+						userEmail={userEmail}
 					/>
 				);
 			})}

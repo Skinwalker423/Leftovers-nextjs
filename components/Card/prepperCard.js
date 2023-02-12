@@ -20,6 +20,8 @@ import {
 	removeFavoritePrepperToDb,
 } from '../../utils/favorites';
 import { useSession } from 'next-auth/react';
+import { Alert } from '@mui/material';
+import { useRouter } from 'next/router';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
@@ -34,7 +36,13 @@ export default function PrepperCard({
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
+	const [errorMsg, setErrorMsg] = useState('');
 	const { data: session } = useSession();
+	const router = useRouter();
+
+	const refreshData = () => {
+		router.push(router.asPath);
+	};
 
 	useEffect(() => {
 		setFavorited(isFavorited);
@@ -53,10 +61,21 @@ export default function PrepperCard({
 	}
 
 	async function handleRemoveFavBtn() {
+		if (!userEmail || !id) {
+			setErrorMsg('no userEmail / prepper id found');
+			return;
+		}
 		setFavorited(false);
-		const data = await removeFavoritePrepperToDb(id, userEmail);
-		return data;
-		console.log('removed this prepper from my favorites');
+		try {
+			const data = await removeFavoritePrepperToDb(id, userEmail);
+			if (data.message) {
+				console.log('removed this prepper from my favorites');
+				refreshData();
+			}
+			return data;
+		} catch (err) {
+			setErrorMsg(err);
+		}
 	}
 
 	return (
@@ -123,6 +142,16 @@ export default function PrepperCard({
 					</Button>
 				</Link>
 			</CardActions>
+			{errorMsg && (
+				<Alert
+					sx={{
+						width: '50%',
+						fontSize: 'larger',
+					}}
+					severity='error'>
+					{errorMsg}
+				</Alert>
+			)}
 		</Card>
 	);
 }

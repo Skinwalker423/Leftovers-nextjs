@@ -41,6 +41,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
+	console.log(favoritesList);
 	return (
 		<Box
 			height='100%'
@@ -53,9 +54,12 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper, index) => {
 					const avatar = 'https://i.pravatar.cc/300';
+					console.log(favoritesList[index]);
+					console.log(prepper.id);
+
 					const favorited =
-						favoritesList && favoritesList[index] === prepper.id ? true : false;
-					console.log(favorited);
+						favoritesList && favoritesList.includes(prepper.id) ? true : false;
+
 					return (
 						<PrepperCard
 							isFavorited={favorited}
