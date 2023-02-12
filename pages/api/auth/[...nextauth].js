@@ -6,7 +6,6 @@ import {
 	findExistingUserEmail,
 	connectMongoDb,
 } from '../../../db/mongodb/mongoDbUtils';
-import { compare } from 'bcrypt';
 
 export const authOptions = {
 	// Configure one or more authentication providers
