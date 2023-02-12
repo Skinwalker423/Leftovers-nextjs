@@ -15,7 +15,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
-import { addFavoritePrepperToDb } from '../../utils/favorites';
+import {
+	addFavoritePrepperToDb,
+	removeFavoritePrepperToDb,
+} from '../../utils/favorites';
 import { useSession } from 'next-auth/react';
 
 export default function PrepperCard({
@@ -49,8 +52,10 @@ export default function PrepperCard({
 		return data;
 	}
 
-	function handleRemoveFavBtn() {
+	async function handleRemoveFavBtn() {
 		setFavorited(false);
+		const data = await removeFavoritePrepperToDb(id, userEmail);
+		return data;
 		console.log('removed this prepper from my favorites');
 	}
 

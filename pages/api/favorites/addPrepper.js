@@ -7,10 +7,7 @@ const addPrepper = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = JSON.parse(req.body);
-	console.log('body', body.userEmail);
-	console.log('This is the prepperDetails:');
 
-	//find prepper using email, then pass prepper to the db
 	try {
 		const client = await connectMongoDb();
 		const document = await addPrepperToFavoritesListDb(

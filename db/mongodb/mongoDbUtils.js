@@ -29,6 +29,31 @@ export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
 		return document;
 	} catch (err) {
 		console.error('problem updating document', err);
+		return;
+	}
+}
+export async function removePrepperFromFavoritesListDb(
+	client,
+	prepperId,
+	userEmail
+) {
+	try {
+		const collection = client.db('leftovers').collection('users');
+		const document = await collection.updateOne(
+			{ email: userEmail },
+			{
+				$pull: { favorites: { id: prepperId } },
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log(`document added to favorites`, document);
+		return document;
+	} catch (err) {
+		console.error('problem updating document', err);
+		return;
 	}
 }
 export async function findAllInCollection(client, collectionArg) {
