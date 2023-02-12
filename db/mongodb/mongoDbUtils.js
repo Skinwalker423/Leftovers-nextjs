@@ -109,6 +109,7 @@ export async function findExistingUserEmail(client, email) {
 
 		if (!document) {
 			client.close();
+			console.log('no user found with email');
 			return null;
 		}
 
@@ -116,8 +117,9 @@ export async function findExistingUserEmail(client, email) {
 			id: document?._id.toString(),
 			email: document?.email,
 			favorites: document?.favorites,
+			password: document?.password,
 		};
-		console.log(`user email found: ${document}:`);
+		console.log(`user email found: ${document.email}:`);
 		client.close();
 		return formattedDoc;
 	} catch (err) {
