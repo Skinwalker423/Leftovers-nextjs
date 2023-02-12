@@ -7,9 +7,12 @@ const removePrepper = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = JSON.parse(req.body);
-	console.log('body', body.userEmail);
+	console.log('body', body);
 	console.log('This is the prepperDetails:');
-
+	if (!body.userEmail || !body.prepperId) {
+		res.status(500).json({ error: 'email and id was not confirmed' });
+		return;
+	}
 	try {
 		const client = await connectMongoDb();
 		const document = await removePrepperFromFavoritesListDb(

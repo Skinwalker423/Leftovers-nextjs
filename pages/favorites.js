@@ -37,6 +37,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Favorites = ({ favoriteList, userSession }) => {
+	const userEmail = userSession?.user?.email;
 	return (
 		<Box className={styles.container}>
 			<Head>
@@ -44,7 +45,11 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<meta name='description' content='Your favorite preppers' />
 			</Head>
 			<main style={{ marginTop: '80px' }} className={styles.main}>
-				<FavoriteList favRow={true} favoriteList={favoriteList} />
+				<FavoriteList
+					userEmail={userEmail}
+					favRow={true}
+					favoriteList={favoriteList}
+				/>
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title='Leftovers' />

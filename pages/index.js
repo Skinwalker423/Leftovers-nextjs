@@ -20,6 +20,7 @@ import {
 	findExistingUserEmail,
 	addDocToDb,
 } from '../db/mongodb/mongoDbUtils';
+import { useSession } from 'next-auth/react';
 
 export async function getServerSideProps({ req, res }) {
 	// const fetchedFavs = await fetchFavoritePreppers();
@@ -70,6 +71,9 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
+	const { data: session } = useSession();
+
+	const userEmail = foundSession?.user?.email || session?.user?.email;
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
@@ -119,11 +123,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 						<LocalPreppersList localPreppers={localPreppers} />
 					</CategoryBanner>
 				)}
-				{favoriteList.length && foundSession && (
+				{favoriteList.length && (foundSession || session) && (
 					<CategoryBanner
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
-						<FavoriteList favoriteList={favoriteList} />
+						<FavoriteList userEmail={userEmail} favoriteList={favoriteList} />
 					</CategoryBanner>
 				)}
 				{error && (
