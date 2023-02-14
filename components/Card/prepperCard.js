@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -22,6 +22,7 @@ import {
 import { useSession } from 'next-auth/react';
 import { Alert } from '@mui/material';
 import { useRouter } from 'next/router';
+import { UserContext } from '../../store/UserContext';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
@@ -39,6 +40,11 @@ export default function PrepperCard({
 	const [errorMsg, setErrorMsg] = useState('');
 	const { data: session } = useSession();
 	const router = useRouter();
+	const {
+		addAndUpdateFavoritePreppers,
+		removeAndUpdateFavoritePreppers,
+		state,
+	} = useContext(UserContext);
 
 	const refreshData = () => {
 		router.push(router.asPath);
@@ -56,8 +62,17 @@ export default function PrepperCard({
 
 	async function handleAddFavBtn() {
 		setFavorited(true);
-		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
-		return data;
+		try {
+			const data = await addAndUpdateFavoritePreppers(
+				prepperDetails,
+				userEmail
+			);
+			return data;
+		} catch (err) {
+			setErrorMsg('problem adding to favorites', err);
+		}
+
+		// return data;
 	}
 
 	async function handleRemoveFavBtn() {
@@ -65,12 +80,19 @@ export default function PrepperCard({
 			setErrorMsg('no userEmail / prepper id found');
 			return;
 		}
+		const newfavoritesList =
+			state.favorites && state.favorites.filter((prepper) => id !== prepper.id);
+		console.log(newfavoritesList);
 		setFavorited(false);
+
 		try {
-			const data = await removeFavoritePrepperToDb(id, userEmail);
+			const data = await removeAndUpdateFavoritePreppers(
+				id,
+				userEmail,
+				newfavoritesList
+			);
 			if (data.message) {
 				console.log('removed this prepper from my favorites');
-				refreshData();
 			}
 			return data;
 		} catch (err) {

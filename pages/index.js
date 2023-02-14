@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Alert, Box } from '@mui/material';
@@ -21,6 +21,8 @@ import {
 	addDocToDb,
 } from '../db/mongodb/mongoDbUtils';
 import { useSession } from 'next-auth/react';
+import { UserContext } from '../store/UserContext';
+import { ACTION_TYPES } from '../store/UserContext';
 
 export async function getServerSideProps({ req, res }) {
 	// const fetchedFavs = await fetchFavoritePreppers();
@@ -72,8 +74,20 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
+	const { state, dispatch } = useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
+
+	useEffect(() => {
+		if (favoriteList) {
+			dispatch({
+				type: ACTION_TYPES.SET_FAVORITES_LIST,
+				payload: favoriteList,
+			});
+		}
+	}, []);
+
+	console.log(state);
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
@@ -127,7 +141,10 @@ export default function Home({ favoriteList, foundSession, error }) {
 					<CategoryBanner
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
-						<FavoriteList userEmail={userEmail} favoriteList={favoriteList} />
+						<FavoriteList
+							userEmail={userEmail}
+							favoriteList={state.favorites}
+						/>
 					</CategoryBanner>
 				)}
 				{error && (

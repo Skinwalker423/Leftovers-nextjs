@@ -1,5 +1,9 @@
 import { createContext, useReducer, useEffect } from 'react';
 import useTrackLocation from '../hooks/useTrackLocation';
+import {
+	addFavoritePrepperToDb,
+	removeFavoritePrepperToDb,
+} from '../utils/favorites';
 
 export const UserContext = createContext();
 
@@ -12,6 +16,7 @@ export const ACTION_TYPES = {
 	SET_TOTAL_PRICE: 'SET_TOTAL_PRICE',
 	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
+	SET_FAVORITES_LIST: 'SET_FAVORITES_LIST',
 };
 
 const userReducer = (state, action) => {
@@ -38,8 +43,15 @@ const userReducer = (state, action) => {
 				...state,
 				cartTotalPrice: action.payload,
 			};
-		case ADD_PREPPER_FAVORITES:
+		case ACTION_TYPES.ADD_PREPPER_FAVORITES:
+			return { ...state, favorites: [...state.favorites, action.payload] };
+
+		case ACTION_TYPES.REMOVE_PREPPER_FAVORITES:
 			return { ...state, favorites: action.payload };
+
+		case ACTION_TYPES.SET_FAVORITES_LIST:
+			return { ...state, favorites: action.payload };
+
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
 	}
@@ -55,6 +67,7 @@ export const UserProvider = ({ children }) => {
 		setLatLong: () => {},
 		userCartlist: [],
 		cartTotalPrice: 0,
+		favorites: [],
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
@@ -136,12 +149,39 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
+	const addAndUpdateFavoritePreppers = async (prepperDetails, userEmail) => {
+		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
+		if (data.message) {
+			dispatch({
+				type: ACTION_TYPES.ADD_PREPPER_FAVORITES,
+				payload: prepperDetails,
+			});
+		}
+		return data;
+	};
+	const removeAndUpdateFavoritePreppers = async (
+		id,
+		userEmail,
+		newfavoritesList
+	) => {
+		const data = await removeFavoritePrepperToDb(id, userEmail);
+		if (data.message) {
+			dispatch({
+				type: ACTION_TYPES.REMOVE_PREPPER_FAVORITES,
+				payload: newfavoritesList,
+			});
+		}
+		return data;
+	};
+
 	const value = {
 		state,
 		dispatch,
 		incrementFoodItem,
 		decrementFoodItem,
 		calculateTotalPrice,
+		addAndUpdateFavoritePreppers,
+		removeAndUpdateFavoritePreppers,
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
