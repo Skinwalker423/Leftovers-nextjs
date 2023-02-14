@@ -54,8 +54,6 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper, index) => {
 					const avatar = 'https://i.pravatar.cc/300';
-					console.log(favoritesList[index]);
-					console.log(prepper.id);
 
 					const favorited =
 						favoritesList && favoritesList.includes(prepper.id) ? true : false;

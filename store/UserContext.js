@@ -44,7 +44,7 @@ const userReducer = (state, action) => {
 				cartTotalPrice: action.payload,
 			};
 		case ACTION_TYPES.ADD_PREPPER_FAVORITES:
-			return { ...state, favorites: action.payload };
+			return { ...state, favorites: [...state.favorites, action.payload] };
 
 		case ACTION_TYPES.REMOVE_PREPPER_FAVORITES:
 			return { ...state, favorites: action.payload };
@@ -149,8 +149,30 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	const addAndUpdateFavoritePreppers = async () => {};
-	const removeAndUpdateFavoritePreppers = async () => {};
+	const addAndUpdateFavoritePreppers = async (prepperDetails, userEmail) => {
+		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
+		if (data.message) {
+			dispatch({
+				type: ACTION_TYPES.ADD_PREPPER_FAVORITES,
+				payload: prepperDetails,
+			});
+		}
+		return data;
+	};
+	const removeAndUpdateFavoritePreppers = async (
+		id,
+		userEmail,
+		newfavoritesList
+	) => {
+		const data = await removeFavoritePrepperToDb(id, userEmail);
+		if (data.message) {
+			dispatch({
+				type: ACTION_TYPES.REMOVE_PREPPER_FAVORITES,
+				payload: newfavoritesList,
+			});
+		}
+		return data;
+	};
 
 	const value = {
 		state,
