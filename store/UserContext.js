@@ -43,13 +43,13 @@ const userReducer = (state, action) => {
 				...state,
 				cartTotalPrice: action.payload,
 			};
-		case ADD_PREPPER_FAVORITES:
+		case ACTION_TYPES.ADD_PREPPER_FAVORITES:
 			return { ...state, favorites: action.payload };
 
-		case REMOVE_PREPPER_FAVORITES:
+		case ACTION_TYPES.REMOVE_PREPPER_FAVORITES:
 			return { ...state, favorites: action.payload };
 
-		case SET_FAVORITES_LIST:
+		case ACTION_TYPES.SET_FAVORITES_LIST:
 			return { ...state, favorites: action.payload };
 
 		default:
