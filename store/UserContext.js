@@ -174,6 +174,10 @@ export const UserProvider = ({ children }) => {
 		return data;
 	};
 
+	const setFavoritesList = (favoriteList) => {
+		dispatch({ type: ACTION_TYPES.SET_FAVORITES_LIST, payload: favoriteList });
+	};
+
 	const value = {
 		state,
 		dispatch,
@@ -182,6 +186,7 @@ export const UserProvider = ({ children }) => {
 		calculateTotalPrice,
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
+		setFavoritesList,
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

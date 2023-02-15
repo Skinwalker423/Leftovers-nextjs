@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { Box } from '@mui/material';
 import styles from '/styles/Home.module.css';
 import Footer from '../components/layout/footer/footer';
-import { UserContext, ACTION_TYPES } from '../store/UserContext';
+import { UserContext } from '../store/UserContext';
 
 import {
 	connectMongoDb,
@@ -39,14 +39,11 @@ export async function getServerSideProps({ req, res }) {
 
 const Favorites = ({ favoriteList, userSession }) => {
 	const userEmail = userSession?.user?.email;
-	const { dispatch, state } = useContext(UserContext);
+	const { state, setFavoritesList } = useContext(UserContext);
 
 	useEffect(() => {
 		if (favoriteList) {
-			dispatch({
-				type: ACTION_TYPES.SET_FAVORITES_LIST,
-				payload: favoriteList,
-			});
+			setFavoritesList(favoriteList);
 		}
 	}, []);
 
