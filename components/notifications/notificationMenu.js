@@ -10,8 +10,8 @@ const NotificationMenu = () => {
 				top: '90%',
 				right: '4%',
 				zIndex: 99,
-				width: '300px',
-				height: '300px',
+				width: '500px',
+				height: '500px',
 			}}>
 			<NotificationList />
 		</Paper>
