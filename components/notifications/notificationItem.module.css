@@ -1,0 +1,9 @@
+.listItem {
+	list-style: none;
+	border-bottom: 1px solid orange;
+	height: 10em;
+}
+
+.link {
+	text-decoration: none;
+}
