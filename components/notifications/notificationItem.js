@@ -8,7 +8,12 @@ const NotificationItem = ({ name, email, message = "hey, what's up?", id }) => {
 	const { colors } = useColors();
 	return (
 		<Link className={styles.link} href={`/messages/${id}`}>
-			<MenuItem className={styles.listItem}>
+			<MenuItem
+				sx={{
+					height: '10em',
+					listStyle: 'none',
+					borderBottom: `1px solid ${colors.orangeAccent[900]}`,
+				}}>
 				<Box width={'100%'}>
 					<Box
 						display={'flex'}
