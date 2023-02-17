@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 import NotificationList from './notificationList';
+import Link from 'next/link';
+import { useColors } from '../../hooks/useColors';
 
 const NotificationMenu = () => {
+	const { colors } = useColors();
 	return (
 		<Paper
 			sx={{
@@ -13,7 +16,22 @@ const NotificationMenu = () => {
 				width: '500px',
 				height: '500px',
 			}}>
+			<Box py={'1em'} backgroundColor={colors.gray[700]}>
+				<Typography variant='h2' textAlign={'center'}>
+					Messages
+				</Typography>
+			</Box>
 			<NotificationList />
+			<Box py='1em' backgroundColor={colors.gray[400]}>
+				<Link style={{ textDecoration: 'none' }} href={'/messages'}>
+					<Typography
+						color={colors.orangeAccent[900]}
+						variant='h3'
+						textAlign={'center'}>
+						See all
+					</Typography>
+				</Link>
+			</Box>
 		</Paper>
 	);
 };
