@@ -7,7 +7,10 @@ import NotificationItem from './notificationItem';
 
 const NotificationList = () => {
 	return (
-		<Box height={'85%'} width='100%' sx={{ overflowY: 'auto' }}>
+		<Box
+			height={'85%'}
+			width='100%'
+			sx={{ overflowY: 'auto', textDecoration: 'none' }}>
 			<MenuList>
 				{mockDataTeam.map(({ name, email, id }) => {
 					return (

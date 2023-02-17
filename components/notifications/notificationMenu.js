@@ -22,9 +22,14 @@ const NotificationMenu = () => {
 				</Typography>
 			</Box>
 			<NotificationList />
-			<Box height={'4em'} backgroundColor={colors.gray[400]}>
-				<Link href={'/messages'}>
-					<Typography>See all</Typography>
+			<Box py='1em' backgroundColor={colors.gray[400]}>
+				<Link style={{ textDecoration: 'none' }} href={'/messages'}>
+					<Typography
+						color={colors.orangeAccent[900]}
+						variant='h3'
+						textAlign={'center'}>
+						See all
+					</Typography>
 				</Link>
 			</Box>
 		</Paper>
