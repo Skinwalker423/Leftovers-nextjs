@@ -87,6 +87,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 123512,
 		favorite: true,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 2,
@@ -99,6 +100,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 123512,
 		favorite: true,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 3,
@@ -111,6 +113,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 4132513,
 		favorite: true,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 4,
@@ -123,6 +126,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 123512,
 		favorite: true,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 5,
@@ -135,6 +139,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 123512,
 		favorite: true,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 6,
@@ -147,6 +152,7 @@ export const mockDataContacts = [
 		zipCode: '90706',
 		registrarId: 123512,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 7,
@@ -159,6 +165,7 @@ export const mockDataContacts = [
 		zipCode: '51523',
 		registrarId: 123512,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 8,
@@ -171,6 +178,7 @@ export const mockDataContacts = [
 		zipCode: '44215',
 		registrarId: 512315,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 9,
@@ -183,6 +191,7 @@ export const mockDataContacts = [
 		zipCode: '111234',
 		registrarId: 928397,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 10,
@@ -195,6 +204,7 @@ export const mockDataContacts = [
 		zipCode: '44215',
 		registrarId: 533215,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 	{
 		id: 11,
@@ -207,6 +217,7 @@ export const mockDataContacts = [
 		zipCode: '1234',
 		registrarId: 92197,
 		favorite: false,
+		message: 'hey what is going on?',
 	},
 ];
 
