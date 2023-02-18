@@ -1,8 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
-import { Box, MenuList, Typography } from '@mui/material';
+import { Box, MenuList } from '@mui/material';
 import { mockDataTeam } from '../../db/mockData';
-import styles from './notificationList.module.css';
 import NotificationItem from './notificationItem';
 
 const NotificationList = () => {
