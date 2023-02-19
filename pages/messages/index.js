@@ -31,7 +31,13 @@ export async function getServerSideProps({ req, res }) {
 
 const Messages = ({ userData }) => {
 	return (
-		<Box display={'flex'} flexDirection='column' m='5em'>
+		<Box
+			width={'100%'}
+			display={'flex'}
+			justifyContent='center'
+			alignItems={'center'}
+			mt='5em'
+			flexDirection='column'>
 			<Head>
 				<title>Messages</title>
 				<meta name='description' content='read your direct messages' />
@@ -41,7 +47,9 @@ const Messages = ({ userData }) => {
 					{userData.email}
 				</Typography>
 			</Box>
-			<NotificationList />
+			<Box width={{ xs: '80%', lg: '65%', xl: '50%' }}>
+				<NotificationList />
+			</Box>
 		</Box>
 	);
 };
