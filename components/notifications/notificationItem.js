@@ -14,11 +14,8 @@ const NotificationItem = ({ name, email, message = "hey, what's up?", id }) => {
 					listStyle: 'none',
 					borderBottom: `1px solid ${colors.orangeAccent[900]}`,
 				}}>
-				<Box width={'100%'}>
-					<Box
-						display={'flex'}
-						justifyContent='space-between'
-						alignItems={'center'}>
+				<Box width={'100%'} display='flex' justifyContent={'space-between'}>
+					<Box display={'flex'} flexDirection='column'>
 						<Typography color={colors.primary[100]}>{name}</Typography>
 						<Typography color={colors.orangeAccent[900]}>{email}</Typography>
 					</Box>
