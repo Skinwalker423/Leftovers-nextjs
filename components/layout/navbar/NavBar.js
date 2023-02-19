@@ -153,7 +153,7 @@ const NavBar = () => {
 									alt='user icon'
 								/>
 							) : (
-								<DefaultAvatar avatar firstEmailLetter={userEmail[0]} />
+								<DefaultAvatar avatar userEmail={userEmail} />
 							)}
 						</IconButton>
 					</Tooltip>

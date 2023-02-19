@@ -3,8 +3,9 @@ import { Box, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useColors } from '../../../hooks/useColors';
 
-const DefaultAvatar = ({ firstEmailLetter, avatar }) => {
+const DefaultAvatar = ({ userEmail, avatar }) => {
 	const { colors } = useColors();
+	const firstEmailLetter = userEmail[0];
 	return (
 		<Box
 			width={avatar ? 35 : 50}
