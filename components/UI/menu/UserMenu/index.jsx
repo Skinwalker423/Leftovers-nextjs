@@ -51,7 +51,7 @@ const UserMenu = () => {
 						/>
 					</Box>
 				) : (
-					<DefaultAvatar firstEmailLetter={userEmail[0]} />
+					<DefaultAvatar userEmail={userEmail} />
 				)}
 				<Box color={colors.primary[100]}>
 					<Typography>{userEmail}</Typography>
@@ -66,9 +66,9 @@ const UserMenu = () => {
 				</MenuItem>
 				<Link
 					style={{ textDecoration: 'none', color: colors.primary[100] }}
-					href={'/toDoList'}>
+					href={'/messages'}>
 					<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-						To-Do List
+						Messages
 					</MenuItem>
 				</Link>
 				<MenuItem
