@@ -5,6 +5,7 @@ import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
 import styles from './index.module.css';
+import Head from 'next/head';
 
 const foodItems = [
 	{
@@ -72,6 +73,10 @@ const Prepper = ({ prepper }) => {
 				display='flex'
 				justifyContent='center'
 				alignItems='center'>
+				<Head>
+					<title>Loading...</title>
+					<meta name='description' content='loading content' />
+				</Head>
 				<CustomLoader
 					size={75}
 					progress={50}
@@ -91,6 +96,14 @@ const Prepper = ({ prepper }) => {
 			flexDirection={'column'}
 			width={'100%'}
 			height='100%'>
+			<Head>
+				<title>{prepper.email}</title>
+				<meta
+					name='description'
+					content={`Kitchen of ${prepper.email}. Dynamic Kitchen description.`}
+					//add dyamanic kitchen description and kitchen name
+				/>
+			</Head>
 			<Box
 				m='100px 0'
 				display='flex'

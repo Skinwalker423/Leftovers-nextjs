@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { mockDataContacts } from '../../db/mockData';
+import Head from 'next/head';
 import styles from './index.module.css';
 import {
 	findAllInCollection,
@@ -50,6 +51,10 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 			display='flex'
 			justifyContent='center'
 			alignItems='center'>
+			<Head>
+				<title>Local Preppers</title>
+				<meta name='description' content='List of all preppers in your area' />
+			</Head>
 			<Typography variant='h1'>List of all preppers in your area</Typography>
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
 				{preppers.map((prepper, index) => {
