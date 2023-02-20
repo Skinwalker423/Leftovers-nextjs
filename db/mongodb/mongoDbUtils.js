@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+const ObjectID = require('mongodb').ObjectId;
 
 export async function connectMongoDb() {
 	const uri = `mongodb+srv://skinwalker423:${process.env.MONGO_DB_KEY}@cluster23.nlaxbsz.mongodb.net/leftovers?retryWrites=true&w=majority`;
@@ -123,5 +124,33 @@ export async function findExistingUserEmail(client, email) {
 	} catch (err) {
 		client.close();
 		console.error('problem retrieving favorites list from user', err);
+	}
+}
+
+export async function findExistingPrepperWithId(client, id) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.findOne({ _id: ObjectID(id) });
+		if (!document) {
+			client.close();
+			return null;
+		}
+		console.log(`prepper email found with ID: ${document}:`);
+		const formattedDoc = {
+			id: document?._id.toString(),
+			email: document.email,
+			location: {
+				address: document.location.address,
+				city: document.location.city,
+				state: document.location.state,
+				zipcode: document.location.zipcode,
+			},
+			meals: document.meals,
+		};
+		client.close();
+		return formattedDoc;
+	} catch (err) {
+		client.close();
+		console.error('problem retrieving user from db', err);
 	}
 }
