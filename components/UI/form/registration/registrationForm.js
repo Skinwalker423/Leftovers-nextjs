@@ -45,7 +45,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		const password = passwordRef.current.value;
 		const confirmPassword = confirmPasswordRef.current.value;
 		const description = descriptionRef.current.value;
-		const kicthenTitle = kitchenTitleRef.current.value;
+		const kitchenTitle = kitchenTitleRef.current.value;
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
@@ -74,7 +74,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				zipcode: zipcodeRef.current.value,
 			},
 			description,
-			kicthenTitle,
+			kitchenTitle,
 		};
 
 		const userformBody = {
@@ -177,13 +177,12 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 						<TextField
 							minRows={3}
 							multiline
-							rows={3}
 							maxRows={3}
 							required
 							color='secondary'
 							inputRef={descriptionRef}
-							label='description'
-							placeholder='Enter a brief description of the types of meals you prepare'
+							label='Description of your meals'
+							placeholder='Enter a brief description of the types of meals you will prepare to share'
 							fullWidth
 						/>
 					</Box>
