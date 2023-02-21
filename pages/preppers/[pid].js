@@ -97,10 +97,10 @@ const Prepper = ({ prepper }) => {
 			width={'100%'}
 			height='100%'>
 			<Head>
-				<title>{prepper.email}</title>
+				<title>{prepper.kitchenTitle}</title>
 				<meta
 					name='description'
-					content={`Kitchen of ${prepper.email}. Dynamic Kitchen description.`}
+					content={prepper.description}
 					//add dyamanic kitchen description and kitchen name
 				/>
 			</Head>
