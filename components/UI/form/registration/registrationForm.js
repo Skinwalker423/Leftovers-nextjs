@@ -4,6 +4,7 @@ import {
 	Box,
 	Paper,
 	TextField,
+	Textarea,
 	Typography,
 	Button,
 	CircularProgress,
@@ -28,6 +29,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const zipcodeRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
+	const kitchenTitleRef = useRef();
+	const descriptionRef = useRef();
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
@@ -41,6 +44,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		const zipcode = zipcodeRef.current.value;
 		const password = passwordRef.current.value;
 		const confirmPassword = confirmPasswordRef.current.value;
+		const description = descriptionRef.current.value;
+		const kitchenTitle = kitchenTitleRef.current.value;
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
@@ -68,6 +73,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				state: state,
 				zipcode: zipcodeRef.current.value,
 			},
+			description,
+			kitchenTitle,
 		};
 
 		const userformBody = {
@@ -106,13 +113,21 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	};
 
 	return (
-		<Paper>
-			<Typography pt={'1em'} textAlign='center' variant='h1'>
+		<Paper
+			sx={{
+				width: { xs: '95%', sm: '85%', md: '50em' },
+				height: { xs: '85vh', md: '80vh' },
+			}}>
+			<Typography py={'.5em'} textAlign='center' variant='h2'>
 				{title}
 			</Typography>
-			<Box width={'600px'} height='700px' p='80px'>
+			<Box width={'100%'} p='1em 5em'>
 				<form onSubmit={handleRegistraionFormSubmit}>
-					<Box width={'100%'} display='flex' justifyContent={'space-between'}>
+					<Box
+						gap={'1em'}
+						width={'100%'}
+						display='flex'
+						justifyContent={'space-between'}>
 						<TextField
 							type='text'
 							required
@@ -120,6 +135,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							inputRef={firstNameRef}
 							label='First Name'
 							color='secondary'
+							fullWidth
 						/>
 						<TextField
 							id='last-name'
@@ -128,6 +144,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							inputRef={lastNameRef}
 							label='Last Name'
 							color='secondary'
+							fullWidth
 						/>
 					</Box>
 					<Box width='100%' mt='1em'>
@@ -136,6 +153,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							type='email'
 							label='Email'
 							value={sessionEmail}
+							autoComplete='username'
 							required
 							inputRef={emailRef}
 							color='secondary'
@@ -144,25 +162,27 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 					</Box>
 					<Box width='100%' mt='1em'>
 						<TextField
-							id='password'
-							type='password'
-							label='Password'
+							id='title'
+							type='text'
+							label='Kitchen Name'
+							value={sessionEmail}
 							required
-							autoComplete='on'
-							inputRef={passwordRef}
+							placeholder="Dana's Delightful Deserts"
+							inputRef={kitchenTitleRef}
 							color='secondary'
 							fullWidth
 						/>
 					</Box>
 					<Box width='100%' mt='1em'>
 						<TextField
-							id='confirmPassword'
-							type='password'
-							label='Confirm Password'
+							minRows={3}
+							multiline
+							maxRows={3}
 							required
-							autoComplete='on'
-							inputRef={confirmPasswordRef}
 							color='secondary'
+							inputRef={descriptionRef}
+							label='Description of your meals'
+							placeholder='Enter a brief description of the types of meals you will prepare to share'
 							fullWidth
 						/>
 					</Box>
@@ -196,6 +216,30 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							label='Zipcode'
 							required
 							inputRef={zipcodeRef}
+							color='secondary'
+							fullWidth
+						/>
+					</Box>
+					<Box width='100%' mt='1em'>
+						<TextField
+							id='password'
+							type='password'
+							label='Password'
+							required
+							autoComplete='new-password'
+							inputRef={passwordRef}
+							color='secondary'
+							fullWidth
+						/>
+					</Box>
+					<Box width='100%' mt='1em'>
+						<TextField
+							id='confirmPassword'
+							type='password'
+							label='Confirm Password'
+							required
+							autoComplete='new-password'
+							inputRef={confirmPasswordRef}
 							color='secondary'
 							fullWidth
 						/>

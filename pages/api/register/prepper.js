@@ -7,7 +7,8 @@ import {
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
 
 const prepper = async (req, res) => {
-	const { email, firstName, lastName, location } = req.body;
+	const { email, firstName, lastName, location, kitchenTitle, description } =
+		req.body;
 	const { address, city, state, zipcode } = location;
 	const isValidEmail = validateEmail(email);
 	const isValidZip = isValidZipCode(zipcode);
@@ -24,9 +25,13 @@ const prepper = async (req, res) => {
 		!firstName ||
 		!lastName ||
 		firstName.trim() === '' ||
-		lastName.trim() === ''
+		lastName.trim() === '' ||
+		!description ||
+		description.trim() === '' ||
+		!kitchenTitle ||
+		kitchenTitle.trim() === ''
 	) {
-		res.status(422).json({ error: 'invalid names' });
+		res.status(422).json({ error: 'invalid inputs' });
 		return;
 	}
 	if (
@@ -45,7 +50,8 @@ const prepper = async (req, res) => {
 		lastName,
 		location,
 		meals: [],
-		description: '',
+		description,
+		kitchenTitle,
 	};
 	if (req.method === 'POST') {
 		try {

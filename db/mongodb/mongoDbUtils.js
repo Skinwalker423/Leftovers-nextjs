@@ -66,13 +66,17 @@ export async function findAllInCollection(client, collectionArg) {
 		return [];
 	}
 
-	const mappedDoc = document.map(({ _id, firstName, lastName, email }) => {
-		return {
-			name: `${firstName} ${lastName}`,
-			email: email,
-			id: _id.toString(),
-		};
-	});
+	const mappedDoc = document.map(
+		({ _id, firstName, lastName, email, description, kitchenTitle }) => {
+			return {
+				name: `${firstName} ${lastName}`,
+				email: email,
+				id: _id.toString(),
+				description: description,
+				kitchenTitle: kitchenTitle,
+			};
+		}
+	);
 	console.log(mappedDoc);
 	return mappedDoc;
 }
@@ -95,6 +99,9 @@ export async function findExistingPrepperEmail(client, email) {
 				zipcode: document.location.zipcode,
 			},
 			meals: document.meals,
+			description: document?.description,
+			kitchenTitle: document?.kitchenTitle,
+			name: `${document.firstName} ${document.lastName}`,
 		};
 		client.close();
 		return formattedDoc;
@@ -146,6 +153,9 @@ export async function findExistingPrepperWithId(client, id) {
 				zipcode: document.location.zipcode,
 			},
 			meals: document.meals,
+			description: document?.description,
+			kitchenTitle: document?.kitchenTitle,
+			name: `${document.firstName} ${document.lastName}`,
 		};
 		client.close();
 		return formattedDoc;

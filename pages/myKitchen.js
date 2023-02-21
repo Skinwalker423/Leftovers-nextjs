@@ -34,7 +34,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper }) => {
-	console.log(userData);
+	console.log(prepper);
 	const { name = 'User', email, image = '/icons8-connect.svg' } = userData;
 	return (
 		<Box
@@ -45,10 +45,10 @@ const myKitchen = ({ userData, prepper }) => {
 			justifyContent='space-around'
 			alignItems={'center'}>
 			<Box>
-				<Typography variant='h1'>{name}'s Kitchen</Typography>
+				<Typography variant='h1'>{prepper.kitchenTitle}</Typography>
 				<Typography variant='h2'>{email}</Typography>
-				<Typography variant='h3'>Pic</Typography>
-				<Typography variant='h3'>Pic</Typography>
+				<Typography variant='h3'>{prepper.description}</Typography>
+				<Typography variant='h3'>{prepper.name}</Typography>
 				<Typography variant='h3'>
 					state: {prepper ? prepper.location.state : ''}
 				</Typography>

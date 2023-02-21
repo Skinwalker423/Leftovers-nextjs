@@ -26,6 +26,8 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 	const streetAddressRef = useRef();
 	const cityRef = useRef();
 	const zipcodeRef = useRef();
+	const kitchenTitleRef = useRef();
+	const descriptionRef = useRef();
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
@@ -37,6 +39,8 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 		const lastName = lastNameRef.current.value;
 		const email = sessionEmail;
 		const zipcode = zipcodeRef.current.value;
+		const description = descriptionRef.current.value;
+		const kitchenTitle = kitchenTitleRef.current.value;
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
@@ -69,6 +73,8 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 				state: state,
 				zipcode: zipcodeRef.current.value,
 			},
+			kitchenTitle,
+			description,
 		};
 		try {
 			const response = await fetch('/api/register/prepper', {
@@ -119,7 +125,32 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 							color='secondary'
 						/>
 					</Box>
-
+					<Box width='100%' mt='1em'>
+						<TextField
+							id='title'
+							type='text'
+							label='Kitchen Name'
+							value={sessionEmail}
+							required
+							placeholder="Dana's Delightful Deserts"
+							inputRef={kitchenTitleRef}
+							color='secondary'
+							fullWidth
+						/>
+					</Box>
+					<Box width='100%' mt='1em'>
+						<TextField
+							minRows={3}
+							multiline
+							maxRows={3}
+							required
+							color='secondary'
+							inputRef={descriptionRef}
+							label='Description of your meals'
+							placeholder='Enter a brief description of the types of meals you will prepare to share'
+							fullWidth
+						/>
+					</Box>
 					<Box width='100%' mt='1em'>
 						<TextField
 							id='address'
