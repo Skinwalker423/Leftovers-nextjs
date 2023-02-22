@@ -5,6 +5,7 @@ import { Box, Typography, Alert } from '@mui/material';
 import Image from 'next/image';
 import MyKitchenForm from '../components/UI/form/mykitchen/myKitchenForm';
 import RegistrationForm from '../components/UI/form/registration/registrationForm';
+import AddMeal from '../components/UI/modal/addMeal';
 import {
 	connectMongoDb,
 	findExistingPrepperEmail,
@@ -64,6 +65,7 @@ const myKitchen = ({ userData, prepper }) => {
 					priority
 				/>
 			</Box>
+			<AddMeal />
 			{!prepper && (
 				<MyKitchenForm sessionEmail={email} title='Register Kitchen' />
 			)}

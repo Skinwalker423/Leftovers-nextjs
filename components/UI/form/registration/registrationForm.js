@@ -165,7 +165,6 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							id='title'
 							type='text'
 							label='Kitchen Name'
-							value={sessionEmail}
 							required
 							placeholder="Dana's Delightful Deserts"
 							inputRef={kitchenTitleRef}
