@@ -4,25 +4,20 @@ import Alert from '@mui/material/Alert';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import RegistrationForm from '../components/UI/form/registration/registrationForm';
+import MyKitchenForm from '../components/UI/form/mykitchen/myKitchenForm';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await unstable_getServerSession(req, res, authOptions);
-
-	if (session) {
-		return {
-			redirect: {
-				destination: '/myKitchen',
-				permanent: false,
-			},
-		};
-	}
+	const userSession = session ? session : null;
 
 	return {
-		props: {},
+		props: {
+			userSession,
+		},
 	};
 }
 
-const Register = () => {
+const Register = ({ userSession }) => {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
 
@@ -34,11 +29,18 @@ const Register = () => {
 			flexDirection='column'
 			justifyContent='center'
 			alignItems='center'>
-			<RegistrationForm
-				setErrorMsg={setErrorMsg}
-				setMsg={setMsg}
-				title={'Prepper Registration'}
-			/>
+			{userSession ? (
+				<MyKitchenForm
+					title={'Prepper Registration'}
+					sessionEmail={userSession?.user?.email}
+				/>
+			) : (
+				<RegistrationForm
+					setErrorMsg={setErrorMsg}
+					setMsg={setMsg}
+					title={'Prepper Registration'}
+				/>
+			)}
 
 			{msg && (
 				<Alert
