@@ -102,10 +102,10 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 
 	return (
 		<Paper>
-			<Typography pt={'1em'} textAlign='center' variant='h1'>
+			<Typography py={'.5em'} textAlign='center' variant='h1'>
 				{title}
 			</Typography>
-			<Box width={'600px'} height='500px' p='80px'>
+			<Box width={'100%'} height='70vh' px='80px'>
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box width={'100%'} display='flex' justifyContent={'space-between'}>
 						<TextField
