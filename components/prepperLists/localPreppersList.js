@@ -16,6 +16,7 @@ const LocalPreppersList = ({ localPreppers }) => {
 				subTitle={prepper.email}
 				avatar={avatar}
 				id={prepper.id}
+				key={prepper.id}
 			/>
 		);
 	});

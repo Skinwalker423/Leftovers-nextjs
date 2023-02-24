@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card/prepperCard';
-import Link from 'next/link';
 import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { mockDataContacts } from '../../db/mockData';
@@ -18,12 +17,23 @@ export async function getServerSideProps({ req, res }) {
 		const client = await connectMongoDb();
 		const allPreppers = await findAllInCollection(client, 'preppers');
 		const session = await unstable_getServerSession(req, res, authOptions);
+
+		if (!session) {
+			return {
+				props: {
+					preppers: allPreppers || [],
+					userEmail: null,
+					favoritesList: [],
+				},
+			};
+		}
 		const userEmail = session?.user?.email;
-		const userDocument = await findExistingUserEmail(client, userEmail);
+		const userDocument =
+			userEmail && (await findExistingUserEmail(client, userEmail));
 		const favoritesList = userDocument.favorites.map(
 			(favPrepper) => favPrepper.id
 		);
-		console.log('favorites list:', favoritesList);
+
 		return {
 			props: {
 				preppers: allPreppers || [],
@@ -42,7 +52,6 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
-	console.log(favoritesList);
 	return (
 		<Box
 			height='100%'
@@ -57,7 +66,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 			</Head>
 			<Typography variant='h1'>List of all preppers in your area</Typography>
 			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
-				{preppers.map((prepper, index) => {
+				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
 
 					const favorited =
@@ -73,7 +82,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 							subTitle={'Homecooking genius'}
 							avatar={avatar}
 							id={prepper.id}
-							userEmail={userEmail}
+							userEmail={userEmail ? userEmail : ''}
 						/>
 					);
 				})}
