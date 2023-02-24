@@ -71,21 +71,21 @@ const myKitchen = ({ userData, prepper }) => {
 					/>
 				)}
 				<Typography variant='h1'>
-					{prepper ? prepper.kitchenTitle : ''}
+					{prepper ? prepper?.kitchenTitle : ''}
 				</Typography>
 				<Typography variant='h2'>{email}</Typography>
 				<Typography variant='h3'>
-					{prepper ? prepper.description : ''}
+					{prepper ? prepper?.description : ''}
 				</Typography>
-				<Typography variant='h3'>{prepper ? prepper.name : name}</Typography>
+				<Typography variant='h3'>{prepper ? prepper?.name : name}</Typography>
 				<Typography variant='h3'>
-					state: {prepper ? prepper.location.state : ''}
+					state: {prepper.location ? prepper?.location?.state : ''}
 				</Typography>
 				<Typography variant='h3'>
-					zipcode: {prepper ? prepper.location.zipcode : ''}
+					zipcode: {prepper.location ? prepper?.location?.zipcode : ''}
 				</Typography>
 
-				<AddMeal />
+				<AddMeal email={prepper.email} />
 			</Box>
 		</Box>
 	);

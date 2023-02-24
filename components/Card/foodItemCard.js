@@ -18,7 +18,7 @@ export default function FoodItemCard({
 	image = '/art.jpg',
 	price,
 	id,
-	qty,
+	qty = 1,
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const { state, dispatch, incrementFoodItem, calculateTotalPrice } =

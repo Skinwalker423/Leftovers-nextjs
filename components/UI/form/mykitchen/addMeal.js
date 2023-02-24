@@ -8,8 +8,9 @@ import {
 	CircularProgress,
 } from '@mui/material';
 import { useColors } from '../../../../hooks/useColors';
+import { addMeal } from '../../../../utils/meals';
 
-const AddMeal = () => {
+const AddMeal = ({ email }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -40,16 +41,29 @@ const AddMeal = () => {
 		setImageFile(e.target.files[0]);
 	};
 
-	const handleAddMealForm = (e) => {
+	const handleAddMealForm = async (e) => {
 		e.preventDefault();
+		setIsFormLoading(true);
+		//send image file to a img hosting server e.g. Cloudinary
+		//put url to that image in mealDetails to send to mongodb
+
 		const mealDetails = {
 			title: titleRef.current.value,
 			price: priceRef.current.value,
 			description: descriptionRef.current.value,
-			image: imageFile,
+			image: '',
 		};
 
 		console.log(mealDetails);
+		try {
+			const data = await addMeal(email, mealDetails);
+			if (data) {
+				setIsFormLoading(false);
+			}
+		} catch (err) {
+			console.error('problem adding meal', err);
+			setIsFormLoading(false);
+		}
 	};
 
 	return (

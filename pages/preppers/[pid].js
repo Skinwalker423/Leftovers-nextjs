@@ -115,28 +115,27 @@ const Prepper = ({ prepper }) => {
 					<Typography variant='h1'>Prepper id: {prepperId}</Typography>
 					<Typography variant='h1'> email: {prepper.email}</Typography>
 					<Typography variant='h1'>
-						{' '}
-						address: {prepper.location.address}
+						address: {prepper?.location?.address}
 					</Typography>
-					<Typography variant='h1'> city: {prepper.location.city}</Typography>
+					<Typography variant='h1'> city: {prepper?.location?.city}</Typography>
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
-				{foodItems.map(({ id, item, price, image, description, qty }) => {
+				{prepper.meals.map(({ price, image, description, title }) => {
 					return (
 						<Box
-							key={id}
+							key={title}
 							className={styles.prepCard}
 							width='100%'
 							height={'500px'}>
 							<FoodItemCard
-								key={id}
-								foodItem={item}
-								image={image}
+								key={title}
+								foodItem={title}
+								image={image === '' ? '/art.jpg' : image}
 								price={price}
 								description={description}
-								id={id}
-								qty={qty}
+								id={title}
+								qty={1}
 							/>
 						</Box>
 					);

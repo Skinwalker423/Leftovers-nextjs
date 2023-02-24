@@ -92,9 +92,9 @@ const NavBar = () => {
 							{session && <NavItem title='Favs' href='/favorites' />}
 							<NavItem title='About' href='/about' />
 							{session ? (
-								<NavItem title='My Kitchen' href='myKitchen' />
+								<NavItem title='My Kitchen' href='/myKitchen' />
 							) : (
-								<NavItem title='Register' href='register' />
+								<NavItem title='Register' href='/register' />
 							)}
 						</ul>
 					</nav>
