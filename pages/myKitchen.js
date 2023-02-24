@@ -85,7 +85,7 @@ const myKitchen = ({ userData, prepper }) => {
 					zipcode: {prepper ? prepper.location.zipcode : ''}
 				</Typography>
 
-				<AddMeal />
+				<AddMeal email={prepper.email} />
 			</Box>
 		</Box>
 	);

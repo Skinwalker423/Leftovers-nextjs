@@ -164,3 +164,24 @@ export async function findExistingPrepperWithId(client, id) {
 		console.error('problem retrieving user from db', err);
 	}
 }
+
+export async function addMealToPrepperDb(client, email, meal) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{ email: email },
+			{
+				$push: { meals: meal },
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log(`document added to meals`, document);
+		return document;
+	} catch (err) {
+		console.error('problem updating meals', err);
+		return;
+	}
+}
