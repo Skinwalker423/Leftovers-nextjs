@@ -121,20 +121,16 @@ const Prepper = ({ prepper }) => {
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
-				{prepper.meals.map(({ price, image, description, title }) => {
+				{prepper.meals.map(({ price, image, description, title, id }) => {
 					return (
-						<Box
-							key={title}
-							className={styles.prepCard}
-							width='100%'
-							height={'500px'}>
+						<Box key={id} width='100%' height={'500px'}>
 							<FoodItemCard
 								key={title}
 								foodItem={title}
 								image={image === '' ? '/art.jpg' : image}
 								price={price}
 								description={description}
-								id={title}
+								id={id}
 								qty={1}
 							/>
 						</Box>

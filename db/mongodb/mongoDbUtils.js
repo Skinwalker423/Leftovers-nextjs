@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 const ObjectID = require('mongodb').ObjectId;
 
 export async function connectMongoDb() {
@@ -166,12 +166,16 @@ export async function findExistingPrepperWithId(client, id) {
 }
 
 export async function addMealToPrepperDb(client, email, meal) {
+	const mealDetails = {
+		id: ObjectId(),
+		...meal,
+	};
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
 			{ email: email },
 			{
-				$push: { meals: meal },
+				$push: { meals: mealDetails },
 			}
 		);
 

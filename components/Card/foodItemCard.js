@@ -10,7 +10,6 @@ import { IconButton } from '@mui/material';
 import { Box, Typography, Stack } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
-import { ACTION_TYPES } from '../../store/UserContext';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
@@ -21,8 +20,7 @@ export default function FoodItemCard({
 	qty = 1,
 }) {
 	const [favorited, setFavorited] = useState(false);
-	const { state, dispatch, incrementFoodItem, calculateTotalPrice } =
-		useContext(UserContext);
+	const { incrementFoodItem, calculateTotalPrice } = useContext(UserContext);
 
 	const meal = {
 		id,
@@ -45,12 +43,12 @@ export default function FoodItemCard({
 
 	return (
 		<Card sx={{ maxWidth: 345, height: '300px' }}>
-			<CardMedia sx={{ height: '50%' }} image={image} title='green iguana' />
+			<CardMedia sx={{ height: '50%' }} image={image} title={foodItem} />
 			<Stack sx={{ height: '50%' }} justifyContent='space-between'>
 				<CardContent>
 					<Box display='flex' justifyContent={'space-between'}>
 						<Typography
-							color={'green'}
+							color={'secondary'}
 							gutterBottom
 							variant='h5'
 							component='div'>
@@ -61,9 +59,7 @@ export default function FoodItemCard({
 							${price}
 						</Typography>
 					</Box>
-					<Typography variant='body2' color='text.secondary'>
-						{description}
-					</Typography>
+					<Typography variant='body2'>{description}</Typography>
 				</CardContent>
 				<CardActions>
 					<IconButton onClick={handleFavorite} size='small'>
@@ -73,7 +69,11 @@ export default function FoodItemCard({
 							<FavoriteBorderOutlinedIcon />
 						)}
 					</IconButton>
-					<Button onClick={handleAddCartItem} size='small'>
+					<Button
+						variant='outlined'
+						color='success'
+						onClick={handleAddCartItem}
+						size='small'>
 						Add to Cart
 					</Button>
 				</CardActions>
