@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, IconButton } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
 import styles from './index.module.css';
 import Head from 'next/head';
+import Image from 'next/image';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const foodItems = [
 	{
@@ -111,13 +113,37 @@ const Prepper = ({ prepper }) => {
 				width='100%'
 				justifyContent='center'
 				alignItems='center'>
-				<Paper sx={{ width: '70%' }}>
-					<Typography variant='h1'>Prepper id: {prepperId}</Typography>
-					<Typography variant='h1'> email: {prepper.email}</Typography>
-					<Typography variant='h1'>
-						address: {prepper?.location?.address}
-					</Typography>
-					<Typography variant='h1'> city: {prepper?.location?.city}</Typography>
+				<Paper
+					sx={{
+						width: '70%',
+						height: '50vh',
+						p: '1em',
+						position: 'relative',
+					}}>
+					<Image src={'/pixzolo.jpg'} fill />
+					<Box
+						position={'relative'}
+						display='flex'
+						height={'100%'}
+						flexDirection={'column'}
+						alignItems={'center'}
+						justifyContent={'space-between'}>
+						<Box>
+							<Typography textAlign={'center'} variant='h1' color={'error'}>
+								{prepper.kitchenTitle}
+							</Typography>
+							<Typography variant='h2'>{prepper.description}</Typography>
+						</Box>
+						<Box>
+							<Typography variant='h2'>{prepper.email}</Typography>
+							<Box display={'flex'} alignItems='center'>
+								<IconButton>
+									<WorkspacePremiumIcon color='error' fontSize='large' />
+								</IconButton>
+								<Typography fontSize={'large'}>42</Typography>
+							</Box>
+						</Box>
+					</Box>
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
