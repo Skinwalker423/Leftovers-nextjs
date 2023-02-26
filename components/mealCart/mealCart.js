@@ -1,10 +1,9 @@
 import { Paper, Box, Button, Typography } from '@mui/material';
 import CartItemList from './cartItemList';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
-import { ACTION_TYPES } from '../../store/UserContext';
 
 const MealCart = ({ setShowMealCart }) => {
 	const { state } = useContext(UserContext);
@@ -50,9 +49,7 @@ const MealCart = ({ setShowMealCart }) => {
 							Checkout
 						</Button>
 					</Link>
-					<Typography textAlign={'end'}>
-						Total: ${'pending review...'};
-					</Typography>
+					<Typography textAlign={'end'}>Total: ${totalPrice};</Typography>
 				</Box>
 			</Box>
 		</Paper>

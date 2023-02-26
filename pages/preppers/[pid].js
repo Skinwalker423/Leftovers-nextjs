@@ -1,42 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Typography, Paper, IconButton } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
-import styles from './index.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-import { UserContext } from '../../store/UserContext';
-
-const foodItems = [
-	{
-		id: 1,
-		item: 'Tacos',
-		image: '/art.jpg',
-		description: 'homemade tacos',
-		price: 4.99,
-		qty: 1,
-	},
-	{
-		id: 2,
-		item: 'Pan con Pavo',
-		image: '/art.jpg',
-		description: 'Delicious homemade chicken sandwiches',
-		price: 4.99,
-		qty: 1,
-	},
-	{
-		id: 3,
-		item: 'Manjar Blanco',
-		image: '/art.jpg',
-		description:
-			'Authentic Salvadorian sweet and creamy vanilla desert topped with cinnamon',
-		price: 4.99,
-		qty: 1,
-	},
-];
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -66,9 +36,6 @@ export async function getStaticPaths() {
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
-	console.log(prepper);
-	const { state } = useContext(UserContext);
-	console.log(state);
 
 	useEffect(() => {
 		if (prepper.meals) {
@@ -110,11 +77,7 @@ const Prepper = ({ prepper }) => {
 			height='100%'>
 			<Head>
 				<title>{prepper.kitchenTitle}</title>
-				<meta
-					name='description'
-					content={prepper.description}
-					//add dyamanic kitchen description and kitchen name
-				/>
+				<meta name='description' content={prepper.description} />
 			</Head>
 			<Box
 				m='100px 0'

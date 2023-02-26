@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
-import useTrackLocation from '../hooks/useTrackLocation';
+// import useTrackLocation from '../hooks/useTrackLocation';
 import {
 	addFavoritePrepperToDb,
 	removeFavoritePrepperToDb,
@@ -71,16 +71,21 @@ export const UserProvider = ({ children }) => {
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
+	useEffect(() => {
+		if (state.userCartlist) {
+			calculateTotalPrice();
+		}
+	}, [state.userCartlist]);
+
 	const incrementFoodItem = (mealItem) => {
 		const { id, price, image, foodItem, description } = mealItem;
-		console.log(state.userCartlist);
-		console.log(price);
 
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
 
 		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
+			console.log('no food item found. adding 1st item to userCartList');
 			const newMeals = [
 				...state.userCartlist,
 				{
@@ -92,12 +97,13 @@ export const UserProvider = ({ children }) => {
 					qty: 1,
 				},
 			];
-			dispatch({ type: ACTION_TYPES.INCREMENT_FOOD_ITEM, payload: newMeals });
-			return;
+			console.log('cartList right before dispatching increment item', newMeals);
+			return dispatch({
+				type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+				payload: newMeals,
+			});
 		}
-		console.log(findExistingFoodItem);
 		const filteredList = state.userCartlist.filter((item) => item.id !== id);
-		console.log(filteredList);
 		const newCartList = [
 			...filteredList,
 
@@ -153,19 +159,14 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	const calculateTotalPrice = () => {
+	function calculateTotalPrice() {
 		let totals = 0;
 		const totalPrice = state.userCartlist.forEach((meal) => {
-			console.log(meal.price);
-			console.log(meal.qty);
-
 			return (totals += parseInt(meal.price) * meal.qty);
 		});
 		console.log('total price is', totals);
-		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
-		console.log(totals);
-		return totals;
-	};
+		return dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
+	}
 
 	const addAndUpdateFavoritePreppers = async (prepperDetails, userEmail) => {
 		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
