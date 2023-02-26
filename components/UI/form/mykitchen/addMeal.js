@@ -6,16 +6,18 @@ import {
 	Button,
 	TextField,
 	CircularProgress,
+	Alert,
 } from '@mui/material';
 import { useColors } from '../../../../hooks/useColors';
 import { addMeal } from '../../../../utils/meals';
 
-const AddMeal = ({ email }) => {
+const AddMeal = ({ email, setMsg }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [imageFile, setImageFile] = useState(null);
+	const [error, setError] = useState('');
 	const { colors } = useColors();
 
 	const titleRef = useRef();
@@ -28,7 +30,7 @@ const AddMeal = ({ email }) => {
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
 		width: '50%',
-		height: '50%',
+		height: '55%',
 		bgcolor: 'background.paper',
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
@@ -57,12 +59,15 @@ const AddMeal = ({ email }) => {
 		console.log(mealDetails);
 		try {
 			const data = await addMeal(email, mealDetails);
-			if (data) {
+			if (data.message) {
+				setMsg(data.message);
 				setIsFormLoading(false);
+				setOpen(false);
 			}
 		} catch (err) {
 			console.error('problem adding meal', err);
 			setIsFormLoading(false);
+			setError(err);
 		}
 	};
 
@@ -154,6 +159,20 @@ const AddMeal = ({ email }) => {
 									</Typography>
 								)}
 							</Button>
+							{error && (
+								<Alert
+									onClose={() => {
+										setError('');
+									}}
+									position='relative'
+									sx={{
+										width: '100%',
+										fontSize: 'larger',
+									}}
+									severity='error'>
+									{error}
+								</Alert>
+							)}
 						</Box>
 					</form>
 				</Box>
