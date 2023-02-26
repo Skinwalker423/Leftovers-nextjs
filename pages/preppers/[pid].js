@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Typography, Paper, IconButton } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
@@ -8,6 +8,7 @@ import styles from './index.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import { UserContext } from '../../store/UserContext';
 
 const foodItems = [
 	{
@@ -64,7 +65,16 @@ export async function getStaticPaths() {
 
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
+	const [meals, setMeals] = useState([]);
 	console.log(prepper);
+	const { state } = useContext(UserContext);
+	console.log(state);
+
+	useEffect(() => {
+		if (prepper.meals) {
+			setMeals(prepper.meals);
+		}
+	}, [meals]);
 
 	const prepperId = router.query.pid;
 	if (!prepperId) {
@@ -147,7 +157,7 @@ const Prepper = ({ prepper }) => {
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
-				{prepper.meals.map(({ price, image, description, title, id }) => {
+				{meals.map(({ price, image, description, title, id }) => {
 					return (
 						<Box key={id} width='100%' height={'500px'}>
 							<FoodItemCard

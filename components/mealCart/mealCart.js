@@ -1,9 +1,10 @@
 import { Paper, Box, Button, Typography } from '@mui/material';
 import CartItemList from './cartItemList';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../../store/UserContext';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
+import { ACTION_TYPES } from '../../store/UserContext';
 
 const MealCart = ({ setShowMealCart }) => {
 	const { state } = useContext(UserContext);
@@ -12,6 +13,8 @@ const MealCart = ({ setShowMealCart }) => {
 	function handleCheckoutBtn() {
 		setShowMealCart(false);
 	}
+
+	const totalPrice = Math.round(state.cartTotalPrice * 100) / 100;
 
 	return (
 		<Paper
@@ -48,7 +51,7 @@ const MealCart = ({ setShowMealCart }) => {
 						</Button>
 					</Link>
 					<Typography textAlign={'end'}>
-						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
+						Total: ${'pending review...'};
 					</Typography>
 				</Box>
 			</Box>

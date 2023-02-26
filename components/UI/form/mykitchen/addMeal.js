@@ -51,7 +51,7 @@ const AddMeal = ({ email, setMsg }) => {
 
 		const mealDetails = {
 			title: titleRef.current.value,
-			price: priceRef.current.value,
+			price: parseInt(priceRef.current.value),
 			description: descriptionRef.current.value,
 			image: '',
 		};

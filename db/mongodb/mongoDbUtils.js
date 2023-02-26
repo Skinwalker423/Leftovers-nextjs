@@ -167,7 +167,7 @@ export async function findExistingPrepperWithId(client, id) {
 
 export async function addMealToPrepperDb(client, email, meal) {
 	const mealDetails = {
-		id: ObjectId(),
+		id: ObjectId().toString(),
 		...meal,
 	};
 	try {

@@ -71,35 +71,39 @@ export const UserProvider = ({ children }) => {
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
-	const calculateTotalPrice = () => {
-		const { userCartlist } = state;
-		let totals = 0;
-		const totalPrice = userCartlist.forEach((meal) => {
-			totals += meal.price * meal.qty;
-		});
-		console.log('total price is', totals);
-		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
-		return totalPrice;
-	};
-
 	const incrementFoodItem = (mealItem) => {
 		const { id, price, image, foodItem, description } = mealItem;
+		console.log(state.userCartlist);
+		console.log(price);
+
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
 
 		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
-			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: mealItem });
+			const newMeals = [
+				...state.userCartlist,
+				{
+					id,
+					price: parseInt(price),
+					image,
+					foodItem,
+					description,
+					qty: 1,
+				},
+			];
+			dispatch({ type: ACTION_TYPES.INCREMENT_FOOD_ITEM, payload: newMeals });
 			return;
 		}
 		console.log(findExistingFoodItem);
 		const filteredList = state.userCartlist.filter((item) => item.id !== id);
+		console.log(filteredList);
 		const newCartList = [
 			...filteredList,
 
 			{
 				id,
-				price,
+				price: parseInt(price),
 				image,
 				foodItem,
 				description,
@@ -134,7 +138,7 @@ export const UserProvider = ({ children }) => {
 
 				{
 					id,
-					price,
+					price: parseInt(price),
 					image,
 					foodItem,
 					description,
@@ -147,6 +151,20 @@ export const UserProvider = ({ children }) => {
 				payload: newCartList,
 			});
 		}
+	};
+
+	const calculateTotalPrice = () => {
+		let totals = 0;
+		const totalPrice = state.userCartlist.forEach((meal) => {
+			console.log(meal.price);
+			console.log(meal.qty);
+
+			return (totals += parseInt(meal.price) * meal.qty);
+		});
+		console.log('total price is', totals);
+		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
+		console.log(totals);
+		return totals;
 	};
 
 	const addAndUpdateFavoritePreppers = async (prepperDetails, userEmail) => {
