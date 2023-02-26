@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Alert } from '@mui/material';
@@ -44,7 +44,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper }) => {
-	console.log(prepper);
+	const [msg, setMsg] = useState('');
 	const { name = 'User', email, image } = userData;
 	return (
 		<Box
@@ -85,7 +85,23 @@ const myKitchen = ({ userData, prepper }) => {
 					zipcode: {prepper.location ? prepper?.location?.zipcode : ''}
 				</Typography>
 
-				<AddMeal email={prepper.email} />
+				<AddMeal setMsg={setMsg} email={prepper.email} />
+				{msg && (
+					<Alert
+						onClose={() => {
+							setMsg('');
+						}}
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+							position: 'absolute',
+							top: '10em',
+							left: '35em',
+						}}
+						severity='success'>
+						{msg}
+					</Alert>
+				)}
 			</Box>
 		</Box>
 	);

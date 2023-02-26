@@ -120,7 +120,7 @@ const Prepper = ({ prepper }) => {
 						p: '1em',
 						position: 'relative',
 					}}>
-					<Image src={'/pixzolo.jpg'} fill />
+					<Image src={'/pixzolo.jpg'} fill alt={prepper.kitchenTitle} />
 					<Box
 						position={'relative'}
 						display='flex'
