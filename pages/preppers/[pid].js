@@ -4,38 +4,9 @@ import { Box, Typography, Paper, IconButton } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
-import styles from './index.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
-
-const foodItems = [
-	{
-		id: 1,
-		item: 'Tacos',
-		image: '/art.jpg',
-		description: 'homemade tacos',
-		price: 4.99,
-		qty: 1,
-	},
-	{
-		id: 2,
-		item: 'Pan con Pavo',
-		image: '/art.jpg',
-		description: 'Delicious homemade chicken sandwiches',
-		price: 4.99,
-		qty: 1,
-	},
-	{
-		id: 3,
-		item: 'Manjar Blanco',
-		image: '/art.jpg',
-		description:
-			'Authentic Salvadorian sweet and creamy vanilla desert topped with cinnamon',
-		price: 4.99,
-		qty: 1,
-	},
-];
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -64,7 +35,13 @@ export async function getStaticPaths() {
 
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
-	console.log(prepper);
+	const [meals, setMeals] = useState([]);
+
+	useEffect(() => {
+		if (prepper.meals) {
+			setMeals(prepper.meals);
+		}
+	}, [meals]);
 
 	const prepperId = router.query.pid;
 	if (!prepperId) {
@@ -100,11 +77,7 @@ const Prepper = ({ prepper }) => {
 			height='100%'>
 			<Head>
 				<title>{prepper.kitchenTitle}</title>
-				<meta
-					name='description'
-					content={prepper.description}
-					//add dyamanic kitchen description and kitchen name
-				/>
+				<meta name='description' content={prepper.description} />
 			</Head>
 			<Box
 				m='100px 0'
@@ -147,7 +120,7 @@ const Prepper = ({ prepper }) => {
 				</Paper>
 			</Box>
 			<Box display={'flex'} width='70%'>
-				{prepper.meals.map(({ price, image, description, title, id }) => {
+				{meals.map(({ price, image, description, title, id }) => {
 					return (
 						<Box key={id} width='100%' height={'500px'}>
 							<FoodItemCard

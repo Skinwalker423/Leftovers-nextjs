@@ -20,7 +20,7 @@ export default function FoodItemCard({
 	qty = 1,
 }) {
 	const [favorited, setFavorited] = useState(false);
-	const { incrementFoodItem, calculateTotalPrice } = useContext(UserContext);
+	const { incrementFoodItem } = useContext(UserContext);
 
 	const meal = {
 		id,
@@ -38,7 +38,6 @@ export default function FoodItemCard({
 
 	const handleAddCartItem = () => {
 		incrementFoodItem(meal);
-		calculateTotalPrice();
 	};
 
 	return (

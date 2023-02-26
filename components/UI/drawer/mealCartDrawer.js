@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -11,6 +11,7 @@ import { UserContext } from '../../../store/UserContext';
 export default function MealCartDrawer({ isDrawerOpen, toggleDrawer }) {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
+
 	return (
 		<Drawer
 			anchor={'right'}

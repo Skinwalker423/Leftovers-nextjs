@@ -13,6 +13,8 @@ const MealCart = ({ setShowMealCart }) => {
 		setShowMealCart(false);
 	}
 
+	const totalPrice = Math.round(state.cartTotalPrice * 100) / 100;
+
 	return (
 		<Paper
 			sx={{
@@ -47,9 +49,7 @@ const MealCart = ({ setShowMealCart }) => {
 							Checkout
 						</Button>
 					</Link>
-					<Typography textAlign={'end'}>
-						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
-					</Typography>
+					<Typography textAlign={'end'}>Total: ${totalPrice};</Typography>
 				</Box>
 			</Box>
 		</Paper>

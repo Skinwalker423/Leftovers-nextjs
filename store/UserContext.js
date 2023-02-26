@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
-import useTrackLocation from '../hooks/useTrackLocation';
+// import useTrackLocation from '../hooks/useTrackLocation';
 import {
 	addFavoritePrepperToDb,
 	removeFavoritePrepperToDb,
@@ -71,35 +71,45 @@ export const UserProvider = ({ children }) => {
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
-	const calculateTotalPrice = () => {
-		const { userCartlist } = state;
-		let totals = 0;
-		const totalPrice = userCartlist.forEach((meal) => {
-			totals += meal.price * meal.qty;
-		});
-		console.log('total price is', totals);
-		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
-		return totalPrice;
-	};
+	useEffect(() => {
+		if (state.userCartlist) {
+			calculateTotalPrice();
+		}
+	}, [state.userCartlist]);
 
 	const incrementFoodItem = (mealItem) => {
 		const { id, price, image, foodItem, description } = mealItem;
+
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
 
 		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
-			dispatch({ type: ACTION_TYPES.ADD_FOOD_TO_CART, payload: mealItem });
-			return;
+			console.log('no food item found. adding 1st item to userCartList');
+			const newMeals = [
+				...state.userCartlist,
+				{
+					id,
+					price: parseInt(price),
+					image,
+					foodItem,
+					description,
+					qty: 1,
+				},
+			];
+			console.log('cartList right before dispatching increment item', newMeals);
+			return dispatch({
+				type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
+				payload: newMeals,
+			});
 		}
-		console.log(findExistingFoodItem);
 		const filteredList = state.userCartlist.filter((item) => item.id !== id);
 		const newCartList = [
 			...filteredList,
 
 			{
 				id,
-				price,
+				price: parseInt(price),
 				image,
 				foodItem,
 				description,
@@ -134,7 +144,7 @@ export const UserProvider = ({ children }) => {
 
 				{
 					id,
-					price,
+					price: parseInt(price),
 					image,
 					foodItem,
 					description,
@@ -148,6 +158,15 @@ export const UserProvider = ({ children }) => {
 			});
 		}
 	};
+
+	function calculateTotalPrice() {
+		let totals = 0;
+		const totalPrice = state.userCartlist.forEach((meal) => {
+			return (totals += parseInt(meal.price) * meal.qty);
+		});
+		console.log('total price is', totals);
+		return dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
+	}
 
 	const addAndUpdateFavoritePreppers = async (prepperDetails, userEmail) => {
 		const data = await addFavoritePrepperToDb(prepperDetails, userEmail);
