@@ -3,6 +3,7 @@ import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Alert } from '@mui/material';
 import Image from 'next/image';
+import SuccessAlert from '../components/UI/alert/successAlert';
 
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
@@ -86,22 +87,7 @@ const myKitchen = ({ userData, prepper }) => {
 				</Typography>
 
 				<AddMeal setMsg={setMsg} email={prepper.email} />
-				{msg && (
-					<Alert
-						onClose={() => {
-							setMsg('');
-						}}
-						sx={{
-							width: '50%',
-							fontSize: 'larger',
-							position: 'absolute',
-							top: '10em',
-							left: '35em',
-						}}
-						severity='success'>
-						{msg}
-					</Alert>
-				)}
+				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			</Box>
 		</Box>
 	);
