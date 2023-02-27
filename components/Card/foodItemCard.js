@@ -18,6 +18,7 @@ export default function FoodItemCard({
 	price,
 	id,
 	qty = 1,
+	setMsg,
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
@@ -33,11 +34,14 @@ export default function FoodItemCard({
 
 	const handleFavorite = () => {
 		setFavorited((bool) => !bool);
-		console.log(`favorited ${foodItem}`);
 	};
 
 	const handleAddCartItem = () => {
 		incrementFoodItem(meal);
+		setMsg(`Added ${foodItem} to your meal cart`);
+		setTimeout(() => {
+			setMsg('');
+		}, 5000);
 	};
 
 	return (

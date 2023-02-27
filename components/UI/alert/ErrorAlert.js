@@ -1,23 +1,23 @@
 import React from 'react';
 import { Alert } from '@mui/material';
 
-const SuccessAlert = ({ msg, setMsg }) => {
+const ErrorAlert = ({ error, setError }) => {
 	return (
 		<Alert
 			onClose={() => {
-				setMsg('');
+				setError('');
 			}}
 			sx={{
 				width: '50%',
 				fontSize: 'larger',
 				position: 'absolute',
-				bottom: '21em',
+				top: '10em',
 				left: '35em',
 			}}
-			severity='success'>
-			{msg}
+			severity='error'>
+			{error}
 		</Alert>
 	);
 };
 
-export default SuccessAlert;
+export default ErrorAlert;
