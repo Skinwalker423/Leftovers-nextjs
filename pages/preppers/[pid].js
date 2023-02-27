@@ -7,6 +7,7 @@ import FoodItemCard from '../../components/Card/foodItemCard';
 import Head from 'next/head';
 import Image from 'next/image';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import SuccessAlert from '../../components/UI/alert/successAlert';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -36,6 +37,7 @@ export async function getStaticPaths() {
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
+	const [msg, setMsg] = useState('');
 
 	useEffect(() => {
 		if (prepper.meals) {
@@ -131,11 +133,13 @@ const Prepper = ({ prepper }) => {
 								description={description}
 								id={id}
 								qty={1}
+								setMsg={setMsg}
 							/>
 						</Box>
 					);
 				})}
 			</Box>
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 		</Box>
 	);
 };
