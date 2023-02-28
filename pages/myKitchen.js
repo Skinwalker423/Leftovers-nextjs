@@ -4,7 +4,7 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Alert } from '@mui/material';
 import Image from 'next/image';
 import SuccessAlert from '../components/UI/alert/successAlert';
-
+import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import {
@@ -53,9 +53,10 @@ const myKitchen = ({ userData, prepper }) => {
 			height={'100vh'}
 			display={'flex'}
 			flexDirection={{ xs: 'column', lg: 'row' }}
-			justifyContent='space-around'
+			justifyContent='center'
 			alignItems={'center'}>
 			<Box>
+				<ResponsiveDrawer />
 				{image ? (
 					<Image
 						alt={`avatar image of ${name}`}
