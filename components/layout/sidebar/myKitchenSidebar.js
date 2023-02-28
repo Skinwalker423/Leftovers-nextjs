@@ -23,6 +23,7 @@ const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
 	width: drawerWidth,
+	top: '6em',
 	transition: theme.transitions.create('width', {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.enteringScreen,
@@ -36,6 +37,7 @@ const closedMixin = (theme) => ({
 		duration: theme.transitions.duration.leavingScreen,
 	}),
 	overflowX: 'hidden',
+	top: '6em',
 	width: `calc(${theme.spacing(7)} + 1px)`,
 	[theme.breakpoints.up('sm')]: {
 		width: `calc(${theme.spacing(8)} + 1px)`,
@@ -87,7 +89,7 @@ export default function MiniDrawer() {
 		<Box>
 			<Drawer
 				sx={{
-					'.css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
+					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
 						top: '6em',
 					},
 				}}
@@ -119,30 +121,32 @@ export default function MiniDrawer() {
 				</DrawerHeader>
 				<Divider />
 				<List>
-					{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: 'block' }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5,
-								}}>
-								<ListItemIcon
+					{['Contact Info', 'My Meals', 'Kitchen proile', 'Orders'].map(
+						(text, index) => (
+							<ListItem key={text} disablePadding sx={{ display: 'block' }}>
+								<ListItemButton
 									sx={{
-										minWidth: 0,
-										mr: open ? 3 : 'auto',
-										justifyContent: 'center',
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
 									}}>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-							</ListItemButton>
-						</ListItem>
-					))}
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: open ? 3 : 'auto',
+											justifyContent: 'center',
+										}}>
+										{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+									</ListItemIcon>
+									<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+								</ListItemButton>
+							</ListItem>
+						)
+					)}
 				</List>
 				<Divider />
 				<List>
-					{['All mail', 'Trash', 'Spam'].map((text, index) => (
+					{['Notifications', 'Trash', 'Spam'].map((text, index) => (
 						<ListItem key={text} disablePadding sx={{ display: 'block' }}>
 							<ListItemButton
 								sx={{

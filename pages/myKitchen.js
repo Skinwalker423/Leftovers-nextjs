@@ -53,10 +53,10 @@ const myKitchen = ({ userData, prepper }) => {
 			height={'100vh'}
 			display={'flex'}
 			flexDirection={{ xs: 'column', lg: 'row' }}
-			justifyContent='space-around'
+			justifyContent='center'
 			alignItems={'center'}>
-			<ResponsiveDrawer />
 			<Box>
+				<ResponsiveDrawer />
 				{image ? (
 					<Image
 						alt={`avatar image of ${name}`}
