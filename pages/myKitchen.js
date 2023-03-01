@@ -55,8 +55,9 @@ const myKitchen = ({ userData, prepper }) => {
 			display={'flex'}
 			flexDirection={{ xs: 'column', lg: 'row' }}
 			justifyContent='center'
-			alignItems={'flex-start'}>
-			<Box width='80%' mt={'6em'}>
+			alignItems={'center'}>
+			<ResponsiveDrawer />
+			<Box width={{ xs: '70%', lg: '80%' }} mt={'6em'}>
 				<InfoCard>
 					{image ? (
 						<Image

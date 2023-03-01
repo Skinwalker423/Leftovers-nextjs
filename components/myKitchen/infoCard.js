@@ -5,6 +5,7 @@ const InfoCard = ({ children }) => {
 	return (
 		<Paper
 			sx={{
+				width: '100%',
 				mt: '2em',
 				display: 'flex',
 				justifyContent: 'space-between',
