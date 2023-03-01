@@ -86,8 +86,8 @@ const AddMeal = ({ email, setMsg }) => {
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='modal-title'
-				aria-describedby='modal-description'>
+				aria-labelledby='add-meal-form'
+				aria-describedby='submit details to create a new meal'>
 				<Box sx={style}>
 					<form onSubmit={handleAddMealForm}>
 						<Typography textAlign={'center'} variant='h3'>
