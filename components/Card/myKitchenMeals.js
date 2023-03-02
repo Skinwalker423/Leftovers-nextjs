@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
+import { removeMeal } from '../../utils/meals';
 
 export default function MyKitchenMealCard({
 	foodItem = 'Food Item',
@@ -13,7 +14,16 @@ export default function MyKitchenMealCard({
 	id,
 	qty = 1,
 	setMsg,
+	prepperEmail,
 }) {
+	const handleRemoveMeal = async () => {
+		const data = await removeMeal(prepperEmail, id);
+		if (data.message) {
+			console.log('meal removed');
+			setMsg(data.message);
+		}
+	};
+
 	return (
 		<Card key={id} sx={{ maxWidth: 345 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
@@ -24,7 +34,7 @@ export default function MyKitchenMealCard({
 			</CardContent>
 
 			<CardActions>
-				<Button size='small' color='error'>
+				<Button onClick={handleRemoveMeal} size='small' color='error'>
 					Remove
 				</Button>
 			</CardActions>

@@ -52,7 +52,7 @@ const myKitchen = ({ userData, prepper }) => {
 	const { name = 'User', email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
 
-	const handleRemoveMealBtn = () => {
+	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
 	};
 
@@ -63,6 +63,9 @@ const myKitchen = ({ userData, prepper }) => {
 					key={id}
 					foodItem={title}
 					description={description}
+					setMsg={setMsg}
+					prepperEmail={prepper.email}
+					id={id}
 				/>
 			</Box>
 		);
@@ -120,11 +123,8 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				<InfoCard>
 					<Typography>Remove a meal</Typography>
-					<Button
-						onClick={handleRemoveMealBtn}
-						color='error'
-						variant='contained'>
-						Remove meal
+					<Button onClick={handleShowMealBtn} color='error' variant='contained'>
+						{showMeals ? 'Hide meals' : 'Remove Meal'}
 					</Button>
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}

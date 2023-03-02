@@ -46,10 +46,6 @@ export default function PrepperCard({
 		state,
 	} = useContext(UserContext);
 
-	const refreshData = () => {
-		router.push(router.asPath);
-	};
-
 	useEffect(() => {
 		setFavorited(isFavorited);
 	}, []);
