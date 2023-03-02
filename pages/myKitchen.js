@@ -52,6 +52,10 @@ const myKitchen = ({ userData, prepper }) => {
 	const { name = 'User', email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
 
+	const handleRemoveMealBtn = () => {
+		setShowMeals((bool) => !bool);
+	};
+
 	const mealsList = prepper.meals.map(({ title, id, description }) => {
 		return (
 			<Box key={id}>
@@ -116,14 +120,19 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				<InfoCard>
 					<Typography>Remove a meal</Typography>
-					<Button color='error' variant='contained'>
+					<Button
+						onClick={handleRemoveMealBtn}
+						color='error'
+						variant='contained'>
 						Remove meal
 					</Button>
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
-				<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
-					{mealsList}
-				</Box>
+				{showMeals && (
+					<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
+						{mealsList}
+					</Box>
+				)}
 			</Box>
 		</Box>
 	);
