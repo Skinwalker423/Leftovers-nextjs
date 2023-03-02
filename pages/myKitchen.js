@@ -8,6 +8,7 @@ import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
+import MyKitchenMealCard from '../components/Card/myKitchenMeals';
 import {
 	connectMongoDb,
 	findExistingPrepperEmail,
@@ -46,8 +47,23 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper }) => {
+	console.log(prepper.meals);
 	const [msg, setMsg] = useState('');
 	const { name = 'User', email, image } = userData;
+	const [showMeals, setShowMeals] = useState(false);
+
+	const mealsList = prepper.meals.map(({ title, id, description }) => {
+		return (
+			<Box key={id}>
+				<MyKitchenMealCard
+					key={id}
+					foodItem={title}
+					description={description}
+				/>
+			</Box>
+		);
+	});
+
 	return (
 		<Box
 			width='100%'
@@ -74,7 +90,7 @@ const myKitchen = ({ userData, prepper }) => {
 							fontSize='3em'
 						/>
 					)}
-					<Button color='error' variant='contained'>
+					<Button color='warning' variant='contained'>
 						Edit image
 					</Button>
 				</InfoCard>
@@ -82,41 +98,16 @@ const myKitchen = ({ userData, prepper }) => {
 					<Typography variant='h1'>
 						{prepper ? prepper?.kitchenTitle : ''}
 					</Typography>
-					<Button color='error' variant='contained'>
+					<Button color='warning' variant='contained'>
 						Edit Kitchen Name
-					</Button>
-				</InfoCard>
-				<InfoCard>
-					<Typography variant='h2'>{email}</Typography>
-					<Button color='error' variant='contained'>
-						Edit Email
 					</Button>
 				</InfoCard>
 				<InfoCard>
 					<Typography variant='h3'>
 						{prepper ? prepper?.description : ''}
 					</Typography>
-					<Button color='error' variant='contained'>
+					<Button color='warning' variant='contained'>
 						Edit description
-					</Button>
-				</InfoCard>
-				<InfoCard>
-					<Typography variant='h3'>{prepper ? prepper?.name : name}</Typography>
-					<Button color='error' variant='contained'>
-						Edit name
-					</Button>
-				</InfoCard>
-				<InfoCard>
-					<Box>
-						<Typography variant='h3'>
-							state: {prepper.location ? prepper?.location?.state : ''}
-						</Typography>
-						<Typography variant='h3'>
-							zipcode: {prepper.location ? prepper?.location?.zipcode : ''}
-						</Typography>
-					</Box>
-					<Button color='error' variant='contained'>
-						Edit Email
 					</Button>
 				</InfoCard>
 				<InfoCard>
@@ -130,6 +121,9 @@ const myKitchen = ({ userData, prepper }) => {
 					</Button>
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+				<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
+					{mealsList}
+				</Box>
 			</Box>
 		</Box>
 	);
