@@ -125,6 +125,10 @@ export async function findExistingUserEmail(client, email) {
 			email: document?.email,
 			favorites: document?.favorites,
 			password: document?.password,
+			meals: document?.meals,
+			description: document?.description,
+			kitchenTitle: document?.kitchenTitle,
+			name: `${document.firstName} ${document.lastName}`,
 		};
 		client.close();
 		return formattedDoc;
@@ -186,6 +190,27 @@ export async function addMealToPrepperDb(client, email, meal) {
 		return document;
 	} catch (err) {
 		console.error('problem updating meals', err);
+		return;
+	}
+}
+
+export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{ email: userEmail },
+			{
+				$pull: { meals: { id: mealId } },
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log(`meal removed`, document);
+		return document;
+	} catch (err) {
+		console.error('problem updating document', err);
 		return;
 	}
 }
