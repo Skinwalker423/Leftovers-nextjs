@@ -73,14 +73,7 @@ const AddMeal = ({ email, setMsg }) => {
 
 	return (
 		<div>
-			<Button
-				sx={{
-					backgroundColor: colors.orangeAccent[900],
-					'&:hover': {
-						backgroundColor: colors.orangeAccent[700],
-					},
-				}}
-				onClick={handleOpen}>
+			<Button variant='contained' color='success' onClick={handleOpen}>
 				Add Meal
 			</Button>
 			<Modal

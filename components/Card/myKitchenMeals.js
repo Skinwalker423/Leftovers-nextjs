@@ -15,18 +15,14 @@ export default function MyKitchenMealCard({
 	setMsg,
 }) {
 	return (
-		<Card sx={{ maxWidth: 345 }}>
-			<CardActionArea>
-				<CardMedia component='img' height='140' image={image} alt={foodItem} />
-				<CardContent>
-					<Typography gutterBottom variant='h5' component='div'>
-						{foodItem}
-					</Typography>
-					<Typography variant='body2' color='text.secondary'>
-						{description}
-					</Typography>
-				</CardContent>
-			</CardActionArea>
+		<Card key={id} sx={{ maxWidth: 345 }}>
+			<CardMedia component='img' height='140' image={image} alt={foodItem} />
+			<CardContent>
+				<Typography gutterBottom variant='h5' component='div'>
+					{foodItem}
+				</Typography>
+			</CardContent>
+
 			<CardActions>
 				<Button size='small' color='error'>
 					Remove
