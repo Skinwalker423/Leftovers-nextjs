@@ -186,8 +186,8 @@ export async function addMealToPrepperDb(client, email, meal) {
 		if (!document) {
 			return;
 		}
-		console.log(`document added to meals`, document);
-		return document;
+		console.log(`document added to meals`, mealDetails);
+		return mealDetails;
 	} catch (err) {
 		console.error('problem updating meals', err);
 		return;
