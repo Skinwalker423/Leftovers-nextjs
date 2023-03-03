@@ -51,12 +51,13 @@ const myKitchen = ({ userData, prepper }) => {
 	const [msg, setMsg] = useState('');
 	const { name = 'User', email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
+	const [meals, setMeals] = useState(prepper.meals);
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
 	};
 
-	const mealsList = prepper.meals.map(({ title, id, description }) => {
+	const mealsList = meals.map(({ title, id, description }) => {
 		return (
 			<Box key={id}>
 				<MyKitchenMealCard
@@ -66,6 +67,7 @@ const myKitchen = ({ userData, prepper }) => {
 					setMsg={setMsg}
 					prepperEmail={prepper.email}
 					id={id}
+					setMeals={setMeals}
 				/>
 			</Box>
 		);
@@ -119,7 +121,7 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				<InfoCard>
 					<Typography>Add a meal to your Kitchen</Typography>
-					<AddMeal setMsg={setMsg} email={prepper.email} />
+					<AddMeal setMsg={setMsg} email={prepper.email} setMeals={setMeals} />
 				</InfoCard>
 				<InfoCard>
 					<Typography>Remove a meal</Typography>

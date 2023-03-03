@@ -73,7 +73,7 @@ export default function FoodItemCard({
 						)}
 					</IconButton>
 					<Button
-						variant='outlined'
+						variant='contained'
 						color='success'
 						onClick={handleAddCartItem}
 						size='small'>

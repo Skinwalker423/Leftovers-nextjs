@@ -11,7 +11,7 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import { addMeal } from '../../../../utils/meals';
 
-const AddMeal = ({ email, setMsg }) => {
+const AddMeal = ({ email, setMsg, setMeals }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -60,6 +60,9 @@ const AddMeal = ({ email, setMsg }) => {
 		try {
 			const data = await addMeal(email, mealDetails);
 			if (data.message) {
+				setMeals((meals) => {
+					return [...meals, data.meal];
+				});
 				setMsg(data.message);
 				setIsFormLoading(false);
 				setOpen(false);

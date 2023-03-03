@@ -15,11 +15,15 @@ export default function MyKitchenMealCard({
 	qty = 1,
 	setMsg,
 	prepperEmail,
+	setMeals,
 }) {
 	const handleRemoveMeal = async () => {
 		const data = await removeMeal(prepperEmail, id);
 		if (data.message) {
 			console.log('meal removed');
+			setMeals((meals) => {
+				return meals.filter((meal) => meal.id !== id);
+			});
 			setMsg(data.message);
 		}
 	};
