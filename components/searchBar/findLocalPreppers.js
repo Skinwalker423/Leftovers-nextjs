@@ -33,9 +33,11 @@ const FindLocalPreppersSearchBar = ({
 							className={styles.account}
 							sx={{
 								color: 'action.active',
-								mr: 3,
+								mr: 2,
 								my: 0.5,
 								fontSize: 'large',
+								height: '3em',
+								width: '2em',
 							}}
 						/>
 						<TextField
@@ -49,7 +51,13 @@ const FindLocalPreppersSearchBar = ({
 						/>
 						<ArrowForwardOutlinedIcon
 							className={styles.arrow}
-							sx={{ color: 'action.active', mr: 1, my: 0.5, fontSize: 'large' }}
+							sx={{
+								color: 'action.active',
+								my: 0.5,
+								fontSize: 'large',
+								height: '3em',
+								width: '2em',
+							}}
 						/>
 					</Box>
 				</FormControl>
