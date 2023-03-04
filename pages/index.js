@@ -3,7 +3,6 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Alert, Box } from '@mui/material';
 import Footer from '../components/layout/footer/footer';
-import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
@@ -25,7 +24,6 @@ import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
 
 export async function getServerSideProps({ req, res }) {
-	// const fetchedFavs = await fetchFavoritePreppers();
 	const session = await unstable_getServerSession(req, res, authOptions);
 	const foundSession = session ? session : null;
 	console.log('this is the session:', session);
@@ -121,23 +119,25 @@ export default function Home({ favoriteList, foundSession, error }) {
 					content='The largest meal sharing app in the world'
 				/>
 			</Head>
-			<header className={styles.header}>
-				<LandingHeader title='Welcome to Leftovers!' img='ball-park.jpg' />
-				<FindLocalPreppersSearchBar
-					handleZipChange={handleZipChange}
-					handleZipSearchForm={handleZipSearchForm}
-					errorMsg={errorMsg}
-				/>
+			<header>
+				<Box display={'flex'} justifyContent='center' alignItems={'center'}>
+					<LandingHeader title='Welcome to Leftovers!' img='ball-park.jpg' />
+					<FindLocalPreppersSearchBar
+						handleZipChange={handleZipChange}
+						handleZipSearchForm={handleZipSearchForm}
+						errorMsg={errorMsg}
+					/>
+				</Box>
 			</header>
 			<main className={styles.main}>
-				{localPreppers.length && (
+				{localPreppers.length !== 0 && (
 					<CategoryBanner
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
 						<LocalPreppersList localPreppers={localPreppers} />
 					</CategoryBanner>
 				)}
-				{favoriteList.length && (foundSession || session) && (
+				{favoriteList.length !== 0 && (foundSession || session) && (
 					<CategoryBanner
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
