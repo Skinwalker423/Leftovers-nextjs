@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import FavoriteList from '../components/favorites/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
-import { Box } from '@mui/material';
+import { Alert, Box, Typography } from '@mui/material';
 import styles from '/styles/Home.module.css';
 import Footer from '../components/layout/footer/footer';
 import { UserContext } from '../store/UserContext';
@@ -54,6 +54,11 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<meta name='description' content='Your favorite preppers' />
 			</Head>
 			<main style={{ marginTop: '80px' }} className={styles.main}>
+				{!favoriteList.length && (
+					<Alert sx={{ mt: '2em' }} color='warning'>
+						<Typography variant='h1'>No Favorites added</Typography>
+					</Alert>
+				)}
 				<FavoriteList
 					userEmail={userEmail}
 					favRow={true}
