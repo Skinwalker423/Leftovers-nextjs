@@ -3,10 +3,8 @@ import React from 'react';
 import PrepperCard from '../Card/prepperCard';
 import styles from './favoriteList.module.css';
 import CustomLoader from '../UI/Loader';
-import { useColors } from '../../hooks/useColors';
 
 const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
-	const { colors } = useColors();
 	const avatar = 'https://i.pravatar.cc/300';
 	if (!favoriteList) {
 		return <CustomLoader />;
