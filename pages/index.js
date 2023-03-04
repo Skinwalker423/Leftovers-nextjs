@@ -85,8 +85,6 @@ export default function Home({ favoriteList, foundSession, error }) {
 		}
 	}, []);
 
-	console.log(state);
-
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
 		const isValidZip = isValidZipCode(zipCode);
@@ -97,11 +95,13 @@ export default function Home({ favoriteList, foundSession, error }) {
 		console.log('submitted');
 		setErrorMsg('');
 		const findPreppers = await fetchLocalPreppers(zipCode);
-		console.log(findPreppers);
-		if (findPreppers.length !== 0) {
-			setLocalPreppers(findPreppers);
+
+		if (findPreppers.error) {
+			console.log(findPreppers);
+			setErrorMsg(findPreppers.error);
 		} else {
-			setErrorMsg('could not find local preppers. Try another zip code');
+			console.log(findPreppers);
+			setLocalPreppers(findPreppers);
 		}
 	};
 
@@ -147,7 +147,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						/>
 					</CategoryBanner>
 				)}
-				{error && (
+				{(error || errorMsg) && (
 					<Alert
 						sx={{
 							width: '50%',
@@ -155,7 +155,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 							mt: '5em',
 						}}
 						severity='error'>
-						{error}
+						{error || errorMsg}
 					</Alert>
 				)}
 			</main>

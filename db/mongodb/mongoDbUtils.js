@@ -214,3 +214,35 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 		return;
 	}
 }
+
+export async function findLocalPreppersWithZipcode(client, zipcode) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const data = await collection
+			.find({ 'location.zipcode': zipcode.toString() })
+			.toArray();
+		if (!data) {
+			client.close();
+			console.log('no data found with zipcode query');
+			return [];
+		}
+		console.log(`preppers found: ${data}:`);
+		const mappedDoc = data.map(
+			({ _id, firstName, lastName, email, description, kitchenTitle }) => {
+				return {
+					name: `${firstName} ${lastName}`,
+					email: email,
+					id: _id.toString(),
+					description: description,
+					kitchenTitle: kitchenTitle,
+				};
+			}
+		);
+		console.log(mappedDoc);
+		client.close();
+		return mappedDoc;
+	} catch (err) {
+		client.close();
+		console.error('problem retrieving preppers from db', err);
+	}
+}

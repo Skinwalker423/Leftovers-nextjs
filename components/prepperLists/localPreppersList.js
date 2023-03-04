@@ -5,7 +5,7 @@ import Link from 'next/link';
 import styles from './localPreppersList.module.css';
 
 const LocalPreppersList = ({ localPreppers }) => {
-	if (!localPreppers) {
+	if (!localPreppers.length) {
 		return;
 	}
 	const preppers = localPreppers.map((prepper) => {
