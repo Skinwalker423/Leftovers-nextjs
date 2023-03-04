@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+import styles from '../../styles/Home.module.css';
 import { Box, Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
-import { useColors } from '../hooks/useColors';
-import NavBar from '../components/global/NavBar';
-import { mockDataContacts } from '../data/mockData';
-import useTrackLocation from '../hooks/useTrackLocation';
+import { useColors } from '../../hooks/useColors';
+import NavBar from '../../components/layout/navbar/NavBar';
+
+import useTrackLocation from '../../hooks/useTrackLocation';
 import { useEffect, useContext, useState, useRef } from 'react';
-import { ACTION_TYPES } from '../store/UserContext';
-import { UserContext } from '../store/UserContext';
-import CustomLoader from '../components/Loader';
+import { ACTION_TYPES } from '../../store/UserContext';
+import { UserContext } from '../../store/UserContext';
+import CustomLoader from '../../components/UI/Loader';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from '!mapbox-gl';
 
@@ -75,8 +75,11 @@ export default function Directions() {
 	return (
 		<Box className={styles.container}>
 			<Head>
-				<title>Leftovers</title>
-				<meta name='description' content='The largest meal sharing app' />
+				<title>Directions</title>
+				<meta
+					name='description'
+					content='find directions to your local prepper'
+				/>
 			</Head>
 
 			<main className={styles.main}>

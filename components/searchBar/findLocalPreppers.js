@@ -21,7 +21,7 @@ const FindLocalPreppersSearchBar = ({
 						sx={{
 							display: 'flex',
 							alignItems: 'flex-end',
-							backgroundColor: colors.blueAccent[700],
+							backgroundColor: colors.primary[400],
 							justifyContent: 'center',
 							alignItems: 'center',
 							borderRadius: '5px',
