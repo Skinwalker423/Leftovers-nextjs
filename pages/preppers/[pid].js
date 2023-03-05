@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Paper, IconButton } from '@mui/material';
+import { Box, Typography, Paper, IconButton, Alert } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
@@ -121,24 +121,34 @@ const Prepper = ({ prepper }) => {
 					</Box>
 				</Paper>
 			</Box>
-			<Box display={'flex'} width='70%'>
-				{meals.map(({ price, image, description, title, id }) => {
-					return (
-						<Box key={id} width='100%' height={'500px'}>
-							<FoodItemCard
-								key={title}
-								foodItem={title}
-								image={image === '' ? '/art.jpg' : image}
-								price={price}
-								description={description}
-								id={id}
-								qty={1}
-								setMsg={setMsg}
-							/>
-						</Box>
-					);
-				})}
-			</Box>
+			{meals.length !== 0 ? (
+				<Box display={'flex'} width='70%'>
+					{meals.map(({ price, image, description, title, id }) => {
+						return (
+							<Box key={id} width='100%' height={'500px'}>
+								<FoodItemCard
+									key={title}
+									foodItem={title}
+									image={image === '' ? '/art.jpg' : image}
+									price={price}
+									description={description}
+									id={id}
+									qty={1}
+									setMsg={setMsg}
+								/>
+							</Box>
+						);
+					})}
+				</Box>
+			) : (
+				<Box width='50%'>
+					<Alert color='error' fontSize='large'>
+						<Typography variant='h3'>
+							Meals are currently unavailbale. Check back soon
+						</Typography>
+					</Alert>
+				</Box>
+			)}
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 		</Box>
 	);
