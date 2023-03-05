@@ -23,6 +23,7 @@ import { useSession } from 'next-auth/react';
 import { Alert } from '@mui/material';
 import { useRouter } from 'next/router';
 import { UserContext } from '../../store/UserContext';
+import TrophyLikesButton from '../likes/trophyLikesButton';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
@@ -140,12 +141,13 @@ export default function PrepperCard({
 						onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
 						aria-label='add to favorites'>
 						{favorited ? (
-							<FavoriteIcon color='error' />
+							<FavoriteIcon fontSize='large' color='error' />
 						) : (
-							<FavoriteBorderOutlinedIcon color='error' />
+							<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
 						)}
 					</IconButton>
 				)}
+				<TrophyLikesButton />
 				<Link className={styles.link} href={`/preppers/${id}`}>
 					<Button
 						sx={{

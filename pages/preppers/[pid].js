@@ -6,8 +6,9 @@ import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
 import Head from 'next/head';
 import Image from 'next/image';
-import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+
 import SuccessAlert from '../../components/UI/alert/successAlert';
+import TrophyLikesButton from '../../components/likes/trophyLikesButton';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -111,12 +112,7 @@ const Prepper = ({ prepper }) => {
 						</Box>
 						<Box>
 							<Typography variant='h2'>{prepper.email}</Typography>
-							<Box display={'flex'} alignItems='center'>
-								<IconButton>
-									<WorkspacePremiumIcon color='error' fontSize='large' />
-								</IconButton>
-								<Typography fontSize={'large'}>42</Typography>
-							</Box>
+							<TrophyLikesButton />
 						</Box>
 					</Box>
 				</Paper>
