@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { unstable_getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
-import { Box, Typography, Alert, Divider, Paper, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import Image from 'next/image';
 import SuccessAlert from '../components/UI/alert/successAlert';
 import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
@@ -130,9 +131,18 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{showMeals && (
-					<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
-						{mealsList}
-					</Box>
+					<AnimatePresence>
+						<motion.div
+							key={'meals'}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ type: 'spring', delay: 0.2 }}
+							exit={{ opacity: 0 }}>
+							<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
+								{mealsList}
+							</Box>
+						</motion.div>
+					</AnimatePresence>
 				)}
 			</Box>
 		</Box>

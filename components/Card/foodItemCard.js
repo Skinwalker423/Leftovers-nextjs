@@ -10,6 +10,7 @@ import { IconButton } from '@mui/material';
 import { Box, Typography, Stack } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
@@ -45,42 +46,44 @@ export default function FoodItemCard({
 	};
 
 	return (
-		<Card sx={{ maxWidth: 345, height: '300px' }}>
-			<CardMedia sx={{ height: '50%' }} image={image} title={foodItem} />
-			<Stack sx={{ height: '50%' }} justifyContent='space-between'>
-				<CardContent>
-					<Box display='flex' justifyContent={'space-between'}>
-						<Typography
-							color={'secondary'}
-							gutterBottom
-							variant='h5'
-							component='div'>
-							{foodItem}
-						</Typography>
+		<motion.div whileHover={{ scale: 1.1 }}>
+			<Card sx={{ maxWidth: 345, height: '300px' }}>
+				<CardMedia sx={{ height: '50%' }} image={image} title={foodItem} />
+				<Stack sx={{ height: '50%' }} justifyContent='space-between'>
+					<CardContent>
+						<Box display='flex' justifyContent={'space-between'}>
+							<Typography
+								color={'secondary'}
+								gutterBottom
+								variant='h5'
+								component='div'>
+								{foodItem}
+							</Typography>
 
-						<Typography gutterBottom variant='h5' component='div'>
-							${price}
-						</Typography>
-					</Box>
-					<Typography variant='body2'>{description}</Typography>
-				</CardContent>
-				<CardActions>
-					<IconButton onClick={handleFavorite} size='small'>
-						{favorited ? (
-							<FavoriteIcon color='error' />
-						) : (
-							<FavoriteBorderOutlinedIcon />
-						)}
-					</IconButton>
-					<Button
-						variant='contained'
-						color='success'
-						onClick={handleAddCartItem}
-						size='small'>
-						Add to Cart
-					</Button>
-				</CardActions>
-			</Stack>
-		</Card>
+							<Typography gutterBottom variant='h5' component='div'>
+								${price}
+							</Typography>
+						</Box>
+						<Typography variant='body2'>{description}</Typography>
+					</CardContent>
+					<CardActions>
+						<IconButton onClick={handleFavorite} size='small'>
+							{favorited ? (
+								<FavoriteIcon color='error' />
+							) : (
+								<FavoriteBorderOutlinedIcon />
+							)}
+						</IconButton>
+						<Button
+							variant='contained'
+							color='success'
+							onClick={handleAddCartItem}
+							size='small'>
+							Add to Cart
+						</Button>
+					</CardActions>
+				</Stack>
+			</Card>
+		</motion.div>
 	);
 }
