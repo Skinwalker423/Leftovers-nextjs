@@ -47,7 +47,6 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper }) => {
-	console.log(prepper.meals);
 	const [msg, setMsg] = useState('');
 	const { name = 'User', email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);

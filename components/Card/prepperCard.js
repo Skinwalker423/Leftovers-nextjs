@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -15,10 +16,6 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
-import {
-	addFavoritePrepperToDb,
-	removeFavoritePrepperToDb,
-} from '../../utils/favorites';
 import { useSession } from 'next-auth/react';
 import { Alert } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -98,80 +95,82 @@ export default function PrepperCard({
 	}
 
 	return (
-		<Card className={styles.prepCard} key={id}>
-			<CardHeader
-				avatar={
-					<Avatar
-						sx={{ bgcolor: colors.orangeAccent[500] }}
-						aria-label='prepper'>
-						<Image
-							style={{ objectFit: 'fill', borderRadius: '50%' }}
-							src={avatar}
-							width={37}
-							height={37}
-							alt={`avatar for ${name}`}
-						/>
-					</Avatar>
-				}
-				action={
-					<IconButton aria-label='settings'>
-						<MoreVertIcon />
-					</IconButton>
-				}
-				title={name}
-				subheader={subTitle}
-			/>
-			<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
-			<CardContent>
-				<Typography variant='body2' color='text.secondary'>
-					This impressive paella is a perfect party dish and a fun meal to cook
-					together with your guests. Add 1 cup of frozen peas along with the
-					mussels, if you like.
-				</Typography>
-			</CardContent>
-			<CardActions
-				sx={{
-					display: 'flex',
-					justifyContent: session ? 'space-between' : 'flex-end',
-					alignItems: 'center',
-				}}
-				disableSpacing>
-				{session && (
-					<IconButton
-						onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
-						aria-label='add to favorites'>
-						{favorited ? (
-							<FavoriteIcon fontSize='large' color='error' />
-						) : (
-							<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
-						)}
-					</IconButton>
-				)}
-				<TrophyLikesButton />
-				<Link className={styles.link} href={`/preppers/${id}`}>
-					<Button
-						sx={{
-							border: `1px solid ${colors.orangeAccent[900]}`,
-							color: colors.orangeAccent[400],
-							'&:hover': {
-								backgroundColor: colors.orangeAccent[900],
-								color: 'white',
-							},
-						}}>
-						View Details
-					</Button>
-				</Link>
-			</CardActions>
-			{errorMsg && (
-				<Alert
+		<motion.div whileHover={{ scale: 1.1 }}>
+			<Card className={styles.prepCard} key={id}>
+				<CardHeader
+					avatar={
+						<Avatar
+							sx={{ bgcolor: colors.orangeAccent[500] }}
+							aria-label='prepper'>
+							<Image
+								style={{ objectFit: 'fill', borderRadius: '50%' }}
+								src={avatar}
+								width={37}
+								height={37}
+								alt={`avatar for ${name}`}
+							/>
+						</Avatar>
+					}
+					action={
+						<IconButton aria-label='settings'>
+							<MoreVertIcon />
+						</IconButton>
+					}
+					title={name}
+					subheader={subTitle}
+				/>
+				<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
+				<CardContent>
+					<Typography variant='body2' color='text.secondary'>
+						This impressive paella is a perfect party dish and a fun meal to
+						cook together with your guests. Add 1 cup of frozen peas along with
+						the mussels, if you like.
+					</Typography>
+				</CardContent>
+				<CardActions
 					sx={{
-						width: '50%',
-						fontSize: 'larger',
+						display: 'flex',
+						justifyContent: session ? 'space-between' : 'flex-end',
+						alignItems: 'center',
 					}}
-					severity='error'>
-					{errorMsg}
-				</Alert>
-			)}
-		</Card>
+					disableSpacing>
+					{session && (
+						<IconButton
+							onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
+							aria-label='add to favorites'>
+							{favorited ? (
+								<FavoriteIcon fontSize='large' color='error' />
+							) : (
+								<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
+							)}
+						</IconButton>
+					)}
+					<TrophyLikesButton />
+					<Link className={styles.link} href={`/preppers/${id}`}>
+						<Button
+							sx={{
+								border: `1px solid ${colors.orangeAccent[900]}`,
+								color: colors.orangeAccent[400],
+								'&:hover': {
+									backgroundColor: colors.orangeAccent[900],
+									color: 'white',
+								},
+							}}>
+							View Details
+						</Button>
+					</Link>
+				</CardActions>
+				{errorMsg && (
+					<Alert
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+						}}
+						severity='error'>
+						{errorMsg}
+					</Alert>
+				)}
+			</Card>
+		</motion.div>
 	);
 }
