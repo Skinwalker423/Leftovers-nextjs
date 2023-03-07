@@ -6,7 +6,8 @@
 .prepCard {
 	margin: 50px;
 	text-decoration: none;
-	max-width: 500px;
+	max-width: 30rem;
+	min-width: 25rem;
 }
 
 .link {

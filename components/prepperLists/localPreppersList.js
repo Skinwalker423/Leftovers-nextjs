@@ -8,15 +8,16 @@ const LocalPreppersList = ({ localPreppers }) => {
 	if (!localPreppers.length) {
 		return;
 	}
-	const preppers = localPreppers.map((prepper) => {
+	const preppers = localPreppers.map(({ name, email, id, description }) => {
 		const avatar = 'https://i.pravatar.cc/300';
 		return (
 			<PrepperCard
-				title={prepper.name}
-				subTitle={prepper.email}
+				title={name}
+				subTitle={email}
 				avatar={avatar}
-				id={prepper.id}
-				key={prepper.id}
+				id={id}
+				key={id}
+				description={description}
 			/>
 		);
 	});

@@ -37,7 +37,6 @@ export default function PrepperCard({
 	const [favorited, setFavorited] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { data: session } = useSession();
-	const router = useRouter();
 	const {
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
@@ -122,15 +121,13 @@ export default function PrepperCard({
 				<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
 				<CardContent>
 					<Typography variant='body2' color='text.secondary'>
-						This impressive paella is a perfect party dish and a fun meal to
-						cook together with your guests. Add 1 cup of frozen peas along with
-						the mussels, if you like.
+						{description}
 					</Typography>
 				</CardContent>
 				<CardActions
 					sx={{
 						display: 'flex',
-						justifyContent: session ? 'space-between' : 'flex-end',
+						justifyContent: 'space-between',
 						alignItems: 'center',
 					}}
 					disableSpacing>
