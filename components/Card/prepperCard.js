@@ -18,7 +18,6 @@ import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
 import { useSession } from 'next-auth/react';
 import { Alert } from '@mui/material';
-import { useRouter } from 'next/router';
 import { UserContext } from '../../store/UserContext';
 import TrophyLikesButton from '../likes/trophyLikesButton';
 
@@ -64,8 +63,6 @@ export default function PrepperCard({
 		} catch (err) {
 			setErrorMsg('problem adding to favorites', err);
 		}
-
-		// return data;
 	}
 
 	async function handleRemoveFavBtn() {
@@ -95,7 +92,10 @@ export default function PrepperCard({
 
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
-			<Card className={styles.prepCard} key={id}>
+			<Card
+				sx={{ width: { xs: '80%', md: '100%' } }}
+				className={styles.prepCard}
+				key={id}>
 				<CardHeader
 					avatar={
 						<Avatar

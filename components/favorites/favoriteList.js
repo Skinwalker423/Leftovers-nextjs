@@ -12,9 +12,7 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 	return (
 		<Box
 			display={'flex'}
-			overflow='auto'
 			sx={{
-				overflowY: 'hidden',
 				height: {
 					xs: favRow ? '' : '30rem',
 					sm: favRow ? '' : '30rem',
