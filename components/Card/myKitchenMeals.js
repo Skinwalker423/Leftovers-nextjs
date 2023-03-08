@@ -38,7 +38,11 @@ export default function MyKitchenMealCard({
 			</CardContent>
 
 			<CardActions>
-				<Button onClick={handleRemoveMeal} size='small' color='error'>
+				<Button
+					onClick={handleRemoveMeal}
+					size='small'
+					color='error'
+					variant='contained'>
 					Remove
 				</Button>
 			</CardActions>

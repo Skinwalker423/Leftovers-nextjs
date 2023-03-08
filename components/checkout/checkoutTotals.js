@@ -6,6 +6,11 @@ import { useColors } from '../../hooks/useColors';
 const CheckoutTotals = () => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
+
+	const handlePayBtn = async () => {
+		//add number of served to prepper trophy icon
+	};
+
 	return (
 		<Box
 			display='flex'
@@ -32,7 +37,7 @@ const CheckoutTotals = () => {
 					width='100%'
 					alignItems='center'
 					justifyContent='space-between'>
-					<Button variant='contained' color='success'>
+					<Button onClick={handlePayBtn} variant='contained' color='success'>
 						Pay
 					</Button>
 					<Typography textAlign={'end'}>
