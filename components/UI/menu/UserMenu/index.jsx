@@ -21,7 +21,6 @@ const UserMenu = () => {
 	const userName = session?.user?.name;
 
 	const handleSignOut = () => {
-		console.log('clicked sign out');
 		signOut();
 	};
 
