@@ -93,7 +93,7 @@ export default function PrepperCard({
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
 			<Card
-				sx={{ width: { xs: '80%', md: '100%' } }}
+				sx={{ width: { xs: '95%', md: '100%' }, m: '2rem', maxWidth: '31em' }}
 				className={styles.prepCard}
 				key={id}>
 				<CardHeader

@@ -31,7 +31,7 @@ export async function getServerSideProps({ req, res }) {
 
 	return {
 		props: {
-			favoriteList: favoritePreppersList,
+			favoriteList: document.favorites || favoritePreppersList,
 			userSession: session,
 		},
 	};
