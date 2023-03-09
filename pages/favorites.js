@@ -31,7 +31,7 @@ export async function getServerSideProps({ req, res }) {
 
 	return {
 		props: {
-			favoriteList: document.favorites || favoritePreppersList,
+			favoriteList: favoritePreppersList,
 			userSession: session,
 		},
 	};
@@ -53,7 +53,10 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<title>Favorites</title>
 				<meta name='description' content='Your favorite preppers' />
 			</Head>
-			<main style={{ marginTop: '80px' }} className={styles.main}>
+			<main style={{ marginTop: '8rem' }} className={styles.main}>
+				<Typography color={'secondary'} variant='h1'>
+					Favorites
+				</Typography>
 				{!favoriteList.length && (
 					<Alert sx={{ mt: '2em' }} color='warning'>
 						<Typography variant='h1'>No Favorites added</Typography>
