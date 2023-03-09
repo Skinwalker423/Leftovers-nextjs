@@ -12,6 +12,9 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 	return (
 		<Box
 			display={'flex'}
+			flexWrap='wrap'
+			width={'100%'}
+			gap='3em'
 			sx={{
 				height: {
 					xs: favRow ? '' : '30rem',
@@ -20,7 +23,6 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 					lg: '',
 				},
 			}}
-			flexWrap='wrap'
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {
 				return (
