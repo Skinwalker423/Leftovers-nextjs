@@ -93,7 +93,11 @@ export default function PrepperCard({
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
 			<Card
-				sx={{ width: { xs: '95%', md: '100%' }, m: '2rem', maxWidth: '31em' }}
+				sx={{
+					width: { xs: '25rem', md: '25rem' },
+					m: '2rem',
+					maxWidth: '25rem',
+				}}
 				className={styles.prepCard}
 				key={id}>
 				<CardHeader
@@ -121,18 +125,12 @@ export default function PrepperCard({
 				<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
 				<CardContent>
 					<Typography
-						sx={{ maxHeight: '5rem', overflowY: 'auto', overflowY: 'hidden' }}
+						sx={{
+							maxHeight: '5rem',
+							height: '5rem',
+						}}
 						variant='body2'
 						color='text.secondary'>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book. It has survived not
-						only five centuries, but also the leap into electronic typesetting,
-						remaining essentially unchanged. It was popularised in the 1960s
-						with the release of Letraset sheets containing Lorem Ipsum passages,
-						and more recently with desktop publishing software like Aldus
-						PageMaker including versions of Lorem Ipsum.
 						{description}
 					</Typography>
 				</CardContent>
