@@ -166,6 +166,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							type='text'
 							label='Kitchen Name'
 							required
+							inputProps={{ maxLength: '50' }}
 							placeholder="Dana's Delightful Deserts"
 							inputRef={kitchenTitleRef}
 							color='secondary'
@@ -178,6 +179,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							multiline
 							maxRows={3}
 							required
+							inputProps={{ maxLength: '255' }}
 							color='secondary'
 							inputRef={descriptionRef}
 							label='Description of your meals'

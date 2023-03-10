@@ -93,7 +93,11 @@ export default function PrepperCard({
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
 			<Card
-				sx={{ width: { xs: '95%', md: '100%' }, m: '2rem', maxWidth: '31em' }}
+				sx={{
+					width: { xs: '25rem', md: '25rem' },
+					m: '2rem',
+					maxWidth: '25rem',
+				}}
 				className={styles.prepCard}
 				key={id}>
 				<CardHeader
@@ -120,7 +124,13 @@ export default function PrepperCard({
 				/>
 				<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
 				<CardContent>
-					<Typography variant='body2' color='text.secondary'>
+					<Typography
+						sx={{
+							maxHeight: '5rem',
+							height: '5rem',
+						}}
+						variant='body2'
+						color='text.secondary'>
 						{description}
 					</Typography>
 				</CardContent>
