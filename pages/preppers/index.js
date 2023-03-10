@@ -77,12 +77,13 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 							isFavorited={favorited}
 							className={styles.prepCard}
 							key={prepper.id}
-							name={prepper.name}
+							name={prepper.kitchenTitle}
 							email={prepper.email}
-							subTitle={'Homecooking genius'}
+							subTitle={prepper.name}
 							avatar={avatar}
 							id={prepper.id}
 							userEmail={userEmail ? userEmail : ''}
+							description={prepper.description}
 						/>
 					);
 				})}
