@@ -3,7 +3,7 @@ import { UserContext } from '../../store/UserContext';
 import { Box, Typography, Button } from '@mui/material';
 import CartItem from './cartItem';
 
-const CartItemList = () => {
+const CartItemList = ({ checkout }) => {
 	const { state } = useContext(UserContext);
 	const { userCartlist } = state;
 	if (!userCartlist) {
@@ -32,7 +32,7 @@ const CartItemList = () => {
 			display={'flex'}
 			overflow='auto'
 			flexDirection='column'
-			justifyContent='flex-start'>
+			justifyContent={checkout ? 'center' : 'flex-start'}>
 			<Typography sx={{ my: '2em' }} textAlign={'center'} variant='h2'>
 				Meals
 			</Typography>
