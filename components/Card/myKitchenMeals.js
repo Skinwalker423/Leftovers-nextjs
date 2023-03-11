@@ -28,6 +28,11 @@ export default function MyKitchenMealCard({
 		}
 	};
 
+	const handleOutOfStock = () => {
+		//add banner to meal card
+		console.log('meal out of stock');
+	};
+
 	return (
 		<Card key={id} sx={{ maxWidth: 345 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
@@ -44,6 +49,13 @@ export default function MyKitchenMealCard({
 					color='error'
 					variant='contained'>
 					Remove
+				</Button>
+				<Button
+					onClick={handleOutOfStock}
+					size='small'
+					color='warning'
+					variant='contained'>
+					Out of Stock
 				</Button>
 			</CardActions>
 		</Card>

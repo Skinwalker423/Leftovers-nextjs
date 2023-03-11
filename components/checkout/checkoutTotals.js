@@ -15,10 +15,12 @@ const CheckoutTotals = () => {
 		<Box
 			display='flex'
 			flexDirection={'column'}
+			height='100vh'
 			alignItems='center'
-			justifyContent='flex-start'
+			justifyContent='space-evenly'
 			width='100%'
-			p='20px'>
+			sx={{ borderLeft: `1px solid ${colors.orangeAccent[900]}` }}
+			p='5rem'>
 			<Box>
 				<Typography variant='h2'>
 					Total costs with shipping and handling
@@ -36,7 +38,7 @@ const CheckoutTotals = () => {
 					display={'flex'}
 					width='100%'
 					alignItems='center'
-					justifyContent='space-between'>
+					justifyContent='space-evenly'>
 					<Button onClick={handlePayBtn} variant='contained' color='success'>
 						Pay
 					</Button>

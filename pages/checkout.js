@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 import CheckoutList from '../components/checkout/checkoutList';
 import CheckoutTotals from '../components/checkout/checkoutTotals';
 
@@ -11,6 +11,7 @@ const Checkout = () => {
 			height='100vh'
 			justifyContent={'space-evenly'}>
 			<CheckoutList />
+			<Divider />
 			<CheckoutTotals />
 		</Box>
 	);
