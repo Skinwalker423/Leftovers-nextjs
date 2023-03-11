@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 const CheckoutList = () => {
 	return (
 		<Box width={'100%'} p='20px'>
-			<CartItemList />
+			<CartItemList checkout={true} />
 		</Box>
 	);
 };
