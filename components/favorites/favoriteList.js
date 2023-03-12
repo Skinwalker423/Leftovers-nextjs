@@ -25,12 +25,12 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 			}}
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {
+				console.log(prepper);
 				return (
 					<PrepperCard
 						key={prepper.id}
 						isFavorited={true}
 						name={prepper.name}
-						subTitle={prepper.email}
 						avatar={avatar}
 						id={prepper.id}
 						userEmail={userEmail}

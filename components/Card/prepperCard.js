@@ -17,7 +17,7 @@ import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
 import { useSession } from 'next-auth/react';
-import { Alert } from '@mui/material';
+import { Alert, Tooltip } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import TrophyLikesButton from '../likes/trophyLikesButton';
 
@@ -142,17 +142,21 @@ export default function PrepperCard({
 					}}
 					disableSpacing>
 					{session && (
-						<IconButton
-							onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
-							aria-label='add to favorites'>
-							{favorited ? (
-								<FavoriteIcon fontSize='large' color='error' />
-							) : (
-								<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
-							)}
-						</IconButton>
+						<Tooltip title='Add to Favorites'>
+							<IconButton
+								onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
+								aria-label='add to favorites'>
+								{favorited ? (
+									<FavoriteIcon fontSize='large' color='error' />
+								) : (
+									<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
+								)}
+							</IconButton>
+						</Tooltip>
 					)}
+
 					<TrophyLikesButton />
+
 					<Link className={styles.link} href={`/preppers/${id}`}>
 						<Button
 							sx={{
