@@ -23,6 +23,7 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 					md: '',
 					lg: '',
 				},
+				overflowY: 'auto',
 			}}
 			className={styles.prepCardContainer}>
 			{favoriteList.map((prepper) => {
