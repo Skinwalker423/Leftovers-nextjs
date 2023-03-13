@@ -132,6 +132,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 			<main className={styles.main}>
 				{localPreppers.length !== 0 && (
 					<CategoryBanner
+						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
 						<LocalPreppersList localPreppers={localPreppers} />
@@ -139,6 +140,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 				)}
 				{favoriteList.length !== 0 && (foundSession || session) && (
 					<CategoryBanner
+						link='/favorites'
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
 						<FavoriteList

@@ -23,7 +23,12 @@ const LocalPreppersList = ({ localPreppers }) => {
 	});
 
 	return (
-		<Box className={styles.prepCardContainer} display={'flex'} flexWrap='wrap'>
+		<Box
+			className={styles.prepCardContainer}
+			sx={{ overflowX: { xs: 'hidden' } }}
+			display={'flex'}
+			flexDirection={{ xs: 'column', md: 'row' }}
+			flexWrap={{ xs: 'none', md: 'wrap' }}>
 			{localPreppers && localPreppers.length !== 0 && preppers}
 		</Box>
 	);
