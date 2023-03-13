@@ -12,9 +12,10 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 	return (
 		<Box
 			display={'flex'}
-			flexWrap='wrap'
+			flexWrap={{ xs: 'unset', md: 'wrap' }}
 			width={'100%'}
 			gap='3em'
+			mb={'1em'}
 			sx={{
 				height: {
 					xs: favRow ? '' : '30rem',
@@ -34,6 +35,7 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 						avatar={avatar}
 						id={prepper.id}
 						userEmail={userEmail}
+						description={prepper.description}
 					/>
 				);
 			})}

@@ -50,6 +50,7 @@ export default function PrepperCard({
 		id,
 		name,
 		email,
+		description,
 	};
 
 	async function handleAddFavBtn() {
@@ -91,12 +92,13 @@ export default function PrepperCard({
 	}
 
 	return (
-		<motion.div whileHover={{ scale: 1.1 }}>
+		<motion.div whileHover={{ scale: 1.05 }}>
 			<Card
 				sx={{
-					width: { xs: '25rem', md: '25rem' },
+					width: { xs: '80%', sm: '20rem', md: '25rem' },
 					m: '2rem',
 					maxWidth: '25rem',
+					height: '27rem',
 				}}
 				className={styles.prepCard}
 				key={id}>
