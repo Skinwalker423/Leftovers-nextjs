@@ -179,7 +179,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							multiline
 							maxRows={3}
 							required
-							inputProps={{ maxLength: '255' }}
+							inputProps={{ maxLength: '240' }}
 							color='secondary'
 							inputRef={descriptionRef}
 							label='Description of your meals'
