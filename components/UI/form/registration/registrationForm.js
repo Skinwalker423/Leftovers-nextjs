@@ -62,6 +62,10 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			setErrorMsg('password does not match');
 			return;
 		}
+		if (description.length > 240) {
+			setErrorMsg('Description is more than 240 characters');
+			return;
+		}
 
 		const formBody = {
 			firstName,
