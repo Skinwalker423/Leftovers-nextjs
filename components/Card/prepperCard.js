@@ -91,6 +91,9 @@ export default function PrepperCard({
 		}
 	}
 
+	const lorem =
+		'Vestibulum condimentum sed leo at posuere. Nunc leo neque, commodo a placerat vel, consequat elementum quam. Sed dictum ac urna at bibendum. Phasellus enim tellus, dictum ut vestibulum et, blandit at diam. Donec aliquam ut magna ac auctor.';
+
 	return (
 		<motion.div whileHover={{ scale: 1.05 }}>
 			<Card
@@ -98,7 +101,7 @@ export default function PrepperCard({
 					width: { xs: '80%', sm: '20rem', md: '25rem' },
 					m: '2rem',
 					maxWidth: '25rem',
-					height: '27rem',
+					height: '26rem',
 				}}
 				className={styles.prepCard}
 				key={id}>
@@ -128,12 +131,12 @@ export default function PrepperCard({
 				<CardContent>
 					<Typography
 						sx={{
-							maxHeight: '5rem',
-							height: '5rem',
+							maxHeight: '3.5rem',
+							height: '3.5rem',
 						}}
 						variant='body2'
 						color='text.secondary'>
-						{description}
+						{lorem}
 					</Typography>
 				</CardContent>
 				<CardActions

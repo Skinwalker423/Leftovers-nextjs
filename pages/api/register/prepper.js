@@ -13,11 +13,15 @@ const prepper = async (req, res) => {
 	const isValidEmail = validateEmail(email);
 	const isValidZip = isValidZipCode(zipcode);
 	if (!isValidEmail) {
-		res.status(422).json({ message: 'invalid email' });
+		res.status(422).json({ error: 'invalid email' });
 		return;
 	}
 	if (!isValidZip) {
-		res.status(422).json({ message: 'invalid zipcode' });
+		res.status(422).json({ error: 'invalid zipcode' });
+		return;
+	}
+	if (description.length > 240 || kitchenTitle.length > 50) {
+		res.status(422).json({ error: 'Description or title is too long' });
 		return;
 	}
 
@@ -78,7 +82,7 @@ const prepper = async (req, res) => {
 				.json({ message: 'something went wrong with connecting to mongodb' });
 		}
 	} else {
-		res.status(400).json({ message: 'invalid request' });
+		res.status(400).json({ error: 'invalid request' });
 	}
 };
 

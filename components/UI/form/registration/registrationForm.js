@@ -62,6 +62,10 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			setErrorMsg('password does not match');
 			return;
 		}
+		if (description.length > 240) {
+			setErrorMsg('Description is more than 240 characters');
+			return;
+		}
 
 		const formBody = {
 			firstName,
@@ -179,7 +183,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							multiline
 							maxRows={3}
 							required
-							inputProps={{ maxLength: '255' }}
+							inputProps={{ maxLength: '240' }}
 							color='secondary'
 							inputRef={descriptionRef}
 							label='Description of your meals'
