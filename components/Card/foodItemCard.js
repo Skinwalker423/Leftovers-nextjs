@@ -1,13 +1,18 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { IconButton } from '@mui/material';
-import { Box, Typography, Stack } from '@mui/material';
+import {
+	Box,
+	Typography,
+	Stack,
+	IconButton,
+	CardActions,
+	CardContent,
+	CardMedia,
+	Tooltip,
+	Button,
+	Card,
+} from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -66,14 +71,17 @@ export default function FoodItemCard({
 						</Box>
 						<Typography variant='body2'>{description}</Typography>
 					</CardContent>
-					<CardActions>
-						<IconButton onClick={handleFavorite} size='small'>
-							{favorited ? (
-								<FavoriteIcon color='error' />
-							) : (
-								<FavoriteBorderOutlinedIcon />
-							)}
-						</IconButton>
+					<CardActions
+						sx={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Tooltip title='Like this meal'>
+							<IconButton onClick={handleFavorite} size='small'>
+								{favorited ? (
+									<FavoriteIcon color='error' />
+								) : (
+									<FavoriteBorderOutlinedIcon />
+								)}
+							</IconButton>
+						</Tooltip>
 						<Button
 							variant='contained'
 							color='success'
