@@ -59,7 +59,7 @@ const myKitchen = ({ userData, prepper }) => {
 
 	const mealsList = meals.map(({ title, id, description }) => {
 		return (
-			<Box key={id}>
+			<Box key={id} mb='2em'>
 				<MyKitchenMealCard
 					key={id}
 					foodItem={title}
@@ -76,13 +76,13 @@ const myKitchen = ({ userData, prepper }) => {
 	return (
 		<Box
 			width='100%'
-			// height={'90%'}
+			height={'100%'}
 			display={'flex'}
-			flexDirection={{ xs: 'column', lg: 'row' }}
-			justifyContent='center'
+			flexDirection={{ xs: 'column', md: 'row' }}
+			justifyContent={{ xs: 'flex-start' }}
 			alignItems={'center'}>
 			<ResponsiveDrawer />
-			<Box width={{ xs: '70%', lg: '80%' }} mt={'6em'}>
+			<Box mx={'1rem'} width={{ xs: '70%', sm: '60%', md: '40%' }} mt={'6em'}>
 				<InfoCard>
 					{image ? (
 						<Image
@@ -130,21 +130,26 @@ const myKitchen = ({ userData, prepper }) => {
 					</Button>
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
-				{showMeals && (
-					<AnimatePresence>
-						<motion.div
-							key={'meals'}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ type: 'spring', delay: 0.2 }}
-							exit={{ opacity: 0 }}>
-							<Box mt={'2em'} gap='2em' display={'flex'} flexWrap='wrap'>
-								{mealsList}
-							</Box>
-						</motion.div>
-					</AnimatePresence>
-				)}
 			</Box>
+			{!showMeals && (
+				<AnimatePresence>
+					<motion.div
+						key={'meals'}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						transition={{ type: 'spring', delay: 0.2 }}
+						exit={{ opacity: 0 }}>
+						<Box
+							width={'100%'}
+							mt={'2em'}
+							gap='2em'
+							display={'flex'}
+							flexWrap='wrap'>
+							{mealsList}
+						</Box>
+					</motion.div>
+				</AnimatePresence>
+			)}
 		</Box>
 	);
 };
