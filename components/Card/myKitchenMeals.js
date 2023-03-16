@@ -33,6 +33,11 @@ export default function MyKitchenMealCard({
 		console.log('meal out of stock');
 	};
 
+	const handleQtyUpdate = () => {
+		//adjust qty in bd
+		console.log('updated qty');
+	};
+
 	return (
 		<Card key={id} sx={{ maxWidth: 345 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
@@ -56,6 +61,13 @@ export default function MyKitchenMealCard({
 					color='warning'
 					variant='contained'>
 					Out of Stock
+				</Button>
+				<Button
+					onClick={handleQtyUpdate}
+					size='small'
+					color='success'
+					variant='contained'>
+					Quantity
 				</Button>
 			</CardActions>
 		</Card>
