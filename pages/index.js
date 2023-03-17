@@ -26,7 +26,6 @@ import { ACTION_TYPES } from '../store/UserContext';
 export async function getServerSideProps({ req, res }) {
 	const session = await unstable_getServerSession(req, res, authOptions);
 	const foundSession = session ? session : null;
-	console.log('this is the session:', session);
 	const client = session && (await connectMongoDb());
 	const user =
 		session &&
