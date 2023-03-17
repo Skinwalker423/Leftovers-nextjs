@@ -5,9 +5,14 @@ import {
 	Typography,
 	Button,
 	TextField,
+	MenuItem,
+	Select,
+	FormControl,
+	InputLabel,
 	CircularProgress,
 	Alert,
 } from '@mui/material';
+
 import { useColors } from '../../../../hooks/useColors';
 import { addMeal } from '../../../../utils/meals';
 
@@ -18,11 +23,22 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [imageFile, setImageFile] = useState(null);
 	const [error, setError] = useState('');
+	const [cost, setCost] = useState(0);
 	const { colors } = useColors();
 
 	const titleRef = useRef();
 	const descriptionRef = useRef();
-	const priceRef = useRef();
+	const qtyRef = useRef();
+
+	const costArray = [0, 5, 10, 15, 20];
+
+	const costList = costArray.map((cost) => {
+		return (
+			<MenuItem key={cost} value={cost}>
+				$ {cost}
+			</MenuItem>
+		);
+	});
 
 	const style = {
 		position: 'absolute',
@@ -38,6 +54,10 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		p: 4,
 	};
 
+	const handlePriceChange = (e) => {
+		setCost(e.target.value);
+	};
+
 	const handleFileChange = (e) => {
 		console.log(e.target.files[0]);
 		setImageFile(e.target.files[0]);
@@ -51,9 +71,11 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 
 		const mealDetails = {
 			title: titleRef.current.value,
-			price: parseInt(priceRef.current.value),
+			price: parseInt(cost),
 			description: descriptionRef.current.value,
 			image: '',
+			qty: qtyRef.current.value,
+			soldOut: false,
 		};
 
 		console.log(mealDetails);
@@ -110,17 +132,34 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 									inputRef={titleRef}
 								/>
 							</Box>
-							<Box>
-								<TextField
-									id='price'
-									type='number'
-									label='Price'
-									required
-									placeholder='$4.99'
-									color='secondary'
-									fullWidth
-									inputRef={priceRef}
-								/>
+							<Box display={'flex'} justifyContent='space-between'>
+								<Box width={'45%'}>
+									<TextField
+										id='qty'
+										type='number'
+										label='Number of meals on hand'
+										required
+										placeholder='5'
+										color='secondary'
+										fullWidth
+										inputRef={qtyRef}
+									/>
+								</Box>
+								<Box width={'45%'}>
+									<FormControl fullWidth>
+										<InputLabel id='price'>Price</InputLabel>
+										<Select
+											labelId='price'
+											id='price'
+											label='Price'
+											value={cost}
+											required
+											defaultValue={5}
+											onChange={handlePriceChange}>
+											{costList}
+										</Select>
+									</FormControl>
+								</Box>
 							</Box>
 							<Button variant='contained' color='secondary' component='label'>
 								Upload Pic of Meal
