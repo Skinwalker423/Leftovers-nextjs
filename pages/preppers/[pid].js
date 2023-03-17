@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Paper, IconButton, Alert } from '@mui/material';
+import { Box, Typography, Paper, Alert } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
@@ -119,7 +119,7 @@ const Prepper = ({ prepper }) => {
 			</Box>
 			{meals.length !== 0 ? (
 				<Box display={'flex'} width='70%'>
-					{meals.map(({ price, image, description, title, id }) => {
+					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
 							<Box key={id} width='100%' height={'500px'}>
 								<FoodItemCard
@@ -129,7 +129,7 @@ const Prepper = ({ prepper }) => {
 									price={price}
 									description={description}
 									id={id}
-									qty={1}
+									qty={qty}
 									setMsg={setMsg}
 								/>
 							</Box>
