@@ -11,6 +11,7 @@ import {
 	CardMedia,
 	Tooltip,
 	Button,
+	Alert,
 	Card,
 } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
@@ -52,24 +53,37 @@ export default function FoodItemCard({
 
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
-			<Card sx={{ maxWidth: 345, height: '300px' }}>
+			<Card sx={{ maxWidth: 375, height: '28rem' }}>
 				<CardMedia sx={{ height: '50%' }} image={image} title={foodItem} />
 				<Stack sx={{ height: '50%' }} justifyContent='space-between'>
-					<CardContent>
-						<Box display='flex' justifyContent={'space-between'}>
-							<Typography
-								color={'secondary'}
-								gutterBottom
-								variant='h5'
-								component='div'>
-								{foodItem}
-							</Typography>
+					<CardContent
+						sx={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-between',
+							height: '100%',
+						}}>
+						<Box>
+							<Box display='flex' justifyContent={'space-between'}>
+								<Typography
+									color={'secondary'}
+									gutterBottom
+									variant='h5'
+									component='div'>
+									{foodItem}
+								</Typography>
 
-							<Typography gutterBottom variant='h5' component='div'>
-								${price}
-							</Typography>
+								<Typography gutterBottom variant='h5' component='div'>
+									${price}
+								</Typography>
+							</Box>
+							<Box>
+								<Typography variant='body2'>{description}</Typography>
+							</Box>
 						</Box>
-						<Typography variant='body2'>{description}</Typography>
+						<Box>
+							<Alert>Only {qty} left</Alert>
+						</Box>
 					</CardContent>
 					<CardActions
 						sx={{ display: 'flex', justifyContent: 'space-between' }}>
