@@ -53,9 +53,9 @@ export default function FoodItemCard({
 
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
-			<Card sx={{ maxWidth: 375, height: '28rem' }}>
-				<CardMedia sx={{ height: '50%' }} image={image} title={foodItem} />
-				<Stack sx={{ height: '50%' }} justifyContent='space-between'>
+			<Card sx={{ maxWidth: 375, height: '26rem' }}>
+				<CardMedia sx={{ height: '45%' }} image={image} title={foodItem} />
+				<Stack sx={{ height: '55%' }} justifyContent='space-between'>
 					<CardContent
 						sx={{
 							display: 'flex',

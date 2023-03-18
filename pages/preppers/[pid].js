@@ -83,7 +83,7 @@ const Prepper = ({ prepper }) => {
 				<meta name='description' content={prepper.description} />
 			</Head>
 			<Box
-				m='100px 0'
+				mt='100px'
 				display='flex'
 				flexDirection={'column'}
 				width='100%'
@@ -118,7 +118,11 @@ const Prepper = ({ prepper }) => {
 				</Paper>
 			</Box>
 			{meals.length !== 0 ? (
-				<Box display={'flex'} width='70%'>
+				<Box
+					display={'flex'}
+					mt='2rem'
+					flexDirection={{ xs: 'column', lg: 'row' }}
+					width='70%'>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
 							<Box key={id} width='100%' height={'500px'}>
