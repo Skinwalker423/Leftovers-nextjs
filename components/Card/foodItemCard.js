@@ -82,7 +82,9 @@ export default function FoodItemCard({
 							</Box>
 						</Box>
 						<Box>
-							<Alert>Only {qty} left</Alert>
+							<Alert color={qty > 3 ? 'success' : 'error'}>
+								{`${qty > 3 ? '' : 'Only'} ${qty} left`}
+							</Alert>
 						</Box>
 					</CardContent>
 					<CardActions
