@@ -82,9 +82,13 @@ export default function FoodItemCard({
 							</Box>
 						</Box>
 						<Box>
-							<Alert color={qty > 3 ? 'success' : 'error'}>
-								{`${qty > 3 ? '' : 'Only'} ${qty} left`}
-							</Alert>
+							{qty == 0 ? (
+								<Alert color='error'>SOLD OUT</Alert>
+							) : (
+								<Alert color={qty > 3 ? 'success' : 'warning'}>
+									{`${qty > 3 ? '' : 'Only'} ${qty} left`}
+								</Alert>
+							)}
 						</Box>
 					</CardContent>
 					<CardActions
@@ -101,6 +105,7 @@ export default function FoodItemCard({
 						<Button
 							variant='contained'
 							color='success'
+							disabled={qty == 0}
 							onClick={handleAddCartItem}
 							size='small'>
 							Add to Cart
