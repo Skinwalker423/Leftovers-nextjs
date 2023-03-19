@@ -6,6 +6,10 @@ import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
 import Head from 'next/head';
 import Image from 'next/image';
+import {
+	findAllInCollection,
+	connectMongoDb,
+} from '../../db/mongodb/mongoDbUtils';
 
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import TrophyLikesButton from '../../components/likes/trophyLikesButton';
@@ -27,12 +31,15 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
 	const listofBannerKitchens = ['1', '2', '3'];
+	const client = await connectMongoDb();
+	const allPreppers = await findAllInCollection(client, 'preppers');
 
-	const paths = listofBannerKitchens.map((prepperId) => ({
-		params: { pid: prepperId },
+	const paths = allPreppers.map(({ id }) => ({
+		params: { pid: id },
 	}));
+	console.log('paths', paths);
 
-	return { paths, fallback: 'blocking' };
+	return { paths, fallback: false };
 }
 
 const Prepper = ({ prepper }) => {
