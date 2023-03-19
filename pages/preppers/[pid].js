@@ -30,14 +30,12 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-	const listofBannerKitchens = ['1', '2', '3'];
 	const client = await connectMongoDb();
 	const allPreppers = await findAllInCollection(client, 'preppers');
 
 	const paths = allPreppers.map(({ id }) => ({
 		params: { pid: id },
 	}));
-	console.log('paths', paths);
 
 	return { paths, fallback: false };
 }
@@ -98,7 +96,7 @@ const Prepper = ({ prepper }) => {
 				alignItems='center'>
 				<Paper
 					sx={{
-						width: '70%',
+						width: { xs: '100%', lg: '70%' },
 						height: '50vh',
 						p: '1em',
 						position: 'relative',
@@ -128,11 +126,13 @@ const Prepper = ({ prepper }) => {
 				<Box
 					display={'flex'}
 					mt='2rem'
-					flexDirection={{ xs: 'column', lg: 'row' }}
-					width='70%'>
+					flexWrap={'wrap'}
+					gap={10}
+					justifyContent={'center'}
+					width={{ xs: '100%', lg: '70%' }}>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
-							<Box key={id} width='100%' height={'500px'}>
+							<Box key={id} width={375}>
 								<FoodItemCard
 									key={title}
 									foodItem={title}
