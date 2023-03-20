@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Button } from '@mui/material';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ import {
 } from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await getServerSession(req, res, authOptions);
 
 	if (!session) {
 		return {

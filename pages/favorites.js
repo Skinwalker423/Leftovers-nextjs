@@ -11,11 +11,11 @@ import {
 	connectMongoDb,
 	findExistingUserEmail,
 } from '../db/mongodb/mongoDbUtils';
-import { unstable_getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 
 export async function getServerSideProps({ req, res }) {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await getServerSession(req, res, authOptions);
 	if (!session) {
 		return {
 			redirect: {
