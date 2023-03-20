@@ -226,7 +226,6 @@ export async function findLocalPreppersWithZipcode(client, zipcode) {
 			console.log('no data found with zipcode query');
 			return [];
 		}
-		console.log(`preppers found: ${data}:`);
 		const mappedDoc = data.map(
 			({ _id, firstName, lastName, email, description, kitchenTitle }) => {
 				return {
@@ -238,11 +237,34 @@ export async function findLocalPreppersWithZipcode(client, zipcode) {
 				};
 			}
 		);
-		console.log(mappedDoc);
 		client.close();
 		return mappedDoc;
 	} catch (err) {
 		client.close();
 		console.error('problem retrieving preppers from db', err);
+	}
+}
+
+export async function updateMealQty(client, userEmail, mealId, qty) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail,
+				meals: { id: mealId },
+			},
+			{
+				$set: { qty: qty },
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log(`qty adjusted`, document);
+		return document;
+	} catch (err) {
+		console.error('problem updating qty', err);
+		return;
 	}
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import PrepperCard from '../../components/Card/prepperCard';
-import { unstable_getServerSession } from 'next-auth/next';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { mockDataContacts } from '../../db/mockData';
 import Head from 'next/head';
@@ -16,7 +16,7 @@ export async function getServerSideProps({ req, res }) {
 	try {
 		const client = await connectMongoDb();
 		const allPreppers = await findAllInCollection(client, 'preppers');
-		const session = await unstable_getServerSession(req, res, authOptions);
+		const session = await getServerSession(req, res, authOptions);
 
 		if (!session) {
 			return {
