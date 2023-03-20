@@ -125,7 +125,7 @@ const Prepper = ({ prepper }) => {
 			{meals.length !== 0 ? (
 				<Box
 					display={'flex'}
-					mt='2rem'
+					my='2rem'
 					flexWrap={'wrap'}
 					gap={10}
 					justifyContent={'center'}

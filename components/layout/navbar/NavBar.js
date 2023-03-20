@@ -63,6 +63,7 @@ const NavBar = () => {
 			position={'fixed'}
 			justifyContent='space-between'
 			alignItems='center'
+			height='5rem'
 			top='0'
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
@@ -80,7 +81,7 @@ const NavBar = () => {
 						alt='Leftovers icon'
 					/>
 				</Link>
-				<Box width={'500px'} className={styles.navBar}>
+				<Box width={'500px'} height='3rem' className={styles.navBar}>
 					<nav>
 						<ul
 							style={{
