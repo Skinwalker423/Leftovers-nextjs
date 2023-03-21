@@ -251,11 +251,9 @@ export async function updateMealQty(client, userEmail, mealId, qty) {
 		const document = await collection.updateOne(
 			{
 				email: userEmail,
-				meals: { id: mealId },
+				'meals.id': mealId,
 			},
-			{
-				$set: { qty: qty },
-			}
+			{ $set: { 'meals.$.qty': qty } }
 		);
 
 		if (!document) {
