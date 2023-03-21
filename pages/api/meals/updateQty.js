@@ -8,12 +8,14 @@ const updateQty = async (req, res) => {
 	const body = req.body;
 	console.log(body);
 	const { mealId, email, qty } = body;
-	console.log('mealid and email and qty', mealId, email, qty);
+
+	if (typeof parseInt(qty) !== 'number') {
+		res.status(400).json({ error: 'not a number' });
+	}
 
 	try {
 		const client = await connectMongoDb();
 		const document = await updateMealQty(client, email, mealId, qty);
-		console.log('this is the response to update meal qty in mongo:', document);
 
 		if (!document || !document.modifiedCount) {
 			client.close();

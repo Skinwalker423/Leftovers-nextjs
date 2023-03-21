@@ -3,9 +3,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { removeMeal } from '../../utils/meals';
 import { updateMealQtyInDb } from '../../utils/meals';
+import UpdateQtyForm from '../UI/form/mykitchen/updateQtyForm';
 
 export default function MyKitchenMealCard({
 	foodItem = 'Food Item',
@@ -30,24 +32,23 @@ export default function MyKitchenMealCard({
 		}
 	};
 
-	const handleOutOfStock = () => {
+	const handleOutOfStock = async () => {
 		//add banner to meal card
-		console.log('meal out of stock');
-	};
-
-	const handleQtyUpdate = async () => {
-		//adjust qty in bd
-		const data = await updateMealQtyInDb(prepperEmail, id, 9);
+		const data = await updateMealQtyInDb(prepperEmail, id, 0);
 		if (data.message) {
-			console.log('updated qty');
+			console.log('meal out of stock');
 			setMsg(data.message);
 		} else if (data.error) {
 			setError(data.error);
 		}
 	};
 
+	const handleQtyUpdate = async () => {
+		//adjust qty in bd
+	};
+
 	return (
-		<Card key={id} sx={{ maxWidth: 345 }}>
+		<Card key={id} sx={{ width: 350 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
 			<CardContent>
 				<Typography gutterBottom variant='h5' component='div'>
@@ -56,27 +57,30 @@ export default function MyKitchenMealCard({
 			</CardContent>
 
 			<CardActions>
-				<Button
-					onClick={handleRemoveMeal}
-					size='small'
-					color='error'
-					variant='contained'>
-					Remove
-				</Button>
-				<Button
-					onClick={handleOutOfStock}
-					size='small'
-					color='warning'
-					variant='contained'>
-					Out of Stock
-				</Button>
-				<Button
+				<Box width='100%' display={'flex'} justifyContent='space-evenly'>
+					<Button
+						onClick={handleRemoveMeal}
+						size='small'
+						color='error'
+						variant='contained'>
+						Remove
+					</Button>
+					<Button
+						onClick={handleOutOfStock}
+						size='small'
+						color='warning'
+						variant='contained'>
+						Out of Stock
+					</Button>
+					<UpdateQtyForm email={prepperEmail} mealId={id} setMsg={setMsg} />
+					{/* <Button
 					onClick={handleQtyUpdate}
 					size='small'
 					color='success'
 					variant='contained'>
 					Quantity
-				</Button>
+				</Button> */}
+				</Box>
 			</CardActions>
 		</Card>
 	);
