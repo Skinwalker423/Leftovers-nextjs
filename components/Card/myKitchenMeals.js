@@ -5,6 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { removeMeal } from '../../utils/meals';
+import { updateMealQtyInDb } from '../../utils/meals';
 
 export default function MyKitchenMealCard({
 	foodItem = 'Food Item',
@@ -14,6 +15,7 @@ export default function MyKitchenMealCard({
 	id,
 	qty = 1,
 	setMsg,
+	setError,
 	prepperEmail,
 	setMeals,
 }) {
@@ -33,9 +35,15 @@ export default function MyKitchenMealCard({
 		console.log('meal out of stock');
 	};
 
-	const handleQtyUpdate = () => {
+	const handleQtyUpdate = async () => {
 		//adjust qty in bd
-		console.log('updated qty');
+		const data = await updateMealQtyInDb(prepperEmail, id, 9);
+		if (data.message) {
+			console.log('updated qty');
+			setMsg(data.message);
+		} else if (data.error) {
+			setError(data.error);
+		}
 	};
 
 	return (

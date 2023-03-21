@@ -5,6 +5,7 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Button } from '@mui/material';
 import Image from 'next/image';
 import SuccessAlert from '../components/UI/alert/successAlert';
+import ErrorAlert from '../components/UI/alert/ErrorAlert';
 import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
@@ -49,6 +50,7 @@ export async function getServerSideProps({ req, res }) {
 
 const myKitchen = ({ userData, prepper }) => {
 	const [msg, setMsg] = useState('');
+	const [error, setError] = useState('');
 	const { name = 'User', email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
 	const [meals, setMeals] = useState(prepper.meals);
@@ -65,6 +67,7 @@ const myKitchen = ({ userData, prepper }) => {
 					foodItem={title}
 					description={description}
 					setMsg={setMsg}
+					setError={setError}
 					prepperEmail={prepper.email}
 					id={id}
 					setMeals={setMeals}
@@ -133,6 +136,7 @@ const myKitchen = ({ userData, prepper }) => {
 					</Button>
 				</InfoCard>
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+				{error && <ErrorAlert error={error} setError={setError} />}
 			</Box>
 			{showMeals && (
 				<AnimatePresence>
