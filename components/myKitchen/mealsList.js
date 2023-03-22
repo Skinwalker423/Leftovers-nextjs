@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MyKitchenMealCard from '../Card/myKitchenMeals';
 import Box from '@mui/material/Box';
 
-function MealsList({ meals, prepperEmail, setMeals }) {
+function MealsList({ meals, prepperEmail, setMeals, setMsg, setError }) {
 	const mealsList = meals.map(({ title, id, description }) => {
 		return (
 			<Box key={id} mb='2em'>
