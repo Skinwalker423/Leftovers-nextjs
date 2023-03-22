@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import { Box, Typography, Button } from '@mui/material';
@@ -10,11 +9,12 @@ import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
-import MyKitchenMealCard from '../components/Card/myKitchenMeals';
+
 import {
 	connectMongoDb,
 	findExistingPrepperEmail,
 } from '../db/mongodb/mongoDbUtils';
+import MealsList from '../components/myKitchen/mealsList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -59,23 +59,6 @@ const myKitchen = ({ userData, prepper }) => {
 		setShowMeals((bool) => !bool);
 	};
 
-	const mealsList = meals.map(({ title, id, description }) => {
-		return (
-			<Box key={id} mb='2em'>
-				<MyKitchenMealCard
-					key={id}
-					foodItem={title}
-					description={description}
-					setMsg={setMsg}
-					setError={setError}
-					prepperEmail={prepper.email}
-					id={id}
-					setMeals={setMeals}
-				/>
-			</Box>
-		);
-	});
-
 	return (
 		<Box
 			width='100%'
@@ -114,7 +97,7 @@ const myKitchen = ({ userData, prepper }) => {
 						Edit Kitchen Name
 					</Button>
 				</InfoCard>
-				<InfoCard title='Descrption'>
+				<InfoCard title='Description'>
 					<Typography variant='h3'>
 						{prepper ? prepper?.description : ''}
 					</Typography>
@@ -139,25 +122,13 @@ const myKitchen = ({ userData, prepper }) => {
 				{error && <ErrorAlert error={error} setError={setError} />}
 			</Box>
 			{showMeals && (
-				<AnimatePresence>
-					<motion.div
-						key={'meals'}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ type: 'spring', delay: 0.2 }}
-						exit={{ opacity: 0 }}>
-						<Box
-							width={'100%'}
-							mt={'2em'}
-							gap='2em'
-							display={'flex'}
-							alignItems='center'
-							justifyContent={'center'}
-							flexWrap='wrap'>
-							{mealsList}
-						</Box>
-					</motion.div>
-				</AnimatePresence>
+				<MealsList
+					meals={meals}
+					prepperEmail={prepper.email}
+					setMeals={setMeals}
+					setMsg={setMsg}
+					setError={setError}
+				/>
 			)}
 		</Box>
 	);
