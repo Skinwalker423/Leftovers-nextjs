@@ -15,6 +15,7 @@ import {
 	connectMongoDb,
 	findExistingPrepperEmail,
 } from '../db/mongodb/mongoDbUtils';
+import MealsList from '../components/myKitchen/mealsList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -114,7 +115,7 @@ const myKitchen = ({ userData, prepper }) => {
 						Edit Kitchen Name
 					</Button>
 				</InfoCard>
-				<InfoCard title='Descrption'>
+				<InfoCard title='Description'>
 					<Typography variant='h3'>
 						{prepper ? prepper?.description : ''}
 					</Typography>
