@@ -3,6 +3,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 import SignIn from '../components/UI/form/auth/signin';
 import SignUpForm from '../components/UI/form/auth/signup';
+import Head from 'next/head';
 
 export async function getServerSideProps({ req }) {
 	const session = await getSession({ req });
@@ -30,6 +31,13 @@ const signin = () => {
 			alignItems={'center'}
 			width='100%'
 			height='100vh'>
+			<Head>
+				<title>Sign In</title>
+				<meta
+					name='description'
+					content='Sign in using your email and password, or by signing in with Google'
+				/>
+			</Head>
 			<Box
 				width={'90%'}
 				display={'flex'}

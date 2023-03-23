@@ -67,6 +67,13 @@ const myKitchen = ({ userData, prepper }) => {
 			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={{ xs: 'flex-start' }}
 			alignItems={'center'}>
+			<Head>
+				<title>MyKitchen</title>
+				<meta
+					name='description'
+					content='Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities'
+				/>
+			</Head>
 			<ResponsiveDrawer />
 			<Box mx={'1rem'} width={{ xs: '70%', sm: '60%', md: '40%' }} mt={'6em'}>
 				<InfoCard title='Avatar'>

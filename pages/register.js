@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import RegistrationForm from '../components/UI/form/registration/registrationForm';
 import MyKitchenForm from '../components/UI/form/mykitchen/myKitchenForm';
+import Head from 'next/head';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -29,6 +30,13 @@ const Register = ({ userSession }) => {
 			flexDirection='column'
 			justifyContent='center'
 			alignItems='center'>
+			<Head>
+				<title>Register</title>
+				<meta
+					name='description'
+					content='Register your kitchen to begin prepping meals for your community and sharing your unique homemade meals through the largest meal sharing app in the world'
+				/>
+			</Head>
 			{userSession ? (
 				<MyKitchenForm
 					title={'Prepper Registration'}
