@@ -1,32 +1,32 @@
 {
-  "name": "leftovers-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/icons-material": "^5.10.16",
-    "@mui/material": "^5.10.17",
-    "bcrypt": "^5.1.0",
-    "framer-motion": "^10.0.2",
-    "fs": "^0.0.1-security",
-    "mapbox-gl": "^2.11.1",
-    "mongodb": "^4.13.0",
-    "next": "13.0.6",
-    "next-auth": "^4.18.5",
-    "path": "^0.12.7",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-google-button": "^0.7.2"
-  },
-  "devDependencies": {
-    "eslint": "8.29.0",
-    "eslint-config-next": "13.0.6"
-  }
+	"name": "leftovers-next",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.10.5",
+		"@emotion/styled": "^11.10.5",
+		"@mui/icons-material": "^5.10.16",
+		"@mui/material": "^5.10.17",
+		"bcrypt": "^5.1.0",
+		"framer-motion": "^10.0.2",
+		"fs": "^0.0.1-security",
+		"mapbox-gl": "^2.11.1",
+		"mongodb": "^4.13.0",
+		"next": "13.0.6",
+		"next-auth": "^4.18.5",
+		"path": "^0.12.7",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-google-button": "^0.7.2"
+	},
+	"devDependencies": {
+		"eslint": "8.29.0",
+		"eslint-config-next": "13.0.6"
+	}
 }

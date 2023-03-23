@@ -9,6 +9,7 @@ import ResponsiveDrawer from '../components/layout/sidebar/myKitchenSidebar';
 import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
+import Head from 'next/head';
 
 import {
 	connectMongoDb,
@@ -96,20 +97,10 @@ const myKitchen = ({ userData, prepper }) => {
 						Edit image
 					</Button>
 				</InfoCard>
-				<InfoCard title='Kitchen Name'>
-					<Typography variant='h1'>
-						{prepper ? prepper?.kitchenTitle : ''}
-					</Typography>
+				<InfoCard title='Kitchen Picture'>
+					<Typography>Picture here</Typography>
 					<Button color='warning' variant='contained'>
-						Edit Kitchen Name
-					</Button>
-				</InfoCard>
-				<InfoCard title='Description'>
-					<Typography variant='h3'>
-						{prepper ? prepper?.description : ''}
-					</Typography>
-					<Button color='warning' variant='contained'>
-						Edit description
+						Edit Kitchen Picture
 					</Button>
 				</InfoCard>
 				<InfoCard title='Add Meal'>
@@ -125,6 +116,19 @@ const myKitchen = ({ userData, prepper }) => {
 						{showMeals ? 'Hide meals' : 'Update Meals'}
 					</Button>
 				</InfoCard>
+				<InfoCard title='Kitchen Name'>
+					<Typography variant='h1'>{prepper.kitchenTitle}</Typography>
+					<Button color='warning' variant='contained'>
+						Edit Kitchen Name
+					</Button>
+				</InfoCard>
+				<InfoCard title='Description'>
+					<Typography variant='h3'>{prepper.description}</Typography>
+					<Button color='warning' variant='contained'>
+						Edit description
+					</Button>
+				</InfoCard>
+
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{error && <ErrorAlert error={error} setError={setError} />}
 			</Box>
