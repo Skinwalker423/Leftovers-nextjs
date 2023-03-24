@@ -259,10 +259,30 @@ export async function updateMealQty(client, userEmail, mealId, qty) {
 		if (!document) {
 			return;
 		}
-		console.log(`qty adjusted`, document);
 		return document;
 	} catch (err) {
 		console.error('problem updating qty', err);
+		return;
+	}
+}
+
+export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail,
+			},
+			{ $set: { kitchenTitle } }
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('updated kitchen name', document);
+		return document;
+	} catch (err) {
+		console.error('problem updating kitchen name', err);
 		return;
 	}
 }
