@@ -1,10 +1,10 @@
-export async function updateKitchenTitleDb(email, kicthenTitle) {
+export async function updateKitchenTitleDb(email, kitchenTitle) {
 	const formBody = {
-		kicthenTitle,
+		kitchenTitle,
 		email,
 	};
 
-	const response = await fetch('/api/meals/updateQty', {
+	const response = await fetch('/api/myKitchen/updateTitle', {
 		headers: {
 			'Content-type': 'application/json',
 		},

@@ -1,4 +1,3 @@
-inputRef;
 import React, { useState, useRef } from 'react';
 import {
 	Modal,
@@ -11,9 +10,9 @@ import {
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
-import { updateKitchenTitle } from '../../../../db/mongodb/mongoDbUtils';
+import { updateKitchenTitleDb } from '../../../../utils/myKitchen/updateKitchenTitle';
 
-const updateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
+const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -41,15 +40,9 @@ const updateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 	const handleSubmitForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-		//send image file to a img hosting server e.g. Cloudinary
-		//put url to that image in mealDetails to send to mongodb
 
 		try {
-			const data = await updateKitchenTitle(
-				email,
-				mealId,
-				titleRef.current.value
-			);
+			const data = await updateKitchenTitleDb(email, titleRef.current.value);
 			if (data.message) {
 				setMsg(data.message);
 				setIsFormLoading(false);
@@ -141,4 +134,4 @@ const updateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 	);
 };
 
-export default updateKitchenTitleForm;
+export default UpdateKitchenTitleForm;
