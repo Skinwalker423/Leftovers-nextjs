@@ -286,3 +286,24 @@ export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
 		return;
 	}
 }
+
+export async function updateKitchenDescription(client, userEmail, description) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail,
+			},
+			{ $set: { description } }
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('updated kitchen name', document);
+		return document;
+	} catch (err) {
+		console.error('problem updating kitchen name', err);
+		return;
+	}
+}

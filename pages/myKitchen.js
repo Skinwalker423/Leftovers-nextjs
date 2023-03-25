@@ -10,7 +10,7 @@ import AddMeal from '../components/UI/form/mykitchen/addMeal';
 import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
 import Head from 'next/head';
-import UpdateKitchenTitleForm from '../components/UI/form/mykitchen/updateKitchenTitleForm';
+import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitleForm';
 
 import {
 	connectMongoDb,
@@ -119,7 +119,7 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				<InfoCard title='Kitchen Name'>
 					<Typography variant='h1'>{prepper.kitchenTitle}</Typography>
-					<UpdateKitchenTitleForm
+					<UpdateKitchenForm
 						email={prepper.email}
 						oldKitchenTitle={prepper.kitchenTitle}
 						setMsg={setMsg}
@@ -127,9 +127,11 @@ const myKitchen = ({ userData, prepper }) => {
 				</InfoCard>
 				<InfoCard title='Description'>
 					<Typography variant='h3'>{prepper.description}</Typography>
-					<Button color='warning' variant='contained'>
-						Edit description
-					</Button>
+					<UpdateKitchenForm
+						email={prepper.email}
+						oldDescription={prepper.description}
+						setMsg={setMsg}
+					/>
 				</InfoCard>
 
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
