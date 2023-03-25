@@ -3,18 +3,24 @@ import { updateKitchenTitle } from '../../../db/mongodb/mongoDbUtils';
 
 const updateTitle = async (req, res) => {
 	if (req.method !== 'PATCH') {
-		res.status(400).json({ error: 'Invalid request method' });
+		return res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
 	console.log(body);
 	const { kitchenTitle, email } = body;
 
 	if (!kitchenTitle || kitchenTitle.trim() === '') {
-		res.status(400).json({ error: 'no title entered' });
+		return res.status(400).json({ error: 'no title entered' });
+	}
+
+	if (kitchenTitle.length > 50) {
+		return res
+			.status(400)
+			.json({ error: 'The title is too long. 50 max characters' });
 	}
 
 	if (!email) {
-		res.status(400).json({ error: 'could not verify email address' });
+		return res.status(400).json({ error: 'could not verify email address' });
 	}
 
 	try {
