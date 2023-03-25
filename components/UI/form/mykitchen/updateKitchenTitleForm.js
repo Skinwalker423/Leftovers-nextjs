@@ -11,14 +11,22 @@ import {
 
 import { useColors } from '../../../../hooks/useColors';
 import { updateKitchenTitleDb } from '../../../../utils/myKitchen/updateKitchenTitle';
+import { updateDescriptionDb } from '../../../../utils/myKitchen/updateDescription';
 
-const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
+const UpdateKitchenForm = ({
+	email,
+	setMsg,
+	oldKitchenTitle,
+	oldDescription,
+}) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 
-	const titleRef = useRef();
+	const oldInputValue = oldKitchenTitle ? oldKitchenTitle : oldDescription;
+
+	const inputRef = useRef();
 
 	const style = {
 		position: 'absolute',
@@ -37,12 +45,29 @@ const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const handleSubmitForm = async (e) => {
+	const handleTitleSubmitForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateKitchenTitleDb(email, titleRef.current.value);
+			const data = await updateKitchenTitleDb(email, inputRef.current.value);
+			if (data.message) {
+				setMsg(data.message);
+				setIsFormLoading(false);
+				setOpen(false);
+			}
+		} catch (err) {
+			console.error('problem updating qty', err);
+			setIsFormLoading(false);
+			setError(err);
+		}
+	};
+	const handleDescriptionSubmitForm = async (e) => {
+		e.preventDefault();
+		setIsFormLoading(true);
+
+		try {
+			const data = await updateDescriptionDb(email, inputRef.current.value);
 			if (data.message) {
 				setMsg(data.message);
 				setIsFormLoading(false);
@@ -60,19 +85,28 @@ const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 			<Button
 				size='small'
 				variant='contained'
-				color='success'
+				color='warning'
 				onClick={handleOpen}>
-				Update Kicthen Title
+				Update Kicthen {oldKitchenTitle ? 'Title' : 'Description'}
 			</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='update-title-form'
-				aria-describedby='Update the existing kicthen title'>
+				aria-labelledby={`update-${
+					oldKitchenTitle ? 'title' : 'description'
+				}-form`}
+				aria-describedby={`update existing kitchen ${
+					oldKitchenTitle ? 'title' : 'description'
+				}-form`}>
 				<Box sx={style}>
-					<form onSubmit={handleSubmitForm}>
+					<form
+						onSubmit={
+							oldKitchenTitle
+								? handleTitleSubmitForm
+								: handleDescriptionSubmitForm
+						}>
 						<Typography textAlign={'center'} variant='h3'>
-							New Kicthen Title
+							New Kicthen {oldKitchenTitle ? 'Title' : 'Description'}
 						</Typography>
 						<Box
 							display={'flex'}
@@ -89,10 +123,11 @@ const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 									type='text'
 									label='Kicthen Title'
 									required
-									placeholder={oldKitchenTitle}
+									defaultValue={oldInputValue}
+									placeholder={oldInputValue}
 									color='secondary'
 									fullWidth
-									inputRef={titleRef}
+									inputRef={inputRef}
 								/>
 							</Box>
 
@@ -134,4 +169,4 @@ const UpdateKitchenTitleForm = ({ email, setMsg, oldKitchenTitle }) => {
 	);
 };
 
-export default UpdateKitchenTitleForm;
+export default UpdateKitchenForm;

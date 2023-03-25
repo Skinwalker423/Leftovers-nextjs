@@ -1,5 +1,7 @@
-import { connectMongoDb } from '../../../db/mongodb/mongoDbUtils';
-import { updatedescription } from '../../../db/mongodb/mongoDbUtils';
+import {
+	connectMongoDb,
+	updateKitchenDescription,
+} from '../../../db/mongodb/mongoDbUtils';
 
 const updateDescription = async (req, res) => {
 	if (req.method !== 'PATCH') {
@@ -25,7 +27,7 @@ const updateDescription = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await updatedescription(client, email, description);
+		const document = await updateKitchenDescription(client, email, description);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
