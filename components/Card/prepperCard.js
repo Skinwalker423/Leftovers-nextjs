@@ -173,7 +173,10 @@ export default function PrepperCard({
 						<Button
 							onClick={handleDetailsClick}
 							disabled={loading}
+							size='large'
 							sx={{
+								width: '7rem',
+								height: '2.5rem',
 								border: `1px solid ${colors.orangeAccent[900]}`,
 								color: colors.orangeAccent[400],
 								'&:hover': {
@@ -181,7 +184,11 @@ export default function PrepperCard({
 									color: 'white',
 								},
 							}}>
-							{loading ? <CircularProgress /> : 'View Details'}
+							{loading ? (
+								<CircularProgress size={'2rem'} />
+							) : (
+								<Typography fontSize={'small'}>View Details</Typography>
+							)}
 						</Button>
 					</Link>
 				</CardActions>
