@@ -20,6 +20,7 @@ import { useSession } from 'next-auth/react';
 import { Alert, Tooltip } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import TrophyLikesButton from '../likes/trophyLikesButton';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',
@@ -34,6 +35,7 @@ export default function PrepperCard({
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { data: session } = useSession();
 	const {
@@ -44,6 +46,7 @@ export default function PrepperCard({
 
 	useEffect(() => {
 		setFavorited(isFavorited);
+		setLoading(false);
 	}, []);
 
 	const prepperDetails = {
@@ -90,6 +93,10 @@ export default function PrepperCard({
 			setErrorMsg(err);
 		}
 	}
+
+	const handleDetailsClick = () => {
+		setLoading(true);
+	};
 
 	const lorem =
 		'Vestibulum condimentum sed leo at posuere. Nunc leo neque, commodo a placerat vel, consequat elementum quam. Sed dictum ac urna at bibendum. Phasellus enim tellus, dictum ut vestibulum et, blandit at diam. Donec aliquam ut magna ac auctor.';
@@ -164,6 +171,8 @@ export default function PrepperCard({
 
 					<Link className={styles.link} href={`/preppers/${id}`}>
 						<Button
+							onClick={handleDetailsClick}
+							disabled={loading}
 							sx={{
 								border: `1px solid ${colors.orangeAccent[900]}`,
 								color: colors.orangeAccent[400],
@@ -172,7 +181,7 @@ export default function PrepperCard({
 									color: 'white',
 								},
 							}}>
-							View Details
+							{loading ? <CircularProgress /> : 'View Details'}
 						</Button>
 					</Link>
 				</CardActions>

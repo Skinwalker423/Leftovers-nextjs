@@ -65,27 +65,28 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 				<meta name='description' content='List of all preppers in your area' />
 			</Head>
 			<Typography variant='h1'>List of all preppers in your area</Typography>
-			<Box mt='20px' display='flex' gap='10px' flexWrap={'wrap'}>
+			<Box mt='2rem' display='flex' gap='1rem' flexWrap={'wrap'}>
 				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
 
 					const favorited =
 						favoritesList && favoritesList.includes(prepper.id) ? true : false;
-
-					return (
-						<PrepperCard
-							isFavorited={favorited}
-							className={styles.prepCard}
-							key={prepper.id}
-							name={prepper.kitchenTitle}
-							email={prepper.email}
-							subTitle={prepper.name}
-							avatar={avatar}
-							id={prepper.id}
-							userEmail={userEmail ? userEmail : ''}
-							description={prepper.description}
-						/>
-					);
+					if (prepper.email !== userEmail) {
+						return (
+							<PrepperCard
+								isFavorited={favorited}
+								className={styles.prepCard}
+								key={prepper.id}
+								name={prepper.kitchenTitle}
+								email={prepper.email}
+								subTitle={prepper.name}
+								avatar={avatar}
+								id={prepper.id}
+								userEmail={userEmail ? userEmail : ''}
+								description={prepper.description}
+							/>
+						);
+					}
 				})}
 			</Box>
 		</Box>
