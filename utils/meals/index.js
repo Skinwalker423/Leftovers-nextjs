@@ -49,3 +49,20 @@ export async function updateMealQtyInDb(email, mealId, qty) {
 	const data = await response.json();
 	return data;
 }
+
+export async function decrementMealQtyDB(email, mealId) {
+	const formBody = {
+		mealId,
+		email,
+	};
+
+	const response = await fetch('/api/meals/processPayment', {
+		headers: {
+			'Content-type': 'application/json',
+		},
+		method: 'PATCH',
+		body: JSON.stringify(formBody),
+	});
+	const data = await response.json();
+	return data;
+}
