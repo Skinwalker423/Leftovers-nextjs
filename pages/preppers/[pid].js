@@ -96,8 +96,8 @@ const Prepper = ({ prepper }) => {
 				alignItems='center'>
 				<Paper
 					sx={{
-						width: { xs: '100%', lg: '70%' },
-						height: '50vh',
+						width: { xs: '100%', lg: '80%' },
+						height: '40vh',
 						p: '1em',
 						position: 'relative',
 					}}>
