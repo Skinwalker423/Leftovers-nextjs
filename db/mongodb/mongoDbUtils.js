@@ -307,3 +307,24 @@ export async function updateKitchenDescription(client, userEmail, description) {
 		return;
 	}
 }
+
+export async function decrementMealQty(client, userEmail, mealId) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail,
+				'meals.id': mealId,
+			},
+			{ $inc: { 'meals.$.qty': -1 } }
+		);
+
+		if (!document) {
+			return;
+		}
+		return document;
+	} catch (err) {
+		console.error('problem updating qty', err);
+		return;
+	}
+}
