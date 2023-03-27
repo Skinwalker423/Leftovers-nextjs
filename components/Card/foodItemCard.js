@@ -26,6 +26,7 @@ export default function FoodItemCard({
 	id,
 	qty = 1,
 	setMsg,
+	prepperEmail,
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
@@ -37,6 +38,7 @@ export default function FoodItemCard({
 		description,
 		foodItem,
 		qty,
+		prepperEmail,
 	};
 
 	const handleFavorite = () => {

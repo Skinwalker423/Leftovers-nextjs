@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Divider } from '@mui/material';
 import CheckoutList from '../components/checkout/checkoutList';
 import CheckoutTotals from '../components/checkout/checkoutTotals';
 import Head from 'next/head';
+import { UserContext } from '../store/UserContext';
 
 const Checkout = () => {
+	const { state } = useContext(UserContext);
+	const { userCartlist } = state;
+
 	return (
 		<Box
 			display='flex'
