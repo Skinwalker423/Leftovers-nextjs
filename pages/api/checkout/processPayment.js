@@ -9,7 +9,7 @@ const processPayment = async (req, res) => {
 	}
 	const body = req.body;
 	console.log(body);
-	const { mealId, email } = body;
+	const { mealId, email, qty } = body;
 
 	if (!mealId || !email) {
 		return res.status(400).json({ error: 'no mealId and/or prepper email' });
@@ -17,7 +17,7 @@ const processPayment = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await decrementMealQty(client, email, mealId);
+		const document = await decrementMealQty(client, email, mealId, qty);
 
 		if (!document || !document.modifiedCount) {
 			client.close();

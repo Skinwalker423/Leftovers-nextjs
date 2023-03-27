@@ -78,14 +78,13 @@ export const UserProvider = ({ children }) => {
 	}, [state.userCartlist]);
 
 	const incrementFoodItem = (mealItem) => {
-		const { id, price, image, foodItem, description } = mealItem;
+		const { id, price, image, foodItem, description, prepperEmail } = mealItem;
 
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
 
 		if (findExistingFoodItem === undefined || !findExistingFoodItem) {
-			console.log('no food item found. adding 1st item to userCartList');
 			const newMeals = [
 				...state.userCartlist,
 				{
@@ -95,9 +94,10 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: 1,
+					prepperEmail,
 				},
 			];
-			console.log('cartList right before dispatching increment item', newMeals);
+
 			return dispatch({
 				type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
 				payload: newMeals,
@@ -114,6 +114,7 @@ export const UserProvider = ({ children }) => {
 				foodItem,
 				description,
 				qty: findExistingFoodItem.qty + 1,
+				prepperEmail,
 			},
 		];
 		console.log(newCartList);
@@ -149,6 +150,7 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: findExistingFoodItem.qty - 1,
+					prepperEmail,
 				},
 			];
 			console.log(newCartList);
@@ -164,7 +166,7 @@ export const UserProvider = ({ children }) => {
 		const totalPrice = state.userCartlist.forEach((meal) => {
 			return (totals += parseInt(meal.price) * meal.qty);
 		});
-		console.log('total price is', totals);
+
 		return dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: totals });
 	}
 

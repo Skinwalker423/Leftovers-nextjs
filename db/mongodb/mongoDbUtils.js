@@ -308,7 +308,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 	}
 }
 
-export async function decrementMealQty(client, prepperEmail, mealId) {
+export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
@@ -316,7 +316,7 @@ export async function decrementMealQty(client, prepperEmail, mealId) {
 				email: prepperEmail,
 				'meals.id': mealId,
 			},
-			{ $inc: { 'meals.$.qty': -1 } }
+			{ $inc: { 'meals.$.qty': -qty } }
 		);
 
 		if (!document) {

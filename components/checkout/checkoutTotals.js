@@ -2,13 +2,30 @@ import React, { useContext } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
+import { decrementMealQtyDB } from '../../utils/meals';
 
 const CheckoutTotals = () => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
+	const { userCartlist } = state;
+	console.log(userCartlist);
 
 	const handlePayBtn = async () => {
-		//add number of served to prepper trophy icon
+		//confirm payment
+		console.log('payment confirmed');
+		//decrement quantity of meal
+		for (const item of userCartlist) {
+			const { prepperEmail, id, qty } = item;
+			console.log(prepperEmail, id, qty);
+			// const data = await decrementMealQtyDB(prepperEmail, id, qty);
+			// if (data.message) {
+			// 	console.log('qty updated', data.message);
+			// }
+			// if (data.error) {
+			// 	console.log('problem', data.error);
+			// }
+			//add number of served to prepper trophy icon
+		}
 	};
 
 	return (
