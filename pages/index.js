@@ -6,7 +6,7 @@ import Footer from '../components/layout/footer/footer';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
-import { unstable_getServerSession } from 'next-auth/next';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
@@ -24,8 +24,14 @@ import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
 
 export async function getServerSideProps({ req, res }) {
-	const session = await unstable_getServerSession(req, res, authOptions);
-	const foundSession = session ? session : null;
+	const session = await getServerSession(req, res, authOptions);
+	const foundSession = session
+		? {
+				name: session.user?.name || null,
+				image: session.user?.image || null,
+				email: session.user?.email || null,
+		  }
+		: null;
 	const client = session && (await connectMongoDb());
 	const user =
 		session &&
