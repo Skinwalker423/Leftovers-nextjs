@@ -9,7 +9,13 @@ import Head from 'next/head';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
-	const userSession = session ? session : null;
+	const userSession = session
+		? {
+				name: session.user?.name || null,
+				image: session.user?.image || null,
+				email: session.user?.email || null,
+		  }
+		: null;
 
 	return {
 		props: {

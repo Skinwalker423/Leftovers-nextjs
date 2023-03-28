@@ -16,6 +16,11 @@ import { authOptions } from './api/auth/[...nextauth]';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
+	const user = {
+		name: session.user?.name || null,
+		image: session.user?.image || null,
+		email: session.user?.email || null,
+	};
 	if (!session) {
 		return {
 			redirect: {
@@ -32,7 +37,7 @@ export async function getServerSideProps({ req, res }) {
 	return {
 		props: {
 			favoriteList: document.favorites || favoritePreppersList,
-			userSession: session,
+			userSession: user,
 		},
 	};
 }

@@ -8,6 +8,7 @@ import {
 	Alert,
 } from '@mui/material';
 import { validateEmail } from '../../../../utils/form-validation';
+import { signIn } from 'next-auth/react';
 
 const SignUpForm = ({ title }) => {
 	const [errorMsg, setErrorMsg] = useState('');
@@ -57,6 +58,7 @@ const SignUpForm = ({ title }) => {
 				setErrorMsg(data.error);
 			} else {
 				setMsg(data.message);
+				signIn();
 			}
 		} catch (err) {
 			setErrorMsg(err);

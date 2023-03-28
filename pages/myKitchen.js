@@ -42,9 +42,16 @@ export async function getServerSideProps({ req, res }) {
 		};
 	}
 
+	console.log(session.user);
+	const user = {
+		name: session.user?.name || null,
+		image: session.user?.image || null,
+		email: session.user?.email || null,
+	};
+
 	return {
 		props: {
-			userData: session.user,
+			userData: user,
 			prepper: userDb,
 		},
 	};
@@ -53,7 +60,7 @@ export async function getServerSideProps({ req, res }) {
 const myKitchen = ({ userData, prepper }) => {
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
-	const { name = 'User', email, image } = userData;
+	const { email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
 	const [meals, setMeals] = useState(prepper.meals);
 
@@ -81,7 +88,7 @@ const myKitchen = ({ userData, prepper }) => {
 				<InfoCard title='Avatar'>
 					{image ? (
 						<Image
-							alt={`avatar image of ${name}`}
+							alt={`avatar image of ${prepper.name}`}
 							src={image}
 							width={100}
 							height={100}

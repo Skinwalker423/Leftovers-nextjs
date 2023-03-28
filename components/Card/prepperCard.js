@@ -98,9 +98,6 @@ export default function PrepperCard({
 		setLoading(true);
 	};
 
-	const lorem =
-		'Vestibulum condimentum sed leo at posuere. Nunc leo neque, commodo a placerat vel, consequat elementum quam. Sed dictum ac urna at bibendum. Phasellus enim tellus, dictum ut vestibulum et, blandit at diam. Donec aliquam ut magna ac auctor.';
-
 	return (
 		<motion.div whileHover={{ scale: 1.05 }}>
 			<Card
@@ -143,7 +140,7 @@ export default function PrepperCard({
 						}}
 						variant='body2'
 						color='text.secondary'>
-						{lorem}
+						{description}
 					</Typography>
 				</CardContent>
 				<CardActions
