@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, FormControl, TextField } from '@mui/material';
+import { Box, FormControl, IconButton, TextField } from '@mui/material';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useColors } from '../../hooks/useColors';
@@ -41,6 +41,7 @@ const FindLocalPreppersSearchBar = ({
 							}}
 						/>
 						<TextField
+							sx={{ mr: '1rem' }}
 							id='input-with-sx'
 							label='Enter your current zip code'
 							variant='standard'
@@ -49,16 +50,18 @@ const FindLocalPreppersSearchBar = ({
 							onChange={handleZipChange}
 							helperText={errorMsg ? errorMsg : ''}
 						/>
-						<ArrowForwardOutlinedIcon
-							className={styles.arrow}
-							sx={{
-								color: 'action.active',
-								my: 0.5,
-								fontSize: 'large',
-								height: '3em',
-								width: '2em',
-							}}
-						/>
+						<IconButton type='submit' size='small'>
+							<ArrowForwardOutlinedIcon
+								className={styles.arrow}
+								sx={{
+									color: 'action.active',
+									my: 0.5,
+									fontSize: 'large',
+									height: '2em',
+									width: '2em',
+								}}
+							/>
+						</IconButton>
 					</Box>
 				</FormControl>
 			</form>
