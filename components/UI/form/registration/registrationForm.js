@@ -209,7 +209,12 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' display={'flex'} mt='1em'>
+					<Box
+						width='100%'
+						display={'flex'}
+						gap={2}
+						flexDirection={{ xs: 'column', sm: 'row' }}
+						mt='1em'>
 						<TextField
 							id='city'
 							type='text'
