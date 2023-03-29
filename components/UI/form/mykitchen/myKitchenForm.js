@@ -14,6 +14,7 @@ import {
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
 import StateInput from '../registration/stateInput';
+import { signIn } from 'next-auth/react';
 
 const MyKitchenForm = ({ title, sessionEmail }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
@@ -90,9 +91,9 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 				setErrorMsg(data.error);
 				setIsFormLoading(false);
 			} else {
-				router.push('/myKitchen');
 				setIsFormLoading(false);
 				setMsg(data.message);
+				signIn();
 			}
 		} catch (err) {
 			setErrorMsg(err);

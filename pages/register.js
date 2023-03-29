@@ -31,7 +31,6 @@ const Register = ({ userSession }) => {
 	return (
 		<Box
 			width='100%'
-			height='100vh'
 			display='flex'
 			flexDirection='column'
 			justifyContent='center'
@@ -59,7 +58,10 @@ const Register = ({ userSession }) => {
 			{msg && (
 				<Alert
 					sx={{
-						width: '50%',
+						position: 'absolute',
+						bottom: '0',
+						width: '60%',
+						textAlign: 'center',
 						fontSize: 'larger',
 						mt: '5em',
 					}}
@@ -70,7 +72,9 @@ const Register = ({ userSession }) => {
 			{errorMsg && (
 				<Alert
 					sx={{
-						width: '50%',
+						position: 'absolute',
+						bottom: '0',
+						width: '60%',
 						fontSize: 'larger',
 						mt: '5em',
 					}}

@@ -16,6 +16,7 @@ import {
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
 import StateInput from './stateInput';
+import { signIn } from 'next-auth/react';
 
 const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
@@ -106,9 +107,9 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				setErrorMsg(data.error);
 				setIsFormLoading(false);
 			} else {
-				router.push('/myKitchen');
 				setIsFormLoading(false);
 				setMsg(data.message);
+				signIn();
 			}
 		} catch (err) {
 			setErrorMsg(err);
@@ -120,7 +121,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		<Paper
 			sx={{
 				width: { xs: '95%', sm: '85%', md: '50em' },
-				height: { xs: '85vh', md: '80vh' },
+				height: { xs: '100%', md: '88vh' },
+				mt: '5rem',
 			}}>
 			<Typography py={'.5em'} textAlign='center' variant='h2'>
 				{title}
@@ -130,26 +132,31 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 					<Box
 						gap={'1em'}
 						width={'100%'}
+						height={'100%'}
 						display='flex'
 						justifyContent={'space-between'}>
-						<TextField
-							type='text'
-							required
-							id='first-name'
-							inputRef={firstNameRef}
-							label='First Name'
-							color='secondary'
-							fullWidth
-						/>
-						<TextField
-							id='last-name'
-							type='text'
-							required
-							inputRef={lastNameRef}
-							label='Last Name'
-							color='secondary'
-							fullWidth
-						/>
+						<Box height={'20px'}>
+							<TextField
+								type='text'
+								required
+								id='first-name'
+								inputRef={firstNameRef}
+								label='First Name'
+								color='secondary'
+								fullWidth
+							/>
+						</Box>
+						<Box>
+							<TextField
+								id='last-name'
+								type='text'
+								required
+								inputRef={lastNameRef}
+								label='Last Name'
+								color='secondary'
+								fullWidth
+							/>
+						</Box>
 					</Box>
 					<Box width='100%' mt='1em'>
 						<TextField
@@ -250,14 +257,14 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 						/>
 					</Box>
 					<Button
-						sx={{ mt: '3rem', p: '1em' }}
+						sx={{ mt: '2rem', p: '1em' }}
 						variant='contained'
 						fullWidth
 						disabled={isFormLoading}
 						color='success'
 						type='submit'
 						required
-						size='large'>
+						size='medium'>
 						{isFormLoading ? (
 							<CircularProgress />
 						) : (
