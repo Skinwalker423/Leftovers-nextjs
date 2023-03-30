@@ -9,9 +9,17 @@ const addMeal = async (req, res) => {
 	console.log(body);
 	const { meal, email } = body;
 
+	const mealDetails = {
+		title: meal.title,
+		price: parseInt(meal.price),
+		description: meal.description,
+		image: meal.image,
+		qty: parseInt(meal.qty),
+	};
+
 	try {
 		const client = await connectMongoDb();
-		const document = await addMealToPrepperDb(client, email, meal);
+		const document = await addMealToPrepperDb(client, email, mealDetails);
 		console.log('this is the response for adding a meal in mongo:', document);
 
 		if (!document) {

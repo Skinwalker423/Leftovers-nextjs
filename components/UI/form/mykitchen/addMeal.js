@@ -74,8 +74,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
 			image: '',
-			qty: qtyRef.current.value,
-			soldOut: false,
+			qty: parseInt(qtyRef.current.value),
 		};
 
 		console.log(mealDetails);

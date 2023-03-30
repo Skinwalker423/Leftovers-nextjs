@@ -4,11 +4,13 @@ import MyKitchenMealCard from '../Card/myKitchenMeals';
 import Box from '@mui/material/Box';
 
 function MealsList({ meals, prepperEmail, setMeals, setMsg, setError }) {
-	const mealsList = meals.map(({ title, id, description }) => {
+	console.log(meals);
+	const mealsList = meals.map(({ title, id, description, qty }) => {
 		return (
 			<Box key={id} mb='2em'>
 				<MyKitchenMealCard
 					key={id}
+					qty={qty}
 					foodItem={title}
 					description={description}
 					setMsg={setMsg}
