@@ -44,15 +44,26 @@ export default function MyKitchenMealCard({
 	};
 
 	const handleQtyUpdate = async () => {
-		//adjust qty in bd
+		//adjust qty in db
 	};
 
 	return (
 		<Card key={id} sx={{ width: 350 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
-			<CardContent>
-				<Typography gutterBottom variant='h5' component='div'>
+			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
+				<Typography
+					color={'secondary'}
+					gutterBottom
+					variant='h5'
+					component='div'>
 					{foodItem}
+				</Typography>
+				<Typography
+					color={'secondary'}
+					gutterBottom
+					variant='h5'
+					component='div'>
+					QTY: {qty}
 				</Typography>
 			</CardContent>
 
