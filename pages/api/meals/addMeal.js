@@ -28,7 +28,9 @@ const addMeal = async (req, res) => {
 			return;
 		}
 		client.close();
-		res.status(200).json({ message: 'Successfully added a meal' });
+		res
+			.status(200)
+			.json({ message: 'Successfully added a meal', meal: document });
 		return;
 	} catch (err) {
 		client.close();
