@@ -4,7 +4,7 @@ import { UserContext } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
 import { decrementMealQtyDB } from '../../utils/meals';
 
-const CheckoutTotals = () => {
+const CheckoutTotals = ({ onPaymentClick, loading }) => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
 	const { userCartlist } = state;
@@ -13,19 +13,8 @@ const CheckoutTotals = () => {
 	const handlePayBtn = async () => {
 		//confirm payment
 		console.log('payment confirmed');
+		await onPaymentClick();
 		//decrement quantity of meal
-		for (const item of userCartlist) {
-			const { prepperEmail, id, qty } = item;
-			console.log(prepperEmail, id, qty);
-			const data = await decrementMealQtyDB(prepperEmail, id, qty);
-			if (data.message) {
-				console.log('qty updated', data.message);
-			}
-			if (data.error) {
-				console.log('problem', data.error);
-			}
-			//add number of served to prepper trophy icon
-		}
 	};
 
 	return (
@@ -56,7 +45,11 @@ const CheckoutTotals = () => {
 					width='100%'
 					alignItems='center'
 					justifyContent='space-evenly'>
-					<Button onClick={handlePayBtn} variant='contained' color='success'>
+					<Button
+						disabled={loading}
+						onClick={handlePayBtn}
+						variant='contained'
+						color='success'>
 						Pay
 					</Button>
 					<Typography textAlign={'end'}>
