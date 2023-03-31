@@ -10,9 +10,10 @@ const SuccessAlert = ({ msg, setMsg }) => {
 			sx={{
 				width: '50%',
 				fontSize: 'larger',
-				position: 'absolute',
-				bottom: '21em',
+				position: 'relative',
+				top: 0,
 				left: '35em',
+				zIndex: 99,
 			}}
 			severity='success'>
 			{msg}
