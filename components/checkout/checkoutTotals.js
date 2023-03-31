@@ -17,13 +17,13 @@ const CheckoutTotals = () => {
 		for (const item of userCartlist) {
 			const { prepperEmail, id, qty } = item;
 			console.log(prepperEmail, id, qty);
-			// const data = await decrementMealQtyDB(prepperEmail, id, qty);
-			// if (data.message) {
-			// 	console.log('qty updated', data.message);
-			// }
-			// if (data.error) {
-			// 	console.log('problem', data.error);
-			// }
+			const data = await decrementMealQtyDB(prepperEmail, id, qty);
+			if (data.message) {
+				console.log('qty updated', data.message);
+			}
+			if (data.error) {
+				console.log('problem', data.error);
+			}
 			//add number of served to prepper trophy icon
 		}
 	};

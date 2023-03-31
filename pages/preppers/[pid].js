@@ -43,7 +43,7 @@ export async function getStaticPaths() {
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
-	const [msg, setMsg] = useState('');
+	const [msg, setMsg] = useState('test');
 
 	useEffect(() => {
 		if (prepper.meals) {
