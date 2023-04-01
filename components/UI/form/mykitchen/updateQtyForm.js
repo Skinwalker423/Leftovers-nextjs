@@ -55,6 +55,11 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 			setIsFormLoading(false);
 			setError(err);
 		}
+
+		setTimeout(() => {
+			setMsg('');
+			setError('');
+		}, 3000);
 	};
 
 	return (
