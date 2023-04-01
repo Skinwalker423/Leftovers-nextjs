@@ -29,18 +29,27 @@ export default function MyKitchenMealCard({
 				return meals.filter((meal) => meal.id !== id);
 			});
 			setMsg(data.message);
+		} else if (data.error) {
+			setError(data.error);
 		}
+		setTimeout(() => {
+			setError('');
+			setMsg('');
+		}, 3000);
 	};
 
 	const handleOutOfStock = async () => {
 		//add banner to meal card
 		const data = await updateMealQtyInDb(prepperEmail, id, 0);
 		if (data.message) {
-			console.log('meal out of stock');
 			setMsg(data.message);
 		} else if (data.error) {
 			setError(data.error);
 		}
+		setTimeout(() => {
+			setError('');
+			setMsg('');
+		}, 3000);
 	};
 
 	const handleQtyUpdate = async () => {

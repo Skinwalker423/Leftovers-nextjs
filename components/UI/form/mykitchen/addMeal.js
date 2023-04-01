@@ -93,6 +93,11 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 			setIsFormLoading(false);
 			setError(err);
 		}
+
+		setTimeout(() => {
+			setMsg('');
+			setError('');
+		}, 3000);
 	};
 
 	return (

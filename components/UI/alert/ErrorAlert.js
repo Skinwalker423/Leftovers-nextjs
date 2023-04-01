@@ -1,21 +1,25 @@
 import React from 'react';
-import { Alert } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
 
-const ErrorAlert = ({ error, setError }) => {
+const ErrorAlert = ({ error, setError, width = '100%' }) => {
 	return (
 		<Alert
 			onClose={() => {
 				setError('');
 			}}
+			color='error'
+			variant='filled'
 			sx={{
-				width: '50%',
+				position: 'fixed',
+				bottom: 0,
+				width: { width },
 				fontSize: 'larger',
-				position: 'absolute',
-				top: '10em',
-				left: '35em',
-			}}
-			severity='error'>
-			{error}
+				textAlign: 'center',
+				justifyContent: 'center',
+				zIndex: 50,
+			}}>
+			<Typography fontSize={'2rem'}>{error}</Typography>
 		</Alert>
 	);
 };
