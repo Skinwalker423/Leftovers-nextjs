@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
 
 const SuccessAlert = ({ msg, setMsg }) => {
 	return (
@@ -7,16 +8,18 @@ const SuccessAlert = ({ msg, setMsg }) => {
 			onClose={() => {
 				setMsg('');
 			}}
+			color='success'
+			variant='filled'
 			sx={{
-				width: '50%',
+				position: 'fixed',
+				bottom: 0,
+				width: '100%',
 				fontSize: 'larger',
-				position: 'relative',
-				top: 0,
-				left: '35em',
-				zIndex: 99,
-			}}
-			severity='success'>
-			{msg}
+				textAlign: 'center',
+				justifyContent: 'center',
+				zIndex: 50,
+			}}>
+			<Typography fontSize={'2rem'}>{msg}</Typography>
 		</Alert>
 	);
 };

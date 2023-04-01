@@ -29,7 +29,7 @@ const Checkout = () => {
 				setTimeout(() => {
 					setMsg('');
 					router.push('/confirmation');
-				}, 5000);
+				}, 3000);
 			}
 			if (data.error) {
 				console.log('problem', data.error);
@@ -54,6 +54,9 @@ const Checkout = () => {
 					content='Checkout page. Confirm the meals, cost, and pay options before completing your order'
 				/>
 			</Head>
+			<CheckoutList />
+			<Divider />
+			<CheckoutTotals loading={loading} onPaymentClick={onPaymentClick} />
 			{(msg || loading) && (
 				<Alert
 					color={loading ? 'warning' : 'success'}
@@ -88,9 +91,6 @@ const Checkout = () => {
 					<Typography fontSize={'3rem'}>{error}</Typography>
 				</Alert>
 			)}
-			<CheckoutList />
-			<Divider />
-			<CheckoutTotals loading={loading} onPaymentClick={onPaymentClick} />
 		</Box>
 	);
 };
