@@ -43,7 +43,7 @@ export async function getStaticPaths() {
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
-	const [msg, setMsg] = useState('test');
+	const [msg, setMsg] = useState('');
 
 	useEffect(() => {
 		if (prepper.meals) {
@@ -122,13 +122,24 @@ const Prepper = ({ prepper }) => {
 					</Box>
 				</Paper>
 			</Box>
-			{meals.length !== 0 ? (
+			{!prepper.meals.length && (
+				<Box width='50%'>
+					<Alert color='error' fontSize='large'>
+						<Typography variant='h3'>
+							Meals are currently unavailbale. Check back soon
+						</Typography>
+					</Alert>
+				</Box>
+			)}
+			{prepper.meals.length && meals.length !== 0 ? (
 				<Box
 					display={'flex'}
 					my='2rem'
 					flexWrap={'wrap'}
 					gap={10}
+					height='100%'
 					justifyContent={'center'}
+					alignItems={'center'}
 					width={{ xs: '100%', lg: '70%' }}>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
@@ -149,12 +160,8 @@ const Prepper = ({ prepper }) => {
 					})}
 				</Box>
 			) : (
-				<Box width='50%'>
-					<Alert color='error' fontSize='large'>
-						<Typography variant='h3'>
-							Meals are currently unavailbale. Check back soon
-						</Typography>
-					</Alert>
+				<Box mt={'3rem'}>
+					<CustomLoader />
 				</Box>
 			)}
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}

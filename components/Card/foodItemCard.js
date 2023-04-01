@@ -50,7 +50,7 @@ export default function FoodItemCard({
 		setMsg(`Added ${foodItem} to your meal cart`);
 		setTimeout(() => {
 			setMsg('');
-		}, 5000);
+		}, 3000);
 	};
 
 	return (
