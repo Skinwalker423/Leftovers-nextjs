@@ -142,8 +142,8 @@ const myKitchen = ({ userData, prepper }) => {
 					/>
 				</InfoCard>
 
-				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
-				{error && <ErrorAlert error={error} setError={setError} />}
+				{msg && <SuccessAlert width='80%' msg={msg} setMsg={setMsg} />}
+				{error && <ErrorAlert width='80%' error={error} setError={setError} />}
 			</Box>
 			{showMeals && (
 				<MealsList

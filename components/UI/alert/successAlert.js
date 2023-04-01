@@ -2,7 +2,7 @@ import React from 'react';
 import Alert from '@mui/material/Alert';
 import Typography from '@mui/material/Typography';
 
-const SuccessAlert = ({ msg, setMsg }) => {
+const SuccessAlert = ({ msg, setMsg, width = '100%' }) => {
 	return (
 		<Alert
 			onClose={() => {
@@ -13,7 +13,7 @@ const SuccessAlert = ({ msg, setMsg }) => {
 			sx={{
 				position: 'fixed',
 				bottom: 0,
-				width: '100%',
+				width: width,
 				fontSize: 'larger',
 				textAlign: 'center',
 				justifyContent: 'center',
