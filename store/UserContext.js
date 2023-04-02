@@ -13,6 +13,7 @@ export const ACTION_TYPES = {
 	ADD_FOOD_TO_CART: 'ADD_FOOD_TO_CART',
 	INCREMENT_FOOD_ITEM: 'INCREMENT_FOOD_ITEM',
 	DECREMENT_FOOD_ITEM: 'DECREMENT_FOOD_ITEM',
+	CLEAR_CARTLIST: 'CLEAR_CARTLIST',
 	SET_TOTAL_PRICE: 'SET_TOTAL_PRICE',
 	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
@@ -27,6 +28,11 @@ const userReducer = (state, action) => {
 			return {
 				...state,
 				userCartlist: [...state.userCartlist, action.payload],
+			};
+		case ACTION_TYPES.CLEAR_CARTLIST:
+			return {
+				...state,
+				userCartlist: [],
 			};
 		case ACTION_TYPES.INCREMENT_FOOD_ITEM:
 			return {

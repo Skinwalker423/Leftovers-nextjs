@@ -6,9 +6,10 @@ import Head from 'next/head';
 import { UserContext } from '../store/UserContext';
 import { decrementMealQtyDB } from '../utils/meals';
 import { useRouter } from 'next/router';
+import { ACTION_TYPES } from '../store/UserContext';
 
 const Checkout = () => {
-	const { state } = useContext(UserContext);
+	const { state, dispatch } = useContext(UserContext);
 	const { userCartlist } = state;
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
@@ -17,7 +18,9 @@ const Checkout = () => {
 
 	const onPaymentClick = async () => {
 		setLoading(true);
+
 		//process payment
+
 		for (const item of userCartlist) {
 			const { prepperEmail, id, qty } = item;
 			console.log(prepperEmail, id, qty);
@@ -26,6 +29,8 @@ const Checkout = () => {
 				console.log('qty updated', data.message);
 				setLoading(false);
 				setMsg(data.message);
+				dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
+				dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
 				setTimeout(() => {
 					setMsg('');
 					router.push('/confirmation');
@@ -37,7 +42,6 @@ const Checkout = () => {
 				setError(data.error);
 			}
 			//add number of served to prepper trophy icon
-			//clear userCartList
 		}
 	};
 
