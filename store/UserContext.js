@@ -32,7 +32,7 @@ const userReducer = (state, action) => {
 		case ACTION_TYPES.CLEAR_CARTLIST:
 			return {
 				...state,
-				userCartlist: null,
+				userCartlist: [],
 			};
 		case ACTION_TYPES.INCREMENT_FOOD_ITEM:
 			return {
