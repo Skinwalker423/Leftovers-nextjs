@@ -4,7 +4,13 @@ import Typography from '@mui/material/Typography';
 
 const Confirmation = () => {
 	return (
-		<Box>
+		<Box
+			width={'100%'}
+			height={'100vh'}
+			display={'flex'}
+			flexDirection={'column'}
+			justifyContent={'center'}
+			alignItems={'center'}>
 			<Typography variant='h1'>Thanks for your order!</Typography>
 			<Box>
 				<Typography variant='h3'>

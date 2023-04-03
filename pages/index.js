@@ -14,6 +14,7 @@ import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
+import ValueMealList from '../components/mealLists/valueMealList';
 import {
 	connectMongoDb,
 	findExistingUserEmail,
@@ -141,6 +142,14 @@ export default function Home({ favoriteList, foundSession, error }) {
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
 						<LocalPreppersList localPreppers={localPreppers} />
+					</CategoryBanner>
+				)}
+				{localPreppers.length !== 0 && (
+					<CategoryBanner
+						link='/'
+						title='$5 Meals'
+						bgColor={colors.greenAccent[700]}>
+						<ValueMealList localPreppers={localPreppers} />
 					</CategoryBanner>
 				)}
 				{favoriteList.length !== 0 && (foundSession || session) && (
