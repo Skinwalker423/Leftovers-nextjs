@@ -103,10 +103,8 @@ export default function Home({ favoriteList, foundSession, error }) {
 		const findPreppers = await fetchLocalPreppers(zipCode);
 
 		if (findPreppers.error) {
-			console.log(findPreppers);
 			setErrorMsg(findPreppers.error);
 		} else {
-			console.log(findPreppers);
 			setLocalPreppers(findPreppers);
 		}
 	};
