@@ -11,7 +11,7 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 			className={styles.navLink}
 			style={{
 				textDecoration: 'none',
-				padding: '0 10px',
+				padding: '0 1em',
 			}}
 			href={href}>
 			<li>

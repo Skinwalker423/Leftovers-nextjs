@@ -68,42 +68,46 @@ const NavBar = () => {
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
 			width='100%'>
-			<Box
+			{/* <Box
 				display='flex'
 				width='50%'
 				justifyContent={'space-between'}
-				alignItems='center'>
-				<Link href={'/'}>
-					<Image
-						src='/icons8-connect.svg'
-						width={50}
-						height={50}
-						alt='Leftovers icon'
-					/>
-				</Link>
-				<Box width={'500px'} height='3rem' className={styles.navBar}>
-					<nav>
-						<ul
-							style={{
-								listStyle: 'none',
-								display: 'flex',
-								justifyContent: 'space-evenly',
-							}}>
-							<NavItem title='Preppers' href='/preppers' />
-							{session && <NavItem title='Favs' href='/favorites' />}
-							<NavItem title='About' href='/about' />
-							{session ? (
-								<NavItem title='MyKitchen' href='/myKitchen' />
-							) : (
-								<NavItem title='Register' href='/register' />
-							)}
-						</ul>
-					</nav>
-				</Box>
-				<Box className={styles.collapsedNavBar}>
-					<CollapsedNavMenu />
-				</Box>
+				alignItems='center'> */}
+			<Link href={'/'}>
+				<Image
+					src='/icons8-connect.svg'
+					width={50}
+					height={50}
+					alt='Leftovers icon'
+				/>
+			</Link>
+			<Box
+				width={{ sm: '15rem', md: '35rem' }}
+				height='3rem'
+				className={styles.navBar}>
+				<nav style={{ width: '100%' }}>
+					<ul
+						style={{
+							listStyle: 'none',
+							display: 'flex',
+							justifyContent: 'space-evenly',
+						}}>
+						<NavItem title='Home' href='/' />
+						<NavItem title='Preppers' href='/preppers' />
+						{session && <NavItem title='Favs' href='/favorites' />}
+						<NavItem title='About' href='/about' />
+						{session ? (
+							<NavItem title='MyKitchen' href='/myKitchen' />
+						) : (
+							<NavItem title='Register' href='/register' />
+						)}
+					</ul>
+				</nav>
 			</Box>
+			<Box className={styles.collapsedNavBar}>
+				<CollapsedNavMenu />
+			</Box>
+			{/* </Box> */}
 			<Box display='flex' alignItems='center'>
 				<Tooltip title='darkmode'>
 					<Box>
