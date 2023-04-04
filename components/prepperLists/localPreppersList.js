@@ -8,12 +8,11 @@ const LocalPreppersList = ({ localPreppers }) => {
 	if (!localPreppers.length) {
 		return;
 	}
-	const preppers = localPreppers.map(({ name, email, id, description }) => {
+	const preppers = localPreppers.map(({ id, description, kitchenTitle }) => {
 		const avatar = 'https://i.pravatar.cc/300';
 		return (
 			<PrepperCard
-				title={name}
-				subTitle={email}
+				name={kitchenTitle}
 				avatar={avatar}
 				id={id}
 				key={id}
@@ -25,7 +24,7 @@ const LocalPreppersList = ({ localPreppers }) => {
 	return (
 		<Box
 			className={styles.prepCardContainer}
-			sx={{ overflowX: { xs: 'hidden' } }}
+			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
 			display={'flex'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			flexWrap={{ xs: 'none', md: 'wrap' }}>

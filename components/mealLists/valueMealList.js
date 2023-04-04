@@ -17,6 +17,8 @@ const ValueMealList = ({ localPreppers, setMessage, row }) => {
 				return (
 					<FoodItemCard
 						prepperEmail={prepper.email}
+						kitchen={prepper.kitchenTitle}
+						prepperId={prepper.id}
 						foodItem={title}
 						id={id}
 						price={price}
@@ -32,20 +34,10 @@ const ValueMealList = ({ localPreppers, setMessage, row }) => {
 
 	return (
 		<Box
+			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
 			display={'flex'}
-			flexWrap={{ xs: 'unset', md: 'wrap' }}
-			width={'100%'}
-			gap='3em'
-			mb={'1em'}
-			sx={{
-				height: {
-					xs: row ? '' : '30rem',
-					sm: row ? '' : '30rem',
-					md: '',
-					lg: '',
-				},
-				overflowY: 'auto',
-			}}>
+			flexDirection={{ xs: 'column', md: 'row' }}
+			flexWrap={{ xs: 'none', md: 'wrap' }}>
 			{list}
 		</Box>
 	);
