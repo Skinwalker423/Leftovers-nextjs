@@ -227,13 +227,22 @@ export async function findLocalPreppersWithZipcode(client, zipcode) {
 			return [];
 		}
 		const mappedDoc = data.map(
-			({ _id, firstName, lastName, email, description, kitchenTitle }) => {
+			({
+				_id,
+				firstName,
+				lastName,
+				email,
+				description,
+				kitchenTitle,
+				meals,
+			}) => {
 				return {
 					name: `${firstName} ${lastName}`,
-					email: email,
+					email,
 					id: _id.toString(),
-					description: description,
-					kitchenTitle: kitchenTitle,
+					description,
+					kitchenTitle,
+					meals,
 				};
 			}
 		);

@@ -17,6 +17,7 @@ import {
 import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
@@ -27,6 +28,8 @@ export default function FoodItemCard({
 	qty = 1,
 	setMsg,
 	prepperEmail,
+	prepperId,
+	kitchen,
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
@@ -55,7 +58,13 @@ export default function FoodItemCard({
 
 	return (
 		<motion.div whileHover={{ scale: 1.1 }}>
-			<Card sx={{ maxWidth: 375, height: '26rem' }}>
+			<Card
+				sx={{
+					maxWidth: 375,
+					height: '24rem',
+					minWidth: 325,
+					m: '2rem',
+				}}>
 				<CardMedia sx={{ height: '45%' }} image={image} title={foodItem} />
 				<Stack sx={{ height: '55%' }} justifyContent='space-between'>
 					<CardContent
@@ -66,6 +75,7 @@ export default function FoodItemCard({
 							height: '100%',
 						}}>
 						<Box>
+							{kitchen && <Typography variant='h4'>{kitchen}</Typography>}
 							<Box display='flex' justifyContent={'space-between'}>
 								<Typography
 									color={'secondary'}
@@ -104,6 +114,19 @@ export default function FoodItemCard({
 								)}
 							</IconButton>
 						</Tooltip>
+						{prepperId && (
+							<Link
+								style={{ textDecoration: 'none' }}
+								href={`/preppers/${prepperId}`}>
+								<Button
+									variant='outlined'
+									color={'secondary'}
+									disabled={qty == 0}
+									size='small'>
+									Visit Kitchen
+								</Button>
+							</Link>
+						)}
 						<Button
 							variant='contained'
 							color='success'
