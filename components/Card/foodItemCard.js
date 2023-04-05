@@ -4,6 +4,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {
 	Box,
 	Typography,
+	CircularProgress,
 	Stack,
 	IconButton,
 	CardActions,
@@ -32,6 +33,7 @@ export default function FoodItemCard({
 	kitchen,
 }) {
 	const [favorited, setFavorited] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
 
 	const meal = {
@@ -54,6 +56,10 @@ export default function FoodItemCard({
 		setTimeout(() => {
 			setMsg('');
 		}, 3000);
+	};
+
+	const handleViewKitchenClick = () => {
+		setLoading(true);
 	};
 
 	return (
@@ -120,10 +126,21 @@ export default function FoodItemCard({
 								href={`/preppers/${prepperId}`}>
 								<Button
 									variant='outlined'
+									onClick={handleViewKitchenClick}
 									color={'secondary'}
-									disabled={qty == 0}
+									disabled={qty == 0 || loading}
 									size='small'>
-									Visit Kitchen
+									<Typography
+										display={'flex'}
+										justifyContent={'center'}
+										alignItems={'center'}
+										sx={{ width: '6rem', height: '1.5rem' }}>
+										{loading ? (
+											<CircularProgress size={'1rem'} />
+										) : (
+											'Visit Kitchen'
+										)}
+									</Typography>
 								</Button>
 							</Link>
 						)}
