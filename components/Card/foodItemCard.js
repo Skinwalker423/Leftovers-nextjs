@@ -125,17 +125,22 @@ export default function FoodItemCard({
 								style={{ textDecoration: 'none' }}
 								href={`/preppers/${prepperId}`}>
 								<Button
-									sx={{ width: '5.5rem', height: '1.85rem' }}
 									variant='outlined'
 									onClick={handleViewKitchenClick}
 									color={'secondary'}
 									disabled={qty == 0 || loading}
 									size='small'>
-									{!loading ? (
-										<CircularProgress size={'1rem'} />
-									) : (
-										'Visit Kitchen'
-									)}
+									<Typography
+										display={'flex'}
+										justifyContent={'center'}
+										alignItems={'center'}
+										sx={{ width: '6rem', height: '1.5rem' }}>
+										{loading ? (
+											<CircularProgress size={'1rem'} />
+										) : (
+											'Visit Kitchen'
+										)}
+									</Typography>
 								</Button>
 							</Link>
 						)}
