@@ -18,6 +18,7 @@ export const ACTION_TYPES = {
 	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
 	SET_FAVORITES_LIST: 'SET_FAVORITES_LIST',
+	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST',
 };
 
 const userReducer = (state, action) => {
@@ -58,6 +59,9 @@ const userReducer = (state, action) => {
 		case ACTION_TYPES.SET_FAVORITES_LIST:
 			return { ...state, favorites: action.payload };
 
+		case ACTION_TYPES.SET_LOCALPREPPERS_LIST:
+			return { ...state, localPreppers: action.payload };
+
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
 	}
@@ -74,6 +78,7 @@ export const UserProvider = ({ children }) => {
 		userCartlist: [],
 		cartTotalPrice: 0,
 		favorites: [],
+		localPreppers: [],
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 

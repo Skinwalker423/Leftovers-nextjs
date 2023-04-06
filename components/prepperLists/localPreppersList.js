@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../store/UserContext';
 import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
-import Link from 'next/link';
 import styles from './localPreppersList.module.css';
 
-const LocalPreppersList = ({ localPreppers }) => {
-	if (!localPreppers.length) {
-		return;
-	}
-	const preppers = localPreppers.map(({ id, description, kitchenTitle }) => {
-		const avatar = 'https://i.pravatar.cc/300';
-		return (
-			<PrepperCard
-				name={kitchenTitle}
-				avatar={avatar}
-				id={id}
-				key={id}
-				description={description}
-			/>
-		);
-	});
+const LocalPreppersList = () => {
+	const { state } = useContext(UserContext);
+	const preppers = state.localPreppers.map(
+		({ id, description, kitchenTitle }) => {
+			const avatar = 'https://i.pravatar.cc/300';
+			return (
+				<PrepperCard
+					name={kitchenTitle}
+					avatar={avatar}
+					id={id}
+					key={id}
+					description={description}
+				/>
+			);
+		}
+	);
 
 	return (
 		<Box

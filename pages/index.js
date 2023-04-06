@@ -74,7 +74,6 @@ export async function getServerSideProps({ req, res }) {
 
 export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
-	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
@@ -105,7 +104,10 @@ export default function Home({ favoriteList, foundSession, error }) {
 		if (findPreppers.error) {
 			setErrorMsg(findPreppers.error);
 		} else {
-			setLocalPreppers(findPreppers);
+			dispatch({
+				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
+				payload: findPreppers,
+			});
 		}
 	};
 
@@ -134,31 +136,28 @@ export default function Home({ favoriteList, foundSession, error }) {
 				</Box>
 			</header>
 			<main className={styles.main}>
-				{localPreppers.length !== 0 && (
+				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList localPreppers={localPreppers} />
+						<LocalPreppersList />
 					</CategoryBanner>
 				)}
-				{localPreppers.length !== 0 && (
+				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link='/'
 						title='$5 Meals'
 						bgColor={colors.greenAccent[700]}>
-						<ValueMealList localPreppers={localPreppers} />
+						<ValueMealList />
 					</CategoryBanner>
 				)}
-				{favoriteList.length !== 0 && (foundSession || session) && (
+				{state.favorites.length !== 0 && (foundSession || session) && (
 					<CategoryBanner
 						link='/favorites'
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
-						<FavoriteList
-							userEmail={userEmail}
-							favoriteList={state.favorites}
-						/>
+						<FavoriteList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
 				{(error || errorMsg) && (

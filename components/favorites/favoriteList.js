@@ -1,14 +1,13 @@
-import { Box } from '@mui/material';
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../store/UserContext';
+import Box from '@mui/material/Box';
 import PrepperCard from '../Card/prepperCard';
 import styles from './favoriteList.module.css';
-import CustomLoader from '../UI/Loader';
 
-const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
+const FavoriteList = ({ favRow, userEmail }) => {
 	const avatar = 'https://i.pravatar.cc/300';
-	if (!favoriteList) {
-		return <CustomLoader />;
-	}
+	const { state } = useContext(UserContext);
+
 	return (
 		<Box
 			display={'flex'}
@@ -26,7 +25,7 @@ const FavoriteList = ({ favoriteList, favRow, userEmail }) => {
 				overflowY: 'auto',
 			}}
 			className={styles.prepCardContainer}>
-			{favoriteList.map((prepper) => {
+			{state.favorites.map((prepper) => {
 				return (
 					<PrepperCard
 						key={prepper.id}
