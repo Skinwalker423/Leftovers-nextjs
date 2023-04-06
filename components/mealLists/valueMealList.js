@@ -1,21 +1,17 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../../store/UserContext';
 import FoodItemCard from '../Card/foodItemCard';
 import Box from '@mui/material/Box';
-import { RouterTwoTone } from '@mui/icons-material';
 
-const ValueMealList = ({ localPreppers, setMessage, row }) => {
-	console.log(localPreppers);
-	const [valueList, setValueList] = useState([]);
+const ValueMealList = () => {
+	const { state } = useContext(UserContext);
 
-	if (!localPreppers.length) {
-		return 'loading...';
-	}
-
-	const list = localPreppers.map((prepper) => {
+	const list = state.localPreppers.map((prepper) => {
 		return prepper.meals.map(({ id, title, price, qty, description }) => {
 			if (price === 5 && qty > 0) {
 				return (
 					<FoodItemCard
+						key={id}
 						prepperEmail={prepper.email}
 						kitchen={prepper.kitchenTitle}
 						prepperId={prepper.id}
@@ -29,8 +25,6 @@ const ValueMealList = ({ localPreppers, setMessage, row }) => {
 			}
 		});
 	});
-
-	console.log(list);
 
 	return (
 		<Box

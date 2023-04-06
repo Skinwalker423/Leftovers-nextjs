@@ -105,7 +105,10 @@ export default function Home({ favoriteList, foundSession, error }) {
 		if (findPreppers.error) {
 			setErrorMsg(findPreppers.error);
 		} else {
-			setLocalPreppers(findPreppers);
+			dispatch({
+				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
+				payload: findPreppers,
+			});
 		}
 	};
 
@@ -134,20 +137,20 @@ export default function Home({ favoriteList, foundSession, error }) {
 				</Box>
 			</header>
 			<main className={styles.main}>
-				{localPreppers.length !== 0 && (
+				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList localPreppers={localPreppers} />
+						<LocalPreppersList localPreppers={state.localPreppers} />
 					</CategoryBanner>
 				)}
-				{localPreppers.length !== 0 && (
+				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link='/'
 						title='$5 Meals'
 						bgColor={colors.greenAccent[700]}>
-						<ValueMealList localPreppers={localPreppers} />
+						<ValueMealList />
 					</CategoryBanner>
 				)}
 				{favoriteList.length !== 0 && (foundSession || session) && (
