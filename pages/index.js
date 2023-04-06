@@ -74,7 +74,6 @@ export async function getServerSideProps({ req, res }) {
 
 export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
-	const [localPreppers, setLocalPreppers] = useState([]);
 	const [errorMsg, setErrorMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
@@ -142,7 +141,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList localPreppers={state.localPreppers} />
+						<LocalPreppersList />
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (
@@ -153,15 +152,12 @@ export default function Home({ favoriteList, foundSession, error }) {
 						<ValueMealList />
 					</CategoryBanner>
 				)}
-				{favoriteList.length !== 0 && (foundSession || session) && (
+				{state.favorites.length !== 0 && (foundSession || session) && (
 					<CategoryBanner
 						link='/favorites'
 						title='Favorite Preppers'
 						bgColor={colors.blueAccent[700]}>
-						<FavoriteList
-							userEmail={userEmail}
-							favoriteList={state.favorites}
-						/>
+						<FavoriteList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
 				{(error || errorMsg) && (
