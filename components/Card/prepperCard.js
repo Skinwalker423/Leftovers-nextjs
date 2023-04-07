@@ -66,6 +66,9 @@ export default function PrepperCard({
 			);
 			if (data.message) {
 				setMsg(data.message);
+				setTimeout(() => {
+					setMsg('');
+				}, 3000);
 			}
 			if (data.error) {
 				setErrorMsg(data.error);
@@ -93,7 +96,14 @@ export default function PrepperCard({
 				newfavoritesList
 			);
 			if (data.message) {
+				setMsg(data.message);
 				console.log('removed this prepper from my favorites');
+				setTimeout(() => {
+					setMsg('');
+				}, 3000);
+			}
+			if (data.error) {
+				setErrorMsg(data.error);
 			}
 			return data;
 		} catch (err) {
