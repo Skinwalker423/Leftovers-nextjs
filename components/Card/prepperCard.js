@@ -32,6 +32,7 @@ export default function PrepperCard({
 	isFavorited,
 	userEmail,
 	id,
+	setMsg,
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
@@ -63,6 +64,12 @@ export default function PrepperCard({
 				prepperDetails,
 				userEmail
 			);
+			if (data.message) {
+				setMsg(data.message);
+			}
+			if (data.error) {
+				setErrorMsg(data.error);
+			}
 			return data;
 		} catch (err) {
 			setErrorMsg('problem adding to favorites', err);
