@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import PrepperCard from '../../components/Card/prepperCard';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
@@ -11,6 +12,7 @@ import {
 	connectMongoDb,
 	findExistingUserEmail,
 } from '../../db/mongodb/mongoDbUtils';
+import SuccessAlert from '../../components/UI/alert/successAlert';
 
 export async function getServerSideProps({ req, res }) {
 	try {
@@ -52,6 +54,8 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
+	const [msg, setMsg] = useState();
+
 	return (
 		<Box
 			height='100%'
@@ -84,11 +88,13 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 								id={prepper.id}
 								userEmail={userEmail ? userEmail : ''}
 								description={prepper.description}
+								setMsg={setMsg}
 							/>
 						);
 					}
 				})}
 			</Box>
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 		</Box>
 	);
 };

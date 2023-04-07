@@ -32,6 +32,7 @@ export default function PrepperCard({
 	isFavorited,
 	userEmail,
 	id,
+	setMsg,
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
@@ -63,6 +64,15 @@ export default function PrepperCard({
 				prepperDetails,
 				userEmail
 			);
+			if (data.message) {
+				setMsg(data.message);
+				setTimeout(() => {
+					setMsg('');
+				}, 3000);
+			}
+			if (data.error) {
+				setErrorMsg(data.error);
+			}
 			return data;
 		} catch (err) {
 			setErrorMsg('problem adding to favorites', err);
@@ -86,7 +96,14 @@ export default function PrepperCard({
 				newfavoritesList
 			);
 			if (data.message) {
+				setMsg(data.message);
 				console.log('removed this prepper from my favorites');
+				setTimeout(() => {
+					setMsg('');
+				}, 3000);
+			}
+			if (data.error) {
+				setErrorMsg(data.error);
 			}
 			return data;
 		} catch (err) {
