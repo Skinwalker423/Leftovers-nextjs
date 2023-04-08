@@ -28,7 +28,7 @@ const LocalPreppersList = () => {
 			display={'flex'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			flexWrap={{ xs: 'none', md: 'wrap' }}>
-			{localPreppers && localPreppers.length !== 0 && preppers}
+			{state.localPreppers && state.localPreppers.length !== 0 && preppers}
 		</Box>
 	);
 };
