@@ -141,7 +141,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList />
+						<LocalPreppersList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (
@@ -149,7 +149,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						link='/'
 						title='$5 Meals'
 						bgColor={colors.greenAccent[700]}>
-						<ValueMealList />
+						<ValueMealList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (

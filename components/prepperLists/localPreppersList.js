@@ -4,20 +4,22 @@ import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
 import styles from './localPreppersList.module.css';
 
-const LocalPreppersList = () => {
+const LocalPreppersList = ({ userEmail }) => {
 	const { state } = useContext(UserContext);
 	const preppers = state.localPreppers.map(
-		({ id, description, kitchenTitle }) => {
+		({ id, description, kitchenTitle, email }) => {
 			const avatar = 'https://i.pravatar.cc/300';
-			return (
-				<PrepperCard
-					name={kitchenTitle}
-					avatar={avatar}
-					id={id}
-					key={id}
-					description={description}
-				/>
-			);
+			if (email !== userEmail) {
+				return (
+					<PrepperCard
+						name={kitchenTitle}
+						avatar={avatar}
+						id={id}
+						key={id}
+						description={description}
+					/>
+				);
+			}
 		}
 	);
 

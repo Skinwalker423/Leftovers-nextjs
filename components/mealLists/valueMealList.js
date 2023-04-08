@@ -3,12 +3,12 @@ import { UserContext } from '../../store/UserContext';
 import FoodItemCard from '../Card/foodItemCard';
 import Box from '@mui/material/Box';
 
-const ValueMealList = () => {
+const ValueMealList = ({ userEmail }) => {
 	const { state } = useContext(UserContext);
 
 	const list = state.localPreppers.map((prepper) => {
 		return prepper.meals.map(({ id, title, price, qty, description }) => {
-			if (price === 5 && qty > 0) {
+			if (price === 5 && qty > 0 && prepper.email !== userEmail) {
 				return (
 					<FoodItemCard
 						key={id}
