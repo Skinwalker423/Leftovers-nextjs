@@ -3,10 +3,10 @@ import { Box, Stack, Typography } from '@mui/material';
 import NotificationList from '../../components/notifications/notificationList';
 import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
-import { unstable_getServerSession } from 'next-auth/next';
+import { getServerSession } from 'next-auth/next';
 
 export async function getServerSideProps({ req, res }) {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await getServerSession(req, res, authOptions);
 
 	if (!session) {
 		return {

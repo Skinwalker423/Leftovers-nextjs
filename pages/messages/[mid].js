@@ -2,12 +2,12 @@ import React from 'react';
 import { Box, Paper, Stack, Typography } from '@mui/material';
 import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
-import { unstable_getServerSession } from 'next-auth/next';
+import { getServerSession } from 'next-auth/next';
 import { mockDataContacts } from '../../db/mockData';
 import NotificationItem from '../../components/notifications/notificationItem';
 
 export async function getServerSideProps({ req, res, params }) {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await getServerSession(req, res, authOptions);
 	const messageId = params.mid;
 	console.log(messageId);
 
