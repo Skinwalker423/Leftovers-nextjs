@@ -6,9 +6,26 @@ import { authOptions } from './api/auth/[...nextauth]';
 import RegistrationForm from '../components/UI/form/registration/registrationForm';
 import MyKitchenForm from '../components/UI/form/mykitchen/myKitchenForm';
 import Head from 'next/head';
+import {
+	connectMongoDb,
+	findExistingPrepperEmail,
+} from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
+	const client = await connectMongoDb();
+	const userDb = await findExistingPrepperEmail(client, session.user.email);
+
+	if (userDb) {
+		return {
+			redirect: {
+				destination: '/myKitchen',
+				permanent: false,
+			},
+		};
+	}
+
+	console.log(session);
 	const userSession = session
 		? {
 				name: session.user?.name || null,
@@ -27,10 +44,12 @@ export async function getServerSideProps({ req, res }) {
 const Register = ({ userSession }) => {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
+	console.log(userSession);
 
 	return (
 		<Box
 			width='100%'
+			height='100vh'
 			display='flex'
 			flexDirection='column'
 			justifyContent='center'
@@ -45,7 +64,7 @@ const Register = ({ userSession }) => {
 			{userSession ? (
 				<MyKitchenForm
 					title={'Prepper Registration'}
-					sessionEmail={userSession?.user?.email}
+					sessionEmail={userSession.email}
 				/>
 			) : (
 				<RegistrationForm

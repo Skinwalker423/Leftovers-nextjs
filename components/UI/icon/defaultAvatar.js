@@ -10,7 +10,7 @@ const DefaultAvatar = ({
 	fontSize = 'large',
 }) => {
 	const { colors } = useColors();
-	const firstEmailLetter = userEmail[0];
+	const firstEmailLetter = userEmail ? userEmail[0] : '';
 	return (
 		<Box
 			width={avatar ? 35 : widthHeight}

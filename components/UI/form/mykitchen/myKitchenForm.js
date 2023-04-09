@@ -43,6 +43,8 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 		const description = descriptionRef.current.value;
 		const kitchenTitle = kitchenTitleRef.current.value;
 
+		console.log(email);
+
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
 
@@ -93,7 +95,7 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 			} else {
 				setIsFormLoading(false);
 				setMsg(data.message);
-				signIn();
+				router.push('/');
 			}
 		} catch (err) {
 			setErrorMsg(err);
@@ -106,7 +108,7 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 			<Typography py={'.5em'} textAlign='center' variant='h1'>
 				{title}
 			</Typography>
-			<Box width={'100%'} height='70vh' px='80px'>
+			<Box width={'100%'} height='60vh' px='80px'>
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box width={'100%'} display='flex' justifyContent={'space-between'}>
 						<TextField
