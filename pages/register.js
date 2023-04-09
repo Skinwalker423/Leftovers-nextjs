@@ -27,10 +27,12 @@ export async function getServerSideProps({ req, res }) {
 const Register = ({ userSession }) => {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
+	console.log(userSession);
 
 	return (
 		<Box
 			width='100%'
+			height='100vh'
 			display='flex'
 			flexDirection='column'
 			justifyContent='center'
@@ -45,7 +47,7 @@ const Register = ({ userSession }) => {
 			{userSession ? (
 				<MyKitchenForm
 					title={'Prepper Registration'}
-					sessionEmail={userSession?.user?.email}
+					sessionEmail={userSession?.email}
 				/>
 			) : (
 				<RegistrationForm
