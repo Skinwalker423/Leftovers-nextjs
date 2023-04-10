@@ -102,7 +102,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 
 	return (
 		<div>
-			<Button variant='contained' color='success' onClick={handleOpen}>
+			<Button variant='outlined' color='success' onClick={handleOpen}>
 				Add Meal
 			</Button>
 			<Modal

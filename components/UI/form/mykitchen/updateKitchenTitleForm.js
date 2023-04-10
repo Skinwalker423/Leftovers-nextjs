@@ -92,7 +92,7 @@ const UpdateKitchenForm = ({
 		<div>
 			<Button
 				size='small'
-				variant='contained'
+				variant='outlined'
 				color='warning'
 				onClick={handleOpen}>
 				Update Kicthen {oldKitchenTitle ? 'Title' : 'Description'}

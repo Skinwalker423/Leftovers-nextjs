@@ -66,7 +66,7 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 		<div>
 			<Button
 				size='small'
-				variant='contained'
+				variant='outlined'
 				color='success'
 				onClick={handleOpen}>
 				Update Qty

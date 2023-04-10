@@ -101,13 +101,13 @@ const myKitchen = ({ userData, prepper }) => {
 							fontSize='3em'
 						/>
 					)}
-					<Button color='warning' variant='contained'>
+					<Button color='warning' variant='outlined'>
 						Edit image
 					</Button>
 				</InfoCard>
 				<InfoCard title='Kitchen Picture'>
 					<Typography>Picture here</Typography>
-					<Button color='warning' variant='contained'>
+					<Button color='warning' variant='outlined'>
 						Edit Kitchen Picture
 					</Button>
 				</InfoCard>
@@ -120,7 +120,7 @@ const myKitchen = ({ userData, prepper }) => {
 						Use this to adjust meal status such as sold out, quantity, and
 						remove a meal
 					</Typography>
-					<Button onClick={handleShowMealBtn} color='error' variant='contained'>
+					<Button onClick={handleShowMealBtn} color='error' variant='outlined'>
 						{showMeals ? 'Hide meals' : 'Update Meals'}
 					</Button>
 				</InfoCard>
