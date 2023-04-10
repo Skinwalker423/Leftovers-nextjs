@@ -52,10 +52,6 @@ export default function MyKitchenMealCard({
 		}, 3000);
 	};
 
-	const handleQtyUpdate = async () => {
-		//adjust qty in db
-	};
-
 	return (
 		<Card key={id} sx={{ width: 350 }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
@@ -82,14 +78,14 @@ export default function MyKitchenMealCard({
 						onClick={handleRemoveMeal}
 						size='small'
 						color='error'
-						variant='contained'>
+						variant='outlined'>
 						Remove
 					</Button>
 					<Button
 						onClick={handleOutOfStock}
 						size='small'
 						color='warning'
-						variant='contained'>
+						variant='outlined'>
 						Out of Stock
 					</Button>
 					<UpdateQtyForm email={prepperEmail} mealId={id} setMsg={setMsg} />

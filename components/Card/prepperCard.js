@@ -199,7 +199,7 @@ export default function PrepperCard({
 								},
 							}}>
 							{loading ? (
-								<CircularProgress size={'2rem'} />
+								<CircularProgress color='secondary' size={'2rem'} />
 							) : (
 								<Typography fontSize={'small'}>View Details</Typography>
 							)}
