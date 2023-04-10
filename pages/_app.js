@@ -9,6 +9,7 @@ import createEmotionCache from '../config/createEmotionCache';
 import { SessionProvider } from 'next-auth/react';
 import UserProvider from '../store/UserContext';
 import Layout from './layout/layout';
+import CustomLoader from '../components/UI/Loader';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

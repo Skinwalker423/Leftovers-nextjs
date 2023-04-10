@@ -17,7 +17,6 @@ import {
 	findExistingPrepperEmail,
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { NoMealsRounded } from '@mui/icons-material';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
