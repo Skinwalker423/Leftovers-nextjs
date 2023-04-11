@@ -84,6 +84,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const [loading, setLoading] = useState(false);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
+	console.log('useremail', userEmail);
 
 	useEffect(() => {
 		if (favoriteList) {

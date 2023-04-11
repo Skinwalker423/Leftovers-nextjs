@@ -57,6 +57,8 @@ export default function PrepperCard({
 		description,
 	};
 
+	console.log('prepper and userEmail:', prepperDetails, userEmail);
+
 	async function handleAddFavBtn() {
 		setFavorited(true);
 		try {

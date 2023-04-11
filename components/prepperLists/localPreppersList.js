@@ -6,6 +6,7 @@ import styles from './localPreppersList.module.css';
 
 const LocalPreppersList = ({ userEmail }) => {
 	const { state } = useContext(UserContext);
+
 	const preppers = state.localPreppers.map(
 		({ id, description, kitchenTitle, email }) => {
 			const avatar = 'https://i.pravatar.cc/300';
@@ -17,6 +18,7 @@ const LocalPreppersList = ({ userEmail }) => {
 						id={id}
 						key={id}
 						description={description}
+						userEmail={userEmail}
 					/>
 				);
 			}
