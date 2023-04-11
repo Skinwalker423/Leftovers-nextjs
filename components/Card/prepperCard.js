@@ -86,7 +86,6 @@ export default function PrepperCard({
 		}
 		const newfavoritesList =
 			state.favorites && state.favorites.filter((prepper) => id !== prepper.id);
-		console.log(newfavoritesList);
 		setFavorited(false);
 
 		try {

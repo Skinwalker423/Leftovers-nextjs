@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Alert, Box } from '@mui/material';
@@ -24,7 +23,6 @@ import {
 import { useSession } from 'next-auth/react';
 import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
-import CustomLoader from '../components/UI/Loader';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -77,11 +75,9 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
-	const router = useRouter();
 	const { colors } = useColors();
 	const { data: session } = useSession();
 	const { state, dispatch } = useContext(UserContext);
-	const [loading, setLoading] = useState(false);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
 
