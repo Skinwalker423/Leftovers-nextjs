@@ -57,8 +57,6 @@ export default function PrepperCard({
 		description,
 	};
 
-	console.log('prepper and userEmail:', prepperDetails, userEmail);
-
 	async function handleAddFavBtn() {
 		setFavorited(true);
 		try {
@@ -88,7 +86,6 @@ export default function PrepperCard({
 		}
 		const newfavoritesList =
 			state.favorites && state.favorites.filter((prepper) => id !== prepper.id);
-		console.log(newfavoritesList);
 		setFavorited(false);
 
 		try {
