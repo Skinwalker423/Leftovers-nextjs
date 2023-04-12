@@ -23,8 +23,6 @@ export async function getStaticProps({ params }) {
 			return { notFound: true };
 		}
 
-		console.log({ prepperData });
-
 		return {
 			props: {
 				prepper: prepperData ? prepperData : [],
@@ -62,12 +60,7 @@ const Prepper = ({ prepper }) => {
 	const prepperId = router.query.pid;
 	if (router.isFallback || !prepperId) {
 		return (
-			<Box
-				width='100%'
-				height='100vh'
-				display='flex'
-				justifyContent='center'
-				alignItems='center'>
+			<Box>
 				<Head>
 					<title>Loading...</title>
 					<meta name='description' content='loading content' />
