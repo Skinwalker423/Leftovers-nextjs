@@ -16,17 +16,23 @@ import TrophyLikesButton from '../../components/likes/trophyLikesButton';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
+	try {
+		const prepperData = await fetchPrepper(prepperId);
 
-	const prepperData = await fetchPrepper(prepperId);
-	console.log({ prepperData });
+		if (!prepperData || prepperData.error) {
+			return { notFound: true };
+		}
 
-	return {
-		props: {
-			prepper: prepperData ? prepperData : [],
-		},
+		return {
+			props: {
+				prepper: prepperData ? prepperData : [],
+			},
 
-		revalidate: 60, // In seconds
-	};
+			revalidate: 60, // In seconds
+		};
+	} catch (err) {
+		return { notFound: true };
+	}
 }
 
 export async function getStaticPaths() {
@@ -37,7 +43,7 @@ export async function getStaticPaths() {
 		params: { pid: id },
 	}));
 
-	return { paths, fallback: false };
+	return { paths, fallback: true };
 }
 
 const Prepper = ({ prepper }) => {
@@ -46,20 +52,15 @@ const Prepper = ({ prepper }) => {
 	const [msg, setMsg] = useState('');
 
 	useEffect(() => {
-		if (prepper.meals) {
+		if (prepper && prepper.meals) {
 			setMeals(prepper.meals);
 		}
 	}, [meals]);
 
 	const prepperId = router.query.pid;
-	if (!prepperId) {
+	if (router.isFallback || !prepperId) {
 		return (
-			<Box
-				width='100%'
-				height='100vh'
-				display='flex'
-				justifyContent='center'
-				alignItems='center'>
+			<Box>
 				<Head>
 					<title>Loading...</title>
 					<meta name='description' content='loading content' />

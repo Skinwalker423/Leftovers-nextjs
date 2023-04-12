@@ -10,7 +10,7 @@ const CustomLoader = ({
 	return (
 		<Box zIndex={100} position={'fixed'} top={'60%'} left={'50%'}>
 			<CircularProgress color={color} size={size} value={progress} />
-			<Typography sx={{ mt: '20px' }}>{title}</Typography>
+			<Typography sx={{ mt: '1rem' }}>{title}</Typography>
 		</Box>
 	);
 };
