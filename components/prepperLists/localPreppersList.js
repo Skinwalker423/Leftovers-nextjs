@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
 import styles from './localPreppersList.module.css';
 
-const LocalPreppersList = ({ userEmail }) => {
+const LocalPreppersList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
 
 	const preppers = state.localPreppers.map(
@@ -19,6 +19,7 @@ const LocalPreppersList = ({ userEmail }) => {
 						key={id}
 						description={description}
 						userEmail={userEmail}
+						setMsg={setMsg}
 					/>
 				);
 			}

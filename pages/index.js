@@ -14,6 +14,7 @@ import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
+import SuccessAlert from '../components/UI/alert/successAlert';
 import ValueMealList from '../components/mealLists/valueMealList';
 import {
 	connectMongoDb,
@@ -75,6 +76,7 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+	const [msg, setMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
 	const { state, dispatch } = useContext(UserContext);
@@ -141,7 +143,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						link='/preppers'
 						title='Local Preppers'
 						bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList userEmail={userEmail} />
+						<LocalPreppersList setMsg={setMsg} userEmail={userEmail} />
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (
@@ -171,6 +173,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						{error || errorMsg}
 					</Alert>
 				)}
+				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title='Leftovers' />
