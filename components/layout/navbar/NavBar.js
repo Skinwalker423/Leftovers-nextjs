@@ -32,6 +32,7 @@ const NavBar = () => {
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [selected, setSelected] = useState('/');
 
 	const toggleDrawer = (event) => {
 		if (
@@ -106,7 +107,7 @@ const NavBar = () => {
 			<Box className={styles.collapsedNavBar}>
 				<CollapsedNavMenu />
 			</Box>
-			{/* </Box> */}
+
 			<Box display='flex' alignItems='center'>
 				<Tooltip title='darkmode'>
 					<Box>
