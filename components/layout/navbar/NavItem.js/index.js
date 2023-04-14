@@ -9,16 +9,16 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 	const { colors } = useColors();
 	const router = useRouter();
 
-	const currentPage = href === router.asPath ? true : false;
+	const currentPage =
+		href === router.asPath ? `2px solid ${colors.orangeAccent[900]}` : '';
+
 	return (
 		<Link
 			className={styles.navLink}
 			style={{
 				textDecoration: 'none',
 				padding: '0 1em',
-				borderBottom: currentPage
-					? `2px solid ${colors.orangeAccent[900]}`
-					: '',
+				borderBottom: currentPage,
 			}}
 			href={href}>
 			<li>

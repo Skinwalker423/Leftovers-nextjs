@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Box, Typography, IconButton, Tooltip } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useColors } from '../../../hooks/useColors';
 import { ColorModeContext } from '../../../config/theme';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
@@ -18,21 +17,17 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
 import DefaultAvatar from '../../UI/icon/defaultAvatar';
-import CustomLoader from '../../UI/Loader';
 
 const NavBar = () => {
 	const { data: session } = useSession();
 	const userEmail = session?.user?.email;
 	const userIcon = session?.user?.image;
-	const router = useRouter();
 
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
 	const [showUserMenu, setShowUserMenu] = useState();
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const [loading, setLoading] = useState(false);
-	const [selected, setSelected] = useState('/');
 
 	const toggleDrawer = (event) => {
 		if (
