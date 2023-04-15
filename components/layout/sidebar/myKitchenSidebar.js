@@ -1,12 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -73,9 +70,10 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-export default function MiniDrawer() {
+export default function ResponsiveDrawer() {
 	const theme = useTheme();
-	const [open, setOpen] = React.useState(true);
+	const [open, setOpen] = useState(true);
+	const [selected, setSelected] = useState('');
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -120,11 +118,20 @@ export default function MiniDrawer() {
 					)}
 				</DrawerHeader>
 				<Divider />
-				<List>
+				<List
+					sx={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-evenly',
+						alignItems: 'space-evenly',
+						height: '50%',
+					}}>
 					{['Contact Info', 'My Meals', 'Kitchen proile', 'Orders'].map(
 						(text, index) => (
 							<ListItem key={text} disablePadding sx={{ display: 'block' }}>
 								<ListItemButton
+									onClick={() => setSelected(text)}
+									selected={text === selected}
 									sx={{
 										minHeight: 48,
 										justifyContent: open ? 'initial' : 'center',
@@ -144,7 +151,7 @@ export default function MiniDrawer() {
 						)
 					)}
 				</List>
-				<Divider />
+				{/* <Divider />
 				<List>
 					{['Notifications', 'Trash', 'Spam'].map((text, index) => (
 						<ListItem key={text} disablePadding sx={{ display: 'block' }}>
@@ -166,7 +173,7 @@ export default function MiniDrawer() {
 							</ListItemButton>
 						</ListItem>
 					))}
-				</List>
+				</List> */}
 			</Drawer>
 		</Box>
 	);

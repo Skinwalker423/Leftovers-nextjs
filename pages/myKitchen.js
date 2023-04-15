@@ -63,6 +63,7 @@ const myKitchen = ({ userData, prepper }) => {
 	const { email, image } = userData;
 	const [showMeals, setShowMeals] = useState(false);
 	const [meals, setMeals] = useState(prepper.meals);
+	const [selected, setSelected] = useState('');
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
@@ -83,7 +84,7 @@ const myKitchen = ({ userData, prepper }) => {
 					content='Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities'
 				/>
 			</Head>
-			<ResponsiveDrawer />
+			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			<Box mx={'1rem'} width={{ xs: '70%', sm: '60%', md: '40%' }} mt={'6em'}>
 				<InfoCard title='Avatar'>
 					{image ? (
