@@ -70,10 +70,9 @@ const Drawer = styled(MuiDrawer, {
 	}),
 }));
 
-export default function ResponsiveDrawer() {
+export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
 	const [open, setOpen] = useState(true);
-	const [selected, setSelected] = useState('');
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -126,7 +125,7 @@ export default function ResponsiveDrawer() {
 						alignItems: 'space-evenly',
 						height: '50%',
 					}}>
-					{['Contact Info', 'My Meals', 'Kitchen proile', 'Orders'].map(
+					{['Contact Info', 'My Meals', 'Kitchen profile', 'Orders'].map(
 						(text, index) => (
 							<ListItem key={text} disablePadding sx={{ display: 'block' }}>
 								<ListItemButton
