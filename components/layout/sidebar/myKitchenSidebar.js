@@ -110,6 +110,10 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 								edge='start'
 								sx={{
 									...(open && { display: 'none' }),
+									display: 'flex',
+									justifyContent: 'center',
+									alignItems: 'center',
+									width: { xs: '100%', sm: 'unset' },
 								}}>
 								<MenuIcon />
 							</IconButton>
@@ -125,14 +129,14 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 						alignItems: 'space-evenly',
 						height: '50%',
 					}}>
-					{['Contact Info', 'My Meals', 'Kitchen profile', 'Orders'].map(
+					{['Kitchen profile', 'My Meals', 'Contact Info', 'Orders'].map(
 						(text, index) => (
 							<ListItem key={text} disablePadding sx={{ display: 'block' }}>
 								<ListItemButton
 									onClick={() => setSelected(text)}
 									selected={text === selected}
 									sx={{
-										minHeight: 48,
+										minHeight: 58,
 										justifyContent: open ? 'initial' : 'center',
 										px: 2.5,
 									}}>
@@ -141,6 +145,7 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 											minWidth: 0,
 											mr: open ? 3 : 'auto',
 											justifyContent: 'center',
+											alignItems: 'center',
 										}}>
 										{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
 									</ListItemIcon>

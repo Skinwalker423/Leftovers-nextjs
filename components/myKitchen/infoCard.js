@@ -5,8 +5,10 @@ const InfoCard = ({ children, title = 'Title' }) => {
 	return (
 		<Paper
 			sx={{
-				mt: '2em',
+				my: '2rem ',
+				ml: '2rem',
 				height: '100%',
+				width: { xs: '100%', md: '80%', lg: '70%' },
 				p: '2em',
 			}}>
 			<Box>
