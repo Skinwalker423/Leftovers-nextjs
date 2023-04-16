@@ -37,7 +37,7 @@ function MealsList({ meals, prepperEmail, setMeals, setMsg, setError }) {
 					gap='2em'
 					display={'flex'}
 					alignItems='center'
-					justifyContent={'center'}
+					justifyContent={'space-evenly'}
 					flexWrap='wrap'>
 					{mealsList}
 				</Box>

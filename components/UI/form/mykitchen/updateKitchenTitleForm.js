@@ -95,7 +95,7 @@ const UpdateKitchenForm = ({
 				variant='outlined'
 				color='warning'
 				onClick={handleOpen}>
-				Update Kicthen {oldKitchenTitle ? 'Title' : 'Description'}
+				Update {oldKitchenTitle ? 'Title' : 'Description'}
 			</Button>
 			<Modal
 				open={open}

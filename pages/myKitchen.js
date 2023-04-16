@@ -63,7 +63,7 @@ const myKitchen = ({ userData, prepper }) => {
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const { email, image } = userData;
-	const [showMeals, setShowMeals] = useState(false);
+	const [showMeals, setShowMeals] = useState(true);
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('');
 
@@ -88,7 +88,14 @@ const myKitchen = ({ userData, prepper }) => {
 			</Head>
 			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			{selected === 'Kitchen profile' && (
-				<Box mx={'1rem'} width={{ xs: '70%', sm: '60%', md: '40%' }} mt={'6em'}>
+				<Box
+					display='flex'
+					flexDirection={'column'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					mx={'1rem'}
+					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					mt={'6em'}>
 					<InfoCard title='Avatar'>
 						{image ? (
 							<Image
@@ -112,12 +119,12 @@ const myKitchen = ({ userData, prepper }) => {
 					<InfoCard title='Kitchen Picture'>
 						<Typography>Picture here</Typography>
 						<Button color='warning' variant='outlined'>
-							Edit Kitchen Picture
+							Edit Picture
 						</Button>
 					</InfoCard>
 
 					<InfoCard title='Kitchen Name'>
-						<Typography variant='h1'>{prepper.kitchenTitle}</Typography>
+						<Typography>{prepper.kitchenTitle}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
 							oldKitchenTitle={prepper.kitchenTitle}
@@ -125,7 +132,7 @@ const myKitchen = ({ userData, prepper }) => {
 						/>
 					</InfoCard>
 					<InfoCard title='Description'>
-						<Typography variant='h3'>{prepper.description}</Typography>
+						<Typography>{prepper.description}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
 							oldDescription={prepper.description}
@@ -135,7 +142,7 @@ const myKitchen = ({ userData, prepper }) => {
 				</Box>
 			)}
 			{selected === 'My Meals' && (
-				<Box mx={'1rem'} width={{ xs: '70%', sm: '60%', md: '40%' }} mt={'6em'}>
+				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }} mt={'6em'}>
 					<InfoCard title='Add Meal'>
 						<Typography>Add a meal to your Kitchen</Typography>
 						<AddMeal
@@ -156,19 +163,19 @@ const myKitchen = ({ userData, prepper }) => {
 							{showMeals ? 'Hide meals' : 'Update Meals'}
 						</Button>
 					</InfoCard>
+					{showMeals && (
+						<MealsList
+							meals={meals}
+							prepperEmail={prepper.email}
+							setMeals={setMeals}
+							setMsg={setMsg}
+							setError={setError}
+						/>
+					)}
 				</Box>
 			)}
 			{msg && <SuccessAlert width='80%' msg={msg} setMsg={setMsg} />}
 			{error && <ErrorAlert width='80%' error={error} setError={setError} />}
-			{showMeals && (
-				<MealsList
-					meals={meals}
-					prepperEmail={prepper.email}
-					setMeals={setMeals}
-					setMsg={setMsg}
-					setError={setError}
-				/>
-			)}
 		</Box>
 	);
 };
