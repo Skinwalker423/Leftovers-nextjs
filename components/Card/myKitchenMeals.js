@@ -53,7 +53,7 @@ export default function MyKitchenMealCard({
 	};
 
 	return (
-		<Card key={id} sx={{ width: 350 }}>
+		<Card key={id} sx={{ width: { xs: 275, md: 350 } }}>
 			<CardMedia component='img' height='140' image={image} alt={foodItem} />
 			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
 				<Typography
