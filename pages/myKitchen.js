@@ -65,7 +65,7 @@ const myKitchen = ({ userData, prepper }) => {
 	const { email, image } = userData;
 	const [showMeals, setShowMeals] = useState(true);
 	const [meals, setMeals] = useState(prepper.meals);
-	const [selected, setSelected] = useState('');
+	const [selected, setSelected] = useState('Kitchen profile');
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
