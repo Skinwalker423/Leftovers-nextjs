@@ -15,7 +15,6 @@ export async function getServerSideProps({ req, res }) {
 	try {
 		
 	const session = await getServerSession(req, res, authOptions);
-	console.log(session);
 	const userSession = session
 		? {
 				name: session.user?.name || null,
@@ -56,6 +55,7 @@ export async function getServerSideProps({ req, res }) {
 	return {
 		props: {
 			error,
+			userSession,
 		}
 	}	
 }
@@ -66,7 +66,7 @@ const Register = ({ userSession, error }) => {
 	const [msg, setMsg] = useState('');
 
 	if(error){
-		return setErrorMsg(error);
+		setErrorMsg(error);
 	}
 
 	return (
