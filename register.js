@@ -12,8 +12,9 @@ import {
 } from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
+	try {
+		
 	const session = await getServerSession(req, res, authOptions);
-	console.log(session);
 	const userSession = session
 		? {
 				name: session.user?.name || null,
@@ -48,12 +49,25 @@ export async function getServerSideProps({ req, res }) {
 			userSession,
 		},
 	};
+
+} catch (error) {
+	console.error(error);
+	return {
+		props: {
+			error,
+			userSession,
+		}
+	}	
+}
 }
 
-const Register = ({ userSession }) => {
+const Register = ({ userSession, error }) => {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
-	console.log(userSession);
+
+	if(error){
+		setErrorMsg(error);
+	}
 
 	return (
 		<Box
