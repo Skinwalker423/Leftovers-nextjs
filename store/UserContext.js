@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from 'react';
 // import useTrackLocation from '../hooks/useTrackLocation';
 import {
 	addFavoritePrepperToDb,
-	removeFavoritePrepperToDb,
+	removeFavoritePrepperToDb
 } from '../utils/favorites';
 
 export const UserContext = createContext();
@@ -18,7 +18,7 @@ export const ACTION_TYPES = {
 	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
 	SET_FAVORITES_LIST: 'SET_FAVORITES_LIST',
-	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST',
+	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST'
 };
 
 const userReducer = (state, action) => {
@@ -28,27 +28,27 @@ const userReducer = (state, action) => {
 		case ACTION_TYPES.ADD_FOOD_TO_CART:
 			return {
 				...state,
-				userCartlist: [...state.userCartlist, action.payload],
+				userCartlist: [...state.userCartlist, action.payload]
 			};
 		case ACTION_TYPES.CLEAR_CARTLIST:
 			return {
 				...state,
-				userCartlist: [],
+				userCartlist: []
 			};
 		case ACTION_TYPES.INCREMENT_FOOD_ITEM:
 			return {
 				...state,
-				userCartlist: action.payload,
+				userCartlist: action.payload
 			};
 		case ACTION_TYPES.DECREMENT_FOOD_ITEM:
 			return {
 				...state,
-				userCartlist: action.payload,
+				userCartlist: action.payload
 			};
 		case ACTION_TYPES.SET_TOTAL_PRICE:
 			return {
 				...state,
-				cartTotalPrice: action.payload,
+				cartTotalPrice: action.payload
 			};
 		case ACTION_TYPES.ADD_PREPPER_FAVORITES:
 			return { ...state, favorites: [...state.favorites, action.payload] };
@@ -72,13 +72,13 @@ export const UserProvider = ({ children }) => {
 		coords: {
 			latlong: '',
 			lat: null,
-			long: null,
+			long: null
 		},
 		setLatLong: () => {},
 		userCartlist: [],
 		cartTotalPrice: 0,
 		favorites: [],
-		localPreppers: [],
+		localPreppers: []
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 
@@ -105,13 +105,13 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: 1,
-					prepperEmail,
-				},
+					prepperEmail
+				}
 			];
 
 			return dispatch({
 				type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
-				payload: newMeals,
+				payload: newMeals
 			});
 		}
 		const filteredList = state.userCartlist.filter((item) => item.id !== id);
@@ -125,17 +125,17 @@ export const UserProvider = ({ children }) => {
 				foodItem,
 				description,
 				qty: findExistingFoodItem.qty + 1,
-				prepperEmail,
-			},
+				prepperEmail
+			}
 		];
 		console.log(newCartList);
 		dispatch({
 			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
-			payload: newCartList,
+			payload: newCartList
 		});
 	};
 	const decrementFoodItem = (mealItem) => {
-		const { id, price, image, foodItem, description } = mealItem;
+		const { id, price, image, foodItem, description, prepperEmail } = mealItem;
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
@@ -148,7 +148,7 @@ export const UserProvider = ({ children }) => {
 		if (findExistingFoodItem.qty < 2) {
 			dispatch({
 				type: ACTION_TYPES.DECREMENT_FOOD_ITEM,
-				payload: filteredList,
+				payload: filteredList
 			});
 		} else {
 			const newCartList = [
@@ -161,13 +161,13 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: findExistingFoodItem.qty - 1,
-					prepperEmail,
-				},
+					prepperEmail
+				}
 			];
 			console.log(newCartList);
 			dispatch({
 				type: ACTION_TYPES.DECREMENT_FOOD_ITEM,
-				payload: newCartList,
+				payload: newCartList
 			});
 		}
 	};
@@ -186,7 +186,7 @@ export const UserProvider = ({ children }) => {
 		if (data.message) {
 			dispatch({
 				type: ACTION_TYPES.ADD_PREPPER_FAVORITES,
-				payload: prepperDetails,
+				payload: prepperDetails
 			});
 		}
 		return data;
@@ -200,7 +200,7 @@ export const UserProvider = ({ children }) => {
 		if (data.message) {
 			dispatch({
 				type: ACTION_TYPES.REMOVE_PREPPER_FAVORITES,
-				payload: newfavoritesList,
+				payload: newfavoritesList
 			});
 		}
 		return data;
@@ -218,7 +218,7 @@ export const UserProvider = ({ children }) => {
 		calculateTotalPrice,
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
-		setFavoritesList,
+		setFavoritesList
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
