@@ -1,42 +1,39 @@
 import React, { useRef, useState } from 'react';
-import { registerPrepper, registerUser } from '../../../../utils/registration';
 import {
 	Box,
 	Paper,
 	TextField,
-	Textarea,
 	Typography,
 	Button,
 	CircularProgress,
 	Alert,
-	useMediaQuery,
-	useTheme
+	useTheme,
+	useMediaQuery
 } from '@mui/material';
 import {
 	isValidZipCode,
 	validateEmail
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
-import StateInput from './stateInput';
+import StateInput from '../registration/stateInput';
 import { signIn } from 'next-auth/react';
 
-const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
+const MyKitchenForm = ({ title, sessionEmail }) => {
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const [description, setDescription] = useState();
+	const [errorMsg, setErrorMsg] = useState();
+	const [msg, setMsg] = useState();
+	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
-	const emailRef = useRef();
 	const streetAddressRef = useRef();
 	const cityRef = useRef();
 	const zipcodeRef = useRef();
-	const passwordRef = useRef();
-	const confirmPasswordRef = useRef();
 	const kitchenTitleRef = useRef();
 	const descriptionRef = useRef();
-
-	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.up('md'));
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
@@ -46,30 +43,31 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 		setMsg('');
 		const firstName = firstNameRef.current.value;
 		const lastName = lastNameRef.current.value;
-		const email = emailRef.current.value;
+		const email = sessionEmail;
 		const zipcode = zipcodeRef.current.value;
-		const password = passwordRef.current.value;
-		const confirmPassword = confirmPasswordRef.current.value;
 		const description = descriptionRef.current.value;
 		const kitchenTitle = kitchenTitleRef.current.value;
+
+		console.log(email);
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);
 
 		if (!isValidZip) {
 			setErrorMsg('Invalid zipcode');
+			setIsFormLoading(false);
 			return;
 		}
 		if (!isValidEmail) {
 			setErrorMsg('Invalid email');
+			setIsFormLoading(false);
 			return;
 		}
-		if (password !== confirmPassword) {
-			setErrorMsg('password does not match');
-			return;
-		}
-		if (description.length > 240) {
-			setErrorMsg('Description is more than 240 characters');
+
+		if (!state) {
+			setErrorMsg('please select a State');
+			setIsFormLoading(false);
+
 			return;
 		}
 
@@ -83,30 +81,18 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				state: state,
 				zipcode: zipcodeRef.current.value
 			},
-			description,
-			kitchenTitle
-		};
-
-		const userformBody = {
-			email,
-			password,
-			confirmPassword
+			kitchenTitle,
+			description
 		};
 		try {
-			const data = await registerUser(userformBody);
-
-			if (data.error) {
-				setErrorMsg(data.error);
-				setIsFormLoading(false);
-				return;
-			}
-		} catch (err) {
-			setErrorMsg(err);
-			setIsFormLoading(false);
-			return;
-		}
-		try {
-			const data = await registerPrepper(formBody);
+			const response = await fetch('/api/register/prepper', {
+				headers: {
+					'Content-type': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify(formBody)
+			});
+			const data = await response.json();
 
 			if (data.error) {
 				setErrorMsg(data.error);
@@ -114,7 +100,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 			} else {
 				setIsFormLoading(false);
 				setMsg(data.message);
-				signIn();
+				router.push('/');
 			}
 		} catch (err) {
 			setErrorMsg(err);
@@ -123,22 +109,15 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	};
 
 	return (
-		<Paper
-			sx={{
-				width: { xs: '90%', sm: '85%', md: '50em' },
-				height: { xs: '80vh', md: '89vh' },
-				mt: '5rem'
-			}}
-		>
-			<Typography py={'.5em'} textAlign="center" variant="h2">
+		<Paper>
+			<Typography py={'.5em'} textAlign="center" variant="h1">
 				{title}
 			</Typography>
-			<Box width={'100%'} p={{ xs: '1em 2em', sm: '1em 5em' }}>
+			<Box width={'100%'} height="60vh" px="80px">
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box
-						gap={'1em'}
+						gap={2}
 						width={'100%'}
-						height={'100%'}
 						display="flex"
 						justifyContent={'space-between'}
 					>
@@ -146,36 +125,21 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							size={matches ? 'medium' : 'small'}
 							type="text"
 							required
+							fullWidth
 							id="first-name"
 							inputRef={firstNameRef}
 							label="First Name"
 							color="secondary"
-							fullWidth
 						/>
-
 						<TextField
 							size={matches ? 'medium' : 'small'}
 							id="last-name"
 							type="text"
 							required
+							fullWidth
 							inputRef={lastNameRef}
 							label="Last Name"
 							color="secondary"
-							fullWidth
-						/>
-					</Box>
-					<Box width="100%" mt="1em">
-						<TextField
-							size={matches ? 'medium' : 'small'}
-							id="email"
-							type="email"
-							label="Email"
-							value={sessionEmail}
-							autoComplete="username"
-							required
-							inputRef={emailRef}
-							color="secondary"
-							fullWidth
 						/>
 					</Box>
 					<Box width="100%" mt="1em">
@@ -185,20 +149,19 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							type="text"
 							label="Kitchen Name"
 							required
-							inputProps={{ maxLength: '50' }}
 							placeholder="Dana's Delightful Deserts"
 							inputRef={kitchenTitleRef}
 							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width={'100%'} mt="1em">
+					<Box width="100%" mt="1em">
 						<TextField
 							size="medium"
 							rows={3}
 							fullWidth
-							required
 							multiline={matches ? true : false}
+							required
 							inputRef={descriptionRef}
 							inputProps={{ maxLength: '240' }}
 							color="secondary"
@@ -221,8 +184,8 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 					<Box
 						width="100%"
 						display={'flex'}
+						flexDirection={{ xs: 'column' }}
 						gap={2}
-						flexDirection={'column'}
 						mt="1em"
 					>
 						<TextField
@@ -235,7 +198,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							color="secondary"
 							fullWidth
 						/>
-						<Box gap={2} display={'flex'}>
+						<Box display={'flex'} gap={2}>
 							<StateInput
 								size={matches ? 'medium' : 'small'}
 								state={state}
@@ -255,41 +218,15 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							/>
 						</Box>
 					</Box>
-					<Box width="100%" mt="1em">
-						<TextField
-							size={matches ? 'medium' : 'small'}
-							id="password"
-							type="password"
-							label="Password"
-							required
-							autoComplete="new-password"
-							inputRef={passwordRef}
-							color="secondary"
-							fullWidth
-						/>
-					</Box>
-					<Box width="100%" mt="1em">
-						<TextField
-							size={matches ? 'medium' : 'small'}
-							id="confirmPassword"
-							type="password"
-							label="Confirm Password"
-							required
-							autoComplete="new-password"
-							inputRef={confirmPasswordRef}
-							color="secondary"
-							fullWidth
-						/>
-					</Box>
 					<Button
-						sx={{ mt: '2rem', p: '1em' }}
+						sx={{ mt: '3rem', p: '1em' }}
 						variant="contained"
 						fullWidth
 						disabled={isFormLoading}
 						color="success"
 						type="submit"
 						required
-						size="medium"
+						size="large"
 					>
 						{isFormLoading ? (
 							<CircularProgress />
@@ -299,10 +236,34 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							</Typography>
 						)}
 					</Button>
+					{msg && (
+						<Alert
+							sx={{
+								width: '100%',
+								fontSize: 'larger',
+								mt: '1.5em'
+							}}
+							severity="success"
+						>
+							{msg}
+						</Alert>
+					)}
+					{errorMsg && (
+						<Alert
+							sx={{
+								width: '100%',
+								fontSize: 'larger',
+								mt: '1.5em'
+							}}
+							severity="error"
+						>
+							{errorMsg}
+						</Alert>
+					)}
 				</form>
 			</Box>
 		</Paper>
 	);
 };
 
-export default RegistrationForm;
+export default MyKitchenForm;
