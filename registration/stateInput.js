@@ -68,11 +68,8 @@ const StateInput = ({ setState, state, size }) => {
 	}
 
 	return (
-		<Box>
-			<FormControl
-				size={size}
-				sx={{ width: { xs: '100%', sm: '7em', md: '8em' } }}
-			>
+		<Box width={'100%'}>
+			<FormControl size={size} sx={{ width: '100%' }}>
 				<InputLabel id="state">State</InputLabel>
 				<Select
 					labelId="state"
