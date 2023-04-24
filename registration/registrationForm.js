@@ -125,15 +125,15 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	return (
 		<Paper
 			sx={{
-				width: { xs: '95%', sm: '85%', md: '50em' },
-				height: { xs: '100%', md: '88vh' },
+				width: { xs: '90%', sm: '85%', md: '50em' },
+				height: { xs: '100vh', md: '88vh' },
 				mt: '5rem'
 			}}
 		>
 			<Typography py={'.5em'} textAlign="center" variant="h2">
 				{title}
 			</Typography>
-			<Box width={'100%'} p="1em 5em">
+			<Box width={'100%'} p={{ xs: '1em 2em', sm: '1em 5em' }}>
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box
 						gap={'1em'}
@@ -222,7 +222,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 						width="100%"
 						display={'flex'}
 						gap={2}
-						flexDirection={{ xs: 'column', sm: 'row' }}
+						flexDirection={'column'}
 						mt="1em"
 					>
 						<TextField
@@ -235,23 +235,25 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 							color="secondary"
 							fullWidth
 						/>
-						<StateInput
-							size={matches ? 'medium' : 'small'}
-							state={state}
-							setState={setState}
-						/>
+						<Box gap={2} display={'flex'}>
+							<StateInput
+								size={matches ? 'medium' : 'small'}
+								state={state}
+								setState={setState}
+							/>
 
-						<TextField
-							size={matches ? 'medium' : 'small'}
-							id="zipcode"
-							type="number"
-							inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
-							label="Zipcode"
-							required
-							inputRef={zipcodeRef}
-							color="secondary"
-							fullWidth
-						/>
+							<TextField
+								size={matches ? 'medium' : 'small'}
+								id="zipcode"
+								type="number"
+								inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
+								label="Zipcode"
+								required
+								inputRef={zipcodeRef}
+								color="secondary"
+								fullWidth
+							/>
+						</Box>
 					</Box>
 					<Box width="100%" mt="1em">
 						<TextField
