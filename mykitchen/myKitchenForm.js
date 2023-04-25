@@ -18,14 +18,12 @@ import { useRouter } from 'next/router';
 import StateInput from '../registration/stateInput';
 import { signIn } from 'next-auth/react';
 
-const MyKitchenForm = ({ title, sessionEmail }) => {
+const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const [errorMsg, setErrorMsg] = useState();
-	const [msg, setMsg] = useState();
 	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
