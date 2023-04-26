@@ -1,8 +1,8 @@
-.navLink:hover {
+/* .menuItem:hover {
 	border-bottom: 2px solid orange;
-}
+} */
 
-.navLink{
+.navLink {
 	text-decoration: none;
 	padding: 0 1em;
 }
