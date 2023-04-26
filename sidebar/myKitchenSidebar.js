@@ -18,6 +18,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import CountertopsIcon from '@mui/icons-material/Countertops';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import Tooltip from '@mui/material/Tooltip';
 
 const drawerWidth = 240;
 ['Kitchen profile', 'My Meals', 'Contact Info', 'Orders'];
@@ -98,7 +99,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -169,16 +170,18 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 									px: 2.5
 								}}
 							>
-								<ListItemIcon
-									sx={{
-										minWidth: 0,
-										mr: open ? 3 : 'auto',
-										justifyContent: 'center',
-										alignItems: 'center'
-									}}
-								>
-									{item.image}
-								</ListItemIcon>
+								<Tooltip title={item.name}>
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: open ? 3 : 'auto',
+											justifyContent: 'center',
+											alignItems: 'center'
+										}}
+									>
+										{item.image}
+									</ListItemIcon>
+								</Tooltip>
 								<ListItemText
 									primary={item.name}
 									sx={{ opacity: open ? 1 : 0 }}
