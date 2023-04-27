@@ -31,7 +31,7 @@ const menuListItems = [
 		image: <RestaurantIcon />
 	},
 	{
-		name: 'Contact Info',
+		name: 'Personal Info',
 		image: <PermIdentityIcon />
 	},
 	{
