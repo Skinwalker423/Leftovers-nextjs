@@ -16,9 +16,10 @@ import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitl
 
 import {
 	connectMongoDb,
-	findExistingPrepperEmail,
+	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
+import { Stack } from '@mui/material';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -27,8 +28,8 @@ export async function getServerSideProps({ req, res }) {
 		return {
 			redirect: {
 				destination: '/signin',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -39,8 +40,8 @@ export async function getServerSideProps({ req, res }) {
 		return {
 			redirect: {
 				destination: '/register',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -48,14 +49,14 @@ export async function getServerSideProps({ req, res }) {
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
-		email: session.user?.email || null,
+		email: session.user?.email || null
 	};
 
 	return {
 		props: {
 			userData: user,
-			prepper: userDb,
-		},
+			prepper: userDb
+		}
 	};
 }
 
@@ -73,57 +74,39 @@ const myKitchen = ({ userData, prepper }) => {
 
 	return (
 		<Box
-			width='100%'
+			width="100%"
 			height={'100%'}
 			display={'flex'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={{ xs: 'flex-start' }}
-			alignItems={'center'}>
+			alignItems={'center'}
+		>
 			<Head>
 				<title>MyKitchen</title>
 				<meta
-					name='description'
-					content='Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities'
+					name="description"
+					content="Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities"
 				/>
 			</Head>
 			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			{selected === 'Kitchen profile' && (
 				<Box
-					display='flex'
+					display="flex"
 					flexDirection={'column'}
 					justifyContent={'center'}
 					alignItems={'center'}
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
-					mt={'6em'}>
-					<InfoCard title='Avatar'>
-						{image ? (
-							<Image
-								alt={`avatar image of ${prepper.name}`}
-								src={image}
-								width={100}
-								height={100}
-								priority
-							/>
-						) : (
-							<DefaultAvatar
-								userEmail={prepper.name}
-								widthHeight={100}
-								fontSize='3em'
-							/>
-						)}
-						<Button color='warning' variant='outlined'>
-							Edit image
-						</Button>
-					</InfoCard>
-					<InfoCard title='Kitchen Picture'>
+					mt={'6em'}
+				>
+					<InfoCard title="Kitchen Picture">
 						<Typography>Picture here</Typography>
-						<Button color='warning' variant='outlined'>
+						<Button color="warning" variant="outlined">
 							Edit Picture
 						</Button>
 					</InfoCard>
 
-					<InfoCard title='Kitchen Name'>
+					<InfoCard title="Kitchen Name">
 						<Typography>{prepper.kitchenTitle}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
@@ -131,7 +114,7 @@ const myKitchen = ({ userData, prepper }) => {
 							setMsg={setMsg}
 						/>
 					</InfoCard>
-					<InfoCard title='Description'>
+					<InfoCard title="Description">
 						<Typography>{prepper.description}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
@@ -143,7 +126,7 @@ const myKitchen = ({ userData, prepper }) => {
 			)}
 			{selected === 'My Meals' && (
 				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }} mt={'6em'}>
-					<InfoCard title='Add Meal'>
+					<InfoCard title="Add Meal">
 						<Typography>Add a meal to your Kitchen</Typography>
 						<AddMeal
 							setMsg={setMsg}
@@ -151,15 +134,16 @@ const myKitchen = ({ userData, prepper }) => {
 							setMeals={setMeals}
 						/>
 					</InfoCard>
-					<InfoCard title='Remove/Edit Meals'>
+					<InfoCard title="Remove/Edit Meals">
 						<Typography>
 							Use this to adjust meal status such as sold out, quantity, and
 							remove a meal
 						</Typography>
 						<Button
 							onClick={handleShowMealBtn}
-							color='error'
-							variant='outlined'>
+							color="error"
+							variant="outlined"
+						>
 							{showMeals ? 'Hide meals' : 'Update Meals'}
 						</Button>
 					</InfoCard>
@@ -174,8 +158,55 @@ const myKitchen = ({ userData, prepper }) => {
 					)}
 				</Box>
 			)}
-			{msg && <SuccessAlert width='80%' msg={msg} setMsg={setMsg} />}
-			{error && <ErrorAlert width='80%' error={error} setError={setError} />}
+			{selected === 'Personal Info' && (
+				<Box
+					display="flex"
+					flexDirection={'column'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					mx={'1rem'}
+					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					mt={'6em'}
+				>
+					<InfoCard title="Avatar">
+						{image ? (
+							<Image
+								alt={`avatar image of ${prepper.name}`}
+								src={image}
+								width={100}
+								height={100}
+								priority
+							/>
+						) : (
+							<DefaultAvatar
+								userEmail={prepper.name}
+								widthHeight={100}
+								fontSize="3em"
+							/>
+						)}
+						<Button color="warning" variant="outlined">
+							Edit image
+						</Button>
+					</InfoCard>
+					<InfoCard title="Email">
+						<Typography>{prepper.email}</Typography>
+					</InfoCard>
+					<InfoCard title="Name">
+						<Typography>{prepper.name}</Typography>
+					</InfoCard>
+					<InfoCard title="Home Address">
+						<Stack>
+							<Typography>{prepper.location.address}</Typography>
+							<Typography>
+								{prepper.location.city}, {prepper.location.state},{' '}
+								{prepper.location.zipcode}
+							</Typography>
+						</Stack>
+					</InfoCard>
+				</Box>
+			)}
+			{msg && <SuccessAlert width="80%" msg={msg} setMsg={setMsg} />}
+			{error && <ErrorAlert width="80%" error={error} setError={setError} />}
 		</Box>
 	);
 };

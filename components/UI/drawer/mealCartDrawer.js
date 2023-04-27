@@ -15,30 +15,38 @@ export default function MealCartDrawer({ isDrawerOpen, toggleDrawer }) {
 	return (
 		<Drawer
 			anchor={'right'}
-			variant='temporary'
+			variant="temporary"
 			open={isDrawerOpen}
-			onClose={toggleDrawer}>
+			onClose={toggleDrawer}
+			sx={{
+				'.MuiDrawer-paper': {
+					width: { xs: '70vw', md: '45vw' }
+				}
+			}}
+		>
 			<CartItemList />
 
 			<Box
 				sx={{
 					borderTop: `1px solid ${colors.orangeAccent[900]}`,
 					mt: '15px',
-					pt: '20px',
+					pt: '20px'
 				}}
 				display={'flex'}
-				width='100%'>
+				width="100%"
+			>
 				<Box
 					display={'flex'}
-					width='100%'
-					alignItems='center'
-					justifyContent='space-evenly'>
+					width="100%"
+					alignItems="center"
+					justifyContent="space-evenly"
+				>
 					<Link href={'/checkout'}>
-						<Button onClick={toggleDrawer} variant='contained' color='error'>
+						<Button onClick={toggleDrawer} variant="contained" color="error">
 							Checkout
 						</Button>
 					</Link>
-					<Typography variant='h3' textAlign={'end'}>
+					<Typography variant="h3" textAlign={'end'}>
 						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
 					</Typography>
 				</Box>

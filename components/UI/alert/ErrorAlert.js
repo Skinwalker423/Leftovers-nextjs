@@ -8,17 +8,19 @@ const ErrorAlert = ({ error, setError, width = '100%' }) => {
 			onClose={() => {
 				setError('');
 			}}
-			color='error'
-			variant='filled'
+			color="error"
+			severity="error"
+			variant="filled"
 			sx={{
 				position: 'fixed',
 				bottom: 0,
-				width: { width },
+				width: width,
 				fontSize: 'larger',
 				textAlign: 'center',
 				justifyContent: 'center',
-				zIndex: 50,
-			}}>
+				zIndex: 50
+			}}
+		>
 			<Typography fontSize={'2rem'}>{error}</Typography>
 		</Alert>
 	);

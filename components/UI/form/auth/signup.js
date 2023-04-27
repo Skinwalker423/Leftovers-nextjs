@@ -5,12 +5,14 @@ import {
 	TextField,
 	Typography,
 	Button,
-	Alert,
+	Alert
 } from '@mui/material';
 import { validateEmail } from '../../../../utils/form-validation';
 import { signIn } from 'next-auth/react';
+import { useColors } from '../../../../hooks/useColors';
 
 const SignUpForm = ({ title }) => {
+	const { colors } = useColors();
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
 	const emailRef = useRef();
@@ -41,15 +43,15 @@ const SignUpForm = ({ title }) => {
 		const formBody = {
 			email: emailRef.current.value,
 			password: passwordRef.current.value,
-			confirmPassword: confirmPasswordRef.current.value,
+			confirmPassword: confirmPasswordRef.current.value
 		};
 		try {
 			const response = await fetch('/api/register/user', {
 				headers: {
-					'Content-type': 'application/json',
+					'Content-type': 'application/json'
 				},
 				method: 'POST',
-				body: JSON.stringify(formBody),
+				body: JSON.stringify(formBody)
 			});
 			const data = await response.json();
 			console.log(data);
@@ -70,14 +72,17 @@ const SignUpForm = ({ title }) => {
 			sx={{
 				width: {
 					xs: '100%',
-					md: '45%',
+					md: '45%'
 				},
 				height: {
-					xs: '50vh',
+					xs: '50vh'
 				},
 				my: '1em',
-			}}>
-			<Typography pt={'.5em'} textAlign='center' variant='h1'>
+				boxShadow: 5,
+				border: `2px solid ${colors.orangeAccent[900]}`
+			}}
+		>
+			<Typography pt={'.5em'} textAlign="center" variant="h1">
 				Sign Up
 			</Typography>
 			<Box
@@ -86,55 +91,57 @@ const SignUpForm = ({ title }) => {
 					px: {
 						xs: '2em',
 						md: '5em',
-						lg: '8em',
-					},
-				}}>
+						lg: '8em'
+					}
+				}}
+			>
 				<form onSubmit={handleSignUpFormSubmit}>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='email'
-							type='email'
-							label='Email'
+							id="email"
+							type="email"
+							label="Email"
 							required
-							autoComplete='on'
+							autoComplete="on"
 							inputRef={emailRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='password'
-							type='password'
-							label='Password'
+							id="password"
+							type="password"
+							label="Password"
 							required
-							autoComplete='on'
+							autoComplete="on"
 							inputRef={passwordRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='confirmPassword'
-							type='password'
-							label='Confirm Password'
+							id="confirmPassword"
+							type="password"
+							label="Confirm Password"
 							required
-							autoComplete='on'
+							autoComplete="on"
 							inputRef={confirmPasswordRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
 					<Box>
 						<Button
 							sx={{ mt: '3rem', height: '4em' }}
-							variant='contained'
+							variant="contained"
 							fullWidth
-							color='success'
-							type='submit'
+							color="success"
+							type="submit"
 							required
-							size='large'>
+							size="large"
+						>
 							<Typography fontSize={'large'}>Submit</Typography>
 						</Button>
 					</Box>
@@ -143,16 +150,18 @@ const SignUpForm = ({ title }) => {
 			<Box
 				display={'flex'}
 				width={'100%'}
-				justifyContent='center'
-				alignItems='center'
-				mt='3em'>
+				justifyContent="center"
+				alignItems="center"
+				mt="3em"
+			>
 				{msg && (
 					<Alert
 						sx={{
 							width: '50%',
-							fontSize: 'larger',
+							fontSize: 'larger'
 						}}
-						severity='success'>
+						severity="success"
+					>
 						{msg}
 					</Alert>
 				)}
@@ -160,9 +169,10 @@ const SignUpForm = ({ title }) => {
 					<Alert
 						sx={{
 							width: '50%',
-							fontSize: 'larger',
+							fontSize: 'larger'
 						}}
-						severity='error'>
+						severity="error"
+					>
 						{errorMsg}
 					</Alert>
 				)}

@@ -18,40 +18,45 @@ const SignIn = () => {
 			sx={{
 				width: {
 					xs: '100%',
-					md: '45%',
+					md: '45%'
 				},
 				height: {
 					xs: '35vh',
-					md: '50vh',
+					md: '50vh'
 				},
 				mt: {
 					xs: '5em',
-					md: '0',
+					md: '0'
 				},
+				boxShadow: 5,
+				border: `2px solid ${colors.orangeAccent[900]}`,
 
 				display: 'flex',
 				justifyContent: 'space-evenly',
 				alignItems: 'center',
-				flexDirection: 'column',
-			}}>
+				flexDirection: 'column'
+			}}
+		>
 			<Box>
-				<Typography variant='h1'>Sign In Using</Typography>
+				<Typography variant="h1">Sign In Using</Typography>
 			</Box>
 			<Button
 				onClick={handleSignInCredentials}
-				size='large'
+				size="large"
 				sx={{ width: '250px', height: '50px' }}
-				color='secondary'
-				variant='contained'>
+				color="secondary"
+				variant="contained"
+			>
 				Email and Password
 			</Button>
 			<Typography
-				variant='h3'
+				variant="h3"
 				sx={{
 					borderTop: `1px solid ${colors.orangeAccent[900]}`,
 					width: '90%',
-					textAlign: 'center',
-				}}>
+					textAlign: 'center'
+				}}
+			>
 				or
 			</Typography>
 			<GoogleButton onClick={handleSignInGoogle}>

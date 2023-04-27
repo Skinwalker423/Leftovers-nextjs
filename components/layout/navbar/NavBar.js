@@ -58,43 +58,46 @@ const NavBar = () => {
 
 	return (
 		<Box
-			padding='10px 20px'
-			display='flex'
+			padding="10px 20px"
+			display="flex"
 			position={'fixed'}
-			justifyContent='space-between'
-			alignItems='center'
-			height='5rem'
-			top='0'
+			justifyContent="space-between"
+			alignItems="center"
+			height="5rem"
+			top="0"
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
-			width='100%'>
+			width="100%"
+		>
 			<Link href={'/'}>
 				<Image
-					src='/icons8-connect.svg'
+					src="/icons8-connect.svg"
 					width={50}
 					height={50}
-					alt='Leftovers icon'
+					alt="Leftovers icon"
 				/>
 			</Link>
 			<Box
 				width={{ sm: '15rem', md: '35rem' }}
-				height='3rem'
-				className={styles.navBar}>
+				height="3rem"
+				className={styles.navBar}
+			>
 				<nav style={{ width: '100%' }}>
 					<ul
 						style={{
 							listStyle: 'none',
 							display: 'flex',
-							justifyContent: 'space-evenly',
-						}}>
-						<NavItem title='Home' href='/' />
-						<NavItem title='Preppers' href='/preppers' />
-						{session && <NavItem title='Favs' href='/favorites' />}
-						<NavItem title='About' href='/about' />
+							justifyContent: 'space-evenly'
+						}}
+					>
+						<NavItem title="Home" href="/" />
+						<NavItem title="Preppers" href="/preppers" />
+						{session && <NavItem title="Favs" href="/favorites" />}
+						<NavItem title="About" href="/about" />
 						{session ? (
-							<NavItem title='MyKitchen' href='/myKitchen' />
+							<NavItem title="MyKitchen" href="/myKitchen" />
 						) : (
-							<NavItem title='Register' href='/register' />
+							<NavItem title="Register" href="/register" />
 						)}
 					</ul>
 				</nav>
@@ -103,8 +106,8 @@ const NavBar = () => {
 				<CollapsedNavMenu />
 			</Box>
 
-			<Box display='flex' alignItems='center'>
-				<Tooltip title='darkmode'>
+			<Box display="flex" alignItems="center">
+				<Tooltip title="darkmode">
 					<Box>
 						<IconButton onClick={handleDarkMode}>
 							{palette.mode === 'light' ? (
@@ -116,7 +119,7 @@ const NavBar = () => {
 					</Box>
 				</Tooltip>
 				{session && (
-					<Tooltip title='notifications'>
+					<Tooltip title="notifications">
 						<Box>
 							<IconButton onClick={handleNotificationButton}>
 								{showNotifictions ? (
@@ -128,7 +131,7 @@ const NavBar = () => {
 						</Box>
 					</Tooltip>
 				)}
-				<Tooltip title='meal cart'>
+				<Tooltip title="meal cart">
 					<Box>
 						<IconButton onClick={toggleDrawer}>
 							<ShoppingCartOutlinedIcon />
@@ -142,7 +145,8 @@ const NavBar = () => {
 							<Box>
 								<Typography>{userEmail}</Typography>
 							</Box>
-						}>
+						}
+					>
 						<IconButton onClick={handleUserIcon}>
 							{userIcon ? (
 								<Image
@@ -150,7 +154,7 @@ const NavBar = () => {
 									src={userIcon}
 									width={25}
 									height={25}
-									alt='user icon'
+									alt="user icon"
 								/>
 							) : (
 								<DefaultAvatar avatar userEmail={userEmail} />
@@ -171,13 +175,14 @@ const NavBar = () => {
 							<Typography
 								sx={{
 									'&:hover': {
-										borderBottom: `1px solid ${colors.orangeAccent[900]}`,
-									},
+										borderBottom: `1px solid ${colors.orangeAccent[900]}`
+									}
 								}}
-								px='.5em'
+								px=".5em"
 								fontSize={'large'}
-								variant='button'
-								color={colors.orangeAccent[900]}>
+								variant="button"
+								color={colors.orangeAccent[900]}
+							>
 								Sign In
 							</Typography>
 						</Link>
