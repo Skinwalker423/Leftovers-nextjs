@@ -13,43 +13,46 @@ export async function getServerSideProps({ req }) {
 		return {
 			redirect: {
 				destination: '/',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
 	return {
-		props: {},
+		props: {}
 	};
 }
 
 const signin = () => {
 	return (
 		<Box
+			sx={{ backgroundImage: 'url("./art.jpg")', backgroundSize: 'cover' }}
 			display={'flex'}
-			justifyContent='center'
+			justifyContent="center"
 			alignItems={'center'}
-			width='100%'
-			height='100vh'>
+			width="100%"
+			height="100vh"
+		>
 			<Head>
 				<title>Sign In</title>
 				<meta
-					name='description'
-					content='Sign in using your email and password, or by signing in with Google'
+					name="description"
+					content="Sign in using your email and password, or by signing in with Google"
 				/>
 			</Head>
 			<Box
 				width={'90%'}
 				display={'flex'}
-				justifyContent='space-around'
+				justifyContent="space-around"
 				alignItems={'center'}
 				sx={{
 					flexDirection: {
 						sm: 'column',
 						xs: 'column',
-						md: 'row',
-					},
-				}}>
+						md: 'row'
+					}
+				}}
+			>
 				<SignIn />
 				<SignUpForm />
 			</Box>

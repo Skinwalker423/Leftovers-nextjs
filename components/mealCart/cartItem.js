@@ -25,26 +25,28 @@ const CartItem = ({ meal }) => {
 		<Box
 			key={id}
 			display={'flex'}
-			justifyContent='space-between'
+			justifyContent="space-between"
 			width={'100%'}
-			px='20px'
-			alignItems='center'
+			px="20px"
+			alignItems="center"
 			my={'2em'}
 			borderTop={`1px solid ${colors.primary[100]}`}
-			height='100px'>
+			height="100px"
+		>
 			<Box>
 				<Image src={img} alt={foodItem} width={50} height={50} />
 			</Box>
-			<Box>
+			<Box maxHeight={50} overflow={'auto'}>
 				<Typography>{foodItem}</Typography>
 			</Box>
-			<Box>
-				<Typography>qty: {qty}</Typography>
-			</Box>
-			<Stack>
+
+			<Stack textAlign={'center'}>
 				<IconButton onClick={handleIncrementArrow}>
 					<KeyboardArrowUpIcon />
 				</IconButton>
+				<Box>
+					<Typography>{qty}</Typography>
+				</Box>
 				<IconButton onClick={handleDecrementArrow}>
 					<KeyboardArrowDownIcon />
 				</IconButton>

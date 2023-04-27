@@ -7,20 +7,23 @@ import {
 	Button,
 	CircularProgress,
 	Alert,
+	useTheme,
+	useMediaQuery
 } from '@mui/material';
 import {
 	isValidZipCode,
-	validateEmail,
+	validateEmail
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
 import StateInput from '../registration/stateInput';
 import { signIn } from 'next-auth/react';
 
-const MyKitchenForm = ({ title, sessionEmail }) => {
+const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const [errorMsg, setErrorMsg] = useState();
-	const [msg, setMsg] = useState();
 	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
@@ -74,18 +77,18 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 				address: streetAddressRef.current.value,
 				city: cityRef.current.value,
 				state: state,
-				zipcode: zipcodeRef.current.value,
+				zipcode: zipcodeRef.current.value
 			},
 			kitchenTitle,
-			description,
+			description
 		};
 		try {
 			const response = await fetch('/api/register/prepper', {
 				headers: {
-					'Content-type': 'application/json',
+					'Content-type': 'application/json'
 				},
 				method: 'POST',
-				body: JSON.stringify(formBody),
+				body: JSON.stringify(formBody)
 			});
 			const data = await response.json();
 
@@ -105,97 +108,124 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 
 	return (
 		<Paper>
-			<Typography py={'.5em'} textAlign='center' variant='h1'>
+			<Typography py={'.5em'} textAlign="center" variant="h1">
 				{title}
 			</Typography>
-			<Box width={'100%'} height='60vh' px='80px'>
+			<Box width={'100%'} height="60vh" px="80px">
 				<form onSubmit={handleRegistraionFormSubmit}>
-					<Box width={'100%'} display='flex' justifyContent={'space-between'}>
+					<Box
+						gap={2}
+						width={'100%'}
+						display="flex"
+						justifyContent={'space-between'}
+					>
 						<TextField
-							type='text'
+							size={matches ? 'medium' : 'small'}
+							type="text"
 							required
-							id='first-name'
+							fullWidth
+							id="first-name"
 							inputRef={firstNameRef}
-							label='First Name'
-							color='secondary'
+							label="First Name"
+							color="secondary"
 						/>
 						<TextField
-							id='last-name'
-							type='text'
+							size={matches ? 'medium' : 'small'}
+							id="last-name"
+							type="text"
 							required
+							fullWidth
 							inputRef={lastNameRef}
-							label='Last Name'
-							color='secondary'
+							label="Last Name"
+							color="secondary"
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='title'
-							type='text'
-							label='Kitchen Name'
+							size={matches ? 'medium' : 'small'}
+							id="title"
+							type="text"
+							label="Kitchen Name"
 							required
 							placeholder="Dana's Delightful Deserts"
 							inputRef={kitchenTitleRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							minRows={3}
-							multiline
-							maxRows={3}
+							size="medium"
+							rows={3}
+							fullWidth
+							multiline={matches ? true : false}
 							required
-							color='secondary'
 							inputRef={descriptionRef}
-							label='Description of your meals'
-							placeholder='Enter a brief description of the types of meals you will prepare to share'
-							fullWidth
+							inputProps={{ maxLength: '240' }}
+							color="secondary"
+							label="Description of your meals"
+							placeholder="Enter a brief description of the types of meals you will prepare to share"
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='address'
-							type='text'
-							label='Address'
+							size={matches ? 'medium' : 'small'}
+							id="address"
+							type="text"
+							label="Address"
 							required
 							inputRef={streetAddressRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' display={'flex'} mt='1em'>
+					<Box
+						width="100%"
+						display={'flex'}
+						flexDirection={{ xs: 'column' }}
+						gap={2}
+						mt="1em"
+					>
 						<TextField
-							id='city'
-							type='text'
-							label='City'
+							size={matches ? 'medium' : 'small'}
+							id="city"
+							type="text"
+							label="City"
 							required
 							inputRef={cityRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
-						<StateInput state={state} setState={setState} />
+						<Box display={'flex'} gap={2}>
+							<StateInput
+								size={matches ? 'medium' : 'small'}
+								state={state}
+								setState={setState}
+							/>
 
-						<TextField
-							id='zipcode'
-							type='number'
-							inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
-							label='Zipcode'
-							required
-							inputRef={zipcodeRef}
-							color='secondary'
-							fullWidth
-						/>
+							<TextField
+								size={matches ? 'medium' : 'small'}
+								id="zipcode"
+								type="number"
+								inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
+								label="Zipcode"
+								required
+								inputRef={zipcodeRef}
+								color="secondary"
+								fullWidth
+							/>
+						</Box>
 					</Box>
 					<Button
 						sx={{ mt: '3rem', p: '1em' }}
-						variant='contained'
+						variant="contained"
 						fullWidth
 						disabled={isFormLoading}
-						color='success'
-						type='submit'
+						color="success"
+						type="submit"
 						required
-						size='large'>
+						size="large"
+					>
 						{isFormLoading ? (
 							<CircularProgress />
 						) : (
@@ -209,9 +239,10 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 							sx={{
 								width: '100%',
 								fontSize: 'larger',
-								mt: '1.5em',
+								mt: '1.5em'
 							}}
-							severity='success'>
+							severity="success"
+						>
 							{msg}
 						</Alert>
 					)}
@@ -220,9 +251,10 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 							sx={{
 								width: '100%',
 								fontSize: 'larger',
-								mt: '1.5em',
+								mt: '1.5em'
 							}}
-							severity='error'>
+							severity="error"
+						>
 							{errorMsg}
 						</Alert>
 					)}

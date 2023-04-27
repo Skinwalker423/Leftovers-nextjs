@@ -45,8 +45,8 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		top: '50%',
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
-		width: '50%',
-		height: '55%',
+		width: {xs: '100%',sm: '85%', md:'70%', lg: '55%', xl: '45%'},
+		height: {xs: '70%',sm: '68%', md:'55%'},
 		bgcolor: 'background.paper',
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
@@ -121,7 +121,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 							alignItems='space-between'
 							justifyContent={'space-between'}
 							gap='2em'
-							px='5em'
+							px={{xs: '1rem',sm:'2rem', md: '3rem', lg: '5rem'}}
 							width='100%'
 							mt='1em'>
 							<Box>
@@ -136,8 +136,8 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 									inputRef={titleRef}
 								/>
 							</Box>
-							<Box display={'flex'} justifyContent='space-between'>
-								<Box width={'45%'}>
+							<Box gap={3} display={'flex'} flexDirection={{xs: 'column', md: 'row'}} justifyContent='space-between'>
+								<Box width={{xs: '100%',md: '45%'}}>
 									<TextField
 										id='qty'
 										type='number'
@@ -149,7 +149,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 										inputRef={qtyRef}
 									/>
 								</Box>
-								<Box width={'45%'}>
+								<Box width={{xs: '100%',md: '45%'}}>
 									<FormControl fullWidth>
 										<InputLabel id='price'>Price</InputLabel>
 										<Select
@@ -200,6 +200,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 							</Button>
 							{error && (
 								<Alert
+			
 									onClose={() => {
 										setError('');
 									}}

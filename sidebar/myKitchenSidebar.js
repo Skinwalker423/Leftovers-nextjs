@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -20,8 +21,6 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import Tooltip from '@mui/material/Tooltip';
 
-const drawerWidth = 240;
-['Kitchen profile', 'My Meals', 'Contact Info', 'Orders'];
 const menuListItems = [
 	{
 		name: 'Kitchen profile',
@@ -32,7 +31,7 @@ const menuListItems = [
 		image: <RestaurantIcon />
 	},
 	{
-		name: 'Contact Info',
+		name: 'Personal Info',
 		image: <PermIdentityIcon />
 	},
 	{
@@ -45,6 +44,7 @@ const menuListItems = [
 	}
 ];
 
+const drawerWidth = 240;
 const openedMixin = (theme) => ({
 	width: drawerWidth,
 	top: '6em',
@@ -72,7 +72,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'flex-end',
-
 	marginLeft: '4.5em',
 	padding: theme.spacing(0, 1),
 	// necessary for content to be below app bar
@@ -99,7 +98,9 @@ const Drawer = styled(MuiDrawer, {
 
 export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
-	const [open, setOpen] = useState(false);
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
+
+	const [open, setOpen] = useState(true);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -108,6 +109,12 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
+
+	useEffect(() => {
+		if (matches) {
+			handleDrawerClose();
+		}
+	}, [matches]);
 
 	return (
 		<Box>

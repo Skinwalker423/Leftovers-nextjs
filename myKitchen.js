@@ -19,7 +19,6 @@ import {
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { Stack } from '@mui/material';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -187,21 +186,6 @@ const myKitchen = ({ userData, prepper }) => {
 						<Button color="warning" variant="outlined">
 							Edit image
 						</Button>
-					</InfoCard>
-					<InfoCard title="Email">
-						<Typography>{prepper.email}</Typography>
-					</InfoCard>
-					<InfoCard title="Name">
-						<Typography>{prepper.name}</Typography>
-					</InfoCard>
-					<InfoCard title="Home Address">
-						<Stack>
-							<Typography>{prepper.location.address}</Typography>
-							<Typography>
-								{prepper.location.city}, {prepper.location.state},{' '}
-								{prepper.location.zipcode}
-							</Typography>
-						</Stack>
 					</InfoCard>
 				</Box>
 			)}
