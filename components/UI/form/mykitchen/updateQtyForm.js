@@ -6,18 +6,17 @@ import {
 	Button,
 	TextField,
 	CircularProgress,
-	Alert,
+	Alert
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
 import { updateMealQtyInDb } from '../../../../utils/meals';
 
-const UpdateQtyForm = ({ email, setMsg, mealId }) => {
+const UpdateQtyForm = ({ email, setMsg, mealId, setMeals }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
-
 	const qtyRef = useRef();
 
 	const style = {
@@ -31,7 +30,7 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
 		boxShadow: 24,
-		p: 4,
+		p: 4
 	};
 
 	const handleOpen = () => setOpen(true);
@@ -43,9 +42,18 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
 
+		const newQty = qtyRef.current.value;
+
 		try {
-			const data = await updateMealQtyInDb(email, mealId, qtyRef.current.value);
+			const data = await updateMealQtyInDb(email, mealId, newQty);
 			if (data.message) {
+				setMeals((meals) => {
+					return meals.map((meal) => {
+						if (meal.id === mealId) {
+							return { ...meal, qty: newQty };
+						} else return { ...meal };
+					});
+				});
 				setMsg(data.message);
 				setIsFormLoading(false);
 				setOpen(false);
@@ -65,52 +73,56 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 	return (
 		<div>
 			<Button
-				size='small'
-				variant='outlined'
-				color='success'
-				onClick={handleOpen}>
+				size="small"
+				variant="outlined"
+				color="success"
+				onClick={handleOpen}
+			>
 				Update Qty
 			</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='add-meal-form'
-				aria-describedby='submit details to create a new meal'>
+				aria-labelledby="add-meal-form"
+				aria-describedby="submit details to create a new meal"
+			>
 				<Box sx={style}>
 					<form onSubmit={handleAddMealForm}>
-						<Typography textAlign={'center'} variant='h3'>
+						<Typography textAlign={'center'} variant="h3">
 							Number of meals you have on hand
 						</Typography>
 						<Box
 							display={'flex'}
-							flexDirection='column'
-							alignItems='space-between'
+							flexDirection="column"
+							alignItems="space-between"
 							justifyContent={'space-between'}
-							gap='2em'
-							px='5em'
-							width='100%'
-							mt='1em'>
+							gap="2em"
+							px="5em"
+							width="100%"
+							mt="1em"
+						>
 							<Box width={'100%'}>
 								<TextField
-									id='qty'
-									type='number'
-									label='Number of meals on hand'
+									id="qty"
+									type="number"
+									label="Number of meals on hand"
 									required
-									placeholder='5'
-									color='secondary'
+									placeholder="5"
+									color="secondary"
 									fullWidth
 									inputRef={qtyRef}
 								/>
 							</Box>
 
 							<Button
-								variant='contained'
+								variant="contained"
 								fullWidth
 								disabled={isFormLoading}
-								color='success'
-								type='submit'
+								color="success"
+								type="submit"
 								required
-								size='large'>
+								size="large"
+							>
 								{isFormLoading ? (
 									<CircularProgress />
 								) : (
@@ -124,12 +136,13 @@ const UpdateQtyForm = ({ email, setMsg, mealId }) => {
 									onClose={() => {
 										setError('');
 									}}
-									position='relative'
+									position="relative"
 									sx={{
 										width: '100%',
-										fontSize: 'larger',
+										fontSize: 'larger'
 									}}
-									severity='error'>
+									severity="error"
+								>
 									{error}
 								</Alert>
 							)}
