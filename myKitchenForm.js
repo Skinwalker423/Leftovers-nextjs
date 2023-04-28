@@ -18,14 +18,12 @@ import { useRouter } from 'next/router';
 import StateInput from '../registration/stateInput';
 import { signIn } from 'next-auth/react';
 
-const MyKitchenForm = ({ title, sessionEmail }) => {
+const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const [errorMsg, setErrorMsg] = useState();
-	const [msg, setMsg] = useState();
 	const router = useRouter();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
@@ -109,11 +107,11 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 	};
 
 	return (
-		<Paper>
-			<Typography py={'.5em'} textAlign="center" variant="h1">
+		<Paper sx={{ py: '2em', m: '1em' }}>
+			<Typography textAlign="center" variant="h1">
 				{title}
 			</Typography>
-			<Box width={'100%'} height="60vh" px="80px">
+			<Box width={'100%'} p="2em 4em">
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box
 						gap={2}
@@ -236,30 +234,6 @@ const MyKitchenForm = ({ title, sessionEmail }) => {
 							</Typography>
 						)}
 					</Button>
-					{msg && (
-						<Alert
-							sx={{
-								width: '100%',
-								fontSize: 'larger',
-								mt: '1.5em'
-							}}
-							severity="success"
-						>
-							{msg}
-						</Alert>
-					)}
-					{errorMsg && (
-						<Alert
-							sx={{
-								width: '100%',
-								fontSize: 'larger',
-								mt: '1.5em'
-							}}
-							severity="error"
-						>
-							{errorMsg}
-						</Alert>
-					)}
 				</form>
 			</Box>
 		</Paper>

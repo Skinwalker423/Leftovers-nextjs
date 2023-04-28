@@ -88,7 +88,7 @@ const Register = ({ userSession, error }) => {
 			{userSession ? (
 				<MyKitchenForm
 					title={'Prepper Registration'}
-					sessionEmail={userSession.email}
+					sessionEmail={!userSession ? null : userSession.email}
 					setErrorMsg={setErrorMsg}
 					setMsg={setMsg}
 				/>
