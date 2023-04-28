@@ -8,6 +8,7 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { removeMeal } from '../../utils/meals';
 import { updateMealQtyInDb } from '../../utils/meals';
 import UpdateQtyForm from '../UI/form/mykitchen/updateQtyForm';
+import AreYouSure from '../UI/modal/areYouSure';
 
 export default function MyKitchenMealCard({
 	foodItem = 'Food Item',
@@ -19,7 +20,7 @@ export default function MyKitchenMealCard({
 	setMsg,
 	setError,
 	prepperEmail,
-	setMeals,
+	setMeals
 }) {
 	const handleRemoveMeal = async () => {
 		const data = await removeMeal(prepperEmail, id);
@@ -43,6 +44,13 @@ export default function MyKitchenMealCard({
 		const data = await updateMealQtyInDb(prepperEmail, id, 0);
 		if (data.message) {
 			setMsg(data.message);
+			setMeals((meals) => {
+				return meals.map((meal) => {
+					if (meal.id === id) {
+						return { ...meal, qty: 0 };
+					} else return { ...meal };
+				});
+			});
 		} else if (data.error) {
 			setError(data.error);
 		}
@@ -54,43 +62,61 @@ export default function MyKitchenMealCard({
 
 	return (
 		<Card key={id} sx={{ width: { xs: 275, sm: 350 } }}>
-			<CardMedia component='img' height='140' image={image} alt={foodItem} />
+			<CardMedia component="img" height="140" image={image} alt={foodItem} />
 			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
 				<Typography
 					color={'secondary'}
 					gutterBottom
-					variant='h5'
-					component='div'>
+					variant="h5"
+					component="div"
+				>
 					{foodItem}
 				</Typography>
 				<Typography
 					color={'secondary'}
 					gutterBottom
-					variant='h5'
-					component='div'>
+					variant="h5"
+					component="div"
+				>
 					QTY: {qty}
 				</Typography>
 			</CardContent>
 			<CardActions>
 				<Box
 					pb={'1rem'}
-					width='100%'
+					width="100%"
 					display={'flex'}
-					justifyContent='space-evenly'>
-					<Button
+					justifyContent="space-evenly"
+				>
+					{/* <Button
 						onClick={handleRemoveMeal}
 						size='small'
 						color='error'
 						variant='outlined'>
 						Remove
-					</Button>
-					<Button
+					</Button> */}
+					<AreYouSure
+						title={`Remove ${foodItem}`}
+						text="Are you sure you want to remove this meal from your kitchen?"
+						onConfirmationClick={handleRemoveMeal}
+						buttonTitle="REMOVE"
+						buttonColor="error"
+					/>
+					<AreYouSure
+						title={`Out of Stock`}
+						text='Are you sure you want to set this meal as "Out of Stock"?'
+						onConfirmationClick={handleOutOfStock}
+						buttonTitle="OUT OF STOCK"
+						buttonColor="warning"
+					/>
+					{/* <Button
 						onClick={handleOutOfStock}
-						size='small'
-						color='warning'
-						variant='outlined'>
+						size="small"
+						color="warning"
+						variant="outlined"
+					>
 						Out of Stock
-					</Button>
+					</Button> */}
 					<UpdateQtyForm email={prepperEmail} mealId={id} setMsg={setMsg} />
 				</Box>
 			</CardActions>

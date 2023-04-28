@@ -107,11 +107,11 @@ const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 	};
 
 	return (
-		<Paper>
-			<Typography py={'.5em'} textAlign="center" variant="h1">
+		<Paper sx={{ py: '2em', m: '1em' }}>
+			<Typography textAlign="center" variant="h1">
 				{title}
 			</Typography>
-			<Box width={'100%'} height="60vh" px="80px">
+			<Box width={'100%'} p="2em 4em">
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box
 						gap={2}
@@ -234,30 +234,6 @@ const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 							</Typography>
 						)}
 					</Button>
-					{msg && (
-						<Alert
-							sx={{
-								width: '100%',
-								fontSize: 'larger',
-								mt: '1.5em'
-							}}
-							severity="success"
-						>
-							{msg}
-						</Alert>
-					)}
-					{errorMsg && (
-						<Alert
-							sx={{
-								width: '100%',
-								fontSize: 'larger',
-								mt: '1.5em'
-							}}
-							severity="error"
-						>
-							{errorMsg}
-						</Alert>
-					)}
 				</form>
 			</Box>
 		</Paper>
