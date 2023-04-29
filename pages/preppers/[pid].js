@@ -13,6 +13,8 @@ import {
 
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import TrophyLikesButton from '../../components/likes/trophyLikesButton';
+import useTheme from '@mui/material';
+import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -50,6 +52,7 @@ const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
 	const [msg, setMsg] = useState('');
+	const { colors } = useColors();
 
 	const bannerImage = prepper.kitchenImgUrl || '/art.jpg';
 
@@ -95,37 +98,38 @@ const Prepper = ({ prepper }) => {
 				display="flex"
 				flexDirection={'column'}
 				width="100%"
+				height={'50vh'}
 				justifyContent="center"
 				alignItems="center"
 				position={'relative'}
 				top={0}
 			>
 				<Image src={bannerImage} fill alt={prepper.kitchenTitle} />
-				<Box
-					sx={{
-						width: { xs: '100%', lg: '100%' },
-						height: '50vh',
-						p: '1em',
-						position: 'relative',
-						top: 50
-					}}
-				>
+				<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
 					<Box
 						position={'relative'}
+						borderRadius={'1em'}
 						display="flex"
-						height={'100%'}
+						height={'20em'}
+						padding={'2em'}
 						flexDirection={'column'}
 						alignItems={'center'}
 						justifyContent={'space-between'}
+						backgroundColor={'rgba(100, 50, 0, 0.6)'}
 					>
 						<Box>
-							<Typography textAlign={'center'} variant="h1" color={'error'}>
+							<Typography
+								textAlign={'center'}
+								variant="h1"
+								color={colors.orangeAccent[300]}
+							>
 								{prepper.kitchenTitle}
 							</Typography>
-							<Typography variant="h2">{prepper.description}</Typography>
+							<Typography color={'white'} variant="h2">
+								{prepper.description}
+							</Typography>
 						</Box>
 						<Box>
-							<Typography variant="h2">{prepper.email}</Typography>
 							<TrophyLikesButton />
 						</Box>
 					</Box>
