@@ -13,18 +13,19 @@ const FavoriteList = ({ favRow, userEmail }) => {
 			display={'flex'}
 			flexWrap={{ xs: 'unset', md: 'wrap' }}
 			width={'100%'}
-			gap='3em'
+			gap="3em"
 			mb={'1em'}
 			sx={{
 				height: {
 					xs: favRow ? '' : '30rem',
 					sm: favRow ? '' : '30rem',
 					md: '',
-					lg: '',
+					lg: ''
 				},
-				overflowY: 'auto',
+				overflowY: 'auto'
 			}}
-			className={styles.prepCardContainer}>
+			className={styles.prepCardContainer}
+		>
 			{state.favorites.map((prepper) => {
 				return (
 					<PrepperCard
@@ -35,6 +36,7 @@ const FavoriteList = ({ favRow, userEmail }) => {
 						id={prepper.id}
 						userEmail={userEmail}
 						description={prepper.description}
+						kitchenImgUrl={prepper.kitchenImgUrl}
 					/>
 				);
 			})}
