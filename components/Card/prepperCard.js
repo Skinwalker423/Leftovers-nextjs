@@ -27,12 +27,12 @@ export default function PrepperCard({
 	name,
 	email,
 	subTitle,
-	kitchenImg = '/art.jpg',
+	kitchenImgUrl = '/kitchen2.jpg',
 	description,
 	isFavorited,
 	userEmail,
 	id,
-	setMsg,
+	setMsg
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
@@ -42,7 +42,7 @@ export default function PrepperCard({
 	const {
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
-		state,
+		state
 	} = useContext(UserContext);
 
 	useEffect(() => {
@@ -55,6 +55,7 @@ export default function PrepperCard({
 		name,
 		email,
 		description,
+		kitchenImgUrl
 	};
 
 	async function handleAddFavBtn() {
@@ -121,15 +122,17 @@ export default function PrepperCard({
 					width: { xs: '80%', sm: '20rem', md: '25rem' },
 					m: '2rem',
 					maxWidth: '25rem',
-					height: '26rem',
+					height: '26rem'
 				}}
 				className={styles.prepCard}
-				key={id}>
+				key={id}
+			>
 				<CardHeader
 					avatar={
 						<Avatar
 							sx={{ bgcolor: colors.orangeAccent[500] }}
-							aria-label='prepper'>
+							aria-label="prepper"
+						>
 							<Image
 								style={{ objectFit: 'fill', borderRadius: '50%' }}
 								src={avatar}
@@ -140,22 +143,28 @@ export default function PrepperCard({
 						</Avatar>
 					}
 					action={
-						<IconButton aria-label='settings'>
+						<IconButton aria-label="settings">
 							<MoreVertIcon />
 						</IconButton>
 					}
 					title={name}
 					subheader={subTitle}
 				/>
-				<CardMedia component='img' height='194' image={kitchenImg} alt={name} />
+				<CardMedia
+					component="img"
+					height="194"
+					image={kitchenImgUrl}
+					alt={name}
+				/>
 				<CardContent>
 					<Typography
 						sx={{
 							maxHeight: '3.5rem',
-							height: '3.5rem',
+							height: '3.5rem'
 						}}
-						variant='body2'
-						color='text.secondary'>
+						variant="body2"
+						color="text.secondary"
+					>
 						{description}
 					</Typography>
 				</CardContent>
@@ -163,18 +172,20 @@ export default function PrepperCard({
 					sx={{
 						display: 'flex',
 						justifyContent: 'space-between',
-						alignItems: 'center',
+						alignItems: 'center'
 					}}
-					disableSpacing>
+					disableSpacing
+				>
 					{session && (
-						<Tooltip title='Add to Favorites'>
+						<Tooltip title="Add to Favorites">
 							<IconButton
 								onClick={favorited ? handleRemoveFavBtn : handleAddFavBtn}
-								aria-label='add to favorites'>
+								aria-label="add to favorites"
+							>
 								{favorited ? (
-									<FavoriteIcon fontSize='large' color='error' />
+									<FavoriteIcon fontSize="large" color="error" />
 								) : (
-									<FavoriteBorderOutlinedIcon fontSize='large' color='error' />
+									<FavoriteBorderOutlinedIcon fontSize="large" color="error" />
 								)}
 							</IconButton>
 						</Tooltip>
@@ -186,7 +197,7 @@ export default function PrepperCard({
 						<Button
 							onClick={handleDetailsClick}
 							disabled={loading}
-							size='large'
+							size="large"
 							sx={{
 								width: '7rem',
 								height: '2.5rem',
@@ -194,11 +205,12 @@ export default function PrepperCard({
 								color: colors.orangeAccent[400],
 								'&:hover': {
 									backgroundColor: colors.orangeAccent[900],
-									color: 'white',
-								},
-							}}>
+									color: 'white'
+								}
+							}}
+						>
 							{loading ? (
-								<CircularProgress color='secondary' size={'2rem'} />
+								<CircularProgress color="secondary" size={'2rem'} />
 							) : (
 								<Typography fontSize={'small'}>View Details</Typography>
 							)}
@@ -209,9 +221,10 @@ export default function PrepperCard({
 					<Alert
 						sx={{
 							width: '50%',
-							fontSize: 'larger',
+							fontSize: 'larger'
 						}}
-						severity='error'>
+						severity="error"
+					>
 						{errorMsg}
 					</Alert>
 				)}

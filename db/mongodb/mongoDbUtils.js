@@ -19,7 +19,7 @@ export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
 		const document = await collection.updateOne(
 			{ email: userEmail },
 			{
-				$push: { favorites: prepper },
+				$push: { favorites: prepper }
 			}
 		);
 
@@ -43,7 +43,7 @@ export async function removePrepperFromFavoritesListDb(
 		const document = await collection.updateOne(
 			{ email: userEmail },
 			{
-				$pull: { favorites: { id: prepperId } },
+				$pull: { favorites: { id: prepperId } }
 			}
 		);
 
@@ -67,13 +67,22 @@ export async function findAllInCollection(client, collectionArg) {
 	}
 
 	const mappedDoc = document.map(
-		({ _id, firstName, lastName, email, description, kitchenTitle }) => {
+		({
+			_id,
+			firstName,
+			lastName,
+			email,
+			description,
+			kitchenTitle,
+			kitchenImgUrl
+		}) => {
 			return {
 				name: `${firstName} ${lastName}`,
 				email: email,
 				id: _id.toString(),
 				description: description,
 				kitchenTitle: kitchenTitle,
+				kitchenImgUrl: kitchenImgUrl || ''
 			};
 		}
 	);
@@ -96,12 +105,13 @@ export async function findExistingPrepperEmail(client, email) {
 				address: document.location.address,
 				city: document.location.city,
 				state: document.location.state,
-				zipcode: document.location.zipcode,
+				zipcode: document.location.zipcode
 			},
 			meals: document.meals,
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
-			name: `${document.firstName} ${document.lastName}`,
+			kitchenImgUrl: document?.kitchenImgUrl || '',
+			name: `${document.firstName} ${document.lastName}`
 		};
 		client.close();
 		return formattedDoc;
@@ -125,10 +135,8 @@ export async function findExistingUserEmail(client, email) {
 			email: document?.email,
 			favorites: document?.favorites,
 			password: document?.password,
-			meals: document?.meals,
-			description: document?.description,
-			kitchenTitle: document?.kitchenTitle,
-			name: `${document.firstName} ${document.lastName}`,
+			image: document?.image,
+			name: `${document.firstName} ${document.lastName}`
 		};
 		client.close();
 		return formattedDoc;
@@ -154,12 +162,13 @@ export async function findExistingPrepperWithId(client, id) {
 				address: document.location.address,
 				city: document.location.city,
 				state: document.location.state,
-				zipcode: document.location.zipcode,
+				zipcode: document.location.zipcode
 			},
 			meals: document.meals,
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
-			name: `${document.firstName} ${document.lastName}`,
+			kitchenImgUrl: document?.kitchenImgUrl || '',
+			name: `${document.firstName} ${document.lastName}`
 		};
 		client.close();
 		return formattedDoc;
@@ -172,14 +181,14 @@ export async function findExistingPrepperWithId(client, id) {
 export async function addMealToPrepperDb(client, email, meal) {
 	const mealDetails = {
 		id: ObjectId().toString(),
-		...meal,
+		...meal
 	};
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
 			{ email: email },
 			{
-				$push: { meals: mealDetails },
+				$push: { meals: mealDetails }
 			}
 		);
 
@@ -200,7 +209,7 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 		const document = await collection.updateOne(
 			{ email: userEmail },
 			{
-				$pull: { meals: { id: mealId } },
+				$pull: { meals: { id: mealId } }
 			}
 		);
 
@@ -234,7 +243,8 @@ export async function findLocalPreppersWithZipcode(client, zipcode) {
 				email,
 				description,
 				kitchenTitle,
-				meals,
+				kitchenImgUrl = '',
+				meals
 			}) => {
 				return {
 					name: `${firstName} ${lastName}`,
@@ -242,7 +252,8 @@ export async function findLocalPreppersWithZipcode(client, zipcode) {
 					id: _id.toString(),
 					description,
 					kitchenTitle,
-					meals,
+					kitchenImgUrl,
+					meals
 				};
 			}
 		);
@@ -260,7 +271,7 @@ export async function updateMealQty(client, userEmail, mealId, qty) {
 		const document = await collection.updateOne(
 			{
 				email: userEmail,
-				'meals.id': mealId,
+				'meals.id': mealId
 			},
 			{ $set: { 'meals.$.qty': qty } }
 		);
@@ -280,7 +291,7 @@ export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
 			{
-				email: userEmail,
+				email: userEmail
 			},
 			{ $set: { kitchenTitle } }
 		);
@@ -301,7 +312,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
 			{
-				email: userEmail,
+				email: userEmail
 			},
 			{ $set: { description } }
 		);
@@ -323,7 +334,7 @@ export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 		const document = await collection.updateOne(
 			{
 				email: prepperEmail,
-				'meals.id': mealId,
+				'meals.id': mealId
 			},
 			{ $inc: { 'meals.$.qty': -qty } }
 		);
