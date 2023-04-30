@@ -77,8 +77,9 @@ const myKitchen = ({ userData, prepper }) => {
 	return (
 		<Box
 			width="100%"
-			height={'100vh'}
+			height={'100%'}
 			display={'flex'}
+			position={'relative'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={{ xs: 'flex-start' }}
 			alignItems={'center'}
@@ -94,6 +95,7 @@ const myKitchen = ({ userData, prepper }) => {
 					content="Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities"
 				/>
 			</Head>
+
 			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			{selected === 'Kitchen profile' && (
 				<Box
