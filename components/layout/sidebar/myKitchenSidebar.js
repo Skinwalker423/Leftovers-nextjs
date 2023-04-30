@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,45 +16,70 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import CountertopsIcon from '@mui/icons-material/Countertops';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import Tooltip from '@mui/material/Tooltip';
+
+const menuListItems = [
+	{
+		name: 'Kitchen profile',
+		image: <CountertopsIcon />
+	},
+	{
+		name: 'My Meals',
+		image: <RestaurantIcon />
+	},
+	{
+		name: 'Personal Info',
+		image: <PermIdentityIcon />
+	},
+	{
+		name: 'Orders',
+		image: <InboxIcon />
+	},
+	{
+		name: 'Messages',
+		image: <MailIcon />
+	}
+];
 
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
 	width: drawerWidth,
 	top: '6em',
 	transition: theme.transitions.create('width', {
 		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.enteringScreen,
+		duration: theme.transitions.duration.enteringScreen
 	}),
-	overflowX: 'hidden',
+	overflowX: 'hidden'
 });
 
 const closedMixin = (theme) => ({
 	transition: theme.transitions.create('width', {
 		easing: theme.transitions.easing.sharp,
-		duration: theme.transitions.duration.leavingScreen,
+		duration: theme.transitions.duration.leavingScreen
 	}),
 	overflowX: 'hidden',
 	top: '6em',
 	width: `calc(${theme.spacing(7)} + 1px)`,
 	[theme.breakpoints.up('sm')]: {
-		width: `calc(${theme.spacing(8)} + 1px)`,
-	},
+		width: `calc(${theme.spacing(8)} + 1px)`
+	}
 });
 
 const DrawerHeader = styled('div')(({ theme }) => ({
 	display: 'flex',
 	alignItems: 'center',
 	justifyContent: 'flex-end',
-
 	marginLeft: '4.5em',
 	padding: theme.spacing(0, 1),
 	// necessary for content to be below app bar
-	...theme.mixins.toolbar,
+	...theme.mixins.toolbar
 }));
 
 const Drawer = styled(MuiDrawer, {
-	shouldForwardProp: (prop) => prop !== 'open',
+	shouldForwardProp: (prop) => prop !== 'open'
 })(({ theme, open }) => ({
 	width: drawerWidth,
 
@@ -62,16 +88,18 @@ const Drawer = styled(MuiDrawer, {
 	boxSizing: 'border-box',
 	...(open && {
 		...openedMixin(theme),
-		'& .MuiDrawer-paper': openedMixin(theme),
+		'& .MuiDrawer-paper': openedMixin(theme)
 	}),
 	...(!open && {
 		...closedMixin(theme),
-		'& .MuiDrawer-paper': closedMixin(theme),
-	}),
+		'& .MuiDrawer-paper': closedMixin(theme)
+	})
 }));
 
 export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.down('md'));
+
 	const [open, setOpen] = useState(true);
 
 	const handleDrawerOpen = () => {
@@ -82,16 +110,23 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 		setOpen(false);
 	};
 
+	useEffect(() => {
+		if (matches) {
+			handleDrawerClose();
+		}
+	}, [matches]);
+
 	return (
-		<Box>
+		<Box zIndex={98}>
 			<Drawer
 				sx={{
 					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
-						top: '6em',
-					},
+						top: '6em'
+					}
 				}}
-				variant='permanent'
-				open={open}>
+				variant="permanent"
+				open={open}
+			>
 				<DrawerHeader>
 					{open ? (
 						<IconButton onClick={handleDrawerClose}>
@@ -104,17 +139,18 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 					) : (
 						<Toolbar>
 							<IconButton
-								color='inherit'
-								aria-label='open drawer'
+								color="inherit"
+								aria-label="open drawer"
 								onClick={handleDrawerOpen}
-								edge='start'
+								edge="start"
 								sx={{
 									...(open && { display: 'none' }),
 									display: 'flex',
 									justifyContent: 'center',
 									alignItems: 'center',
-									width: { xs: '100%', sm: 'unset' },
-								}}>
+									width: { xs: '100%', sm: 'unset' }
+								}}
+							>
 								<MenuIcon />
 							</IconButton>
 						</Toolbar>
@@ -127,33 +163,39 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 						flexDirection: 'column',
 						justifyContent: 'space-evenly',
 						alignItems: 'space-evenly',
-						height: '50%',
-					}}>
-					{['Kitchen profile', 'My Meals', 'Contact Info', 'Orders'].map(
-						(text, index) => (
-							<ListItem key={text} disablePadding sx={{ display: 'block' }}>
-								<ListItemButton
-									onClick={() => setSelected(text)}
-									selected={text === selected}
-									sx={{
-										minHeight: 58,
-										justifyContent: open ? 'initial' : 'center',
-										px: 2.5,
-									}}>
+						height: '50%'
+					}}
+				>
+					{menuListItems.map((item, index) => (
+						<ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+							<ListItemButton
+								onClick={() => setSelected(item.name)}
+								selected={item.name === selected}
+								sx={{
+									minHeight: 58,
+									justifyContent: open ? 'initial' : 'center',
+									px: 2.5
+								}}
+							>
+								<Tooltip title={item.name}>
 									<ListItemIcon
 										sx={{
 											minWidth: 0,
 											mr: open ? 3 : 'auto',
 											justifyContent: 'center',
-											alignItems: 'center',
-										}}>
-										{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+											alignItems: 'center'
+										}}
+									>
+										{item.image}
 									</ListItemIcon>
-									<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-								</ListItemButton>
-							</ListItem>
-						)
-					)}
+								</Tooltip>
+								<ListItemText
+									primary={item.name}
+									sx={{ opacity: open ? 1 : 0 }}
+								/>
+							</ListItemButton>
+						</ListItem>
+					))}
 				</List>
 				{/* <Divider />
 				<List>

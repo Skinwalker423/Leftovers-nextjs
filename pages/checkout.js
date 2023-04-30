@@ -47,15 +47,16 @@ const Checkout = () => {
 
 	return (
 		<Box
-			display='flex'
+			display="flex"
 			width={'100%'}
-			height='100vh'
-			justifyContent={'space-evenly'}>
+			height="100vh"
+			justifyContent={'space-evenly'}
+		>
 			<Head>
 				<title>Checkout</title>
 				<meta
-					name='description'
-					content='Checkout page. Confirm the meals, cost, and pay options before completing your order'
+					name="description"
+					content="Checkout page. Confirm the meals, cost, and pay options before completing your order"
 				/>
 			</Head>
 			<CheckoutList />
@@ -64,7 +65,7 @@ const Checkout = () => {
 			{(msg || loading) && (
 				<Alert
 					color={loading ? 'warning' : 'success'}
-					variant='filled'
+					variant="filled"
 					sx={{
 						position: 'absolute',
 						bottom: 0,
@@ -72,8 +73,9 @@ const Checkout = () => {
 						fontSize: 'larger',
 						textAlign: 'center',
 						justifyContent: 'center',
-						zIndex: 50,
-					}}>
+						zIndex: 50
+					}}
+				>
 					<Typography fontSize={'3rem'}>
 						{loading ? 'Processing payment...' : msg}
 					</Typography>
@@ -81,8 +83,8 @@ const Checkout = () => {
 			)}
 			{error && (
 				<Alert
-					color='error'
-					variant='filled'
+					color="error"
+					variant="filled"
 					sx={{
 						position: 'absolute',
 						bottom: 0,
@@ -90,8 +92,9 @@ const Checkout = () => {
 						fontSize: 'larger',
 						textAlign: 'center',
 						justifyContent: 'center',
-						zIndex: 99,
-					}}>
+						zIndex: 99
+					}}
+				>
 					<Typography fontSize={'3rem'}>{error}</Typography>
 				</Alert>
 			)}

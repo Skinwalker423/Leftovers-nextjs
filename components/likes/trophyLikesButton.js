@@ -1,16 +1,18 @@
 import React from 'react';
-import { Box, IconButton, Typography, Tooltip } from '@mui/material';
+import { Box, IconButton, Typography, Tooltip, Paper } from '@mui/material';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 const TrophyLikesButton = ({ counter = 23 }) => {
 	return (
-		<Tooltip title='Meals Served'>
-			<Box display={'flex'} alignItems='center'>
+		<Tooltip title="Meals Served">
+			<Paper sx={{ display: 'flex', alignItems: 'center', px: '1em' }}>
 				<IconButton>
-					<WorkspacePremiumIcon color='error' fontSize='large' />
+					<WorkspacePremiumIcon color="error" fontSize="large" />
 				</IconButton>
-				<Typography fontSize={'large'}>{counter}</Typography>
-			</Box>
+				<Typography color={'orange'} fontSize={'large'}>
+					{counter}
+				</Typography>
+			</Paper>
 		</Tooltip>
 	);
 };

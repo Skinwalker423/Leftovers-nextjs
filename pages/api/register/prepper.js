@@ -2,7 +2,7 @@ import React from 'react';
 import {
 	connectMongoDb,
 	addDocToDb,
-	findExistingPrepperEmail,
+	findExistingPrepperEmail
 } from '../../../db/mongodb/mongoDbUtils';
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
 
@@ -56,6 +56,7 @@ const prepper = async (req, res) => {
 		meals: [],
 		description,
 		kitchenTitle,
+		kitchenImgUrl: '/art.jpg'
 	};
 	if (req.method === 'POST') {
 		try {

@@ -21,6 +21,7 @@ import {
 import MealsList from '../components/myKitchen/mealsList';
 import { Stack } from '@mui/material';
 
+
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
 
@@ -68,7 +69,9 @@ const myKitchen = ({ userData, prepper }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 
+
 	console.log(prepper);
+
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
@@ -87,6 +90,7 @@ const myKitchen = ({ userData, prepper }) => {
 				backgroundImage: `url('/kitchen2.jpg')`,
 				backgroundSize: 'cover'
 			}}
+
 		>
 			<Head>
 				<title>MyKitchen</title>
@@ -95,7 +99,6 @@ const myKitchen = ({ userData, prepper }) => {
 					content="Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities"
 				/>
 			</Head>
-
 			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			{selected === 'Kitchen profile' && (
 				<Box
@@ -108,6 +111,7 @@ const myKitchen = ({ userData, prepper }) => {
 					mt={'6em'}
 				>
 					<InfoCard title="Kitchen Picture">
+
 						<Image
 							width={100}
 							height={100}
@@ -120,6 +124,7 @@ const myKitchen = ({ userData, prepper }) => {
 					</InfoCard>
 
 					<InfoCard title="Kitchen Name">
+
 						<Typography variant="h4">{prepper.kitchenTitle}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
@@ -128,7 +133,9 @@ const myKitchen = ({ userData, prepper }) => {
 						/>
 					</InfoCard>
 					<InfoCard title="Description">
+
 						<Typography variant="h4">{prepper.description}</Typography>
+
 						<UpdateKitchenForm
 							email={prepper.email}
 							oldDescription={prepper.description}
@@ -149,6 +156,7 @@ const myKitchen = ({ userData, prepper }) => {
 					</InfoCard>
 					<InfoCard title="Remove/Edit Meals">
 						<Typography variant="h4">
+
 							Use this to adjust meal status such as sold out, quantity, and
 							remove a meal
 						</Typography>

@@ -10,7 +10,7 @@ import styles from './index.module.css';
 import {
 	findAllInCollection,
 	connectMongoDb,
-	findExistingUserEmail,
+	findExistingUserEmail
 } from '../../db/mongodb/mongoDbUtils';
 import SuccessAlert from '../../components/UI/alert/successAlert';
 
@@ -25,8 +25,8 @@ export async function getServerSideProps({ req, res }) {
 				props: {
 					preppers: allPreppers || [],
 					userEmail: null,
-					favoritesList: [],
-				},
+					favoritesList: []
+				}
 			};
 		}
 		const userEmail = session?.user?.email;
@@ -40,15 +40,15 @@ export async function getServerSideProps({ req, res }) {
 			props: {
 				preppers: allPreppers || [],
 				userEmail: userEmail ? userEmail : null,
-				favoritesList: favoritesList || [],
-			},
+				favoritesList: favoritesList || []
+			}
 		};
 	} catch (err) {
 		console.error('could not find preppers', err);
 		return {
 			props: {
-				preppers: mockDataContacts || [],
-			},
+				preppers: mockDataContacts || []
+			}
 		};
 	}
 }
@@ -58,18 +58,19 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 
 	return (
 		<Box
-			height='100%'
-			m='6rem 3rem'
+			height="100%"
+			m="6rem 3rem"
 			flexDirection={'column'}
-			display='flex'
-			justifyContent='center'
-			alignItems='center'>
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
+		>
 			<Head>
 				<title>Local Preppers</title>
-				<meta name='description' content='List of all preppers in your area' />
+				<meta name="description" content="List of all preppers in your area" />
 			</Head>
-			<Typography variant='h1'>List of all preppers in your area</Typography>
-			<Box mt='2rem' display='flex' gap='1rem' flexWrap={'wrap'}>
+			<Typography variant="h1">List of all preppers in your area</Typography>
+			<Box mt="2rem" display="flex" gap="1rem" flexWrap={'wrap'}>
 				{preppers.map((prepper) => {
 					const avatar = 'https://i.pravatar.cc/300';
 
@@ -85,6 +86,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 								email={prepper.email}
 								subTitle={prepper.name}
 								avatar={avatar}
+								kitchenImgUrl={prepper.kitchenImgUrl}
 								id={prepper.id}
 								userEmail={userEmail ? userEmail : ''}
 								description={prepper.description}
