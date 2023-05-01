@@ -50,6 +50,7 @@ const Checkout = () => {
 			display="flex"
 			width={'100%'}
 			height="100vh"
+			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={'space-evenly'}
 		>
 			<Head>
