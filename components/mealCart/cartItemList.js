@@ -20,12 +20,8 @@ const CartItemList = ({ checkout }) => {
 
 	return (
 		<Box
-			height="80%"
-			sx={{
-				width: {
-					xs: '100%'
-				}
-			}}
+			height={{ xs: '50vh', md: '80%' }}
+			width={'100%'}
 			display={'flex'}
 			overflow="auto"
 			flexDirection="column"

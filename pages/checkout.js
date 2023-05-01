@@ -1,5 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { Box, Divider, Alert, Typography } from '@mui/material';
+import {
+	Box,
+	Divider,
+	Alert,
+	Typography,
+	useTheme,
+	useMediaQuery
+} from '@mui/material';
 import CheckoutList from '../components/checkout/checkoutList';
 import CheckoutTotals from '../components/checkout/checkoutTotals';
 import Head from 'next/head';
@@ -7,6 +14,7 @@ import { UserContext } from '../store/UserContext';
 import { decrementMealQtyDB } from '../utils/meals';
 import { useRouter } from 'next/router';
 import { ACTION_TYPES } from '../store/UserContext';
+import { useColors } from '../hooks/useColors';
 
 const Checkout = () => {
 	const { state, dispatch } = useContext(UserContext);
@@ -15,6 +23,11 @@ const Checkout = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
+	const { colors } = useColors();
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.up('md'));
+
+	const dividerResponse = matches ? 'vertical' : 'horizontal';
 
 	const onPaymentClick = async () => {
 		setLoading(true);
@@ -50,6 +63,7 @@ const Checkout = () => {
 			display="flex"
 			width={'100%'}
 			height="100vh"
+			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={'space-evenly'}
 		>
 			<Head>
@@ -60,7 +74,11 @@ const Checkout = () => {
 				/>
 			</Head>
 			<CheckoutList />
-			<Divider />
+			<Divider
+				variant="middle"
+				orientation={dividerResponse}
+				color={colors.orangeAccent[900]}
+			/>
 			<CheckoutTotals loading={loading} onPaymentClick={onPaymentClick} />
 			{(msg || loading) && (
 				<Alert
