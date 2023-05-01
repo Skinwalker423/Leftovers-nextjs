@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Paper, Typography, Button } from '@mui/material';
+import { Box, Paper, Typography, Button, Divider } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import GoogleButton from 'react-google-button';
 import { useColors } from '../../../../hooks/useColors';
