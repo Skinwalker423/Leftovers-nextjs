@@ -109,14 +109,7 @@ export default function MyKitchenMealCard({
 						buttonTitle="OUT OF STOCK"
 						buttonColor="warning"
 					/>
-					{/* <Button
-						onClick={handleOutOfStock}
-						size="small"
-						color="warning"
-						variant="outlined"
-					>
-						Out of Stock
-					</Button> */}
+
 					<UpdateQtyForm
 						email={prepperEmail}
 						mealId={id}
