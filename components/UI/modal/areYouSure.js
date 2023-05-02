@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { CircularProgress } from '@mui/material';
 
 const style = {
 	position: 'absolute',
@@ -24,15 +25,19 @@ export default function AreYouSure({
 	buttonTitle = 'Open Model'
 }) {
 	const [open, setOpen] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	const handleConfirmationBtn = async () => {
 		try {
+			setLoading(true);
 			await onConfirmationClick();
+			setLoading(false);
 			handleClose();
 		} catch (err) {
 			console.error(err);
+			setLoading(false);
 			handleClose();
 		}
 	};
@@ -60,18 +65,24 @@ export default function AreYouSure({
 					<Typography id="confirmation-dialogue" sx={{ mt: 2 }}>
 						{text}
 					</Typography>
-					<Box mt={'2em'} display={'flex'} justifyContent={'center'}>
-						<Button
-							onClick={handleConfirmationBtn}
-							variant="outlined"
-							color="success"
-						>
-							Yes, Continue
-						</Button>
-						<Button onClick={handleClose} variant="outlined" color="error">
-							No, Cancel
-						</Button>
-					</Box>
+					{loading ? (
+						<Box mt={'2em'} display={'flex'} justifyContent={'center'}>
+							<CircularProgress />
+						</Box>
+					) : (
+						<Box mt={'2em'} display={'flex'} justifyContent={'center'}>
+							<Button
+								onClick={handleConfirmationBtn}
+								variant="outlined"
+								color="success"
+							>
+								'Yes, Continue'
+							</Button>
+							<Button onClick={handleClose} variant="outlined" color="error">
+								No, Cancel
+							</Button>
+						</Box>
+					)}
 				</Box>
 			</Modal>
 		</div>
