@@ -10,36 +10,35 @@ import { Typography } from '@mui/material';
 
 const LandingCard = ({
 	image = '/images/alegria/prepper2.png',
-	title = 'Become a food prepper'
+	title = 'Become a food prepper',
+	description = 'Make your favorite meals that only you can make and share them with those around you',
+	linkText = 'Learn More'
 }) => {
 	return (
 		<Box
 			sx={{
 				position: 'relative',
 				width: 400,
-				height: '500px',
+				height: '550px',
 				backgroundColor: 'white'
 			}}
 		>
 			<Box position={'relative'} width={'100%'} height={'50%'}>
-				<Image src={image} fill alt={title} />
+				<Image src={image} width={400} height={300} alt={title} />
 			</Box>
 			<Stack gap={3} sx={{ alignItems: 'center' }} p={'2.5em'}>
 				<Typography variant="h2" fontWeight={600}>
 					{title}
 				</Typography>
-				<Typography>
-					Make your favorite meals that only you can make and share them with
-					those around you
-				</Typography>
+				<Typography>{description}</Typography>
 
-				<Link href={'/'}>
+				<Link style={{ textDecoration: 'none' }} href={'/'}>
 					<Typography
 						sx={{ display: 'flex', alignItems: 'center' }}
 						fontSize={'large'}
 						color={'error'}
 					>
-						Learn more
+						{linkText}
 						<ArrowRightAltIcon color="red" />
 					</Typography>{' '}
 				</Link>
