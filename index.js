@@ -179,8 +179,17 @@ export default function Home({ favoriteList, foundSession, error }) {
 					</Alert>
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
-				<Box width={'100%'} height={'600px'} backgroundColor="white">
+				<Box
+					py={'3em'}
+					width={'100%'}
+					display={'flex'}
+					justifyContent={'space-evenly'}
+					height={'600px'}
+					backgroundColor="white"
+				>
 					<LandingCard />
+					<LandingCard image="/images/alegria/prepper.png" />
+					<LandingCard image="/images/alegria/cookingtogether.png" />
 				</Box>
 			</main>
 			<footer className={styles.footer}>
