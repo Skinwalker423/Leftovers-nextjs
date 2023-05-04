@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, Button, Typography } from '@mui/material';
 import Footer from '../components/layout/footer/footer';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
@@ -25,6 +25,8 @@ import { useSession } from 'next-auth/react';
 import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
 import LandingCard from '../components/Card/landingCard';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -180,16 +182,63 @@ export default function Home({ favoriteList, foundSession, error }) {
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				<Box
+					position={'relative'}
 					py={'3em'}
 					width={'100%'}
 					display={'flex'}
+					flexDirection={{ xs: 'column', md: 'row' }}
 					justifyContent={'space-evenly'}
-					height={'600px'}
+					alignItems={'center'}
+					height={{ lg: '50rem' }}
 					backgroundColor="white"
+					gap={5}
 				>
 					<LandingCard />
 					<LandingCard image="/images/alegria/prepper.png" />
 					<LandingCard image="/images/alegria/cookingtogether.png" />
+				</Box>
+				<Box
+					display={'flex'}
+					alignItems={'center'}
+					flexDirection={{ xs: 'column', lg: 'row' }}
+					justifyContent={'center'}
+					width={'100%'}
+					height={'50rem'}
+					p={{ xs: '2em', lg: '5em' }}
+					gap={5}
+				>
+					<Box
+						position={'relative'}
+						width={{ xs: '100%', sm: '90%', md: '80%', lg: '80%', xl: '65%' }}
+						height={{ xs: '50%', sm: '60%', md: '75%', lg: '75%', xl: '100%' }}
+					>
+						<Image
+							src={'/images/cooking/homecooking.jpg'}
+							fill
+							alt={'family preparing food'}
+						/>
+					</Box>
+					<Box
+						display={'flex'}
+						flexDirection={'column'}
+						justifyContent={'center'}
+						alignItems={'center'}
+						gap={2}
+					>
+						<Typography textAlign={'center'} variant="h2">
+							Everything you crave, homecooked.
+						</Typography>
+						<Typography textAlign={'center'}>
+							Get a slice of homemade apple pie or pick up authentic backyard
+							ribs from the best cooks in your community that you've heard so
+							much about.
+						</Typography>
+						<Link href={'/'}>
+							<Button variant="contained" color="error">
+								Find Preppers
+							</Button>
+						</Link>
+					</Box>
 				</Box>
 			</main>
 			<footer className={styles.footer}>
