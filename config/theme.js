@@ -14,7 +14,7 @@ export const tokens = (mode) => ({
 					600: '#525252',
 					700: '#3d3d3d',
 					800: '#292929',
-					900: '#141414',
+					900: '#141414'
 				},
 				primary: {
 					100: '#d0d1d5',
@@ -24,8 +24,8 @@ export const tokens = (mode) => ({
 					500: '#141b2d',
 					600: '#101624',
 					700: '#0c101b',
-					800: '#080b12',
-					900: '#040509',
+					800: '#d0d1d5',
+					900: '#1f2a40'
 				},
 				greenAccent: {
 					100: '#dbf5ee',
@@ -36,7 +36,7 @@ export const tokens = (mode) => ({
 					600: '#3da58a',
 					700: '#2e7c67',
 					800: '#1e5245',
-					900: '#0f2922',
+					900: '#0f2922'
 				},
 				orangeAccent: {
 					100: '#FFFBF6',
@@ -46,8 +46,8 @@ export const tokens = (mode) => ({
 					500: '#F8BD59',
 					600: '#F7AE32',
 					700: '#F59E0B',
-					800: '#C07C08',
-					900: '#e65100',
+					900: '#C07C08',
+					800: '#e65100'
 				},
 				redAccent: {
 					100: '#f8dcdb',
@@ -58,7 +58,7 @@ export const tokens = (mode) => ({
 					600: '#af3f3b',
 					700: '#832f2c',
 					800: '#58201e',
-					900: '#2c100f',
+					900: '#2c100f'
 				},
 				blueAccent: {
 					100: '#e1e2fe',
@@ -69,8 +69,8 @@ export const tokens = (mode) => ({
 					600: '#535ac8',
 					700: '#3e4396',
 					800: '#2a2d64',
-					900: '#151632',
-				},
+					900: '#151632'
+				}
 		  }
 		: {
 				gray: {
@@ -82,7 +82,7 @@ export const tokens = (mode) => ({
 					600: '#858585',
 					700: '#a3a3a3',
 					800: '#c2c2c2',
-					900: '#e0e0e0',
+					900: '#e0e0e0'
 				},
 				primary: {
 					100: '#040509',
@@ -93,7 +93,7 @@ export const tokens = (mode) => ({
 					600: '#434957',
 					700: '#727681',
 					800: '#a1a4ab',
-					900: '#d0d1d5',
+					900: 'white'
 				},
 				greenAccent: {
 					100: '#0f2922',
@@ -104,7 +104,7 @@ export const tokens = (mode) => ({
 					600: '#70d8bd',
 					700: '#94e2cd',
 					800: '#b7ebde',
-					900: '#dbf5ee',
+					900: '#dbf5ee'
 				},
 				orangeAccent: {
 					100: '#e65100',
@@ -115,7 +115,7 @@ export const tokens = (mode) => ({
 					600: '#FACD81',
 					700: '#FBDCA8',
 					800: '#FDECCF',
-					900: '#F59E0B',
+					900: '#F59E0B'
 				},
 				redAccent: {
 					100: '#2c100f',
@@ -126,7 +126,7 @@ export const tokens = (mode) => ({
 					600: '#e2726e',
 					700: '#e99592',
 					800: '#f1b9b7',
-					900: '#f8dcdb',
+					900: '#f8dcdb'
 				},
 				blueAccent: {
 					100: '#151632',
@@ -137,9 +137,9 @@ export const tokens = (mode) => ({
 					600: '#868dfb',
 					700: '#a4a9fc',
 					800: '#c3c6fd',
-					900: '#e1e2fe',
-				},
-		  }),
+					900: '#e1e2fe'
+				}
+		  })
 });
 
 export const themeSettings = (mode) => {
@@ -151,70 +151,70 @@ export const themeSettings = (mode) => {
 			...(mode === 'dark'
 				? {
 						primary: {
-							main: colors.primary[500],
+							main: colors.primary[500]
 						},
 						secondary: {
-							main: colors.orangeAccent[900],
+							main: colors.orangeAccent[900]
 						},
 						neutral: {
 							main: colors.gray[500],
 							dark: colors.gray[700],
-							light: colors.gray[100],
+							light: colors.gray[100]
 						},
 						background: {
-							default: colors.primary[500],
-						},
+							default: colors.primary[500]
+						}
 				  }
 				: {
 						primary: {
-							main: colors.primary[100],
+							main: colors.primary[100]
 						},
 						secondary: {
-							main: colors.orangeAccent[500],
+							main: colors.orangeAccent[500]
 						},
 						neutral: {
 							main: colors.gray[500],
 							dark: colors.gray[700],
-							light: colors.gray[100],
+							light: colors.gray[100]
 						},
 						background: {
-							default: '#fcfcfc',
-						},
-				  }),
+							default: '#fcfcfc'
+						}
+				  })
 		},
 		typography: {
 			fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
 			fontSize: 12,
 			h1: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 40,
+				fontSize: 40
 			},
 			h2: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 32,
+				fontSize: 32
 			},
 			h3: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 24,
+				fontSize: 24
 			},
 			h4: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 20,
+				fontSize: 20
 			},
 			h5: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 16,
+				fontSize: 16
 			},
 			h6: {
 				fontFamily: ['Source Sans Pro', 'sans-serif'].join(','),
-				fontSize: 14,
-			},
-		},
+				fontSize: 14
+			}
+		}
 	};
 };
 
 export const ColorModeContext = createContext({
-	toggleColorMode: () => {},
+	toggleColorMode: () => {}
 });
 
 export const useMode = () => {
@@ -223,7 +223,7 @@ export const useMode = () => {
 	const colorMode = useMemo(
 		() => ({
 			toggleColorMode: () =>
-				setMode((prevState) => (prevState === 'light' ? 'dark' : 'light')),
+				setMode((prevState) => (prevState === 'light' ? 'dark' : 'light'))
 		}),
 		[]
 	);

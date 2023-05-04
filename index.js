@@ -190,7 +190,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 					justifyContent={'space-evenly'}
 					alignItems={'center'}
 					height={{ lg: '50rem' }}
-					backgroundColor="white"
+					backgroundColor={colors.primary[900]}
 					gap={5}
 				>
 					<LandingCard />

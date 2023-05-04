@@ -22,8 +22,8 @@ const LandingCard = ({
 				position: 'relative',
 				width: 400,
 				height: '500px',
-				backgroundColor: colors.orangeAccent[900],
-				border: '1px solid orange',
+				// backgroundColor: colors.orangeAccent[900],
+				// border: '1px solid orange',
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'space-between'
