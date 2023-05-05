@@ -131,7 +131,12 @@ export default function Home({ favoriteList, foundSession, error }) {
 				/>
 			</Head>
 			<header>
-				<Box display={'flex'} justifyContent="center" alignItems={'center'}>
+				<Box
+					width={'100%'}
+					display={'flex'}
+					justifyContent="center"
+					alignItems={'center'}
+				>
 					<LandingHeader title="Welcome to Leftovers!" img="/ball-park.jpg" />
 					<FindLocalPreppersSearchBar
 						handleZipChange={handleZipChange}
