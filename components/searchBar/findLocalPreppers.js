@@ -31,8 +31,8 @@ const FindLocalPreppersSearchBar = ({
 					>
 						<AccountCircle
 							className={styles.account}
+							color="secondary"
 							sx={{
-								color: colors.orangeAccent[900],
 								mr: 2,
 								my: 0.5,
 								fontSize: 'large',
@@ -53,8 +53,8 @@ const FindLocalPreppersSearchBar = ({
 						<IconButton type="submit" size="small">
 							<ArrowForwardOutlinedIcon
 								className={styles.arrow}
+								color="secondary"
 								sx={{
-									color: colors.redAccent[500],
 									my: 0.5,
 									fontSize: 'large',
 									height: '2em',

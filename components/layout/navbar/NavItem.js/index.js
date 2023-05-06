@@ -19,13 +19,13 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 				width={'100%'}
 				sx={{
 					':hover': {
-						borderBottom: `2px solid ${colors.orangeAccent[900]}`
+						borderBottom: `2px solid ${colors.secondary}`
 					}
 				}}
 				borderBottom={currentPage}
 			>
 				<li>
-					<Typography color={colors.orangeAccent[900]} variant="h4">
+					<Typography color={'secondary'} variant="h4">
 						{title}
 					</Typography>
 				</li>

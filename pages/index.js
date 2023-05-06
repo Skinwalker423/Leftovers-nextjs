@@ -191,7 +191,8 @@ export default function Home({ favoriteList, foundSession, error }) {
 					py={'3em'}
 					width={'100%'}
 					display={'flex'}
-					flexDirection={{ xs: 'column', md: 'row' }}
+					flexWrap={'wrap'}
+					// flexDirection={{ xs: 'column', md: 'row' }}
 					justifyContent={'space-evenly'}
 					alignItems={'center'}
 					height={{ lg: '50rem' }}
@@ -230,7 +231,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						alignItems={'center'}
 						gap={2}
 					>
-						<Typography textAlign={'center'} variant="h2">
+						<Typography color={'secondary'} textAlign={'center'} variant="h2">
 							Everything you crave, homecooked.
 						</Typography>
 						<Typography textAlign={'center'}>

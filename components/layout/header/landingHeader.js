@@ -27,7 +27,7 @@ const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 					lineHeight={{ xs: 'normal', md: 1.5 }}
 					fontWeight={900}
 					fontSize={{ xs: '4em', lg: '5em' }}
-					color={colors.orangeAccent[100]}
+					color={colors.orangeAccent[800]}
 					textAlign={'center'}
 					sx={{
 						textShadow:
