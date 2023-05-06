@@ -148,7 +148,11 @@ export default function PrepperCard({
 							<MoreVertIcon />
 						</IconButton>
 					}
-					title={name}
+					title={
+						<Typography variant="h4" color={'secondary'}>
+							{name}
+						</Typography>
+					}
 					subheader={subTitle}
 				/>
 				<CardMedia
@@ -199,21 +203,24 @@ export default function PrepperCard({
 							onClick={handleDetailsClick}
 							disabled={loading}
 							size="large"
+							color="secondary"
 							sx={{
 								width: '7rem',
 								height: '2.5rem',
 								border: `1px solid ${colors.orangeAccent[900]}`,
-								color: colors.orangeAccent[400],
+
 								'&:hover': {
 									backgroundColor: colors.orangeAccent[900],
-									color: 'white'
+									color: colors.primary[100]
 								}
 							}}
 						>
 							{loading ? (
 								<CircularProgress color="secondary" size={'2rem'} />
 							) : (
-								<Typography fontSize={'small'}>View Details</Typography>
+								<Typography color={'secondary'} fontSize={'small'}>
+									View Details
+								</Typography>
 							)}
 						</Button>
 					</Link>
