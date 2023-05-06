@@ -2,16 +2,17 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 
-const LogoTitle = ({ img, title }) => {
+const LogoTitle = ({ img, title, primaryColor }) => {
 	return (
-		<Box display={'flex'} justifyContent='center' alignItems='center'>
+		<Box display={'flex'} justifyContent="center" alignItems="center">
 			<Image src={img} width={50} height={50} alt={title} />
 			<Typography
-				px={'20px'}
+				color={primaryColor}
+				px={'1em'}
 				textAlign={'center'}
-				variant='h2'
-				component='h1'
-				gutterBottom>
+				variant="h2"
+				gutterBottom
+			>
 				{title}
 			</Typography>
 		</Box>

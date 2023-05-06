@@ -5,7 +5,11 @@ import Copyright from './copyright';
 import ProfessionalIconList from './ProfessionalIconList';
 import LogoTitle from './logoTitle';
 
-export default function Footer({ img = '/favicon.ico', title = 'Title' }) {
+export default function Footer({
+	img = '/favicon.ico',
+	title = 'Title',
+	primaryColor
+}) {
 	const { colors } = useColors();
 
 	return (
@@ -19,25 +23,28 @@ export default function Footer({ img = '/favicon.ico', title = 'Title' }) {
 				backgroundColor: colors.primary[400],
 				width: '100%',
 				padding: '0',
-				margin: '0',
-			}}>
+				margin: '0'
+			}}
+		>
 			<Container
-				component='main'
+				component="main"
 				sx={{ mt: 8, mb: 2, justifyContent: 'center', alignItems: 'center' }}
-				maxWidth='sm'>
-				<LogoTitle title={title} img={img} />
+				maxWidth="sm"
+			>
+				<LogoTitle primaryColor={primaryColor} title={title} img={img} />
 				<ProfessionalIconList />
 			</Container>
 			<Box
-				component='footer'
+				component="footer"
 				sx={{
 					py: 3,
 					px: 2,
 					mt: 'auto',
-					backgroundColor: colors.primary[400],
-				}}>
+					backgroundColor: colors.primary[400]
+				}}
+			>
 				<Container>
-					<Copyright company={title} link='/' />
+					<Copyright company={title} link="/" />
 				</Container>
 			</Box>
 		</Box>

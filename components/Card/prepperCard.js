@@ -122,7 +122,8 @@ export default function PrepperCard({
 					width: { xs: '80%', sm: '20rem', md: '25rem' },
 					m: '2rem',
 					maxWidth: '25rem',
-					height: '26rem'
+					height: '26rem',
+					backgroundColor: colors.primary[400]
 				}}
 				className={styles.prepCard}
 				key={id}

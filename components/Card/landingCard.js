@@ -12,7 +12,8 @@ const LandingCard = ({
 	image = '/images/alegria/prepper2.png',
 	title = 'Become a food prepper',
 	description = 'Make your favorite meals that only you can make and share them with those around you',
-	linkText = 'Learn More'
+	linkText = 'Learn More',
+	primaryColor = 'primary'
 }) => {
 	const { colors } = useColors();
 
@@ -20,10 +21,8 @@ const LandingCard = ({
 		<Box
 			sx={{
 				position: 'relative',
-				width: 400,
+				maxWidth: 400,
 				height: '500px',
-				// backgroundColor: colors.orangeAccent[900],
-				// border: '1px solid orange',
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'space-between'
@@ -33,11 +32,10 @@ const LandingCard = ({
 				<Image src={image} width={398} height={300} alt={title} />
 			</Box>
 			<Stack gap={3} sx={{ alignItems: 'center' }} p={'2.5em'}>
-				<Typography variant="h2" fontWeight={600}>
+				<Typography color={primaryColor} variant="h2" fontWeight={600}>
 					{title}
 				</Typography>
-				<Typography>{description}</Typography>
-
+				<Typography variant="h5">{description}</Typography>
 				<Link style={{ textDecoration: 'none' }} href={'/'}>
 					<Typography
 						sx={{ display: 'flex', alignItems: 'center' }}
