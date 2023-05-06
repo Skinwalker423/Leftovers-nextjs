@@ -19,6 +19,7 @@ import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useColors } from '../../hooks/useColors';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
@@ -35,6 +36,7 @@ export default function FoodItemCard({
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
+	const { colors } = useColors();
 
 	const meal = {
 		id,
@@ -70,7 +72,7 @@ export default function FoodItemCard({
 					height: '24rem',
 					minWidth: 325,
 					m: '2rem',
-					backgroundColor: 'primary'
+					backgroundColor: colors.primary[400]
 				}}
 			>
 				<CardMedia sx={{ height: '45%' }} image={image} title={foodItem} />
@@ -105,9 +107,14 @@ export default function FoodItemCard({
 						</Box>
 						<Box>
 							{qty == 0 ? (
-								<Alert color="error">OUT OF STOCK</Alert>
+								<Alert variant="outlined" color="error">
+									OUT OF STOCK
+								</Alert>
 							) : (
-								<Alert color={qty > 3 ? 'success' : 'warning'}>
+								<Alert
+									variant="outlined"
+									color={qty > 3 ? 'success' : 'warning'}
+								>
 									{`${qty > 3 ? '' : 'Only'} ${qty} left`}
 								</Alert>
 							)}

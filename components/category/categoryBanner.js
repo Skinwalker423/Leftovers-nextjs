@@ -8,22 +8,24 @@ const CategoryBanner = ({
 	title = 'Title Here',
 	bgColor,
 	children,
-	link = '/',
+	link = '/'
 }) => {
 	const { colors } = useColors();
 	return (
 		<Box
 			width={'96%'}
-			m='1em'
+			m="1em"
 			borderRadius={'2em'}
 			sx={{ overflowY: 'hidden' }}
-			backgroundColor={bgColor}>
+			backgroundColor={bgColor}
+		>
 			<Link style={{ textDecoration: 'none' }} href={link}>
 				<Typography
-					color={colors.orangeAccent[900]}
+					color={colors.primary[900]}
 					textAlign={'center'}
-					mt='.5em'
-					variant='h2'>
+					mt=".5em"
+					variant="h1"
+				>
 					{title}
 				</Typography>
 			</Link>
