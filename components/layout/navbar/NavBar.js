@@ -181,7 +181,7 @@ const NavBar = () => {
 								px=".5em"
 								fontSize={'large'}
 								variant="button"
-								color={colors.orangeAccent[900]}
+								color={'secondary'}
 							>
 								Sign In
 							</Typography>

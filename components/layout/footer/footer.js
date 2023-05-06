@@ -5,11 +5,7 @@ import Copyright from './copyright';
 import ProfessionalIconList from './ProfessionalIconList';
 import LogoTitle from './logoTitle';
 
-export default function Footer({
-	img = '/favicon.ico',
-	title = 'Title',
-	primaryColor
-}) {
+export default function Footer({ img = '/favicon.ico', title = 'Title' }) {
 	const { colors } = useColors();
 
 	return (
@@ -31,7 +27,7 @@ export default function Footer({
 				sx={{ mt: 8, mb: 2, justifyContent: 'center', alignItems: 'center' }}
 				maxWidth="sm"
 			>
-				<LogoTitle primaryColor={primaryColor} title={title} img={img} />
+				<LogoTitle title={title} img={img} />
 				<ProfessionalIconList />
 			</Container>
 			<Box

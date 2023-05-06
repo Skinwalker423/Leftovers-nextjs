@@ -12,8 +12,7 @@ const LandingCard = ({
 	image = '/images/alegria/prepper2.png',
 	title = 'Become a food prepper',
 	description = 'Make your favorite meals that only you can make and share them with those around you',
-	linkText = 'Learn More',
-	primaryColor = 'primary'
+	linkText = 'Learn More'
 }) => {
 	const { colors } = useColors();
 
@@ -32,7 +31,7 @@ const LandingCard = ({
 				<Image src={image} width={398} height={300} alt={title} />
 			</Box>
 			<Stack gap={3} sx={{ alignItems: 'center' }} p={'2.5em'}>
-				<Typography color={primaryColor} variant="h2" fontWeight={600}>
+				<Typography color={'secondary'} variant="h2" fontWeight={600}>
 					{title}
 				</Typography>
 				<Typography variant="h5">{description}</Typography>

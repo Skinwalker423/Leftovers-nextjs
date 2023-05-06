@@ -84,8 +84,6 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const { data: session } = useSession();
 	const { state, dispatch } = useContext(UserContext);
 
-	const primaryColor = colors.orangeAccent[900];
-
 	const userEmail = foundSession?.user?.email || session?.user?.email;
 
 	useEffect(() => {
@@ -201,15 +199,9 @@ export default function Home({ favoriteList, foundSession, error }) {
 					backgroundColor={colors.primary[900]}
 					gap={5}
 				>
-					<LandingCard primaryColor={primaryColor} />
-					<LandingCard
-						primaryColor={primaryColor}
-						image="/images/alegria/prepper.png"
-					/>
-					<LandingCard
-						primaryColor={primaryColor}
-						image="/images/alegria/cookingtogether.png"
-					/>
+					<LandingCard />
+					<LandingCard image="/images/alegria/prepper.png" />
+					<LandingCard image="/images/alegria/cookingtogether.png" />
 				</Box>
 				<Box
 					display={'flex'}
@@ -239,7 +231,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						alignItems={'center'}
 						gap={2}
 					>
-						<Typography textAlign={'center'} variant="h2">
+						<Typography color={'secondary'} textAlign={'center'} variant="h2">
 							Everything you crave, homecooked.
 						</Typography>
 						<Typography textAlign={'center'}>
@@ -256,11 +248,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 				</Box>
 			</main>
 			<footer className={styles.footer}>
-				<Footer
-					primaryColor={primaryColor}
-					img={'/icons8-connect.svg'}
-					title="Leftovers"
-				/>
+				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>
 		</Box>
 	);
