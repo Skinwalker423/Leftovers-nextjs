@@ -24,7 +24,7 @@ import { useColors } from '../../hooks/useColors';
 export default function FoodItemCard({
 	foodItem = 'Food Item',
 	description = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-	image = '/art.jpg',
+	image,
 	price,
 	id,
 	qty = 1,
@@ -38,10 +38,13 @@ export default function FoodItemCard({
 	const { incrementFoodItem } = useContext(UserContext);
 	const { colors } = useColors();
 
+	const defaultMealImg =
+		image === '' ? '/images/cooking/defaultMeal.jpg' : image;
+
 	const meal = {
 		id,
 		price,
-		image,
+		image: defaultMealImg,
 		description,
 		foodItem,
 		qty,
@@ -75,7 +78,11 @@ export default function FoodItemCard({
 					backgroundColor: colors.primary[400]
 				}}
 			>
-				<CardMedia sx={{ height: '45%' }} image={image} title={foodItem} />
+				<CardMedia
+					sx={{ height: '45%' }}
+					image={defaultMealImg}
+					title={foodItem}
+				/>
 				<Stack sx={{ height: '55%' }} justifyContent="space-between">
 					<CardContent
 						sx={{

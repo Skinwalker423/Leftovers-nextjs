@@ -161,7 +161,7 @@ const Prepper = ({ prepper }) => {
 								<FoodItemCard
 									key={title}
 									foodItem={title}
-									image={image === '' ? '/art.jpg' : image}
+									image={image}
 									price={price}
 									description={description}
 									id={id}
