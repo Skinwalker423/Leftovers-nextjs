@@ -19,7 +19,7 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 				width={'100%'}
 				sx={{
 					':hover': {
-						borderBottom: `2px solid ${colors.secondary}`
+						borderBottom: `2px solid ${colors.orangeAccent[900]}`
 					}
 				}}
 				borderBottom={currentPage}
