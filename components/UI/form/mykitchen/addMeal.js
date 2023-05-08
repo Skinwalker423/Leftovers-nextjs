@@ -10,7 +10,7 @@ import {
 	FormControl,
 	InputLabel,
 	CircularProgress,
-	Alert,
+	Alert
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
@@ -45,13 +45,13 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		top: '50%',
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
-		width: {xs: '100%',sm: '85%', md:'70%', lg: '55%', xl: '45%'},
-		height: {xs: '70%',sm: '68%', md:'55%'},
+		width: { xs: '100%', sm: '85%', md: '70%', lg: '55%', xl: '45%' },
+		height: { xs: '70%', sm: '68%', md: '55%' },
 		bgcolor: 'background.paper',
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
 		boxShadow: 24,
-		p: 4,
+		p: 4
 	};
 
 	const handlePriceChange = (e) => {
@@ -68,13 +68,14 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		setIsFormLoading(true);
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
+		const imgUrl = null;
 
 		const mealDetails = {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
-			image: '',
-			qty: parseInt(qtyRef.current.value),
+			image: imgUrl || null,
+			qty: parseInt(qtyRef.current.value)
 		};
 
 		console.log(mealDetails);
@@ -102,72 +103,80 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 
 	return (
 		<div>
-			<Button variant='outlined' color='success' onClick={handleOpen}>
+			<Button variant="outlined" color="success" onClick={handleOpen}>
 				Add Meal
 			</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='add-meal-form'
-				aria-describedby='submit details to create a new meal'>
+				aria-labelledby="add-meal-form"
+				aria-describedby="submit details to create a new meal"
+			>
 				<Box sx={style}>
 					<form onSubmit={handleAddMealForm}>
-						<Typography textAlign={'center'} variant='h3'>
+						<Typography textAlign={'center'} variant="h3">
 							Add a meal to your kitchen
 						</Typography>
 						<Box
 							display={'flex'}
-							flexDirection='column'
-							alignItems='space-between'
+							flexDirection="column"
+							alignItems="space-between"
 							justifyContent={'space-between'}
-							gap='2em'
-							px={{xs: '1rem',sm:'2rem', md: '3rem', lg: '5rem'}}
-							width='100%'
-							mt='1em'>
+							gap="2em"
+							px={{ xs: '1rem', sm: '2rem', md: '3rem', lg: '5rem' }}
+							width="100%"
+							mt="1em"
+						>
 							<Box>
 								<TextField
-									id='title'
-									type='text'
-									label='Meal Name'
+									id="title"
+									type="text"
+									label="Meal Name"
 									required
 									placeholder="Dreamer's Donuts"
-									color='secondary'
+									color="secondary"
 									fullWidth
 									inputRef={titleRef}
 								/>
 							</Box>
-							<Box gap={3} display={'flex'} flexDirection={{xs: 'column', md: 'row'}} justifyContent='space-between'>
-								<Box width={{xs: '100%',md: '45%'}}>
+							<Box
+								gap={3}
+								display={'flex'}
+								flexDirection={{ xs: 'column', md: 'row' }}
+								justifyContent="space-between"
+							>
+								<Box width={{ xs: '100%', md: '45%' }}>
 									<TextField
-										id='qty'
-										type='number'
-										label='Number of meals on hand'
+										id="qty"
+										type="number"
+										label="Number of meals on hand"
 										required
-										placeholder='5'
-										color='secondary'
+										placeholder="5"
+										color="secondary"
 										fullWidth
 										inputRef={qtyRef}
 									/>
 								</Box>
-								<Box width={{xs: '100%',md: '45%'}}>
+								<Box width={{ xs: '100%', md: '45%' }}>
 									<FormControl fullWidth>
-										<InputLabel id='price'>Price</InputLabel>
+										<InputLabel id="price">Price</InputLabel>
 										<Select
-											labelId='price'
-											id='price'
-											label='Price'
+											labelId="price"
+											id="price"
+											label="Price"
 											value={cost}
 											required
 											defaultValue={5}
-											onChange={handlePriceChange}>
+											onChange={handlePriceChange}
+										>
 											{costList}
 										</Select>
 									</FormControl>
 								</Box>
 							</Box>
-							<Button variant='contained' color='secondary' component='label'>
+							<Button variant="contained" color="secondary" component="label">
 								Upload Pic of Meal
-								<input onChange={handleFileChange} type='file' hidden />
+								<input onChange={handleFileChange} type="file" hidden />
 							</Button>
 							<Box>
 								<TextField
@@ -175,21 +184,22 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 									multiline
 									maxRows={3}
 									required
-									color='secondary'
-									label='Description of this meal'
-									placeholder='Enter a brief description of what is included in this meal'
+									color="secondary"
+									label="Description of this meal"
+									placeholder="Enter a brief description of what is included in this meal"
 									fullWidth
 									inputRef={descriptionRef}
 								/>
 							</Box>
 							<Button
-								variant='contained'
+								variant="contained"
 								fullWidth
 								disabled={isFormLoading}
-								color='success'
-								type='submit'
+								color="success"
+								type="submit"
 								required
-								size='large'>
+								size="large"
+							>
 								{isFormLoading ? (
 									<CircularProgress />
 								) : (
@@ -200,16 +210,16 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 							</Button>
 							{error && (
 								<Alert
-			
 									onClose={() => {
 										setError('');
 									}}
-									position='relative'
+									position="relative"
 									sx={{
 										width: '100%',
-										fontSize: 'larger',
+										fontSize: 'larger'
 									}}
-									severity='error'>
+									severity="error"
+								>
 									{error}
 								</Alert>
 							)}

@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import CardActions from '@mui/material/CardActions';
 import { removeMeal } from '../../utils/meals';
 import { updateMealQtyInDb } from '../../utils/meals';
 import UpdateQtyForm from '../UI/form/mykitchen/updateQtyForm';
@@ -22,6 +22,7 @@ export default function MyKitchenMealCard({
 	prepperEmail,
 	setMeals
 }) {
+	const defaultImg = !image ? '/images/cooking/defaultMeal.jpg' : image;
 	const handleRemoveMeal = async () => {
 		const data = await removeMeal(prepperEmail, id);
 		if (data.message) {
@@ -62,7 +63,12 @@ export default function MyKitchenMealCard({
 
 	return (
 		<Card key={id} sx={{ width: { xs: 275, sm: 350 } }}>
-			<CardMedia component="img" height="140" image={image} alt={foodItem} />
+			<CardMedia
+				component="img"
+				height="140"
+				image={defaultImg}
+				alt={foodItem}
+			/>
 			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
 				<Typography
 					color={'secondary'}
