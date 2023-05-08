@@ -24,7 +24,7 @@ import { useColors } from '../../hooks/useColors';
 export default function FoodItemCard({
 	foodItem = 'Food Item',
 	description = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-	image,
+	image = '/images/cooking/defaultMeal.jpg',
 	price,
 	id,
 	qty = 1,
@@ -38,8 +38,9 @@ export default function FoodItemCard({
 	const { incrementFoodItem } = useContext(UserContext);
 	const { colors } = useColors();
 
-	const defaultMealImg =
-		image === '' ? '/images/cooking/defaultMeal.jpg' : image;
+	const defaultMealImg = image.length
+		? image
+		: '/images/cooking/defaultMeal.jpg';
 
 	const meal = {
 		id,
