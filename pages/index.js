@@ -27,6 +27,7 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCard from '../components/Card/landingCard';
 import Image from 'next/image';
 import Link from 'next/link';
+import LandingCardList from '../components/landingPagePromos/LandingCardList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -164,45 +165,8 @@ export default function Home({ favoriteList, foundSession, error }) {
 						<ValueMealList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
-				{state.favorites.length !== 0 && (foundSession || session) && (
-					<CategoryBanner
-						link="/favorites"
-						title="Favorite Preppers"
-						bgColor={colors.blueAccent[700]}
-					>
-						<FavoriteList userEmail={userEmail} />
-					</CategoryBanner>
-				)}
-				{(error || errorMsg) && (
-					<Alert
-						sx={{
-							width: '50%',
-							fontSize: 'larger',
-							mt: '5em'
-						}}
-						severity="error"
-					>
-						{error || errorMsg}
-					</Alert>
-				)}
-				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
-				<Box
-					position={'relative'}
-					py={'3em'}
-					width={'100%'}
-					display={'flex'}
-					flexWrap={'wrap'}
-					// flexDirection={{ xs: 'column', md: 'row' }}
-					justifyContent={'space-evenly'}
-					alignItems={'center'}
-					height={{ lg: '50rem' }}
-					backgroundColor={colors.primary[900]}
-					gap={5}
-				>
-					<LandingCard />
-					<LandingCard image="/images/alegria/prepper.png" />
-					<LandingCard image="/images/alegria/cookingtogether.png" />
-				</Box>
+
+				<LandingCardList />
 				<Box
 					display={'flex'}
 					alignItems={'center'}
@@ -246,6 +210,28 @@ export default function Home({ favoriteList, foundSession, error }) {
 						</Link>
 					</Box>
 				</Box>
+				{state.favorites.length !== 0 && (foundSession || session) && (
+					<CategoryBanner
+						link="/favorites"
+						title="Favorite Preppers"
+						bgColor={colors.blueAccent[700]}
+					>
+						<FavoriteList userEmail={userEmail} />
+					</CategoryBanner>
+				)}
+				{(error || errorMsg) && (
+					<Alert
+						sx={{
+							width: '50%',
+							fontSize: 'larger',
+							mt: '5em'
+						}}
+						severity="error"
+					>
+						{error || errorMsg}
+					</Alert>
+				)}
+				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
