@@ -22,7 +22,7 @@ export default function MyKitchenMealCard({
 	prepperEmail,
 	setMeals
 }) {
-	const defaultImg = !image ? '/images/cooking/defaultMeal.jpg' : image;
+	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 	const handleRemoveMeal = async () => {
 		const data = await removeMeal(prepperEmail, id);
 		if (data.message) {

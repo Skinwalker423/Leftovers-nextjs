@@ -38,9 +38,7 @@ export default function FoodItemCard({
 	const { incrementFoodItem } = useContext(UserContext);
 	const { colors } = useColors();
 
-	const defaultMealImg = image.length
-		? image
-		: '/images/cooking/defaultMeal.jpg';
+	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 
 	const meal = {
 		id,

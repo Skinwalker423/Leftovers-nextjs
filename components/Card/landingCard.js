@@ -21,7 +21,7 @@ const LandingCard = ({
 			sx={{
 				position: 'relative',
 				maxWidth: 400,
-				height: '500px',
+				height: '38em',
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'space-between'
