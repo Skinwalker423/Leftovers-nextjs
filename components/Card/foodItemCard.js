@@ -77,7 +77,7 @@ export default function FoodItemCard({
 				}}
 			>
 				<CardMedia
-					sx={{ height: '40%' }}
+				  sx={{ height: '40%' }}
 					image={defaultMealImg}
 					title={foodItem}
 				/>
@@ -95,6 +95,7 @@ export default function FoodItemCard({
 							flexDirection={'column'}
 							justifyContent={'space-between'}
 						>
+
 							<Box display="flex" justifyContent={'space-between'}>
 								<Typography
 									color={'secondary'}
@@ -136,6 +137,7 @@ export default function FoodItemCard({
 									</Typography>
 								</Link>
 							</Box>
+							<Typography>{kitchen}</Typography>
 						</Box>
 						<Box mt={'.5em'}>
 							{qty == 0 ? (
@@ -158,6 +160,7 @@ export default function FoodItemCard({
 							justifyContent: 'space-between',
 							pb: '.5em'
 						}}
+
 					>
 						<Tooltip title="Like this meal">
 							<IconButton onClick={handleFavorite} size="small">
