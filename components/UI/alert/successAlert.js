@@ -8,8 +8,9 @@ const SuccessAlert = ({ msg, setMsg, width = '100%' }) => {
 			onClose={() => {
 				setMsg('');
 			}}
-			color='success'
-			variant='filled'
+			color="success"
+			severity="success"
+			variant="filled"
 			sx={{
 				position: 'fixed',
 				bottom: 0,
@@ -17,8 +18,9 @@ const SuccessAlert = ({ msg, setMsg, width = '100%' }) => {
 				fontSize: 'larger',
 				textAlign: 'center',
 				justifyContent: 'center',
-				zIndex: 50,
-			}}>
+				zIndex: 99
+			}}
+		>
 			<Typography fontSize={'2rem'}>{msg}</Typography>
 		</Alert>
 	);

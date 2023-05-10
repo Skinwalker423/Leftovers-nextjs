@@ -9,10 +9,12 @@ import {
 	Button,
 	CircularProgress,
 	Alert,
+	useMediaQuery,
+	useTheme
 } from '@mui/material';
 import {
 	isValidZipCode,
-	validateEmail,
+	validateEmail
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
 import StateInput from './stateInput';
@@ -21,7 +23,7 @@ import { signIn } from 'next-auth/react';
 const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const router = useRouter();
+	const [description, setDescription] = useState();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
 	const emailRef = useRef();
@@ -32,6 +34,9 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const confirmPasswordRef = useRef();
 	const kitchenTitleRef = useRef();
 	const descriptionRef = useRef();
+
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.up('md'));
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
@@ -76,16 +81,16 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 				address: streetAddressRef.current.value,
 				city: cityRef.current.value,
 				state: state,
-				zipcode: zipcodeRef.current.value,
+				zipcode: zipcodeRef.current.value
 			},
 			description,
-			kitchenTitle,
+			kitchenTitle
 		};
 
 		const userformBody = {
 			email,
 			password,
-			confirmPassword,
+			confirmPassword
 		};
 		try {
 			const data = await registerUser(userformBody);
@@ -120,156 +125,172 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	return (
 		<Paper
 			sx={{
-				width: { xs: '95%', sm: '85%', md: '50em' },
-				height: { xs: '100%', md: '88vh' },
-				mt: '5rem',
-			}}>
-			<Typography py={'.5em'} textAlign='center' variant='h2'>
+				width: { xs: '90%', sm: '85%', md: '50em' },
+				height: { xs: '80vh', md: '89vh' },
+				mt: '5rem'
+			}}
+		>
+			<Typography py={'.5em'} textAlign="center" variant="h2">
 				{title}
 			</Typography>
-			<Box width={'100%'} p='1em 5em'>
+			<Box width={'100%'} p={{ xs: '1em 2em', sm: '1em 5em' }}>
 				<form onSubmit={handleRegistraionFormSubmit}>
 					<Box
 						gap={'1em'}
 						width={'100%'}
 						height={'100%'}
-						display='flex'
-						justifyContent={'space-between'}>
-						<Box height={'20px'}>
-							<TextField
-								type='text'
-								required
-								id='first-name'
-								inputRef={firstNameRef}
-								label='First Name'
-								color='secondary'
-								fullWidth
-							/>
-						</Box>
-						<Box>
-							<TextField
-								id='last-name'
-								type='text'
-								required
-								inputRef={lastNameRef}
-								label='Last Name'
-								color='secondary'
-								fullWidth
-							/>
-						</Box>
-					</Box>
-					<Box width='100%' mt='1em'>
+						display="flex"
+						justifyContent={'space-between'}
+					>
 						<TextField
-							id='email'
-							type='email'
-							label='Email'
-							value={sessionEmail}
-							autoComplete='username'
+							size={matches ? 'medium' : 'small'}
+							type="text"
 							required
-							inputRef={emailRef}
-							color='secondary'
+							id="first-name"
+							inputRef={firstNameRef}
+							label="First Name"
+							color="secondary"
+							fullWidth
+						/>
+
+						<TextField
+							size={matches ? 'medium' : 'small'}
+							id="last-name"
+							type="text"
+							required
+							inputRef={lastNameRef}
+							label="Last Name"
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='title'
-							type='text'
-							label='Kitchen Name'
+							size={matches ? 'medium' : 'small'}
+							id="email"
+							type="email"
+							label="Email"
+							value={sessionEmail}
+							autoComplete="username"
+							required
+							inputRef={emailRef}
+							color="secondary"
+							fullWidth
+						/>
+					</Box>
+					<Box width="100%" mt="1em">
+						<TextField
+							size={matches ? 'medium' : 'small'}
+							id="title"
+							type="text"
+							label="Kitchen Name"
 							required
 							inputProps={{ maxLength: '50' }}
 							placeholder="Dana's Delightful Deserts"
 							inputRef={kitchenTitleRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width={'100%'} mt="1em">
 						<TextField
-							minRows={3}
-							multiline
-							maxRows={3}
+							size="medium"
+							rows={3}
+							fullWidth
 							required
-							inputProps={{ maxLength: '240' }}
-							color='secondary'
+							multiline={matches ? true : false}
 							inputRef={descriptionRef}
-							label='Description of your meals'
-							placeholder='Enter a brief description of the types of meals you will prepare to share'
-							fullWidth
+							inputProps={{ maxLength: '240' }}
+							color="secondary"
+							label="Description of your meals"
+							placeholder="Enter a brief description of the types of meals you will prepare to share"
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='address'
-							type='text'
-							label='Address'
+							size={matches ? 'medium' : 'small'}
+							id="address"
+							type="text"
+							label="Address"
 							required
 							inputRef={streetAddressRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
 					<Box
-						width='100%'
+						width="100%"
 						display={'flex'}
 						gap={2}
-						flexDirection={{ xs: 'column', sm: 'row' }}
-						mt='1em'>
+						flexDirection={'column'}
+						mt="1em"
+					>
 						<TextField
-							id='city'
-							type='text'
-							label='City'
+							size={matches ? 'medium' : 'small'}
+							id="city"
+							type="text"
+							label="City"
 							required
 							inputRef={cityRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
-						<StateInput state={state} setState={setState} />
+						<Box gap={2} display={'flex'}>
+							<StateInput
+								size={matches ? 'medium' : 'small'}
+								state={state}
+								setState={setState}
+							/>
 
-						<TextField
-							id='zipcode'
-							type='number'
-							inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
-							label='Zipcode'
-							required
-							inputRef={zipcodeRef}
-							color='secondary'
-							fullWidth
-						/>
+							<TextField
+								size={matches ? 'medium' : 'small'}
+								id="zipcode"
+								type="number"
+								inputProps={{ pattern: '[0-9]{5}', maxLength: 5 }}
+								label="Zipcode"
+								required
+								inputRef={zipcodeRef}
+								color="secondary"
+								fullWidth
+							/>
+						</Box>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='password'
-							type='password'
-							label='Password'
+							size={matches ? 'medium' : 'small'}
+							id="password"
+							type="password"
+							label="Password"
 							required
-							autoComplete='new-password'
+							autoComplete="new-password"
 							inputRef={passwordRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
-					<Box width='100%' mt='1em'>
+					<Box width="100%" mt="1em">
 						<TextField
-							id='confirmPassword'
-							type='password'
-							label='Confirm Password'
+							size={matches ? 'medium' : 'small'}
+							id="confirmPassword"
+							type="password"
+							label="Confirm Password"
 							required
-							autoComplete='new-password'
+							autoComplete="new-password"
 							inputRef={confirmPasswordRef}
-							color='secondary'
+							color="secondary"
 							fullWidth
 						/>
 					</Box>
 					<Button
 						sx={{ mt: '2rem', p: '1em' }}
-						variant='contained'
+						variant="contained"
 						fullWidth
 						disabled={isFormLoading}
-						color='success'
-						type='submit'
+						color="success"
+						type="submit"
 						required
-						size='medium'>
+						size="medium"
+					>
 						{isFormLoading ? (
 							<CircularProgress />
 						) : (

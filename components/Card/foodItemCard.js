@@ -13,37 +13,41 @@ import {
 	Tooltip,
 	Button,
 	Alert,
-	Card,
+	Card
 } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useColors } from '../../hooks/useColors';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
 	description = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-	image = '/art.jpg',
+	image = '/images/cooking/defaultMeal.jpg',
 	price,
 	id,
 	qty = 1,
 	setMsg,
 	prepperEmail,
 	prepperId,
-	kitchen,
+	kitchen
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const { incrementFoodItem } = useContext(UserContext);
+	const { colors } = useColors();
+
+	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 
 	const meal = {
 		id,
 		price,
-		image,
+		image: defaultMealImg,
 		description,
 		foodItem,
 		qty,
-		prepperEmail,
+		prepperEmail
 	};
 
 	const handleFavorite = () => {
@@ -66,55 +70,73 @@ export default function FoodItemCard({
 		<motion.div whileHover={{ scale: 1.1 }}>
 			<Card
 				sx={{
-					maxWidth: 375,
-					height: '24rem',
-					minWidth: 325,
+					width: { xs: 325, lg: 375 },
+					height: '25rem',
 					m: '2rem',
-				}}>
-				<CardMedia sx={{ height: '45%' }} image={image} title={foodItem} />
-				<Stack sx={{ height: '55%' }} justifyContent='space-between'>
+					backgroundColor: colors.primary[400]
+				}}
+			>
+				<CardMedia
+					sx={{ height: '45%' }}
+					image={defaultMealImg}
+					title={foodItem}
+				/>
+				<Stack sx={{ height: '55%' }} justifyContent="space-between">
 					<CardContent
 						sx={{
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between',
-							height: '100%',
-						}}>
+							height: '100%'
+						}}
+					>
 						<Box>
-							{kitchen && <Typography variant='h4'>{kitchen}</Typography>}
-							<Box display='flex' justifyContent={'space-between'}>
+							<Box display="flex" justifyContent={'space-between'}>
 								<Typography
 									color={'secondary'}
 									gutterBottom
-									variant='h5'
-									component='div'>
+									variant="h4"
+									component="div"
+								>
 									{foodItem}
 								</Typography>
 
-								<Typography gutterBottom variant='h5' component='div'>
+								<Typography
+									color={'secondary'}
+									gutterBottom
+									variant="h4"
+									component="div"
+								>
 									${price}
 								</Typography>
 							</Box>
 							<Box>
-								<Typography variant='body2'>{description}</Typography>
+								<Typography variant="body2">{description}</Typography>
 							</Box>
+							<Typography>{kitchen}</Typography>
 						</Box>
 						<Box>
 							{qty == 0 ? (
-								<Alert color='error'>OUT OF STOCK</Alert>
+								<Alert variant="outlined" color="error">
+									OUT OF STOCK
+								</Alert>
 							) : (
-								<Alert color={qty > 3 ? 'success' : 'warning'}>
+								<Alert
+									variant="outlined"
+									color={qty > 3 ? 'success' : 'warning'}
+								>
 									{`${qty > 3 ? '' : 'Only'} ${qty} left`}
 								</Alert>
 							)}
 						</Box>
 					</CardContent>
 					<CardActions
-						sx={{ display: 'flex', justifyContent: 'space-between' }}>
-						<Tooltip title='Like this meal'>
-							<IconButton onClick={handleFavorite} size='small'>
+						sx={{ display: 'flex', justifyContent: 'space-between' }}
+					>
+						<Tooltip title="Like this meal">
+							<IconButton onClick={handleFavorite} size="small">
 								{favorited ? (
-									<FavoriteIcon color='error' />
+									<FavoriteIcon color="error" />
 								) : (
 									<FavoriteBorderOutlinedIcon />
 								)}
@@ -123,18 +145,21 @@ export default function FoodItemCard({
 						{prepperId && (
 							<Link
 								style={{ textDecoration: 'none' }}
-								href={`/preppers/${prepperId}`}>
+								href={`/preppers/${prepperId}`}
+							>
 								<Button
-									variant='outlined'
+									variant="outlined"
 									onClick={handleViewKitchenClick}
 									color={'secondary'}
 									disabled={qty == 0 || loading}
-									size='small'>
+									size="small"
+								>
 									<Typography
 										display={'flex'}
 										justifyContent={'center'}
 										alignItems={'center'}
-										sx={{ width: '6rem', height: '1.5rem' }}>
+										sx={{ width: '6rem', height: '1.5rem' }}
+									>
 										{loading ? (
 											<CircularProgress size={'1rem'} />
 										) : (
@@ -145,11 +170,12 @@ export default function FoodItemCard({
 							</Link>
 						)}
 						<Button
-							variant='contained'
-							color='success'
+							variant="contained"
+							color="success"
 							disabled={qty == 0}
 							onClick={handleAddCartItem}
-							size='small'>
+							size="small"
+						>
 							Add to Cart
 						</Button>
 					</CardActions>

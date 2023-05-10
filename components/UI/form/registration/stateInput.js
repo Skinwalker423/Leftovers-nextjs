@@ -50,7 +50,7 @@ const usaStatesArray = [
 	'WA',
 	'WV',
 	'WI',
-	'WY',
+	'WY'
 ];
 
 const menuItemList = usaStatesArray.map((state) => {
@@ -61,23 +61,24 @@ const menuItemList = usaStatesArray.map((state) => {
 	);
 });
 
-const StateInput = ({ setState, state }) => {
+const StateInput = ({ setState, state, size }) => {
 	console.log(state);
 	function handleStateChange(e) {
 		setState(e.target.value);
 	}
 
 	return (
-		<Box>
-			<FormControl sx={{ width: { xs: '100%', sm: '7em', md: '8em' } }}>
-				<InputLabel id='state'>State</InputLabel>
+		<Box width={'100%'}>
+			<FormControl size={size} sx={{ width: '100%' }}>
+				<InputLabel id="state">State</InputLabel>
 				<Select
-					labelId='state'
-					id='state'
-					label='State'
+					labelId="state"
+					id="state"
+					label="State"
 					value={state}
 					defaultValue={'CA'}
-					onChange={handleStateChange}>
+					onChange={handleStateChange}
+				>
 					{menuItemList}
 				</Select>
 			</FormControl>

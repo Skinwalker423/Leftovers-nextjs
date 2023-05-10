@@ -7,23 +7,26 @@ const ValueMealList = ({ userEmail }) => {
 	const { state } = useContext(UserContext);
 
 	const list = state.localPreppers.map((prepper) => {
-		return prepper.meals.map(({ id, title, price, qty, description }) => {
-			if (price === 5 && qty > 0 && prepper.email !== userEmail) {
-				return (
-					<FoodItemCard
-						key={id}
-						prepperEmail={prepper.email}
-						kitchen={prepper.kitchenTitle}
-						prepperId={prepper.id}
-						foodItem={title}
-						id={id}
-						price={price}
-						qty={qty}
-						description={description}
-					/>
-				);
+		return prepper.meals.map(
+			({ id, title, price, qty, description, image }) => {
+				if (price === 5 && qty > 0 && prepper.email !== userEmail) {
+					return (
+						<FoodItemCard
+							key={id}
+							prepperEmail={prepper.email}
+							kitchen={prepper.kitchenTitle}
+							prepperId={prepper.id}
+							foodItem={title}
+							id={id}
+							price={price}
+							qty={qty}
+							description={description}
+							image={image}
+						/>
+					);
+				}
 			}
-		});
+		);
 	});
 
 	return (
@@ -31,7 +34,8 @@ const ValueMealList = ({ userEmail }) => {
 			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
 			display={'flex'}
 			flexDirection={{ xs: 'column', md: 'row' }}
-			flexWrap={{ xs: 'none', md: 'wrap' }}>
+			flexWrap={{ xs: 'none', md: 'wrap' }}
+		>
 			{list}
 		</Box>
 	);
