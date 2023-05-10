@@ -70,15 +70,14 @@ export default function FoodItemCard({
 		<motion.div whileHover={{ scale: 1.1 }}>
 			<Card
 				sx={{
-					maxWidth: 375,
-					height: '24rem',
-					minWidth: 325,
+					width: { xs: 325, lg: 375 },
+					height: '25rem',
 					m: '2rem',
 					backgroundColor: colors.primary[400]
 				}}
 			>
 				<CardMedia
-					sx={{ height: '45%' }}
+					sx={{ height: '40%' }}
 					image={defaultMealImg}
 					title={foodItem}
 				/>
@@ -91,7 +90,11 @@ export default function FoodItemCard({
 							height: '100%'
 						}}
 					>
-						<Box>
+						<Box
+							display={'flex'}
+							flexDirection={'column'}
+							justifyContent={'space-between'}
+						>
 							<Box display="flex" justifyContent={'space-between'}>
 								<Typography
 									color={'secondary'}
@@ -102,16 +105,39 @@ export default function FoodItemCard({
 									{foodItem}
 								</Typography>
 
-								<Typography gutterBottom variant="h5" component="div">
+								<Typography
+									color={'secondary'}
+									gutterBottom
+									variant="h4"
+									component="div"
+								>
 									${price}
 								</Typography>
 							</Box>
 							<Box>
-								<Typography variant="body2">{description}</Typography>
+								<Typography fontSize={'small'} variant="body2">
+									{description}
+								</Typography>
 							</Box>
-							<Typography>{kitchen}</Typography>
+							<Box>
+								<Link
+									style={{ textDecoration: 'none' }}
+									href={`/preppers/${prepperId}`}
+								>
+									<Typography
+										sx={{
+											':hover': {
+												color: colors.blueAccent[300]
+											}
+										}}
+										color={colors.blueAccent[400]}
+									>
+										{kitchen}
+									</Typography>
+								</Link>
+							</Box>
 						</Box>
-						<Box>
+						<Box mt={'.5em'}>
 							{qty == 0 ? (
 								<Alert variant="outlined" color="error">
 									OUT OF STOCK
@@ -127,7 +153,11 @@ export default function FoodItemCard({
 						</Box>
 					</CardContent>
 					<CardActions
-						sx={{ display: 'flex', justifyContent: 'space-between' }}
+						sx={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							pb: '.5em'
+						}}
 					>
 						<Tooltip title="Like this meal">
 							<IconButton onClick={handleFavorite} size="small">

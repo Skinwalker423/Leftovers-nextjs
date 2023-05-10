@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { Box, Typography } from '@mui/material';
 import { useColors } from '../../hooks/useColors';
-import styles from './categoryBanner.module.css';
 
 const CategoryBanner = ({
 	title = 'Title Here',
@@ -13,7 +12,7 @@ const CategoryBanner = ({
 	const { colors } = useColors();
 	return (
 		<Box
-			width={'96%'}
+			width={'95%'}
 			m="1em"
 			borderRadius={'2em'}
 			sx={{ overflowY: 'hidden' }}
