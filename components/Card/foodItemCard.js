@@ -77,7 +77,7 @@ export default function FoodItemCard({
 				}}
 			>
 				<CardMedia
-					sx={{ height: '45%' }}
+				  sx={{ height: '40%' }}
 					image={defaultMealImg}
 					title={foodItem}
 				/>
@@ -90,7 +90,12 @@ export default function FoodItemCard({
 							height: '100%'
 						}}
 					>
-						<Box>
+						<Box
+							display={'flex'}
+							flexDirection={'column'}
+							justifyContent={'space-between'}
+						>
+
 							<Box display="flex" justifyContent={'space-between'}>
 								<Typography
 									color={'secondary'}
@@ -111,11 +116,30 @@ export default function FoodItemCard({
 								</Typography>
 							</Box>
 							<Box>
-								<Typography variant="body2">{description}</Typography>
+								<Typography fontSize={'small'} variant="body2">
+									{description}
+								</Typography>
+							</Box>
+							<Box>
+								<Link
+									style={{ textDecoration: 'none' }}
+									href={`/preppers/${prepperId}`}
+								>
+									<Typography
+										sx={{
+											':hover': {
+												color: colors.blueAccent[300]
+											}
+										}}
+										color={colors.blueAccent[400]}
+									>
+										{kitchen}
+									</Typography>
+								</Link>
 							</Box>
 							<Typography>{kitchen}</Typography>
 						</Box>
-						<Box>
+						<Box mt={'.5em'}>
 							{qty == 0 ? (
 								<Alert variant="outlined" color="error">
 									OUT OF STOCK
@@ -131,7 +155,12 @@ export default function FoodItemCard({
 						</Box>
 					</CardContent>
 					<CardActions
-						sx={{ display: 'flex', justifyContent: 'space-between' }}
+						sx={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							pb: '.5em'
+						}}
+
 					>
 						<Tooltip title="Like this meal">
 							<IconButton onClick={handleFavorite} size="small">

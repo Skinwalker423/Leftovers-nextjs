@@ -16,9 +16,10 @@ import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitl
 
 import {
 	connectMongoDb,
-	findExistingPrepperEmail,
+	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
+import { Stack } from '@mui/material';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -27,8 +28,8 @@ export async function getServerSideProps({ req, res }) {
 		return {
 			redirect: {
 				destination: '/signin',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -39,8 +40,8 @@ export async function getServerSideProps({ req, res }) {
 		return {
 			redirect: {
 				destination: '/register',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -48,14 +49,14 @@ export async function getServerSideProps({ req, res }) {
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
-		email: session.user?.email || null,
+		email: session.user?.email || null
 	};
 
 	return {
 		props: {
 			userData: user,
-			prepper: userDb,
-		},
+			prepper: userDb
+		}
 	};
 }
 
@@ -67,72 +68,67 @@ const myKitchen = ({ userData, prepper }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 
+	console.log(prepper);
+
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
 	};
 
 	return (
 		<Box
-			width='100%'
+			width="100%"
 			height={'100%'}
 			display={'flex'}
+			position={'relative'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={{ xs: 'flex-start' }}
-			alignItems={'center'}>
+			alignItems={'center'}
+			sx={{
+				backgroundImage: `url('/kitchen2.jpg')`,
+				backgroundSize: 'cover'
+			}}
+		>
 			<Head>
 				<title>MyKitchen</title>
 				<meta
-					name='description'
-					content='Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities'
+					name="description"
+					content="Manage the contents of your kitchen by adding/removing/updating pictures, avatar, kitchen name, description, meals and their quanities"
 				/>
 			</Head>
+
 			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			{selected === 'Kitchen profile' && (
 				<Box
-					display='flex'
+					display="flex"
 					flexDirection={'column'}
 					justifyContent={'center'}
 					alignItems={'center'}
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
-					mt={'6em'}>
-					<InfoCard title='Avatar'>
-						{image ? (
-							<Image
-								alt={`avatar image of ${prepper.name}`}
-								src={image}
-								width={100}
-								height={100}
-								priority
-							/>
-						) : (
-							<DefaultAvatar
-								userEmail={prepper.name}
-								widthHeight={100}
-								fontSize='3em'
-							/>
-						)}
-						<Button color='warning' variant='outlined'>
-							Edit image
-						</Button>
-					</InfoCard>
-					<InfoCard title='Kitchen Picture'>
-						<Typography>Picture here</Typography>
-						<Button color='warning' variant='outlined'>
+					mt={'6em'}
+				>
+					<InfoCard title="Kitchen Picture">
+						<Image
+							width={100}
+							height={100}
+							src={prepper.kitchenImgUrl || '/kitchen2.jpg'}
+							alt={`The kitchen of ${prepper.kitchenTitle}`}
+						/>
+						<Button color="warning" variant="outlined">
 							Edit Picture
 						</Button>
 					</InfoCard>
 
-					<InfoCard title='Kitchen Name'>
-						<Typography>{prepper.kitchenTitle}</Typography>
+					<InfoCard title="Kitchen Name">
+						<Typography variant="h4">{prepper.kitchenTitle}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
 							oldKitchenTitle={prepper.kitchenTitle}
 							setMsg={setMsg}
 						/>
 					</InfoCard>
-					<InfoCard title='Description'>
-						<Typography>{prepper.description}</Typography>
+					<InfoCard title="Description">
+						<Typography variant="h4">{prepper.description}</Typography>
 						<UpdateKitchenForm
 							email={prepper.email}
 							oldDescription={prepper.description}
@@ -143,23 +139,24 @@ const myKitchen = ({ userData, prepper }) => {
 			)}
 			{selected === 'My Meals' && (
 				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }} mt={'6em'}>
-					<InfoCard title='Add Meal'>
-						<Typography>Add a meal to your Kitchen</Typography>
+					<InfoCard title="Add Meal">
+						<Typography variant="h4">Add a meal to your Kitchen</Typography>
 						<AddMeal
 							setMsg={setMsg}
 							email={prepper.email}
 							setMeals={setMeals}
 						/>
 					</InfoCard>
-					<InfoCard title='Remove/Edit Meals'>
-						<Typography>
+					<InfoCard title="Remove/Edit Meals">
+						<Typography variant="h4">
 							Use this to adjust meal status such as sold out, quantity, and
 							remove a meal
 						</Typography>
 						<Button
 							onClick={handleShowMealBtn}
-							color='error'
-							variant='outlined'>
+							color="error"
+							variant="outlined"
+						>
 							{showMeals ? 'Hide meals' : 'Update Meals'}
 						</Button>
 					</InfoCard>
@@ -174,8 +171,55 @@ const myKitchen = ({ userData, prepper }) => {
 					)}
 				</Box>
 			)}
-			{msg && <SuccessAlert width='80%' msg={msg} setMsg={setMsg} />}
-			{error && <ErrorAlert width='80%' error={error} setError={setError} />}
+			{selected === 'Personal Info' && (
+				<Box
+					display="flex"
+					flexDirection={'column'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					mx={'1rem'}
+					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					mt={'6em'}
+				>
+					<InfoCard title="Avatar">
+						{image ? (
+							<Image
+								alt={`avatar image of ${prepper.name}`}
+								src={image}
+								width={100}
+								height={100}
+								priority
+							/>
+						) : (
+							<DefaultAvatar
+								userEmail={prepper.name}
+								widthHeight={100}
+								fontSize="3em"
+							/>
+						)}
+						<Button color="warning" variant="outlined">
+							Edit image
+						</Button>
+					</InfoCard>
+					<InfoCard title="Email">
+						<Typography variant="h4">{prepper.email}</Typography>
+					</InfoCard>
+					<InfoCard title="Name">
+						<Typography variant="h4">{prepper.name}</Typography>
+					</InfoCard>
+					<InfoCard title="Home Address">
+						<Stack>
+							<Typography variant="h4">{prepper.location.address}</Typography>
+							<Typography variant="h4">
+								{prepper.location.city}, {prepper.location.state},{' '}
+								{prepper.location.zipcode}
+							</Typography>
+						</Stack>
+					</InfoCard>
+				</Box>
+			)}
+			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
+			{error && <ErrorAlert width="100%" error={error} setError={setError} />}
 		</Box>
 	);
 };

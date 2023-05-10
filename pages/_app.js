@@ -9,7 +9,6 @@ import createEmotionCache from '../config/createEmotionCache';
 import { SessionProvider } from 'next-auth/react';
 import UserProvider from '../store/UserContext';
 import Layout from './layout/layout';
-import CustomLoader from '../components/UI/Loader';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -20,15 +19,15 @@ export default function MyApp(props) {
 	const {
 		Component,
 		emotionCache = clientSideEmotionCache,
-		pageProps: { session, ...pageProps },
+		pageProps: { session, ...pageProps }
 	} = props;
 	return (
 		<UserProvider>
 			<CacheProvider value={emotionCache}>
 				<Head>
-					<meta name='description' content='Leftovers' />
-					<meta name='viewport' content='initial-scale=1, width=device-width' />
-					<link rel='icon' href='/icons8-connect.svg' />
+					<meta name="description" content="Leftovers" />
+					<meta name="viewport" content="initial-scale=1, width=device-width" />
+					<link rel="icon" href="/icons8-connect.svg" />
 				</Head>
 				<ColorModeContext.Provider value={colorMode}>
 					<ThemeProvider theme={theme}>

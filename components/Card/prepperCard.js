@@ -163,6 +163,7 @@ export default function PrepperCard({
 				/>
 				<CardContent>
 					<Typography
+						fontSize={'small'}
 						sx={{
 							maxHeight: '3.5rem',
 							height: '3.5rem'

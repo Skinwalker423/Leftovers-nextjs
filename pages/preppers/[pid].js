@@ -8,11 +8,13 @@ import Head from 'next/head';
 import Image from 'next/image';
 import {
 	findAllInCollection,
-	connectMongoDb,
+	connectMongoDb
 } from '../../db/mongodb/mongoDbUtils';
 
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import TrophyLikesButton from '../../components/likes/trophyLikesButton';
+import useTheme from '@mui/material';
+import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
@@ -25,10 +27,10 @@ export async function getStaticProps({ params }) {
 
 		return {
 			props: {
-				prepper: prepperData ? prepperData : [],
+				prepper: prepperData ? prepperData : []
 			},
 
-			revalidate: 60, // In seconds
+			revalidate: 60 // In seconds
 		};
 	} catch (err) {
 		return { notFound: true };
@@ -40,7 +42,7 @@ export async function getStaticPaths() {
 	const allPreppers = await findAllInCollection(client, 'preppers');
 
 	const paths = allPreppers.map(({ id }) => ({
-		params: { pid: id },
+		params: { pid: id }
 	}));
 
 	return { paths, fallback: true };
@@ -50,6 +52,9 @@ const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
 	const [msg, setMsg] = useState('');
+	const { colors } = useColors();
+
+	const bannerImage = prepper.kitchenImgUrl || '/art.jpg';
 
 	useEffect(() => {
 		if (prepper && prepper.meals) {
@@ -63,13 +68,13 @@ const Prepper = ({ prepper }) => {
 			<Box>
 				<Head>
 					<title>Loading...</title>
-					<meta name='description' content='loading content' />
+					<meta name="description" content="loading content" />
 				</Head>
 				<CustomLoader
 					size={75}
 					progress={50}
 					color={'error'}
-					title='Loading...'
+					title="Loading..."
 				/>
 				;
 			</Box>
@@ -78,55 +83,62 @@ const Prepper = ({ prepper }) => {
 
 	return (
 		<Box
-			display='flex'
-			justifyContent='center'
-			alignItems='center'
+			display="flex"
+			justifyContent="center"
+			alignItems="center"
 			flexDirection={'column'}
 			width={'100%'}
-			height='100%'>
+			height="100%"
+		>
 			<Head>
 				<title>{prepper.kitchenTitle}</title>
-				<meta name='description' content={prepper.description} />
+				<meta name="description" content={prepper.description} />
 			</Head>
 			<Box
-				mt='100px'
-				display='flex'
+				display="flex"
 				flexDirection={'column'}
-				width='100%'
-				justifyContent='center'
-				alignItems='center'>
-				<Paper
-					sx={{
-						width: { xs: '100%', lg: '80%' },
-						height: '40vh',
-						p: '1em',
-						position: 'relative',
-					}}>
-					<Image src={'/pixzolo.jpg'} fill alt={prepper.kitchenTitle} />
+				width="100%"
+				height={'50vh'}
+				justifyContent="center"
+				alignItems="center"
+				position={'relative'}
+				top={0}
+			>
+				<Image src={bannerImage} fill alt={prepper.kitchenTitle} />
+				<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
 					<Box
 						position={'relative'}
-						display='flex'
-						height={'100%'}
+						borderRadius={'1em'}
+						display="flex"
+						height={'20em'}
+						padding={'2em'}
 						flexDirection={'column'}
 						alignItems={'center'}
-						justifyContent={'space-between'}>
+						justifyContent={'space-between'}
+						backgroundColor={'rgba(100, 50, 0, 0.6)'}
+					>
 						<Box>
-							<Typography textAlign={'center'} variant='h1' color={'error'}>
+							<Typography
+								textAlign={'center'}
+								variant="h1"
+								color={colors.orangeAccent[300]}
+							>
 								{prepper.kitchenTitle}
 							</Typography>
-							<Typography variant='h2'>{prepper.description}</Typography>
+							<Typography color={'white'} variant="h2">
+								{prepper.description}
+							</Typography>
 						</Box>
 						<Box>
-							<Typography variant='h2'>{prepper.email}</Typography>
 							<TrophyLikesButton />
 						</Box>
 					</Box>
-				</Paper>
+				</Box>
 			</Box>
 			{!prepper.meals.length && (
-				<Box width='50%'>
-					<Alert color='error' fontSize='large'>
-						<Typography variant='h3'>
+				<Box width="50%">
+					<Alert color="error" fontSize="large">
+						<Typography variant="h3">
 							Meals are currently unavailbale. Check back soon
 						</Typography>
 					</Alert>
@@ -135,20 +147,21 @@ const Prepper = ({ prepper }) => {
 			{prepper.meals.length && meals.length !== 0 ? (
 				<Box
 					display={'flex'}
-					my='2rem'
+					my="2rem"
 					flexWrap={'wrap'}
 					gap={10}
-					height='100%'
+					height="100%"
 					justifyContent={'center'}
 					alignItems={'center'}
-					width={{ xs: '100%', lg: '70%' }}>
+					width={{ xs: '100%', lg: '70%' }}
+				>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
 							<Box key={id} width={375}>
 								<FoodItemCard
 									key={title}
 									foodItem={title}
-									image={image === '' ? '/art.jpg' : image}
+									image={image}
 									price={price}
 									description={description}
 									id={id}

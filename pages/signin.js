@@ -1,6 +1,13 @@
 import { getSession } from 'next-auth/react';
 import React from 'react';
-import { Box } from '@mui/material';
+import {
+	Box,
+	Divider,
+	Grid,
+	GridItem,
+	useTheme,
+	useMediaQuery
+} from '@mui/material';
 import SignIn from '../components/UI/form/auth/signin';
 import SignUpForm from '../components/UI/form/auth/signup';
 import Head from 'next/head';
@@ -13,44 +20,61 @@ export async function getServerSideProps({ req }) {
 		return {
 			redirect: {
 				destination: '/',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
 	return {
-		props: {},
+		props: {}
 	};
 }
 
 const signin = () => {
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.up('md'));
+	const dividerResponse = matches ? 'vertical' : 'horizontal';
+
 	return (
 		<Box
+			sx={{ backgroundImage: 'url("./art.jpg")', backgroundSize: 'cover' }}
 			display={'flex'}
-			justifyContent='center'
+			justifyContent="center"
 			alignItems={'center'}
-			width='100%'
-			height='100vh'>
+			width="100%"
+			height="100vh"
+		>
 			<Head>
 				<title>Sign In</title>
 				<meta
-					name='description'
-					content='Sign in using your email and password, or by signing in with Google'
+					name="description"
+					content="Sign in using your email and password, or by signing in with Google"
 				/>
 			</Head>
 			<Box
-				width={'90%'}
+				width={{ xs: '85%', sm: '70%', md: '90%' }}
 				display={'flex'}
-				justifyContent='space-around'
+				height={{ xs: '95vh', md: '100vh' }}
+				justifyContent="space-around"
 				alignItems={'center'}
 				sx={{
 					flexDirection: {
-						sm: 'column',
 						xs: 'column',
-						md: 'row',
-					},
-				}}>
+						md: 'row'
+					}
+				}}
+			>
 				<SignIn />
+
+				<Divider
+					sx={{ p: '1em' }}
+					orientation={dividerResponse}
+					flexItem
+					light={true}
+				>
+					OR
+				</Divider>
+
 				<SignUpForm />
 			</Box>
 		</Box>
