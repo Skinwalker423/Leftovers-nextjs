@@ -9,7 +9,7 @@ import { UserContext } from '../store/UserContext';
 
 import {
 	connectMongoDb,
-	findExistingUserEmail,
+	findExistingUserEmail
 } from '../db/mongodb/mongoDbUtils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
@@ -19,14 +19,14 @@ export async function getServerSideProps({ req, res }) {
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
-		email: session.user?.email || null,
+		email: session.user?.email || null
 	};
 	if (!session) {
 		return {
 			redirect: {
 				destination: '/signin',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -37,8 +37,8 @@ export async function getServerSideProps({ req, res }) {
 	return {
 		props: {
 			favoriteList: document.favorites || favoritePreppersList,
-			userSession: user,
-		},
+			userSession: user
+		}
 	};
 }
 
@@ -56,15 +56,15 @@ const Favorites = ({ favoriteList, userSession }) => {
 		<Box className={styles.container}>
 			<Head>
 				<title>Favorites</title>
-				<meta name='description' content='Your favorite preppers' />
+				<meta name="description" content="Your favorite preppers" />
 			</Head>
-			<main style={{ marginTop: '8rem' }} className={styles.main}>
-				<Typography color={'secondary'} variant='h1'>
+			<main className={styles.main}>
+				<Typography color={'secondary'} variant="h1">
 					Favorites
 				</Typography>
 				{!favoriteList.length && (
-					<Alert sx={{ mt: '2em' }} color='warning'>
-						<Typography variant='h1'>No Favorites added</Typography>
+					<Alert sx={{ mt: '2em' }} color="warning">
+						<Typography variant="h1">No Favorites added</Typography>
 					</Alert>
 				)}
 				<FavoriteList
@@ -74,7 +74,7 @@ const Favorites = ({ favoriteList, userSession }) => {
 				/>
 			</main>
 			<footer className={styles.footer}>
-				<Footer img={'/icons8-connect.svg'} title='Leftovers' />
+				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>
 		</Box>
 	);

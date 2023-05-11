@@ -165,7 +165,15 @@ export default function Home({ favoriteList, foundSession, error }) {
 						<ValueMealList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
-
+				{state.favorites.length !== 0 && (foundSession || session) && (
+					<CategoryBanner
+						link="/favorites"
+						title="Favorite Preppers"
+						bgColor={colors.blueAccent[700]}
+					>
+						<FavoriteList userEmail={userEmail} />
+					</CategoryBanner>
+				)}
 				<LandingCardList />
 				<Box
 					display={'flex'}
@@ -210,15 +218,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						</Link>
 					</Box>
 				</Box>
-				{state.favorites.length !== 0 && (foundSession || session) && (
-					<CategoryBanner
-						link="/favorites"
-						title="Favorite Preppers"
-						bgColor={colors.blueAccent[700]}
-					>
-						<FavoriteList userEmail={userEmail} />
-					</CategoryBanner>
-				)}
+
 				{(error || errorMsg) && (
 					<Alert
 						sx={{
