@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 
 const PromoSection = ({
 	reverse = false,
+	btnText = 'FIND PREPPERS',
+	link = '/',
 	bgColor = 'primary',
 	imgUrl = '/images/cooking/homecooking.jpg',
 	title = 'Everything you crave, homecooked.',
@@ -19,15 +21,15 @@ const PromoSection = ({
 			flexDirection={{ xs: 'column', lg: reverse ? 'row-reverse' : 'row' }}
 			justifyContent={'center'}
 			width={'100%'}
-			height={{ xs: '40em', lg: '60em' }}
-			p={{ xs: '', lg: '5em' }}
+			height={{ xs: '40em', sm: '50em', md: '60em', lg: '70em' }}
+			p={{ xs: '2em', lg: '5em' }}
 			gap={5}
 			backgroundColor={bgColor}
 		>
 			<Box
 				position={'relative'}
 				width={{ xs: '100%', sm: '90%', md: '80%', lg: '80%', xl: '65%' }}
-				height={{ xs: '50%', sm: '60%', md: '75%', lg: '75%', xl: '80%' }}
+				height={{ xs: '50%', sm: '60%', md: '75%', lg: '70%', xl: '75%' }}
 				justifyContent={'center'}
 				alignItems={'center'}
 			>
@@ -44,9 +46,9 @@ const PromoSection = ({
 					{title}
 				</Typography>
 				<Typography textAlign={'center'}>{description}</Typography>
-				<Link href={'/'}>
+				<Link href={link}>
 					<Button variant="contained" color="error">
-						Find Preppers
+						{btnText}
 					</Button>
 				</Link>
 			</Box>

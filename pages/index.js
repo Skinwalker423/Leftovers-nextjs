@@ -175,8 +175,15 @@ export default function Home({ favoriteList, foundSession, error }) {
 					</CategoryBanner>
 				)}
 				<LandingCardList />
-				<PromoSection />
-				<PromoSection />
+
+				<PromoSection imgUrl="/images/cooking/defaultMeal.jpg" />
+				<PromoSection
+					title="Share your beloved creations"
+					description="Whether it be the unique desert that only you have thought of, or good old fashion meals that you have perfected, share those dishes with your community and inspire others to spread joy."
+					bgColor={colors.primary[900]}
+					btnText="Register Now"
+					reverse
+				/>
 				<PromoSection />
 
 				{(error || errorMsg) && (

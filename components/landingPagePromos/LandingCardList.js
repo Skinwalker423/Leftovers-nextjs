@@ -14,7 +14,7 @@ const LandingCardList = () => {
 			flexWrap={'wrap'}
 			justifyContent={'space-evenly'}
 			alignItems={'center'}
-			height={{ lg: '50rem' }}
+			height={{ lg: '70rem' }}
 			backgroundColor={colors.primary[900]}
 			gap={5}
 		>
