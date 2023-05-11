@@ -24,10 +24,10 @@ import {
 import { useSession } from 'next-auth/react';
 import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
-import LandingCard from '../components/Card/landingCard';
 import Image from 'next/image';
 import Link from 'next/link';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
+import PromoSection from '../components/landingPagePromos/promoSection';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -175,49 +175,9 @@ export default function Home({ favoriteList, foundSession, error }) {
 					</CategoryBanner>
 				)}
 				<LandingCardList />
-				<Box
-					display={'flex'}
-					alignItems={'center'}
-					flexDirection={{ xs: 'column', lg: 'row' }}
-					justifyContent={'center'}
-					width={'100%'}
-					height={'50rem'}
-					p={{ xs: '2em', lg: '5em' }}
-					gap={5}
-				>
-					<Box
-						position={'relative'}
-						width={{ xs: '100%', sm: '90%', md: '80%', lg: '80%', xl: '65%' }}
-						height={{ xs: '50%', sm: '60%', md: '75%', lg: '75%', xl: '100%' }}
-					>
-						<Image
-							src={'/images/cooking/homecooking.jpg'}
-							fill
-							alt={'family preparing food'}
-						/>
-					</Box>
-					<Box
-						display={'flex'}
-						flexDirection={'column'}
-						justifyContent={'center'}
-						alignItems={'center'}
-						gap={2}
-					>
-						<Typography color={'secondary'} textAlign={'center'} variant="h2">
-							Everything you crave, homecooked.
-						</Typography>
-						<Typography textAlign={'center'}>
-							Get a slice of homemade apple pie or pick up authentic backyard
-							ribs from the best cooks in your community that you've heard so
-							much about.
-						</Typography>
-						<Link href={'/'}>
-							<Button variant="contained" color="error">
-								Find Preppers
-							</Button>
-						</Link>
-					</Box>
-				</Box>
+				<PromoSection />
+				<PromoSection />
+				<PromoSection />
 
 				{(error || errorMsg) && (
 					<Alert

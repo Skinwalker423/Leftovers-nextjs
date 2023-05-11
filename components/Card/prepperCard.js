@@ -125,7 +125,6 @@ export default function PrepperCard({
 					height: '26rem',
 					backgroundColor: colors.primary[400]
 				}}
-				className={styles.prepCard}
 				key={id}
 			>
 				<CardHeader
