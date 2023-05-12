@@ -21,7 +21,7 @@ const PromoSection = ({
 			flexDirection={{ xs: 'column', lg: reverse ? 'row-reverse' : 'row' }}
 			justifyContent={'center'}
 			width={'100%'}
-			height={{ xs: '40em', sm: '50em', md: '60em', lg: '70em' }}
+			height={{ xs: '45em', sm: '50em', md: '60em', lg: '70em' }}
 			p={{ xs: '2em', lg: '5em' }}
 			gap={5}
 			backgroundColor={bgColor}
@@ -45,7 +45,13 @@ const PromoSection = ({
 				<Typography color={'secondary'} textAlign={'center'} variant="h2">
 					{title}
 				</Typography>
-				<Typography textAlign={'center'}>{description}</Typography>
+				<Typography
+					sx={{ mx: { xs: '1em', md: '5em' } }}
+					fontSize={'medium'}
+					textAlign={'center'}
+				>
+					{description}
+				</Typography>
 				<Link href={link}>
 					<Button variant="contained" color="error">
 						{btnText}

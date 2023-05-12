@@ -183,7 +183,12 @@ export default function Home({ favoriteList, foundSession, error }) {
 					btnText="Register Now"
 					reverse
 				/>
-				<PromoSection />
+				<PromoSection
+					imgUrl="/images/cooking/vegan.jpg"
+					btnText="Find Plant Based food"
+					title="Discover unique plant based creations"
+					description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
+				/>
 
 				{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
