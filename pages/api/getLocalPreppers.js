@@ -2,7 +2,7 @@ import React from 'react';
 import { mockDataContacts } from '../../db/mockData';
 import {
 	findLocalPreppersWithZipcode,
-	connectMongoDb,
+	connectMongoDb
 } from '../../db/mongodb/mongoDbUtils';
 
 async function getLocalPreppers(req, res) {
@@ -20,7 +20,9 @@ async function getLocalPreppers(req, res) {
 			if (findPreppers.length !== 0) {
 				res.status(200).json(findPreppers);
 			} else {
-				res.status(500).json({ error: 'no preppers found' });
+				res
+					.status(500)
+					.json({ error: 'no preppers found. Try another zipcode' });
 			}
 		} catch (err) {
 			res.status(500).json({ error: 'problem with mongo', err });

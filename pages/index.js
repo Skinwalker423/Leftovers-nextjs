@@ -27,6 +27,7 @@ import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
+import CustomLoader from '../components/UI/Loader';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -79,6 +80,7 @@ export async function getServerSideProps({ req, res }) {
 export default function Home({ favoriteList, foundSession, error }) {
 	const [zipCode, setZipCode] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
+	const [isSearching, setIsSearching] = useState(false);
 	const [msg, setMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
@@ -97,9 +99,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
+		setIsSearching(true);
 		const isValidZip = isValidZipCode(zipCode);
 		if (!isValidZip) {
 			setErrorMsg('Invalid zip code');
+			setIsSearching(false);
 			return;
 		}
 		console.log('submitted');
@@ -107,12 +111,15 @@ export default function Home({ favoriteList, foundSession, error }) {
 		const findPreppers = await fetchLocalPreppers(zipCode);
 
 		if (findPreppers.error) {
+			setIsSearching(false);
 			setErrorMsg(findPreppers.error);
 		} else {
 			dispatch({
 				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
 				payload: findPreppers
 			});
+			setIsSearching(false);
+			setZipCode('');
 		}
 	};
 
@@ -190,8 +197,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 					description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
 				/>
 
-				{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
+				{errorMsg && (
+					<ErrorAlert width="50%" error={errorMsg} setError={setErrorMsg} />
+				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+				{isSearching && <CustomLoader />}
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
