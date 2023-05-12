@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { Alert, Box, Button, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
 import Footer from '../components/layout/footer/footer';
 import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
@@ -15,6 +15,7 @@ import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPrepper
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
 import SuccessAlert from '../components/UI/alert/successAlert';
+import ErrorAlert from '../components/UI/alert/ErrorAlert';
 import ValueMealList from '../components/mealLists/valueMealList';
 import {
 	connectMongoDb,
@@ -24,8 +25,6 @@ import {
 import { useSession } from 'next-auth/react';
 import { UserContext } from '../store/UserContext';
 import { ACTION_TYPES } from '../store/UserContext';
-import Image from 'next/image';
-import Link from 'next/link';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 
@@ -186,18 +185,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 				/>
 				<PromoSection />
 
-				{(error || errorMsg) && (
-					<Alert
-						sx={{
-							width: '50%',
-							fontSize: 'larger',
-							mt: '5em'
-						}}
-						severity="error"
-					>
-						{error || errorMsg}
-					</Alert>
-				)}
+				{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			</main>
 			<footer className={styles.footer}>
