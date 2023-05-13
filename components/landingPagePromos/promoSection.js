@@ -28,12 +28,17 @@ const PromoSection = ({
 		>
 			<Box
 				position={'relative'}
-				width={{ xs: '100%', sm: '90%', md: '80%', lg: '80%', xl: '65%' }}
-				height={{ xs: '50%', sm: '60%', md: '75%', lg: '70%', xl: '75%' }}
+				width={{ xs: '100%', sm: '80%', lg: '100%' }}
+				height={{ xs: '50%', sm: '60%', md: '75%', lg: '60%', xl: '75%' }}
 				justifyContent={'center'}
 				alignItems={'center'}
 			>
-				<Image src={imgUrl} fill alt={'family preparing food'} />
+				<Image
+					src={imgUrl}
+					fill
+					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+					alt={'family preparing food'}
+				/>
 			</Box>
 			<Box
 				display={'flex'}
