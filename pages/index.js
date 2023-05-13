@@ -182,9 +182,13 @@ export default function Home({ favoriteList, foundSession, error }) {
 				)}
 				<LandingCardList />
 
-				<PromoSection imgUrl="/images/cooking/defaultMeal.jpg" />
+				<PromoSection
+					link="/preppers"
+					imgUrl="/images/cooking/defaultMeal.jpg"
+				/>
 				<PromoSection
 					title="Share your beloved creations"
+					link="/register"
 					description="Whether it be the unique desert that only you have thought of, or good old fashion meals that you have perfected, share those dishes with your community and inspire others to spread joy."
 					bgColor={colors.primary[900]}
 					btnText="Register Now"

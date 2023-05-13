@@ -21,7 +21,7 @@ async function getLocalPreppers(req, res) {
 				res.status(200).json(findPreppers);
 			} else {
 				res
-					.status(500)
+					.status(200)
 					.json({ error: 'no preppers found. Try another zipcode' });
 			}
 		} catch (err) {
