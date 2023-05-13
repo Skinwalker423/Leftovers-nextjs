@@ -66,7 +66,7 @@ export default function MyKitchenMealCard({
 			<CardMedia
 				component="img"
 				height="140"
-				image={defaultImg}
+				image={defaultMealImg}
 				alt={foodItem}
 			/>
 			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
