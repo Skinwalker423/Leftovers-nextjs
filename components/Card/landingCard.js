@@ -31,10 +31,17 @@ const LandingCard = ({
 				<Image src={image} width={398} height={300} alt={title} />
 			</Box>
 			<Stack gap={3} sx={{ alignItems: 'center' }} p={'2.5em'}>
-				<Typography color={'secondary'} variant="h2" fontWeight={600}>
+				<Typography
+					sx={{ pt: '.5em' }}
+					color={'secondary'}
+					variant="h2"
+					fontWeight={600}
+				>
 					{title}
 				</Typography>
-				<Typography variant="h5">{description}</Typography>
+				<Typography sx={{ height: '5em' }} variant="h5">
+					{description}
+				</Typography>
 				<Link style={{ textDecoration: 'none' }} href={'/'}>
 					<Typography
 						sx={{ display: 'flex', alignItems: 'center' }}
