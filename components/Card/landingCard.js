@@ -11,6 +11,7 @@ import { Typography } from '@mui/material';
 const LandingCard = ({
 	image = '/images/alegria/prepper2.png',
 	title = 'Become a food prepper',
+	link = '/',
 	description = 'Make your favorite meals that only you can make and share them with those around you craving an authentic meal.',
 	linkText = 'Learn More'
 }) => {
@@ -32,7 +33,7 @@ const LandingCard = ({
 			</Box>
 			<Stack gap={3} sx={{ alignItems: 'center' }} p={'2.5em'}>
 				<Typography
-					sx={{ pt: '.5em' }}
+					sx={{ mt: '.25em' }}
 					color={'secondary'}
 					variant="h2"
 					fontWeight={600}
@@ -42,7 +43,7 @@ const LandingCard = ({
 				<Typography sx={{ height: '5em' }} variant="h5">
 					{description}
 				</Typography>
-				<Link style={{ textDecoration: 'none' }} href={'/'}>
+				<Link style={{ textDecoration: 'none' }} href={link}>
 					<Typography
 						sx={{ display: 'flex', alignItems: 'center' }}
 						fontSize={'large'}
