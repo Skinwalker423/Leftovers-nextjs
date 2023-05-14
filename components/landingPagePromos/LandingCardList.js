@@ -18,9 +18,13 @@ const LandingCardList = () => {
 			backgroundColor={colors.primary[900]}
 			gap={5}
 		>
-			<LandingCard />
-			<LandingCard image="/images/alegria/prepper.png" />
+			<LandingCard image="/images/alegria/prepper2.png" />
 			<LandingCard image="/images/alegria/cookingtogether.png" />
+			<LandingCard
+				image="/images/alegria/prepper.png"
+				title="Share your gift to all"
+				description="Do you have a special desert recipe that markets or restaraunts don't seem to have? Now you can create those delights from your kicthen to share with others."
+			/>
 		</Box>
 	);
 };

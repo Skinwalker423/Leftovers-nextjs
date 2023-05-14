@@ -11,7 +11,7 @@ import { Typography } from '@mui/material';
 const LandingCard = ({
 	image = '/images/alegria/prepper2.png',
 	title = 'Become a food prepper',
-	description = 'Make your favorite meals that only you can make and share them with those around you',
+	description = 'Make your favorite meals that only you can make and share them with those around you craving an authentic meal.',
 	linkText = 'Learn More'
 }) => {
 	const { colors } = useColors();
