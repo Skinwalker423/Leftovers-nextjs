@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Paper, Alert } from '@mui/material';
+import { Box, Typography, Paper, Alert, Divider } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
@@ -105,36 +105,45 @@ const Prepper = ({ prepper }) => {
 				top={0}
 			>
 				<Image src={bannerImage} fill alt={prepper.kitchenTitle} />
-				<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-					<Box
-						position={'relative'}
-						borderRadius={'1em'}
-						display="flex"
-						height={'20em'}
-						padding={'2em'}
-						flexDirection={'column'}
-						alignItems={'center'}
-						justifyContent={'space-between'}
-						backgroundColor={'rgba(100, 50, 0, 0.6)'}
-					>
-						<Box>
-							<Typography
-								textAlign={'center'}
-								variant="h1"
-								color={colors.orangeAccent[300]}
-							>
-								{prepper.kitchenTitle}
-							</Typography>
-							<Typography color={'white'} variant="h2">
-								{prepper.description}
-							</Typography>
-						</Box>
-						<Box>
-							<TrophyLikesButton />
-						</Box>
+			</Box>
+			<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+				<Box
+					position={'relative'}
+					borderRadius={'1em'}
+					display="flex"
+					height={'20em'}
+					padding={'2em'}
+					flexDirection={'column'}
+					alignItems={'center'}
+					justifyContent={'space-between'}
+				>
+					<Box>
+						<Typography
+							textAlign={'center'}
+							fontWeight={900}
+							fontSize={{ xs: '3rem', lg: '5rem' }}
+							variant="h1"
+							color={colors.orangeAccent[300]}
+						>
+							{prepper.kitchenTitle}
+						</Typography>
+						<Typography textAlign={'center'} color={'primary'} variant="h2">
+							{prepper.description}
+						</Typography>
+					</Box>
+					<Box>
+						<TrophyLikesButton />
 					</Box>
 				</Box>
 			</Box>
+			<Divider
+				sx={{ my: '2rem', backgroundColor: colors.orangeAccent[900] }}
+				flexItem
+				variant="middle"
+			/>
+			<Typography fontSize={{ xs: '2rem', lg: '4rem' }} variant="h2">
+				Meals
+			</Typography>
 			{!prepper.meals.length && (
 				<Box width="50%">
 					<Alert color="error" fontSize="large">
