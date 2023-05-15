@@ -156,9 +156,7 @@ const Prepper = ({ prepper }) => {
 			{prepper.meals.length && meals.length !== 0 ? (
 				<Box
 					display={'flex'}
-					my="2rem"
 					flexWrap={'wrap'}
-					gap={10}
 					height="100%"
 					justifyContent={'center'}
 					alignItems={'center'}
@@ -166,7 +164,7 @@ const Prepper = ({ prepper }) => {
 				>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (
-							<Box key={id} width={375}>
+							<Box key={id}>
 								<FoodItemCard
 									key={title}
 									foodItem={title}
