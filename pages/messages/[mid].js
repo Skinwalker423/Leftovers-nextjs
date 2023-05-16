@@ -4,19 +4,22 @@ import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
 import { getServerSession } from 'next-auth/next';
 import { mockDataContacts } from '../../db/mockData';
-import NotificationItem from '../../components/notifications/notificationItem';
+import {
+	connectMongoDb,
+	findExistingPrepperEmail,
+	findExistingUserEmail
+} from '../../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res, params }) {
 	const session = await getServerSession(req, res, authOptions);
 	const messageId = params.mid;
-	console.log(messageId);
 
 	if (!session) {
 		return {
 			redirect: {
 				destination: '/signin',
-				permanent: false,
-			},
+				permanent: false
+			}
 		};
 	}
 
@@ -24,15 +27,36 @@ export async function getServerSideProps({ req, res, params }) {
 		messageId &&
 		mockDataContacts.find((message) => message.id.toString() === messageId);
 	console.log(messageDetails);
-	// const client = await connectMongoDb();
-	// const userDb = await findExistingPrepperEmail(client, session.user.email);
 
-	return {
-		props: {
-			userData: session.user,
-			messageDetails: messageDetails ? messageDetails : [],
-		},
-	};
+	try {
+		const client = await connectMongoDb();
+		const prepperDb = await findExistingPrepperEmail(
+			client,
+			session.user.email
+		);
+
+		if (!prepperDb) {
+			const userDb = await findExistingUserEmail(client, session.user.email);
+
+			return {
+				props: {
+					userData: userDb,
+					messageDetails: messageDetails ? messageDetails : []
+				}
+			};
+		}
+
+		return {
+			props: {
+				userData: prepperDb,
+				messageDetails: messageDetails ? messageDetails : []
+			}
+		};
+	} catch (err) {
+		return {
+			notFound: true
+		};
+	}
 }
 
 const Message = ({ messageDetails, userData }) => {
@@ -42,21 +66,22 @@ const Message = ({ messageDetails, userData }) => {
 	return (
 		<Box
 			display={'flex'}
-			justifyContent='center'
+			justifyContent="center"
 			alignItems={'center'}
-			width='100%'
-			height='100vh'>
+			width="100%"
+			height="100vh"
+		>
 			<Head>
 				<title>Message</title>
-				<meta name='description' content='message details' />
+				<meta name="description" content="message details" />
 			</Head>
 			<Paper sx={{ width: '50em', height: '50em' }}>
-				<Stack m='3em'>
+				<Stack m="3em">
 					<Box>
 						<Typography>{name}</Typography>
 						<Typography>{email}</Typography>
 					</Box>
-					<Box mt='5em'>
+					<Box mt="5em">
 						<Typography>{message}</Typography>
 					</Box>
 				</Stack>

@@ -201,9 +201,14 @@ export default function Home({ favoriteList, foundSession, error }) {
 					description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
 				/>
 
-				{errorMsg && (
-					<ErrorAlert width="50%" error={errorMsg} setError={setErrorMsg} />
-				)}
+				{errorMsg ||
+					(error && (
+						<ErrorAlert
+							width="50%"
+							error={errorMsg || error}
+							setError={setErrorMsg}
+						/>
+					))}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
 			</main>
