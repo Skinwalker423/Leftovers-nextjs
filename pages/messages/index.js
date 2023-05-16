@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Stack, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import NotificationList from '../../components/notifications/notificationList';
 import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
@@ -22,7 +23,6 @@ export async function getServerSideProps({ req, res }) {
 		};
 	}
 
-	console.log(session);
 	try {
 		const client = await connectMongoDb();
 		const prepperDb = await findExistingPrepperEmail(
@@ -53,7 +53,6 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Messages = ({ userData }) => {
-	console.log(userData);
 	return (
 		<Box
 			width={'100%'}
