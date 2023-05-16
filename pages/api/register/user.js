@@ -3,7 +3,7 @@ import { hashPassword } from '../../../utils/bcrypt';
 import {
 	connectMongoDb,
 	addDocToDb,
-	findExistingUserEmail,
+	findExistingUserEmail
 } from '../../../db/mongodb/mongoDbUtils';
 import { validateEmail } from '../../../utils/form-validation';
 
@@ -27,6 +27,8 @@ const user = async (req, res) => {
 		email,
 		favorites: [],
 		password: hashedPassword,
+		name: null,
+		image: null
 	};
 	if (req.method === 'POST') {
 		try {
@@ -39,7 +41,7 @@ const user = async (req, res) => {
 			if (userFound) {
 				console.log('prepperFound:', userFound);
 				res.status(400).json({
-					error: 'Email already in use. Choose another email or please sign in',
+					error: 'Email already in use. Choose another email or please sign in'
 				});
 				return;
 			}
