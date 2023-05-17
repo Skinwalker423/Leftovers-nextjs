@@ -197,7 +197,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 				<PromoSection
 					imgUrl="/images/cooking/vegan.jpg"
 					btnText="Find Plant Based food"
-					title="Discover unique plant based creations"
+					title="Discover unique plant based dishes"
 					description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
 				/>
 
