@@ -69,13 +69,16 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
 		const imgUrl = null;
+		const currentDate = new Date();
 
 		const mealDetails = {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
 			image: imgUrl || null,
-			qty: parseInt(qtyRef.current.value)
+			qty: parseInt(qtyRef.current.value),
+			created_at: currentDate,
+			last_modified: currentDate
 		};
 
 		console.log(mealDetails);
