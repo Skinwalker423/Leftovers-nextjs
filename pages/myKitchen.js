@@ -55,7 +55,7 @@ export async function getServerSideProps({ req, res }) {
 	return {
 		props: {
 			userData: user,
-			prepper: userDb
+			prepper: JSON.parse(JSON.stringify(userDb))
 		}
 	};
 }

@@ -29,7 +29,7 @@ const user = async (req, res) => {
 		password: hashedPassword,
 		name: null,
 		image: null,
-		created_at: new Date()
+		createdAt: new Date()
 	};
 	if (req.method === 'POST') {
 		try {
