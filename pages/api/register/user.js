@@ -28,7 +28,8 @@ const user = async (req, res) => {
 		favorites: [],
 		password: hashedPassword,
 		name: null,
-		image: null
+		image: null,
+		created_at: new Date()
 	};
 	if (req.method === 'POST') {
 		try {
