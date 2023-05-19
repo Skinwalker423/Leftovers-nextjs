@@ -111,7 +111,9 @@ export async function findExistingPrepperEmail(client, email) {
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
 			kitchenImgUrl: document?.kitchenImgUrl || '',
-			name: `${document.firstName} ${document.lastName}`
+			name: `${document.firstName} ${document.lastName}`,
+			joined: document?.createdAt?.toString(),
+			lastModified: document?.last_modified?.toString()
 		};
 		client.close();
 		return formattedDoc;
@@ -136,7 +138,8 @@ export async function findExistingUserEmail(client, email) {
 			favorites: document?.favorites,
 			password: document?.password,
 			image: document?.image,
-			name: `${document.firstName} ${document.lastName}`
+			name: `${document.firstName} ${document.lastName}`,
+			joined: document?.createdAt?.toString()
 		};
 		client.close();
 		return formattedDoc;
@@ -273,7 +276,7 @@ export async function updateMealQty(client, userEmail, mealId, qty) {
 				email: userEmail,
 				'meals.id': mealId
 			},
-			{ $set: { 'meals.$.qty': qty } }
+			{ $set: { 'meals.$.qty': qty, 'meals.$.last_modified': new Date() } }
 		);
 
 		if (!document) {
@@ -293,7 +296,7 @@ export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
 			{
 				email: userEmail
 			},
-			{ $set: { kitchenTitle } }
+			{ $set: { kitchenTitle, last_modified: new Date() } }
 		);
 
 		if (!document) {
@@ -314,7 +317,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 			{
 				email: userEmail
 			},
-			{ $set: { description } }
+			{ $set: { description, last_modified: new Date() } }
 		);
 
 		if (!document) {

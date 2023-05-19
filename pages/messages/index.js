@@ -42,7 +42,7 @@ export async function getServerSideProps({ req, res }) {
 
 		return {
 			props: {
-				userData: prepperDb
+				userData: JSON.parse(JSON.stringify(prepperDb))
 			}
 		};
 	} catch (err) {

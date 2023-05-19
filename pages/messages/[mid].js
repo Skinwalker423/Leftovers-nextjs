@@ -40,7 +40,7 @@ export async function getServerSideProps({ req, res, params }) {
 
 			return {
 				props: {
-					userData: userDb,
+					userData: JSON.parse(JSON.stringify(userDb)),
 					messageDetails: messageDetails ? messageDetails : []
 				}
 			};
@@ -48,7 +48,7 @@ export async function getServerSideProps({ req, res, params }) {
 
 		return {
 			props: {
-				userData: prepperDb,
+				userData: JSON.parse(JSON.stringify(prepperDb)),
 				messageDetails: messageDetails ? messageDetails : []
 			}
 		};

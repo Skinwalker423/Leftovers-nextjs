@@ -55,6 +55,7 @@ const Prepper = ({ prepper }) => {
 	const { colors } = useColors();
 
 	const bannerImage = prepper.kitchenImgUrl || '/art.jpg';
+	console.log(prepper);
 
 	useEffect(() => {
 		if (prepper && prepper.meals) {

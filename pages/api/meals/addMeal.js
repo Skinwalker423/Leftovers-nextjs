@@ -16,7 +16,7 @@ const addMeal = async (req, res) => {
 		description: meal.description,
 		image: meal.image,
 		qty: parseInt(meal.qty),
-		created_at: currentDate,
+		createdAt: currentDate,
 		last_modified: currentDate
 	};
 
