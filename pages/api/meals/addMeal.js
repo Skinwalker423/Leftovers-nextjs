@@ -8,6 +8,7 @@ const addMeal = async (req, res) => {
 	const body = req.body;
 	console.log(body);
 	const { meal, email } = body;
+	const currentDate = new Date();
 
 	const mealDetails = {
 		title: meal.title,
@@ -15,6 +16,8 @@ const addMeal = async (req, res) => {
 		description: meal.description,
 		image: meal.image,
 		qty: parseInt(meal.qty),
+		created_at: currentDate,
+		last_modified: currentDate
 	};
 
 	try {
