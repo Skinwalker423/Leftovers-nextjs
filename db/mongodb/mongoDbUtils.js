@@ -191,7 +191,8 @@ export async function addMealToPrepperDb(client, email, meal) {
 		const document = await collection.updateOne(
 			{ email: email },
 			{
-				$push: { meals: mealDetails }
+				$push: { meals: mealDetails },
+				$set: { last_modified: new Date() }
 			}
 		);
 
@@ -212,7 +213,8 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 		const document = await collection.updateOne(
 			{ email: userEmail },
 			{
-				$pull: { meals: { id: mealId } }
+				$pull: { meals: { id: mealId } },
+				$set: { last_modified: new Date() }
 			}
 		);
 
@@ -339,7 +341,10 @@ export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 				email: prepperEmail,
 				'meals.id': mealId
 			},
-			{ $inc: { 'meals.$.qty': -qty } }
+			{
+				$inc: { 'meals.$.qty': -qty },
+				$set: { 'meals.$.last_modified': new Date() }
+			}
 		);
 
 		if (!document) {
