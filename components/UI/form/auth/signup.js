@@ -10,11 +10,13 @@ import {
 import { validateEmail } from '../../../../utils/form-validation';
 import { signIn } from 'next-auth/react';
 import { useColors } from '../../../../hooks/useColors';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const SignUpForm = ({ title }) => {
 	const { colors } = useColors();
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
+	const [loading, setLoading] = useState(false);
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
@@ -22,6 +24,7 @@ const SignUpForm = ({ title }) => {
 	const handleSignUpFormSubmit = async (e) => {
 		e.preventDefault();
 		console.log('registration pending');
+		setLoading(true);
 		setErrorMsg('');
 		setMsg('');
 		const email = emailRef.current.value;
@@ -30,6 +33,7 @@ const SignUpForm = ({ title }) => {
 
 		if (password !== confirmPassword) {
 			setErrorMsg('password does not match');
+			setLoading(false);
 			return;
 		}
 
@@ -37,6 +41,7 @@ const SignUpForm = ({ title }) => {
 
 		if (!isValidEmail) {
 			setErrorMsg('Invalid email');
+			setLoading(false);
 			return;
 		}
 
@@ -58,12 +63,14 @@ const SignUpForm = ({ title }) => {
 
 			if (data.error) {
 				setErrorMsg(data.error);
+				setLoading(false);
 			} else {
 				setMsg(data.message);
 				signIn();
 			}
 		} catch (err) {
 			setErrorMsg(err);
+			setLoading(false);
 		}
 	};
 
@@ -141,8 +148,15 @@ const SignUpForm = ({ title }) => {
 							type="submit"
 							required
 							size="large"
+							disabled={loading}
 						>
-							<Typography fontSize={'large'}>Submit</Typography>
+							<Typography fontSize={'large'}>
+								{loading ? (
+									<CircularProgress color="primary" size={'1.75rem'} />
+								) : (
+									'Submit'
+								)}
+							</Typography>
 						</Button>
 					</Box>
 				</form>
