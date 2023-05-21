@@ -9,7 +9,12 @@ import FindLocalPreppersSearchBar from '../../searchBar/findLocalPreppers';
 const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 	const { colors } = useColors();
 	return (
-		<Box position={'relative'} top="0" height={'85vh'} width="100%">
+		<Box
+			position={'relative'}
+			top="0"
+			height={{ xs: '70vh', md: '85vh' }}
+			width="100%"
+		>
 			<Image
 				priority={true}
 				fill
