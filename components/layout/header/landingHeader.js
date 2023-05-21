@@ -4,11 +4,23 @@ import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import Stack from '@mui/material/Stack';
 import { useColors } from '../../../hooks/useColors';
+import FindLocalPreppersSearchBar from '../../searchBar/findLocalPreppers';
 
-const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
+const LandingHeader = ({
+	title = 'Header goes here',
+	img = '/art.jpg',
+	handleZipChange,
+	handleZipSearchForm,
+	errorMsg
+}) => {
 	const { colors } = useColors();
 	return (
-		<Box position={'relative'} top="0" height={'85vh'} width="100%">
+		<Box
+			position={'relative'}
+			top="0"
+			height={{ xs: '70vh', md: '85vh' }}
+			width="100%"
+		>
 			<Image
 				priority={true}
 				fill
@@ -50,6 +62,11 @@ const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 					The largest food sharing platform, where you can find local authentic
 					meals being prepared by the community and shared to the community
 				</Typography>
+				<FindLocalPreppersSearchBar
+					handleZipChange={handleZipChange}
+					handleZipSearchForm={handleZipSearchForm}
+					errorMsg={errorMsg}
+				/>
 			</Stack>
 		</Box>
 	);
