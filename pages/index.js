@@ -145,11 +145,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 					alignItems={'center'}
 				>
 					<LandingHeader title="Welcome to Leftovers!" img="/ball-park.jpg" />
-					<FindLocalPreppersSearchBar
+					{/* <FindLocalPreppersSearchBar
 						handleZipChange={handleZipChange}
 						handleZipSearchForm={handleZipSearchForm}
 						errorMsg={errorMsg}
-					/>
+					/> */}
 				</Box>
 			</header>
 			<main className={styles.main}>

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import Stack from '@mui/material/Stack';
 import { useColors } from '../../../hooks/useColors';
+import FindLocalPreppersSearchBar from '../../searchBar/findLocalPreppers';
 
 const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 	const { colors } = useColors();
@@ -50,6 +51,7 @@ const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 					The largest food sharing platform, where you can find local authentic
 					meals being prepared by the community and shared to the community
 				</Typography>
+				<FindLocalPreppersSearchBar />
 			</Stack>
 		</Box>
 	);

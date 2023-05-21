@@ -3,7 +3,6 @@ import { Box, FormControl, IconButton, TextField } from '@mui/material';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useColors } from '../../hooks/useColors';
-import styles from './findLocalPreppers.module.css';
 
 const FindLocalPreppersSearchBar = ({
 	handleZipSearchForm,
@@ -13,12 +12,11 @@ const FindLocalPreppersSearchBar = ({
 	const { colors } = useColors();
 
 	return (
-		<Box position={'absolute'} top="50%" className={styles.searchContainer}>
+		<Box position={'relative'} top={100}>
 			<form onSubmit={handleZipSearchForm}>
 				<FormControl>
 					<Box
 						width={{ xs: '25em', sm: '40em' }}
-						className={styles.searchBox}
 						sx={{
 							display: 'flex',
 							backgroundColor: colors.primary[400],
@@ -30,7 +28,6 @@ const FindLocalPreppersSearchBar = ({
 						}}
 					>
 						<AccountCircle
-							className={styles.account}
 							color="secondary"
 							sx={{
 								mr: 2,
@@ -52,7 +49,6 @@ const FindLocalPreppersSearchBar = ({
 						/>
 						<IconButton type="submit" size="small">
 							<ArrowForwardOutlinedIcon
-								className={styles.arrow}
 								color="secondary"
 								sx={{
 									my: 0.5,
