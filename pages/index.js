@@ -144,12 +144,13 @@ export default function Home({ favoriteList, foundSession, error }) {
 					justifyContent="center"
 					alignItems={'center'}
 				>
-					<LandingHeader title="Welcome to Leftovers!" img="/ball-park.jpg" />
-					{/* <FindLocalPreppersSearchBar
+					<LandingHeader
+						title="Welcome to Leftovers!"
+						img="/ball-park.jpg"
 						handleZipChange={handleZipChange}
 						handleZipSearchForm={handleZipSearchForm}
 						errorMsg={errorMsg}
-					/> */}
+					/>
 				</Box>
 			</header>
 			<main className={styles.main}>

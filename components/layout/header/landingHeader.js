@@ -6,7 +6,13 @@ import Stack from '@mui/material/Stack';
 import { useColors } from '../../../hooks/useColors';
 import FindLocalPreppersSearchBar from '../../searchBar/findLocalPreppers';
 
-const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
+const LandingHeader = ({
+	title = 'Header goes here',
+	img = '/art.jpg',
+	handleZipChange,
+	handleZipSearchForm,
+	errorMsg
+}) => {
 	const { colors } = useColors();
 	return (
 		<Box
@@ -56,7 +62,11 @@ const LandingHeader = ({ title = 'Header goes here', img = '/art.jpg' }) => {
 					The largest food sharing platform, where you can find local authentic
 					meals being prepared by the community and shared to the community
 				</Typography>
-				<FindLocalPreppersSearchBar />
+				<FindLocalPreppersSearchBar
+					handleZipChange={handleZipChange}
+					handleZipSearchForm={handleZipSearchForm}
+					errorMsg={errorMsg}
+				/>
 			</Stack>
 		</Box>
 	);
