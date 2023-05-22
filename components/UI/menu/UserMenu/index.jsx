@@ -1,12 +1,19 @@
 import React from 'react';
-import { Box, Typography, MenuList, MenuItem, Paper } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import MenuList from '@mui/material/MenuList';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
 import { useColors } from '../../../../hooks/useColors';
 import { signOut } from 'next-auth/react';
-// import MenuItem from './MenuItem';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import DefaultAvatar from '../../icon/defaultAvatar';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const UserMenu = () => {
 	const { colors } = useColors();
@@ -28,17 +35,20 @@ const UserMenu = () => {
 		<Paper
 			sx={{
 				position: 'absolute',
-				mr: '20px',
-				top: '70px',
-				right: '0',
-				width: '15rem',
-			}}>
+				mr: '1.5em',
+				top: 70,
+				right: 0,
+				width: '20rem',
+				borderRadius: '1em'
+			}}
+		>
 			<Box
 				display={'flex'}
-				flexDirection='column'
+				flexDirection="column"
 				justifyContent={'center'}
-				alignItems='center'
-				m={'20px 0'}>
+				alignItems="center"
+				m={'1.5em 0'}
+			>
 				{userIcon ? (
 					<Box>
 						<Image
@@ -46,7 +56,7 @@ const UserMenu = () => {
 							src={userIcon}
 							width={50}
 							height={50}
-							alt='user icon'
+							alt="user icon"
 						/>
 					</Box>
 				) : (
@@ -55,25 +65,55 @@ const UserMenu = () => {
 				<Box color={colors.primary[100]}>
 					<Typography>{userEmail}</Typography>
 				</Box>
-				<Box color={colors.primary[100]}>
-					<Typography>{userName}</Typography>
-				</Box>
 			</Box>
+			<Divider flexItem variant="middle" color={colors.orangeAccent[900]} />
 			<MenuList>
-				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-					Profile
-				</MenuItem>
-				<Link
-					style={{ textDecoration: 'none', color: colors.primary[100] }}
-					href={'/messages'}>
-					<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
-						Messages
+				<Link style={{ textDecoration: 'none' }} href={'/'}>
+					<MenuItem
+						sx={{
+							height: '4em',
+							pl: '2.5em',
+							justifyContent: 'flex-start',
+							alignItems: 'center',
+							gap: 5
+						}}
+					>
+						<AccountCircle fontSize="large" color="secondary" />
+						<Typography color={colors.primary[100]} fontSize={'large'}>
+							Profile
+						</Typography>
+					</MenuItem>
+				</Link>
+				<Link style={{ textDecoration: 'none' }} href={'/messages'}>
+					<MenuItem
+						sx={{
+							height: '4em',
+							pl: '2.5em',
+							justifyContent: 'flex-start',
+							alignItems: 'center',
+							gap: 5
+						}}
+					>
+						<MailIcon fontSize="large" color="secondary" />
+						<Typography color={colors.primary[100]} fontSize={'large'}>
+							Messages
+						</Typography>
 					</MenuItem>
 				</Link>
 				<MenuItem
-					sx={{ height: '50px', justifyContent: 'center' }}
-					onClick={handleSignOut}>
-					Logout
+					onClick={handleSignOut}
+					sx={{
+						height: '4em',
+						pl: '2.5em',
+						justifyContent: 'flex-start',
+						alignItems: 'center',
+						gap: 5
+					}}
+				>
+					<LogoutIcon fontSize="large" color="secondary" />
+					<Typography color={colors.primary[100]} fontSize={'large'}>
+						Sign Out
+					</Typography>
 				</MenuItem>
 			</MenuList>
 		</Paper>
