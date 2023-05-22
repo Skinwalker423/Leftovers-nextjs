@@ -1,8 +1,14 @@
 import React from 'react';
-import { Box, Typography, MenuList, MenuItem, Paper } from '@mui/material';
+import {
+	Box,
+	Typography,
+	MenuList,
+	MenuItem,
+	Paper,
+	Divider
+} from '@mui/material';
 import { useColors } from '../../../../hooks/useColors';
 import { signOut } from 'next-auth/react';
-// import MenuItem from './MenuItem';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -58,10 +64,8 @@ const UserMenu = () => {
 				<Box color={colors.primary[100]}>
 					<Typography>{userEmail}</Typography>
 				</Box>
-				<Box color={colors.primary[100]}>
-					<Typography>{userName}</Typography>
-				</Box>
 			</Box>
+			<Divider flexItem variant="middle" color={colors.orangeAccent[900]} />
 			<MenuList>
 				<MenuItem sx={{ height: '4em', justifyContent: 'center' }}>
 					Profile
