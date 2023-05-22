@@ -28,17 +28,20 @@ const UserMenu = () => {
 		<Paper
 			sx={{
 				position: 'absolute',
-				mr: '20px',
-				top: '70px',
-				right: '0',
-				width: '15rem',
-			}}>
+				mr: '1.5em',
+				top: 70,
+				right: 0,
+				width: '20rem',
+				borderRadius: '1em'
+			}}
+		>
 			<Box
 				display={'flex'}
-				flexDirection='column'
+				flexDirection="column"
 				justifyContent={'center'}
-				alignItems='center'
-				m={'20px 0'}>
+				alignItems="center"
+				m={'20px 0'}
+			>
 				{userIcon ? (
 					<Box>
 						<Image
@@ -46,7 +49,7 @@ const UserMenu = () => {
 							src={userIcon}
 							width={50}
 							height={50}
-							alt='user icon'
+							alt="user icon"
 						/>
 					</Box>
 				) : (
@@ -60,19 +63,21 @@ const UserMenu = () => {
 				</Box>
 			</Box>
 			<MenuList>
-				<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
+				<MenuItem sx={{ height: '4em', justifyContent: 'center' }}>
 					Profile
 				</MenuItem>
 				<Link
 					style={{ textDecoration: 'none', color: colors.primary[100] }}
-					href={'/messages'}>
-					<MenuItem sx={{ height: '50px', justifyContent: 'center' }}>
+					href={'/messages'}
+				>
+					<MenuItem sx={{ height: '4em', justifyContent: 'center' }}>
 						Messages
 					</MenuItem>
 				</Link>
 				<MenuItem
-					sx={{ height: '50px', justifyContent: 'center' }}
-					onClick={handleSignOut}>
+					sx={{ height: '4em', justifyContent: 'center' }}
+					onClick={handleSignOut}
+				>
 					Logout
 				</MenuItem>
 			</MenuList>
