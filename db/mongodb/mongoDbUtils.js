@@ -59,7 +59,7 @@ export async function removePrepperFromFavoritesListDb(
 }
 export async function findAllInCollection(client, collectionArg) {
 	const collection = client.db('leftovers').collection(collectionArg);
-	const document = await collection.find({}).toArray();
+	const document = await collection.find({}).limit(20).toArray();
 
 	console.log(`document found for collection ${collectionArg}:`);
 	if (!document) {
