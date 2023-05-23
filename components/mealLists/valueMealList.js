@@ -3,7 +3,7 @@ import { UserContext } from '../../store/UserContext';
 import FoodItemCard from '../Card/foodItemCard';
 import Box from '@mui/material/Box';
 
-const ValueMealList = ({ userEmail }) => {
+const ValueMealList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
 
 	const list = state.localPreppers.map((prepper) => {
@@ -22,6 +22,7 @@ const ValueMealList = ({ userEmail }) => {
 							qty={qty}
 							description={description}
 							image={image}
+							setMsg={setMsg}
 						/>
 					);
 				}

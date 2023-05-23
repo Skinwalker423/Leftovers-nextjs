@@ -169,7 +169,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 						title="$5 Meals"
 						bgColor={colors.greenAccent[700]}
 					>
-						<ValueMealList userEmail={userEmail} />
+						<ValueMealList userEmail={userEmail} setMsg={setMsg} />
 					</CategoryBanner>
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (
