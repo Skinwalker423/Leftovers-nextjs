@@ -129,7 +129,12 @@ export default function Home({ favoriteList, foundSession, error }) {
 	};
 
 	return (
-		<Box className={styles.container}>
+		<Box
+			width={'100%'}
+			display={'flex'}
+			flexDirection={'column'}
+			justifyContent={'center'}
+		>
 			<Head>
 				<title>Leftovers</title>
 				<meta

@@ -119,9 +119,8 @@ export default function PrepperCard({
 		<motion.div whileHover={{ scale: 1.05 }}>
 			<Card
 				sx={{
-					width: { xs: '80%', sm: '20rem', md: '25rem' },
-					m: '2rem',
-					maxWidth: '25rem',
+					width: { xs: '20rem', md: '25rem' },
+					mx: '.5rem',
 					height: '26rem',
 					backgroundColor: colors.primary[400]
 				}}

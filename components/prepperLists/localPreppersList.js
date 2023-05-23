@@ -34,11 +34,15 @@ const LocalPreppersList = ({ userEmail, setMsg }) => {
 
 	return (
 		<Box
-			className={styles.prepCardContainer}
-			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
+			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 			display={'flex'}
-			flexDirection={{ xs: 'column', md: 'row' }}
-			flexWrap={{ xs: 'none', md: 'wrap' }}>
+			gap={5}
+			// flexDirection={{ xs: 'column', md: 'row' }}
+			justifyContent={'center'}
+			alignItems={'center'}
+			flexWrap={{ xs: 'wrap', md: 'wrap' }}
+			height={{ xs: '90%', md: '80%' }}
+		>
 			{state.localPreppers && state.localPreppers.length !== 0 && preppers}
 		</Box>
 	);

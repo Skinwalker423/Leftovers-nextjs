@@ -36,6 +36,8 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 			display={'flex'}
 			flexDirection={{ xs: 'column', md: 'row' }}
 			flexWrap={{ xs: 'none', md: 'wrap' }}
+			justifyContent={'center'}
+			alignItems={'center'}
 		>
 			{list}
 		</Box>

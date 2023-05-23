@@ -12,10 +12,13 @@ const CategoryBanner = ({
 	const { colors } = useColors();
 	return (
 		<Box
-			width={'95%'}
-			m="1em"
+			width={'96%'}
+			m="1rem"
+			height={{ xs: '63rem', sm: '35rem' }}
 			borderRadius={'2em'}
-			sx={{ overflowY: 'hidden' }}
+			sx={{ overflow: 'auto' }}
+			alignItems={'center'}
+			justifyContent={'center'}
 			backgroundColor={bgColor}
 		>
 			<Link style={{ textDecoration: 'none' }} href={link}>

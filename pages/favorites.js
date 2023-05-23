@@ -53,25 +53,36 @@ const Favorites = ({ favoriteList, userSession }) => {
 	}, []);
 
 	return (
-		<Box className={styles.container}>
+		<Box>
 			<Head>
 				<title>Favorites</title>
 				<meta name="description" content="Your favorite preppers" />
 			</Head>
 			<main className={styles.main}>
-				<Typography color={'secondary'} variant="h1">
-					Favorites
-				</Typography>
-				{!favoriteList.length && (
-					<Alert sx={{ mt: '2em' }} color="warning">
-						<Typography variant="h1">No Favorites added</Typography>
-					</Alert>
-				)}
-				<FavoriteList
-					userEmail={userEmail}
-					favRow={true}
-					favoriteList={state.favorites}
-				/>
+				<Box position={'relative'} top={{ xs: 100, md: -50 }}>
+					<Typography textAlign={'center'} color={'secondary'} variant="h1">
+						Favorites
+					</Typography>
+					{!favoriteList.length && (
+						<Alert sx={{ mt: '2em' }} color="warning">
+							<Typography variant="h1">No Favorites added</Typography>
+						</Alert>
+					)}
+					<Box
+						width={'100%'}
+						height={'100%'}
+						mt="2rem"
+						display="flex"
+						gap="1rem"
+						flexWrap={'wrap'}
+					>
+						<FavoriteList
+							userEmail={userEmail}
+							favRow={true}
+							favoriteList={state.favorites}
+						/>
+					</Box>
+				</Box>
 			</main>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />

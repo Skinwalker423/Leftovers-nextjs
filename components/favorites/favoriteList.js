@@ -11,18 +11,17 @@ const FavoriteList = ({ favRow, userEmail }) => {
 	return (
 		<Box
 			display={'flex'}
-			flexWrap={{ xs: 'unset', md: 'wrap' }}
+			flexDirection={{ xs: 'column', md: 'row' }}
+			flexWrap={'wrap'}
 			width={'100%'}
+			justifyContent={'center'}
+			alignItems={'center'}
 			gap="3em"
-			mb={'1em'}
+			my={'1em'}
 			sx={{
 				height: {
-					xs: favRow ? '' : '30rem',
-					sm: favRow ? '' : '30rem',
-					md: '',
-					lg: ''
-				},
-				overflowY: 'auto'
+					xs: favRow ? '100%' : 'unset'
+				}
 			}}
 			className={styles.prepCardContainer}
 		>
