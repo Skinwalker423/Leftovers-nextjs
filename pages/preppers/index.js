@@ -69,33 +69,43 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 				<title>Local Preppers</title>
 				<meta name="description" content="List of all preppers in your area" />
 			</Head>
-			<Typography variant="h1">List of all preppers in your area</Typography>
-			<Box mt="2rem" display="flex" gap="1rem" flexWrap={'wrap'}>
-				{preppers.map((prepper) => {
-					const avatar = 'https://i.pravatar.cc/300';
+			<main>
+				<Typography variant="h1">List of all preppers in your area</Typography>
+				<Box
+					mt="2rem"
+					display="flex"
+					justifyContent={'center'}
+					gap={4}
+					flexWrap={'wrap'}
+				>
+					{preppers.map((prepper) => {
+						const avatar = 'https://i.pravatar.cc/300';
 
-					const favorited =
-						favoritesList && favoritesList.includes(prepper.id) ? true : false;
-					if (prepper.email !== userEmail) {
-						return (
-							<PrepperCard
-								isFavorited={favorited}
-								className={styles.prepCard}
-								key={prepper.id}
-								name={prepper.kitchenTitle}
-								email={prepper.email}
-								subTitle={prepper.name}
-								avatar={avatar}
-								kitchenImgUrl={prepper.kitchenImgUrl}
-								id={prepper.id}
-								userEmail={userEmail ? userEmail : ''}
-								description={prepper.description}
-								setMsg={setMsg}
-							/>
-						);
-					}
-				})}
-			</Box>
+						const favorited =
+							favoritesList && favoritesList.includes(prepper.id)
+								? true
+								: false;
+						if (prepper.email !== userEmail) {
+							return (
+								<PrepperCard
+									isFavorited={favorited}
+									className={styles.prepCard}
+									key={prepper.id}
+									name={prepper.kitchenTitle}
+									email={prepper.email}
+									subTitle={prepper.name}
+									avatar={avatar}
+									kitchenImgUrl={prepper.kitchenImgUrl}
+									id={prepper.id}
+									userEmail={userEmail ? userEmail : ''}
+									description={prepper.description}
+									setMsg={setMsg}
+								/>
+							);
+						}
+					})}
+				</Box>
+			</main>
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 		</Box>
 	);
