@@ -8,13 +8,13 @@ const LandingCardList = () => {
 	return (
 		<Box
 			position={'relative'}
-			py={'3em'}
 			width={'100%'}
+			py={'3em'}
 			display={'flex'}
 			flexWrap={'wrap'}
 			justifyContent={'space-evenly'}
 			alignItems={'center'}
-			height={{ lg: '70rem' }}
+			height={{ lg: '60rem' }}
 			backgroundColor={colors.primary[900]}
 			gap={5}
 		>

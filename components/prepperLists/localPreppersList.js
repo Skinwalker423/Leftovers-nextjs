@@ -37,7 +37,6 @@ const LocalPreppersList = ({ userEmail, setMsg }) => {
 			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 			display={'flex'}
 			gap={5}
-			// flexDirection={{ xs: 'column', md: 'row' }}
 			justifyContent={'center'}
 			alignItems={'center'}
 			flexWrap={{ xs: 'wrap', md: 'wrap' }}
