@@ -70,14 +70,15 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 				<meta name="description" content="List of all preppers in your area" />
 			</Head>
 			<main>
-				<Typography variant="h1">List of all preppers in your area</Typography>
-				<Box
-					mt="2rem"
-					display="flex"
-					justifyContent={'center'}
-					gap={4}
-					flexWrap={'wrap'}
+				<Typography
+					sx={{ my: '2em' }}
+					color={'secondary'}
+					textAlign={'center'}
+					variant="h1"
 				>
+					List of all preppers in your area
+				</Typography>
+				<Box display="flex" justifyContent={'center'} gap={4} flexWrap={'wrap'}>
 					{preppers.map((prepper) => {
 						const avatar = 'https://i.pravatar.cc/300';
 
