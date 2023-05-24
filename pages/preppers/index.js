@@ -76,7 +76,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 					textAlign={'center'}
 					variant="h1"
 				>
-					List of all preppers in your area
+					Meal preppers in '[zipcode]'
 				</Typography>
 				<Box display="flex" justifyContent={'center'} gap={4} flexWrap={'wrap'}>
 					{preppers.map((prepper) => {
