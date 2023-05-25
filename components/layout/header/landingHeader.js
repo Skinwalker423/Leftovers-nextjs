@@ -51,6 +51,7 @@ const LandingHeader = ({
 				<Typography
 					textAlign={'center'}
 					maxWidth={{ xs: '17em', sm: '25em' }}
+					fontWeight={600}
 					lineHeight={1.5}
 					fontSize={{ xs: 'large', md: '1.75em' }}
 					color={'white'}
@@ -60,7 +61,8 @@ const LandingHeader = ({
 					}}
 				>
 					The largest food sharing platform, where you can find local authentic
-					meals being prepared by the community and shared to the community
+					meals being prepared by the community and shared to the community.
+					Search for local participating meal preppers!
 				</Typography>
 				<FindLocalPreppersSearchBar
 					handleZipChange={handleZipChange}
