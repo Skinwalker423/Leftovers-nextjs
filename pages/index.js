@@ -87,6 +87,12 @@ export default function Home({ favoriteList, foundSession, error }) {
 	const { state, dispatch } = useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
+	console.log(
+		'this is found session:',
+		foundSession,
+		'this is session:',
+		session
+	);
 
 	useEffect(() => {
 		if (favoriteList) {
@@ -186,26 +192,30 @@ export default function Home({ favoriteList, foundSession, error }) {
 						<FavoriteList userEmail={userEmail} />
 					</CategoryBanner>
 				)}
-				<LandingCardList />
+				{!session && !foundSession && (
+					<Box width={'100%'}>
+						<LandingCardList />
 
-				<PromoSection
-					link="/preppers"
-					imgUrl="/images/cooking/defaultMeal.jpg"
-				/>
-				<PromoSection
-					title="Share your beloved creations"
-					link="/register"
-					description="Whether it be the unique desert that only you have thought of, or good old fashion meals that you have perfected, share those dishes with your community and inspire others to spread joy."
-					bgColor={colors.primary[900]}
-					btnText="Register Now"
-					reverse
-				/>
-				<PromoSection
-					imgUrl="/images/cooking/vegan.jpg"
-					btnText="Find Plant Based food"
-					title="Discover unique plant based dishes"
-					description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
-				/>
+						<PromoSection
+							link="/preppers"
+							imgUrl="/images/cooking/defaultMeal.jpg"
+						/>
+						<PromoSection
+							title="Share your beloved creations"
+							link="/register"
+							description="Whether it be the unique desert that only you have thought of, or good old fashion meals that you have perfected, share those dishes with your community and inspire others to spread joy."
+							bgColor={colors.primary[900]}
+							btnText="Register Now"
+							reverse
+						/>
+						<PromoSection
+							imgUrl="/images/cooking/vegan.jpg"
+							btnText="Find Plant Based food"
+							title="Discover unique plant based dishes"
+							description="Experience the variety of cultural dining prepared by those who cherish plant-based food and want to share their delights."
+						/>
+					</Box>
+				)}
 
 				{errorMsg ||
 					(error && (
