@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PromoSection from '../../components/landingPagePromos/promoSection';
 import { useColors } from '../../hooks/useColors';
+import Link from 'next/link';
 
 export async function getStaticProps() {
 	return {
@@ -13,7 +14,7 @@ export async function getStaticProps() {
 	};
 }
 
-const About = () => {
+const missionStatement = () => {
 	const { colors } = useColors();
 	return (
 		<Box width={'100%'}>
@@ -29,11 +30,12 @@ const About = () => {
 					width={'100%'}
 					height={{ xs: '35vh', sm: '40vh', md: '50vh' }}
 					display={'flex'}
+					flexDirection={'column'}
 					backgroundColor={colors.primary[400]}
-					justifyContent="center"
+					justifyContent="space-evenly"
 					alignItems={'center'}
 				>
-					<Box position={'relative'}>
+					<Box my={'5rem'} position={'relative'}>
 						<Typography
 							fontWeight={800}
 							color={'secondary'}
@@ -43,6 +45,20 @@ const About = () => {
 							Mission Statement
 						</Typography>
 					</Box>
+					<Link style={{ textDecoration: 'none' }} href={'/about'}>
+						<Box
+							width={'20rem'}
+							height={'4rem'}
+							display={'flex'}
+							backgroundColor={colors.orangeAccent[600]}
+							borderRadius={'.5em'}
+							color={'white'}
+							justifyContent={'center'}
+							alignItems={'center'}
+						>
+							<Typography variant="h2">Back to About Us</Typography>
+						</Box>
+					</Link>
 				</Box>
 			</header>
 			<main>
@@ -90,4 +106,4 @@ const About = () => {
 	);
 };
 
-export default About;
+export default missionStatement;
