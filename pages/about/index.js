@@ -30,11 +30,13 @@ const About = () => {
 			<header>
 				<Box
 					width={'100%'}
-					height={{ xs: '35vh', sm: '40vh', md: '50vh' }}
+					height={{ xs: '65vh', md: '55vh' }}
 					display={'flex'}
+					gap={3}
 					backgroundColor={colors.primary[400]}
 					justifyContent="center"
 					alignItems={'center'}
+					flexDirection={{ xs: 'column', md: 'row' }}
 				>
 					<Box position={'relative'}>
 						<Typography
@@ -46,6 +48,83 @@ const About = () => {
 							About Us
 						</Typography>
 					</Box>
+					<Paper
+						sx={{
+							p: '3rem',
+							display: 'flex',
+							flexDirection: 'column',
+							gap: 3,
+							position: { xs: 'unset', lg: 'absolute' },
+							right: { xs: 'unset', lg: 100 }
+						}}
+					>
+						<Link
+							style={{ textDecoration: 'none' }}
+							href={'/about/missionStatement'}
+						>
+							<Box
+								width={'17rem'}
+								height={'3.5rem'}
+								display={'flex'}
+								backgroundColor={colors.orangeAccent[600]}
+								borderRadius={'.5em'}
+								color={'white'}
+								justifyContent={'center'}
+								alignItems={'center'}
+								sx={{
+									':hover': {
+										backgroundColor: colors.orangeAccent[400]
+									}
+								}}
+							>
+								<Typography variant="h3">Mission Statement</Typography>
+							</Box>
+						</Link>
+						<Link
+							style={{ textDecoration: 'none' }}
+							href={'/about/joinTheCommunity'}
+						>
+							<Box
+								width={'17rem'}
+								height={'3.5rem'}
+								display={'flex'}
+								backgroundColor={colors.orangeAccent[600]}
+								borderRadius={'.5em'}
+								color={'white'}
+								justifyContent={'center'}
+								alignItems={'center'}
+								sx={{
+									':hover': {
+										backgroundColor: colors.orangeAccent[400]
+									}
+								}}
+							>
+								<Typography variant="h3">Join the Community</Typography>
+							</Box>
+						</Link>
+						<Link
+							style={{ textDecoration: 'none' }}
+							href={'/about/privacyPolicy'}
+						>
+							<Box
+								width={'17rem'}
+								height={'3.5rem'}
+								display={'flex'}
+								backgroundColor={colors.orangeAccent[600]}
+								borderRadius={'.5em'}
+								color={'white'}
+								justifyContent={'center'}
+								alignItems={'center'}
+								sx={{
+									':hover': {
+										backgroundColor: colors.orangeAccent[400]
+									}
+								}}
+							>
+								<Typography variant="h3">Privacy Policy</Typography>
+							</Box>
+						</Link>
+					</Paper>
 				</Box>
 			</header>
 			<main>
@@ -57,7 +136,7 @@ const About = () => {
 					flexDirection={'column'}
 					textOverflow={'clip'}
 				>
-					<Box
+					{/* <Box
 						display={'flex'}
 						justifyContent={'center'}
 						alignItems={'center'}
@@ -127,7 +206,7 @@ const About = () => {
 								</Box>
 							</Link>
 						</Paper>
-					</Box>
+					</Box> */}
 					<LandingCardList />
 				</Box>
 			</main>

@@ -55,6 +55,11 @@ const missionStatement = () => {
 							color={'white'}
 							justifyContent={'center'}
 							alignItems={'center'}
+							sx={{
+								':hover': {
+									backgroundColor: colors.orangeAccent[400]
+								}
+							}}
 						>
 							<Typography variant="h2">Back to About Us</Typography>
 						</Box>
