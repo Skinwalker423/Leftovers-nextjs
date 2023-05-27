@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import PromoSection from '../../components/landingPagePromos/promoSection';
 import LandingCardList from '../../components/landingPagePromos/LandingCardList';
 import { useColors } from '../../hooks/useColors';
-import Link from 'next/link';
+import AboutNavLink from '../../components/UI/button/aboutNavLink';
 
 export async function getStaticProps() {
 	return {
@@ -58,72 +58,15 @@ const About = () => {
 							right: { xs: 'unset', lg: 100 }
 						}}
 					>
-						<Link
-							style={{ textDecoration: 'none' }}
-							href={'/about/missionStatement'}
-						>
-							<Box
-								width={'17rem'}
-								height={'3.5rem'}
-								display={'flex'}
-								backgroundColor={colors.orangeAccent[600]}
-								borderRadius={'.5em'}
-								color={'white'}
-								justifyContent={'center'}
-								alignItems={'center'}
-								sx={{
-									':hover': {
-										backgroundColor: colors.orangeAccent[400]
-									}
-								}}
-							>
-								<Typography variant="h3">Mission Statement</Typography>
-							</Box>
-						</Link>
-						<Link
-							style={{ textDecoration: 'none' }}
-							href={'/about/joinTheCommunity'}
-						>
-							<Box
-								width={'17rem'}
-								height={'3.5rem'}
-								display={'flex'}
-								backgroundColor={colors.orangeAccent[600]}
-								borderRadius={'.5em'}
-								color={'white'}
-								justifyContent={'center'}
-								alignItems={'center'}
-								sx={{
-									':hover': {
-										backgroundColor: colors.orangeAccent[400]
-									}
-								}}
-							>
-								<Typography variant="h3">Join the Community</Typography>
-							</Box>
-						</Link>
-						<Link
-							style={{ textDecoration: 'none' }}
-							href={'/about/privacyPolicy'}
-						>
-							<Box
-								width={'17rem'}
-								height={'3.5rem'}
-								display={'flex'}
-								backgroundColor={colors.orangeAccent[600]}
-								borderRadius={'.5em'}
-								color={'white'}
-								justifyContent={'center'}
-								alignItems={'center'}
-								sx={{
-									':hover': {
-										backgroundColor: colors.orangeAccent[400]
-									}
-								}}
-							>
-								<Typography variant="h3">Privacy Policy</Typography>
-							</Box>
-						</Link>
+						<AboutNavLink
+							href="/about/missionStatement"
+							title="Mission Statement"
+						/>
+						<AboutNavLink
+							href="/about/joinTheCommunity"
+							title="Join the Community"
+						/>
+						<AboutNavLink href="/about/privacyPolicy" title="Privacy Policy" />
 					</Paper>
 				</Box>
 			</header>
@@ -136,77 +79,6 @@ const About = () => {
 					flexDirection={'column'}
 					textOverflow={'clip'}
 				>
-					{/* <Box
-						display={'flex'}
-						justifyContent={'center'}
-						alignItems={'center'}
-						height={'30rem'}
-						p={'1rem'}
-						width={'35rem'}
-					>
-						<Paper
-							sx={{
-								width: '100%',
-								height: '100%',
-								p: '1rem',
-								display: 'flex',
-								flexDirection: 'column',
-								gap: 3
-							}}
-						>
-							<Link
-								style={{ textDecoration: 'none' }}
-								href={'/about/missionStatement'}
-							>
-								<Box
-									width={'20rem'}
-									height={'4rem'}
-									display={'flex'}
-									backgroundColor={colors.orangeAccent[600]}
-									borderRadius={'.5em'}
-									color={'white'}
-									justifyContent={'center'}
-									alignItems={'center'}
-								>
-									<Typography variant="h2">Mission Statement</Typography>
-								</Box>
-							</Link>
-							<Link
-								style={{ textDecoration: 'none' }}
-								href={'/about/joinTheCommunity'}
-							>
-								<Box
-									width={'20rem'}
-									height={'4rem'}
-									display={'flex'}
-									backgroundColor={colors.orangeAccent[600]}
-									borderRadius={'.5em'}
-									color={'white'}
-									justifyContent={'center'}
-									alignItems={'center'}
-								>
-									<Typography variant="h2">Join the Community</Typography>
-								</Box>
-							</Link>
-							<Link
-								style={{ textDecoration: 'none' }}
-								href={'/about/privacyPolicy'}
-							>
-								<Box
-									width={'20rem'}
-									height={'4rem'}
-									display={'flex'}
-									backgroundColor={colors.orangeAccent[600]}
-									borderRadius={'.5em'}
-									color={'white'}
-									justifyContent={'center'}
-									alignItems={'center'}
-								>
-									<Typography variant="h2">Privacy Policy</Typography>
-								</Box>
-							</Link>
-						</Paper>
-					</Box> */}
 					<LandingCardList />
 				</Box>
 			</main>
