@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PromoSection from '../../components/landingPagePromos/promoSection';
 import { useColors } from '../../hooks/useColors';
-import Link from 'next/link';
+import AboutNavLink from '../../components/UI/button/aboutNavLink';
 
 export async function getStaticProps() {
 	return {
@@ -45,20 +45,7 @@ const missionStatement = () => {
 							Mission Statement
 						</Typography>
 					</Box>
-					<Link style={{ textDecoration: 'none' }} href={'/about'}>
-						<Box
-							width={'20rem'}
-							height={'4rem'}
-							display={'flex'}
-							backgroundColor={colors.orangeAccent[600]}
-							borderRadius={'.5em'}
-							color={'white'}
-							justifyContent={'center'}
-							alignItems={'center'}
-						>
-							<Typography variant="h2">Back to About Us</Typography>
-						</Box>
-					</Link>
+					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
 			</header>
 			<main>

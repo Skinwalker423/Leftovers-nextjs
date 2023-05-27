@@ -5,6 +5,7 @@ import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PrivacyStatement from '../../components/policies/privacyStatement';
+import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps() {
@@ -29,11 +30,12 @@ const PrivacyPolicy = () => {
 					width={'100%'}
 					height={{ xs: '35vh', sm: '40vh', md: '50vh' }}
 					display={'flex'}
+					flexDirection={'column'}
 					backgroundColor={colors.primary[400]}
-					justifyContent="center"
+					justifyContent="space-evenly"
 					alignItems={'center'}
 				>
-					<Box position={'relative'}>
+					<Box my={'5rem'} position={'relative'}>
 						<Typography
 							fontWeight={800}
 							color={'secondary'}
@@ -43,6 +45,7 @@ const PrivacyPolicy = () => {
 							Privacy Policy
 						</Typography>
 					</Box>
+					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
 			</header>
 			<main>
