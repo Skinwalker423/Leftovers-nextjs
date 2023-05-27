@@ -11,7 +11,9 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 	const router = useRouter();
 
 	const currentPage =
-		href === router.asPath ? `2px solid ${colors.orangeAccent[900]}` : '';
+		(router.asPath.includes(href) && href !== '/') || href === router.asPath
+			? `2px solid ${colors.orangeAccent[900]}`
+			: '';
 
 	return (
 		<Link className={styles.navLink} href={href}>
