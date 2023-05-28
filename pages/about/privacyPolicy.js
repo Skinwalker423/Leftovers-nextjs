@@ -28,7 +28,7 @@ const PrivacyPolicy = () => {
 			<header>
 				<Box
 					width={'100%'}
-					height={{ xs: '35vh', sm: '40vh', md: '50vh' }}
+					height={{ xs: '40vh', md: '55vh' }}
 					display={'flex'}
 					flexDirection={'column'}
 					backgroundColor={colors.primary[400]}
