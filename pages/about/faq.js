@@ -55,7 +55,7 @@ const faq = () => {
 				<Box
 					m={5}
 					width={'100%'}
-					height={'60rem'}
+					height={'100%'}
 					display={'flex'}
 					flexDirection={'column'}
 					justifyContent={'flex-start'}
@@ -95,14 +95,101 @@ const faq = () => {
 							</Typography>
 						</AccordionDetails>
 					</Accordion>
-					<Accordion disabled>
+					<Accordion>
 						<AccordionSummary
 							expandIcon={<ExpandMoreIcon />}
 							aria-controls="panel3a-content"
 							id="panel3a-header"
 						>
-							<Typography>Disabled Accordion</Typography>
+							<Typography>Accordion 2</Typography>
 						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
+					</Accordion>
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="panel3a-content"
+							id="panel3a-header"
+						>
+							<Typography>Accordion 2</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
+					</Accordion>
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="panel3a-content"
+							id="panel3a-header"
+						>
+							<Typography>Accordion 2</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
+					</Accordion>
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="panel3a-content"
+							id="panel3a-header"
+						>
+							<Typography>Accordion 2</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
+					</Accordion>
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="panel3a-content"
+							id="panel3a-header"
+						>
+							<Typography>Accordion 2</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
+					</Accordion>
+					<Accordion>
+						<AccordionSummary
+							expandIcon={<ExpandMoreIcon />}
+							aria-controls="panel3a-content"
+							id="panel3a-header"
+						>
+							<Typography>Accordion 2</Typography>
+						</AccordionSummary>
+						<AccordionDetails>
+							<Typography>
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget.
+							</Typography>
+						</AccordionDetails>
 					</Accordion>
 				</Box>
 			</main>
