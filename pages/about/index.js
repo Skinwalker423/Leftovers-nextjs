@@ -50,7 +50,7 @@ const About = () => {
 					</Box>
 					<Paper
 						sx={{
-							p: '3rem',
+							p: '2.5rem',
 							display: 'flex',
 							flexDirection: 'column',
 							gap: 3,
@@ -67,6 +67,7 @@ const About = () => {
 							title="Join the Community"
 						/>
 						<AboutNavLink href="/about/privacyPolicy" title="Privacy Policy" />
+						<AboutNavLink href="/about/faq" title="FAQ's" />
 					</Paper>
 				</Box>
 			</header>

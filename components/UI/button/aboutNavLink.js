@@ -10,7 +10,7 @@ const AboutNavLink = ({ href = '/', title = 'Title Here' }) => {
 		<Link style={{ textDecoration: 'none' }} href={href}>
 			<Box
 				width={'17rem'}
-				height={'3.5rem'}
+				height={'3rem'}
 				display={'flex'}
 				backgroundColor={colors.orangeAccent[600]}
 				borderRadius={'.5em'}

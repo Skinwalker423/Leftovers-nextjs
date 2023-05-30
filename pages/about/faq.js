@@ -4,10 +4,7 @@ import Footer from '../../components/layout/footer/footer';
 import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import BasicAccordion from '../../components/UI/accordion/BasicAccordion';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import { useColors } from '../../hooks/useColors';
 
@@ -51,9 +48,10 @@ const faq = () => {
 					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
 			</header>
-			<main>
+			<main className={styles.main}>
 				<Box
 					m={5}
+					p={5}
 					width={'100%'}
 					height={'100%'}
 					display={'flex'}
@@ -62,135 +60,68 @@ const faq = () => {
 					alignItems={'center'}
 					mx={'1.5em'}
 					textOverflow={'clip'}
+					gap={3}
 				>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel1a-content"
-							id="panel1a-header"
-						>
-							<Typography>Accordion 1</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					<BasicAccordion
+						title="Accordion 1"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel2a-content"
-							id="panel2a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 2"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 3"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 4"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 5"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 6"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 7"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
-					<Accordion>
-						<AccordionSummary
-							expandIcon={<ExpandMoreIcon />}
-							aria-controls="panel3a-content"
-							id="panel3a-header"
-						>
-							<Typography>Accordion 2</Typography>
-						</AccordionSummary>
-						<AccordionDetails>
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 8"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget.
-							</Typography>
-						</AccordionDetails>
-					</Accordion>
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 9"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget."
+					/>
+					<BasicAccordion
+						title="Accordion 10"
+						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+								eget."
+					/>
 				</Box>
 			</main>
 			<footer className={styles.footer}>
