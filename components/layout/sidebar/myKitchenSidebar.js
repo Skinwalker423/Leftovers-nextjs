@@ -20,6 +20,7 @@ import CountertopsIcon from '@mui/icons-material/Countertops';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import Tooltip from '@mui/material/Tooltip';
+import SideBarMenuItem from './SideBarMenuItem';
 
 const menuListItems = [
 	{
@@ -166,60 +167,17 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 						height: '50%'
 					}}
 				>
-					{menuListItems.map((item, index) => (
-						<ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-							<ListItemButton
-								onClick={() => setSelected(item.name)}
-								selected={item.name === selected}
-								sx={{
-									minHeight: 58,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5
-								}}
-							>
-								<Tooltip title={item.name}>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											mr: open ? 3 : 'auto',
-											justifyContent: 'center',
-											alignItems: 'center'
-										}}
-									>
-										{item.image}
-									</ListItemIcon>
-								</Tooltip>
-								<ListItemText
-									primary={item.name}
-									sx={{ opacity: open ? 1 : 0 }}
-								/>
-							</ListItemButton>
-						</ListItem>
+					{menuListItems.map((item) => (
+						<SideBarMenuItem
+							name={item.name}
+							image={item.image}
+							key={item.name}
+							setSelected={setSelected}
+							selected={selected}
+							open={open}
+						/>
 					))}
 				</List>
-				{/* <Divider />
-				<List>
-					{['Notifications', 'Trash', 'Spam'].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: 'block' }}>
-							<ListItemButton
-								sx={{
-									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5,
-								}}>
-								<ListItemIcon
-									sx={{
-										minWidth: 0,
-										mr: open ? 3 : 'auto',
-										justifyContent: 'center',
-									}}>
-									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-								</ListItemIcon>
-								<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-							</ListItemButton>
-						</ListItem>
-					))}
-				</List> */}
 			</Drawer>
 		</Box>
 	);
