@@ -24,7 +24,7 @@ const About = () => {
 				<title>About Us</title>
 				<meta
 					name="description"
-					content="Leftovers is dedicated to providing a platform that allows neighbors to share their excess meals with others in the community"
+					content="Learn more about our Missionstatement, joining the community, privacy policy, and frequently asked questions"
 				/>
 			</Head>
 			<header>
