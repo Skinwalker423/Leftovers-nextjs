@@ -5,7 +5,6 @@ import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import PromoSection from '../../components/landingPagePromos/promoSection';
 import LandingCardList from '../../components/landingPagePromos/LandingCardList';
 import { useColors } from '../../hooks/useColors';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
@@ -24,7 +23,7 @@ const About = () => {
 				<title>About Us</title>
 				<meta
 					name="description"
-					content="Leftovers is dedicated to providing a platform that allows neighbors to share their excess meals with others in the community"
+					content="Learn more about our Missionstatement, joining the community, privacy policy, and frequently asked questions"
 				/>
 			</Head>
 			<header>
