@@ -5,7 +5,6 @@ import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import PromoSection from '../../components/landingPagePromos/promoSection';
 import LandingCardList from '../../components/landingPagePromos/LandingCardList';
 import { useColors } from '../../hooks/useColors';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';

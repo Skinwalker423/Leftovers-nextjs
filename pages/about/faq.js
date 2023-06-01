@@ -8,6 +8,59 @@ import BasicAccordion from '../../components/UI/accordion/BasicAccordion';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import { useColors } from '../../hooks/useColors';
 
+const questions = [
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	},
+	{
+		question: 'accordion',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse malesuada lacus ex, sit amet blandit leo lobortiseget.'
+	}
+];
+
 export async function getStaticProps() {
 	return {
 		props: {}
@@ -62,66 +115,15 @@ const faq = () => {
 					textOverflow={'clip'}
 					gap={3}
 				>
-					<BasicAccordion
-						title="Accordion 1"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 2"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 3"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 4"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 5"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 6"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 7"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 8"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 9"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
-					<BasicAccordion
-						title="Accordion 10"
-						description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-								eget."
-					/>
+					{questions.map(({ question, answer }, index) => {
+						return (
+							<BasicAccordion
+								key={index}
+								title={`${question} ${index}`}
+								description={answer}
+							/>
+						);
+					})}
 				</Box>
 			</main>
 			<footer className={styles.footer}>
