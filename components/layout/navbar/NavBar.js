@@ -78,9 +78,9 @@ const NavBar = () => {
 				/>
 			</Link>
 			<Box
+				display={{ xs: 'none', md: 'unset' }}
 				width={{ sm: '15rem', md: '35rem' }}
 				height="3rem"
-				className={styles.navBar}
 			>
 				<nav style={{ width: '100%' }}>
 					<ul
@@ -102,7 +102,7 @@ const NavBar = () => {
 					</ul>
 				</nav>
 			</Box>
-			<Box className={styles.collapsedNavBar}>
+			<Box display={{ md: 'none' }}>
 				<CollapsedNavMenu />
 			</Box>
 

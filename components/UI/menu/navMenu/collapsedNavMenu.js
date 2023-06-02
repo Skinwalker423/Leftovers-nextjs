@@ -8,6 +8,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import { useColors } from '../../../../hooks/useColors';
 import { useRouter } from 'next/router';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
+import { Typography } from '@mui/material';
 
 export default function CollapsedNavMenu() {
 	const router = useRouter();
@@ -35,6 +41,7 @@ export default function CollapsedNavMenu() {
 				</IconButton>
 			</Tooltip>
 			<Menu
+				sx={{ width: '50rem', display: { md: 'none' } }}
 				id="nav-menu"
 				aria-labelledby="nav-button"
 				anchorEl={anchorEl}
@@ -51,43 +58,52 @@ export default function CollapsedNavMenu() {
 			>
 				<Link className={styles.link} href={'/'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{
+							color: colors.orangeAccent[900],
+							gap: 2,
+							width: '20rem'
+						}}
 						onClick={handleClose}
 					>
-						Home
+						<HomeOutlinedIcon fontSize="large" />
+						<Typography fontSize={'large'}>Home</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/preppers'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900], width: '10rem' }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						Preppers
+						<GroupsOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>Preppers</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/favorites'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						Favs
+						<FavoriteBorderOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>Favorites</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/about'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						About
+						<InfoOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>About</Typography>
 					</MenuItem>
 				</Link>
 				{router.asPath !== '/register' && (
 					<Link className={styles.link} href={'/register'}>
 						<MenuItem
-							sx={{ color: colors.orangeAccent[900] }}
+							sx={{ color: colors.orangeAccent[900], gap: 2 }}
 							onClick={handleClose}
 						>
-							Register
+							<FoodBankOutlinedIcon fontSize={'large'} />
+							<Typography fontSize={'large'}>Register</Typography>
 						</MenuItem>
 					</Link>
 				)}
