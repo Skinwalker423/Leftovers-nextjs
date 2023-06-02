@@ -65,41 +65,45 @@ export default function CollapsedNavMenu() {
 						}}
 						onClick={handleClose}
 					>
-						<HomeOutlinedIcon />
-						<Typography fontSize={'medium'}>Home</Typography>
+						<HomeOutlinedIcon fontSize="large" />
+						<Typography fontSize={'large'}>Home</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/preppers'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						Preppers
+						<GroupsOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>Preppers</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/favorites'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						Favs
+						<FavoriteBorderOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>Favorites</Typography>
 					</MenuItem>
 				</Link>
 				<Link className={styles.link} href={'/about'}>
 					<MenuItem
-						sx={{ color: colors.orangeAccent[900] }}
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
 						onClick={handleClose}
 					>
-						About
+						<InfoOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>About</Typography>
 					</MenuItem>
 				</Link>
 				{router.asPath !== '/register' && (
 					<Link className={styles.link} href={'/register'}>
 						<MenuItem
-							sx={{ color: colors.orangeAccent[900] }}
+							sx={{ color: colors.orangeAccent[900], gap: 2 }}
 							onClick={handleClose}
 						>
-							Register
+							<FoodBankOutlinedIcon fontSize={'large'} />
+							<Typography fontSize={'large'}>Register</Typography>
 						</MenuItem>
 					</Link>
 				)}
