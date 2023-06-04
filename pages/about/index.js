@@ -8,6 +8,10 @@ import Typography from '@mui/material/Typography';
 import LandingCardList from '../../components/landingPagePromos/LandingCardList';
 import { useColors } from '../../hooks/useColors';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
+import PublicOutlinedIcon from '@mui/icons-material/PublicOutlined';
+import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
+import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
+import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 
 export async function getStaticProps() {
 	return {
@@ -60,13 +64,21 @@ const About = () => {
 						<AboutNavLink
 							href="/about/missionStatement"
 							title="Mission Statement"
-						/>
+						>
+							<PublicOutlinedIcon />
+						</AboutNavLink>
 						<AboutNavLink
 							href="/about/joinTheCommunity"
 							title="Join the Community"
-						/>
-						<AboutNavLink href="/about/privacyPolicy" title="Privacy Policy" />
-						<AboutNavLink href="/about/faq" title="FAQ's" />
+						>
+							<PeopleOutlinedIcon />
+						</AboutNavLink>
+						<AboutNavLink href="/about/privacyPolicy" title="Privacy Policy">
+							<PrivacyTipOutlinedIcon />
+						</AboutNavLink>
+						<AboutNavLink href="/about/faq" title="FAQ's">
+							<QuizOutlinedIcon />
+						</AboutNavLink>
 					</Paper>
 				</Box>
 			</header>
