@@ -4,7 +4,7 @@ import { useColors } from '../../../hooks/useColors';
 import Link from 'next/link';
 import Typography from '@mui/material/Typography';
 
-const AboutNavLink = ({ href = '/', title = 'Title Here' }) => {
+const AboutNavLink = ({ href = '/', title = 'Title Here', children }) => {
 	const { colors } = useColors();
 	return (
 		<Link style={{ textDecoration: 'none' }} href={href}>
@@ -15,14 +15,17 @@ const AboutNavLink = ({ href = '/', title = 'Title Here' }) => {
 				backgroundColor={colors.orangeAccent[600]}
 				borderRadius={'.5em'}
 				color={'white'}
-				justifyContent={'center'}
+				justifyContent={'flex-start'}
 				alignItems={'center'}
+				px={'1rem'}
+				gap={1}
 				sx={{
 					':hover': {
 						backgroundColor: colors.orangeAccent[400]
 					}
 				}}
 			>
+				{children}
 				<Typography variant="h3">{title}</Typography>
 			</Box>
 		</Link>
