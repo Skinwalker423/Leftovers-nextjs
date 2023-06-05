@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
 import PrepperCard from '../../components/Card/prepperCard';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
@@ -105,6 +106,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 							);
 						}
 					})}
+					<Pagination size="large" count={5} />
 				</Box>
 			</main>
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}

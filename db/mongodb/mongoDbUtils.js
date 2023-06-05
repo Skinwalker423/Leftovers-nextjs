@@ -57,9 +57,14 @@ export async function removePrepperFromFavoritesListDb(
 		return;
 	}
 }
-export async function findAllInCollection(client, collectionArg) {
+export async function findAllInCollection(
+	client,
+	collectionArg,
+	skip = 0,
+	limit = 5
+) {
 	const collection = client.db('leftovers').collection(collectionArg);
-	const document = await collection.find({}).limit(20).toArray();
+	const document = await collection.find({}).skip(skip).limit(limit).toArray();
 
 	console.log(`document found for collection ${collectionArg}:`);
 	if (!document) {
@@ -229,11 +234,18 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 	}
 }
 
-export async function findLocalPreppersWithZipcode(client, zipcode) {
+export async function findLocalPreppersWithZipcode(
+	client,
+	zipcode,
+	skip = 0,
+	limit = 10
+) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const data = await collection
 			.find({ 'location.zipcode': zipcode.toString() })
+			.skip(skip)
+			.limit(limit)
 			.toArray();
 		if (!data) {
 			client.close();
