@@ -55,29 +55,23 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
-	const [msg, setMsg] = useState();
-	const [preppersList, setPreppersList] = useState([]);
-	const [start, setStart] = useState(0);
-	const [end, setEnd] = useState(2);
-
 	const itemsPerPages = 2;
 	const count = preppers.length;
-	const pages = count / itemsPerPages;
+	const pages = Math.ceil(count / itemsPerPages);
+	const [msg, setMsg] = useState();
+	const [preppersList, setPreppersList] = useState([]);
+	const [pag, setPag] = useState({ start: 0, end: itemsPerPages });
 
 	useEffect(() => {
-		const slicedList = preppers.slice(start, end);
+		const slicedList = preppers.slice(pag.start, pag.end);
 		setPreppersList(slicedList);
-	}, [start, end]);
+	}, [pag]);
 
 	const handleChange = (event, page) => {
-		console.log(page);
 		const newStart = Math.ceil((page - 1) * itemsPerPages);
 		const newEnd = newStart + itemsPerPages;
-		setStart(newStart);
-		setEnd(newEnd);
+		setPag({ ...pag, start: newStart, end: newEnd });
 	};
-
-	console.log(preppersList);
 
 	return (
 		<Box
