@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
@@ -56,6 +56,28 @@ export async function getServerSideProps({ req, res }) {
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
 	const [msg, setMsg] = useState();
+	const [preppersList, setPreppersList] = useState([]);
+	const [start, setStart] = useState(0);
+	const [end, setEnd] = useState(2);
+
+	const itemsPerPages = 2;
+	const count = preppers.length;
+	const pages = count / itemsPerPages;
+
+	useEffect(() => {
+		const slicedList = preppers.slice(start, end);
+		setPreppersList(slicedList);
+	}, [start, end]);
+
+	const handleChange = (event, page) => {
+		console.log(page);
+		const newStart = Math.ceil((page - 1) * itemsPerPages);
+		const newEnd = newStart + itemsPerPages;
+		setStart(newStart);
+		setEnd(newEnd);
+	};
+
+	console.log(preppersList);
 
 	return (
 		<Box
@@ -80,7 +102,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 					Meal preppers in '[zipcode]'
 				</Typography>
 				<Box display="flex" justifyContent={'center'} gap={4} flexWrap={'wrap'}>
-					{preppers.map((prepper) => {
+					{preppersList.map((prepper) => {
 						const avatar = 'https://i.pravatar.cc/300';
 
 						const favorited =
@@ -106,8 +128,13 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 							);
 						}
 					})}
-					<Pagination size="large" count={5} />
 				</Box>
+				<Pagination
+					sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
+					size="large"
+					count={pages}
+					onChange={handleChange}
+				/>
 			</main>
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 		</Box>
