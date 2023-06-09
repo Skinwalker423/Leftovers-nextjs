@@ -110,6 +110,9 @@ export default function Home({ favoriteList, foundSession, error }) {
 		if (!isValidZip) {
 			setErrorMsg('Invalid zip code');
 			setIsSearching(false);
+			setTimeout(() => {
+				setErrorMsg('');
+			}, 5000);
 			return;
 		}
 		console.log('submitted');
@@ -119,6 +122,9 @@ export default function Home({ favoriteList, foundSession, error }) {
 		if (findPreppers.error) {
 			setIsSearching(false);
 			setErrorMsg(findPreppers.error);
+			setTimeout(() => {
+				setErrorMsg('');
+			}, 5000);
 		} else {
 			dispatch({
 				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
@@ -171,7 +177,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 						title="Local Preppers"
 						bgColor={colors.orangeAccent[700]}
 					>
-						<LocalPreppersList setMsg={setMsg} userEmail={userEmail} />
+						<LocalPreppersList
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+						/>
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (
@@ -189,7 +199,11 @@ export default function Home({ favoriteList, foundSession, error }) {
 						title="Favorite Preppers"
 						bgColor={colors.blueAccent[700]}
 					>
-						<FavoriteList userEmail={userEmail} />
+						<FavoriteList
+							setErrorMsg={setErrorMsg}
+							setMsg={setMsg}
+							userEmail={userEmail}
+						/>
 					</CategoryBanner>
 				)}
 				{!session && !foundSession && (
@@ -217,14 +231,13 @@ export default function Home({ favoriteList, foundSession, error }) {
 					</Box>
 				)}
 
-				{errorMsg ||
-					(error && (
-						<ErrorAlert
-							width="50%"
-							error={errorMsg || error}
-							setError={setErrorMsg}
-						/>
-					))}
+				{(errorMsg.length > 0 || error) && (
+					<ErrorAlert
+						width="50%"
+						error={errorMsg || error}
+						setError={setErrorMsg}
+					/>
+				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
 			</main>

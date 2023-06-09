@@ -16,16 +16,15 @@ const FindLocalPreppersSearchBar = ({
 			<form onSubmit={handleZipSearchForm}>
 				<FormControl>
 					<Box
+						display={'flex'}
+						backgroundColor={colors.primary[400]}
 						width={{ xs: '25em', sm: '40em' }}
-						sx={{
-							display: 'flex',
-							backgroundColor: colors.primary[400],
-							justifyContent: 'center',
-							alignItems: 'center',
-							borderRadius: '.5em',
-							height: '5em',
-							padding: '1.25em'
-						}}
+						py="2.5rem"
+						px="1.25rem"
+						justifyContent={'center'}
+						alignItems={'center'}
+						height={'5rem'}
+						borderRadius={'.5rem'}
 					>
 						<AccountCircle
 							color="secondary"
@@ -46,6 +45,7 @@ const FindLocalPreppersSearchBar = ({
 							color="warning"
 							onChange={handleZipChange}
 							helperText={errorMsg ? errorMsg : ''}
+							error={errorMsg}
 						/>
 						<IconButton type="submit" size="small">
 							<ArrowForwardOutlinedIcon
