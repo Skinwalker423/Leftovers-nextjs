@@ -18,7 +18,7 @@ const ErrorAlert = ({ error, setError, width = '100%' }) => {
 				fontSize: 'larger',
 				textAlign: 'center',
 				justifyContent: 'center',
-				zIndex: 99
+				zIndex: 150
 			}}
 		>
 			<Typography fontSize={'2rem'}>{error}</Typography>

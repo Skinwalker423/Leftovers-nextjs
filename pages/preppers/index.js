@@ -14,6 +14,7 @@ import {
 	findExistingUserEmail
 } from '../../db/mongodb/mongoDbUtils';
 import SuccessAlert from '../../components/UI/alert/successAlert';
+import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 
 export async function getServerSideProps({ req, res }) {
 	try {
@@ -58,7 +59,8 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 	const itemsPerPages = 2;
 	const count = preppers.length;
 	const pages = Math.ceil(count / itemsPerPages);
-	const [msg, setMsg] = useState();
+	const [msg, setMsg] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
 	const [preppersList, setPreppersList] = useState([]);
 	const [pag, setPag] = useState({ start: 0, end: itemsPerPages });
 
@@ -118,6 +120,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 									userEmail={userEmail ? userEmail : ''}
 									description={prepper.description}
 									setMsg={setMsg}
+									setErrorMsg={setErrorMsg}
 								/>
 							);
 						}
@@ -130,7 +133,10 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 					onChange={handleChange}
 				/>
 			</main>
-			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} width="50%" />}
+			{errorMsg && (
+				<ErrorAlert error={errorMsg} setError={setErrorMsg} width="50%" />
+			)}
 		</Box>
 	);
 };

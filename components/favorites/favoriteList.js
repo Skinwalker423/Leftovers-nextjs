@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import PrepperCard from '../Card/prepperCard';
 import styles from './favoriteList.module.css';
 
-const FavoriteList = ({ favRow, userEmail }) => {
+const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 	const avatar = 'https://i.pravatar.cc/300';
 	const { state } = useContext(UserContext);
 
@@ -36,6 +36,8 @@ const FavoriteList = ({ favRow, userEmail }) => {
 						userEmail={userEmail}
 						description={prepper.description}
 						kitchenImgUrl={prepper.kitchenImgUrl}
+						setErrorMsg={setErrorMsg}
+						setMsg={setMsg}
 					/>
 				);
 			})}
