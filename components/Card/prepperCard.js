@@ -32,12 +32,13 @@ export default function PrepperCard({
 	isFavorited,
 	userEmail,
 	id,
-	setMsg
+	setMsg,
+	setErrorMsg
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const [errorMsg, setErrorMsg] = useState('');
+
 	const { data: session } = useSession();
 	const {
 		addAndUpdateFavoritePreppers,
@@ -224,17 +225,6 @@ export default function PrepperCard({
 						</Button>
 					</Link>
 				</CardActions>
-				{errorMsg && (
-					<Alert
-						sx={{
-							width: '50%',
-							fontSize: 'larger'
-						}}
-						severity="error"
-					>
-						{errorMsg}
-					</Alert>
-				)}
 			</Card>
 		</motion.div>
 	);
