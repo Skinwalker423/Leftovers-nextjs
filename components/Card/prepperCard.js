@@ -46,14 +46,16 @@ export default function PrepperCard({
 		state
 	} = useContext(UserContext);
 
-	const timeOutMessage = (message = '', timeout = 3000) => {
+	const timeOutMessage = (message = 'Message Here', timeout = 3000) => {
+		setMsg(message);
 		setTimeout(() => {
-			setMsg(message);
+			setMsg('');
 		}, timeout);
 	};
 	const timeOutError = (message = '', timeout = 3000) => {
+		setErrorMsg(message);
 		setTimeout(() => {
-			setErrorMsg(message);
+			setErrorMsg('');
 		}, timeout);
 	};
 
@@ -78,23 +80,21 @@ export default function PrepperCard({
 				userEmail
 			);
 			if (data.message) {
-				setMsg(data.message);
-				setTimeout(() => {
-					setMsg('');
-				}, 3000);
+				timeOutMessage(data.message);
 			}
 			if (data.error) {
-				setErrorMsg(data.error);
+				timeOutError(data.error);
 			}
 			return data;
 		} catch (err) {
-			setErrorMsg('problem adding to favorites', err);
+			const message = `problem adding to favorites, ${err}`;
+			timeOutError(message);
 		}
 	}
 
 	async function handleRemoveFavBtn() {
 		if (!userEmail || !id) {
-			setErrorMsg('no userEmail / prepper id found');
+			timeOutError('no userEmail / prepper id found');
 			return;
 		}
 		const newfavoritesList =
@@ -108,18 +108,14 @@ export default function PrepperCard({
 				newfavoritesList
 			);
 			if (data.message) {
-				setMsg(data.message);
-				console.log('removed this prepper from my favorites');
-				setTimeout(() => {
-					setMsg('');
-				}, 3000);
+				timeOutMessage(data.message);
 			}
 			if (data.error) {
-				setErrorMsg(data.error);
+				timeOutError(data.error);
 			}
 			return data;
 		} catch (err) {
-			setErrorMsg(err);
+			timeOutError(err);
 		}
 	}
 
