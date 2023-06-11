@@ -46,6 +46,17 @@ export default function PrepperCard({
 		state
 	} = useContext(UserContext);
 
+	const timeOutMessage = (message = '', timeout = 3000) => {
+		setTimeout(() => {
+			setMsg(message);
+		}, timeout);
+	};
+	const timeOutError = (message = '', timeout = 3000) => {
+		setTimeout(() => {
+			setErrorMsg(message);
+		}, timeout);
+	};
+
 	useEffect(() => {
 		setFavorited(isFavorited);
 		setLoading(false);
