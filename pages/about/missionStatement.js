@@ -19,7 +19,7 @@ const missionStatement = () => {
 	return (
 		<Box width={'100%'}>
 			<Head>
-				<title>About Us</title>
+				<title>Mission Statement</title>
 				<meta
 					name="description"
 					content="Leftovers is dedicated to providing a platform that allows neighbors to share their excess meals with others in the community"

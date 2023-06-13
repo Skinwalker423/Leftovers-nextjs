@@ -1,6 +1,7 @@
 .container {
 	padding: 0;
 	margin: 0;
+	width: '100%';
 }
 
 .map-container {
@@ -38,6 +39,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 }
 
 .footer {
