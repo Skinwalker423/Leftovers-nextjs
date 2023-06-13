@@ -170,7 +170,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 					/>
 				</Box>
 			</header>
-			<main className={styles.main}>
+			<div position="relative" className={styles.main}>
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"
@@ -240,7 +240,7 @@ export default function Home({ favoriteList, foundSession, error }) {
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
-			</main>
+			</div>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>
