@@ -2,19 +2,14 @@ import React, { useContext } from 'react';
 import { Box, Typography, Button } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
-import { decrementMealQtyDB } from '../../utils/meals';
 
 const CheckoutTotals = ({ onPaymentClick, loading }) => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
 	const { userCartlist } = state;
-	console.log(userCartlist);
 
 	const handlePayBtn = async () => {
-		//confirm payment
-		console.log('payment confirmed');
 		await onPaymentClick();
-		//decrement quantity of meal
 	};
 
 	return (
@@ -48,7 +43,7 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 					justifyContent="space-evenly"
 				>
 					<Button
-						disabled={loading}
+						disabled={loading || userCartlist.length < 1}
 						onClick={handlePayBtn}
 						variant="contained"
 						color="success"
