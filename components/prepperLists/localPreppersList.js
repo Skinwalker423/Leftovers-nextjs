@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
 import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
-import styles from './localPreppersList.module.css';
 
 const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const { state } = useContext(UserContext);
