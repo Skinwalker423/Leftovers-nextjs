@@ -45,7 +45,7 @@ const FindLocalPreppersSearchBar = ({
 							color="warning"
 							onChange={handleZipChange}
 							helperText={errorMsg ? errorMsg : ''}
-							error={errorMsg}
+							error={!!errorMsg}
 						/>
 						<IconButton type="submit" size="small">
 							<ArrowForwardOutlinedIcon
