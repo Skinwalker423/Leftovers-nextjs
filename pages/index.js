@@ -63,7 +63,7 @@ export async function getServerSideProps({ req, res }) {
 				props: {
 					favoriteList: [],
 					session: foundSession,
-					error: err
+					errorServer: err
 				}
 			};
 		}
@@ -77,7 +77,7 @@ export async function getServerSideProps({ req, res }) {
 	};
 }
 
-export default function Home({ favoriteList, foundSession, error }) {
+export default function Home({ favoriteList, foundSession, errorServer }) {
 	const [zipCode, setZipCode] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 	const [isSearching, setIsSearching] = useState(false);
@@ -231,10 +231,10 @@ export default function Home({ favoriteList, foundSession, error }) {
 					</Box>
 				)}
 
-				{(errorMsg.length > 0 || error) && (
+				{(errorMsg.length > 0 || errorServer) && (
 					<ErrorAlert
 						width="50%"
-						error={errorMsg || error}
+						error={errorMsg || errorServer}
 						setError={setErrorMsg}
 					/>
 				)}

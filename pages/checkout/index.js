@@ -15,7 +15,6 @@ import { decrementMealQtyDB } from '../../utils/meals';
 import { useRouter } from 'next/router';
 import { ACTION_TYPES } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
-import SuccessAlert from '../../components/UI/alert/successAlert';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 
 const Checkout = () => {
@@ -39,29 +38,35 @@ const Checkout = () => {
 		setLoading(true);
 
 		//process payment
+		//add number of served to prepper trophy icon
 
+		const orderConfirmation = window.crypto.randomUUID();
+		console.log(orderConfirmation);
+		let orderSlug = `/checkout/${orderConfirmation}/`;
 		for (const item of userCartlist) {
 			const { prepperEmail, id, qty } = item;
 			console.log(prepperEmail, id, qty);
-			const data = await decrementMealQtyDB(prepperEmail, id, qty);
-			if (data.message) {
-				console.log('qty updated', data.message);
-				setLoading(false);
-				setMsg(data.message);
-				dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
-				dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
-				setTimeout(() => {
-					setMsg('');
-					router.push(`/checkout/${prepperEmail}`);
-				}, 3000);
+			orderSlug += prepperEmail;
+			try {
+				const data = await decrementMealQtyDB(prepperEmail, id, qty);
+				if (data.message) {
+					console.log('qty updated', data.message);
+					setLoading(false);
+
+					dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
+					dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
+				}
+				if (data.error) {
+					console.log('problem', data.error);
+					setLoading(false);
+					setError(data.error);
+				}
+			} catch (err) {
+				setError(err);
 			}
-			if (data.error) {
-				console.log('problem', data.error);
-				setLoading(false);
-				setError(data.error);
-			}
-			//add number of served to prepper trophy icon
 		}
+		setMsg('Payment complete');
+		router.push(orderSlug);
 	};
 
 	return (
@@ -105,6 +110,7 @@ const Checkout = () => {
 					</Typography>
 				</Alert>
 			)}
+
 			{error && <ErrorAlert error={error} setError={setError} />}
 		</Box>
 	);
