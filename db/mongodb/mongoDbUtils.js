@@ -13,16 +13,6 @@ export async function addDocToDb(client, collectionArg, doc) {
 	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
-export async function createOrder(doc) {
-	const client = await connectMongoDb();
-	if (!client) return;
-
-	const collection = client.db('leftovers').collection('orders');
-	const document = await collection.insertOne(doc);
-	if (!document) return;
-	console.log('created an order', document);
-	return document;
-}
 
 export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
 	try {
