@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { createOrder } from '../../utils/orders/createOrder';
 import {
 	Box,
 	Divider,
@@ -23,6 +24,8 @@ const Checkout = () => {
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
+
+	const [prepEmail, setPrepEmail] = useState('');
 	const router = useRouter();
 	const { colors } = useColors();
 	const theme = useTheme();
@@ -40,13 +43,19 @@ const Checkout = () => {
 		//process payment
 		//add number of served to prepper trophy icon
 
-		const orderConfirmation = window.crypto.randomUUID();
-		console.log(orderConfirmation);
-		let orderSlug = `/checkout/${orderConfirmation}/`;
+		//create order in mongobd
+		const order = {
+			created_at: new Date(),
+			updated_at: new Date(),
+			items: userCartlist
+		};
+
 		for (const item of userCartlist) {
 			const { prepperEmail, id, qty } = item;
-			console.log(prepperEmail, id, qty);
-			orderSlug += prepperEmail;
+
+			if (prepperEmail !== prepEmail) {
+				setPrepEmail(prepperEmail);
+			}
 			try {
 				const data = await decrementMealQtyDB(prepperEmail, id, qty);
 				if (data.message) {
@@ -66,7 +75,20 @@ const Checkout = () => {
 			}
 		}
 		setMsg('Payment complete');
-		router.push(orderSlug);
+
+		try {
+			const orderDoc = await createOrder(order);
+			if (orderDoc?.error) {
+				setError('problem creating order:', orderDoc.error);
+				return;
+			}
+			const orderId = orderDoc.data;
+			console.log('order created in db', orderId);
+			router.push(`/checkout/${orderId}`);
+		} catch (err) {
+			setError('problem creating order:', err);
+			return;
+		}
 	};
 
 	return (

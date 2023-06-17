@@ -390,8 +390,11 @@ export async function findOrderWithId(id) {
 			return null;
 		}
 		console.log(`Order found with ID: ${document}:`);
+
+		const prepperEmail = document.items[0].prepperEmail;
 		const formattedDoc = {
 			...document,
+			prepperEmail,
 			id: document._id.toString()
 		};
 		client.close();

@@ -3,17 +3,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {
 	connectMongoDb,
-	findExistingPrepperEmail
+	findExistingPrepperEmail,
+	findOrderWithId
 } from '../../db/mongodb/mongoDbUtils';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 
 export async function getServerSideProps({ params }) {
-	const prepperEmail = params.slug[1];
 	const confirmationNumber = params.slug[0];
-	console.log(prepperEmail);
 	console.log(confirmationNumber);
 
-	if (!prepperEmail || !confirmationNumber) {
+	if (!confirmationNumber) {
 		return {
 			notFound: true
 		};
@@ -21,9 +20,18 @@ export async function getServerSideProps({ params }) {
 
 	try {
 		const client = await connectMongoDb();
-		const prepper = await findExistingPrepperEmail(client, prepperEmail);
 
-		console.log(prepper);
+		const order = await findOrderWithId(confirmationNumber);
+
+		const prepper = await findExistingPrepperEmail(client, order.prepperEmail);
+
+		if (!order || !prepper) {
+			return {
+				notFound: true
+			};
+		}
+
+		console.log('found prepper in directions page SSR', prepper);
 
 		const orderDetails = {
 			location: {
@@ -33,7 +41,7 @@ export async function getServerSideProps({ params }) {
 				zipcode: prepper?.location.zipcode
 			},
 			confirmationNumber,
-			prepperEmail
+			prepperEmail: order.prepperEmail
 		};
 
 		return {
