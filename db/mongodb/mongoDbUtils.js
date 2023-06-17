@@ -13,6 +13,16 @@ export async function addDocToDb(client, collectionArg, doc) {
 	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
+export async function createOrderDb(doc) {
+	const client = await connectMongoDb();
+	if (!client) return;
+	const collection = client.db('leftovers').collection('orders');
+	const document = await collection.insertOne(doc);
+	if (!document) return;
+	console.log('created an order', document);
+	client.close();
+	return document;
+}
 
 export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
 	try {
@@ -367,5 +377,27 @@ export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 	} catch (err) {
 		console.error('problem updating qty', err);
 		return;
+	}
+}
+
+export async function findOrderWithId(id) {
+	try {
+		const client = await connectMongoDb();
+		const collection = client.db('leftovers').collection('orders');
+		const document = await collection.findOne({ _id: ObjectID(id) });
+		if (!document) {
+			client.close();
+			return null;
+		}
+		console.log(`Order found with ID: ${document}:`);
+		const formattedDoc = {
+			...document,
+			id: document._id.toString()
+		};
+		client.close();
+		return formattedDoc;
+	} catch (err) {
+		client.close();
+		console.error('problem retrieving order from db', err);
 	}
 }
