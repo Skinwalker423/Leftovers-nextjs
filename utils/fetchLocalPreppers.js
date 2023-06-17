@@ -4,11 +4,11 @@ export const fetchLocalPreppers = async (zipCode) => {
 		{
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ zipCode }),
+			body: JSON.stringify({ zipCode })
 		}
 	);
 
-	return prepperData.json();
+	return await prepperData.json();
 };
