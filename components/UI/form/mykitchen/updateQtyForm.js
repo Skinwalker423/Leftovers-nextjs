@@ -42,7 +42,7 @@ const UpdateQtyForm = ({ email, setMsg, mealId, setMeals }) => {
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
 
-		const newQty = qtyRef.current.value;
+		const newQty = parseInt(qtyRef.current.value);
 
 		try {
 			const data = await updateMealQtyInDb(email, mealId, newQty);
