@@ -26,8 +26,11 @@ const Layout = ({ children }) => {
 	}, [router]);
 	return (
 		<div>
-			<main style={{ position: 'relative' }}>
+			<header>
 				<NavBar />
+			</header>
+
+			<main>
 				{children}
 				{loading && <CustomLoader color="error" />}
 			</main>

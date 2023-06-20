@@ -154,23 +154,15 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					content="The largest meal sharing app in the world"
 				/>
 			</Head>
-			<header>
-				<Box
-					width={'100%'}
-					display={'flex'}
-					justifyContent="center"
-					alignItems={'center'}
-				>
-					<LandingHeader
-						title="Welcome to Leftovers!"
-						img="/ball-park.jpg"
-						handleZipChange={handleZipChange}
-						handleZipSearchForm={handleZipSearchForm}
-						errorMsg={errorMsg}
-					/>
-				</Box>
-			</header>
-			<div position="relative" className={styles.main}>
+
+			<div className={styles.main}>
+				<LandingHeader
+					title="Welcome to Leftovers!"
+					img="/ball-park.jpg"
+					handleZipChange={handleZipChange}
+					handleZipSearchForm={handleZipSearchForm}
+					errorMsg={errorMsg}
+				/>
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"
