@@ -28,6 +28,7 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
+import Map from '../components/checkout/map';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -163,6 +164,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
 				/>
+
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"

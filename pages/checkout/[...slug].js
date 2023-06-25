@@ -7,6 +7,7 @@ import {
 	findOrderWithId
 } from '../../db/mongodb/mongoDbUtils';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
+import Map from '../../components/checkout/map';
 
 export async function getServerSideProps({ params }) {
 	const confirmationNumber = params.slug[0];
@@ -83,6 +84,10 @@ const Directions = ({ orderDetails, error }) => {
 					{orderDetails.location.city},{orderDetails.location.state},
 					{orderDetails.location.zipcode}
 				</Typography>
+				<Map
+					address={orderDetails.location.address}
+					city={orderDetails.location.city}
+				/>
 			</Box>
 			{error?.length && <ErrorAlert errorMsg={error} setError={setErrorMsg} />}
 		</Box>
