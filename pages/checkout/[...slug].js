@@ -61,6 +61,8 @@ export async function getServerSideProps({ params }) {
 
 const Directions = ({ orderDetails, error }) => {
 	const [errorMsg, setErrorMsg] = useState('');
+	const queryAddress = orderDetails.location.address.replaceAll(' ', '%20');
+	const query = `${queryAddress}%20${orderDetails.location.city}`;
 
 	return (
 		<Box
@@ -84,10 +86,16 @@ const Directions = ({ orderDetails, error }) => {
 					{orderDetails.location.city},{orderDetails.location.state},
 					{orderDetails.location.zipcode}
 				</Typography>
-				<Map
+				<a
+					href={`https://www.google.com/maps/search/?api=1&query=${query}`}
+					target="_blank"
+				>
+					Get directions to your prepper
+				</a>
+				{/* <Map
 					address={orderDetails.location.address}
 					city={orderDetails.location.city}
-				/>
+				/> */}
 			</Box>
 			{error?.length && <ErrorAlert errorMsg={error} setError={setErrorMsg} />}
 		</Box>

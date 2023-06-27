@@ -84,7 +84,7 @@ const Checkout = () => {
 			}
 			const orderId = orderDoc.data;
 			console.log('order created in db', orderId);
-			router.push(`/checkout/${orderId}`);
+			window.location.href = `/checkout/${orderId}`;
 		} catch (err) {
 			setError('problem creating order:', err);
 			return;
