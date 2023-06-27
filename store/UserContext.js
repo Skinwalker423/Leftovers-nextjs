@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 // import useTrackLocation from '../hooks/useTrackLocation';
 import {
 	addFavoritePrepperToDb,
@@ -10,6 +11,7 @@ export const UserContext = createContext();
 export const ACTION_TYPES = {
 	SET_LATLONG: 'SET_LATLONG',
 	SET_LOCAL_COFFEE_STORES: 'SET_LOCAL_COFFEE_STORES',
+	SET_CARTLIST: 'SET_CARTLIST',
 	ADD_FOOD_TO_CART: 'ADD_FOOD_TO_CART',
 	INCREMENT_FOOD_ITEM: 'INCREMENT_FOOD_ITEM',
 	DECREMENT_FOOD_ITEM: 'DECREMENT_FOOD_ITEM',
@@ -29,6 +31,11 @@ const userReducer = (state, action) => {
 			return {
 				...state,
 				userCartlist: [...state.userCartlist, action.payload]
+			};
+		case ACTION_TYPES.SET_CARTLIST:
+			return {
+				...state,
+				userCartlist: [...action.payload]
 			};
 		case ACTION_TYPES.CLEAR_CARTLIST:
 			return {
@@ -81,12 +88,20 @@ export const UserProvider = ({ children }) => {
 		localPreppers: []
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
+	const [value, setValue] = useLocalStorage('cartlist', state.userCartlist);
 
 	useEffect(() => {
 		if (state.userCartlist) {
 			calculateTotalPrice();
 		}
+		setValue([...value]);
 	}, [state.userCartlist]);
+
+	useEffect(() => {
+		if (value.length) {
+			dispatch({ type: ACTION_TYPES.SET_CARTLIST, payload: value });
+		}
+	}, []);
 
 	const incrementFoodItem = (mealItem) => {
 		const { id, price, image, foodItem, description, prepperEmail } = mealItem;
@@ -210,7 +225,7 @@ export const UserProvider = ({ children }) => {
 		dispatch({ type: ACTION_TYPES.SET_FAVORITES_LIST, payload: favoriteList });
 	};
 
-	const value = {
+	const valueProps = {
 		state,
 		dispatch,
 		incrementFoodItem,
@@ -221,7 +236,9 @@ export const UserProvider = ({ children }) => {
 		setFavoritesList
 	};
 
-	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+	return (
+		<UserContext.Provider value={valueProps}>{children}</UserContext.Provider>
+	);
 };
 
 export default UserProvider;
