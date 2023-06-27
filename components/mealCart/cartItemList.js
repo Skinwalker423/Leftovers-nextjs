@@ -7,7 +7,7 @@ const CartItemList = ({ checkout }) => {
 	const { state } = useContext(UserContext);
 	const { userCartlist } = state;
 	if (!userCartlist) {
-		return 'Loading...';
+		return 'Empty Cart...';
 	}
 	//sorting the meal items to keep the list consitent when adding/removing items.
 	//mapping the sorted cart items
