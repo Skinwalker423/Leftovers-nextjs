@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import {
 	connectMongoDb,
@@ -8,6 +9,7 @@ import {
 } from '../../db/mongodb/mongoDbUtils';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 import Map from '../../components/checkout/map';
+import { Button } from '@mui/material';
 
 export async function getServerSideProps({ params }) {
 	const confirmationNumber = params.slug[0];
@@ -73,30 +75,58 @@ const Directions = ({ orderDetails, error }) => {
 			justifyContent={'center'}
 			alignItems={'center'}
 		>
-			<Typography variant="h1">Thanks for your order!</Typography>
-			<Typography component="p">
-				Here is your confirmation number: {orderDetails.confirmationNumber}
-			</Typography>
-			<Box>
-				<Typography variant="h3">
-					Here are the directions to for your local prepper to pick up your meal
-				</Typography>
-				<Typography variant="h5">{orderDetails.location.address}</Typography>
-				<Typography variant="h5">
-					{orderDetails.location.city},{orderDetails.location.state},
-					{orderDetails.location.zipcode}
-				</Typography>
+			<Paper
+				sx={{
+					p: 5,
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					gap: 5
+				}}
+			>
+				<Typography variant="h1">Thanks for your order!</Typography>
+				<Box>
+					<Typography fontSize={'large'} component="p">
+						Confirmation Number:
+					</Typography>
+					<Typography component={'p'} fontSize={'x-large'} fontWeight={'bold'}>
+						{orderDetails.confirmationNumber}
+					</Typography>
+				</Box>
+				<Box>
+					<Typography variant="h3">
+						Pick up your meal at this address:
+					</Typography>
+					<Typography
+						textAlign={'center'}
+						fontWeight={'bold'}
+						fontSize={'x-large'}
+					>
+						{orderDetails.location.address}
+					</Typography>
+					<Typography
+						textAlign={'center'}
+						fontWeight={'bold'}
+						fontSize={'x-large'}
+					>
+						{orderDetails.location.city},{orderDetails.location.state},
+						{orderDetails.location.zipcode}
+					</Typography>
+				</Box>
 				<a
 					href={`https://www.google.com/maps/search/?api=1&query=${query}`}
 					target="_blank"
 				>
-					Get directions to your prepper
+					<Button size="large" variant="contained" color="success">
+						Get directions to your prepper
+					</Button>
 				</a>
 				{/* <Map
 					address={orderDetails.location.address}
 					city={orderDetails.location.city}
 				/> */}
-			</Box>
+			</Paper>
 			{error?.length && <ErrorAlert errorMsg={error} setError={setErrorMsg} />}
 		</Box>
 	);

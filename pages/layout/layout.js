@@ -29,7 +29,6 @@ const Layout = ({ children }) => {
 			<header>
 				<NavBar />
 			</header>
-
 			<main>
 				{children}
 				{loading && <CustomLoader color="error" />}
