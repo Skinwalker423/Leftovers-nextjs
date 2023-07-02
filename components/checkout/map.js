@@ -8,10 +8,10 @@ const Map = ({ address, city }) => {
 	const query = `${queryAddress}%20${city}`;
 	const q = `https://www.google.com/maps/embed/v1/place?key=${process.env.GOOGLE_KEY}
   &q=${query}`;
-	const finalQ = `https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=${query}&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`;
-	console.log(finalQ);
+
 	return (
 		<iframe
+			
 			width="520"
 			height="400"
 			marginheight="0"
