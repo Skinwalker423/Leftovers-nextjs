@@ -30,28 +30,28 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 			>
 				<Typography
 					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h2"
+					variant="h3"
 				>
 					cost:
 				</Typography>
 				<Divider />
 				<Typography
 					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h2"
+					variant="h3"
 				>
 					fees:
 				</Typography>
 				<Divider />
 				<Typography
 					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h2"
+					variant="h3"
 				>
 					estimated taxes:
 				</Typography>
 				<Divider />
 				<Typography
 					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h2"
+					variant="h3"
 				>
 					Total:
 				</Typography>
@@ -75,10 +75,11 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 						onClick={handlePayBtn}
 						variant="contained"
 						color="success"
+						sx={{ px: 4, py: 2, width: '50%', fontSize: 'x-large' }}
 					>
 						Pay
 					</Button>
-					<Typography textAlign={'end'}>
+					<Typography fontSize={'x-large'} textAlign={'end'}>
 						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
 					</Typography>
 				</Box>
