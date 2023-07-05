@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Divider } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
 
@@ -20,13 +20,41 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 			alignItems="center"
 			justifyContent="space-evenly"
 			width="100%"
-			p="5rem"
 		>
-			<Box>
-				<Typography variant="h2">
-					Total costs with shipping and handling
+			<Box
+				width={'100%'}
+				px={20}
+				display={'flex'}
+				flexDirection={'column'}
+				gap={3}
+			>
+				<Typography
+					sx={{ backgroundColor: colors.primary[400], p: 3 }}
+					variant="h2"
+				>
+					cost:
 				</Typography>
-				<Typography>details</Typography>
+				<Divider />
+				<Typography
+					sx={{ backgroundColor: colors.primary[400], p: 3 }}
+					variant="h2"
+				>
+					fees:
+				</Typography>
+				<Divider />
+				<Typography
+					sx={{ backgroundColor: colors.primary[400], p: 3 }}
+					variant="h2"
+				>
+					estimated taxes:
+				</Typography>
+				<Divider />
+				<Typography
+					sx={{ backgroundColor: colors.primary[400], p: 3 }}
+					variant="h2"
+				>
+					Total:
+				</Typography>
 			</Box>
 			<Box
 				sx={{
