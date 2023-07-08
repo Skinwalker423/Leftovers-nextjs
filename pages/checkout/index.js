@@ -17,8 +17,38 @@ import { useRouter } from 'next/router';
 import { ACTION_TYPES } from '../../store/UserContext';
 import { useColors } from '../../hooks/useColors';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
 
-const Checkout = () => {
+export async function getServerSideProps({ req, res }) {
+	try {
+		const session = await getServerSession(req, res, authOptions);
+		const foundSession = session
+			? {
+					name: session.user?.name || null,
+					image: session.user?.image || null,
+					email: session.user?.email || null
+			  }
+			: null;
+		console.log('checking session:', foundSession);
+
+		return {
+			props: {
+				foundSession
+			}
+		};
+	} catch (err) {
+		console.log('problem getting session', err);
+		return {
+			props: {
+				foundSession,
+				errorMsg: err
+			}
+		};
+	}
+}
+
+const Checkout = ({ foundSession, errorMsg }) => {
 	const { state, dispatch } = useContext(UserContext);
 	const { userCartlist } = state;
 	const [msg, setMsg] = useState('');
@@ -32,6 +62,8 @@ const Checkout = () => {
 	const matches = useMediaQuery(theme.breakpoints.up('md'));
 
 	const dividerResponse = matches ? 'vertical' : 'horizontal';
+	const userEmail = foundSession ? foundSession?.email : 'Guest';
+	console.log('email:', foundSession.email);
 
 	const onPaymentClick = async () => {
 		if (userCartlist.length < 1) {
@@ -44,7 +76,9 @@ const Checkout = () => {
 		//add number of served to prepper trophy icon
 
 		//create order in mongobd
+
 		const order = {
+			userEmail: userEmail,
 			created_at: new Date(),
 			updated_at: new Date(),
 			items: userCartlist
@@ -133,7 +167,9 @@ const Checkout = () => {
 				</Alert>
 			)}
 
-			{error && <ErrorAlert error={error} setError={setError} />}
+			{(error || errorMsg) && (
+				<ErrorAlert error={error || errorMsg} setError={setError} />
+			)}
 		</Box>
 	);
 };

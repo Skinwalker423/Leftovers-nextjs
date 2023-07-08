@@ -39,6 +39,7 @@ export async function getServerSideProps({ req, res }) {
 				email: session.user?.email || null
 		  }
 		: null;
+	console.log('checking session:', foundSession);
 	const client = session && (await connectMongoDb());
 	const user =
 		session &&
@@ -55,7 +56,7 @@ export async function getServerSideProps({ req, res }) {
 			return {
 				props: {
 					favoriteList: [],
-					session: foundSession
+					foundSession
 				}
 			};
 		} catch (err) {
@@ -63,7 +64,7 @@ export async function getServerSideProps({ req, res }) {
 			return {
 				props: {
 					favoriteList: [],
-					session: foundSession,
+					foundSession,
 					errorServer: err
 				}
 			};
@@ -88,12 +89,6 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const { state, dispatch } = useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
-	console.log(
-		'this is found session:',
-		foundSession,
-		'this is session:',
-		session
-	);
 
 	useEffect(() => {
 		if (favoriteList) {
