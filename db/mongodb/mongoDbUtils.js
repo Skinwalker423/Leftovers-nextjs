@@ -408,18 +408,25 @@ export async function findOrderWithId(id) {
 export async function findAllOrdersByUserEmail(email) {
 	try {
 		const client = await connectMongoDb();
-		const collection = client.db('leftovers').collection('orders');
-		const document = collection.find({ userEmail: email }).toArray();
+		const collection = await client.db('leftovers').collection('orders');
+		const document = await collection.find({ userEmail: email }).toArray();
 		if (!document) {
 			client.close();
 			return null;
 		}
 		console.log(`Orders found with email: ${document}:`);
 
-		client.close();
-		return document;
+		const mappedDoc = document.map((order) => {
+			return {
+				id: order._id.toString(),
+				userEmail: order.userEmail,
+				created_at: order.created_at,
+				items: order.items
+			};
+		});
+
+		return mappedDoc;
 	} catch (err) {
-		client.close();
 		console.error('problem retrieving orders from db', err);
 	}
 }

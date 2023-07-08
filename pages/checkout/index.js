@@ -80,7 +80,6 @@ const Checkout = ({ foundSession, errorMsg }) => {
 		const order = {
 			userEmail: userEmail,
 			created_at: new Date(),
-			updated_at: new Date(),
 			items: userCartlist
 		};
 

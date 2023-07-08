@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Image from 'next/image';
@@ -13,6 +14,7 @@ import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
 import Head from 'next/head';
 import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitleForm';
+import { findAllOrdersByUserEmail } from '../db/mongodb/mongoDbUtils';
 
 import {
 	connectMongoDb,
@@ -35,6 +37,7 @@ export async function getServerSideProps({ req, res }) {
 
 	const client = await connectMongoDb();
 	const userDb = await findExistingPrepperEmail(client, session.user.email);
+	const orders = await findAllOrdersByUserEmail(session?.user?.email);
 
 	if (!userDb) {
 		return {
@@ -45,7 +48,7 @@ export async function getServerSideProps({ req, res }) {
 		};
 	}
 
-	console.log(session.user);
+	console.log('These are the orders:', orders);
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
@@ -55,12 +58,13 @@ export async function getServerSideProps({ req, res }) {
 	return {
 		props: {
 			userData: user,
-			prepper: JSON.parse(JSON.stringify(userDb))
+			prepper: JSON.parse(JSON.stringify(userDb)),
+			orders: orders || []
 		}
 	};
 }
 
-const myKitchen = ({ userData, prepper }) => {
+const myKitchen = ({ userData, prepper, orders }) => {
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const { email, image } = userData;
@@ -68,7 +72,7 @@ const myKitchen = ({ userData, prepper }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 
-	console.log(prepper);
+	console.log(orders);
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
@@ -218,6 +222,44 @@ const myKitchen = ({ userData, prepper }) => {
 					</InfoCard>
 				</Box>
 			)}
+			{selected === 'Orders' && (
+				<Box
+					display="flex"
+					flexDirection={'column'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					minHeight={'100vh'}
+					mx={'1rem'}
+					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					mt={'6em'}
+				>
+					Orders here
+					{orders.length &&
+						orders.map(({ id, items, created_at }) => {
+							return (
+								<Paper key={id}>
+									<Typography>{id}</Typography>
+									<Typography>{created_at}</Typography>
+									<Box>
+										{items.length &&
+											items.map(
+												({ description, foodItem, id, image, price, qty }) => {
+													return (
+														<Box key={id}>
+															<Typography>{foodItem}</Typography>
+															<Typography>{price}</Typography>
+															<Typography>{qty}</Typography>
+														</Box>
+													);
+												}
+											)}
+									</Box>
+								</Paper>
+							);
+						})}
+				</Box>
+			)}
+
 			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
 			{error && <ErrorAlert width="100%" error={error} setError={setError} />}
 		</Box>
