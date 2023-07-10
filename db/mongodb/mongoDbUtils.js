@@ -421,7 +421,8 @@ export async function findAllOrdersByUserEmail(email) {
 				id: order._id.toString(),
 				userEmail: order.userEmail,
 				created_at: order.created_at,
-				items: order.items
+				items: order.items,
+				total: order.total
 			};
 		});
 
