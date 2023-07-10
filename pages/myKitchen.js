@@ -71,6 +71,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [showMeals, setShowMeals] = useState(true);
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
+	const [myOrders, setMyOrders] = useState(orders);
 
 	console.log(orders);
 
@@ -234,21 +235,112 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					mt={'6em'}
 				>
 					Orders here
-					{orders.length &&
-						orders.map(({ id, items, created_at }) => {
+					{myOrders.length > 0 &&
+						myOrders.map(({ id, items, created_at, total }) => {
+							const options = {
+								weekday: 'long',
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							};
+							const newDate = new Date(created_at).toLocaleDateString(
+								undefined,
+								options
+							);
+
 							return (
-								<Paper key={id}>
-									<Typography>{id}</Typography>
-									<Typography>{created_at}</Typography>
+								<Paper sx={{ width: '100%', p: 5 }} key={id}>
+									<Box
+										display={'flex'}
+										justifyContent={'space-between'}
+										alignItems={'center'}
+										mb={'2rem'}
+									>
+										<Box display={'flex'} gap={5}>
+											<Box>
+												<Typography variant="h3">Order Placed</Typography>
+												<Typography>{newDate}</Typography>
+											</Box>
+											<Box>
+												<Typography variant="h3">Total</Typography>
+												<Typography>${total}</Typography>
+											</Box>
+										</Box>
+										<Box>
+											<Typography variant="h3">Order #</Typography>
+											<Typography>{id}</Typography>
+										</Box>
+									</Box>
 									<Box>
 										{items.length &&
 											items.map(
 												({ description, foodItem, id, image, price, qty }) => {
 													return (
-														<Box key={id}>
-															<Typography>{foodItem}</Typography>
-															<Typography>{price}</Typography>
-															<Typography>{qty}</Typography>
+														<Box key={id} display={'flex'} gap={5}>
+															<Image
+																src={image}
+																width={300}
+																height={300}
+																alt={`order item ${foodItem}`}
+															/>
+															<Box
+																display={'flex'}
+																flexDirection={'column'}
+																justifyContent={'space-evenly'}
+															>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Item
+																	</Typography>
+																	<Typography> {foodItem}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Description
+																	</Typography>
+																	<Typography> {description}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Price
+																	</Typography>
+																	<Typography>${price}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		QTY
+																	</Typography>
+																	<Typography> {qty}</Typography>
+																</Box>
+															</Box>
 														</Box>
 													);
 												}

@@ -50,7 +50,7 @@ export async function getServerSideProps({ req, res }) {
 
 const Checkout = ({ foundSession, errorMsg }) => {
 	const { state, dispatch } = useContext(UserContext);
-	const { userCartlist } = state;
+	const { userCartlist, cartTotalPrice } = state;
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -80,7 +80,8 @@ const Checkout = ({ foundSession, errorMsg }) => {
 		const order = {
 			userEmail: userEmail,
 			created_at: new Date(),
-			items: userCartlist
+			items: userCartlist,
+			total: cartTotalPrice
 		};
 
 		for (const item of userCartlist) {
