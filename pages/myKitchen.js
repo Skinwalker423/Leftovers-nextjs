@@ -247,15 +247,14 @@ const myKitchen = ({ userData, prepper, orders }) => {
 								undefined,
 								options
 							);
-							console.log(newDate);
-							console.log(created_at);
+
 							return (
 								<Paper sx={{ width: '100%', p: 5 }} key={id}>
 									<Box
 										display={'flex'}
 										justifyContent={'space-between'}
 										alignItems={'center'}
-										mb={'3rem'}
+										mb={'2rem'}
 									>
 										<Box display={'flex'} gap={5}>
 											<Box>
@@ -289,9 +288,58 @@ const myKitchen = ({ userData, prepper, orders }) => {
 																flexDirection={'column'}
 																justifyContent={'space-evenly'}
 															>
-																<Typography>{foodItem}</Typography>
-																<Typography>Price: {price}</Typography>
-																<Typography>QTY: {qty}</Typography>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Item
+																	</Typography>
+																	<Typography> {foodItem}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Description
+																	</Typography>
+																	<Typography> {description}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		Price
+																	</Typography>
+																	<Typography>${price}</Typography>
+																</Box>
+																<Box>
+																	<Typography
+																		fontWeight={600}
+																		sx={{
+																			borderBottom: '1px solid black',
+																			width: 'fit-content'
+																		}}
+																		variant="h4"
+																	>
+																		QTY
+																	</Typography>
+																	<Typography> {qty}</Typography>
+																</Box>
 															</Box>
 														</Box>
 													);
