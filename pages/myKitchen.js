@@ -15,13 +15,13 @@ import InfoCard from '../components/myKitchen/infoCard';
 import Head from 'next/head';
 import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitleForm';
 import { findAllOrdersByUserEmail } from '../db/mongodb/mongoDbUtils';
-
 import {
 	connectMongoDb,
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
 import { Stack } from '@mui/material';
+import OrdersList from '../components/myKitchen/orders/ordersList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -223,134 +223,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					</InfoCard>
 				</Box>
 			)}
-			{selected === 'Orders' && (
-				<Box
-					display="flex"
-					flexDirection={'column'}
-					justifyContent={'center'}
-					alignItems={'center'}
-					minHeight={'100vh'}
-					mx={'1rem'}
-					width={{ xs: '75%', sm: '60%', md: '80%' }}
-					mt={'6em'}
-				>
-					Orders here
-					{myOrders.length > 0 &&
-						myOrders.map(({ id, items, created_at, total }) => {
-							const options = {
-								weekday: 'long',
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
-							};
-							const newDate = new Date(created_at).toLocaleDateString(
-								undefined,
-								options
-							);
-
-							return (
-								<Paper sx={{ width: '100%', p: 5 }} key={id}>
-									<Box
-										display={'flex'}
-										justifyContent={'space-between'}
-										alignItems={'center'}
-										mb={'2rem'}
-									>
-										<Box display={'flex'} gap={5}>
-											<Box>
-												<Typography variant="h3">Order Placed</Typography>
-												<Typography>{newDate}</Typography>
-											</Box>
-											<Box>
-												<Typography variant="h3">Total</Typography>
-												<Typography>${total}</Typography>
-											</Box>
-										</Box>
-										<Box>
-											<Typography variant="h3">Order #</Typography>
-											<Typography>{id}</Typography>
-										</Box>
-									</Box>
-									<Box>
-										{items.length &&
-											items.map(
-												({ description, foodItem, id, image, price, qty }) => {
-													return (
-														<Box key={id} display={'flex'} gap={5}>
-															<Image
-																src={image}
-																width={300}
-																height={300}
-																alt={`order item ${foodItem}`}
-															/>
-															<Box
-																display={'flex'}
-																flexDirection={'column'}
-																justifyContent={'space-evenly'}
-															>
-																<Box>
-																	<Typography
-																		fontWeight={600}
-																		sx={{
-																			borderBottom: '1px solid black',
-																			width: 'fit-content'
-																		}}
-																		variant="h4"
-																	>
-																		Item
-																	</Typography>
-																	<Typography> {foodItem}</Typography>
-																</Box>
-																<Box>
-																	<Typography
-																		fontWeight={600}
-																		sx={{
-																			borderBottom: '1px solid black',
-																			width: 'fit-content'
-																		}}
-																		variant="h4"
-																	>
-																		Description
-																	</Typography>
-																	<Typography> {description}</Typography>
-																</Box>
-																<Box>
-																	<Typography
-																		fontWeight={600}
-																		sx={{
-																			borderBottom: '1px solid black',
-																			width: 'fit-content'
-																		}}
-																		variant="h4"
-																	>
-																		Price
-																	</Typography>
-																	<Typography>${price}</Typography>
-																</Box>
-																<Box>
-																	<Typography
-																		fontWeight={600}
-																		sx={{
-																			borderBottom: '1px solid black',
-																			width: 'fit-content'
-																		}}
-																		variant="h4"
-																	>
-																		QTY
-																	</Typography>
-																	<Typography> {qty}</Typography>
-																</Box>
-															</Box>
-														</Box>
-													);
-												}
-											)}
-									</Box>
-								</Paper>
-							);
-						})}
-				</Box>
-			)}
+			{selected === 'Orders' && <OrdersList myOrders={myOrders} />}
 
 			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
 			{error && <ErrorAlert width="100%" error={error} setError={setError} />}
