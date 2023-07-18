@@ -20,7 +20,6 @@
 //sidebar menuitem components refactor
 //prepper page header
 //meal pic in db
-//about page
 //checkout page design
 //stripe
 //send image file to a img hosting server e.g. Cloudinary for my kitchen related pics
