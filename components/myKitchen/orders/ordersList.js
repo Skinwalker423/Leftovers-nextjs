@@ -9,12 +9,11 @@ const OrdersList = ({ myOrders }) => {
 		<Box
 			display="flex"
 			flexDirection={'column'}
-			justifyContent={'center'}
-			alignItems={'center'}
+			justifyContent={'flex-start'}
+			alignItems={'flex-start'}
 			minHeight={'100vh'}
-			mx={'1rem'}
-			width={{ xs: '75%', sm: '60%', md: '80%' }}
-			mt={'6em'}
+			width={{ xs: '100%', sm: '90%', md: '80%' }}
+			// mt={'6em'}
 		>
 			{myOrders.length > 0 &&
 				myOrders.map(({ id, items, created_at, total }) => {
@@ -30,7 +29,7 @@ const OrdersList = ({ myOrders }) => {
 					);
 
 					return (
-						<Paper sx={{ width: '100%', p: 5 }} key={id}>
+						<Paper sx={{ width: '100%', p: 2 }} key={id}>
 							<Box
 								display={'flex'}
 								justifyContent={'space-between'}

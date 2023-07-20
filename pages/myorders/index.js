@@ -1,12 +1,12 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import NotificationList from '../../components/notifications/notificationList';
 import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
 import { getServerSession } from 'next-auth/next';
 import { connectMongoDb } from '../../db/mongodb/mongoDbUtils';
 import { findAllOrdersByUserEmail } from '../../db/mongodb/mongoDbUtils';
+import OrdersList from '../../components/myKitchen/orders/ordersList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -43,20 +43,21 @@ const MyOrders = ({ userData, orders }) => {
 		<Box
 			width={'100%'}
 			display={'flex'}
-			justifyContent="center"
+			justifyContent={'center'}
 			alignItems={'center'}
-			mt="5em"
 			flexDirection="column"
+			gap={5}
+			mt="6rem"
 		>
 			<Head>
-				<title>Messages</title>
-				<meta name="description" content="read your direct messages" />
+				<title>MyOrders</title>
+				<meta name="description" content="view all order history and details" />
 			</Head>
-			<Box py={'3em'}>
-				<Typography variant="h1" textAlign={'center'}>
-					{userData.email}
-				</Typography>
-			</Box>
+
+			<Typography component={'h1'} fontSize={'5rem'}>
+				Orders
+			</Typography>
+			<OrdersList myOrders={orders} />
 		</Box>
 	);
 };

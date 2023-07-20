@@ -104,7 +104,8 @@ export const UserProvider = ({ children }) => {
 	}, [value]);
 
 	const incrementFoodItem = (mealItem) => {
-		const { id, price, image, foodItem, description, prepperEmail } = mealItem;
+		const { id, price, image, foodItem, description, prepperEmail, prepperId } =
+			mealItem;
 
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
@@ -120,7 +121,8 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: 1,
-					prepperEmail
+					prepperEmail,
+					prepperId
 				}
 			];
 
@@ -140,7 +142,8 @@ export const UserProvider = ({ children }) => {
 				foodItem,
 				description,
 				qty: findExistingFoodItem.qty + 1,
-				prepperEmail
+				prepperEmail,
+				prepperId
 			}
 		];
 		console.log(newCartList);
@@ -150,7 +153,8 @@ export const UserProvider = ({ children }) => {
 		});
 	};
 	const decrementFoodItem = (mealItem) => {
-		const { id, price, image, foodItem, description, prepperEmail } = mealItem;
+		const { id, price, image, foodItem, description, prepperEmail, prepperId } =
+			mealItem;
 		const findExistingFoodItem = state.userCartlist.find(
 			(item) => item.id === id
 		);
@@ -176,7 +180,8 @@ export const UserProvider = ({ children }) => {
 					foodItem,
 					description,
 					qty: findExistingFoodItem.qty - 1,
-					prepperEmail
+					prepperEmail,
+					prepperId
 				}
 			];
 			console.log(newCartList);

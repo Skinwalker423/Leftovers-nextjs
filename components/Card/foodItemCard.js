@@ -47,7 +47,8 @@ export default function FoodItemCard({
 		description,
 		foodItem,
 		qty,
-		prepperEmail
+		prepperEmail,
+		prepperId
 	};
 
 	const handleFavorite = () => {

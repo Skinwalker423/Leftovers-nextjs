@@ -25,15 +25,13 @@ const Layout = ({ children }) => {
 		};
 	}, [router]);
 	return (
-		<div>
-			<header>
-				<NavBar />
-			</header>
+		<>
+			<NavBar />
 			<main>
 				{children}
 				{loading && <CustomLoader color="error" />}
 			</main>
-		</div>
+		</>
 	);
 };
 
