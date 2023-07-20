@@ -13,7 +13,6 @@ const OrdersList = ({ myOrders }) => {
 			alignItems={'flex-start'}
 			minHeight={'100vh'}
 			width={{ xs: '100%', sm: '90%', md: '80%' }}
-			// mt={'6em'}
 		>
 			{myOrders.length > 0 &&
 				myOrders.map(({ id, items, created_at, total }) => {

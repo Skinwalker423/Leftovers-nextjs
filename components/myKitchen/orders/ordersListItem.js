@@ -58,6 +58,21 @@ const OrdersListItem = ({ items }) => {
 											}}
 											variant="h4"
 										>
+											Kitchen
+										</Typography>
+										<Link href={`/preppers/${prepperId}`}>
+											<Typography> {prepperId}</Typography>
+										</Link>
+									</Box>
+									<Box>
+										<Typography
+											fontWeight={600}
+											sx={{
+												borderBottom: '1px solid black',
+												width: 'fit-content'
+											}}
+											variant="h4"
+										>
 											Description
 										</Typography>
 										<Typography> {description}</Typography>

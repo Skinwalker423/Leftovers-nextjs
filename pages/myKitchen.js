@@ -222,7 +222,18 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					</InfoCard>
 				</Box>
 			)}
-			{selected === 'Orders' && <OrdersList myOrders={myOrders} />}
+			{selected === 'Orders' && (
+				<Box
+					width={{ xs: '80%', sm: '100%' }}
+					mt={'6rem'}
+					display={'flex'}
+					justifyContent={{ xs: 'flex-end', sm: 'center' }}
+					alignItems={{ xs: 'flex-end', sm: 'center' }}
+					ml={'2rem'}
+				>
+					<OrdersList myOrders={myOrders} />
+				</Box>
+			)}
 
 			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
 			{error && <ErrorAlert width="100%" error={error} setError={setError} />}
