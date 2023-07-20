@@ -36,7 +36,7 @@ export async function getServerSideProps({ req, res }) {
 
 	const client = await connectMongoDb();
 	const userDb = await findExistingPrepperEmail(client, session.user.email);
-	const orders = await findAllOrdersByUserEmail(session?.user?.email);
+	const orders = await findAllOrdersByUserEmail(client, session?.user?.email);
 
 	if (!userDb) {
 		return {

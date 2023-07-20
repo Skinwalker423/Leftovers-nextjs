@@ -405,9 +405,8 @@ export async function findOrderWithId(id) {
 	}
 }
 
-export async function findAllOrdersByUserEmail(email) {
+export async function findAllOrdersByUserEmail(client, email) {
 	try {
-		const client = await connectMongoDb();
 		const collection = await client.db('leftovers').collection('orders');
 		const document = await collection.find({ userEmail: email }).toArray();
 		if (!document) {

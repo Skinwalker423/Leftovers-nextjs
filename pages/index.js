@@ -11,7 +11,6 @@ import { authOptions } from './api/auth/[...nextauth]';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
-import FindLocalPreppersSearchBar from '../components/searchBar/findLocalPreppers';
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
 import SuccessAlert from '../components/UI/alert/successAlert';
@@ -28,7 +27,6 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
-import Map from '../components/checkout/map';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
