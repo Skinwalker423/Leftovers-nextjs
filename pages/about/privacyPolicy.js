@@ -4,7 +4,7 @@ import Footer from '../../components/layout/footer/footer';
 import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import PrivacyStatement from '../../components/policies/privacyStatement';
+import PrivacyStatement from '../../components/about/policies/privacyStatement';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import { useColors } from '../../hooks/useColors';
 
