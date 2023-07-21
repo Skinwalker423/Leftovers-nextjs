@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import BasicAccordion from '../../components/UI/accordion/BasicAccordion';
 import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import { useColors } from '../../hooks/useColors';
+import AboutBanner from '../../components/about/AboutBanner';
 
 const questions = [
 	{
@@ -78,7 +79,8 @@ const faq = () => {
 					content="Frequently asked questions about joining the Leftovers community"
 				/>
 			</Head>
-			<header>
+			<AboutBanner header="FAQ" link="/about" linkTitle="Back to About" />
+			{/* <header>
 				<Box
 					width={'100%'}
 					height={{ xs: '40vh', md: '55vh' }}
@@ -100,7 +102,7 @@ const faq = () => {
 					</Box>
 					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
-			</header>
+			</header> */}
 
 			<Box
 				m={5}
