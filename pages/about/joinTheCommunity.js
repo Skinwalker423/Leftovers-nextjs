@@ -6,7 +6,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PromoSection from '../../components/landingPagePromos/promoSection';
 import { useColors } from '../../hooks/useColors';
-import AboutNavLink from '../../components/UI/button/aboutNavLink';
 import AboutBanner from '../../components/about/AboutBanner';
 
 export async function getStaticProps() {
