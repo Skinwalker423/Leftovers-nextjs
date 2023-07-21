@@ -15,13 +15,21 @@ const OrdersListItem = ({ items }) => {
 		>
 			{items.length &&
 				items.map(
-					({ description, foodItem, id, image, price, qty, prepperId }) => {
+					({
+						description,
+						foodItem,
+						id,
+						image,
+						price,
+						qty,
+						prepperId,
+						kitchen
+					}) => {
 						return (
 							<Box
 								key={id}
 								display={'flex'}
 								flexDirection={{ xs: 'column', md: 'row' }}
-								gap={5}
 							>
 								<Box>
 									<Image
@@ -35,47 +43,57 @@ const OrdersListItem = ({ items }) => {
 									display={'flex'}
 									flexDirection={'column'}
 									justifyContent={'space-evenly'}
+									width={'100%'}
+									px={5}
 								>
-									<Box>
-										<Typography
-											fontWeight={600}
-											sx={{
-												borderBottom: '1px solid black',
-												width: 'fit-content'
-											}}
-											variant="h4"
-										>
-											Item
-										</Typography>
-										<Typography> {foodItem}</Typography>
-									</Box>
-									<Box>
-										<Typography
-											fontWeight={600}
-											sx={{
-												borderBottom: '1px solid black',
-												width: 'fit-content'
-											}}
-											variant="h4"
-										>
-											Kitchen
-										</Typography>
-										<Link href={`/preppers/${prepperId}`}>
-											<Typography> {prepperId}</Typography>
-										</Link>
-									</Box>
-									<Box>
-										<Typography
-											fontWeight={600}
-											sx={{
-												borderBottom: '1px solid black',
-												width: 'fit-content'
-											}}
-											variant="h4"
-										>
-											Description
-										</Typography>
-										<Typography> {description}</Typography>
+									<Box
+										display={'flex'}
+										width={'100%'}
+										justifyContent={'space-between'}
+										alignItems={'center'}
+									>
+										<Box>
+											<Typography
+												fontWeight={600}
+												sx={{
+													borderBottom: '1px solid black',
+													width: 'fit-content'
+												}}
+												variant="h4"
+											>
+												Item
+											</Typography>
+											<Typography variant="h3"> {foodItem}</Typography>
+										</Box>
+										<Box>
+											<Typography
+												fontWeight={600}
+												sx={{
+													borderBottom: '1px solid black',
+													width: 'fit-content'
+												}}
+												variant="h4"
+											>
+												Kitchen
+											</Typography>
+											<Link
+												style={{ textDecoration: 'none' }}
+												href={`/preppers/${prepperId}`}
+											>
+												<Typography
+													variant="h3"
+													sx={{
+														color: colors.orangeAccent[400],
+														textDecoration: 'none',
+														':hover': {
+															color: colors.orangeAccent[200]
+														}
+													}}
+												>
+													{kitchen}
+												</Typography>
+											</Link>
+										</Box>
 									</Box>
 									<Box>
 										<Typography
@@ -88,7 +106,7 @@ const OrdersListItem = ({ items }) => {
 										>
 											Price
 										</Typography>
-										<Typography>${price}</Typography>
+										<Typography variant="h3">${price}</Typography>
 									</Box>
 									<Box>
 										<Typography
@@ -101,7 +119,7 @@ const OrdersListItem = ({ items }) => {
 										>
 											QTY
 										</Typography>
-										<Typography> {qty}</Typography>
+										<Typography variant="h3"> {qty}</Typography>
 									</Box>
 								</Box>
 							</Box>

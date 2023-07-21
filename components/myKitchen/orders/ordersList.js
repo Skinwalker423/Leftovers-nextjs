@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrdersListItem from './ordersListItem';
+import Link from 'next/link';
 
 const OrdersList = ({ myOrders }) => {
 	return (
@@ -28,7 +29,10 @@ const OrdersList = ({ myOrders }) => {
 					);
 
 					return (
-						<Paper sx={{ width: '100%', p: 2 }} key={id}>
+						<Paper
+							sx={{ width: '100%', p: { xs: 1, md: 5 }, maxWidth: '60rem' }}
+							key={id}
+						>
 							<Box
 								display={'flex'}
 								justifyContent={'space-between'}
@@ -47,7 +51,9 @@ const OrdersList = ({ myOrders }) => {
 								</Box>
 								<Box>
 									<Typography variant="h3">Order #</Typography>
-									<Typography>{id}</Typography>
+									<Link href={'/'}>
+										<Typography>{id}</Typography>
+									</Link>
 								</Box>
 							</Box>
 							<OrdersListItem items={items} />
