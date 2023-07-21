@@ -47,7 +47,6 @@ const MyOrders = ({ userData, orders }) => {
 			alignItems={'center'}
 			flexDirection="column"
 			gap={5}
-			mt="6rem"
 		>
 			<Head>
 				<title>MyOrders</title>

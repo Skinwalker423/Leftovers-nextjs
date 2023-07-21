@@ -109,7 +109,6 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					alignItems={'center'}
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
-					mt={'6em'}
 				>
 					<InfoCard title="Kitchen Picture">
 						<Image
@@ -142,7 +141,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				</Box>
 			)}
 			{selected === 'My Meals' && (
-				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }} mt={'6em'}>
+				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }}>
 					<InfoCard title="Add Meal">
 						<Typography variant="h4">Add a meal to your Kitchen</Typography>
 						<AddMeal
@@ -183,7 +182,6 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					alignItems={'center'}
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
-					mt={'6em'}
 				>
 					<InfoCard title="Avatar">
 						{image ? (

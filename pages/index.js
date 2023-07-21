@@ -148,8 +148,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					content="The largest meal sharing app in the world"
 				/>
 			</Head>
-
-			<div className={styles.main}>
+			<Box>
 				<LandingHeader
 					title="Welcome to Leftovers!"
 					img="/ball-park.jpg"
@@ -227,7 +226,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
-			</div>
+			</Box>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>

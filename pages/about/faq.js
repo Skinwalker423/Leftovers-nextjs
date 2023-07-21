@@ -101,31 +101,30 @@ const faq = () => {
 					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
 			</header>
-			<main className={styles.main}>
-				<Box
-					m={5}
-					p={5}
-					width={'100%'}
-					height={'100%'}
-					display={'flex'}
-					flexDirection={'column'}
-					justifyContent={'flex-start'}
-					alignItems={'center'}
-					mx={'1.5em'}
-					textOverflow={'clip'}
-					gap={3}
-				>
-					{questions.map(({ question, answer }, index) => {
-						return (
-							<BasicAccordion
-								key={index}
-								title={`${question} ${index}`}
-								description={answer}
-							/>
-						);
-					})}
-				</Box>
-			</main>
+
+			<Box
+				m={5}
+				p={5}
+				width={'100%'}
+				height={'100%'}
+				display={'flex'}
+				flexDirection={'column'}
+				justifyContent={'flex-start'}
+				alignItems={'center'}
+				mx={'1.5em'}
+				textOverflow={'clip'}
+				gap={3}
+			>
+				{questions.map(({ question, answer }, index) => {
+					return (
+						<BasicAccordion
+							key={index}
+							title={`${question} ${index}`}
+							description={answer}
+						/>
+					);
+				})}
+			</Box>
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>

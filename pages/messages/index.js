@@ -59,7 +59,6 @@ const Messages = ({ userData }) => {
 			display={'flex'}
 			justifyContent="center"
 			alignItems={'center'}
-			mt="5em"
 			flexDirection="column"
 		>
 			<Head>

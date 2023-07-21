@@ -122,7 +122,7 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 			<Drawer
 				sx={{
 					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
-						top: '6em'
+						top: '5em'
 					}
 				}}
 				variant="permanent"

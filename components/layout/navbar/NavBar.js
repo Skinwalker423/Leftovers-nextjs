@@ -58,135 +58,139 @@ const NavBar = () => {
 
 	return (
 		<Box
-			padding="10px 20px"
 			display="flex"
 			position={'fixed'}
-			justifyContent="space-between"
-			alignItems="center"
 			height="5rem"
-			top="0"
+			top={0}
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
 			width="100%"
 		>
-			<Link href={'/'}>
-				<Image
-					src="/icons8-connect.svg"
-					width={50}
-					height={50}
-					alt="Leftovers icon"
-				/>
-			</Link>
 			<Box
-				display={{ xs: 'none', md: 'unset' }}
-				width={{ sm: '15rem', md: '35rem' }}
-				height="3rem"
+				width="100%"
+				display="flex"
+				justifyContent="space-between"
+				alignItems="center"
 			>
-				<nav style={{ width: '100%' }}>
-					<ul
-						style={{
-							listStyle: 'none',
-							display: 'flex',
-							justifyContent: 'space-evenly'
-						}}
-					>
-						<NavItem title="Home" href="/" />
-						<NavItem title="Preppers" href="/preppers" />
-						{session && <NavItem title="Favs" href="/favorites" />}
-						<NavItem title="About" href="/about" />
-						{session ? (
-							<NavItem title="MyKitchen" href="/myKitchen" />
-						) : (
-							<NavItem title="Register" href="/register" />
-						)}
-					</ul>
-				</nav>
-			</Box>
-			<Box display={{ md: 'none' }}>
-				<CollapsedNavMenu />
-			</Box>
-
-			<Box display="flex" alignItems="center">
-				<Tooltip title="darkmode">
-					<Box>
-						<IconButton onClick={handleDarkMode}>
-							{palette.mode === 'light' ? (
-								<DarkModeOutlinedIcon />
+				<Link href={'/'}>
+					<Image
+						src="/icons8-connect.svg"
+						width={50}
+						height={50}
+						alt="Leftovers icon"
+					/>
+				</Link>
+				<Box
+					display={{ xs: 'none', md: 'unset' }}
+					width={{ sm: '15rem', md: '35rem' }}
+					height="3rem"
+				>
+					<nav style={{ width: '100%' }}>
+						<ul
+							style={{
+								listStyle: 'none',
+								display: 'flex',
+								justifyContent: 'space-evenly'
+							}}
+						>
+							<NavItem title="Home" href="/" />
+							<NavItem title="Preppers" href="/preppers" />
+							{session && <NavItem title="Favs" href="/favorites" />}
+							<NavItem title="About" href="/about" />
+							{session ? (
+								<NavItem title="MyKitchen" href="/myKitchen" />
 							) : (
-								<DarkModeIcon />
+								<NavItem title="Register" href="/register" />
 							)}
-						</IconButton>
-					</Box>
-				</Tooltip>
-				{session && (
-					<Tooltip title="notifications">
+						</ul>
+					</nav>
+				</Box>
+				<Box display={{ md: 'none' }}>
+					<CollapsedNavMenu />
+				</Box>
+
+				<Box display="flex" alignItems="center">
+					<Tooltip title="darkmode">
 						<Box>
-							<IconButton onClick={handleNotificationButton}>
-								{showNotifictions ? (
-									<NotificationsIcon />
+							<IconButton onClick={handleDarkMode}>
+								{palette.mode === 'light' ? (
+									<DarkModeOutlinedIcon />
 								) : (
-									<NotificationsNoneIcon />
+									<DarkModeIcon />
 								)}
 							</IconButton>
 						</Box>
 					</Tooltip>
-				)}
-				<Tooltip title="meal cart">
-					<Box>
-						<IconButton onClick={toggleDrawer}>
-							<ShoppingCartOutlinedIcon />
-						</IconButton>
-					</Box>
-				</Tooltip>
-				{session && (
-					<Tooltip
-						placement={showUserMenu ? 'left' : 'bottom'}
-						title={
+					{session && (
+						<Tooltip title="notifications">
 							<Box>
-								<Typography>{userEmail}</Typography>
+								<IconButton onClick={handleNotificationButton}>
+									{showNotifictions ? (
+										<NotificationsIcon />
+									) : (
+										<NotificationsNoneIcon />
+									)}
+								</IconButton>
 							</Box>
-						}
-					>
-						<IconButton onClick={handleUserIcon}>
-							{userIcon ? (
-								<Image
-									style={{ borderRadius: '50%' }}
-									src={userIcon}
-									width={25}
-									height={25}
-									alt="user icon"
-								/>
-							) : (
-								<DefaultAvatar avatar userEmail={userEmail} />
-							)}
-						</IconButton>
-					</Tooltip>
-				)}
-				{showUserMenu && <UserMenu />}
-				{showNotifictions && <NotificationMenu />}
-
-				<MealCartDrawer
-					isDrawerOpen={isDrawerOpen}
-					toggleDrawer={toggleDrawer}
-				/>
-				<Box>
-					{!session && (
-						<Link className={styles.link} href={'/signin'}>
-							<Typography
-								sx={{
-									'&:hover': {
-										borderBottom: `1px solid ${colors.orangeAccent[900]}`
-									}
-								}}
-								px=".5em"
-								fontSize={'large'}
-								variant="button"
-								color={'secondary'}
-							>
-								Sign In
-							</Typography>
-						</Link>
+						</Tooltip>
 					)}
+					<Tooltip title="meal cart">
+						<Box>
+							<IconButton onClick={toggleDrawer}>
+								<ShoppingCartOutlinedIcon />
+							</IconButton>
+						</Box>
+					</Tooltip>
+					{session && (
+						<Tooltip
+							placement={showUserMenu ? 'left' : 'bottom'}
+							title={
+								<Box>
+									<Typography>{userEmail}</Typography>
+								</Box>
+							}
+						>
+							<IconButton onClick={handleUserIcon}>
+								{userIcon ? (
+									<Image
+										style={{ borderRadius: '50%' }}
+										src={userIcon}
+										width={25}
+										height={25}
+										alt="user icon"
+									/>
+								) : (
+									<DefaultAvatar avatar userEmail={userEmail} />
+								)}
+							</IconButton>
+						</Tooltip>
+					)}
+					{showUserMenu && <UserMenu />}
+					{showNotifictions && <NotificationMenu />}
+
+					<MealCartDrawer
+						isDrawerOpen={isDrawerOpen}
+						toggleDrawer={toggleDrawer}
+					/>
+					<Box>
+						{!session && (
+							<Link className={styles.link} href={'/signin'}>
+								<Typography
+									sx={{
+										'&:hover': {
+											borderBottom: `1px solid ${colors.orangeAccent[900]}`
+										}
+									}}
+									px=".5em"
+									fontSize={'large'}
+									variant="button"
+									color={'secondary'}
+								>
+									Sign In
+								</Typography>
+							</Link>
+						)}
+					</Box>
 				</Box>
 			</Box>
 		</Box>

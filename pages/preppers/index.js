@@ -56,7 +56,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Home = ({ preppers, userEmail, favoritesList }) => {
-	const itemsPerPages = 2;
+	const itemsPerPages = 8;
 	const count = preppers.length;
 	const pages = Math.ceil(count / itemsPerPages);
 	const [msg, setMsg] = useState('');
@@ -76,19 +76,12 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 	};
 
 	return (
-		<Box
-			height="100%"
-			m="6rem 3rem"
-			flexDirection={'column'}
-			display="flex"
-			justifyContent="center"
-			alignItems="center"
-		>
+		<Box height="100%" mx={'3rem'} flexDirection={'column'} display="flex">
 			<Head>
 				<title>Local Preppers</title>
 				<meta name="description" content="List of all preppers in your area" />
 			</Head>
-			<main>
+			<Box>
 				<Typography
 					sx={{ my: '2em' }}
 					color={'secondary'}
@@ -132,7 +125,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 					count={pages}
 					onChange={handleChange}
 				/>
-			</main>
+			</Box>
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} width="50%" />}
 			{errorMsg && (
 				<ErrorAlert error={errorMsg} setError={setErrorMsg} width="50%" />

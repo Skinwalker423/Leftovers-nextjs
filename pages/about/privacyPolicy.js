@@ -48,17 +48,17 @@ const PrivacyPolicy = () => {
 					<AboutNavLink href="/about" title="Back to About Us" />
 				</Box>
 			</header>
-			<main>
-				<Box
-					m={5}
-					display={'flex'}
-					justifyContent={'center'}
-					mx={'1.5em'}
-					textOverflow={'clip'}
-				>
-					<PrivacyStatement />
-				</Box>
-			</main>
+
+			<Box
+				m={5}
+				display={'flex'}
+				justifyContent={'center'}
+				mx={'1.5em'}
+				textOverflow={'clip'}
+			>
+				<PrivacyStatement />
+			</Box>
+
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>

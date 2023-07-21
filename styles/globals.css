@@ -14,6 +14,10 @@ body,
 	box-sizing: border-box;
 }
 
+main {
+	margin-top: 5rem;
+}
+
 ::-webkit-scrollbar {
 	width: 10px;
 }

@@ -82,18 +82,18 @@ const About = () => {
 					</Paper>
 				</Box>
 			</header>
-			<main>
-				<Box
-					width={'100%'}
-					display={'flex'}
-					justifyContent={'center'}
-					alignItems={'center'}
-					flexDirection={'column'}
-					textOverflow={'clip'}
-				>
-					<LandingCardList />
-				</Box>
-			</main>
+
+			<Box
+				width={'100%'}
+				display={'flex'}
+				justifyContent={'center'}
+				alignItems={'center'}
+				flexDirection={'column'}
+				textOverflow={'clip'}
+			>
+				<LandingCardList />
+			</Box>
+
 			<footer className={styles.footer}>
 				<Footer img={'/icons8-connect.svg'} title="Leftovers" />
 			</footer>
