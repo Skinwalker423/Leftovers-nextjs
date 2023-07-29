@@ -13,7 +13,7 @@ import DefaultAvatar from '../components/UI/icon/defaultAvatar';
 import InfoCard from '../components/myKitchen/infoCard';
 import Head from 'next/head';
 import UpdateKitchenForm from '../components/UI/form/mykitchen/updateKitchenTitleForm';
-import { findAllOrdersByUserEmail } from '../db/mongodb/mongoDbUtils';
+import { findAllOrdersByPrepperEmail } from '../db/mongodb/mongoDbUtils';
 import {
 	connectMongoDb,
 	findExistingPrepperEmail
@@ -36,7 +36,10 @@ export async function getServerSideProps({ req, res }) {
 
 	const client = await connectMongoDb();
 	const userDb = await findExistingPrepperEmail(client, session.user.email);
-	const orders = await findAllOrdersByUserEmail(client, session?.user?.email);
+	const orders = await findAllOrdersByPrepperEmail(
+		client,
+		session?.user?.email
+	);
 
 	if (!userDb) {
 		return {
@@ -58,7 +61,7 @@ export async function getServerSideProps({ req, res }) {
 		props: {
 			userData: user,
 			prepper: JSON.parse(JSON.stringify(userDb)),
-			orders: orders || []
+			orders: orders.lenth > 0 ? orders : []
 		}
 	};
 }

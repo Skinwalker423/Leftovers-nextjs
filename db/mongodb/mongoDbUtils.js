@@ -422,7 +422,7 @@ export async function findAllOrdersByUserEmail(client, email) {
 				created_at: order.created_at,
 				items: order.items,
 				total: order.total,
-				prepperEmail: order.email
+				prepperEmail: order.prepperEmail
 			};
 		});
 
@@ -448,7 +448,7 @@ export async function findAllOrdersByPrepperEmail(client, email) {
 				created_at: order.created_at,
 				items: order.items,
 				total: order.total,
-				prepperEmail: order.email
+				prepperEmail: order.prepperEmail
 			};
 		});
 
