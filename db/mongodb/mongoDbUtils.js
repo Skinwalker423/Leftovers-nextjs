@@ -421,7 +421,34 @@ export async function findAllOrdersByUserEmail(client, email) {
 				userEmail: order.userEmail,
 				created_at: order.created_at,
 				items: order.items,
-				total: order.total
+				total: order.total,
+				prepperEmail: order.email
+			};
+		});
+
+		return mappedDoc;
+	} catch (err) {
+		console.error('problem retrieving orders from db', err);
+	}
+}
+export async function findAllOrdersByPrepperEmail(client, email) {
+	try {
+		const collection = await client.db('leftovers').collection('orders');
+		const document = await collection.find({ prepperEmail: email }).toArray();
+		if (!document) {
+			client.close();
+			return null;
+		}
+		console.log(`Orders found with email: ${document}:`);
+
+		const mappedDoc = document.map((order) => {
+			return {
+				id: order._id.toString(),
+				userEmail: order.userEmail,
+				created_at: order.created_at,
+				items: order.items,
+				total: order.total,
+				prepperEmail: order.email
 			};
 		});
 
