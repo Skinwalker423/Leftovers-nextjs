@@ -14,6 +14,7 @@ import DefaultAvatar from '../../icon/defaultAvatar';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import LogoutIcon from '@mui/icons-material/Logout';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
 
 const UserMenu = () => {
 	const { colors } = useColors();
@@ -30,6 +31,45 @@ const UserMenu = () => {
 	const handleSignOut = () => {
 		signOut();
 	};
+
+	const linkListConfig = [
+		{
+			label: 'Profile',
+			href: '/',
+			icon: <AccountCircle fontSize="large" color="secondary" />
+		},
+		{
+			label: 'Messages',
+			href: '/messages',
+			icon: <MailIcon fontSize="large" color="secondary" />
+		},
+		{
+			label: 'My Orders',
+			href: '/myorders',
+			icon: <RestaurantIcon fontSize="large" color="secondary" />
+		}
+	];
+
+	const linkList = linkListConfig.map(({ label, href, icon }) => {
+		return (
+			<Link style={{ textDecoration: 'none' }} href={href}>
+				<MenuItem
+					sx={{
+						height: '4em',
+						pl: '2.5em',
+						justifyContent: 'flex-start',
+						alignItems: 'center',
+						gap: 5
+					}}
+				>
+					{icon}
+					<Typography color={colors.primary[100]} fontSize={'large'}>
+						{label}
+					</Typography>
+				</MenuItem>
+			</Link>
+		);
+	});
 
 	return (
 		<Paper
@@ -68,38 +108,7 @@ const UserMenu = () => {
 			</Box>
 			<Divider flexItem variant="middle" color={colors.orangeAccent[900]} />
 			<MenuList>
-				<Link style={{ textDecoration: 'none' }} href={'/'}>
-					<MenuItem
-						sx={{
-							height: '4em',
-							pl: '2.5em',
-							justifyContent: 'flex-start',
-							alignItems: 'center',
-							gap: 5
-						}}
-					>
-						<AccountCircle fontSize="large" color="secondary" />
-						<Typography color={colors.primary[100]} fontSize={'large'}>
-							Profile
-						</Typography>
-					</MenuItem>
-				</Link>
-				<Link style={{ textDecoration: 'none' }} href={'/messages'}>
-					<MenuItem
-						sx={{
-							height: '4em',
-							pl: '2.5em',
-							justifyContent: 'flex-start',
-							alignItems: 'center',
-							gap: 5
-						}}
-					>
-						<MailIcon fontSize="large" color="secondary" />
-						<Typography color={colors.primary[100]} fontSize={'large'}>
-							Messages
-						</Typography>
-					</MenuItem>
-				</Link>
+				{linkList}
 				<MenuItem
 					onClick={handleSignOut}
 					sx={{
