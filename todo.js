@@ -2,7 +2,7 @@
 //style confirmation page
 //orders in myKitchen
 //oder pagination or overflow
-//put Header navbar in the main/body section not above it
+//limit cart items to one single prepper
 //orders collection in mongodb
 //limit cart items and orders to one prepper only per order
 //pagination for front page lists

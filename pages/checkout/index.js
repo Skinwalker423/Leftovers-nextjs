@@ -55,7 +55,6 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
-	const [prepEmail, setPrepEmail] = useState('');
 	const router = useRouter();
 	const { colors } = useColors();
 	const theme = useTheme();
@@ -63,7 +62,10 @@ const Checkout = ({ foundSession, errorMsg }) => {
 
 	const dividerResponse = matches ? 'vertical' : 'horizontal';
 	const userEmail = foundSession ? foundSession?.email : 'Guest';
+	const prepEmail = userCartlist.length > 0 ? userCartlist[0].prepperEmail : '';
 	console.log('email:', foundSession.email);
+
+	console.log('prepperEmail', userCartlist[0].prepperEmail);
 
 	const onPaymentClick = async () => {
 		if (userCartlist.length < 1) {
@@ -81,14 +83,16 @@ const Checkout = ({ foundSession, errorMsg }) => {
 			userEmail: userEmail,
 			created_at: new Date(),
 			items: userCartlist,
-			total: cartTotalPrice
+			total: cartTotalPrice,
+			prepperEmail: userCartlist[0].prepperEmail
 		};
 
 		for (const item of userCartlist) {
 			const { prepperEmail, id, qty } = item;
 
 			if (prepperEmail !== prepEmail) {
-				setPrepEmail(prepperEmail);
+				setError('Only items from one prepper is allowed per order');
+				return;
 			}
 			try {
 				const data = await decrementMealQtyDB(prepperEmail, id, qty);

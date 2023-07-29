@@ -71,6 +71,7 @@ const NavBar = () => {
 				display="flex"
 				justifyContent="space-between"
 				alignItems="center"
+				px={2}
 			>
 				<Link href={'/'}>
 					<Image
