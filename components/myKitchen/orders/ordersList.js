@@ -14,6 +14,7 @@ const OrdersList = ({ myOrders }) => {
 			alignItems={'flex-start'}
 			minHeight={'100vh'}
 			width={{ xs: '100%', sm: '90%', md: '80%' }}
+			gap={5}
 		>
 			{myOrders.length > 0 &&
 				myOrders.map(({ id, items, created_at, total }) => {
@@ -36,23 +37,33 @@ const OrdersList = ({ myOrders }) => {
 							<Box
 								display={'flex'}
 								justifyContent={'space-between'}
-								alignItems={'center'}
+								alignItems={'flex-start'}
 								mb={'2rem'}
 							>
-								<Box display={'flex'} gap={5}>
+								<Box
+									display={'flex'}
+									flexDirection={{ xs: 'column', sm: 'row' }}
+									gap={{ xs: 2, sm: 5 }}
+								>
 									<Box>
-										<Typography variant="h3">Order Placed</Typography>
-										<Typography>{newDate}</Typography>
+										<Typography variant="h3">Date</Typography>
+										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											{newDate}
+										</Typography>
 									</Box>
 									<Box>
 										<Typography variant="h3">Total</Typography>
-										<Typography>${total}</Typography>
+										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											${total}
+										</Typography>
 									</Box>
 								</Box>
 								<Box>
 									<Typography variant="h3">Order #</Typography>
 									<Link href={'/'}>
-										<Typography>{id}</Typography>
+										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											{id}
+										</Typography>
 									</Link>
 								</Box>
 							</Box>

@@ -9,10 +9,7 @@ const OrdersListItem = ({ items }) => {
 	const { colors } = useColors();
 	console.log('items', items);
 	return (
-		<Box
-			border={`2px solid ${colors.primary[400]}`}
-			boxShadow={`10px 5px 5px ${colors.primary[400]}`}
-		>
+		<Box display={'flex'} flexDirection={'column'} gap={5}>
 			{items.length &&
 				items.map(
 					({
@@ -30,6 +27,8 @@ const OrdersListItem = ({ items }) => {
 								key={id}
 								display={'flex'}
 								flexDirection={{ xs: 'column', md: 'row' }}
+								border={`2px solid ${colors.primary[400]}`}
+								boxShadow={`10px 5px 5px ${colors.primary[400]}`}
 							>
 								<Box position={'relative'} width={'100%'} height={'300px'}>
 									<Image src={image} fill alt={`order item ${foodItem}`} />
