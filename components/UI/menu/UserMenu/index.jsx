@@ -52,7 +52,7 @@ const UserMenu = () => {
 
 	const linkList = linkListConfig.map(({ label, href, icon }) => {
 		return (
-			<Link style={{ textDecoration: 'none' }} href={href}>
+			<Link key={label} style={{ textDecoration: 'none' }} href={href}>
 				<MenuItem
 					sx={{
 						height: '4em',
