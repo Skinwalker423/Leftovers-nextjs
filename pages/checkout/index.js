@@ -19,6 +19,7 @@ import { useColors } from '../../hooks/useColors';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth/next';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export async function getServerSideProps({ req, res }) {
 	try {
@@ -54,6 +55,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [value, setValue] = useLocalStorage('cartlist', userCartlist);
 
 	const router = useRouter();
 	const { colors } = useColors();
@@ -65,7 +67,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	const prepEmail = userCartlist.length > 0 ? userCartlist[0].prepperEmail : '';
 	console.log('email:', foundSession.email);
 
-	console.log('prepperEmail', userCartlist[0].prepperEmail);
+	console.log('prepperEmail', prepEmail);
 
 	const onPaymentClick = async () => {
 		if (userCartlist.length < 1) {
@@ -98,10 +100,6 @@ const Checkout = ({ foundSession, errorMsg }) => {
 				const data = await decrementMealQtyDB(prepperEmail, id, qty);
 				if (data.message) {
 					console.log('qty updated', data.message);
-					setLoading(false);
-
-					dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
-					dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
 				}
 				if (data.error) {
 					console.log('problem', data.error);
@@ -110,9 +108,13 @@ const Checkout = ({ foundSession, errorMsg }) => {
 				}
 			} catch (err) {
 				setError(err);
+				return;
 			}
 		}
-		setMsg('Payment complete');
+		dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
+		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
+		setValue('');
+		setMsg('Payment complete. Redirecting to directions...');
 
 		try {
 			const orderDoc = await createOrder(order);
@@ -122,6 +124,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 			}
 			const orderId = orderDoc.data;
 			console.log('order created in db', orderId);
+			setLoading(false);
 			window.location.href = `/checkout/${orderId}`;
 		} catch (err) {
 			setError('problem creating order:', err);

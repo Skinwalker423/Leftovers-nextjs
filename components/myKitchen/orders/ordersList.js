@@ -30,7 +30,7 @@ const OrdersList = ({ myOrders }) => {
 
 					return (
 						<Paper
-							sx={{ width: '100%', p: { xs: 1, md: 5 }, maxWidth: '60rem' }}
+							sx={{ width: '100%', p: { xs: 3, md: 5 }, maxWidth: '60rem' }}
 							key={id}
 						>
 							<Box

@@ -31,13 +31,8 @@ const OrdersListItem = ({ items }) => {
 								display={'flex'}
 								flexDirection={{ xs: 'column', md: 'row' }}
 							>
-								<Box>
-									<Image
-										src={image}
-										width={300}
-										height={300}
-										alt={`order item ${foodItem}`}
-									/>
+								<Box position={'relative'} width={'100%'} height={'300px'}>
+									<Image src={image} fill alt={`order item ${foodItem}`} />
 								</Box>
 								<Box
 									display={'flex'}
