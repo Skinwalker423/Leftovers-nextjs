@@ -166,7 +166,7 @@ const NavBar = () => {
 							</IconButton>
 						</Tooltip>
 					)}
-					{showUserMenu && <UserMenu />}
+					{showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
 					{showNotifictions && <NotificationMenu />}
 
 					<MealCartDrawer

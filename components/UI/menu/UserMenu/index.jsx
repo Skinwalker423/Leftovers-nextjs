@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 
-const UserMenu = () => {
+const UserMenu = ({ setShowUserMenu }) => {
 	const { colors } = useColors();
 	const { data: session } = useSession();
 
@@ -52,7 +52,12 @@ const UserMenu = () => {
 
 	const linkList = linkListConfig.map(({ label, href, icon }) => {
 		return (
-			<Link key={label} style={{ textDecoration: 'none' }} href={href}>
+			<Link
+				onClick={() => setShowUserMenu(false)}
+				key={label}
+				style={{ textDecoration: 'none' }}
+				href={href}
+			>
 				<MenuItem
 					sx={{
 						height: '4em',
