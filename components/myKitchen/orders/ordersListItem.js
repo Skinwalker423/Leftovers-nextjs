@@ -31,7 +31,13 @@ const OrdersListItem = ({ items }) => {
 								boxShadow={`10px 5px 5px ${colors.primary[400]}`}
 							>
 								<Box position={'relative'} width={'100%'} height={'300px'}>
-									<Image src={image} fill alt={`order item ${foodItem}`} />
+									<Image
+										src={image}
+										fill
+										priority
+										sizes={{ width: '100%', height: 'auto' }}
+										alt={`order item ${foodItem}`}
+									/>
 								</Box>
 								<Box
 									display={'flex'}
