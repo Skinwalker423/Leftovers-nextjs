@@ -1,4 +1,5 @@
 //order item add kitchen name to db and meal item
+//checkout items list fix description alignment
 //style confirmation page
 //orders in myKitchen
 //order pagination or overflow

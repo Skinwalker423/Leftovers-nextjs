@@ -35,10 +35,16 @@ export default function FoodItemCard({
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const { incrementFoodItem } = useContext(UserContext);
+	const { incrementFoodItem, state } = useContext(UserContext);
 	const { colors } = useColors();
 
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
+	const currentCartItemsPrepper = state?.userCartlist[0]?.prepperEmail;
+	console.log('cartlist in item card', state?.userCartlist[0]?.prepperEmail);
+
+	const isItemFromDifferentPrepper =
+		state.userCartlist.length > 0 && currentCartItemsPrepper !== prepperEmail;
+	console.log(isItemFromDifferentPrepper);
 
 	const meal = {
 		id,
@@ -79,7 +85,7 @@ export default function FoodItemCard({
 				}}
 			>
 				<CardMedia
-					sx={{ height: '40%' }}
+					sx={{ height: '40%', width: 'auto' }}
 					image={defaultMealImg}
 					title={foodItem}
 				/>
@@ -140,9 +146,11 @@ export default function FoodItemCard({
 							</Box>
 						</Box>
 						<Box mt={'.5em'}>
-							{qty == 0 ? (
+							{qty == 0 || isItemFromDifferentPrepper ? (
 								<Alert variant="outlined" color="error">
-									OUT OF STOCK
+									{isItemFromDifferentPrepper
+										? 'Order must be from the same kitchen'
+										: 'OUT OF STOCK'}
 								</Alert>
 							) : (
 								<Alert
@@ -197,10 +205,11 @@ export default function FoodItemCard({
 								</Button>
 							</Link>
 						)}
+
 						<Button
 							variant="contained"
 							color="success"
-							disabled={qty == 0}
+							disabled={qty == 0 || isItemFromDifferentPrepper}
 							onClick={handleAddCartItem}
 							size="small"
 						>
