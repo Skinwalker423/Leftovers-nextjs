@@ -174,6 +174,7 @@ const Prepper = ({ prepper }) => {
 									qty={qty}
 									setMsg={setMsg}
 									prepperEmail={prepper.email}
+									kitchen={prepper.kitchenTitle}
 								/>
 							</Box>
 						);
