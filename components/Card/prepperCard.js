@@ -130,6 +130,7 @@ export default function PrepperCard({
 					width: { xs: '20rem', md: '25rem' },
 					mx: '.5rem',
 					height: '26rem',
+
 					backgroundColor: colors.primary[400]
 				}}
 				key={id}

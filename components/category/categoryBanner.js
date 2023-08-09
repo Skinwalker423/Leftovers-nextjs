@@ -13,14 +13,19 @@ const CategoryBanner = ({
 	return (
 		<Box
 			width={'100%'}
-			height={{ xs: '63rem', sm: '35rem' }}
+			height={{ xs: '65rem', sm: '40rem' }}
 			sx={{ overflow: 'auto' }}
 			alignItems={'center'}
 			justifyContent={'center'}
-			borderBottom={`2px solid ${bgColor}`}
+			borderTop={`2px solid ${bgColor}`}
 		>
 			<Link style={{ textDecoration: 'none' }} href={link}>
-				<Typography color={bgColor} textAlign={'center'} mt=".5em" variant="h1">
+				<Typography
+					color={bgColor}
+					textAlign={'center'}
+					my=".75em"
+					variant="h1"
+				>
 					{title}
 				</Typography>
 			</Link>
