@@ -12,22 +12,15 @@ const CategoryBanner = ({
 	const { colors } = useColors();
 	return (
 		<Box
-			width={'96%'}
-			m="1rem"
+			width={'100%'}
 			height={{ xs: '63rem', sm: '35rem' }}
-			borderRadius={'2em'}
 			sx={{ overflow: 'auto' }}
 			alignItems={'center'}
 			justifyContent={'center'}
-			backgroundColor={bgColor}
+			borderBottom={`2px solid ${bgColor}`}
 		>
 			<Link style={{ textDecoration: 'none' }} href={link}>
-				<Typography
-					color={colors.primary[900]}
-					textAlign={'center'}
-					mt=".5em"
-					variant="h1"
-				>
+				<Typography color={bgColor} textAlign={'center'} mt=".5em" variant="h1">
 					{title}
 				</Typography>
 			</Link>

@@ -1,7 +1,7 @@
 //order item add kitchen name to db and meal item
 //style confirmation page
 //orders in myKitchen
-//oder pagination or overflow
+//order pagination or overflow
 //limit cart items to one single prepper
 //orders collection in mongodb
 //limit cart items and orders to one prepper only per order
