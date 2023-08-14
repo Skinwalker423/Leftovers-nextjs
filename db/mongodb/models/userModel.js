@@ -3,15 +3,15 @@ import mongoose from 'mongoose';
 const UserSchema = new mongoose.Schema({
 	email: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
 	favorites: [
 		{
-			id: String,
-			name: String,
-			email: String,
-			description: String,
-			kitchenImgUrl: String
+			prepperId: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Prepper'
+			}
 		}
 	],
 	password: {
