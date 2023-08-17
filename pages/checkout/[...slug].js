@@ -25,10 +25,16 @@ export async function getServerSideProps({ params }) {
 		const client = await connectMongoDb();
 
 		const order = await findOrderWithId(confirmationNumber);
+		console.log('order with fake id', order);
+		if (!order) {
+			return {
+				notFound: true
+			};
+		}
 
 		const prepper = await findExistingPrepperEmail(client, order.prepperEmail);
 
-		if (!order || !prepper) {
+		if (!prepper) {
 			return {
 				notFound: true
 			};
@@ -53,16 +59,17 @@ export async function getServerSideProps({ params }) {
 			}
 		};
 	} catch (err) {
+		console.log('problem getting order with id', err);
 		return {
-			props: {
-				error: err
-			}
+			notFound: true
 		};
 	}
 }
 
 const Directions = ({ orderDetails, error }) => {
 	const [errorMsg, setErrorMsg] = useState('');
+	if (!orderDetails)
+		return <ErrorAlert error={'No order found'} setError={setErrorMsg} />;
 	const queryAddress = orderDetails.location.address.replaceAll(' ', '%20');
 	const query = `${queryAddress}%20${orderDetails.location.city}`;
 
@@ -127,7 +134,9 @@ const Directions = ({ orderDetails, error }) => {
 					city={orderDetails.location.city}
 				/> */}
 			</Paper>
-			{error?.length && <ErrorAlert errorMsg={error} setError={setErrorMsg} />}
+			{error?.length && (
+				<ErrorAlert errorMsg={error || errorMsg} setError={setErrorMsg} />
+			)}
 		</Box>
 	);
 };

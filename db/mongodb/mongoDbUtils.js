@@ -1,5 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb';
 const ObjectID = require('mongodb').ObjectId;
+import Order from './models/orderModel';
+import { connectToMongoDb } from './mongoose';
 
 export async function connectMongoDb() {
 	const uri = `mongodb+srv://skinwalker423:${process.env.MONGO_DB_KEY}@cluster23.nlaxbsz.mongodb.net/leftovers?retryWrites=true&w=majority`;
@@ -14,14 +16,17 @@ export async function addDocToDb(client, collectionArg, doc) {
 	return document;
 }
 export async function createOrderDb(doc) {
-	const client = await connectMongoDb();
-	if (!client) return;
-	const collection = client.db('leftovers').collection('orders');
-	const document = await collection.insertOne(doc);
+	// const client = await connectMongoDb();
+	// if (!client) return;
+	// const collection = client.db('leftovers').collection('orders');
+	// const document = await collection.insertOne(doc);
+	await connectToMongoDb();
+	const document = await Order.create(doc);
+	// const document = await createOrder.save();
 	if (!document) return;
 	console.log('created an order', document);
-	client.close();
-	return document;
+	// client.close();
+	return await document.save();
 }
 
 export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
@@ -386,7 +391,6 @@ export async function findOrderWithId(id) {
 		const collection = client.db('leftovers').collection('orders');
 		const document = await collection.findOne({ _id: ObjectID(id) });
 		if (!document) {
-			client.close();
 			return null;
 		}
 		console.log(`Order found with ID: ${document}:`);
@@ -397,10 +401,9 @@ export async function findOrderWithId(id) {
 			prepperEmail,
 			id: document._id.toString()
 		};
-		client.close();
+
 		return formattedDoc;
 	} catch (err) {
-		client.close();
 		console.error('problem retrieving order from db', err);
 	}
 }

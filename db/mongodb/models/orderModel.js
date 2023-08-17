@@ -24,6 +24,11 @@ const OrderSchema = new mongoose.Schema({
 	total: {
 		type: Number,
 		required: true
+	},
+	mealStatus: {
+		type: String,
+		enum: ['pending', 'fullfilled', 'unfullilled'],
+		default: 'pending'
 	}
 });
 

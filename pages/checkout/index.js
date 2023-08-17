@@ -111,22 +111,24 @@ const Checkout = ({ foundSession, errorMsg }) => {
 				return;
 			}
 		}
-		dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
-		dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
-		setValue('');
-		setMsg('Payment complete. Redirecting to directions...');
 
 		try {
 			const orderDoc = await createOrder(order);
 			if (orderDoc?.error) {
+				setLoading(false);
 				setError('problem creating order:', orderDoc.error);
 				return;
 			}
 			const orderId = orderDoc.data;
 			console.log('order created in db', orderId);
 			setLoading(false);
+			dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
+			dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
+			setValue('');
+			setMsg('Payment complete. Redirecting to directions...');
 			window.location.href = `/checkout/${orderId}`;
 		} catch (err) {
+			setLoading(false);
 			setError('problem creating order:', err);
 			return;
 		}

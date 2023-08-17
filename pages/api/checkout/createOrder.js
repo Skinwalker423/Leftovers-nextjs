@@ -6,14 +6,14 @@ const createOrder = async (req, res) => {
 		return res.status(400).json({ error: 'Invalid request' });
 	}
 	const order = req.body;
-	console.log(order);
 	const orderDetails = await createOrderDb(order);
+	console.log('order details', orderDetails);
 
-	if (!orderDetails.insertedId) {
+	if (!orderDetails) {
 		return res.status(500).json({ error: 'problem creating order in db' });
 	}
 
-	const formattedId = orderDetails.insertedId.toString();
+	const formattedId = orderDetails._id.toString();
 	console.log('this is the formatted id:', formattedId);
 
 	return res.status(200).json({
