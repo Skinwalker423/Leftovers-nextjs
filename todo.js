@@ -27,3 +27,7 @@
 //send image file to a img hosting server e.g. Cloudinary for my kitchen related pics
 //put url to that image in mealDetails to send to mongodb
 //custom error page for nextauth
+
+//handleAddMealForm
+//send image file to a img hosting server e.g. Cloudinary
+//put url to that image in mealDetails to send to mongodb

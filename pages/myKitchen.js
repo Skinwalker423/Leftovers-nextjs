@@ -61,7 +61,7 @@ export async function getServerSideProps({ req, res }) {
 		props: {
 			userData: user,
 			prepper: JSON.parse(JSON.stringify(userDb)),
-			orders: orders.lenth > 0 ? orders : []
+			orders: orders.length > 0 ? orders : []
 		}
 	};
 }
@@ -74,8 +74,6 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
-
-	console.log(orders);
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);

@@ -4,8 +4,12 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import OrdersListItem from './ordersListItem';
 import Link from 'next/link';
+import { useColors } from '../../../hooks/useColors';
+import { Button } from '@mui/material';
 
 const OrdersList = ({ myOrders }) => {
+	const { colors } = useColors();
+
 	return (
 		<Box
 			display="flex"
@@ -36,13 +40,15 @@ const OrdersList = ({ myOrders }) => {
 						>
 							<Box
 								display={'flex'}
+								flexDirection={{ xs: 'column', sm: 'row' }}
+								gap={{ xs: 2, sm: 1 }}
 								justifyContent={'space-between'}
 								alignItems={'flex-start'}
 								mb={'2rem'}
 							>
 								<Box
 									display={'flex'}
-									flexDirection={{ xs: 'column', sm: 'row' }}
+									// flexDirection={{ xs: 'column', sm: 'row' }}
 									gap={{ xs: 2, sm: 5 }}
 								>
 									<Box>
@@ -66,6 +72,30 @@ const OrdersList = ({ myOrders }) => {
 										</Typography>
 									</Link>
 								</Box>
+							</Box>
+							<Box
+								display={'flex'}
+								justifyContent={'space-between'}
+								p={2}
+								my={5}
+								border={`1px solid ${colors.greenAccent[400]}`}
+							>
+								<Typography variant="h3">
+									Meal Status:
+									<Typography
+										variant="span"
+										textAlign={'center'}
+										color={colors.greenAccent[400]}
+										sx={{
+											borderRadius: 5,
+											px: 2
+										}}
+										fontSize={{ xs: 'small', sm: 'large' }}
+									>
+										fullfilled
+									</Typography>
+								</Typography>
+								<Button>Set Status</Button>
 							</Box>
 							<OrdersListItem items={items} />
 						</Paper>
