@@ -1,4 +1,5 @@
 //continue order status in modal
+//do a check if prepperEmail matches current user to use modal to set status
 //order item add kitchen name to db and meal item
 //checkout items list fix description alignment
 //style confirmation page

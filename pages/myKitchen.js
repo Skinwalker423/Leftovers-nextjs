@@ -75,6 +75,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
 
+	const currentUserEmail = userData?.email;
+
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
 	};
@@ -230,7 +232,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					alignItems={{ xs: 'flex-end', sm: 'center' }}
 					ml={'2rem'}
 				>
-					<OrdersList myOrders={myOrders} />
+					<OrdersList myOrders={myOrders} currentUserEmail={currentUserEmail} />
 				</Box>
 			)}
 

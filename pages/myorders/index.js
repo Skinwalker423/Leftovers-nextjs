@@ -39,6 +39,7 @@ export async function getServerSideProps({ req, res }) {
 
 const MyOrders = ({ userData, orders }) => {
 	console.log('orders in client', orders);
+	const currentUserEmail = userData?.email;
 	return (
 		<Box
 			width={'100%'}
@@ -56,7 +57,7 @@ const MyOrders = ({ userData, orders }) => {
 			<Typography component={'h1'} fontSize={'5rem'}>
 				Orders
 			</Typography>
-			<OrdersList myOrders={orders} />
+			<OrdersList myOrders={orders} currentUserEmail={currentUserEmail} />
 		</Box>
 	);
 };

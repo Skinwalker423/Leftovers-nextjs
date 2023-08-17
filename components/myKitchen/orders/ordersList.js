@@ -8,8 +8,10 @@ import { useColors } from '../../../hooks/useColors';
 import { Button } from '@mui/material';
 import UpdateOrderStatusForm from '../../UI/form/mykitchen/updateOrderStatus';
 
-const OrdersList = ({ myOrders }) => {
+const OrdersList = ({ myOrders, currentUserEmail }) => {
 	const { colors } = useColors();
+
+	console.log('my orders', myOrders);
 
 	return (
 		<Box
@@ -22,7 +24,7 @@ const OrdersList = ({ myOrders }) => {
 			gap={5}
 		>
 			{myOrders.length > 0 &&
-				myOrders.map(({ id, items, created_at, total }) => {
+				myOrders.map(({ id, items, created_at, total, prepperEmail }) => {
 					const options = {
 						weekday: 'long',
 						year: 'numeric',
@@ -96,7 +98,7 @@ const OrdersList = ({ myOrders }) => {
 										fullfilled
 									</Typography>
 								</Typography>
-								<UpdateOrderStatusForm />
+								{prepperEmail === currentUserEmail && <UpdateOrderStatusForm />}
 							</Box>
 							<OrdersListItem items={items} />
 						</Paper>
