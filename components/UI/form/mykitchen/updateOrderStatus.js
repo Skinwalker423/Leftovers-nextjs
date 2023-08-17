@@ -16,7 +16,7 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import { updateMealQtyInDb } from '../../../../utils/meals';
 
-const UpdateQtyForm = ({ email, setMsg, mealId, setMealStatus }) => {
+const UpdateOrderStatusForm = ({ email, setMsg, orderId, setMealStatus }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -54,7 +54,7 @@ const UpdateQtyForm = ({ email, setMsg, mealId, setMealStatus }) => {
 		const newQty = parseInt(qtyRef.current.value);
 
 		try {
-			const data = await updateMealQtyInDb(email, mealId, newQty);
+			const data = await updateMealQtyInDb(email, orderId, newQty);
 			if (data.message) {
 				//setMealStatus
 				setMsg(data.message);
@@ -77,7 +77,7 @@ const UpdateQtyForm = ({ email, setMsg, mealId, setMealStatus }) => {
 		<div>
 			<Button
 				size="small"
-				variant="outlined"
+				variant="contained"
 				color="success"
 				onClick={handleOpen}
 			>
@@ -159,4 +159,4 @@ const UpdateQtyForm = ({ email, setMsg, mealId, setMealStatus }) => {
 	);
 };
 
-export default UpdateQtyForm;
+export default UpdateOrderStatusForm;

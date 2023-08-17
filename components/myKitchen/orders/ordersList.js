@@ -6,6 +6,7 @@ import OrdersListItem from './ordersListItem';
 import Link from 'next/link';
 import { useColors } from '../../../hooks/useColors';
 import { Button } from '@mui/material';
+import UpdateOrderStatusForm from '../../UI/form/mykitchen/updateOrderStatus';
 
 const OrdersList = ({ myOrders }) => {
 	const { colors } = useColors();
@@ -95,7 +96,7 @@ const OrdersList = ({ myOrders }) => {
 										fullfilled
 									</Typography>
 								</Typography>
-								<Button>Set Status</Button>
+								<UpdateOrderStatusForm />
 							</Box>
 							<OrdersListItem items={items} />
 						</Paper>
