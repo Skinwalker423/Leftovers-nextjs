@@ -9,6 +9,14 @@ const OrderSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Prepper'
 	},
+	userEmail: {
+		type: String,
+		required: true
+	},
+	prepperEmail: {
+		type: String,
+		required: true
+	},
 	created_at: {
 		type: Date,
 		default: Date.now()

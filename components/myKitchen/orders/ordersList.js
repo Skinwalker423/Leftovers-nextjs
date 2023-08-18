@@ -24,86 +24,90 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 			gap={5}
 		>
 			{myOrders.length > 0 &&
-				myOrders.map(({ id, items, created_at, total, prepperEmail }) => {
-					const options = {
-						weekday: 'long',
-						year: 'numeric',
-						month: 'long',
-						day: 'numeric'
-					};
-					const newDate = new Date(created_at).toLocaleDateString(
-						undefined,
-						options
-					);
+				myOrders.map(
+					({ id, items, created_at, total, prepperEmail, mealStatus }) => {
+						const options = {
+							weekday: 'long',
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric'
+						};
+						const newDate = new Date(created_at).toLocaleDateString(
+							undefined,
+							options
+						);
 
-					return (
-						<Paper
-							sx={{ width: '100%', p: { xs: 3, md: 5 }, maxWidth: '60rem' }}
-							key={id}
-						>
-							<Box
-								display={'flex'}
-								flexDirection={{ xs: 'column', sm: 'row' }}
-								gap={{ xs: 2, sm: 1 }}
-								justifyContent={'space-between'}
-								alignItems={'flex-start'}
-								mb={'2rem'}
+						return (
+							<Paper
+								sx={{ width: '100%', p: { xs: 3, md: 5 }, maxWidth: '60rem' }}
+								key={id}
 							>
 								<Box
 									display={'flex'}
-									// flexDirection={{ xs: 'column', sm: 'row' }}
-									gap={{ xs: 2, sm: 5 }}
+									flexDirection={{ xs: 'column', sm: 'row' }}
+									gap={{ xs: 2, sm: 1 }}
+									justifyContent={'space-between'}
+									alignItems={'flex-start'}
+									mb={'2rem'}
 								>
-									<Box>
-										<Typography variant="h3">Date</Typography>
-										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
-											{newDate}
-										</Typography>
-									</Box>
-									<Box>
-										<Typography variant="h3">Total</Typography>
-										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
-											${total}
-										</Typography>
-									</Box>
-								</Box>
-								<Box>
-									<Typography variant="h3">Order #</Typography>
-									<Link href={'/'}>
-										<Typography fontSize={{ xs: 'small', sm: 'large' }}>
-											{id}
-										</Typography>
-									</Link>
-								</Box>
-							</Box>
-							<Box
-								display={'flex'}
-								justifyContent={'space-between'}
-								p={2}
-								my={5}
-								border={`1px solid ${colors.greenAccent[400]}`}
-							>
-								<Typography variant="h3">
-									Meal Status:
-									<Typography
-										variant="span"
-										textAlign={'center'}
-										color={colors.greenAccent[400]}
-										sx={{
-											borderRadius: 5,
-											px: 2
-										}}
-										fontSize={{ xs: 'small', sm: 'large' }}
+									<Box
+										display={'flex'}
+										// flexDirection={{ xs: 'column', sm: 'row' }}
+										gap={{ xs: 2, sm: 5 }}
 									>
-										fullfilled
+										<Box>
+											<Typography variant="h3">Date</Typography>
+											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+												{newDate}
+											</Typography>
+										</Box>
+										<Box>
+											<Typography variant="h3">Total</Typography>
+											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+												${total}
+											</Typography>
+										</Box>
+									</Box>
+									<Box>
+										<Typography variant="h3">Order #</Typography>
+										<Link href={'/'}>
+											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+												{id}
+											</Typography>
+										</Link>
+									</Box>
+								</Box>
+								<Box
+									display={'flex'}
+									justifyContent={'space-between'}
+									p={2}
+									my={5}
+									border={`1px solid ${colors.greenAccent[400]}`}
+								>
+									<Typography variant="h3">
+										Meal Status:
+										<Typography
+											variant="span"
+											textAlign={'center'}
+											color={colors.greenAccent[400]}
+											sx={{
+												borderRadius: 5,
+												px: 2
+											}}
+											fontSize={{ xs: 'small', sm: 'large' }}
+										>
+											{mealStatus}
+										</Typography>
 									</Typography>
-								</Typography>
-								{prepperEmail === currentUserEmail && <UpdateOrderStatusForm />}
-							</Box>
-							<OrdersListItem items={items} />
-						</Paper>
-					);
-				})}
+									{prepperEmail === currentUserEmail && (
+										<UpdateOrderStatusForm />
+									)}
+								</Box>
+								<OrdersListItem items={items} />
+							</Paper>
+						);
+					}
+				)}
 		</Box>
 	);
 };

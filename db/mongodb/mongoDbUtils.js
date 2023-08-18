@@ -20,13 +20,23 @@ export async function createOrderDb(doc) {
 	// if (!client) return;
 	// const collection = client.db('leftovers').collection('orders');
 	// const document = await collection.insertOne(doc);
+	console.log('doc', doc);
+	const { userEmail, created_at, updated_at, items, total, prepperEmail } = doc;
 	await connectToMongoDb();
-	const document = await Order.create(doc);
+	const document = new Order({
+		userEmail: userEmail,
+		prepperEmail: prepperEmail,
+		created_at,
+		updated_at,
+		items,
+		total
+	});
 	// const document = await createOrder.save();
 	if (!document) return;
 	console.log('created an order', document);
+	const savedDoc = await document.save();
 	// client.close();
-	return await document.save();
+	return savedDoc;
 }
 
 export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
@@ -422,10 +432,12 @@ export async function findAllOrdersByUserEmail(client, email) {
 			return {
 				id: order._id.toString(),
 				userEmail: order.userEmail,
-				created_at: order.created_at,
+				created_at: order.created_at.toString(),
+				updated_at: order?.updated_at.toString(),
 				items: order.items,
 				total: order.total,
-				prepperEmail: order.prepperEmail
+				prepperEmail: order.prepperEmail,
+				mealStatus: order?.mealStatus || 'N/A'
 			};
 		});
 
@@ -448,10 +460,12 @@ export async function findAllOrdersByPrepperEmail(client, email) {
 			return {
 				id: order._id.toString(),
 				userEmail: order.userEmail,
-				created_at: order.created_at,
+				created_at: order.created_at.toString(),
+				updated_at: order.updated_at.toString(),
 				items: order.items,
 				total: order.total,
-				prepperEmail: order.prepperEmail
+				prepperEmail: order.prepperEmail,
+				mealStatus: order?.mealStatus || 'N/A'
 			};
 		});
 

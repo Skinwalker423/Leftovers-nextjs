@@ -6,6 +6,7 @@ const createOrder = async (req, res) => {
 		return res.status(400).json({ error: 'Invalid request' });
 	}
 	const order = req.body;
+	console.log('body from fetch request', order);
 	const orderDetails = await createOrderDb(order);
 	console.log('order details', orderDetails);
 

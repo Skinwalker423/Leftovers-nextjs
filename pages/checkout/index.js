@@ -84,9 +84,10 @@ const Checkout = ({ foundSession, errorMsg }) => {
 		const order = {
 			userEmail: userEmail,
 			created_at: new Date(),
+			updated_at: new Date(),
 			items: userCartlist,
 			total: cartTotalPrice,
-			prepperEmail: userCartlist[0].prepperEmail
+			prepperEmail: prepEmail
 		};
 
 		for (const item of userCartlist) {
