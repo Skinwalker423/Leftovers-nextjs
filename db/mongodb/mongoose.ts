@@ -1,4 +1,5 @@
 import mongoose, { ConnectOptions } from 'mongoose';
+import Order from './models/orderModel';
 
 let isConnected = false;
 
@@ -17,5 +18,28 @@ export const connectToMongoDb = async () => {
 		isConnected = true;
 	} catch (error) {
 		console.log(error);
+	}
+};
+
+export const updateOrderStatusById = async (id: string, status: string) => {
+	try {
+		const order = await Order.findOneAndUpdate(
+			{
+				id: id
+			},
+			{
+				$set: {
+					mealStatus: status,
+					updated_at: new Date()
+				}
+			},
+			{
+				new: true
+			}
+		);
+
+		return order;
+	} catch (error: any) {
+		throw new Error(`problem updating meal status: ${error.message}`);
 	}
 };

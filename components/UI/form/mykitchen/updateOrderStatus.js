@@ -21,7 +21,7 @@ const UpdateOrderStatusForm = ({ email, setMsg, orderId, setMealStatus }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
-	const qtyRef = useRef();
+
 	const [status, setStatus] = useState('');
 
 	const handleChange = (event) => {
@@ -48,10 +48,6 @@ const UpdateOrderStatusForm = ({ email, setMsg, orderId, setMealStatus }) => {
 	const handleUpdateOrderForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-		//send image file to a img hosting server e.g. Cloudinary
-		//put url to that image in mealDetails to send to mongodb
-
-		const newQty = parseInt(qtyRef.current.value);
 
 		try {
 			const data = await updateMealQtyInDb(email, orderId, newQty);
