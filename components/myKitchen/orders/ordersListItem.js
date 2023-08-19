@@ -30,7 +30,11 @@ const OrdersListItem = ({ items }) => {
 								border={`2px solid ${colors.primary[400]}`}
 								boxShadow={`10px 5px 5px ${colors.primary[400]}`}
 							>
-								<Box position={'relative'} width={'100%'} height={'300px'}>
+								<Box
+									position={'relative'}
+									width={'100%'}
+									height={{ xs: '15em', sm: '20em', md: '25em' }}
+								>
 									<Image
 										src={image}
 										fill
@@ -45,6 +49,8 @@ const OrdersListItem = ({ items }) => {
 									justifyContent={'space-evenly'}
 									width={'100%'}
 									px={5}
+									py={2}
+									gap={3}
 								>
 									<Box
 										display={'flex'}
@@ -61,9 +67,9 @@ const OrdersListItem = ({ items }) => {
 												}}
 												variant="h4"
 											>
-												Item
+												Price
 											</Typography>
-											<Typography variant="h3"> {foodItem}</Typography>
+											<Typography variant="h3">${price}</Typography>
 										</Box>
 										<Box>
 											<Typography
@@ -74,25 +80,9 @@ const OrdersListItem = ({ items }) => {
 												}}
 												variant="h4"
 											>
-												Kitchen
+												QTY
 											</Typography>
-											<Link
-												style={{ textDecoration: 'none' }}
-												href={`/preppers/${prepperId}`}
-											>
-												<Typography
-													variant="h3"
-													sx={{
-														color: colors.orangeAccent[400],
-														textDecoration: 'none',
-														':hover': {
-															color: colors.orangeAccent[200]
-														}
-													}}
-												>
-													{kitchen}
-												</Typography>
-											</Link>
+											<Typography variant="h3"> {qty}</Typography>
 										</Box>
 									</Box>
 									<Box>
@@ -104,9 +94,9 @@ const OrdersListItem = ({ items }) => {
 											}}
 											variant="h4"
 										>
-											Price
+											Item
 										</Typography>
-										<Typography variant="h3">${price}</Typography>
+										<Typography variant="h3"> {foodItem}</Typography>
 									</Box>
 									<Box>
 										<Typography
@@ -117,9 +107,25 @@ const OrdersListItem = ({ items }) => {
 											}}
 											variant="h4"
 										>
-											QTY
+											Kitchen
 										</Typography>
-										<Typography variant="h3"> {qty}</Typography>
+										<Link
+											style={{ textDecoration: 'none' }}
+											href={`/preppers/${prepperId}`}
+										>
+											<Typography
+												variant="h3"
+												sx={{
+													color: colors.orangeAccent[400],
+													textDecoration: 'none',
+													':hover': {
+														color: colors.orangeAccent[200]
+													}
+												}}
+											>
+												{kitchen}
+											</Typography>
+										</Link>
 									</Box>
 								</Box>
 							</Box>

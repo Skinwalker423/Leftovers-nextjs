@@ -82,25 +82,25 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 								<Box
 									display={'flex'}
 									justifyContent={'space-between'}
+									alignItems={'center'}
 									p={2}
 									my={5}
 									border={`1px solid ${colors.greenAccent[400]}`}
 								>
-									<Typography variant="h3">
-										Meal Status:
+									<Box display={'flex'} alignItems={'center'} gap={1}>
+										<Typography variant="h3">Status:</Typography>
 										<Typography
 											variant="span"
 											textAlign={'center'}
 											color={colors.greenAccent[400]}
 											sx={{
-												borderRadius: 5,
-												px: 2
+												borderRadius: 5
 											}}
-											fontSize={{ xs: 'small', sm: 'large' }}
+											fontSize={{ xs: 'medium', sm: 'large' }}
 										>
 											{mealStatus}
 										</Typography>
-									</Typography>
+									</Box>
 									{prepperEmail === currentUserEmail && (
 										<UpdateOrderStatusForm />
 									)}
