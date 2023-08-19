@@ -1,6 +1,7 @@
 //continue order status in modal. update "update_at" while changing status
 //do a check if prepperEmail matches current user to use modal to set status
 //cart items number count on icon
+//order details page
 //order item add kitchen name to db and meal item
 //checkout items list fix description alignment
 //style confirmation page

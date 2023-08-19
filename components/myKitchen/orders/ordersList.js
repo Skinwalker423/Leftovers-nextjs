@@ -72,7 +72,7 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 									</Box>
 									<Box>
 										<Typography variant="h3">Order #</Typography>
-										<Link href={'/'}>
+										<Link href={`/myorders/${id}`}>
 											<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
 												{id}
 											</Typography>
