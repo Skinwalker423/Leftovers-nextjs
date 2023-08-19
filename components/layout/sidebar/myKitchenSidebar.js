@@ -118,7 +118,7 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 	}, [matches]);
 
 	return (
-		<Box zIndex={98}>
+		<Box position={'relative'} zIndex={98}>
 			<Drawer
 				sx={{
 					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {

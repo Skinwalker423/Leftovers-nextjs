@@ -17,10 +17,12 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 		<Box
 			display="flex"
 			flexDirection={'column'}
-			justifyContent={'flex-start'}
-			alignItems={'flex-start'}
+			justifyContent={'flex-center'}
+			alignItems={'flex-center'}
 			minHeight={'100vh'}
 			width={{ xs: '100%', sm: '90%', md: '80%' }}
+			ml={7}
+			p={3}
 			gap={5}
 		>
 			{myOrders.length > 0 &&
@@ -57,13 +59,13 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 									>
 										<Box>
 											<Typography variant="h3">Date</Typography>
-											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
 												{newDate}
 											</Typography>
 										</Box>
 										<Box>
 											<Typography variant="h3">Total</Typography>
-											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
 												${total}
 											</Typography>
 										</Box>
@@ -71,7 +73,7 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 									<Box>
 										<Typography variant="h3">Order #</Typography>
 										<Link href={'/'}>
-											<Typography fontSize={{ xs: 'small', sm: 'large' }}>
+											<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
 												{id}
 											</Typography>
 										</Link>

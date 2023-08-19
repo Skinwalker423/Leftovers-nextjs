@@ -224,16 +224,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				</Box>
 			)}
 			{selected === 'Orders' && (
-				<Box
-					width={{ xs: '80%', sm: '100%' }}
-					mt={'6rem'}
-					display={'flex'}
-					justifyContent={{ xs: 'flex-end', sm: 'center' }}
-					alignItems={{ xs: 'flex-end', sm: 'center' }}
-					ml={'2rem'}
-				>
-					<OrdersList myOrders={myOrders} currentUserEmail={currentUserEmail} />
-				</Box>
+				<OrdersList myOrders={myOrders} currentUserEmail={currentUserEmail} />
 			)}
 
 			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
