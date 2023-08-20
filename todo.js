@@ -35,3 +35,5 @@
 //handleAddMealForm
 //send image file to a img hosting server e.g. Cloudinary
 //put url to that image in mealDetails to send to mongodb
+
+//guard checks on all api endpoints

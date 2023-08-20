@@ -19,8 +19,9 @@ import {
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { Stack } from '@mui/material';
+import { Stack, colors } from '@mui/material';
 import OrdersList from '../components/myKitchen/orders/ordersList';
+import { useColors } from '../hooks/useColors';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -74,6 +75,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
+	const { colors } = useColors();
 
 	const currentUserEmail = userData?.email;
 
@@ -113,6 +115,13 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
 				>
+					<Typography
+						sx={{ py: 2, borderBottom: `1px solid ${colors.gray[900]}` }}
+						color={colors.gray[900]}
+						variant="h1"
+					>
+						Kitchen Profile
+					</Typography>
 					<InfoCard title="Kitchen Picture">
 						<Image
 							width={100}
