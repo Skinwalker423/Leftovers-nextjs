@@ -31,11 +31,11 @@ export async function createOrderDb(doc) {
 		items,
 		total
 	});
-	// const document = await createOrder.save();
+
 	if (!document) return;
 	console.log('created an order', document);
 	const savedDoc = await document.save();
-	// client.close();
+
 	return savedDoc;
 }
 
@@ -125,7 +125,6 @@ export async function findExistingPrepperEmail(client, email) {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.findOne({ email });
 		if (!document) {
-			client.close();
 			return null;
 		}
 
@@ -146,7 +145,7 @@ export async function findExistingPrepperEmail(client, email) {
 			joined: document?.createdAt?.toString(),
 			lastModified: document?.last_modified?.toString()
 		};
-		client.close();
+
 		return formattedDoc;
 	} catch (err) {
 		client.close();
@@ -159,7 +158,6 @@ export async function findExistingUserEmail(client, email) {
 		const document = await collection.findOne({ email });
 
 		if (!document) {
-			client.close();
 			return null;
 		}
 
@@ -172,7 +170,7 @@ export async function findExistingUserEmail(client, email) {
 			name: `${document.firstName} ${document.lastName}`,
 			joined: document?.createdAt?.toString()
 		};
-		client.close();
+
 		return formattedDoc;
 	} catch (err) {
 		client.close();
@@ -185,7 +183,6 @@ export async function findExistingPrepperWithId(client, id) {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.findOne({ _id: ObjectID(id) });
 		if (!document) {
-			client.close();
 			return null;
 		}
 		console.log(`prepper email found with ID: ${document}:`);
@@ -204,7 +201,7 @@ export async function findExistingPrepperWithId(client, id) {
 			kitchenImgUrl: document?.kitchenImgUrl || '',
 			name: `${document.firstName} ${document.lastName}`
 		};
-		client.close();
+
 		return formattedDoc;
 	} catch (err) {
 		client.close();
@@ -274,7 +271,6 @@ export async function findLocalPreppersWithZipcode(
 			.limit(limit)
 			.toArray();
 		if (!data) {
-			client.close();
 			console.log('no data found with zipcode query');
 			return [];
 		}
@@ -300,7 +296,7 @@ export async function findLocalPreppersWithZipcode(
 				};
 			}
 		);
-		client.close();
+
 		return mappedDoc;
 	} catch (err) {
 		client.close();
@@ -423,7 +419,6 @@ export async function findAllOrdersByUserEmail(client, email) {
 		const collection = await client.db('leftovers').collection('orders');
 		const document = await collection.find({ userEmail: email }).toArray();
 		if (!document) {
-			client.close();
 			return null;
 		}
 		console.log(`Orders found with email: ${document}:`);
@@ -451,7 +446,6 @@ export async function findAllOrdersByPrepperEmail(client, email) {
 		const collection = await client.db('leftovers').collection('orders');
 		const document = await collection.find({ prepperEmail: email }).toArray();
 		if (!document) {
-			client.close();
 			return null;
 		}
 		console.log(`Orders found with email: ${document}:`);

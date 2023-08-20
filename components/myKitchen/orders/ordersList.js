@@ -8,7 +8,7 @@ import { useColors } from '../../../hooks/useColors';
 import { Button } from '@mui/material';
 import UpdateOrderStatusForm from '../../UI/form/mykitchen/updateOrderStatus';
 
-const OrdersList = ({ myOrders, currentUserEmail }) => {
+const OrdersList = ({ myOrders, currentUserEmail, setMsg }) => {
 	const { colors } = useColors();
 
 	console.log('my orders', myOrders);
@@ -102,7 +102,11 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 										</Typography>
 									</Box>
 									{prepperEmail === currentUserEmail && (
-										<UpdateOrderStatusForm />
+										<UpdateOrderStatusForm
+											orderId={id}
+											setMsg={setMsg}
+											prepperEmail={prepperEmail}
+										/>
 									)}
 								</Box>
 								<OrdersListItem items={items} />

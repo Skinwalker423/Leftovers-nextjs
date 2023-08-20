@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
 	Modal,
 	Box,
 	Typography,
 	Button,
-	TextField,
 	CircularProgress,
 	Alert,
 	Select,
@@ -14,9 +13,9 @@ import {
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
-import { updateMealQtyInDb } from '../../../../utils/meals';
+import { updateOrderStatusPost } from '../../../../utils/orders/updateOrderStatus';
 
-const UpdateOrderStatusForm = ({ email, setMsg, orderId, setMealStatus }) => {
+const UpdateOrderStatusForm = ({ orderId, setMsg, prepperEmail }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -50,7 +49,7 @@ const UpdateOrderStatusForm = ({ email, setMsg, orderId, setMealStatus }) => {
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateMealQtyInDb(email, orderId, newQty);
+			const data = await updateOrderStatusPost(orderId, status, prepperEmail);
 			if (data.message) {
 				//setMealStatus
 				setMsg(data.message);

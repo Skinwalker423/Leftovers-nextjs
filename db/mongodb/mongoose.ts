@@ -23,6 +23,7 @@ export const connectToMongoDb = async () => {
 
 export const updateOrderStatusById = async (id: string, status: string) => {
 	try {
+		await connectToMongoDb();
 		const order = await Order.findOneAndUpdate(
 			{
 				id: id
