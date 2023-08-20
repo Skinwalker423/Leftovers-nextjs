@@ -15,16 +15,20 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import { updateOrderStatusPost } from '../../../../utils/orders/updateOrderStatus';
 
-const UpdateOrderStatusForm = ({ orderId, setMsg, prepperEmail }) => {
+const UpdateOrderStatusForm = ({
+	orderId,
+	setMsg,
+	prepperEmail,
+	setStatus
+}) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
-
-	const [status, setStatus] = useState('');
+	const [value, setValue] = useState('');
 
 	const handleChange = (event) => {
-		setStatus(event.target.value);
+		setValue(event.target.value);
 	};
 
 	const style = {
@@ -49,9 +53,9 @@ const UpdateOrderStatusForm = ({ orderId, setMsg, prepperEmail }) => {
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateOrderStatusPost(orderId, status, prepperEmail);
+			const data = await updateOrderStatusPost(orderId, value, prepperEmail);
 			if (data.message) {
-				//setMealStatus
+				setStatus(value);
 				setMsg(data.message);
 				setIsFormLoading(false);
 				setOpen(false);
@@ -104,7 +108,7 @@ const UpdateOrderStatusForm = ({ orderId, setMsg, prepperEmail }) => {
 								<Select
 									labelId="status"
 									id="status"
-									value={status}
+									value={value}
 									label="Status"
 									onChange={handleChange}
 								>
