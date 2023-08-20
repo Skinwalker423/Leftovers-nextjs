@@ -98,11 +98,10 @@ const NavBar = () => {
 							<NavItem title="Preppers" href="/preppers" />
 							{session && <NavItem title="Favs" href="/favorites" />}
 							<NavItem title="About" href="/about" />
-							{session ? (
-								<NavItem title="MyKitchen" href="/myKitchen" />
-							) : (
-								<NavItem title="Register" href="/register" />
-							)}
+
+							<NavItem title="MyKitchen" href="/myKitchen" />
+
+							<NavItem title="Register" href="/register" />
 						</ul>
 					</nav>
 				</Box>
@@ -115,9 +114,9 @@ const NavBar = () => {
 						<Box>
 							<IconButton onClick={handleDarkMode}>
 								{palette.mode === 'light' ? (
-									<DarkModeOutlinedIcon />
+									<DarkModeOutlinedIcon fontSize="large" />
 								) : (
-									<DarkModeIcon />
+									<DarkModeIcon fontSize="large" />
 								)}
 							</IconButton>
 						</Box>
@@ -127,19 +126,33 @@ const NavBar = () => {
 							<Box>
 								<IconButton onClick={handleNotificationButton}>
 									{showNotifictions ? (
-										<NotificationsIcon />
+										<NotificationsIcon fontSize="large" />
 									) : (
-										<NotificationsNoneIcon />
+										<NotificationsNoneIcon fontSize="large" />
 									)}
 								</IconButton>
 							</Box>
 						</Tooltip>
 					)}
 					<Tooltip title="meal cart">
-						<Box>
+						<Box position={'relative'}>
 							<IconButton onClick={toggleDrawer}>
-								<ShoppingCartOutlinedIcon />
+								<ShoppingCartOutlinedIcon fontSize="large" />
 							</IconButton>
+							<Box
+								position={'absolute'}
+								display={'flex'}
+								justifyContent={'center'}
+								alignItems={'center'}
+								bottom={0}
+								left={2}
+								borderRadius={5}
+								backgroundColor={colors.orangeAccent[400]}
+								width={'1.5em'}
+								height={'1.5em'}
+							>
+								<Typography color={colors.primary[900]}>2</Typography>
+							</Box>
 						</Box>
 					</Tooltip>
 					{session && (
@@ -156,8 +169,8 @@ const NavBar = () => {
 									<Image
 										style={{ borderRadius: '50%' }}
 										src={userIcon}
-										width={25}
-										height={25}
+										width={40}
+										height={40}
 										alt="user icon"
 									/>
 								) : (
