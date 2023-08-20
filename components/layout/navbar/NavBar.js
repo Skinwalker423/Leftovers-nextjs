@@ -17,6 +17,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
 import DefaultAvatar from '../../UI/icon/defaultAvatar';
+import { useUserContext } from '../../../hooks/useUserContext';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -28,6 +29,9 @@ const NavBar = () => {
 	const [showUserMenu, setShowUserMenu] = useState();
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+	const { state } = useUserContext();
+
+	const cartItemsLength = state.userCartlist.length;
 
 	const toggleDrawer = (event) => {
 		if (
@@ -139,20 +143,24 @@ const NavBar = () => {
 							<IconButton onClick={toggleDrawer}>
 								<ShoppingCartOutlinedIcon fontSize="large" />
 							</IconButton>
-							<Box
-								position={'absolute'}
-								display={'flex'}
-								justifyContent={'center'}
-								alignItems={'center'}
-								bottom={0}
-								left={2}
-								borderRadius={5}
-								backgroundColor={colors.orangeAccent[400]}
-								width={'1.5em'}
-								height={'1.5em'}
-							>
-								<Typography color={colors.primary[900]}>2</Typography>
-							</Box>
+							{cartItemsLength > 0 && (
+								<Box
+									position={'absolute'}
+									display={'flex'}
+									justifyContent={'center'}
+									alignItems={'center'}
+									bottom={0}
+									left={2}
+									borderRadius={5}
+									backgroundColor={colors.orangeAccent[400]}
+									width={'1.5em'}
+									height={'1.5em'}
+								>
+									<Typography color={colors.primary[900]}>
+										{cartItemsLength}
+									</Typography>
+								</Box>
+							)}
 						</Box>
 					</Tooltip>
 					{session && (
