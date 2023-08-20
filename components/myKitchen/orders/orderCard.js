@@ -16,6 +16,14 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 		day: 'numeric'
 	};
 	const newDate = new Date(created_at).toLocaleDateString(undefined, options);
+
+	let statusColor = colors.orangeAccent[400];
+	if (status === 'fulfilled') {
+		statusColor = colors.greenAccent[400];
+	} else if (status === 'unfulfilled') {
+		statusColor = colors.redAccent[400];
+	}
+
 	return (
 		<Paper
 			sx={{ width: '100%', p: { xs: 3, md: 5 }, maxWidth: '60rem' }}
@@ -62,14 +70,14 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 				alignItems={'center'}
 				p={2}
 				my={5}
-				border={`1px solid ${colors.greenAccent[400]}`}
+				border={`1px solid ${statusColor}`}
 			>
 				<Box display={'flex'} alignItems={'center'} gap={1}>
 					<Typography variant="h3">Status:</Typography>
 					<Typography
 						variant="span"
 						textAlign={'center'}
-						color={colors.greenAccent[400]}
+						color={statusColor}
 						sx={{
 							borderRadius: 5
 						}}
