@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
 import { useColors } from '../../hooks/useColors';
 
-const MyKitchenHeader = () => {
+const MyKitchenHeader = ({ title = 'Title Here' }) => {
 	const { colors } = useColors();
 	return (
 		<Typography
@@ -9,7 +9,7 @@ const MyKitchenHeader = () => {
 			color={colors.gray[900]}
 			variant="h1"
 		>
-			Kitchen Profile
+			{title}
 		</Typography>
 	);
 };

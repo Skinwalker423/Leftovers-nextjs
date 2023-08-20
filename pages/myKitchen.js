@@ -22,6 +22,7 @@ import MealsList from '../components/myKitchen/mealsList';
 import { Stack, colors } from '@mui/material';
 import OrdersList from '../components/myKitchen/orders/ordersList';
 import { useColors } from '../hooks/useColors';
+import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -115,13 +116,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
 				>
-					<Typography
-						sx={{ py: 2, borderBottom: `1px solid ${colors.gray[900]}` }}
-						color={colors.gray[900]}
-						variant="h1"
-					>
-						Kitchen Profile
-					</Typography>
+					<MyKitchenHeader title={'Kitchen Profile'} />
 					<InfoCard title="Kitchen Picture">
 						<Image
 							width={100}
@@ -153,7 +148,15 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				</Box>
 			)}
 			{selected === 'My Meals' && (
-				<Box mx={'1rem'} width={{ xs: '75%', sm: '60%', md: '80%' }}>
+				<Box
+					display="flex"
+					flexDirection={'column'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					mx={'1rem'}
+					width={{ xs: '75%', sm: '60%', md: '80%' }}
+				>
+					<MyKitchenHeader title={'My Meals'} />
 					<InfoCard title="Add Meal">
 						<Typography variant="h4">Add a meal to your Kitchen</Typography>
 						<AddMeal
@@ -195,6 +198,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
 				>
+					<MyKitchenHeader title={'Personal Info'} />
 					<InfoCard title="Avatar">
 						{image ? (
 							<Image
@@ -233,11 +237,19 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				</Box>
 			)}
 			{selected === 'Orders' && (
-				<OrdersList
-					myOrders={myOrders}
-					currentUserEmail={currentUserEmail}
-					setMsg={setMsg}
-				/>
+				<Box
+					width={'100%'}
+					display={'flex'}
+					flexDirection={'column'}
+					alignItems={'center'}
+				>
+					<MyKitchenHeader title={'Orders'} />
+					<OrdersList
+						myOrders={myOrders}
+						currentUserEmail={currentUserEmail}
+						setMsg={setMsg}
+					/>
+				</Box>
 			)}
 
 			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
