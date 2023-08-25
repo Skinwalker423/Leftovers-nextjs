@@ -211,25 +211,29 @@ export default function PrepperCard({
 							onClick={handleDetailsClick}
 							disabled={loading}
 							size="large"
+							fontSize={'small'}
 							color="secondary"
 							sx={{
+								':disabled': {
+									color: colors.primary[100],
+									backgroundColor: colors.gray[500],
+									border: `1px solid ${colors.gray[500]}`
+								},
+
 								width: '7rem',
 								height: '2.5rem',
 								border: `1px solid ${colors.orangeAccent[900]}`,
+								backgroundColor: loading ? colors.gray[500] : '',
 
 								'&:hover': {
-									backgroundColor: colors.orangeAccent[900],
-									color: colors.primary[100]
+									backgroundColor: loading
+										? colors.gray[500]
+										: colors.orangeAccent[900],
+									color: loading ? colors.orangeAccent[900] : 'white'
 								}
 							}}
 						>
-							{loading ? (
-								<CircularProgress color="secondary" size={'2rem'} />
-							) : (
-								<Typography color={'secondary'} fontSize={'small'}>
-									View Details
-								</Typography>
-							)}
+							{loading ? 'loading...' : 'View Details'}
 						</Button>
 					</Link>
 				</CardActions>
