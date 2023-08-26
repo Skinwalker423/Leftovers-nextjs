@@ -4,6 +4,7 @@ import { useColors } from '../../../hooks/useColors';
 import UpdateOrderStatusForm from '../../UI/form/mykitchen/updateOrderStatus';
 import OrderMealItems from './orderMealtems';
 import Link from 'next/link';
+import { formatDateString } from '../../../utils/dates';
 
 const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 	const { colors } = useColors();
@@ -15,7 +16,8 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 		month: 'long',
 		day: 'numeric'
 	};
-	const newDate = new Date(created_at).toLocaleDateString(undefined, options);
+	// const newDate = new Date(created_at).toLocaleDateString(undefined, options);
+	const newDate = formatDateString(created_at);
 
 	let statusColor = colors.orangeAccent[400];
 	if (status === 'fulfilled') {
