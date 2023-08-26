@@ -43,7 +43,6 @@ export default function FoodItemCard({
 
 	const isItemFromDifferentPrepper =
 		state.userCartlist.length > 0 && currentCartItemsPrepper !== prepperEmail;
-	console.log(isItemFromDifferentPrepper);
 
 	const meal = {
 		id,
