@@ -35,4 +35,4 @@ yarn-error.log*
 next-env.d.ts
 
 # todo list
-todo.js
+/todo.js
