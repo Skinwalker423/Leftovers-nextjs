@@ -40,7 +40,6 @@ export default function FoodItemCard({
 
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 	const currentCartItemsPrepper = state?.userCartlist[0]?.prepperEmail;
-	console.log('cartlist in item card', state?.userCartlist[0]?.prepperEmail);
 
 	const isItemFromDifferentPrepper =
 		state.userCartlist.length > 0 && currentCartItemsPrepper !== prepperEmail;
