@@ -10,13 +10,6 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 	const { colors } = useColors();
 	const { id, items, created_at, total, prepperEmail, mealStatus } = order;
 	const [status, setStatus] = useState(mealStatus);
-	const options = {
-		weekday: 'long',
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
-	};
-	// const newDate = new Date(created_at).toLocaleDateString(undefined, options);
 	const newDate = formatDateString(created_at);
 
 	let statusColor = colors.orangeAccent[400];
