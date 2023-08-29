@@ -3,8 +3,6 @@ import FavoriteList from '../components/favorites/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
 import { Alert, Box, Typography } from '@mui/material';
-import styles from '/styles/Home.module.css';
-import Footer from '../components/layout/footer/footer';
 import { UserContext } from '../store/UserContext';
 
 import {

@@ -32,11 +32,7 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 				alignItems={'flex-start'}
 				mb={'2rem'}
 			>
-				<Box
-					display={'flex'}
-					// flexDirection={{ xs: 'column', sm: 'row' }}
-					gap={{ xs: 2, sm: 5 }}
-				>
+				<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
 					<Box>
 						<Typography variant="h3">Date</Typography>
 						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
