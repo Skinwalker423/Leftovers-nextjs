@@ -91,9 +91,12 @@ export const UserProvider = ({ children }) => {
 	const [value, setValue] = useLocalStorage('cartlist', state.userCartlist);
 
 	useEffect(() => {
+		
 		if (state.userCartlist) {
 			calculateTotalPrice();
 			setValue([...state.userCartlist]);
+		} else {
+			setValue('')
 		}
 	}, [state.userCartlist.length]);
 

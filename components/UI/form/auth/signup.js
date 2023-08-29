@@ -23,7 +23,6 @@ const SignUpForm = ({ title }) => {
 
 	const handleSignUpFormSubmit = async (e) => {
 		e.preventDefault();
-		console.log('registration pending');
 		setLoading(true);
 		setErrorMsg('');
 		setMsg('');

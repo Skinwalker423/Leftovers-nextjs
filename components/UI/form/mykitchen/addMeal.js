@@ -59,7 +59,6 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	};
 
 	const handleFileChange = (e) => {
-		console.log(e.target.files[0]);
 		setImageFile(e.target.files[0]);
 	};
 

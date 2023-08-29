@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import OrderMealCard from './orderMealCard';
 
 const OrderMealItems = ({ items }) => {
-	console.log('items', items);
 	return (
 		<Box display={'flex'} flexDirection={'column'} gap={5}>
 			{items.length &&
