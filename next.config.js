@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	experimental: {
+		esmExternals: false // THIS IS THE FLAG THAT MATTERS
+	},
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
@@ -7,9 +10,9 @@ const nextConfig = {
 			'img.icons8.com',
 			'images.unsplash.com',
 			'lh3.googleusercontent.com',
-			'i.pravatar.cc',
-		],
-	},
+			'i.pravatar.cc'
+		]
+	}
 };
 
 module.exports = nextConfig;
