@@ -20,11 +20,12 @@ import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
+import { useSession } from 'next-auth/react';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
 	description = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica',
-	image = '/images/cooking/defaultMeal.jpg',
+	image,
 	price,
 	id,
 	qty = 1,
@@ -37,6 +38,8 @@ export default function FoodItemCard({
 	const [loading, setLoading] = useState(false);
 	const { incrementFoodItem, state } = useContext(UserContext);
 	const { colors } = useColors();
+
+	const { data: session } = useSession();
 
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 	const currentCartItemsPrepper = state?.userCartlist[0]?.prepperEmail;
@@ -167,15 +170,17 @@ export default function FoodItemCard({
 							pb: '.5em'
 						}}
 					>
-						<Tooltip title="Like this meal">
-							<IconButton onClick={handleFavorite} size="small">
-								{favorited ? (
-									<FavoriteIcon color="error" />
-								) : (
-									<FavoriteBorderOutlinedIcon />
-								)}
-							</IconButton>
-						</Tooltip>
+						{session && (
+							<Tooltip title="Like this meal">
+								<IconButton onClick={handleFavorite} size="small">
+									{favorited ? (
+										<FavoriteIcon color="error" />
+									) : (
+										<FavoriteBorderOutlinedIcon />
+									)}
+								</IconButton>
+							</Tooltip>
+						)}
 						{prepperId && (
 							<Link
 								style={{ textDecoration: 'none' }}
