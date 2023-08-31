@@ -61,19 +61,6 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		setCost(e.target.value);
 	};
 
-	const handleFileChange = (e) => {
-		const fileReader = new FileReader();
-		if (e.target.files?.length) {
-			const file = e.target.files[0];
-			console.log('file change', file);
-			if (!file.type.includes('image')) return;
-
-			setFiles(Array.from(e.target.files));
-
-			fileReader.readAsDataURL(file);
-		}
-	};
-
 	const handleAddMealForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
