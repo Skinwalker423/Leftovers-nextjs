@@ -64,9 +64,9 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	const handleAddMealForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-		console.log('file after submit', files);
-		const finalImgUrl = files[0].fileUrl;
-		console.log('final image url', finalImgUrl);
+		// console.log('file after submit', files);
+		// const finalImgUrl = files[0].fileUrl;
+		// console.log('final image url', finalImgUrl);
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
 
@@ -74,7 +74,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
-			image: finalImgUrl || null,
+			image: null,
 			qty: parseInt(qtyRef.current.value)
 		};
 
@@ -174,38 +174,6 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 									</FormControl>
 								</Box>
 							</Box>
-							<Box
-								display={'flex'}
-								justifyContent={'center'}
-								alignItems={'flex-start'}
-								gap={5}
-							>
-								<Typography fontWeight={'bold'}>
-									Upload a pic of your meal
-								</Typography>
-								<UploadButton
-									endpoint="imageUploader"
-									onClientUploadComplete={(res) => {
-										// Do something with the response
-										console.log('Files: ', res);
-										setFiles(res);
-									}}
-									onUploadError={(error) => {
-										// Do something with the error.
-										alert(`ERROR! ${error.message}`);
-									}}
-								/>
-							</Box>
-							{/* <Button variant="contained" color="secondary" component="label">
-								Upload Pic of Meal
-								<input
-									accept="image/*"
-									ref={imageRef}
-									onChange={handleFileChange}
-									type="file"
-									hidden
-								/>
-							</Button> */}
 							<Box>
 								<TextField
 									minRows={3}
