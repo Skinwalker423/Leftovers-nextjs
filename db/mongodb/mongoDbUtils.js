@@ -367,6 +367,27 @@ export async function updateKitchenDescription(client, userEmail, description) {
 	}
 }
 
+export async function updateKitchenImage(client, userEmail, kitchenImgUrl) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail
+			},
+			{ $set: { kitchenImgUrl, last_modified: new Date() } }
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('updated kitchen image', document);
+		return document;
+	} catch (err) {
+		console.error('problem updating kitchen image', err);
+		return;
+	}
+}
+
 export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
