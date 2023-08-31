@@ -19,16 +19,12 @@ import {
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { Stack, colors } from '@mui/material';
+import { Stack } from '@mui/material';
 import OrdersList from '../components/myKitchen/orders/ordersList';
 import { useColors } from '../hooks/useColors';
 import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
-import {
-	UploadButton,
-	UploadDropzone,
-	Uploader
-} from '../utils/uploadThing.ts';
 import '@uploadthing/react/styles.css';
+import { UploadButton } from '../utils/uploadthing';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -182,8 +178,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					</InfoCard>
 					<InfoCard title="Remove/Edit Meals">
 						<Typography variant="h4">
-							Use this to adjust meal status such as sold out, quantity, and
-							remove a meal
+							Use this to adjust meal details such as if it's sold out, quantity
+							on hand, meal image, and remove a meal
 						</Typography>
 						<Button
 							onClick={handleShowMealBtn}
