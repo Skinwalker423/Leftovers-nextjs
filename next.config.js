@@ -10,7 +10,8 @@ const nextConfig = {
 			'img.icons8.com',
 			'images.unsplash.com',
 			'lh3.googleusercontent.com',
-			'i.pravatar.cc'
+			'i.pravatar.cc',
+			'uploadthing.com'
 		]
 	}
 };

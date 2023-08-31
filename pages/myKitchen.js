@@ -25,6 +25,7 @@ import { useColors } from '../hooks/useColors';
 import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
 import '@uploadthing/react/styles.css';
 import { UploadButton } from '../utils/uploadthing';
+import { updateKitchenImageDb } from '../utils/myKitchen/updateKitchenImage';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -78,6 +79,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
+	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
 	const { colors } = useColors();
 
 	const currentUserEmail = userData?.email;
@@ -121,17 +123,34 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					<MyKitchenHeader title={'Kitchen Profile'} />
 					<InfoCard title="Kitchen Picture">
 						<Image
-							width={100}
-							height={100}
-							src={prepper.kitchenImgUrl || '/kitchen2.jpg'}
+							width={150}
+							height={150}
+							src={kitchenImage || '/kitchen2.jpg'}
 							alt={`The kitchen of ${prepper.kitchenTitle}`}
 						/>
 						<UploadButton
 							endpoint="imageUploader"
-							onClientUploadComplete={(res) => {
+							onClientUploadComplete={async (res) => {
 								// Do something with the response
-								console.log('Files: ', res);
-								alert('Upload Completed');
+								const imgUrl = res[0].url;
+								setKitchenImage(imgUrl);
+								try {
+									const data = await updateKitchenImageDb(
+										prepper.email,
+										imgUrl
+									);
+									if (data.message) {
+										setMsg(data.message);
+									}
+								} catch (err) {
+									console.error('problem updating qty', err);
+
+									setError(err);
+								}
+								setTimeout(() => {
+									setMsg('');
+									setError('');
+								}, 3000);
 							}}
 							onUploadError={(error) => {
 								// Do something with the error.
