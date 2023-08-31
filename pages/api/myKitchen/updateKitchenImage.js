@@ -1,4 +1,5 @@
 import { connectMongoDb } from '../../../db/mongodb/mongoDbUtils';
+import { updateKitchenImgUrl } from '../../../db/mongodb/mongoDbUtils';
 
 const updateKitchenImage = async (req, res) => {
 	if (req.method !== 'PATCH') {
@@ -6,16 +7,10 @@ const updateKitchenImage = async (req, res) => {
 	}
 	const body = req.body;
 	console.log(body);
-	const { kitchenTitle, email } = body;
+	const { kitchenImgUrl, email } = body;
 
-	if (!kitchenTitle || kitchenTitle.trim() === '') {
+	if (!kitchenImgUrl || kitchenImgUrl.trim() === '') {
 		return res.status(400).json({ error: 'no title entered' });
-	}
-
-	if (kitchenTitle.length > 50) {
-		return res
-			.status(400)
-			.json({ error: 'The title is too long. 50 max characters' });
 	}
 
 	if (!email) {
@@ -24,19 +19,19 @@ const updateKitchenImage = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await updateKitchenTitle(client, email, kitchenTitle);
+		const document = await updateKitchenImgUrl(client, email, kitchenImgUrl);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
-			res.status(500).json({ error: 'could not update kitchen title' });
+			res.status(500).json({ error: 'could not update kitchen image' });
 			return;
 		}
 		client.close();
-		res.status(200).json({ message: 'Successfully updated kitchen title' });
+		res.status(200).json({ message: 'Successfully updated kitchen image' });
 		return;
 	} catch (err) {
 		console.log('error:', err);
-		res.status(500).json({ error: 'problem updating title in db', err });
+		res.status(500).json({ error: 'problem updating image in db', err });
 	}
 };
 

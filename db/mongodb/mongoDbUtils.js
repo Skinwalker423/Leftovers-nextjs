@@ -367,7 +367,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 	}
 }
 
-export async function updateKitchenImage(client, userEmail, kitchenImgUrl) {
+export async function updateKitchenImgUrl(client, userEmail, kitchenImgUrl) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
