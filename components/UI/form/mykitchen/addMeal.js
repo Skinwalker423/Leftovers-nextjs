@@ -21,7 +21,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
-	const [imageFile, setImageFile] = useState(null);
+	const [imageFile, setImageFile] = useState([]);
 	const [error, setError] = useState('');
 	const [cost, setCost] = useState(0);
 	const { colors } = useColors();
@@ -158,7 +158,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 								</Box>
 								<Box width={{ xs: '100%', md: '45%' }}>
 									<FormControl fullWidth>
-										<InputLabel id="price">Price</InputLabel>
+										<InputLabel id="price">Value/Price</InputLabel>
 										<Select
 											labelId="price"
 											id="price"
