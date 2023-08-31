@@ -282,9 +282,10 @@ export async function findLocalPreppersWithZipcode(
 				email,
 				description,
 				kitchenTitle,
-				kitchenImgUrl = '',
+				kitchenImgUrl,
 				meals
 			}) => {
+				console.log('kicthem img url', kitchenImgUrl);
 				return {
 					name: `${firstName} ${lastName}`,
 					email,
