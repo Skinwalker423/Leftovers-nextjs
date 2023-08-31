@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import '@uploadthing/react/styles.css';
 import {
 	Modal,
 	Box,
@@ -13,6 +14,8 @@ import {
 	Alert
 } from '@mui/material';
 
+import { UploadButton } from '../../../../utils/uploadthing.ts';
+
 import { useColors } from '../../../../hooks/useColors';
 import { addMeal } from '../../../../utils/meals';
 
@@ -21,7 +24,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
-	const [imageFile, setImageFile] = useState([]);
+	const [files, setFiles] = useState([]);
 	const [error, setError] = useState('');
 	const [cost, setCost] = useState(0);
 	const { colors } = useColors();
@@ -59,21 +62,32 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 	};
 
 	const handleFileChange = (e) => {
-		setImageFile(e.target.files[0]);
+		const fileReader = new FileReader();
+		if (e.target.files?.length) {
+			const file = e.target.files[0];
+			console.log('file change', file);
+			if (!file.type.includes('image')) return;
+
+			setFiles(Array.from(e.target.files));
+
+			fileReader.readAsDataURL(file);
+		}
 	};
 
 	const handleAddMealForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
+		console.log('file after submit', files);
+		const finalImgUrl = files[0].fileUrl;
+		console.log('final image url', finalImgUrl);
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
-		const imgUrl = null;
 
 		const mealDetails = {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
-			image: imgUrl || null,
+			image: finalImgUrl || null,
 			qty: parseInt(qtyRef.current.value)
 		};
 
@@ -173,10 +187,38 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 									</FormControl>
 								</Box>
 							</Box>
-							<Button variant="contained" color="secondary" component="label">
+							<Box
+								display={'flex'}
+								justifyContent={'center'}
+								alignItems={'flex-start'}
+								gap={5}
+							>
+								<Typography fontWeight={'bold'}>
+									Upload a pic of your meal
+								</Typography>
+								<UploadButton
+									endpoint="imageUploader"
+									onClientUploadComplete={(res) => {
+										// Do something with the response
+										console.log('Files: ', res);
+										setFiles(res);
+									}}
+									onUploadError={(error) => {
+										// Do something with the error.
+										alert(`ERROR! ${error.message}`);
+									}}
+								/>
+							</Box>
+							{/* <Button variant="contained" color="secondary" component="label">
 								Upload Pic of Meal
-								<input onChange={handleFileChange} type="file" hidden />
-							</Button>
+								<input
+									accept="image/*"
+									ref={imageRef}
+									onChange={handleFileChange}
+									type="file"
+									hidden
+								/>
+							</Button> */}
 							<Box>
 								<TextField
 									minRows={3}
