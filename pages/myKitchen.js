@@ -23,6 +23,12 @@ import { Stack, colors } from '@mui/material';
 import OrdersList from '../components/myKitchen/orders/ordersList';
 import { useColors } from '../hooks/useColors';
 import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
+import {
+	UploadButton,
+	UploadDropzone,
+	Uploader
+} from '../utils/uploadThing.ts';
+import '@uploadthing/react/styles.css';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -124,9 +130,18 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							src={prepper.kitchenImgUrl || '/kitchen2.jpg'}
 							alt={`The kitchen of ${prepper.kitchenTitle}`}
 						/>
-						<Button color="warning" variant="outlined">
-							Edit Picture
-						</Button>
+						<UploadButton
+							endpoint="imageUploader"
+							onClientUploadComplete={(res) => {
+								// Do something with the response
+								console.log('Files: ', res);
+								alert('Upload Completed');
+							}}
+							onUploadError={(error) => {
+								// Do something with the error.
+								alert(`ERROR! ${error.message}`);
+							}}
+						/>
 					</InfoCard>
 
 					<InfoCard title="Kitchen Name">
