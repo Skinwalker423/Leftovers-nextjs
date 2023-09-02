@@ -368,6 +368,30 @@ export async function updateKitchenDescription(client, userEmail, description) {
 	}
 }
 
+export async function addKitchenImgUrl(client, userEmail, kitchenImgUrl) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail
+			},
+			{
+				$set: { kitchenImgUrl, last_modified: new Date() },
+				$push: { savedKitchenImages: kitchenImgUrl }
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('added kitchen image', document);
+		return document;
+	} catch (err) {
+		console.error('problem adding kitchen image', err);
+		return;
+	}
+}
+
 export async function updateKitchenImgUrl(client, userEmail, kitchenImgUrl) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
@@ -375,7 +399,9 @@ export async function updateKitchenImgUrl(client, userEmail, kitchenImgUrl) {
 			{
 				email: userEmail
 			},
-			{ $set: { kitchenImgUrl, last_modified: new Date() } }
+			{
+				$set: { kitchenImgUrl, last_modified: new Date() }
+			}
 		);
 
 		if (!document) {

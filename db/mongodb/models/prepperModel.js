@@ -66,6 +66,9 @@ const PrepperSchema = new mongoose.Schema({
 	},
 	kitchenImgUrl: String,
 	profileImgUrl: String,
+	savedKitchenImages: [],
+	savedProfileImages: [],
+
 	createdAt: {
 		type: Date,
 		default: Date.now()

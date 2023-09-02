@@ -1,5 +1,7 @@
-import { connectMongoDb } from '../../../db/mongodb/mongoDbUtils';
-import { updateKitchenImgUrl } from '../../../db/mongodb/mongoDbUtils';
+import {
+	addKitchenImgUrl,
+	connectMongoDb
+} from '../../../db/mongodb/mongoDbUtils';
 
 const updateKitchenImage = async (req, res) => {
 	if (req.method !== 'PATCH') {
@@ -19,7 +21,7 @@ const updateKitchenImage = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await updateKitchenImgUrl(client, email, kitchenImgUrl);
+		const document = await addKitchenImgUrl(client, email, kitchenImgUrl);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
