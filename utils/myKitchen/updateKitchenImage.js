@@ -1,7 +1,8 @@
-export async function updateKitchenImageDb(email, kitchenImgUrl) {
+export async function updateKitchenImageDb(email, kitchenImgUrl, type) {
 	const formBody = {
 		kitchenImgUrl,
-		email
+		email,
+		type
 	};
 
 	const response = await fetch('/api/myKitchen/updateKitchenImage', {

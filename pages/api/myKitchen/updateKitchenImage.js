@@ -21,7 +21,12 @@ const updateKitchenImage = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await addKitchenImgUrl(client, email, kitchenImgUrl);
+		const document = await addKitchenImgUrl(
+			client,
+			email,
+			kitchenImgUrl,
+			'add'
+		);
 
 		if (!document || !document.modifiedCount) {
 			client.close();

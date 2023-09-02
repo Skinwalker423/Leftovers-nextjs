@@ -147,7 +147,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									try {
 										const data = await updateKitchenImageDb(
 											prepper.email,
-											imgUrl
+											imgUrl,
+											'add'
 										);
 										if (data.message) {
 											setMsg(data.message);

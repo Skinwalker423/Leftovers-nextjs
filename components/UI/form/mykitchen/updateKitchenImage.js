@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateKitchenImageDb } from '../../../../utils/myKitchen/updateKitchenImage';
 import {
 	Modal,
 	Box,
@@ -10,7 +11,7 @@ import {
 
 import { useColors } from '../../../../hooks/useColors';
 
-const UpdateKitchenImage = ({ email, setMsg, currentImg }) => {
+const UpdateKitchenImage = ({ email, setMsg, currentImg, savedImages }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [selectedImg, setSelectedImg] = useState(currentImg);
@@ -39,7 +40,7 @@ const UpdateKitchenImage = ({ email, setMsg, currentImg }) => {
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateDescriptionDb(email, inputRef.current.value);
+			const data = await updateKitchenImageDb(email, selectedImg, 'update');
 			if (data.message) {
 				setMsg(data.message);
 				setIsFormLoading(false);
