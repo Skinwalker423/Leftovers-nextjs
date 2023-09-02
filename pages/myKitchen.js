@@ -26,6 +26,7 @@ import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
 import '@uploadthing/react/styles.css';
 import { UploadButton } from '../utils/uploadthing';
 import { updateKitchenImageDb } from '../utils/myKitchen/updateKitchenImage';
+import UpdateKitchenImage from '../components/UI/form/mykitchen/updateKitchenImage';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -134,9 +135,13 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							alignItems={'center'}
 							width={'50%'}
 						>
-							<Button color="secondary" size="large" variant="outlined">
-								Select from your avatars
-							</Button>
+							<UpdateKitchenImage
+								email={prepper.email}
+								setMsg={setMsg}
+								currentImg={kitchenImage}
+								savedImages={prepper.savedKitchenImages}
+								setKitchenImage={setKitchenImage}
+							/>
 							<Typography>Or</Typography>
 							<UploadButton
 								endpoint="imageUploader"

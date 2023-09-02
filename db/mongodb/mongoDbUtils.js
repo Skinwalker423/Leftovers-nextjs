@@ -143,7 +143,10 @@ export async function findExistingPrepperEmail(client, email) {
 			kitchenImgUrl: document?.kitchenImgUrl || '',
 			name: `${document.firstName} ${document.lastName}`,
 			joined: document?.createdAt?.toString(),
-			lastModified: document?.last_modified?.toString()
+			lastModified: document?.last_modified?.toString(),
+			savedKitchenImages: document.savedKitchenImages,
+			savedProfileImages: document.savedProfileImages,
+			profileImgUrl: document?.profileImgUrl
 		};
 
 		return formattedDoc;
@@ -199,7 +202,12 @@ export async function findExistingPrepperWithId(client, id) {
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
 			kitchenImgUrl: document?.kitchenImgUrl || '',
-			name: `${document.firstName} ${document.lastName}`
+			name: `${document.firstName} ${document.lastName}`,
+			joined: document?.createdAt?.toString(),
+			lastModified: document?.last_modified?.toString(),
+			savedKitchenImages: document.savedKitchenImages,
+			savedProfileImages: document.savedProfileImages,
+			profileImgUrl: document?.profileImgUrl
 		};
 
 		return formattedDoc;
@@ -283,7 +291,10 @@ export async function findLocalPreppersWithZipcode(
 				description,
 				kitchenTitle,
 				kitchenImgUrl,
-				meals
+				meals,
+				profileImgUrl,
+				savedProfileImages,
+				savedKitchenImages
 			}) => {
 				console.log('kicthem img url', kitchenImgUrl);
 				return {
@@ -293,7 +304,10 @@ export async function findLocalPreppersWithZipcode(
 					description,
 					kitchenTitle,
 					kitchenImgUrl,
-					meals
+					meals,
+					profileImgUrl,
+					savedProfileImages,
+					savedKitchenImages
 				};
 			}
 		);
@@ -369,6 +383,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 }
 
 export async function addKitchenImgUrl(client, userEmail, kitchenImgUrl, type) {
+	console.log('type of action', type);
 	const add = {
 		$set: { kitchenImgUrl, last_modified: new Date() },
 		$push: { savedKitchenImages: kitchenImgUrl }

@@ -9,7 +9,7 @@ const updateKitchenImage = async (req, res) => {
 	}
 	const body = req.body;
 	console.log(body);
-	const { kitchenImgUrl, email } = body;
+	const { kitchenImgUrl, email, type } = body;
 
 	if (!kitchenImgUrl || kitchenImgUrl.trim() === '') {
 		return res.status(400).json({ error: 'no title entered' });
@@ -21,12 +21,7 @@ const updateKitchenImage = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await addKitchenImgUrl(
-			client,
-			email,
-			kitchenImgUrl,
-			'add'
-		);
+		const document = await addKitchenImgUrl(client, email, kitchenImgUrl, type);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
