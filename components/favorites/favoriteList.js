@@ -31,7 +31,7 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 						key={prepper.id}
 						isFavorited={true}
 						name={prepper.name}
-						avatar={avatar}
+						avatar={prepper.profileImgUrl || avatar}
 						id={prepper.id}
 						userEmail={userEmail}
 						description={prepper.description}

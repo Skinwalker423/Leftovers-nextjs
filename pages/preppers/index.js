@@ -107,7 +107,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 									name={prepper.kitchenTitle}
 									email={prepper.email}
 									subTitle={prepper.name}
-									avatar={avatar}
+									avatar={prepper.profileImgUrl || avatar}
 									kitchenImgUrl={prepper.kitchenImgUrl}
 									id={prepper.id}
 									userEmail={userEmail ? userEmail : ''}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Paper, Alert, Divider } from '@mui/material';
+import { Box, Typography, Alert, Divider } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
 import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
@@ -13,7 +13,6 @@ import {
 
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import TrophyLikesButton from '../../components/likes/trophyLikesButton';
-import useTheme from '@mui/material';
 import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {

@@ -1,3 +1,4 @@
+//handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment
 //style confirmation page

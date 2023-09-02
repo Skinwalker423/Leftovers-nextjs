@@ -9,7 +9,14 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
 	const preppers = state.localPreppers.map(
-		({ id, description, kitchenTitle, email, kitchenImgUrl }) => {
+		({
+			id,
+			description,
+			kitchenTitle,
+			email,
+			kitchenImgUrl,
+			profileImgUrl
+		}) => {
 			const favorited =
 				state.favorites && favoritesPrepId.includes(id) ? true : false;
 
@@ -19,7 +26,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 					<PrepperCard
 						isFavorited={favorited}
 						name={kitchenTitle}
-						avatar={avatar}
+						avatar={profileImgUrl || avatar}
 						id={id}
 						key={id}
 						description={description}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { mockDataContacts } from '../../db/mockData';
 
 async function getFavoritePreppers(req, res) {
