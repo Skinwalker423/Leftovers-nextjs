@@ -128,35 +128,46 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							src={kitchenImage || '/kitchen2.jpg'}
 							alt={`The kitchen of ${prepper.kitchenTitle}`}
 						/>
-						<UploadButton
-							endpoint="imageUploader"
-							onClientUploadComplete={async (res) => {
-								// Do something with the response
-								const imgUrl = res[0].url;
-								setKitchenImage(imgUrl);
-								try {
-									const data = await updateKitchenImageDb(
-										prepper.email,
-										imgUrl
-									);
-									if (data.message) {
-										setMsg(data.message);
-									}
-								} catch (err) {
-									console.error('problem updating qty', err);
+						<Box
+							display={'flex'}
+							justifyContent={'space-evenly'}
+							alignItems={'center'}
+							width={'50%'}
+						>
+							<Button color="secondary" size="large" variant="outlined">
+								Select from your avatars
+							</Button>
+							<Typography>Or</Typography>
+							<UploadButton
+								endpoint="imageUploader"
+								onClientUploadComplete={async (res) => {
+									// Do something with the response
+									const imgUrl = res[0].url;
+									setKitchenImage(imgUrl);
+									try {
+										const data = await updateKitchenImageDb(
+											prepper.email,
+											imgUrl
+										);
+										if (data.message) {
+											setMsg(data.message);
+										}
+									} catch (err) {
+										console.error('problem updating qty', err);
 
-									setError(err);
-								}
-								setTimeout(() => {
-									setMsg('');
-									setError('');
-								}, 3000);
-							}}
-							onUploadError={(error) => {
-								// Do something with the error.
-								alert(`ERROR! ${error.message}`);
-							}}
-						/>
+										setError(err);
+									}
+									setTimeout(() => {
+										setMsg('');
+										setError('');
+									}, 3000);
+								}}
+								onUploadError={(error) => {
+									// Do something with the error.
+									alert(`ERROR! ${error.message}`);
+								}}
+							/>
+						</Box>
 					</InfoCard>
 
 					<InfoCard title="Kitchen Name">
