@@ -10,10 +10,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import CountertopsIcon from '@mui/icons-material/Countertops';
@@ -48,7 +44,8 @@ const menuListItems = [
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
 	width: drawerWidth,
-	top: '6em',
+	top: '5em',
+
 	transition: theme.transitions.create('width', {
 		easing: theme.transitions.easing.sharp,
 		duration: theme.transitions.duration.enteringScreen
@@ -62,7 +59,7 @@ const closedMixin = (theme) => ({
 		duration: theme.transitions.duration.leavingScreen
 	}),
 	overflowX: 'hidden',
-	top: '6em',
+	top: '5em',
 	width: `calc(${theme.spacing(7)} + 1px)`,
 	[theme.breakpoints.up('sm')]: {
 		width: `calc(${theme.spacing(8)} + 1px)`
@@ -100,6 +97,7 @@ const Drawer = styled(MuiDrawer, {
 export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
+	const xSmall = useMediaQuery(theme.breakpoints.only('xs'));
 
 	const [open, setOpen] = useState(true);
 
@@ -117,16 +115,32 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 		}
 	}, [matches]);
 
+	if (xSmall) {
+		return (
+			<Box
+				sx={{ backgroundColor: 'blue' }}
+				width={'100%'}
+				height={'7rem'}
+				display={'flex'}
+				position={'fixed'}
+				bottom={0}
+			>
+				test
+			</Box>
+		);
+	}
+
 	return (
-		<Box position={'relative'} zIndex={98}>
+		<Box zIndex={98}>
 			<Drawer
-				sx={{
-					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
-						top: '5em'
-					}
-				}}
+				// sx={{
+				// 	'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
+				// 		top: '5em'
+				// 	}
+				// }}
 				variant="permanent"
 				open={open}
+				anchor="bottom"
 			>
 				<DrawerHeader>
 					{open ? (

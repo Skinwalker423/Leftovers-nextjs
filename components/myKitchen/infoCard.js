@@ -6,7 +6,7 @@ const InfoCard = ({ children, title = 'Title' }) => {
 		<Paper
 			sx={{
 				my: '2rem ',
-				ml: '2rem',
+				ml: { xs: 0, sm: '2rem' },
 				height: '100%',
 				width: { xs: '100%', md: '80%', lg: '70%' },
 				p: 2

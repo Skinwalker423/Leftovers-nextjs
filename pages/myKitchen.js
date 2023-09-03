@@ -118,8 +118,9 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					flexDirection={'column'}
 					justifyContent={'center'}
 					alignItems={'center'}
-					ml={'1.5rem'}
-					width={{ xs: '80%', sm: '60%', md: '80%' }}
+					ml={{ xs: 0, sm: '1.5rem' }}
+					mb={'7rem'}
+					width={{ xs: '90%', sm: '60%', md: '80%' }}
 				>
 					<MyKitchenHeader title={'Kitchen Profile'} />
 					<InfoCard title="Kitchen Picture">
