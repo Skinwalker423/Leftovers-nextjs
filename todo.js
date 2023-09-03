@@ -1,9 +1,7 @@
-//responsive design for update image list
 //handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment
 //style confirmation page
-//orders in myKitchen
 //order pagination or overflow
 //pagination for front page lists
 //continue pagination. "load more preppers"
