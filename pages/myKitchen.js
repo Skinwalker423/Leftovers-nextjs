@@ -19,7 +19,7 @@ import {
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { Stack } from '@mui/material';
+import { Stack, useMediaQuery, useTheme } from '@mui/material';
 import OrdersList from '../components/myKitchen/orders/ordersList';
 import { useColors } from '../hooks/useColors';
 import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
@@ -82,6 +82,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [myOrders, setMyOrders] = useState(orders);
 	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
 	const { colors } = useColors();
+	const theme = useTheme();
+	const xSmall = useMediaQuery(theme.breakpoints.down('xs'));
 
 	const currentUserEmail = userData?.email;
 
@@ -111,7 +113,21 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				/>
 			</Head>
 
-			<ResponsiveDrawer selected={selected} setSelected={setSelected} />
+			{xSmall ? (
+				<Box
+					sx={{ backgroundColor: 'blue' }}
+					width={'100%'}
+					height={'7rem'}
+					display={'flex'}
+					position={'fixed'}
+					bottom={0}
+					zIndex={200}
+				>
+					test
+				</Box>
+			) : (
+				<ResponsiveDrawer selected={selected} setSelected={setSelected} />
+			)}
 			{selected === 'Kitchen profile' && (
 				<Box
 					display="flex"
