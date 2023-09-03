@@ -10,36 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import CountertopsIcon from '@mui/icons-material/Countertops';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import Tooltip from '@mui/material/Tooltip';
-import SideBarMenuItem from './SideBarMenuItem';
 
-const menuListItems = [
-	{
-		name: 'Kitchen profile',
-		image: <CountertopsIcon />
-	},
-	{
-		name: 'My Meals',
-		image: <RestaurantIcon />
-	},
-	{
-		name: 'Personal Info',
-		image: <PermIdentityIcon />
-	},
-	{
-		name: 'Orders',
-		image: <InboxIcon />
-	},
-	{
-		name: 'Messages',
-		image: <MailIcon />
-	}
-];
+import SideBarMenuItem from './SideBarMenuItem';
+import { menuListItems } from '../../../constants';
 
 const drawerWidth = 240;
 const openedMixin = (theme) => ({
@@ -97,7 +70,6 @@ const Drawer = styled(MuiDrawer, {
 export default function ResponsiveDrawer({ setSelected, selected }) {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('md'));
-	const xSmall = useMediaQuery(theme.breakpoints.only('xs'));
 
 	const [open, setOpen] = useState(true);
 
@@ -115,29 +87,14 @@ export default function ResponsiveDrawer({ setSelected, selected }) {
 		}
 	}, [matches]);
 
-	if (xSmall) {
-		return (
-			<Box
-				sx={{ backgroundColor: 'blue' }}
-				width={'100%'}
-				height={'7rem'}
-				display={'flex'}
-				position={'fixed'}
-				bottom={0}
-			>
-				test
-			</Box>
-		);
-	}
-
 	return (
 		<Box zIndex={98}>
 			<Drawer
-				// sx={{
-				// 	'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
-				// 		top: '5em'
-				// 	}
-				// }}
+				sx={{
+					'& .css-12i7wg6-MuiPaper-root-MuiDrawer-paper': {
+						top: '5em'
+					}
+				}}
 				variant="permanent"
 				open={open}
 				anchor="bottom"
