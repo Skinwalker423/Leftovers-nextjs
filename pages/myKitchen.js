@@ -121,7 +121,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					display={'flex'}
 					position={'fixed'}
 					bottom={0}
-					zIndex={200}
+					zIndex={99}
 				>
 					test
 				</Box>

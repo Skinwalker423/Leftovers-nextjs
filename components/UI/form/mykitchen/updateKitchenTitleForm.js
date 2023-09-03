@@ -6,7 +6,7 @@ import {
 	Button,
 	TextField,
 	CircularProgress,
-	Alert,
+	Alert
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
@@ -17,7 +17,7 @@ const UpdateKitchenForm = ({
 	email,
 	setMsg,
 	oldKitchenTitle,
-	oldDescription,
+	oldDescription
 }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
@@ -39,7 +39,7 @@ const UpdateKitchenForm = ({
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
 		boxShadow: 24,
-		p: 4,
+		p: 4
 	};
 
 	const handleOpen = () => setOpen(true);
@@ -91,10 +91,12 @@ const UpdateKitchenForm = ({
 	return (
 		<div>
 			<Button
-				size='small'
-				variant='outlined'
-				color='warning'
-				onClick={handleOpen}>
+				size="small"
+				variant="outlined"
+				sx={{ zIndex: 50 }}
+				color="warning"
+				onClick={handleOpen}
+			>
 				Update {oldKitchenTitle ? 'Title' : 'Description'}
 			</Button>
 			<Modal
@@ -105,48 +107,52 @@ const UpdateKitchenForm = ({
 				}-form`}
 				aria-describedby={`update existing kitchen ${
 					oldKitchenTitle ? 'title' : 'description'
-				}-form`}>
+				}-form`}
+			>
 				<Box sx={style}>
 					<form
 						onSubmit={
 							oldKitchenTitle
 								? handleTitleSubmitForm
 								: handleDescriptionSubmitForm
-						}>
-						<Typography textAlign={'center'} variant='h3'>
+						}
+					>
+						<Typography textAlign={'center'} variant="h3">
 							New Kicthen {oldKitchenTitle ? 'Title' : 'Description'}
 						</Typography>
 						<Box
 							display={'flex'}
-							flexDirection='column'
-							alignItems='space-between'
+							flexDirection="column"
+							alignItems="space-between"
 							justifyContent={'space-between'}
-							gap='2em'
-							px='5em'
-							width='100%'
-							mt='1em'>
+							gap="2em"
+							px="5em"
+							width="100%"
+							mt="1em"
+						>
 							<Box width={'100%'}>
 								<TextField
-									id='kitchenTitle'
-									type='text'
-									label='Kicthen Title'
+									id="kitchenTitle"
+									type="text"
+									label="Kicthen Title"
 									required
 									defaultValue={oldInputValue}
 									placeholder={oldInputValue}
-									color='secondary'
+									color="secondary"
 									fullWidth
 									inputRef={inputRef}
 								/>
 							</Box>
 
 							<Button
-								variant='contained'
+								variant="contained"
 								fullWidth
 								disabled={isFormLoading}
-								color='success'
-								type='submit'
+								color="success"
+								type="submit"
 								required
-								size='large'>
+								size="large"
+							>
 								{isFormLoading ? (
 									<CircularProgress />
 								) : (
@@ -160,12 +166,13 @@ const UpdateKitchenForm = ({
 									onClose={() => {
 										setError('');
 									}}
-									position='relative'
+									position="relative"
 									sx={{
 										width: '100%',
-										fontSize: 'larger',
+										fontSize: 'larger'
 									}}
-									severity='error'>
+									severity="error"
+								>
 									{error}
 								</Alert>
 							)}
