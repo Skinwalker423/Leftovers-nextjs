@@ -1,3 +1,4 @@
+//responsive design for update image list
 //handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment

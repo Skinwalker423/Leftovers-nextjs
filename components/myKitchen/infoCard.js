@@ -9,10 +9,11 @@ const InfoCard = ({ children, title = 'Title' }) => {
 				ml: '2rem',
 				height: '100%',
 				width: { xs: '100%', md: '80%', lg: '70%' },
-				p: '2em',
-			}}>
+				p: 2
+			}}
+		>
 			<Box>
-				<Typography color={'secondary'} variant='h4'>
+				<Typography color={'secondary'} variant="h4">
 					{title}
 				</Typography>
 			</Box>
@@ -20,8 +21,9 @@ const InfoCard = ({ children, title = 'Title' }) => {
 				sx={{
 					display: 'flex',
 					justifyContent: 'space-between',
-					alignItems: 'center',
-				}}>
+					alignItems: 'center'
+				}}
+			>
 				{children}
 			</Box>
 		</Paper>

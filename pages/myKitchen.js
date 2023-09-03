@@ -118,61 +118,78 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					flexDirection={'column'}
 					justifyContent={'center'}
 					alignItems={'center'}
-					mx={'1rem'}
-					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					ml={'1.5rem'}
+					width={{ xs: '80%', sm: '60%', md: '80%' }}
 				>
 					<MyKitchenHeader title={'Kitchen Profile'} />
 					<InfoCard title="Kitchen Picture">
-						<Image
-							width={150}
-							height={150}
-							src={kitchenImage || '/kitchen2.jpg'}
-							alt={`The kitchen of ${prepper.kitchenTitle}`}
-						/>
 						<Box
 							display={'flex'}
-							justifyContent={'space-evenly'}
 							alignItems={'center'}
-							width={'50%'}
+							flexDirection={{ xs: 'column', sm: 'row' }}
+							justifyContent={'space-between'}
+							width={'100%'}
 						>
-							<UpdateKitchenImage
-								email={prepper.email}
-								setMsg={setMsg}
-								currentImg={kitchenImage}
-								savedImages={prepper.savedKitchenImages}
-								setKitchenImage={setKitchenImage}
-							/>
-							<Typography>Or</Typography>
-							<UploadButton
-								endpoint="imageUploader"
-								onClientUploadComplete={async (res) => {
-									// Do something with the response
-									const imgUrl = res[0].url;
-									setKitchenImage(imgUrl);
-									try {
-										const data = await updateKitchenImageDb(
-											prepper.email,
-											imgUrl,
-											'add'
-										);
-										if (data.message) {
-											setMsg(data.message);
-										}
-									} catch (err) {
-										console.error('problem updating qty', err);
+							<Box
+								position={'relative'}
+								width={{ xs: '100%', sm: 150 }}
+								height={{ xs: 200, sm: 150 }}
+							>
+								<Image
+									fill
+									style={{ objectFit: 'cover' }}
+									src={kitchenImage || '/kitchen2.jpg'}
+									alt={`The kitchen of ${prepper.kitchenTitle}`}
+								/>
+							</Box>
+							<Box
+								display={'flex'}
+								justifyContent={'space-evenly'}
+								alignItems={'center'}
+								width={'50%'}
+								flexDirection={{ xs: 'column', sm: 'row' }}
+								gap={1}
+								mt={{ xs: 2, sm: 0 }}
+							>
+								<UpdateKitchenImage
+									email={prepper.email}
+									setMsg={setMsg}
+									currentImg={kitchenImage}
+									savedImages={prepper.savedKitchenImages}
+									setKitchenImage={setKitchenImage}
+								/>
+								<Typography>Or</Typography>
+								<UploadButton
+									endpoint="imageUploader"
+									onClientUploadComplete={async (res) => {
+										// Do something with the response
+										const imgUrl = res[0].url;
+										setKitchenImage(imgUrl);
+										try {
+											const data = await updateKitchenImageDb(
+												prepper.email,
+												imgUrl,
+												'add'
+											);
+											if (data.message) {
+												setMsg(data.message);
+											}
+										} catch (err) {
+											console.error('problem updating qty', err);
 
-										setError(err);
-									}
-									setTimeout(() => {
-										setMsg('');
-										setError('');
-									}, 3000);
-								}}
-								onUploadError={(error) => {
-									// Do something with the error.
-									alert(`ERROR! ${error.message}`);
-								}}
-							/>
+											setError(err);
+										}
+										setTimeout(() => {
+											setMsg('');
+											setError('');
+										}, 3000);
+									}}
+									onUploadError={(error) => {
+										// Do something with the error.
+										alert(`ERROR! ${error.message}`);
+									}}
+								/>
+							</Box>
 						</Box>
 					</InfoCard>
 
