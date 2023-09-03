@@ -126,14 +126,14 @@ const myKitchen = ({ userData, prepper, orders }) => {
 						<Box
 							display={'flex'}
 							alignItems={'center'}
-							flexDirection={{ xs: 'column', sm: 'row' }}
+							flexDirection={{ xs: 'column', md: 'row' }}
 							justifyContent={'space-between'}
 							width={'100%'}
 						>
 							<Box
 								position={'relative'}
-								width={{ xs: '100%', sm: 150 }}
-								height={{ xs: 200, sm: 150 }}
+								width={{ xs: '100%', md: 150 }}
+								height={{ xs: 200, md: 150 }}
 							>
 								<Image
 									fill
@@ -144,12 +144,12 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							</Box>
 							<Box
 								display={'flex'}
-								justifyContent={'space-evenly'}
+								justifyContent={'flex-end'}
 								alignItems={'center'}
-								width={'50%'}
-								flexDirection={{ xs: 'column', sm: 'row' }}
+								width={'70%'}
+								flexDirection={{ xs: 'column', md: 'row' }}
 								gap={1}
-								mt={{ xs: 2, sm: 0 }}
+								mt={{ xs: 2, md: 0 }}
 							>
 								<UpdateKitchenImage
 									email={prepper.email}

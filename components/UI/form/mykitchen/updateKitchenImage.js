@@ -33,8 +33,8 @@ const UpdateKitchenImage = ({
 		top: '50%',
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
-		width: '50%',
-		height: '50%',
+		width: { xs: '90%', sm: '75%', lg: '50%' },
+		height: { xs: '70%', sm: '60%', lg: '50%' },
 		bgcolor: 'background.paper',
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
@@ -107,7 +107,7 @@ const UpdateKitchenImage = ({
 				variant="outlined"
 				color="warning"
 				onClick={handleOpen}
-				sx={{ py: 1, px: 3 }}
+				sx={{ py: 1, px: 3, width: '17em' }}
 			>
 				Choose from your saved images
 			</Button>
