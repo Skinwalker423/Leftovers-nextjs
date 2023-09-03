@@ -140,6 +140,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									style={{ objectFit: 'cover' }}
 									src={kitchenImage || '/kitchen2.jpg'}
 									alt={`The kitchen of ${prepper.kitchenTitle}`}
+									priority
 								/>
 							</Box>
 							<Box
