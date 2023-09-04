@@ -1,5 +1,5 @@
 import {
-	addKitchenImgUrl,
+	updateKitchenImgUrl,
 	connectMongoDb
 } from '../../../db/mongodb/mongoDbUtils';
 
@@ -21,7 +21,12 @@ const updateKitchenImage = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await addKitchenImgUrl(client, email, kitchenImgUrl, type);
+		const document = await updateKitchenImgUrl(
+			client,
+			email,
+			kitchenImgUrl,
+			type
+		);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
