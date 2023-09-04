@@ -258,6 +258,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 						<MealsList
 							meals={meals}
 							prepperEmail={prepper.email}
+							savedMealImages={prepper.savedMealImages}
 							setMeals={setMeals}
 							setMsg={setMsg}
 							setError={setError}

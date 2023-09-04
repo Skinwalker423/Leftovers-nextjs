@@ -20,7 +20,8 @@ export default function MyKitchenMealCard({
 	setMsg,
 	setError,
 	prepperEmail,
-	setMeals
+	setMeals,
+	savedMealImages
 }) {
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 

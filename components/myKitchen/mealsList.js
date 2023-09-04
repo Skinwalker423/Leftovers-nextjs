@@ -3,7 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import MyKitchenMealCard from '../Card/myKitchenMeals';
 import Box from '@mui/material/Box';
 
-function MealsList({ meals, prepperEmail, setMeals, setMsg, setError }) {
+function MealsList({
+	meals,
+	prepperEmail,
+	setMeals,
+	setMsg,
+	setError,
+	savedMealImages
+}) {
+	console.log('saved images', savedMealImages);
 	const mealsList = meals.map(({ title, id, description, qty, image }) => {
 		return (
 			<Box key={id} mb="2em">
@@ -18,6 +26,7 @@ function MealsList({ meals, prepperEmail, setMeals, setMsg, setError }) {
 					id={id}
 					setMeals={setMeals}
 					image={image}
+					savedMealImages={savedMealImages}
 				/>
 			</Box>
 		);

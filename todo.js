@@ -1,3 +1,4 @@
+//add mandatory meal image input for add meal form
 //handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment
