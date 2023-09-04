@@ -382,7 +382,12 @@ export async function updateKitchenDescription(client, userEmail, description) {
 	}
 }
 
-export async function addKitchenImgUrl(client, userEmail, kitchenImgUrl, type) {
+export async function updateKitchenImgUrl(
+	client,
+	userEmail,
+	kitchenImgUrl,
+	type
+) {
 	console.log('type of action', type);
 	const add = {
 		$set: { kitchenImgUrl, last_modified: new Date() },
@@ -416,25 +421,43 @@ export async function addKitchenImgUrl(client, userEmail, kitchenImgUrl, type) {
 	}
 }
 
-export async function updateKitchenImgUrl(client, userEmail, kitchenImgUrl) {
+export async function updateMealImgUrl(
+	client,
+	userEmail,
+	mealId,
+	imgUrl,
+	type
+) {
+	console.log('type of action', type);
+	const add = {
+		$set: { 'meals.$.image': imgUrl, 'meals.$.last_modified': new Date() },
+		$push: { savedKitchenImages: kitchenImgUrl }
+	};
+
+	const update = {
+		$set: { 'meals.$.image': imgUrl, 'meals.$.last_modified': new Date() }
+	};
+
+	const action = type === 'add' ? add : update;
+	console.log('action type', action);
+
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
 			{
-				email: userEmail
+				email: userEmail,
+				'meals.id': mealId
 			},
-			{
-				$set: { kitchenImgUrl, last_modified: new Date() }
-			}
+			action
 		);
 
 		if (!document) {
 			return;
 		}
-		console.log('updated kitchen image', document);
+		console.log('added kitchen image', document);
 		return document;
 	} catch (err) {
-		console.error('problem updating kitchen image', err);
+		console.error('problem adding kitchen image', err);
 		return;
 	}
 }
