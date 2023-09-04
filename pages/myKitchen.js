@@ -269,10 +269,12 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				<Box
 					display="flex"
 					flexDirection={'column'}
-					justifyContent={'center'}
+					justifyContent={'flex-start'}
 					alignItems={'center'}
 					mx={'1rem'}
 					width={{ xs: '75%', sm: '60%', md: '80%' }}
+					minHeight={'100vh'}
+					mb={{ xs: '7em', sm: 0 }}
 				>
 					<MyKitchenHeader title={'Personal Info'} />
 					<InfoCard title="Avatar">
@@ -318,6 +320,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					display={'flex'}
 					flexDirection={'column'}
 					alignItems={'center'}
+					minHeight={'100vh'}
+					mb={{ xs: '7em', sm: 0 }}
 				>
 					<MyKitchenHeader title={'Orders'} />
 					<OrdersList
