@@ -4,11 +4,9 @@ import {
 	Box,
 	Paper,
 	TextField,
-	Textarea,
 	Typography,
 	Button,
 	CircularProgress,
-	Alert,
 	useMediaQuery,
 	useTheme
 } from '@mui/material';
@@ -16,14 +14,12 @@ import {
 	isValidZipCode,
 	validateEmail
 } from '../../../../utils/form-validation';
-import { useRouter } from 'next/router';
 import StateInput from './stateInput';
 import { signIn } from 'next-auth/react';
 
 const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [state, setState] = useState('');
-	const [description, setDescription] = useState();
 	const firstNameRef = useRef();
 	const lastNameRef = useRef();
 	const emailRef = useRef();

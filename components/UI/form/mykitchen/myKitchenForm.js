@@ -6,7 +6,6 @@ import {
 	Typography,
 	Button,
 	CircularProgress,
-	Alert,
 	useTheme,
 	useMediaQuery
 } from '@mui/material';
@@ -16,7 +15,6 @@ import {
 } from '../../../../utils/form-validation';
 import { useRouter } from 'next/router';
 import StateInput from '../registration/stateInput';
-import { signIn } from 'next-auth/react';
 
 const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 	const theme = useTheme();

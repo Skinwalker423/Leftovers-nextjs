@@ -57,7 +57,10 @@ const prepper = async (req, res) => {
 		description,
 		kitchenTitle,
 		kitchenImgUrl: '/art.jpg',
-		createdAt: new Date()
+		createdAt: new Date(),
+		savedProfileImages: [],
+		savedKitchenImages: [],
+		savedMealImages: []
 	};
 	if (req.method === 'POST') {
 		try {
