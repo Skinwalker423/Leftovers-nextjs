@@ -27,6 +27,7 @@ import '@uploadthing/react/styles.css';
 import { UploadButton } from '../utils/uploadthing';
 import { updateKitchenImageDb } from '../utils/myKitchen/updateKitchenImage';
 import UpdateKitchenImage from '../components/UI/form/mykitchen/updateKitchenImage';
+import MyKitchenBottomBar from '../components/layout/bottombar/myKitchenBottomBar';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -83,7 +84,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
 	const { colors } = useColors();
 	const theme = useTheme();
-	const xSmall = useMediaQuery(theme.breakpoints.down('xs'));
+	const xSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const currentUserEmail = userData?.email;
 
@@ -114,17 +115,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 			</Head>
 
 			{xSmall ? (
-				<Box
-					sx={{ backgroundColor: 'blue' }}
-					width={'100%'}
-					height={'7rem'}
-					display={'flex'}
-					position={'fixed'}
-					bottom={0}
-					zIndex={99}
-				>
-					test
-				</Box>
+				<MyKitchenBottomBar selected={selected} setSelected={setSelected} />
 			) : (
 				<ResponsiveDrawer selected={selected} setSelected={setSelected} />
 			)}
