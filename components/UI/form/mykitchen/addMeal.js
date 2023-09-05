@@ -19,13 +19,14 @@ import { UploadButton } from '../../../../utils/uploadthing.ts';
 
 import { useColors } from '../../../../hooks/useColors';
 import { addMeal } from '../../../../utils/meals';
+import Image from 'next/image.js';
 
 const AddMeal = ({ email, setMsg, setMeals }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
-	const [files, setFiles] = useState([]);
+	const [mealImage, setMealImage] = useState();
 	const [error, setError] = useState('');
 	const [cost, setCost] = useState(0);
 	const { colors } = useColors();
@@ -75,7 +76,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
-			image: null,
+			image: ,
 			qty: parseInt(qtyRef.current.value)
 		};
 
@@ -181,25 +182,35 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 								alignItems={'center'}
 								gap={5}
 							>
-								<Box
-									display={'flex'}
-									flexDirection={'column'}
-									justifyContent={'center'}
-									alignItems={'center'}
-									width={'10em'}
-									height={'10em'}
-									border={`1px solid black`}
-									borderRadius={5}
-								>
-									<Typography variant="h5">Upload pic of meal</Typography>
-									<InsertPhotoIcon fontSize="large" />
-								</Box>
+								{mealImage ? (
+									<Image
+										src={files}
+										alt={'image of new meal'}
+										width={150}
+										height={150}
+									/>
+								) : (
+									<Box
+										display={'flex'}
+										flexDirection={'column'}
+										justifyContent={'center'}
+										alignItems={'center'}
+										width={150}
+										height={150}
+										border={`1px solid black`}
+										backgroundColor={colors.gray[900]}
+										borderRadius={5}
+									>
+										<Typography variant="h5">Upload pic of meal</Typography>
+										<InsertPhotoIcon fontSize="large" />
+									</Box>
+								)}
 								<UploadButton
 									endpoint="imageUploader"
 									onClientUploadComplete={async (res) => {
 										// Do something with the response
 										const imgUrl = res[0].url;
-										setFiles(imgUrl);
+										setMealImage(imgUrl);
 									}}
 									onUploadError={(error) => {
 										// Do something with the error.
