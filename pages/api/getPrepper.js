@@ -2,7 +2,7 @@ import React from 'react';
 import { mockDataContacts } from '../../db/mockData';
 import {
 	findExistingPrepperWithId,
-	connectMongoDb,
+	connectMongoDb
 } from '../../db/mongodb/mongoDbUtils';
 
 async function getPrepper(req, res) {

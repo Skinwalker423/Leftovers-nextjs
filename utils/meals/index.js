@@ -58,7 +58,7 @@ export async function updateMealImgInDb(email, mealId, imgUrl, type) {
 		type
 	};
 
-	const response = await fetch('/api/meals/updateQty', {
+	const response = await fetch('/api/meals/updateImgUrl', {
 		headers: {
 			'Content-type': 'application/json'
 		},

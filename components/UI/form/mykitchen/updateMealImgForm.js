@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateKitchenImageDb } from '../../../../utils/myKitchen/updateKitchenImage';
+import { updateMealImgInDb } from '../../../../utils/meals';
 import Image from 'next/image';
 import {
 	Modal,
@@ -18,7 +18,8 @@ const UpdateMealImgForm = ({
 	setMsg,
 	currentImg,
 	savedImages,
-	setMealImage
+	setMealImage,
+	mealId
 }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
@@ -80,7 +81,12 @@ const UpdateMealImgForm = ({
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateKitchenImageDb(email, selectedImg, 'update');
+			const data = await updateMealImgInDb(
+				email,
+				mealId,
+				selectedImg,
+				'update'
+			);
 			if (data.message) {
 				setMealImage(selectedImg);
 				setMsg(data.message);

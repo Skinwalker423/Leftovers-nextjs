@@ -432,19 +432,6 @@ export async function updateMealImgUrl(
 	imgUrl,
 	type
 ) {
-	console.log('type of action', type);
-	const add = {
-		$set: { 'meals.$.image': imgUrl, 'meals.$.last_modified': new Date() },
-		$push: { savedKitchenImages: kitchenImgUrl }
-	};
-
-	const update = {
-		$set: { 'meals.$.image': imgUrl, 'meals.$.last_modified': new Date() }
-	};
-
-	const action = type === 'add' ? add : update;
-	console.log('action type', action);
-
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(
@@ -452,8 +439,20 @@ export async function updateMealImgUrl(
 				email: userEmail,
 				'meals.id': mealId
 			},
-			action
+			{ $set: { 'meals.$.image': imgUrl, 'meals.$.last_modified': new Date() } }
 		);
+
+		if (type === 'add') {
+			const addedSavedImage = await collection.updateOne(
+				{
+					email: userEmail
+				},
+				{
+					$push: { savedMealImages: imgUrl },
+					$set: { last_modified: new Date() }
+				}
+			);
+		}
 
 		if (!document) {
 			return;

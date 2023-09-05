@@ -53,6 +53,8 @@ const Prepper = ({ prepper }) => {
 	const [msg, setMsg] = useState('');
 	const { colors } = useColors();
 
+	console.log('prepper info', prepper);
+
 	const bannerImage = prepper.kitchenImgUrl || '/art.jpg';
 
 	useEffect(() => {

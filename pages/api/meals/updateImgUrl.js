@@ -21,7 +21,13 @@ const updateImgUrl = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = await updateMealImgUrl(client, email, mealId, type);
+		const document = await updateMealImgUrl(
+			client,
+			email,
+			mealId,
+			imgUrl,
+			type
+		);
 
 		if (!document || !document.modifiedCount) {
 			client.close();
