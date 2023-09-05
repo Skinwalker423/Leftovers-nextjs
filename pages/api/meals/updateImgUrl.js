@@ -1,4 +1,7 @@
-import { connectMongoDb } from '../../../db/mongodb/mongoDbUtils';
+import {
+	connectMongoDb,
+	updateMealImgUrl
+} from '../../../db/mongodb/mongoDbUtils';
 
 const updateImgUrl = async (req, res) => {
 	if (req.method !== 'PATCH') {
@@ -6,7 +9,7 @@ const updateImgUrl = async (req, res) => {
 	}
 	const body = req.body;
 	console.log(body);
-	const { imgUrl, email, type } = body;
+	const { imgUrl, email, mealId, type } = body;
 
 	if (!imgUrl || imgUrl.trim() === '') {
 		return res.status(400).json({ error: 'no title entered' });
@@ -18,7 +21,7 @@ const updateImgUrl = async (req, res) => {
 
 	try {
 		const client = await connectMongoDb();
-		const document = '';
+		const document = await updateMealImgUrl(client, email, mealId, type);
 
 		if (!document || !document.modifiedCount) {
 			client.close();

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,6 +9,9 @@ import { removeMeal } from '../../utils/meals';
 import { updateMealQtyInDb } from '../../utils/meals';
 import UpdateQtyForm from '../UI/form/mykitchen/updateQtyForm';
 import AreYouSure from '../UI/modal/areYouSure';
+import MealImageUpatesOptions from '../myKitchen/meals/mealImageUpates';
+import { Divider } from '@mui/material';
+import { useColors } from '../../hooks/useColors';
 
 export default function MyKitchenMealCard({
 	foodItem = 'Food Item',
@@ -24,6 +27,9 @@ export default function MyKitchenMealCard({
 	savedMealImages
 }) {
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
+	const [mealImage, setMealImage] = React.useState(defaultMealImg);
+
+	const { colors } = useColors();
 
 	const handleRemoveMeal = async () => {
 		const data = await removeMeal(prepperEmail, id);
@@ -67,7 +73,7 @@ export default function MyKitchenMealCard({
 			<CardMedia
 				component="img"
 				height="140"
-				image={defaultMealImg}
+				image={mealImage}
 				alt={foodItem}
 			/>
 			<CardContent sx={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -88,20 +94,13 @@ export default function MyKitchenMealCard({
 					QTY: {qty}
 				</Typography>
 			</CardContent>
-			<CardActions>
+			<CardActions sx={{ display: 'flex', flexDirection: 'column' }}>
 				<Box
 					pb={'1rem'}
 					width="100%"
 					display={'flex'}
 					justifyContent="space-evenly"
 				>
-					{/* <Button
-						onClick={handleRemoveMeal}
-						size='small'
-						color='error'
-						variant='outlined'>
-						Remove
-					</Button> */}
 					<AreYouSure
 						title={`Remove ${foodItem}`}
 						text="Are you sure you want to remove this meal from your kitchen?"
@@ -124,6 +123,16 @@ export default function MyKitchenMealCard({
 						setMeals={setMeals}
 					/>
 				</Box>
+				<Divider flexItem variant="middle" color={colors.orangeAccent[900]} />
+				<MealImageUpatesOptions
+					mealImage={mealImage}
+					mealId={id}
+					setMealImage={setMealImage}
+					setMsg={setMsg}
+					savedMealImages={savedMealImages}
+					prepperEmail={prepperEmail}
+					setError={setError}
+				/>
 			</CardActions>
 		</Card>
 	);

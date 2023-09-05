@@ -51,8 +51,6 @@ const UpdateMealImgForm = ({
 				key={i}
 				display={'flex'}
 				position={'relative'}
-				width={125}
-				height={125}
 				border={image === selectedImg && `5px solid ${colors.blueAccent[400]}`}
 				onClick={() => setSelectedImg(image)}
 			>
@@ -107,7 +105,7 @@ const UpdateMealImgForm = ({
 				variant="outlined"
 				color="warning"
 				onClick={handleOpen}
-				sx={{ py: 1, px: 3, width: '17em' }}
+				sx={{ py: 1, px: 3 }}
 			>
 				Saved Images
 			</Button>
