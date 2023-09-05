@@ -13,6 +13,7 @@ import {
 	CircularProgress,
 	Alert
 } from '@mui/material';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 
 import { UploadButton } from '../../../../utils/uploadthing.ts';
 
@@ -173,6 +174,38 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 										</Select>
 									</FormControl>
 								</Box>
+							</Box>
+							<Box
+								display={'flex'}
+								justifyContent={'center'}
+								alignItems={'center'}
+								gap={5}
+							>
+								<Box
+									display={'flex'}
+									flexDirection={'column'}
+									justifyContent={'center'}
+									alignItems={'center'}
+									width={'10em'}
+									height={'10em'}
+									border={`1px solid black`}
+									borderRadius={5}
+								>
+									<Typography variant="h5">Upload pic of meal</Typography>
+									<InsertPhotoIcon fontSize="large" />
+								</Box>
+								<UploadButton
+									endpoint="imageUploader"
+									onClientUploadComplete={async (res) => {
+										// Do something with the response
+										const imgUrl = res[0].url;
+										setFiles(imgUrl);
+									}}
+									onUploadError={(error) => {
+										// Do something with the error.
+										alert(`ERROR! ${error.message}`);
+									}}
+								/>
 							</Box>
 							<Box>
 								<TextField
