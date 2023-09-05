@@ -52,6 +52,8 @@ const UpdateMealImgForm = ({
 				key={i}
 				display={'flex'}
 				position={'relative'}
+				width={125}
+				height={125}
 				border={image === selectedImg && `5px solid ${colors.blueAccent[400]}`}
 				onClick={() => setSelectedImg(image)}
 			>
