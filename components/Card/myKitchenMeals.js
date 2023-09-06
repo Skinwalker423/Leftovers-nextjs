@@ -27,7 +27,7 @@ export default function MyKitchenMealCard({
 	savedMealImages
 }) {
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
-	const [mealImage, setMealImage] = React.useState(defaultMealImg);
+	const [mealImage, setMealImage] = useState(defaultMealImg);
 
 	const { colors } = useColors();
 
@@ -132,6 +132,7 @@ export default function MyKitchenMealCard({
 					savedMealImages={savedMealImages}
 					prepperEmail={prepperEmail}
 					setError={setError}
+					setMeals={setMeals}
 				/>
 			</CardActions>
 		</Card>
