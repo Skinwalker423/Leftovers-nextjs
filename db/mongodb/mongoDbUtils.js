@@ -464,6 +464,29 @@ export async function updateMealImgUrl(
 		return;
 	}
 }
+export async function addImgUrlToSavedImages(client, userEmail, imgUrl) {
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail
+			},
+			{
+				$push: { savedMealImages: imgUrl },
+				$set: { last_modified: new Date() }
+			}
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('added meal image to saved images', document);
+		return document;
+	} catch (err) {
+		console.error('problem adding meal image', err);
+		return;
+	}
+}
 
 export async function decrementMealQty(client, prepperEmail, mealId, qty) {
 	try {
