@@ -51,7 +51,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 		left: '50%',
 		transform: 'translate(-50%, -50%)',
 		width: { xs: '100%', sm: '85%', md: '70%', lg: '55%', xl: '45%' },
-		height: { xs: '70%', sm: '68%', md: '55%' },
+		height: { xs: '90%', sm: '90%', md: '90%' },
 		bgcolor: 'background.paper',
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
@@ -65,18 +65,21 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 
 	const handleAddMealForm = async (e) => {
 		e.preventDefault();
-		setIsFormLoading(true);
-		// console.log('file after submit', files);
-		// const finalImgUrl = files[0].fileUrl;
-		// console.log('final image url', finalImgUrl);
-		//send image file to a img hosting server e.g. Cloudinary
-		//put url to that image in mealDetails to send to mongodb
 
+		if (!mealImage) {
+			setError('Please prove a picture of the meal');
+			setTimeout(() => {
+				setMsg('');
+				setError('');
+			}, 3000);
+			return;
+		}
+		setIsFormLoading(true);
 		const mealDetails = {
 			title: titleRef.current.value,
 			price: parseInt(cost),
 			description: descriptionRef.current.value,
-			image: ,
+			image: mealImage || null,
 			qty: parseInt(qtyRef.current.value)
 		};
 
@@ -144,7 +147,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 							<Box
 								gap={3}
 								display={'flex'}
-								flexDirection={{ xs: 'column', md: 'row' }}
+								flexDirection={{ xs: 'column', sm: 'row' }}
 								justifyContent="space-between"
 							>
 								<Box width={{ xs: '100%', md: '45%' }}>
@@ -184,7 +187,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 							>
 								{mealImage ? (
 									<Image
-										src={files}
+										src={mealImage}
 										alt={'image of new meal'}
 										width={150}
 										height={150}
