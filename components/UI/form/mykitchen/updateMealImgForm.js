@@ -40,7 +40,7 @@ const UpdateMealImgForm = ({
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
 		boxShadow: 24,
-		p: 4
+		p: { xs: 2, sm: 4 }
 	};
 
 	const handleOpen = () => setOpen(true);
@@ -52,8 +52,8 @@ const UpdateMealImgForm = ({
 				key={i}
 				display={'flex'}
 				position={'relative'}
-				width={125}
-				height={125}
+				width={150}
+				height={150}
 				border={image === selectedImg && `5px solid ${colors.blueAccent[400]}`}
 				onClick={() => setSelectedImg(image)}
 			>
@@ -62,7 +62,7 @@ const UpdateMealImgForm = ({
 					alt={'saved kitchen image'}
 					fill
 					style={{ objectFit: 'cover' }}
-					sizes="125px"
+					sizes="150px"
 				/>
 				{image === selectedImg && (
 					<CheckBoxIcon
@@ -135,7 +135,7 @@ const UpdateMealImgForm = ({
 							<Box
 								display={'flex'}
 								flexWrap={'wrap'}
-								height={'80%'}
+								maxHeight={'80%'}
 								width={'100%'}
 								overflow={'auto'}
 								gap={3}
