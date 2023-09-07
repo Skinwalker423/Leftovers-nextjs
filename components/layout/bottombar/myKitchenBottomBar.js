@@ -2,11 +2,13 @@ import { Box, List } from '@mui/material';
 import React from 'react';
 import SideBarMenuItem from '../sidebar/SideBarMenuItem';
 import { menuListItems } from '../../../constants';
+import { useColors } from '../../../hooks/useColors';
 
 const MyKitchenBottomBar = ({ setSelected, selected }) => {
+	const { colors } = useColors();
 	return (
 		<Box
-			sx={{ backgroundColor: 'white' }}
+			sx={{ backgroundColor: colors.primary[400] }}
 			width={'100%'}
 			height={'7rem'}
 			display={'flex'}
