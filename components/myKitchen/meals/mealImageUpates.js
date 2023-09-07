@@ -26,6 +26,7 @@ const MealImageUpatesOptions = ({
 				flexDirection={{ xs: 'column', md: 'row' }}
 				gap={1}
 				mt={{ xs: 2, md: 2 }}
+				px={2}
 			>
 				<UpdateMealImgForm
 					email={prepperEmail}
