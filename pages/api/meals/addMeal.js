@@ -24,15 +24,15 @@ const addMeal = async (req, res) => {
 		last_modified: currentDate
 	};
 
+	const client = await connectMongoDb();
 	try {
-		const client = await connectMongoDb();
 		const document = await addMealToPrepperDb(client, email, mealDetails);
 		console.log('this is the response for adding a meal in mongo:', document);
 		const prepper = await findExistingPrepperEmail(client, email);
 
 		console.log('saved meal images', prepper.savedMealImages);
-		if (!prepper.savedMealImages.includes(image)) {
-			await addImgUrlToSavedImages(client, email, image);
+		if (!prepper.savedMealImages.includes(meal.image)) {
+			await addImgUrlToSavedImages(client, email, meal.image);
 		}
 
 		if (!document) {

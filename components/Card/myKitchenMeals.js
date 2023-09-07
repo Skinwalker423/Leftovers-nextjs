@@ -132,7 +132,6 @@ export default function MyKitchenMealCard({
 					savedMealImages={savedMealImages}
 					prepperEmail={prepperEmail}
 					setError={setError}
-					setMeals={setMeals}
 				/>
 			</CardActions>
 		</Card>
