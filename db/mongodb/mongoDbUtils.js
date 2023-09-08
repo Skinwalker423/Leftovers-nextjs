@@ -589,3 +589,42 @@ export async function findAllOrdersByPrepperEmail(client, email) {
 		console.error('problem retrieving orders from db', err);
 	}
 }
+
+export async function updateProfileImgUrl(
+	client,
+	userEmail,
+	profileImgUrl,
+	type
+) {
+	console.log('type of action', type);
+	const add = {
+		$set: { profileImgUrl, last_modified: new Date() },
+		$push: { savedProfileImages: kitchenImgUrl }
+	};
+
+	const update = {
+		$set: { profileImgUrl, last_modified: new Date() }
+	};
+
+	const action = type === 'add' ? add : update;
+	console.log('action type', action);
+
+	try {
+		const collection = client.db('leftovers').collection('preppers');
+		const document = await collection.updateOne(
+			{
+				email: userEmail
+			},
+			action
+		);
+
+		if (!document) {
+			return;
+		}
+		console.log('added profile image', document);
+		return document;
+	} catch (err) {
+		console.error('problem adding profile image', err);
+		return;
+	}
+}
