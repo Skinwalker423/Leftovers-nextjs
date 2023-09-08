@@ -5,10 +5,16 @@ import {
 	findExistingPrepperEmail
 } from '../../../db/mongodb/mongoDbUtils';
 import { validateEmail, isValidZipCode } from '../../../utils/form-validation';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
 
 const prepper = async (req, res) => {
 	const { email, firstName, lastName, location, kitchenTitle, description } =
 		req.body;
+	const session = await getServerSession(req, res, authOptions);
+
+	const userImage = session.user?.image || '';
+
 	const { address, city, state, zipcode } = location;
 	const isValidEmail = validateEmail(email);
 	const isValidZip = isValidZipCode(zipcode);
@@ -57,10 +63,11 @@ const prepper = async (req, res) => {
 		description,
 		kitchenTitle,
 		kitchenImgUrl: '/art.jpg',
+		profileImgUrl: userImage,
 		createdAt: new Date(),
 		savedProfileImages: [],
 		savedKitchenImages: [],
-		savedMealImages: []
+		savedMealImages: userImage ? [userImage] : []
 	};
 	if (req.method === 'POST') {
 		try {
