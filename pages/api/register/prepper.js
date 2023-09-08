@@ -65,9 +65,9 @@ const prepper = async (req, res) => {
 		kitchenImgUrl: '/art.jpg',
 		profileImgUrl: userImage,
 		createdAt: new Date(),
-		savedProfileImages: [],
+		savedProfileImages: userImage ? [userImage] : [],
 		savedKitchenImages: [],
-		savedMealImages: userImage ? [userImage] : []
+		savedMealImages: []
 	};
 	if (req.method === 'POST') {
 		try {
