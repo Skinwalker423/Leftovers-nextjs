@@ -28,6 +28,8 @@ import { UploadButton } from '../utils/uploadthing';
 import { updateKitchenImageDb } from '../utils/myKitchen/updateKitchenImage';
 import UpdateKitchenImage from '../components/UI/form/mykitchen/updateKitchenImage';
 import MyKitchenBottomBar from '../components/layout/bottombar/myKitchenBottomBar';
+import ProfileSavedImagesForm from '../components/UI/form/mykitchen/profileSavedImages';
+import { updateProfileImageDb } from '../utils/myKitchen/updateProfileImageDB';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -82,11 +84,14 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
 	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
+	const [profileImage, setProfileImage] = useState(prepper.profileImgUrl);
 	const { colors } = useColors();
 	const theme = useTheme();
 	const xSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const currentUserEmail = userData?.email;
+
+	console.log('google image', image);
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
@@ -185,7 +190,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 												setMsg(data.message);
 											}
 										} catch (err) {
-											console.error('problem updating qty', err);
+											console.error('problem updating kitchen image', err);
 
 											setError(err);
 										}
@@ -279,10 +284,10 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				>
 					<MyKitchenHeader title={'Personal Info'} />
 					<InfoCard title="Avatar">
-						{image ? (
+						{profileImage || image ? (
 							<Image
 								alt={`avatar image of ${prepper.name}`}
-								src={image}
+								src={profileImage || image}
 								width={100}
 								height={100}
 								priority
@@ -303,12 +308,12 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							gap={1}
 							mt={{ xs: 2, md: 0 }}
 						>
-							<UpdateKitchenImage
+							<ProfileSavedImagesForm
 								email={prepper.email}
 								setMsg={setMsg}
-								currentImg={kitchenImage}
-								savedImages={prepper.savedKitchenImages}
-								setKitchenImage={setKitchenImage}
+								currentImg={profileImage}
+								savedImages={prepper.savedProfileImages}
+								setProfileImage={setProfileImage}
 							/>
 							<Typography>Or</Typography>
 							<UploadButton
@@ -316,9 +321,9 @@ const myKitchen = ({ userData, prepper, orders }) => {
 								onClientUploadComplete={async (res) => {
 									// Do something with the response
 									const imgUrl = res[0].url;
-									setKitchenImage(imgUrl);
+									setProfileImage(imgUrl);
 									try {
-										const data = await updateKitchenImageDb(
+										const data = await updateProfileImageDb(
 											prepper.email,
 											imgUrl,
 											'add'
@@ -327,7 +332,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 											setMsg(data.message);
 										}
 									} catch (err) {
-										console.error('problem updating qty', err);
+										console.error('problem updating profile image', err);
 
 										setError(err);
 									}

@@ -599,7 +599,7 @@ export async function updateProfileImgUrl(
 	console.log('type of action', type);
 	const add = {
 		$set: { profileImgUrl, last_modified: new Date() },
-		$push: { savedProfileImages: kitchenImgUrl }
+		$push: { savedProfileImages: profileImgUrl }
 	};
 
 	const update = {

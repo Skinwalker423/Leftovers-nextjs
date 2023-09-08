@@ -84,7 +84,10 @@ const ProfileSavedImagesForm = ({
 		try {
 			const data = await updateProfileImageDb(email, selectedImg, 'update');
 			if (data.message) {
-				setProfileImage(selectedImg);
+				setProfileImage((prevImage) => {
+					console.log('previous image', prevImage);
+					return selectedImg;
+				});
 				setMsg(data.message);
 				setIsFormLoading(false);
 				setOpen(false);
@@ -93,6 +96,8 @@ const ProfileSavedImagesForm = ({
 			console.error('problem updating image', err);
 			setIsFormLoading(false);
 			setError(err);
+		} finally {
+			setIsFormLoading(false);
 		}
 		setTimeout(() => {
 			setMsg('');
