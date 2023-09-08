@@ -294,9 +294,54 @@ const myKitchen = ({ userData, prepper, orders }) => {
 								fontSize="3em"
 							/>
 						)}
-						<Button color="warning" variant="outlined">
-							Edit image
-						</Button>
+						<Box
+							display={'flex'}
+							justifyContent={'flex-end'}
+							alignItems={'center'}
+							width={'70%'}
+							flexDirection={{ xs: 'column', md: 'row' }}
+							gap={1}
+							mt={{ xs: 2, md: 0 }}
+						>
+							<UpdateKitchenImage
+								email={prepper.email}
+								setMsg={setMsg}
+								currentImg={kitchenImage}
+								savedImages={prepper.savedKitchenImages}
+								setKitchenImage={setKitchenImage}
+							/>
+							<Typography>Or</Typography>
+							<UploadButton
+								endpoint="imageUploader"
+								onClientUploadComplete={async (res) => {
+									// Do something with the response
+									const imgUrl = res[0].url;
+									setKitchenImage(imgUrl);
+									try {
+										const data = await updateKitchenImageDb(
+											prepper.email,
+											imgUrl,
+											'add'
+										);
+										if (data.message) {
+											setMsg(data.message);
+										}
+									} catch (err) {
+										console.error('problem updating qty', err);
+
+										setError(err);
+									}
+									setTimeout(() => {
+										setMsg('');
+										setError('');
+									}, 3000);
+								}}
+								onUploadError={(error) => {
+									// Do something with the error.
+									alert(`ERROR! ${error.message}`);
+								}}
+							/>
+						</Box>
 					</InfoCard>
 					<InfoCard title="Email">
 						<Typography variant="h4">{prepper.email}</Typography>

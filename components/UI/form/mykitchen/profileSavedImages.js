@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { updateKitchenImageDb } from '../../../../utils/myKitchen/updateKitchenImage';
+import { updateProfileImageDb } from '../../../../utils/myKitchen/updateProfileImageDB';
 import Image from 'next/image';
 import {
 	Modal,
@@ -13,12 +13,12 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 
 import { useColors } from '../../../../hooks/useColors';
 
-const UpdateKitchenImage = ({
+const ProfileSavedImagesForm = ({
 	email,
 	setMsg,
 	currentImg,
 	savedImages,
-	setKitchenImage
+	setProfileImage
 }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
@@ -82,15 +82,15 @@ const UpdateKitchenImage = ({
 		setIsFormLoading(true);
 
 		try {
-			const data = await updateKitchenImageDb(email, selectedImg, 'update');
+			const data = await updateProfileImageDb(email, selectedImg, 'update');
 			if (data.message) {
-				setKitchenImage(selectedImg);
+				setProfileImage(selectedImg);
 				setMsg(data.message);
 				setIsFormLoading(false);
 				setOpen(false);
 			}
 		} catch (err) {
-			console.error('problem updating kitchen image', err);
+			console.error('problem updating image', err);
 			setIsFormLoading(false);
 			setError(err);
 		}
@@ -114,8 +114,8 @@ const UpdateKitchenImage = ({
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby={`update-kitchenImage-form`}
-				aria-describedby={`update existing kitchen image form`}
+				aria-labelledby={`update-profile-image-form`}
+				aria-describedby={`update existing profile image form`}
 			>
 				<Box sx={style}>
 					<form style={{ height: '100%' }} onSubmit={handleImageUpdate}>
@@ -178,4 +178,4 @@ const UpdateKitchenImage = ({
 	);
 };
 
-export default UpdateKitchenImage;
+export default ProfileSavedImagesForm;

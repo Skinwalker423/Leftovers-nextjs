@@ -1,4 +1,4 @@
-export async function updateKitchenImageDb(email, profileImgUrl, type) {
+export async function updateProfileImageDb(email, profileImgUrl, type) {
 	const formBody = {
 		profileImgUrl,
 		email,
