@@ -102,13 +102,13 @@ export default function MyKitchenMealCard({
 					display={'flex'}
 					justifyContent="space-evenly"
 				>
-					<AreYouSure
-						title={`Remove ${foodItem}`}
-						text="Are you sure you want to remove this meal from your kitchen?"
-						onConfirmationClick={handleRemoveMeal}
-						buttonTitle="REMOVE"
-						buttonColor="error"
+					<UpdateQtyForm
+						email={prepperEmail}
+						mealId={id}
+						setMsg={setMsg}
+						setMeals={setMeals}
 					/>
+
 					<AreYouSure
 						title={`Out of Stock`}
 						text='Are you sure you want to set this meal as "Out of Stock"?'
@@ -117,11 +117,12 @@ export default function MyKitchenMealCard({
 						buttonColor="warning"
 					/>
 
-					<UpdateQtyForm
-						email={prepperEmail}
-						mealId={id}
-						setMsg={setMsg}
-						setMeals={setMeals}
+					<AreYouSure
+						title={`Remove ${foodItem}`}
+						text="Are you sure you want to remove this meal from your kitchen?"
+						onConfirmationClick={handleRemoveMeal}
+						buttonTitle="REMOVE"
+						buttonColor="error"
 					/>
 				</Box>
 				<Divider flexItem variant="middle" color={colors.orangeAccent[900]} />
