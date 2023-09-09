@@ -16,13 +16,6 @@ import {
 export async function getServerSideProps({ req, res }) {
 	try {
 		const session = await getServerSession(req, res, authOptions);
-		const userSession = session
-			? {
-					name: session.user?.name || null,
-					image: session.user?.image || null,
-					email: session.user?.email || null
-			  }
-			: null;
 
 		if (!session) {
 			return {
@@ -33,10 +26,16 @@ export async function getServerSideProps({ req, res }) {
 			};
 		}
 
-		const client = await connectMongoDb();
-		const userDb = await findExistingPrepperEmail(client, session.user.email);
+		const userSession = {
+			name: session.user?.name || null,
+			image: session.user?.image || null,
+			email: session.user?.email || null
+		};
 
-		if (userDb) {
+		const client = await connectMongoDb();
+		const prepperDb = await findExistingPrepperEmail(client, userSession.email);
+
+		if (prepperDb) {
 			return {
 				redirect: {
 					destination: '/signup',
@@ -86,7 +85,15 @@ const Register = ({ userSession, error }) => {
 					content="Register your kitchen to begin prepping meals for your community and sharing your unique homemade meals through the largest meal sharing app in the world"
 				/>
 			</Head>
-			{userSession ? (
+			{userSession && (
+				<MyKitchenForm
+					title={'Prepper Registration'}
+					sessionEmail={userSession.email}
+					setErrorMsg={setErrorMsg}
+					setMsg={setMsg}
+				/>
+			)}
+			{/* {userSession ? (
 				<MyKitchenForm
 					title={'Prepper Registration'}
 					sessionEmail={!userSession ? null : userSession.email}
@@ -99,7 +106,7 @@ const Register = ({ userSession, error }) => {
 					setMsg={setMsg}
 					title={'Prepper Registration'}
 				/>
-			)}
+			)} */}
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
 		</Box>
