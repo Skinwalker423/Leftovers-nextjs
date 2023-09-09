@@ -135,8 +135,17 @@ const Prepper = ({ prepper }) => {
 						<TrophyLikesButton />
 					</Box>
 					{!prepper.isKitchenClosed && (
-						<Box width={'100%'} mt={5}>
-							<Alert
+						<Box
+							position={'relative'}
+							display={'flex'}
+							flexDirection={'column'}
+							justifyContent={'center'}
+							alignItems={'center'}
+							width={'100%'}
+							height={'20rem'}
+							mt={5}
+						>
+							{/* <Alert
 								sx={{
 									textAlign: 'center',
 									display: 'flex',
@@ -147,7 +156,12 @@ const Prepper = ({ prepper }) => {
 								color="error"
 							>
 								Sorry, We are closed
-							</Alert>
+							</Alert> */}
+							<Image
+								src={'/images/myKitchen/redClosed.jpg'}
+								style={{ objectFit: 'cover' }}
+								fill
+							/>
 						</Box>
 					)}
 				</Box>
