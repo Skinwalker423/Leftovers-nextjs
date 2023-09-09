@@ -1,6 +1,6 @@
 //add a sign in prepper page for the hours open
 //store closed sign on prepper page
-//add mandatory meal image input for add meal form
+//increment number of meals served on prepper page
 //handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment
