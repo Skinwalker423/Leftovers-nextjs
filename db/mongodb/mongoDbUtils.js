@@ -147,7 +147,8 @@ export async function findExistingPrepperEmail(client, email) {
 			savedKitchenImages: document.savedKitchenImages,
 			savedProfileImages: document.savedProfileImages,
 			savedMealImages: document.savedMealImages,
-			profileImgUrl: document?.profileImgUrl
+			profileImgUrl: document?.profileImgUrl,
+			isKitchenClosed: document.isKitchenClosed
 		};
 
 		return formattedDoc;
@@ -209,7 +210,8 @@ export async function findExistingPrepperWithId(client, id) {
 			savedKitchenImages: document.savedKitchenImages,
 			savedProfileImages: document.savedProfileImages,
 			savedMealImages: document.savedMealImages,
-			profileImgUrl: document?.profileImgUrl
+			profileImgUrl: document?.profileImgUrl,
+			isKitchenClosed: document.isKitchenClosed
 		};
 
 		return formattedDoc;
@@ -297,9 +299,9 @@ export async function findLocalPreppersWithZipcode(
 				profileImgUrl,
 				savedProfileImages,
 				savedKitchenImages,
-				savedMealImages
+				savedMealImages,
+				isKitchenClosed
 			}) => {
-				console.log('kicthem img url', kitchenImgUrl);
 				return {
 					name: `${firstName} ${lastName}`,
 					email,
@@ -311,7 +313,8 @@ export async function findLocalPreppersWithZipcode(
 					profileImgUrl,
 					savedProfileImages,
 					savedKitchenImages,
-					savedMealImages
+					savedMealImages,
+					isKitchenClosed
 				};
 			}
 		);
