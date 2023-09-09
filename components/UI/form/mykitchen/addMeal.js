@@ -18,7 +18,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { UploadButton } from '../../../../utils/uploadthing.ts';
 
 import { useColors } from '../../../../hooks/useColors';
-import { addMeal } from '../../../../utils/meals';
+import { addMeal, updateMealImgInDb } from '../../../../utils/meals';
 import Image from 'next/image.js';
 
 const AddMeal = ({ email, setMsg, setMeals }) => {

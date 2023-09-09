@@ -85,6 +85,10 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [myOrders, setMyOrders] = useState(orders);
 	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
 	const [profileImage, setProfileImage] = useState(prepper.profileImgUrl);
+	const [savedMealImages, setSavedMealImages] = useState(
+		prepper.savedMealImages
+	);
+
 	const { colors } = useColors();
 	const theme = useTheme();
 	const xSmall = useMediaQuery(theme.breakpoints.down('sm'));
@@ -263,7 +267,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 						<MealsList
 							meals={meals}
 							prepperEmail={prepper.email}
-							savedMealImages={prepper.savedMealImages}
+							savedMealImages={savedMealImages}
+							setSavedMealImages={setSavedMealImages}
 							setMeals={setMeals}
 							setMsg={setMsg}
 							setError={setError}

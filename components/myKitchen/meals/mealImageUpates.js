@@ -11,7 +11,8 @@ const MealImageUpatesOptions = ({
 	mealImage,
 	prepperEmail,
 	mealId,
-	setError
+	setError,
+	setSavedMealImages
 }) => {
 	return (
 		<>
@@ -44,6 +45,7 @@ const MealImageUpatesOptions = ({
 						const imgUrl = res[0].url;
 						console.log('image url', imgUrl);
 						setMealImage(imgUrl);
+						setSavedMealImages((prevImages) => [...prevImages, imgUrl]);
 						try {
 							const data = await updateMealImgInDb(
 								prepperEmail,

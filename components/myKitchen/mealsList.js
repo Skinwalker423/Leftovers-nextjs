@@ -9,7 +9,8 @@ function MealsList({
 	setMeals,
 	setMsg,
 	setError,
-	savedMealImages
+	savedMealImages,
+	setSavedMealImages
 }) {
 	console.log('saved images', savedMealImages);
 	const mealsList = meals.map(({ title, id, description, qty, image }) => {
@@ -27,6 +28,7 @@ function MealsList({
 					setMeals={setMeals}
 					image={image}
 					savedMealImages={savedMealImages}
+					setSavedMealImages={setSavedMealImages}
 				/>
 			</Box>
 		);
