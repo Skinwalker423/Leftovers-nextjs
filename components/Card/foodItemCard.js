@@ -32,7 +32,8 @@ export default function FoodItemCard({
 	setMsg,
 	prepperEmail,
 	prepperId,
-	kitchen
+	kitchen,
+	isKitchenClosed
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -212,7 +213,9 @@ export default function FoodItemCard({
 						<Button
 							variant="contained"
 							color="success"
-							disabled={qty == 0 || isItemFromDifferentPrepper}
+							disabled={
+								qty == 0 || isItemFromDifferentPrepper || isKitchenClosed
+							}
 							onClick={handleAddCartItem}
 							size="small"
 						>

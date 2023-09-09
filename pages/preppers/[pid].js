@@ -104,14 +104,13 @@ const Prepper = ({ prepper }) => {
 				position={'relative'}
 				top={0}
 			>
-				<Image src={bannerImage} fill alt={prepper.kitchenTitle} />
+				<Image src={bannerImage} fill alt={prepper.kitchenTitle} priority />
 			</Box>
 			<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
 				<Box
 					position={'relative'}
 					borderRadius={'1em'}
 					display="flex"
-					// height={'20em'}
 					padding={'2em'}
 					flexDirection={'column'}
 					alignItems={'center'}
@@ -134,7 +133,7 @@ const Prepper = ({ prepper }) => {
 					<Box>
 						<TrophyLikesButton />
 					</Box>
-					{!prepper.isKitchenClosed && (
+					{prepper.isKitchenClosed && (
 						<Box
 							position={'relative'}
 							display={'flex'}
@@ -145,22 +144,12 @@ const Prepper = ({ prepper }) => {
 							height={'20rem'}
 							mt={5}
 						>
-							{/* <Alert
-								sx={{
-									textAlign: 'center',
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center'
-								}}
-								variant="filled"
-								color="error"
-							>
-								Sorry, We are closed
-							</Alert> */}
 							<Image
 								src={'/images/myKitchen/redClosed.jpg'}
 								style={{ objectFit: 'cover' }}
 								fill
+								alt="Store closed image"
+								sizes="100%"
 							/>
 						</Box>
 					)}
