@@ -111,7 +111,7 @@ const Prepper = ({ prepper }) => {
 					position={'relative'}
 					borderRadius={'1em'}
 					display="flex"
-					height={'20em'}
+					// height={'20em'}
 					padding={'2em'}
 					flexDirection={'column'}
 					alignItems={'center'}
@@ -134,6 +134,22 @@ const Prepper = ({ prepper }) => {
 					<Box>
 						<TrophyLikesButton />
 					</Box>
+					{!prepper.isKitchenClosed && (
+						<Box width={'100%'} mt={5}>
+							<Alert
+								sx={{
+									textAlign: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+									alignItems: 'center'
+								}}
+								variant="filled"
+								color="error"
+							>
+								Sorry, We are closed
+							</Alert>
+						</Box>
+					)}
 				</Box>
 			</Box>
 			<Divider
