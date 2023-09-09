@@ -18,10 +18,10 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { UploadButton } from '../../../../utils/uploadthing.ts';
 
 import { useColors } from '../../../../hooks/useColors';
-import { addMeal, updateMealImgInDb } from '../../../../utils/meals';
+import { addMeal } from '../../../../utils/meals';
 import Image from 'next/image.js';
 
-const AddMeal = ({ email, setMsg, setMeals }) => {
+const AddMeal = ({ email, setMsg, setMeals, setSavedMealImages }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -214,6 +214,7 @@ const AddMeal = ({ email, setMsg, setMeals }) => {
 										// Do something with the response
 										const imgUrl = res[0].url;
 										setMealImage(imgUrl);
+										setSavedMealImages((prevImages) => [...prevImages, imgUrl]);
 									}}
 									onUploadError={(error) => {
 										// Do something with the error.

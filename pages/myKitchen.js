@@ -248,6 +248,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							setMsg={setMsg}
 							email={prepper.email}
 							setMeals={setMeals}
+							setSavedMealImages={setSavedMealImages}
 						/>
 					</InfoCard>
 					<InfoCard title="Remove/Edit Meals">
