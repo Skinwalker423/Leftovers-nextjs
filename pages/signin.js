@@ -71,6 +71,10 @@ const signin = () => {
 					orientation={dividerResponse}
 					flexItem
 					light={true}
+					style={{
+						fontSize: 'large',
+						fontWeight: 'bold'
+					}}
 				>
 					OR
 				</Divider>

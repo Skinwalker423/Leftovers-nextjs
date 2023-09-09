@@ -13,7 +13,9 @@ const prepper = async (req, res) => {
 		req.body;
 	const session = await getServerSession(req, res, authOptions);
 
-	const userImage = session.user?.image || '';
+	console.log('session inside prepper registration', session);
+
+	const userImage = session ? session.user?.image : '';
 
 	const { address, city, state, zipcode } = location;
 	const isValidEmail = validateEmail(email);
@@ -66,7 +68,7 @@ const prepper = async (req, res) => {
 		profileImgUrl: userImage,
 		createdAt: new Date(),
 		savedProfileImages: userImage ? [userImage] : [],
-		savedKitchenImages: [],
+		savedKitchenImages: ['/art.jpg'],
 		savedMealImages: []
 	};
 	if (req.method === 'POST') {

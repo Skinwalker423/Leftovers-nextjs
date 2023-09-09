@@ -26,8 +26,9 @@ export async function getServerSideProps({ req, res }) {
 
 		if (!session) {
 			return {
-				props: {
-					userSession
+				redirect: {
+					destination: '/signin',
+					permanent: false
 				}
 			};
 		}
@@ -38,7 +39,7 @@ export async function getServerSideProps({ req, res }) {
 		if (userDb) {
 			return {
 				redirect: {
-					destination: '/myKitchen',
+					destination: '/signup',
 					permanent: false
 				}
 			};
