@@ -70,6 +70,8 @@ const PrepperSchema = new mongoose.Schema({
 	savedProfileImages: [],
 	savedMealImages: [],
 
+	isKitchenClosed: false,
+
 	createdAt: {
 		type: Date,
 		default: Date.now()
