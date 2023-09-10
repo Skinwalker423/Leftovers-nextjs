@@ -3,7 +3,6 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Footer from '../components/layout/footer/footer';
-import FavoriteList from '../components/favorites/favoriteList';
 import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
 import { getServerSession } from 'next-auth/next';
@@ -27,6 +26,7 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
+import FavoriteList from '../components/mealLists/favoriteList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);

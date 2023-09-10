@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
 import Box from '@mui/material/Box';
 import PrepperCard from '../Card/prepperCard';
-import styles from './favoriteList.module.css';
 
 const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 	const avatar = 'https://i.pravatar.cc/300';
@@ -20,10 +19,11 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 			my={'1em'}
 			sx={{
 				height: {
-					xs: favRow ? '100%' : 'unset'
+					xs: favRow ? '100%' : 'unset',
+					overflowX: { xs: 'hidden' },
+					overflowY: 'hidden'
 				}
 			}}
-			className={styles.prepCardContainer}
 		>
 			{state.favorites.map((prepper) => {
 				return (
