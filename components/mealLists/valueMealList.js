@@ -8,7 +8,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 
 	const list = state.localPreppers.map((prepper) => {
 		return prepper.meals.map(
-			({ id, title, price, qty, description, image }) => {
+			({ id, title, price, qty, description, image, isKitchenClosed }) => {
 				if (price === 5 && qty > 0 && prepper.email !== userEmail) {
 					return (
 						<FoodItemCard
@@ -23,6 +23,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 							description={description}
 							image={image}
 							setMsg={setMsg}
+							isKitchenClosed={isKitchenClosed}
 						/>
 					);
 				}
