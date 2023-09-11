@@ -214,8 +214,8 @@ export default function FoodItemCard({
 						{isKitchenClosed && (
 							<Image
 								src={'/images/myKitchen/redClosed.jpg'}
-								width={20}
-								height={20}
+								width={50}
+								height={30}
 								alt="closed sign"
 							/>
 						)}

@@ -26,7 +26,7 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
-import FavoriteList from '../components/mealLists/favoriteList';
+import FavoriteList from '../components/prepperLists/favoriteList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
