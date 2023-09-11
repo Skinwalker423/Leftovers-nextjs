@@ -7,6 +7,8 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 	const avatar = 'https://i.pravatar.cc/300';
 	const { state } = useContext(UserContext);
 
+	console.log('favorites', state.favorites);
+
 	return (
 		<Box
 			display={'flex'}
@@ -38,6 +40,7 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 						kitchenImgUrl={prepper.kitchenImgUrl}
 						setErrorMsg={setErrorMsg}
 						setMsg={setMsg}
+						isKitchenClosed={prepper.isKitchenClosed}
 					/>
 				);
 			})}

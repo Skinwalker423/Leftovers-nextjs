@@ -21,6 +21,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useColors } from '../../hooks/useColors';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 export default function FoodItemCard({
 	foodItem = 'Food Item',
@@ -208,6 +209,15 @@ export default function FoodItemCard({
 									</Typography>
 								</Button>
 							</Link>
+						)}
+
+						{isKitchenClosed && (
+							<Image
+								src={'/images/myKitchen/redClosed.jpg'}
+								width={20}
+								height={20}
+								alt="closed sign"
+							/>
 						)}
 
 						<Button
