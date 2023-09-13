@@ -105,7 +105,8 @@ export async function findAllInCollection(
 			email,
 			description,
 			kitchenTitle,
-			kitchenImgUrl
+			kitchenImgUrl,
+			profileImgUrl
 		}) => {
 			return {
 				name: `${firstName} ${lastName}`,
@@ -113,7 +114,8 @@ export async function findAllInCollection(
 				id: _id.toString(),
 				description: description,
 				kitchenTitle: kitchenTitle,
-				kitchenImgUrl: kitchenImgUrl || ''
+				kitchenImgUrl: kitchenImgUrl || '',
+				profileImgUrl
 			};
 		}
 	);
