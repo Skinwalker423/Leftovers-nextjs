@@ -334,9 +334,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									// Do something with the response
 									const imgUrl = res[0].url;
 									setProfileImage(imgUrl);
-									selectedImg(imgUrl);
+									setSelectedImg(imgUrl);
 									if (!savedAvatarImages.includes(imgUrl)) {
-										console.log('image not already in db');
 										setSavedAvatarImages((prevList) => [...prevList, imgUrl]);
 									}
 									try {
