@@ -91,6 +91,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [savedAvatarImages, setSavedAvatarImages] = useState(
 		prepper.savedProfileImages
 	);
+	const [selectedImg, setSelectedImg] = useState(profileImage);
 
 	const { colors } = useColors();
 	const theme = useTheme();
@@ -323,6 +324,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 								currentImg={profileImage}
 								savedImages={savedAvatarImages}
 								setProfileImage={setProfileImage}
+								selectedImg={selectedImg}
+								setSelectedImg={setSelectedImg}
 							/>
 							<Typography>Or</Typography>
 							<UploadButton
@@ -331,6 +334,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									// Do something with the response
 									const imgUrl = res[0].url;
 									setProfileImage(imgUrl);
+									selectedImg(imgUrl);
 									if (!savedAvatarImages.includes(imgUrl)) {
 										console.log('image not already in db');
 										setSavedAvatarImages((prevList) => [...prevList, imgUrl]);

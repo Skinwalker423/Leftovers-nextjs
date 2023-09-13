@@ -18,11 +18,13 @@ const ProfileSavedImagesForm = ({
 	setMsg,
 	currentImg,
 	savedImages,
-	setProfileImage
+	setProfileImage,
+	selectedImg,
+	setSelectedImg
 }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
-	const [selectedImg, setSelectedImg] = useState(currentImg);
+
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 
