@@ -88,6 +88,9 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [savedMealImages, setSavedMealImages] = useState(
 		prepper.savedMealImages
 	);
+	const [savedAvatarImages, setSavedAvatarImages] = useState(
+		prepper.savedProfileImages
+	);
 
 	const { colors } = useColors();
 	const theme = useTheme();
@@ -318,7 +321,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 								email={prepper.email}
 								setMsg={setMsg}
 								currentImg={profileImage}
-								savedImages={prepper.savedProfileImages}
+								savedImages={savedAvatarImages}
 								setProfileImage={setProfileImage}
 							/>
 							<Typography>Or</Typography>
@@ -328,6 +331,10 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									// Do something with the response
 									const imgUrl = res[0].url;
 									setProfileImage(imgUrl);
+									if (!savedAvatarImages.includes(imgUrl)) {
+										console.log('image not already in db');
+										setSavedAvatarImages((prevList) => [...prevList, imgUrl]);
+									}
 									try {
 										const data = await updateProfileImageDb(
 											prepper.email,
