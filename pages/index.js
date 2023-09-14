@@ -126,6 +126,12 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 			});
 			setIsSearching(false);
 			setZipCode('');
+			if (findPreppers.length) {
+				const results = document.getElementById('searchResults');
+				results.scrollIntoView({
+					behavior: 'smooth'
+				});
+			}
 		}
 	};
 
@@ -155,8 +161,9 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
+					zipCode={zipCode}
 				/>
-
+				<div id="searchResults" />
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"
@@ -170,6 +177,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 						/>
 					</CategoryBanner>
 				)}
+
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/"

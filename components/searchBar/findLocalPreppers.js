@@ -7,7 +7,8 @@ import { useColors } from '../../hooks/useColors';
 const FindLocalPreppersSearchBar = ({
 	handleZipSearchForm,
 	handleZipChange,
-	errorMsg
+	errorMsg,
+	zipCode
 }) => {
 	const { colors } = useColors();
 
@@ -42,6 +43,7 @@ const FindLocalPreppersSearchBar = ({
 							label="Enter your current zip code"
 							variant="standard"
 							fullWidth
+							value={zipCode}
 							color="warning"
 							onChange={handleZipChange}
 							helperText={errorMsg ? errorMsg : ''}

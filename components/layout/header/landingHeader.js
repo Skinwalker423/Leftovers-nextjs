@@ -11,7 +11,8 @@ const LandingHeader = ({
 	img = '/art.jpg',
 	handleZipChange,
 	handleZipSearchForm,
-	errorMsg
+	errorMsg,
+	zipCode
 }) => {
 	const { colors } = useColors();
 	return (
@@ -63,6 +64,7 @@ const LandingHeader = ({
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}
+					zipCode={zipCode}
 				/>
 			</Stack>
 		</Box>
