@@ -103,7 +103,7 @@ const NavBar = () => {
 							{session && <NavItem title="Favs" href="/favorites" />}
 							<NavItem title="About" href="/about" />
 
-							<NavItem title="MyKitchen" href="/myKitchen" />
+							{session && <NavItem title="MyKitchen" href="/myKitchen" />}
 
 							<NavItem title="Register" href="/register" />
 						</ul>
