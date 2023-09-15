@@ -26,6 +26,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 							image={image}
 							setMsg={setMsg}
 							isKitchenClosed={prepper.isKitchenClosed}
+							showClosed={true}
 						/>
 					);
 				}
