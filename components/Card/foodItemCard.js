@@ -34,7 +34,8 @@ export default function FoodItemCard({
 	prepperEmail,
 	prepperId,
 	kitchen,
-	isKitchenClosed
+	isKitchenClosed,
+	showClosed
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -168,7 +169,7 @@ export default function FoodItemCard({
 					<CardActions
 						sx={{
 							display: 'flex',
-							justifyContent: 'space-between',
+							justifyContent: session ? 'space-between' : 'flex-end',
 							pb: '.5em'
 						}}
 					>
@@ -211,7 +212,7 @@ export default function FoodItemCard({
 							</Link>
 						)}
 
-						{isKitchenClosed && (
+						{isKitchenClosed && showClosed && (
 							<Image
 								src={'/images/myKitchen/redClosed.jpg'}
 								width={50}
