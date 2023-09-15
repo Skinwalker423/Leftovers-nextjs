@@ -129,7 +129,8 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 			if (findPreppers.length) {
 				const results = document.getElementById('searchResults');
 				results.scrollIntoView({
-					behavior: 'smooth'
+					behavior: 'smooth',
+					block: 'center'
 				});
 			}
 		}
