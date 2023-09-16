@@ -16,23 +16,24 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 			: '';
 
 	return (
-		<Link className={styles.navLink} href={href}>
-			<Box
-				width={'100%'}
-				sx={{
-					':hover': {
-						borderBottom: `2px solid ${colors.orangeAccent[900]}`
-					}
-				}}
-				borderBottom={currentPage}
-			>
-				<li>
+		<li>
+			<Link className={styles.navLink} href={href}>
+				<Box
+					width={'100%'}
+					pb={1}
+					sx={{
+						':hover': {
+							borderBottom: `2px solid ${colors.orangeAccent[900]}`
+						}
+					}}
+					borderBottom={currentPage}
+				>
 					<Typography color={'secondary'} variant="h4">
 						{title}
 					</Typography>
-				</li>
-			</Box>
-		</Link>
+				</Box>
+			</Link>
+		</li>
 	);
 };
 

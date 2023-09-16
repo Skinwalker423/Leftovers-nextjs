@@ -87,17 +87,11 @@ const NavBar = () => {
 				</Link>
 				<Box
 					display={{ xs: 'none', md: 'unset' }}
-					width={{ sm: '15rem', md: '35rem' }}
-					height="3rem"
+					// width={{ sm: '15rem', md: '35rem' }}
+					// height="3.5rem"
 				>
 					<nav style={{ width: '100%' }}>
-						<ul
-							style={{
-								listStyle: 'none',
-								display: 'flex',
-								justifyContent: 'space-evenly'
-							}}
-						>
+						<ul className={styles.linkListContainer}>
 							<NavItem title="Home" href="/" />
 							<NavItem title="Preppers" href="/preppers" />
 							{session && <NavItem title="Favs" href="/favorites" />}
