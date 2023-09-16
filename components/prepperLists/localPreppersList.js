@@ -15,7 +15,8 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 			kitchenTitle,
 			email,
 			kitchenImgUrl,
-			profileImgUrl
+			profileImgUrl,
+			mealsServed
 		}) => {
 			const favorited =
 				state.favorites && favoritesPrepId.includes(id) ? true : false;
@@ -34,6 +35,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 						setMsg={setMsg}
 						setErrorMsg={setErrorMsg}
 						kitchenImgUrl={kitchenImgUrl}
+						mealsServed={mealsServed}
 					/>
 				);
 			}

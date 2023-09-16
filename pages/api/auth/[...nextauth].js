@@ -4,7 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { comparePassword } from '../../../utils/bcrypt';
 import {
 	findExistingUserEmail,
-	connectMongoDb,
+	connectMongoDb
 } from '../../../db/mongodb/mongoDbUtils';
 
 export const authOptions = {
@@ -23,13 +23,13 @@ export const authOptions = {
 					label: 'Email',
 					type: 'email',
 					placeholder: 'jwick@kickass.com',
-					autocomplete: 'username',
+					autocomplete: 'username'
 				},
 				password: {
 					label: 'Password',
 					type: 'password',
-					autocomplete: 'new-password',
-				},
+					autocomplete: 'new-password'
+				}
 			},
 			async authorize(credentials, req) {
 				// Add logic here to look up the user from the credentials supplied
@@ -49,7 +49,7 @@ export const authOptions = {
 					if (matchedPasswords) {
 						client.close();
 						return {
-							email: foundUser.email,
+							email: foundUser.email
 						};
 					} else {
 						// throw new Error('Incorrect email/password');
@@ -63,7 +63,7 @@ export const authOptions = {
 
 					// You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
 				}
-			},
+			}
 		}),
 		GoogleProvider({
 			clientId: process.env.GOOGLE_ID,
@@ -72,11 +72,11 @@ export const authOptions = {
 				params: {
 					prompt: 'consent',
 					access_type: 'offline',
-					response_type: 'code',
-				},
+					response_type: 'code'
+				}
 			},
-			checks: 'pkce',
-		}),
+			checks: 'pkce'
+		})
 		// ...add more providers here
 	],
 	secret: process.env.NEXT_AUTH_SECRET,
@@ -90,9 +90,19 @@ export const authOptions = {
 		},
 		async session({ session, token, user }) {
 			// Send properties to the client, like an access_token from a provider.
+			console.log('user inside session callback', user);
+			console.log('session inside session callback', session);
+			console.log('token inside session callback', token);
+			const client = await connectMongoDb();
+			const foundUser = await findExistingUserEmail(client, session.user.email);
+
+			if (!foundUser) {
+				console.log('creating user in db');
+			}
+
 			session.accessToken = token.accessToken;
 			return session;
-		},
-	},
+		}
+	}
 };
 export default NextAuth(authOptions);
