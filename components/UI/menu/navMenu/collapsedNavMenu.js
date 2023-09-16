@@ -14,9 +14,11 @@ import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlin
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import { Typography } from '@mui/material';
+import { useSession } from 'next-auth/react';
 
 export default function CollapsedNavMenu() {
 	const router = useRouter();
+	const { data: session } = useSession();
 	const [anchorEl, setAnchorEl] = useState(null);
 	const { colors } = useColors();
 	const open = Boolean(anchorEl);
@@ -78,15 +80,17 @@ export default function CollapsedNavMenu() {
 						<Typography fontSize={'large'}>Preppers</Typography>
 					</MenuItem>
 				</Link>
-				<Link className={styles.link} href={'/favorites'}>
-					<MenuItem
-						sx={{ color: colors.orangeAccent[900], gap: 2 }}
-						onClick={handleClose}
-					>
-						<FavoriteBorderOutlinedIcon fontSize={'large'} />
-						<Typography fontSize={'large'}>Favorites</Typography>
-					</MenuItem>
-				</Link>
+				{session && (
+					<Link className={styles.link} href={'/favorites'}>
+						<MenuItem
+							sx={{ color: colors.orangeAccent[900], gap: 2 }}
+							onClick={handleClose}
+						>
+							<FavoriteBorderOutlinedIcon fontSize={'large'} />
+							<Typography fontSize={'large'}>Favorites</Typography>
+						</MenuItem>
+					</Link>
+				)}
 				<Link className={styles.link} href={'/about'}>
 					<MenuItem
 						sx={{ color: colors.orangeAccent[900], gap: 2 }}
