@@ -22,6 +22,10 @@ const PrepperSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	mealsServed: {
+		type: Number,
+		default: 0
+	},
 	meals: [
 		{
 			id: {
