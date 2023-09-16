@@ -11,24 +11,33 @@ const NavItem = ({ title = 'nav item', href = '/' }) => {
 	const router = useRouter();
 
 	const currentPage =
-		(router.asPath.includes(href) && href !== '/') || href === router.asPath
-			? `2px solid ${colors.orangeAccent[900]}`
-			: '';
+		(router.asPath.includes(href) && href !== '/') || href === router.asPath;
 
 	return (
-		<li>
+		<li className={styles.navLinkContainer}>
 			<Link className={styles.navLink} href={href}>
 				<Box
 					width={'100%'}
-					pb={1}
+					height={'2.5rem'}
+					py={1}
 					sx={{
 						':hover': {
-							borderBottom: `2px solid ${colors.orangeAccent[900]}`
+							borderBottom: `2px solid ${colors.orangeAccent[300]}`
 						}
 					}}
-					borderBottom={currentPage}
+					borderBottom={
+						currentPage ? `2px solid ${colors.orangeAccent[300]}` : ''
+					}
 				>
-					<Typography color={'secondary'} variant="h4">
+					<Typography
+						sx={{
+							':hover': {
+								color: colors.orangeAccent[300]
+							}
+						}}
+						color={currentPage ? colors.orangeAccent[300] : 'secondary'}
+						variant="h4"
+					>
 						{title}
 					</Typography>
 				</Box>
