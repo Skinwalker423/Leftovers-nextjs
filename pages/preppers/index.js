@@ -114,6 +114,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 									description={prepper.description}
 									setMsg={setMsg}
 									setErrorMsg={setErrorMsg}
+									mealsServed={prepper.mealsServed}
 								/>
 							);
 						}

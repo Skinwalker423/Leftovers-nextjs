@@ -33,7 +33,8 @@ export default function PrepperCard({
 	userEmail,
 	id,
 	setMsg,
-	setErrorMsg
+	setErrorMsg,
+	mealsServed
 }) {
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
@@ -204,7 +205,7 @@ export default function PrepperCard({
 						</Tooltip>
 					)}
 
-					<TrophyLikesButton />
+					<TrophyLikesButton mealsServed={mealsServed} />
 
 					<Link className={styles.link} href={`/preppers/${id}`}>
 						<Button

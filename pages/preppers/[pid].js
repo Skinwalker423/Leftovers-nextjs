@@ -131,7 +131,7 @@ const Prepper = ({ prepper }) => {
 						</Typography>
 					</Box>
 					<Box>
-						<TrophyLikesButton />
+						<TrophyLikesButton mealsServed={prepper.mealsServed} />
 					</Box>
 					{prepper.isKitchenClosed && (
 						<Box

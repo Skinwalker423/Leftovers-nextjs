@@ -3,7 +3,7 @@ import { Box, IconButton, Typography, Tooltip, Paper } from '@mui/material';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { useColors } from '../../hooks/useColors';
 
-const TrophyLikesButton = ({ counter = 23 }) => {
+const TrophyLikesButton = ({ mealsServed }) => {
 	const { colors } = useColors();
 	return (
 		<Tooltip title="Meals Served">
@@ -13,7 +13,7 @@ const TrophyLikesButton = ({ counter = 23 }) => {
 			>
 				<WorkspacePremiumIcon color="error" fontSize="large" />
 				<Typography color={colors.orangeAccent[900]} fontSize={'large'}>
-					{counter}
+					{mealsServed}
 				</Typography>
 			</Box>
 		</Tooltip>

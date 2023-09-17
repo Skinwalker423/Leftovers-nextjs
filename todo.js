@@ -1,6 +1,5 @@
-//add a sign in prepper page for the hours open
-//store closed sign on prepper page
 //increment number of meals served on prepper page
+//add a sign in prepper page for the hours open
 //handle edit avatar photo and meal photo
 //order details page
 //checkout items list fix description alignment

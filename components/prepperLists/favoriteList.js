@@ -41,6 +41,7 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 						setErrorMsg={setErrorMsg}
 						setMsg={setMsg}
 						isKitchenClosed={prepper.isKitchenClosed}
+						mealsServed={prepper.mealsServed}
 					/>
 				);
 			})}
