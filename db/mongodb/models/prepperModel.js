@@ -86,7 +86,7 @@ const PrepperSchema = new mongoose.Schema({
 	}
 });
 
-const User =
+const Prepper =
 	mongoose.models.Prepper || mongoose.model('Prepper', PrepperSchema);
 
-export default User;
+export default Prepper;

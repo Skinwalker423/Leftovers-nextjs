@@ -4,7 +4,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { comparePassword } from '../../../utils/bcrypt';
 import {
 	findExistingUserEmail,
-	connectMongoDb
+	connectMongoDb,
+	addDocToDb
 } from '../../../db/mongodb/mongoDbUtils';
 
 export const authOptions = {
@@ -92,12 +93,17 @@ export const authOptions = {
 			// Send properties to the client, like an access_token from a provider.
 			console.log('user inside session callback', user);
 			console.log('session inside session callback', session);
-			console.log('token inside session callback', token);
+
 			const client = await connectMongoDb();
 			const foundUser = await findExistingUserEmail(client, session.user.email);
-
+			const userDetails = {
+				...session.user,
+				favorites: []
+			};
+			console.log('userDetails', userDetails);
 			if (!foundUser) {
-				console.log('creating user in db');
+				const doc = await addDocToDb(client, 'users', userDetails);
+				console.log('created a user', doc);
 			}
 
 			session.accessToken = token.accessToken;
