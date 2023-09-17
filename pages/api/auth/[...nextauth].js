@@ -4,9 +4,10 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { comparePassword } from '../../../utils/bcrypt';
 import {
 	findExistingUserEmail,
-	connectMongoDb,
-	addDocToDb
+	connectMongoDb
 } from '../../../db/mongodb/mongoDbUtils';
+import User from '../../../db/mongodb/models/userModel';
+import { connectToMongoDb } from '../../../db/mongodb/mongoose';
 
 export const authOptions = {
 	// Configure one or more authentication providers
@@ -92,16 +93,22 @@ export const authOptions = {
 		async session({ session, token, user }) {
 			// Send properties to the client, like an access_token from a provider.
 
-			const client = await connectMongoDb();
-			const foundUser = await findExistingUserEmail(client, session.user.email);
+			// const client = await connectMongoDb();
+			// const foundUser = await findExistingUserEmail(client, session.user.email);
+			await connectToMongoDb();
+			const foundUser = await User.findOne({
+				prepperEmail: session.user.email
+			});
+
 			const userDetails = {
 				...session.user,
 				favorites: []
 			};
 
 			if (!foundUser) {
-				const doc = await addDocToDb(client, 'users', userDetails);
-				console.log('created a user', doc);
+				const newUser = new User(userDetails);
+				await newUser.save();
+				console.log('created a user', newUser);
 			}
 
 			session.accessToken = token.accessToken;
