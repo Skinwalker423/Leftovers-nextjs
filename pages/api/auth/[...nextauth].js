@@ -91,8 +91,6 @@ export const authOptions = {
 		},
 		async session({ session, token, user }) {
 			// Send properties to the client, like an access_token from a provider.
-			console.log('user inside session callback', user);
-			console.log('session inside session callback', session);
 
 			const client = await connectMongoDb();
 			const foundUser = await findExistingUserEmail(client, session.user.email);
@@ -100,7 +98,7 @@ export const authOptions = {
 				...session.user,
 				favorites: []
 			};
-			console.log('userDetails', userDetails);
+
 			if (!foundUser) {
 				const doc = await addDocToDb(client, 'users', userDetails);
 				console.log('created a user', doc);

@@ -17,8 +17,7 @@ import ErrorAlert from '../components/UI/alert/ErrorAlert';
 import ValueMealList from '../components/mealLists/valueMealList';
 import {
 	connectMongoDb,
-	findExistingUserEmail,
-	addDocToDb
+	findExistingUserEmail
 } from '../db/mongodb/mongoDbUtils';
 import { useSession } from 'next-auth/react';
 import { UserContext } from '../store/UserContext';
@@ -43,31 +42,6 @@ export async function getServerSideProps({ req, res }) {
 		session &&
 		client &&
 		(await findExistingUserEmail(client, session.user.email));
-
-	if (!user && session) {
-		const userDetails = {
-			...session.user,
-			favorites: []
-		};
-		try {
-			const doc = await addDocToDb(client, 'users', userDetails);
-			return {
-				props: {
-					favoriteList: [],
-					foundSession
-				}
-			};
-		} catch (err) {
-			console.error('could not establish Google auth user');
-			return {
-				props: {
-					favoriteList: [],
-					foundSession,
-					errorServer: err
-				}
-			};
-		}
-	}
 
 	return {
 		props: {

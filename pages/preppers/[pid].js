@@ -55,7 +55,7 @@ const Prepper = ({ prepper }) => {
 
 	console.log('prepper info', prepper);
 
-	const bannerImage = prepper.kitchenImgUrl || '/art.jpg';
+	const bannerImage = prepper?.kitchenImgUrl || '/art.jpg';
 
 	useEffect(() => {
 		if (prepper && prepper.meals) {
