@@ -2,10 +2,6 @@ import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { comparePassword } from '../../../utils/bcrypt';
-import {
-	findExistingUserEmail,
-	connectMongoDb
-} from '../../../db/mongodb/mongoDbUtils';
 import User from '../../../db/mongodb/models/userModel';
 import { connectToMongoDb } from '../../../db/mongodb/mongoose';
 
@@ -35,11 +31,12 @@ export const authOptions = {
 			},
 			async authorize(credentials, req) {
 				// Add logic here to look up the user from the credentials supplied
-				const client = await connectMongoDb();
-				const foundUser = await findExistingUserEmail(
-					client,
-					credentials.email
-				);
+				await connectToMongoDb();
+				const foundUser = await User.findOne({
+					email: credentials.email
+				});
+
+				console.log('found user in email/pw sign in', foundUser);
 
 				if (foundUser) {
 					// Any object returned will be saved in `user` property of the JWT
@@ -49,7 +46,6 @@ export const authOptions = {
 					);
 
 					if (matchedPasswords) {
-						client.close();
 						return {
 							email: foundUser.email
 						};
@@ -97,8 +93,10 @@ export const authOptions = {
 			// const foundUser = await findExistingUserEmail(client, session.user.email);
 			await connectToMongoDb();
 			const foundUser = await User.findOne({
-				prepperEmail: session.user.email
+				email: session.user.email
 			});
+
+			console.log('found user', foundUser);
 
 			const userDetails = {
 				...session.user,
