@@ -7,21 +7,24 @@ const createOrder = async (req, res) => {
 	}
 	const order = req.body;
 	console.log('body from fetch request', order);
-	const orderDetails = await createOrderDb(order);
-	console.log('order details', orderDetails);
+	try {
+		const orderDetails = await createOrderDb(order);
+		console.log('order details', orderDetails);
 
-	if (!orderDetails) {
-		return res.status(500).json({ error: 'problem creating order in db' });
+		const updatedServed = await incrementMealsServedDB(order.prepperEmail);
+		console.log('meals served updated', updatedServed);
+		const formattedId = orderDetails._id.toString();
+		console.log('this is the formatted id:', formattedId);
+
+		return res.status(200).json({
+			message: 'request to create order completed',
+			data: formattedId
+		});
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ error: `problem creating order in db: ${error}` });
 	}
-	const updatedServed = await incrementMealsServedDB(order.prepperEmail);
-	console.log(updatedServed);
-	const formattedId = orderDetails._id.toString();
-	console.log('this is the formatted id:', formattedId);
-
-	return res.status(200).json({
-		message: 'request to create order completed',
-		data: formattedId
-	});
 };
 
 export default createOrder;
