@@ -50,7 +50,7 @@ export const incrementMealsServedDB = async (prepperEmail: string) => {
 		await connectToMongoDb();
 		const updateServed = await Prepper.findOneAndUpdate(
 			{
-				prepperEmail
+				email: prepperEmail
 			},
 			{
 				$inc: {

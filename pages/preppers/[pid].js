@@ -17,10 +17,12 @@ import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
+	console.log('prepperId in prepper page', prepperId);
 	try {
 		const prepperData = await fetchPrepper(prepperId);
+		console.log('prepperdata in prepper page', prepperData);
 
-		if (!prepperData || prepperData.error) {
+		if (!prepperData) {
 			return { notFound: true };
 		}
 
@@ -32,6 +34,7 @@ export async function getStaticProps({ params }) {
 			revalidate: 60 // In seconds
 		};
 	} catch (err) {
+		console.log('something went wrong fetching prepper', err);
 		return { notFound: true };
 	}
 }

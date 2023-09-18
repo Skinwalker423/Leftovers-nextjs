@@ -10,8 +10,10 @@ const createOrder = async (req, res) => {
 	try {
 		const orderDetails = await createOrderDb(order);
 		console.log('order details', orderDetails);
-
-		const updatedServed = await incrementMealsServedDB(order.prepperEmail);
+		console.log('prepper email after order', orderDetails.prepperEmail);
+		const updatedServed = await incrementMealsServedDB(
+			orderDetails.prepperEmail
+		);
 		console.log('meals served updated', updatedServed);
 		const formattedId = orderDetails._id.toString();
 		console.log('this is the formatted id:', formattedId);
