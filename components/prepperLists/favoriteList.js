@@ -17,6 +17,7 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 			alignItems={'center'}
 			gap="3em"
 			my={'1em'}
+			py={2}
 			sx={{
 				height: {
 					xs: favRow ? '100%' : 'unset',

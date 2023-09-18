@@ -38,7 +38,7 @@ export async function getServerSideProps({ req, res }) {
 		if (prepperDb) {
 			return {
 				redirect: {
-					destination: '/signup',
+					destination: '/myKitchen',
 					permanent: false
 				}
 			};
