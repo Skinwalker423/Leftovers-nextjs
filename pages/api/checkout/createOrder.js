@@ -1,5 +1,5 @@
 import { createOrderDb } from '../../../db/mongodb/mongoDbUtils';
-const ObjectID = require('mongodb').ObjectId;
+import { incrementMealsServedDB } from '../../../db/mongodb/mongoose';
 
 const createOrder = async (req, res) => {
 	if (req.method !== 'POST') {
@@ -13,7 +13,8 @@ const createOrder = async (req, res) => {
 	if (!orderDetails) {
 		return res.status(500).json({ error: 'problem creating order in db' });
 	}
-
+	const updatedServed = await incrementMealsServedDB(order.prepperEmail);
+	console.log(updatedServed);
 	const formattedId = orderDetails._id.toString();
 	console.log('this is the formatted id:', formattedId);
 
