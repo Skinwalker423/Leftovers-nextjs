@@ -1,5 +1,6 @@
 import mongoose, { ConnectOptions } from 'mongoose';
 import Order from './models/orderModel';
+import Prepper from './models/prepperModel';
 
 let isConnected = false;
 
@@ -40,6 +41,25 @@ export const updateOrderStatusById = async (id: string, status: string) => {
 		);
 
 		return order;
+	} catch (error: any) {
+		throw new Error(`problem updating meal status: ${error.message}`);
+	}
+};
+export const incrementMealsServedDB = async (prepperEmail: string) => {
+	try {
+		await connectToMongoDb();
+		const updateServed = await Prepper.findOneAndUpdate(
+			{
+				prepperEmail
+			},
+			{
+				$inc: {
+					mealsServed: 1
+				}
+			}
+		);
+
+		return updateServed;
 	} catch (error: any) {
 		throw new Error(`problem updating meal status: ${error.message}`);
 	}
