@@ -93,7 +93,7 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 				<Box display="flex" justifyContent={'center'} gap={4} flexWrap={'wrap'}>
 					{preppersList.map((prepper) => {
 						const avatar = 'https://i.pravatar.cc/300';
-						console.log('avatar', prepper.profileImgUrl);
+
 						const favorited =
 							favoritesList && favoritesList.includes(prepper.id)
 								? true

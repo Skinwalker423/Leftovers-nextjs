@@ -26,7 +26,6 @@ export async function getServerSideProps({ req, res, params }) {
 	const messageDetails =
 		messageId &&
 		mockDataContacts.find((message) => message.id.toString() === messageId);
-	console.log(messageDetails);
 
 	try {
 		const client = await connectMongoDb();
@@ -60,7 +59,6 @@ export async function getServerSideProps({ req, res, params }) {
 }
 
 const Message = ({ messageDetails, userData }) => {
-	console.log(messageDetails);
 	const { name, email, id, message } = messageDetails;
 
 	return (

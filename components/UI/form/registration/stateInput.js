@@ -62,7 +62,6 @@ const menuItemList = usaStatesArray.map((state) => {
 });
 
 const StateInput = ({ setState, state, size }) => {
-	console.log(state);
 	function handleStateChange(e) {
 		setState(e.target.value);
 	}

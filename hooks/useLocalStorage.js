@@ -5,7 +5,7 @@ function getSavedValue(key, initialValue) {
 		// Perform localStorage action
 		const item = localStorage.getItem('key');
 		const storedValue = JSON.parse(window.localStorage.getItem(key));
-		console.log('inside useLocalStorage', storedValue);
+
 		if (storedValue) return storedValue;
 		if (initialValue instanceof Function) return initialValue();
 		return initialValue;

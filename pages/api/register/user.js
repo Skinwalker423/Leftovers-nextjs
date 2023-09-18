@@ -42,7 +42,6 @@ const user = async (req, res) => {
 		const userFound = await findExistingUserEmail(client, email);
 
 		if (userFound) {
-			console.log('prepperFound:', userFound);
 			res.status(400).json({
 				error: 'Email already in use. Choose another email or please sign in'
 			});
@@ -50,7 +49,6 @@ const user = async (req, res) => {
 		}
 
 		const doc = await addDocToDb(client, 'users', userDetails);
-		console.log(doc);
 		client.close();
 		res.status(200).json({ message: 'Succesfully signed up!' });
 	} catch (err) {

@@ -36,7 +36,7 @@ export async function getServerSideProps({ req, res }) {
 				email: session.user?.email || null
 		  }
 		: null;
-	console.log('checking session:', foundSession);
+
 	const client = session && (await connectMongoDb());
 	const user =
 		session &&
@@ -83,7 +83,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 			}, 5000);
 			return;
 		}
-		console.log('submitted');
+
 		setErrorMsg('');
 		const findPreppers = await fetchLocalPreppers(zipCode);
 

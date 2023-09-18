@@ -2,7 +2,7 @@ import React from 'react';
 
 export async function getServerSideProps({ params }) {
 	const orderId = params.orderId;
-	console.log('order id', orderId);
+
 	return {
 		props: {
 			order: []

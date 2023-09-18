@@ -8,7 +8,7 @@ const updateKitchenImage = async (req, res) => {
 		return res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
-	console.log(body);
+
 	const { kitchenImgUrl, email, type } = body;
 
 	if (!kitchenImgUrl || kitchenImgUrl.trim() === '') {
@@ -37,7 +37,6 @@ const updateKitchenImage = async (req, res) => {
 		res.status(200).json({ message: 'Successfully updated kitchen image' });
 		return;
 	} catch (err) {
-		console.log('error:', err);
 		res.status(500).json({ error: 'problem updating image in db', err });
 	}
 };

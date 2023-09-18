@@ -7,7 +7,6 @@ import {
 
 async function getPrepper(req, res) {
 	if (req.method === 'POST') {
-		console.log('this is the request body: ', req.body);
 		const pid = req.body.pid;
 		if (!pid) {
 			return res.status(500).send({ error: 'no prepper id found' });

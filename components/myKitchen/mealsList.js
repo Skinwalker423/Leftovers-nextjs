@@ -12,7 +12,6 @@ function MealsList({
 	savedMealImages,
 	setSavedMealImages
 }) {
-	console.log('saved images', savedMealImages);
 	const mealsList = meals.map(({ title, id, description, qty, image }) => {
 		return (
 			<Box key={id} mb="2em">

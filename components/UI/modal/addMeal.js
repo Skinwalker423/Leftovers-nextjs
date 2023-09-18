@@ -5,7 +5,7 @@ import {
 	Typography,
 	Button,
 	TextField,
-	CircularProgress,
+	CircularProgress
 } from '@mui/material';
 import { useColors } from '../../../hooks/useColors';
 
@@ -32,7 +32,7 @@ const AddMeal = () => {
 		border: `2px solid ${colors.orangeAccent[900]}`,
 		borderRadius: '1em',
 		boxShadow: 24,
-		p: 4,
+		p: 4
 	};
 
 	const handleFileChange = (e) => {
@@ -46,10 +46,8 @@ const AddMeal = () => {
 			title: titleRef.current.value,
 			price: priceRef.current.value,
 			description: descriptionRef.current.value,
-			image: imageFile,
+			image: imageFile
 		};
-
-		console.log(mealDetails);
 	};
 
 	return (
@@ -58,58 +56,61 @@ const AddMeal = () => {
 				sx={{
 					backgroundColor: colors.orangeAccent[900],
 					'&:hover': {
-						backgroundColor: colors.orangeAccent[700],
-					},
+						backgroundColor: colors.orangeAccent[700]
+					}
 				}}
-				onClick={handleOpen}>
+				onClick={handleOpen}
+			>
 				Add Meal
 			</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
-				aria-labelledby='modal-title'
-				aria-describedby='modal-description'>
+				aria-labelledby="modal-title"
+				aria-describedby="modal-description"
+			>
 				<Box sx={style}>
 					<form onSubmit={handleAddMealForm}>
-						<Typography textAlign={'center'} variant='h3'>
+						<Typography textAlign={'center'} variant="h3">
 							Add a meal to your kitchen
 						</Typography>
 						<Box
 							display={'flex'}
-							flexDirection='column'
-							alignItems='space-between'
+							flexDirection="column"
+							alignItems="space-between"
 							justifyContent={'space-between'}
-							gap='2em'
-							px='5em'
-							width='100%'
-							mt='1em'>
+							gap="2em"
+							px="5em"
+							width="100%"
+							mt="1em"
+						>
 							<Box>
 								<TextField
-									id='title'
-									type='text'
-									label='Meal Name'
+									id="title"
+									type="text"
+									label="Meal Name"
 									required
 									placeholder="Dreamer's Donuts"
-									color='secondary'
+									color="secondary"
 									fullWidth
 									inputRef={titleRef}
 								/>
 							</Box>
 							<Box>
 								<TextField
-									id='price'
-									type='number'
-									label='Price'
+									id="price"
+									type="number"
+									label="Price"
 									required
-									placeholder='$4.99'
-									color='secondary'
+									placeholder="$4.99"
+									color="secondary"
 									fullWidth
 									inputRef={priceRef}
 								/>
 							</Box>
-							<Button variant='contained' color='secondary' component='label'>
+							<Button variant="contained" color="secondary" component="label">
 								Upload Pic of Meal
-								<input onChange={handleFileChange} type='file' hidden />
+								<input onChange={handleFileChange} type="file" hidden />
 							</Button>
 							<Box>
 								<TextField
@@ -117,21 +118,22 @@ const AddMeal = () => {
 									multiline
 									maxRows={3}
 									required
-									color='secondary'
-									label='Description of this meal'
-									placeholder='Enter a brief description of what is included in this meal'
+									color="secondary"
+									label="Description of this meal"
+									placeholder="Enter a brief description of what is included in this meal"
 									fullWidth
 									inputRef={descriptionRef}
 								/>
 							</Box>
 							<Button
-								variant='contained'
+								variant="contained"
 								fullWidth
 								disabled={isFormLoading}
-								color='success'
-								type='submit'
+								color="success"
+								type="submit"
 								required
-								size='large'>
+								size="large"
+							>
 								{isFormLoading ? (
 									<CircularProgress />
 								) : (

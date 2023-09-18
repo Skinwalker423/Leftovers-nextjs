@@ -7,7 +7,7 @@ const updateStatus = async (req, res) => {
 		return res.status(400).json({ error: 'invalid request' });
 	}
 	const session = await getServerSession(req, res, authOptions);
-	console.log('user in get server session', session);
+
 	if (!session) {
 		return res.status(401).json({ error: 'unauthorized' });
 	}
@@ -15,7 +15,6 @@ const updateStatus = async (req, res) => {
 	const { orderId, status, prepperEmail } = req.body;
 
 	const prepperCheck = session?.user?.email !== prepperEmail;
-	console.log('this is a prepper check', prepperCheck);
 
 	if (prepperCheck) {
 		return res.status(401).json({ error: 'unauthorized user' });
@@ -29,7 +28,6 @@ const updateStatus = async (req, res) => {
 			data: updatedOrder
 		});
 	} catch (error) {
-		console.log('error updating order', error.message);
 		return res.status(500).json({ error: 'problem updating order' });
 	}
 };

@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-
-import { useColors } from '../../../hooks/useColors';
 
 import OrderCard from './orderCard';
 
 const OrdersList = ({ myOrders, currentUserEmail, setMsg }) => {
-	console.log('my orders', myOrders);
-
 	return (
 		<Box
 			display="flex"

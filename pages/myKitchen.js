@@ -59,7 +59,6 @@ export async function getServerSideProps({ req, res }) {
 		};
 	}
 
-	console.log('These are the orders:', orders);
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
@@ -98,8 +97,6 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const xSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const currentUserEmail = userData?.email;
-
-	console.log('google image', image);
 
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);

@@ -14,7 +14,6 @@ import Head from 'next/head';
 
 export async function getServerSideProps({ req }) {
 	const session = await getSession({ req });
-	console.log('checking session', session);
 
 	if (session) {
 		return {

@@ -7,8 +7,7 @@ const removePrepper = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = JSON.parse(req.body);
-	console.log('body', body);
-	console.log('This is the prepperDetails:');
+
 	if (!body.userEmail || !body.prepperId) {
 		res.status(500).json({ error: 'email and id was not confirmed' });
 		return;
@@ -19,10 +18,6 @@ const removePrepper = async (req, res) => {
 			client,
 			body.prepperId,
 			body.userEmail
-		);
-		console.log(
-			'this is the response for removing a prepper from the favorites list in mongo:',
-			document
 		);
 
 		if (!document) {

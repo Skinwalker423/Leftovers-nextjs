@@ -10,7 +10,6 @@ const addMeal = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
-	console.log(body);
 	const { meal, email } = body;
 	const currentDate = new Date();
 
@@ -27,10 +26,9 @@ const addMeal = async (req, res) => {
 	const client = await connectMongoDb();
 	try {
 		const document = await addMealToPrepperDb(client, email, mealDetails);
-		console.log('this is the response for adding a meal in mongo:', document);
+
 		const prepper = await findExistingPrepperEmail(client, email);
 
-		console.log('saved meal images', prepper.savedMealImages);
 		if (!prepper.savedMealImages.includes(meal.image)) {
 			await addImgUrlToSavedImages(client, email, meal.image);
 		}

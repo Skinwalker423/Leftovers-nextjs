@@ -28,8 +28,6 @@ const ProfileSavedImagesForm = ({
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 
-	console.log('saved images list', savedImages);
-
 	const style = {
 		position: 'absolute',
 		top: '50%',
@@ -87,7 +85,6 @@ const ProfileSavedImagesForm = ({
 			const data = await updateProfileImageDb(email, selectedImg, 'update');
 			if (data.message) {
 				setProfileImage((prevImage) => {
-					console.log('previous image', prevImage);
 					return selectedImg;
 				});
 				setMsg(data.message);

@@ -22,7 +22,7 @@ export async function getServerSideProps({ req, res }) {
 
 	const client = await connectMongoDb();
 	const orders = await findAllOrdersByUserEmail(client, session?.user?.email);
-	console.log('These are the orders:', orders);
+
 	const user = {
 		name: session.user?.name || null,
 		image: session.user?.image || null,
@@ -38,7 +38,6 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const MyOrders = ({ userData, orders }) => {
-	console.log('orders in client', orders);
 	const currentUserEmail = userData?.email;
 	return (
 		<Box

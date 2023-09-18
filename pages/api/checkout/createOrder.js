@@ -6,17 +6,16 @@ const createOrder = async (req, res) => {
 		return res.status(400).json({ error: 'Invalid request' });
 	}
 	const order = req.body;
-	console.log('body from fetch request', order);
 	try {
 		const orderDetails = await createOrderDb(order);
-		console.log('order details', orderDetails);
-		console.log('prepper email after order', orderDetails.prepperEmail);
-		const updatedServed = await incrementMealsServedDB(
-			orderDetails.prepperEmail
-		);
-		console.log('meals served updated', updatedServed);
+
+		if (orderDetails.prepperEmail) {
+			const updatedServed = await incrementMealsServedDB(
+				orderDetails.prepperEmail
+			);
+		}
+
 		const formattedId = orderDetails._id.toString();
-		console.log('this is the formatted id:', formattedId);
 
 		return res.status(200).json({
 			message: 'request to create order completed',

@@ -13,8 +13,6 @@ const prepper = async (req, res) => {
 		req.body;
 	const session = await getServerSession(req, res, authOptions);
 
-	console.log('session inside prepper registration', session);
-
 	const userImage = session ? session.user?.image : '';
 
 	const { address, city, state, zipcode } = location;
@@ -79,7 +77,6 @@ const prepper = async (req, res) => {
 			//check for existing prepper email
 
 			const prepperFound = await findExistingPrepperEmail(client, email);
-			console.log('prepperFound:', prepperFound);
 
 			if (prepperFound) {
 				res.status(400).json({ error: 'Email already in use' });

@@ -8,7 +8,7 @@ const updateProfileImage = async (req, res) => {
 		return res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
-	console.log(body);
+
 	const { profileImgUrl, email, type } = body;
 
 	if (!profileImgUrl || profileImgUrl.trim() === '') {
@@ -37,7 +37,6 @@ const updateProfileImage = async (req, res) => {
 		res.status(200).json({ message: 'Successfully updated profile image' });
 		return;
 	} catch (err) {
-		console.log('error:', err);
 		res
 			.status(500)
 			.json({ error: 'problem updating profile image in db', err });

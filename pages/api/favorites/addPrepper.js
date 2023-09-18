@@ -15,10 +15,6 @@ const addPrepper = async (req, res) => {
 			body.prepper,
 			body.userEmail
 		);
-		console.log(
-			'this is the response for adding to favorites list in mongo:',
-			document
-		);
 
 		if (!document) {
 			client.close();

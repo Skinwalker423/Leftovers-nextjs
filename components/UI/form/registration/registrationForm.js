@@ -36,7 +36,7 @@ const RegistrationForm = ({ title, setErrorMsg, setMsg, sessionEmail }) => {
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
-		console.log('registration pending');
+
 		setIsFormLoading(true);
 		setErrorMsg('');
 		setMsg('');

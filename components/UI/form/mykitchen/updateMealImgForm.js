@@ -27,8 +27,6 @@ const UpdateMealImgForm = ({
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 
-	console.log('saved images list', savedImages);
-
 	const style = {
 		position: 'absolute',
 		top: '50%',

@@ -83,7 +83,6 @@ const AddMeal = ({ email, setMsg, setMeals, setSavedMealImages }) => {
 			qty: parseInt(qtyRef.current.value)
 		};
 
-		console.log(mealDetails);
 		try {
 			const data = await addMeal(email, mealDetails);
 			if (data.message) {

@@ -33,7 +33,7 @@ const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 
 	const handleRegistraionFormSubmit = async (e) => {
 		e.preventDefault();
-		console.log('registration pending');
+
 		setIsFormLoading(true);
 		setErrorMsg('');
 		setMsg('');
@@ -43,8 +43,6 @@ const MyKitchenForm = ({ title, sessionEmail, setErrorMsg, setMsg }) => {
 		const zipcode = zipcodeRef.current.value;
 		const description = descriptionRef.current.value;
 		const kitchenTitle = kitchenTitleRef.current.value;
-
-		console.log(email);
 
 		const isValidZip = isValidZipCode(zipcode);
 		const isValidEmail = validateEmail(email);

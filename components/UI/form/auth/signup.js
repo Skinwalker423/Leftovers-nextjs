@@ -58,7 +58,6 @@ const SignUpForm = ({ title }) => {
 				body: JSON.stringify(formBody)
 			});
 			const data = await response.json();
-			console.log(data);
 
 			if (data.error) {
 				setErrorMsg(data.error);

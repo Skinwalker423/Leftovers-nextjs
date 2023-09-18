@@ -7,7 +7,6 @@ import {
 
 async function getLocalPreppers(req, res) {
 	if (req.method === 'POST') {
-		console.log('this is the request body: ', req.body);
 		const zip = req.body.zipCode;
 		if (!zip) {
 			return res.status(500).send({ error: 'no zipcode entered' });

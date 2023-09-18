@@ -6,14 +6,12 @@ const addMeal = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
-	console.log(body);
+
 	const { mealId, email } = body;
-	console.log('mealid and email', mealId, email);
 
 	try {
 		const client = await connectMongoDb();
 		const document = await removeMealFromPrepperListDb(client, email, mealId);
-		console.log('this is the response to remove a meal in mongo:', document);
 
 		if (!document.modifiedCount) {
 			client.close();

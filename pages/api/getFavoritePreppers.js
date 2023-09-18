@@ -8,7 +8,6 @@ async function getFavoritePreppers(req, res) {
 		if (findFavPreppers) {
 			res.status(200).json(findFavPreppers);
 		} else {
-			console.log({ findFavPreppers });
 			res.status(500).json({ data: 'no favorites found' });
 		}
 	} else {

@@ -12,15 +12,9 @@ export async function connectMongoDb() {
 export async function addDocToDb(client, collectionArg, doc) {
 	const collection = client.db('leftovers').collection(collectionArg);
 	const document = await collection.insertOne(doc);
-	console.log(`document for collection ${collectionArg} added`, document);
 	return document;
 }
 export async function createOrderDb(doc) {
-	// const client = await connectMongoDb();
-	// if (!client) return;
-	// const collection = client.db('leftovers').collection('orders');
-	// const document = await collection.insertOne(doc);
-	console.log('doc', doc);
 	const { userEmail, created_at, updated_at, items, total, prepperEmail } = doc;
 	await connectToMongoDb();
 	const document = new Order({
@@ -33,7 +27,6 @@ export async function createOrderDb(doc) {
 	});
 
 	if (!document) return;
-	console.log('created an order', document);
 	const savedDoc = await document.save();
 
 	return savedDoc;
@@ -52,7 +45,7 @@ export async function addPrepperToFavoritesListDb(client, prepper, userEmail) {
 		if (!document) {
 			return;
 		}
-		console.log(`document added to favorites`, document);
+
 		return document;
 	} catch (err) {
 		console.error('problem updating document', err);
@@ -76,7 +69,7 @@ export async function removePrepperFromFavoritesListDb(
 		if (!document) {
 			return;
 		}
-		console.log(`document added to favorites`, document);
+
 		return document;
 	} catch (err) {
 		console.error('problem updating document', err);
@@ -92,7 +85,6 @@ export async function findAllInCollection(
 	const collection = client.db('leftovers').collection(collectionArg);
 	const document = await collection.find({}).skip(skip).limit(limit).toArray();
 
-	console.log(`document found for collection ${collectionArg}:`);
 	if (!document) {
 		return [];
 	}
@@ -121,7 +113,7 @@ export async function findAllInCollection(
 			};
 		}
 	);
-	console.log(mappedDoc);
+
 	return mappedDoc;
 }
 export async function findExistingPrepperEmail(client, email) {
@@ -195,7 +187,7 @@ export async function findExistingPrepperWithId(client, id) {
 		if (!document) {
 			return null;
 		}
-		console.log(`prepper email found with ID: ${document}:`);
+
 		const formattedDoc = {
 			id: document?._id.toString(),
 			email: document.email,
@@ -245,7 +237,7 @@ export async function addMealToPrepperDb(client, email, meal) {
 		if (!document) {
 			return;
 		}
-		console.log(`document added to meals`, mealDetails);
+
 		return mealDetails;
 	} catch (err) {
 		console.error('problem updating meals', err);
@@ -267,7 +259,7 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 		if (!document) {
 			return;
 		}
-		console.log(`meal removed`, document);
+
 		return document;
 	} catch (err) {
 		console.error('problem updating document', err);
@@ -289,7 +281,6 @@ export async function findLocalPreppersWithZipcode(
 			.limit(limit)
 			.toArray();
 		if (!data) {
-			console.log('no data found with zipcode query');
 			return [];
 		}
 		const mappedDoc = data.map(
@@ -368,7 +359,7 @@ export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
 		if (!document) {
 			return;
 		}
-		console.log('updated kitchen name', document);
+
 		return document;
 	} catch (err) {
 		console.error('problem updating kitchen name', err);
@@ -389,7 +380,7 @@ export async function updateKitchenDescription(client, userEmail, description) {
 		if (!document) {
 			return;
 		}
-		console.log('updated kitchen name', document);
+
 		return document;
 	} catch (err) {
 		console.error('problem updating kitchen name', err);
@@ -403,7 +394,6 @@ export async function updateKitchenImgUrl(
 	kitchenImgUrl,
 	type
 ) {
-	console.log('type of action', type);
 	const add = {
 		$set: { kitchenImgUrl, last_modified: new Date() },
 		$push: { savedKitchenImages: kitchenImgUrl }
@@ -414,7 +404,6 @@ export async function updateKitchenImgUrl(
 	};
 
 	const action = type === 'add' ? add : update;
-	console.log('action type', action);
 
 	try {
 		const collection = client.db('leftovers').collection('preppers');
@@ -428,7 +417,7 @@ export async function updateKitchenImgUrl(
 		if (!document) {
 			return;
 		}
-		console.log('added kitchen image', document);
+
 		return document;
 	} catch (err) {
 		console.error('problem adding kitchen image', err);
@@ -468,7 +457,7 @@ export async function updateMealImgUrl(
 		if (!document) {
 			return;
 		}
-		console.log('added kitchen image', document);
+
 		return document;
 	} catch (err) {
 		console.error('problem adding kitchen image', err);
@@ -491,7 +480,7 @@ export async function addImgUrlToSavedImages(client, userEmail, imgUrl) {
 		if (!document) {
 			return;
 		}
-		console.log('added meal image to saved images', document);
+
 		return document;
 	} catch (err) {
 		console.error('problem adding meal image', err);
@@ -531,7 +520,6 @@ export async function findOrderWithId(id) {
 		if (!document) {
 			return null;
 		}
-		console.log(`Order found with ID: ${document}:`);
 
 		const prepperEmail = document.items[0].prepperEmail;
 		const formattedDoc = {
@@ -553,7 +541,6 @@ export async function findAllOrdersByUserEmail(client, email) {
 		if (!document) {
 			return null;
 		}
-		console.log(`Orders found with email: ${document}:`);
 
 		const mappedDoc = document.map((order) => {
 			return {
@@ -580,7 +567,6 @@ export async function findAllOrdersByPrepperEmail(client, email) {
 		if (!document) {
 			return null;
 		}
-		console.log(`Orders found with email: ${document}:`);
 
 		const mappedDoc = document.map((order) => {
 			return {
@@ -607,7 +593,6 @@ export async function updateProfileImgUrl(
 	profileImgUrl,
 	type
 ) {
-	console.log('type of action', type);
 	const add = {
 		$set: { profileImgUrl, last_modified: new Date() },
 		$push: { savedProfileImages: profileImgUrl }
@@ -618,7 +603,6 @@ export async function updateProfileImgUrl(
 	};
 
 	const action = type === 'add' ? add : update;
-	console.log('action type', action);
 
 	try {
 		const collection = client.db('leftovers').collection('preppers');
@@ -632,10 +616,9 @@ export async function updateProfileImgUrl(
 		if (!document) {
 			return;
 		}
-		console.log('added profile image', document);
+
 		return document;
 	} catch (err) {
-		console.error('problem adding profile image', err);
 		return;
 	}
 }

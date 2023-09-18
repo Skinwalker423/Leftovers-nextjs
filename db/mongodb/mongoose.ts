@@ -18,7 +18,7 @@ export const connectToMongoDb = async () => {
 		} as ConnectOptions);
 		isConnected = true;
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 };
 

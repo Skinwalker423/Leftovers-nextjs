@@ -13,7 +13,6 @@ import { Button } from '@mui/material';
 
 export async function getServerSideProps({ params }) {
 	const confirmationNumber = params.slug[0];
-	console.log(confirmationNumber);
 
 	if (!confirmationNumber) {
 		return {
@@ -25,7 +24,7 @@ export async function getServerSideProps({ params }) {
 		const client = await connectMongoDb();
 
 		const order = await findOrderWithId(confirmationNumber);
-		console.log('order with fake id', order);
+
 		if (!order) {
 			return {
 				notFound: true
@@ -39,8 +38,6 @@ export async function getServerSideProps({ params }) {
 				notFound: true
 			};
 		}
-
-		console.log('found prepper in directions page SSR', prepper);
 
 		const orderDetails = {
 			location: {
@@ -59,7 +56,6 @@ export async function getServerSideProps({ params }) {
 			}
 		};
 	} catch (err) {
-		console.log('problem getting order with id', err);
 		return {
 			notFound: true
 		};

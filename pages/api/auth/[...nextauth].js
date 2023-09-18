@@ -36,8 +36,6 @@ export const authOptions = {
 					email: credentials.email
 				});
 
-				console.log('found user in email/pw sign in', foundUser);
-
 				if (foundUser) {
 					// Any object returned will be saved in `user` property of the JWT
 					const matchedPasswords = await comparePassword(
@@ -96,8 +94,6 @@ export const authOptions = {
 				email: session.user.email
 			});
 
-			console.log('found user', foundUser);
-
 			const userDetails = {
 				...session.user,
 				favorites: []
@@ -106,7 +102,6 @@ export const authOptions = {
 			if (!foundUser) {
 				const newUser = new User(userDetails);
 				await newUser.save();
-				console.log('created a user', newUser);
 			}
 
 			session.accessToken = token.accessToken;

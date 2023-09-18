@@ -91,12 +91,11 @@ export const UserProvider = ({ children }) => {
 	const [value, setValue] = useLocalStorage('cartlist', state.userCartlist);
 
 	useEffect(() => {
-		
 		if (state.userCartlist) {
 			calculateTotalPrice();
 			setValue([...state.userCartlist]);
 		} else {
-			setValue('')
+			setValue('');
 		}
 	}, [state.userCartlist.length]);
 
@@ -159,7 +158,7 @@ export const UserProvider = ({ children }) => {
 				kitchen
 			}
 		];
-		console.log(newCartList);
+
 		dispatch({
 			type: ACTION_TYPES.INCREMENT_FOOD_ITEM,
 			payload: newCartList
@@ -206,7 +205,7 @@ export const UserProvider = ({ children }) => {
 					kitchen
 				}
 			];
-			console.log(newCartList);
+
 			dispatch({
 				type: ACTION_TYPES.DECREMENT_FOOD_ITEM,
 				payload: newCartList

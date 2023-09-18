@@ -31,7 +31,6 @@ export async function getServerSideProps({ req, res }) {
 					email: session.user?.email || null
 			  }
 			: null;
-		console.log('checking session:', foundSession);
 
 		return {
 			props: {
@@ -39,7 +38,6 @@ export async function getServerSideProps({ req, res }) {
 			}
 		};
 	} catch (err) {
-		console.log('problem getting session', err);
 		return {
 			props: {
 				foundSession,
@@ -65,9 +63,6 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	const dividerResponse = matches ? 'vertical' : 'horizontal';
 	const userEmail = foundSession ? foundSession?.email : 'Guest';
 	const prepEmail = userCartlist.length > 0 ? userCartlist[0].prepperEmail : '';
-	console.log('email:', foundSession.email);
-
-	console.log('prepperEmail', prepEmail);
 
 	const onPaymentClick = async () => {
 		if (userCartlist.length < 1) {
@@ -99,11 +94,8 @@ const Checkout = ({ foundSession, errorMsg }) => {
 			}
 			try {
 				const data = await decrementMealQtyDB(prepperEmail, id, qty);
-				if (data.message) {
-					console.log('qty updated', data.message);
-				}
+
 				if (data.error) {
-					console.log('problem', data.error);
 					setLoading(false);
 					setError(data.error);
 				}
@@ -121,7 +113,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 				return;
 			}
 			const orderId = orderDoc.data;
-			console.log('order created in db', orderId);
+
 			setLoading(false);
 			dispatch({ type: ACTION_TYPES.CLEAR_CARTLIST });
 			dispatch({ type: ACTION_TYPES.SET_TOTAL_PRICE, payload: 0 });
