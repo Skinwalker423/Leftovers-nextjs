@@ -6,13 +6,19 @@ import { useColors } from '../../hooks/useColors';
 const TrophyLikesButton = ({ mealsServed }) => {
 	const { colors } = useColors();
 	return (
-		<Tooltip title="Meals Served">
+		<Tooltip title={<h3>Meals Served</h3>}>
 			<Box
 				backgroundColor={colors.primary[400]}
-				sx={{ display: 'flex', alignItems: 'center', px: '1em' }}
+				sx={{
+					display: 'flex',
+					alignItems: 'center',
+					px: 4,
+					py: 2,
+					borderRadius: 5
+				}}
 			>
 				<WorkspacePremiumIcon color="error" fontSize="large" />
-				<Typography color={colors.orangeAccent[900]} fontSize={'large'}>
+				<Typography color={colors.orangeAccent[900]} fontSize={'x-large'}>
 					{mealsServed}
 				</Typography>
 			</Box>
