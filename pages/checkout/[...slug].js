@@ -8,7 +8,6 @@ import {
 	findOrderWithId
 } from '../../db/mongodb/mongoDbUtils';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
-import Map from '../../components/checkout/map';
 import { Button } from '@mui/material';
 
 export async function getServerSideProps({ params }) {

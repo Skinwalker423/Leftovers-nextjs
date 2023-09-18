@@ -85,29 +85,29 @@ const NavBar = () => {
 						alt="Leftovers icon"
 					/>
 				</Link>
-				<Box
-					display={{ xs: 'none', md: 'unset' }}
-					// width={{ sm: '15rem', md: '35rem' }}
-					// height="3.5rem"
-				>
-					<nav style={{ width: '100%' }}>
-						<ul className={styles.linkListContainer}>
-							<NavItem title="Home" href="/" />
-							<NavItem title="Preppers" href="/preppers" />
-							{session && <NavItem title="Favs" href="/favorites" />}
-							<NavItem title="About" href="/about" />
 
-							{session && <NavItem title="MyKitchen" href="/myKitchen" />}
+				<Box display="flex" alignItems="center" gap={1}>
+					<Box
+						display={{ xs: 'none', md: 'unset' }}
+						// width={{ sm: '15rem', md: '35rem' }}
+						// height="3.5rem"
+					>
+						<nav style={{ width: '100%' }}>
+							<ul className={styles.linkListContainer}>
+								<NavItem title="Home" href="/" />
+								<NavItem title="Preppers" href="/preppers" />
+								{session && <NavItem title="Favs" href="/favorites" />}
+								<NavItem title="About" href="/about" />
 
-							<NavItem title="Register" href="/register" />
-						</ul>
-					</nav>
-				</Box>
-				<Box display={{ md: 'none' }}>
-					<CollapsedNavMenu />
-				</Box>
+								{session && <NavItem title="MyKitchen" href="/myKitchen" />}
 
-				<Box display="flex" alignItems="center">
+								<NavItem title="Register" href="/register" />
+							</ul>
+						</nav>
+					</Box>
+					<Box display={{ md: 'none' }}>
+						<CollapsedNavMenu />
+					</Box>
 					<Tooltip title="darkmode">
 						<Box>
 							<IconButton onClick={handleDarkMode}>
