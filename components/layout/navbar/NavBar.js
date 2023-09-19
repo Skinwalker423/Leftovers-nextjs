@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Box, Typography, IconButton, Tooltip } from '@mui/material';
+import { Box, Typography, IconButton, Tooltip, Button } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -18,6 +18,7 @@ import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
 import DefaultAvatar from '../../UI/icon/defaultAvatar';
 import { useUserContext } from '../../../hooks/useUserContext';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -86,9 +87,9 @@ const NavBar = () => {
 					/>
 				</Link>
 
-				<Box display="flex" alignItems="center" gap={1}>
+				<Box display="flex" alignItems="center" gap={{ xs: 0, sm: 2 }}>
 					<Box
-						display={{ xs: 'none', md: 'unset' }}
+						display={{ xs: 'none', lg: 'unset' }}
 						// width={{ sm: '15rem', md: '35rem' }}
 						// height="3.5rem"
 					>
@@ -105,9 +106,25 @@ const NavBar = () => {
 							</ul>
 						</nav>
 					</Box>
-					<Box display={{ md: 'none' }}>
+					<Box display={{ lg: 'none' }}>
 						<CollapsedNavMenu />
 					</Box>
+					<Tooltip title="set default zipcode">
+						<Button
+							sx={{
+								border: `1px solid ${colors.orangeAccent[400]}`,
+								borderRadius: 3,
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								gap: 0.5
+							}}
+							size={'small'}
+						>
+							<LocationOnIcon color="error" />
+							<Typography color="secondary">90706</Typography>
+						</Button>
+					</Tooltip>
 					<Tooltip title="darkmode">
 						<Box>
 							<IconButton onClick={handleDarkMode}>
