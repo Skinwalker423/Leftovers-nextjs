@@ -5,6 +5,19 @@ import { useColors } from '../../hooks/useColors';
 
 const TrophyLikesButton = ({ mealsServed }) => {
 	const { colors } = useColors();
+
+	let awardColor = 'primary';
+
+	if (mealsServed >= 40) {
+		awardColor = 'secondary';
+	} else if (mealsServed >= 20) {
+		awardColor = 'error';
+	} else if (mealsServed >= 10) {
+		awardColor = 'info';
+	} else {
+		awardColor = 'primary';
+	}
+
 	return (
 		<Tooltip title={<h3>Meals Served</h3>}>
 			<Box
@@ -17,7 +30,7 @@ const TrophyLikesButton = ({ mealsServed }) => {
 					borderRadius: 5
 				}}
 			>
-				<WorkspacePremiumIcon color="error" fontSize="large" />
+				<WorkspacePremiumIcon color={awardColor} fontSize="large" />
 				<Typography color={colors.orangeAccent[900]} fontSize={'x-large'}>
 					{mealsServed}
 				</Typography>
