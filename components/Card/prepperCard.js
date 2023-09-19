@@ -130,7 +130,7 @@ export default function PrepperCard({
 				sx={{
 					width: { xs: '20rem', md: '25rem' },
 					mx: '.5rem',
-					height: '26rem',
+					height: '100%',
 
 					backgroundColor: colors.primary[400]
 				}}

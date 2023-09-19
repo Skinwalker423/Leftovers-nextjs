@@ -25,8 +25,8 @@ const TrophyLikesButton = ({ mealsServed }) => {
 				sx={{
 					display: 'flex',
 					alignItems: 'center',
-					px: 4,
-					py: 2,
+					px: { xs: 2, sm: 4 },
+					py: 1,
 					borderRadius: 5
 				}}
 			>
