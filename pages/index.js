@@ -80,7 +80,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 		if (defaultZipcode) {
 			setDefaultZipcode(defaultZipcode);
 		}
-	}, [defaultZipcode]);
+	}, []);
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();

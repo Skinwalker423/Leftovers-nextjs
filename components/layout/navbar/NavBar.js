@@ -60,7 +60,6 @@ const NavBar = () => {
 		setShowNotifications((bool) => !bool);
 		setShowUserMenu(false);
 	};
-	const handleSetDefaultZipcode = () => {};
 
 	return (
 		<Box

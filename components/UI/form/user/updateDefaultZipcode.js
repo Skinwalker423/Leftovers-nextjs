@@ -12,12 +12,11 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import { updateMealQtyInDb } from '../../../../utils/meals';
 
-const UpdateDefaultZipcodeForm = ({ email, setMsg, mealId, setMeals }) => {
+const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
-	const qtyRef = useRef();
 
 	const style = {
 		position: 'absolute',
@@ -36,28 +35,14 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg, mealId, setMeals }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const handleAddMealForm = async (e) => {
+	const handleUpdateZipcodeForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
 		//send image file to a img hosting server e.g. Cloudinary
 		//put url to that image in mealDetails to send to mongodb
 
-		const newQty = parseInt(qtyRef.current.value);
-
 		try {
 			const data = await updateMealQtyInDb(email, mealId, newQty);
-			if (data.message) {
-				setMeals((meals) => {
-					return meals.map((meal) => {
-						if (meal.id === mealId) {
-							return { ...meal, qty: newQty };
-						} else return { ...meal };
-					});
-				});
-				setMsg(data.message);
-				setIsFormLoading(false);
-				setOpen(false);
-			}
 		} catch (err) {
 			console.error('problem updating qty', err);
 			setIsFormLoading(false);
@@ -73,12 +58,19 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg, mealId, setMeals }) => {
 	return (
 		<div>
 			<Button
-				size="small"
-				variant="outlined"
-				color="success"
 				onClick={handleOpen}
+				sx={{
+					border: `1px solid ${colors.orangeAccent[400]}`,
+					borderRadius: 3,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: 0.5
+				}}
+				size={'small'}
 			>
-				Update Qty
+				<LocationOnIcon color="error" />
+				<Typography color="secondary">90706</Typography>
 			</Button>
 			<Modal
 				open={open}

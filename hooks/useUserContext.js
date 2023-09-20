@@ -10,7 +10,8 @@ export const useUserContext = () => {
 		calculateTotalPrice,
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
-		setFavoritesList
+		setFavoritesList,
+		setDefaultZipcode
 	} = useContext(UserContext);
 
 	return {
@@ -21,6 +22,7 @@ export const useUserContext = () => {
 		calculateTotalPrice,
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
-		setFavoritesList
+		setFavoritesList,
+		setDefaultZipcode
 	};
 };
