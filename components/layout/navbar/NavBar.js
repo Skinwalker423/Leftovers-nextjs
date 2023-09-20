@@ -18,7 +18,8 @@ import CollapsedNavMenu from '../../UI/menu/navMenu/collapsedNavMenu';
 import MealCartDrawer from '../../UI/drawer/mealCartDrawer';
 import DefaultAvatar from '../../UI/icon/defaultAvatar';
 import { useUserContext } from '../../../hooks/useUserContext';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+
+import UpdateDefaultZipcodeForm from '../../UI/form/user/updateDefaultZipcode';
 
 const NavBar = () => {
 	const { data: session } = useSession();
@@ -109,22 +110,9 @@ const NavBar = () => {
 					<Box display={{ lg: 'none' }}>
 						<CollapsedNavMenu />
 					</Box>
-					<Tooltip title="set default zipcode">
-						<Button
-							sx={{
-								border: `1px solid ${colors.orangeAccent[400]}`,
-								borderRadius: 3,
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
-								gap: 0.5
-							}}
-							size={'small'}
-						>
-							<LocationOnIcon color="error" />
-							<Typography color="secondary">90706</Typography>
-						</Button>
-					</Tooltip>
+
+					<UpdateDefaultZipcodeForm />
+
 					<Tooltip title="darkmode">
 						<Box>
 							<IconButton onClick={handleDarkMode}>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
 	Modal,
 	Box,
@@ -6,17 +6,25 @@ import {
 	Button,
 	TextField,
 	CircularProgress,
-	Alert
+	Alert,
+	Tooltip
 } from '@mui/material';
 
 import { useColors } from '../../../../hooks/useColors';
-import { updateMealQtyInDb } from '../../../../utils/meals';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useUserContext } from '../../../../hooks/useUserContext';
 
-const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
+const UpdateDefaultZipcodeForm = () => {
 	const [open, setOpen] = useState(false);
 	const [isFormLoading, setIsFormLoading] = useState(false);
 	const [error, setError] = useState('');
 	const { colors } = useColors();
+	const [zipcode, setZipcode] = useState('');
+	const [msg, setMsg] = useState('');
+
+	const { setDefaultZipcode, state } = useUserContext();
+
+	console.log('zip', zipcode);
 
 	const style = {
 		position: 'absolute',
@@ -35,6 +43,10 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
+	const handleZipcodeChange = (e) => {
+		setZipcode(e.target.value);
+	};
+
 	const handleUpdateZipcodeForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
@@ -42,9 +54,12 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 		//put url to that image in mealDetails to send to mongodb
 
 		try {
-			const data = await updateMealQtyInDb(email, mealId, newQty);
+			setDefaultZipcode(zipcode);
+			setMsg('updated zipcode');
+			handleClose();
+			setIsFormLoading(false);
 		} catch (err) {
-			console.error('problem updating qty', err);
+			console.error('problem updating zipcode', err);
 			setIsFormLoading(false);
 			setError(err);
 		}
@@ -57,21 +72,47 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 
 	return (
 		<div>
-			<Button
-				onClick={handleOpen}
-				sx={{
-					border: `1px solid ${colors.orangeAccent[400]}`,
-					borderRadius: 3,
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: 0.5
-				}}
-				size={'small'}
-			>
-				<LocationOnIcon color="error" />
-				<Typography color="secondary">90706</Typography>
-			</Button>
+			<Tooltip title="set default zipcode">
+				<Button
+					onClick={handleOpen}
+					sx={{
+						border: `1px solid ${colors.orangeAccent[400]}`,
+						borderRadius: 3,
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						gap: 0.5
+					}}
+					size={'small'}
+				>
+					<LocationOnIcon color="error" />
+					<Typography color="secondary">
+						{state.defaultZipcode || 'Set Zicode'}
+					</Typography>
+					{msg && (
+						<Alert
+							onClose={() => {
+								setMsg('');
+							}}
+							color="success"
+							severity="success"
+							variant="filled"
+							sx={{
+								position: 'absolute',
+								top: 70,
+
+								width: '23rem',
+								fontSize: 'larger',
+								textAlign: 'center',
+								justifyContent: 'center',
+								zIndex: 99
+							}}
+						>
+							<Typography fontSize={'2rem'}>{msg}</Typography>
+						</Alert>
+					)}
+				</Button>
+			</Tooltip>
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -79,9 +120,9 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 				aria-describedby="submit details to create a new meal"
 			>
 				<Box sx={style}>
-					<form onSubmit={handleAddMealForm}>
+					<form onSubmit={handleUpdateZipcodeForm}>
 						<Typography textAlign={'center'} variant="h3">
-							Number of meals you have on hand
+							Set your preferred zipcode
 						</Typography>
 						<Box
 							display={'flex'}
@@ -95,14 +136,15 @@ const UpdateDefaultZipcodeForm = ({ email, setMsg }) => {
 						>
 							<Box width={'100%'}>
 								<TextField
-									id="qty"
-									type="number"
-									label="Number of meals on hand"
+									id="zipcode"
+									type="text"
+									label="zipcode"
 									required
-									placeholder="5"
+									placeholder="90210"
 									color="secondary"
 									fullWidth
-									inputRef={qtyRef}
+									onChange={handleZipcodeChange}
+									value={zipcode}
 								/>
 							</Box>
 
