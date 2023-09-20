@@ -19,6 +19,11 @@ const UserSchema = new mongoose.Schema({
 	},
 	name: String,
 	image: String,
+	zipcode: {
+		type: String,
+		length: 10,
+		default: null
+	},
 	createdAt: {
 		type: Date,
 		default: Date.now()
