@@ -29,19 +29,24 @@ import FavoriteList from '../components/prepperLists/favoriteList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
-	const foundSession = session
-		? {
-				name: session.user?.name || null,
-				image: session.user?.image || null,
-				email: session.user?.email || null
-		  }
-		: null;
 
 	const client = session && (await connectMongoDb());
 	const user =
 		session &&
 		client &&
 		(await findExistingUserEmail(client, session.user.email));
+
+	console.log('user in SSR', user);
+
+	const foundSession = session
+		? {
+				name: session.user?.name || null,
+				image: session.user?.image || null,
+				email: session.user?.email || null,
+				zipcode: user?.zipcode || null,
+				favorites: user?.favorites || []
+		  }
+		: null;
 
 	return {
 		props: {
@@ -61,6 +66,8 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const { state, dispatch } = useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
+
+	console.log('user data', foundSession);
 
 	useEffect(() => {
 		if (favoriteList) {
