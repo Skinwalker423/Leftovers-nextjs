@@ -20,7 +20,8 @@ export const ACTION_TYPES = {
 	ADD_PREPPER_FAVORITES: 'ADD_PREPPER_FAVORITES',
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
 	SET_FAVORITES_LIST: 'SET_FAVORITES_LIST',
-	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST'
+	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST',
+	SET_DEFAULT_ZIPCODE: 'SET_DEFAULT_ZIPCODE'
 };
 
 const userReducer = (state, action) => {
@@ -68,6 +69,8 @@ const userReducer = (state, action) => {
 
 		case ACTION_TYPES.SET_LOCALPREPPERS_LIST:
 			return { ...state, localPreppers: action.payload };
+		case ACTION_TYPES.SET_DEFAULT_ZIPCODE:
+			return { ...state, defaultZipcode: action.payload };
 
 		default:
 			throw new Error(`unhandled action type: ${action.type}`);
@@ -85,7 +88,8 @@ export const UserProvider = ({ children }) => {
 		userCartlist: [],
 		cartTotalPrice: 0,
 		favorites: [],
-		localPreppers: []
+		localPreppers: [],
+		defaultZipcode: null
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 	const [value, setValue] = useLocalStorage('cartlist', state.userCartlist);
@@ -250,6 +254,9 @@ export const UserProvider = ({ children }) => {
 	const setFavoritesList = (favoriteList) => {
 		dispatch({ type: ACTION_TYPES.SET_FAVORITES_LIST, payload: favoriteList });
 	};
+	const setDefaultZipcode = (zipcode) => {
+		dispatch({ type: ACTION_TYPES.SET_DEFAULT_ZIPCODE, payload: zipcode });
+	};
 
 	const valueProps = {
 		state,
@@ -259,7 +266,8 @@ export const UserProvider = ({ children }) => {
 		calculateTotalPrice,
 		addAndUpdateFavoritePreppers,
 		removeAndUpdateFavoritePreppers,
-		setFavoritesList
+		setFavoritesList,
+		setDefaultZipcode
 	};
 
 	return (
