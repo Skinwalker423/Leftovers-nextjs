@@ -63,20 +63,24 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const [msg, setMsg] = useState('');
 	const { colors } = useColors();
 	const { data: session } = useSession();
-	const { state, dispatch } = useContext(UserContext);
+	const { state, dispatch, setFavoritesList, setDefaultZipcode } =
+		useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
+	const defaultZipcode = foundSession?.user?.zipcode;
 
-	console.log('user data', foundSession);
+	console.log('user zipcode', defaultZipcode);
+	console.log('user state', state);
 
 	useEffect(() => {
 		if (favoriteList) {
-			dispatch({
-				type: ACTION_TYPES.SET_FAVORITES_LIST,
-				payload: favoriteList
-			});
+			setFavoritesList(favoriteList);
 		}
-	}, []);
+
+		if (defaultZipcode) {
+			setDefaultZipcode(defaultZipcode);
+		}
+	}, [defaultZipcode]);
 
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
