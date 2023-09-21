@@ -1,3 +1,4 @@
+//sign in hover bottom bar
 //add a sign in prepper page for the hours open
 //default zipcode
 //logo text design

@@ -80,9 +80,10 @@ const SignUpForm = ({ title }) => {
 					md: '45%'
 				},
 				height: {
-					xs: '50vh'
+					xs: '45vh',
+					sm: '50vh'
 				},
-				my: '1em',
+
 				boxShadow: 5,
 				border: `2px solid ${colors.orangeAccent[900]}`
 			}}

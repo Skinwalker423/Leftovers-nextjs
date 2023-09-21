@@ -6,11 +6,13 @@ import {
 	Grid,
 	GridItem,
 	useTheme,
-	useMediaQuery
+	useMediaQuery,
+	Typography
 } from '@mui/material';
 import SignIn from '../components/UI/form/auth/signin';
 import SignUpForm from '../components/UI/form/auth/signup';
 import Head from 'next/head';
+import { useColors } from '../hooks/useColors';
 
 export async function getServerSideProps({ req }) {
 	const session = await getSession({ req });
@@ -30,9 +32,10 @@ export async function getServerSideProps({ req }) {
 }
 
 const signin = () => {
+	const { colors } = useColors();
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.up('md'));
-	const dividerResponse = matches ? 'vertical' : 'horizontal';
+	const dividerResponse = matches ? 'column' : 'row';
 
 	return (
 		<Box
@@ -41,7 +44,7 @@ const signin = () => {
 			justifyContent="center"
 			alignItems={'center'}
 			width="100%"
-			height="100vh"
+			minHeight={'100vh'}
 		>
 			<Head>
 				<title>Sign In</title>
@@ -65,18 +68,29 @@ const signin = () => {
 			>
 				<SignIn />
 
-				<Divider
-					sx={{ p: '1em' }}
-					orientation={dividerResponse}
-					flexItem
-					light={true}
-					style={{
-						fontSize: 'large',
-						fontWeight: 'bold'
-					}}
+				<Box
+					width={dividerResponse === 'row' ? '100%' : '1px'}
+					display={'flex'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					gap={1}
+					flexDirection={dividerResponse}
+					py={2}
 				>
-					OR
-				</Divider>
+					<Box
+						width={'100%'}
+						bgcolor={colors.orangeAccent[800]}
+						height={dividerResponse === 'row' ? '1px' : '20em'}
+					/>
+					<Typography color={'primary'} variant="h4">
+						OR
+					</Typography>
+					<Box
+						width={'100%'}
+						bgcolor={colors.orangeAccent[800]}
+						height={dividerResponse === 'row' ? '1px' : '20em'}
+					/>
+				</Box>
 
 				<SignUpForm />
 			</Box>

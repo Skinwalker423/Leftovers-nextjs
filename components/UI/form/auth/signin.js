@@ -64,10 +64,7 @@ const SignIn = () => {
 					xs: '45vh',
 					md: '50vh'
 				},
-				mt: {
-					xs: '5em',
-					md: '0'
-				},
+
 				px: { xs: 3, sm: 5, lg: 15 },
 				py: { xs: 3 },
 				boxShadow: 5,
@@ -137,10 +134,11 @@ const SignIn = () => {
 				justifyContent={'center'}
 				alignItems={'center'}
 				gap={1}
+				py={2}
 			>
-				<Box width={'100%'} bgcolor={colors.orangeAccent[400]} height={'1px'} />
+				<Box width={'100%'} bgcolor={colors.orangeAccent[800]} height={'1px'} />
 				<Typography>or</Typography>
-				<Box width={'100%'} bgcolor={colors.orangeAccent[400]} height={'1px'} />
+				<Box width={'100%'} bgcolor={colors.orangeAccent[800]} height={'1px'} />
 			</Box>
 			<GoogleButton onClick={handleSignInGoogle}>
 				Sign In With Google
