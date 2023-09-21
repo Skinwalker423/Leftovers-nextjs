@@ -32,6 +32,15 @@ export async function getServerSideProps({ req, res }) {
 			  }
 			: null;
 
+		if (!session) {
+			return {
+				redirect: {
+					destination: '/signin',
+					permanent: false
+				}
+			};
+		}
+
 		return {
 			props: {
 				foundSession

@@ -111,7 +111,7 @@ const NavBar = () => {
 						<CollapsedNavMenu />
 					</Box>
 
-					<UpdateDefaultZipcodeForm />
+					{session && <UpdateDefaultZipcodeForm />}
 
 					<Tooltip title="darkmode">
 						<Box>

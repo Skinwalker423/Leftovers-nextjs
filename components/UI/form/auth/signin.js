@@ -10,9 +10,9 @@ const SignIn = () => {
 		signIn('google');
 	}
 
-	function handleSignInCredentials() {
+	const handleSignInCredentials = () => {
 		signIn();
-	}
+	};
 	return (
 		<Paper
 			sx={{
