@@ -162,7 +162,7 @@ const NavBar = () => {
 							)}
 						</Box>
 					</Tooltip>
-					{session && (
+					{session ? (
 						<Tooltip
 							placement={showUserMenu ? 'left' : 'bottom'}
 							title={
@@ -185,6 +185,28 @@ const NavBar = () => {
 								)}
 							</IconButton>
 						</Tooltip>
+					) : (
+						<Box>
+							{
+								<Link className={styles.link} href={'/signin'}>
+									<Typography
+										sx={{
+											'&:hover': {
+												borderBottom: `2px solid ${colors.orangeAccent[300]}`,
+												color: colors.orangeAccent[300]
+											}
+										}}
+										px=".5em"
+										pb={0.75}
+										fontSize={'large'}
+										variant="button"
+										color={'secondary'}
+									>
+										Sign In
+									</Typography>
+								</Link>
+							}
+						</Box>
 					)}
 					{showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
 					{showNotifictions && <NotificationMenu />}
@@ -193,25 +215,6 @@ const NavBar = () => {
 						isDrawerOpen={isDrawerOpen}
 						toggleDrawer={toggleDrawer}
 					/>
-					<Box>
-						{!session && (
-							<Link className={styles.link} href={'/signin'}>
-								<Typography
-									sx={{
-										'&:hover': {
-											borderBottom: `1px solid ${colors.orangeAccent[900]}`
-										}
-									}}
-									px=".5em"
-									fontSize={'large'}
-									variant="button"
-									color={'secondary'}
-								>
-									Sign In
-								</Typography>
-							</Link>
-						)}
-					</Box>
 				</Box>
 			</Box>
 		</Box>
