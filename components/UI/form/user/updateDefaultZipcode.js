@@ -73,7 +73,7 @@ const UpdateDefaultZipcodeForm = () => {
 	return (
 		<div>
 			<Tooltip title="set default zipcode">
-				<Button
+				<Box
 					onClick={handleOpen}
 					sx={{
 						border: `1px solid ${colors.orangeAccent[400]}`,
@@ -81,12 +81,18 @@ const UpdateDefaultZipcodeForm = () => {
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
-						gap: 0.5
+						gap: 0.5,
+						px: 2,
+						py: 0.5,
+						cursor: 'pointer',
+						':hover': {
+							bgcolor: colors.orangeAccent[700]
+						}
 					}}
 					size={'small'}
 				>
 					<LocationOnIcon color="error" />
-					<Typography color="secondary">
+					<Typography sx={{ color: colors.orangeAccent[100] }}>
 						{state.defaultZipcode || 'Set Zicode'}
 					</Typography>
 					{msg && (
@@ -111,7 +117,7 @@ const UpdateDefaultZipcodeForm = () => {
 							<Typography fontSize={'2rem'}>{msg}</Typography>
 						</Alert>
 					)}
-				</Button>
+				</Box>
 			</Tooltip>
 			<Modal
 				open={open}
