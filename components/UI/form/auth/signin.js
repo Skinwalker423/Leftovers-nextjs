@@ -131,29 +131,17 @@ const SignIn = () => {
 					</Button>
 				</Box>
 			</form>
-			{/* <Box>
-				<Typography variant="h1">Sign In Using</Typography>
+			<Box
+				width={'100%'}
+				display={'flex'}
+				justifyContent={'center'}
+				alignItems={'center'}
+				gap={1}
+			>
+				<Box width={'100%'} bgcolor={colors.orangeAccent[400]} height={'1px'} />
+				<Typography>or</Typography>
+				<Box width={'100%'} bgcolor={colors.orangeAccent[400]} height={'1px'} />
 			</Box>
-			<Button
-				onClick={handleSignInCredentials}
-				size="large"
-				sx={{ width: '250px', height: '50px' }}
-				color="secondary"
-				variant="contained"
-			>
-				Email and Password
-			</Button> */}
-			<Typography
-				variant="h3"
-				sx={{
-					borderTop: `1px solid ${colors.orangeAccent[900]}`,
-					width: '90%',
-					textAlign: 'center',
-					py: 1
-				}}
-			>
-				or
-			</Typography>
 			<GoogleButton onClick={handleSignInGoogle}>
 				Sign In With Google
 			</GoogleButton>
