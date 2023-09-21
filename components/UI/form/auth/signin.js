@@ -59,14 +59,15 @@ const SignIn = () => {
 			console.log('response from bad sign in', res);
 
 			if (!res.error) {
-				setLoading(false);
 				router.push('/');
+				setLoading(false);
 			} else {
 				setError('invalid email/password');
 				setLoading(false);
 			}
 		} catch (error) {
-			console.log('problem signing in', error);
+			setError('problem signing in. Try again');
+			setLoading(false);
 		}
 	};
 	return (
