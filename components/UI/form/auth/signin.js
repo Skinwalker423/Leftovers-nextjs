@@ -5,7 +5,9 @@ import {
 	Typography,
 	Button,
 	Divider,
-	TextField
+	TextField,
+	CircularProgress,
+	Alert
 } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import GoogleButton from 'react-google-button';
@@ -17,6 +19,8 @@ const SignIn = () => {
 		email: '',
 		password: ''
 	});
+
+	const [error, setError] = useState('');
 
 	const [loading, setLoading] = useState(false);
 	const router = useRouter();
@@ -43,15 +47,27 @@ const SignIn = () => {
 		});
 	};
 
-	const handleSignInCredentials = (e) => {
+	const handleSignInCredentials = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		signIn('credentials', {
-			...data,
-			redirect: false
-		});
-		setLoading(false);
-		router.push('/');
+		try {
+			const res = await signIn('credentials', {
+				...data,
+				redirect: false
+			});
+
+			console.log('response from bad sign in', res);
+
+			if (!res.error) {
+				setLoading(false);
+				router.push('/');
+			} else {
+				setError('invalid email/password');
+				setLoading(false);
+			}
+		} catch (error) {
+			console.log('problem signing in', error);
+		}
 	};
 	return (
 		<Paper
@@ -109,7 +125,7 @@ const SignIn = () => {
 
 				<Box>
 					<Button
-						sx={{ mt: 1, height: '4em' }}
+						sx={{ my: 2, height: '4em' }}
 						variant="contained"
 						fullWidth
 						color="success"
@@ -126,6 +142,26 @@ const SignIn = () => {
 							)}
 						</Typography>
 					</Button>
+					{error && (
+						<Alert
+							onClose={() => {
+								setError('');
+							}}
+							color="error"
+							severity="error"
+							variant="filled"
+							sx={{
+								bottom: 0,
+								width: '100%',
+								fontSize: 'larger',
+								textAlign: 'center',
+								justifyContent: 'center',
+								zIndex: 150
+							}}
+						>
+							{error}
+						</Alert>
+					)}
 				</Box>
 			</form>
 			<Box

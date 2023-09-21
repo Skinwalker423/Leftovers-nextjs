@@ -53,7 +53,6 @@ export const authOptions = {
 					}
 				} else {
 					// If you return null then an error will be displayed advising the user to check their details.
-					client.close();
 					// throw new Error('no user found');
 					return null;
 
