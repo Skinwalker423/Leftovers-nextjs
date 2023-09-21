@@ -13,6 +13,7 @@ import {
 import { useColors } from '../../../../hooks/useColors';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useUserContext } from '../../../../hooks/useUserContext';
+import { isValidZipCode } from '../../../../utils/form-validation';
 
 const UpdateDefaultZipcodeForm = () => {
 	const [open, setOpen] = useState(false);
@@ -50,8 +51,14 @@ const UpdateDefaultZipcodeForm = () => {
 	const handleUpdateZipcodeForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-		//send image file to a img hosting server e.g. Cloudinary
-		//put url to that image in mealDetails to send to mongodb
+
+		const isValidZip = isValidZipCode(zipcode);
+
+		if (!isValidZip) {
+			setError('Invalid zipcode');
+			setIsFormLoading(false);
+			return;
+		}
 
 		try {
 			setDefaultZipcode(zipcode);
