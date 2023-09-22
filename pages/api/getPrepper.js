@@ -1,5 +1,3 @@
-import React from 'react';
-import { mockDataContacts } from '../../db/mockData';
 import {
 	findExistingPrepperWithId,
 	connectMongoDb

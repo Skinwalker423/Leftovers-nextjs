@@ -14,6 +14,7 @@ import { useColors } from '../../../../hooks/useColors';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { isValidZipCode } from '../../../../utils/form-validation';
+import { useSession } from 'next-auth/react';
 
 const UpdateDefaultZipcodeForm = () => {
 	const [open, setOpen] = useState(false);
@@ -24,6 +25,9 @@ const UpdateDefaultZipcodeForm = () => {
 	const [msg, setMsg] = useState('');
 
 	const { setDefaultZipcode, state } = useUserContext();
+	const { data: session } = useSession();
+
+	const sessionUserId = session?.user?.id;
 
 	console.log('zip', zipcode);
 
@@ -51,17 +55,27 @@ const UpdateDefaultZipcodeForm = () => {
 	const handleUpdateZipcodeForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-
+		console.log('session user id after submitting form', sessionUserId);
 		const isValidZip = isValidZipCode(zipcode);
 
 		if (!isValidZip) {
 			setError('Invalid zipcode');
 			setIsFormLoading(false);
-
 			return;
 		}
 
 		try {
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${sessionUserId}`,
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					method: 'PATCH',
+					body: zipcode
+				}
+			);
+			console.log('response from zip change form', res);
 			setDefaultZipcode(zipcode);
 			setMsg('updated zipcode');
 			handleClose();
