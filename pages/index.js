@@ -36,14 +36,14 @@ export async function getServerSideProps({ req, res }) {
 		client &&
 		(await findExistingUserEmail(client, session.user.email));
 
-	console.log('user in SSR', user);
+	console.log('user in SSR', session);
 
 	const foundSession = session
 		? {
 				name: session.user?.name || null,
 				image: session.user?.image || null,
 				email: session.user?.email || null,
-				zipcode: user?.defaultZipcode || null,
+				defaultZipcode: session.user?.defaultZipcode || null,
 				favorites: user?.favorites || [],
 				id: session?.user?.id
 		  }
@@ -68,7 +68,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 		useContext(UserContext);
 
 	const userEmail = foundSession?.user?.email || session?.user?.email;
-	const defaultZipcode = foundSession?.user?.zipcode;
+	const defaultZipcode = foundSession?.user?.defaultZipcode;
 
 	console.log('user zipcode', defaultZipcode);
 	console.log('user session', foundSession);

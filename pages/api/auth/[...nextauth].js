@@ -4,6 +4,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { comparePassword } from '../../../utils/bcrypt';
 import User from '../../../db/mongodb/models/userModel';
 import { connectToMongoDb } from '../../../db/mongodb/mongoose';
+import Prepper from '../../../db/mongodb/models/prepperModel';
 
 export const authOptions = {
 	// Configure one or more authentication providers
@@ -100,12 +101,17 @@ export const authOptions = {
 			};
 
 			if (!foundUser) {
-				const newUser = new User(userDetails);
+				const newUser = new User(userDetails).populate({
+					path: 'favorites',
+					model: Prepper
+				});
 				await newUser.save();
 				session.user.id = newUser?._id.toString();
+				session.user.favorites = [];
 			} else {
 				session.user.id = foundUser._id.toString();
 				session.user.defaultZipcode = foundUser?.defaultZipcode;
+				session.user.favorites = foundUser?.favorites || [];
 			}
 
 			session.accessToken = token.accessToken;
