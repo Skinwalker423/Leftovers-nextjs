@@ -30,8 +30,6 @@ const UpdateDefaultZipcodeForm = () => {
 	const sessionUserId = session?.user?.id;
 	const sessionUserZipcode = session?.user?.defaultZipcode;
 
-	console.log('zip', session);
-
 	const style = {
 		position: 'absolute',
 		top: '50%',
@@ -76,11 +74,16 @@ const UpdateDefaultZipcodeForm = () => {
 					body: zipcode
 				}
 			);
-			console.log('response from zip change form', res);
-			setDefaultZipcode(zipcode);
-			setMsg('updated zipcode');
-			handleClose();
-			setIsFormLoading(false);
+			const response = await res.json();
+			if (response.message) {
+				setDefaultZipcode(zipcode);
+				setMsg(res.message);
+				handleClose();
+				setIsFormLoading(false);
+			} else {
+				setIsFormLoading(false);
+				setError('problem with the request');
+			}
 		} catch (err) {
 			console.error('problem updating zipcode', err);
 			setIsFormLoading(false);

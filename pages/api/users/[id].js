@@ -16,8 +16,7 @@ async function updateUserDefaultZipcode(req, res) {
 				defaultZipcode: newZipcode
 			}
 		});
-
-		console.log('updated user', updatedUser);
+		await updatedUser.save();
 		res.status(200).json({ message: 'update complete' });
 	} catch (error) {
 		res.status(500).json({ error: 'problem updating existing user' });

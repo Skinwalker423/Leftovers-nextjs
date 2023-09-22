@@ -70,9 +70,6 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const userEmail = foundSession?.email || session?.user?.email;
 	const defaultZipcode = foundSession?.defaultZipcode;
 
-	console.log('user zipcode', defaultZipcode);
-	console.log('user session', session);
-
 	useEffect(() => {
 		if (favoriteList) {
 			setFavoritesList(favoriteList);
