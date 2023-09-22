@@ -43,7 +43,7 @@ export async function getServerSideProps({ req, res }) {
 				name: session.user?.name || null,
 				image: session.user?.image || null,
 				email: session.user?.email || null,
-				defaultZipcode: session.user?.defaultZipcode || null,
+				defaultZipcode: session?.user?.defaultZipcode || null,
 				favorites: user?.favorites || [],
 				id: session?.user?.id
 		  }
@@ -67,11 +67,11 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const { state, dispatch, setFavoritesList, setDefaultZipcode } =
 		useContext(UserContext);
 
-	const userEmail = foundSession?.user?.email || session?.user?.email;
-	const defaultZipcode = foundSession?.user?.defaultZipcode;
+	const userEmail = foundSession?.email || session?.user?.email;
+	const defaultZipcode = foundSession?.defaultZipcode;
 
 	console.log('user zipcode', defaultZipcode);
-	console.log('user session', foundSession);
+	console.log('user session', session);
 
 	useEffect(() => {
 		if (favoriteList) {

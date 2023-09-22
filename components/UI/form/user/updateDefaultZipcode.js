@@ -28,8 +28,9 @@ const UpdateDefaultZipcodeForm = () => {
 	const { data: session } = useSession();
 
 	const sessionUserId = session?.user?.id;
+	const sessionUserZipcode = session?.user?.defaultZipcode;
 
-	console.log('zip', zipcode);
+	console.log('zip', session);
 
 	const style = {
 		position: 'absolute',

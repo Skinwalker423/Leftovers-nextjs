@@ -162,7 +162,7 @@ export async function findExistingUserEmail(client, email) {
 		if (!document) {
 			return null;
 		}
-
+		console.log('document', document);
 		const formattedDoc = {
 			id: document?._id.toString(),
 			email: document?.email,

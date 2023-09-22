@@ -101,16 +101,14 @@ export const authOptions = {
 			};
 
 			if (!foundUser) {
-				const newUser = new User(userDetails).populate({
-					path: 'favorites',
-					model: Prepper
-				});
+				const newUser = new User(userDetails);
+				//populate favorite preppers when Object Ids are replaced
 				await newUser.save();
 				session.user.id = newUser?._id.toString();
 				session.user.favorites = [];
 			} else {
 				session.user.id = foundUser._id.toString();
-				session.user.defaultZipcode = foundUser?.defaultZipcode;
+				session.user.defaultZipcode = foundUser.defaultZipcode;
 				session.user.favorites = foundUser?.favorites || [];
 			}
 

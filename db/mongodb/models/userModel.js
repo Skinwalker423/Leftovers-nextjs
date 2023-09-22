@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	name: String,
 	image: String,
-	zipcode: {
+	defaultZipcode: {
 		type: String,
 		length: 10,
 		default: null

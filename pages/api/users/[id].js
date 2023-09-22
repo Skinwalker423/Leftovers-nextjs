@@ -8,10 +8,16 @@ async function updateUserDefaultZipcode(req, res) {
 
 	const { id } = req.query;
 	const newZipcode = req.body;
-	console.log('inside zip api', id);
-	console.log('new zip', newZipcode);
 
 	try {
+		await connectToMongoDb();
+		const updatedUser = await User.findByIdAndUpdate(id, {
+			$set: {
+				defaultZipcode: newZipcode
+			}
+		});
+
+		console.log('updated user', updatedUser);
 		res.status(200).json({ message: 'update complete' });
 	} catch (error) {
 		res.status(500).json({ error: 'problem updating existing user' });
