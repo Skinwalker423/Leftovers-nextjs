@@ -95,12 +95,17 @@ export const authOptions = {
 
 			const userDetails = {
 				...session.user,
-				favorites: []
+				favorites: [],
+				defaultZipcode: null
 			};
 
 			if (!foundUser) {
 				const newUser = new User(userDetails);
 				await newUser.save();
+				session.user.id = newUser?._id.toString();
+			} else {
+				session.user.id = foundUser._id.toString();
+				session.user.defaultZipcode = foundUser?.defaultZipcode;
 			}
 
 			session.accessToken = token.accessToken;

@@ -170,7 +170,8 @@ export async function findExistingUserEmail(client, email) {
 			password: document?.password,
 			image: document?.image,
 			name: `${document.firstName} ${document.lastName}`,
-			joined: document?.createdAt?.toString()
+			joined: document?.createdAt?.toString(),
+			defaultZipcode: document?.defaultZipcode
 		};
 
 		return formattedDoc;

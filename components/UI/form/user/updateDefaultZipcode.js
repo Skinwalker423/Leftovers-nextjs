@@ -57,6 +57,7 @@ const UpdateDefaultZipcodeForm = () => {
 		if (!isValidZip) {
 			setError('Invalid zipcode');
 			setIsFormLoading(false);
+
 			return;
 		}
 

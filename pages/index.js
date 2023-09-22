@@ -43,8 +43,9 @@ export async function getServerSideProps({ req, res }) {
 				name: session.user?.name || null,
 				image: session.user?.image || null,
 				email: session.user?.email || null,
-				zipcode: user?.zipcode || null,
-				favorites: user?.favorites || []
+				zipcode: user?.defaultZipcode || null,
+				favorites: user?.favorites || [],
+				id: session?.user?.id
 		  }
 		: null;
 
@@ -70,7 +71,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 	const defaultZipcode = foundSession?.user?.zipcode;
 
 	console.log('user zipcode', defaultZipcode);
-	console.log('user state', state);
+	console.log('user session', foundSession);
 
 	useEffect(() => {
 		if (favoriteList) {
