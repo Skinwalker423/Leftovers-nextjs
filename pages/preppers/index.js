@@ -10,10 +10,12 @@ import styles from './index.module.css';
 import {
 	findAllInCollection,
 	connectMongoDb,
-	findExistingUserEmail
+	findExistingUserEmail,
+	findLocalPreppersWithZipcode
 } from '../../db/mongodb/mongoDbUtils';
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
+import { Alert } from '@mui/material';
 
 export async function getServerSideProps({ req, res }) {
 	try {
@@ -35,8 +37,10 @@ export async function getServerSideProps({ req, res }) {
 			client,
 			session?.user?.defaultZipcode
 		);
-
+		console.log('local preppers', localPreppers);
 		const userEmail = session?.user?.email;
+		const userDefaultZipcode = session?.user?.defaultZipcode;
+		console.log('zip', userDefaultZipcode);
 		const userDocument =
 			userEmail && (await findExistingUserEmail(client, userEmail));
 		const favoritesList = userDocument.favorites.map(
@@ -47,7 +51,8 @@ export async function getServerSideProps({ req, res }) {
 			props: {
 				preppers: localPreppers || [],
 				userEmail: userEmail ? userEmail : null,
-				favoritesList: favoritesList || []
+				favoritesList: favoritesList || [],
+				defaultZipcode: userDefaultZipcode ? userDefaultZipcode : ''
 			}
 		};
 	} catch (err) {
@@ -60,7 +65,7 @@ export async function getServerSideProps({ req, res }) {
 	}
 }
 
-const Home = ({ preppers, userEmail, favoritesList }) => {
+const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 	const itemsPerPages = 8;
 	const count = preppers.length;
 	const pages = Math.ceil(count / itemsPerPages);
@@ -93,38 +98,63 @@ const Home = ({ preppers, userEmail, favoritesList }) => {
 					textAlign={'center'}
 					variant="h1"
 				>
-					Meal preppers in '[zipcode]'
+					Local Meal Preppers in {defaultZipcode ? defaultZipcode : ''}
 				</Typography>
-				<Box display="flex" justifyContent={'center'} gap={4} flexWrap={'wrap'}>
-					{preppersList.map((prepper) => {
-						const avatar = 'https://i.pravatar.cc/300';
+				{preppersList.length > 0 ? (
+					<Box
+						display="flex"
+						justifyContent={'center'}
+						gap={4}
+						flexWrap={'wrap'}
+					>
+						{preppersList.map((prepper) => {
+							const avatar = 'https://i.pravatar.cc/300';
 
-						const favorited =
-							favoritesList && favoritesList.includes(prepper.id)
-								? true
-								: false;
-						if (prepper.email !== userEmail) {
-							return (
-								<PrepperCard
-									isFavorited={favorited}
-									className={styles.prepCard}
-									key={prepper.id}
-									name={prepper.kitchenTitle}
-									email={prepper.email}
-									subTitle={prepper.name}
-									avatar={prepper.profileImgUrl || avatar}
-									kitchenImgUrl={prepper.kitchenImgUrl}
-									id={prepper.id}
-									userEmail={userEmail ? userEmail : ''}
-									description={prepper.description}
-									setMsg={setMsg}
-									setErrorMsg={setErrorMsg}
-									mealsServed={prepper.mealsServed}
-								/>
-							);
-						}
-					})}
-				</Box>
+							const favorited =
+								favoritesList && favoritesList.includes(prepper.id)
+									? true
+									: false;
+							if (prepper.email !== userEmail) {
+								return (
+									<PrepperCard
+										isFavorited={favorited}
+										className={styles.prepCard}
+										key={prepper.id}
+										name={prepper.kitchenTitle}
+										email={prepper.email}
+										subTitle={prepper.name}
+										avatar={prepper.profileImgUrl || avatar}
+										kitchenImgUrl={prepper.kitchenImgUrl}
+										id={prepper.id}
+										userEmail={userEmail ? userEmail : ''}
+										description={prepper.description}
+										setMsg={setMsg}
+										setErrorMsg={setErrorMsg}
+										mealsServed={prepper.mealsServed}
+									/>
+								);
+							}
+						})}
+					</Box>
+				) : (
+					<Box
+						width={'100%'}
+						display={'flex'}
+						justifyContent={'center'}
+						alignItems={'center'}
+					>
+						<Alert
+							severity="error"
+							sx={{
+								width: '50%'
+							}}
+						>
+							<Typography textAlign={'center'} variant="h2">
+								No preppers available nearby.
+							</Typography>
+						</Alert>
+					</Box>
+				)}
 				<Pagination
 					sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
 					size="large"
