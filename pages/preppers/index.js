@@ -37,10 +37,8 @@ export async function getServerSideProps({ req, res }) {
 			client,
 			session?.user?.defaultZipcode
 		);
-		console.log('local preppers', localPreppers);
 		const userEmail = session?.user?.email;
 		const userDefaultZipcode = session?.user?.defaultZipcode;
-		console.log('zip', userDefaultZipcode);
 		const userDocument =
 			userEmail && (await findExistingUserEmail(client, userEmail));
 		const favoritesList = userDocument.favorites.map(
