@@ -15,6 +15,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { isValidZipCode } from '../../../../utils/form-validation';
 import { useSession } from 'next-auth/react';
+import { fetchUpdateUserZipcode } from '../../../../utils/users';
 
 const UpdateDefaultZipcodeForm = () => {
 	const [open, setOpen] = useState(false);
@@ -22,13 +23,12 @@ const UpdateDefaultZipcodeForm = () => {
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 	const [zipcode, setZipcode] = useState('');
-	const [msg, setMsg] = useState('');
+	const [msg, setMsg] = useState('test');
 
 	const { setDefaultZipcode, state } = useUserContext();
 	const { data: session } = useSession();
 
 	const sessionUserId = session?.user?.id;
-	const sessionUserZipcode = session?.user?.defaultZipcode;
 
 	const style = {
 		position: 'absolute',
@@ -64,20 +64,11 @@ const UpdateDefaultZipcodeForm = () => {
 		}
 
 		try {
-			const res = await fetch(
-				`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${sessionUserId}`,
-				{
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					method: 'PATCH',
-					body: zipcode
-				}
-			);
-			const response = await res.json();
+			const response = await fetchUpdateUserZipcode(sessionUserId, zipcode);
+
 			if (response.message) {
 				setDefaultZipcode(zipcode);
-				setMsg(res.message);
+				setMsg(response.message);
 				handleClose();
 				setIsFormLoading(false);
 			} else {
@@ -92,7 +83,6 @@ const UpdateDefaultZipcodeForm = () => {
 
 		setTimeout(() => {
 			setMsg('');
-			setError('');
 		}, 3000);
 	};
 
@@ -121,28 +111,6 @@ const UpdateDefaultZipcodeForm = () => {
 					<Typography sx={{ color: colors.orangeAccent[100] }}>
 						{state.defaultZipcode || 'Set Zicode'}
 					</Typography>
-					{msg && (
-						<Alert
-							onClose={() => {
-								setMsg('');
-							}}
-							color="success"
-							severity="success"
-							variant="filled"
-							sx={{
-								position: 'absolute',
-								top: 70,
-
-								width: '23rem',
-								fontSize: 'larger',
-								textAlign: 'center',
-								justifyContent: 'center',
-								zIndex: 99
-							}}
-						>
-							<Typography fontSize={'2rem'}>{msg}</Typography>
-						</Alert>
-					)}
 				</Box>
 			</Tooltip>
 			<Modal
@@ -216,6 +184,28 @@ const UpdateDefaultZipcodeForm = () => {
 					</form>
 				</Box>
 			</Modal>
+			{msg && (
+				<Alert
+					onClose={() => {
+						setMsg('');
+					}}
+					color="success"
+					severity="success"
+					variant="filled"
+					sx={{
+						position: 'absolute',
+						top: 100,
+						right: 50,
+						width: '23rem',
+						fontSize: 'larger',
+						textAlign: 'center',
+						justifyContent: 'center',
+						zIndex: 99
+					}}
+				>
+					<Typography fontSize={'2rem'}>{msg}</Typography>
+				</Alert>
+			)}
 		</div>
 	);
 };
