@@ -5,7 +5,6 @@ import Pagination from '@mui/material/Pagination';
 import PrepperCard from '../../components/Card/prepperCard';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
-import { mockDataContacts } from '../../db/mockData';
 import Head from 'next/head';
 import styles from './index.module.css';
 import {
@@ -19,10 +18,10 @@ import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 export async function getServerSideProps({ req, res }) {
 	try {
 		const client = await connectMongoDb();
-		const allPreppers = await findAllInCollection(client, 'preppers');
 		const session = await getServerSession(req, res, authOptions);
 
 		if (!session) {
+			const allPreppers = await findAllInCollection(client, 'preppers');
 			return {
 				props: {
 					preppers: allPreppers || [],
@@ -31,6 +30,12 @@ export async function getServerSideProps({ req, res }) {
 				}
 			};
 		}
+
+		const localPreppers = await findLocalPreppersWithZipcode(
+			client,
+			session?.user?.defaultZipcode
+		);
+
 		const userEmail = session?.user?.email;
 		const userDocument =
 			userEmail && (await findExistingUserEmail(client, userEmail));
@@ -40,7 +45,7 @@ export async function getServerSideProps({ req, res }) {
 
 		return {
 			props: {
-				preppers: allPreppers || [],
+				preppers: localPreppers || [],
 				userEmail: userEmail ? userEmail : null,
 				favoritesList: favoritesList || []
 			}
@@ -49,7 +54,7 @@ export async function getServerSideProps({ req, res }) {
 		console.error('could not find preppers', err);
 		return {
 			props: {
-				preppers: mockDataContacts || []
+				preppers: []
 			}
 		};
 	}

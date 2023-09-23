@@ -23,12 +23,13 @@ const UpdateDefaultZipcodeForm = () => {
 	const [error, setError] = useState('');
 	const { colors } = useColors();
 	const [zipcode, setZipcode] = useState('');
-	const [msg, setMsg] = useState('test');
+	const [msg, setMsg] = useState('');
 
 	const { setDefaultZipcode, state } = useUserContext();
 	const { data: session } = useSession();
 
 	const sessionUserId = session?.user?.id;
+	const sessionUserZipcode = session?.user?.defaultZipcode;
 
 	const style = {
 		position: 'absolute',
@@ -109,7 +110,7 @@ const UpdateDefaultZipcodeForm = () => {
 				>
 					<LocationOnIcon color="error" />
 					<Typography sx={{ color: colors.orangeAccent[100] }}>
-						{state.defaultZipcode || 'Set Zicode'}
+						{state.defaultZipcode || sessionUserZipcode || 'Set Zicode'}
 					</Typography>
 				</Box>
 			</Tooltip>

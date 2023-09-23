@@ -74,7 +74,6 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 		if (favoriteList) {
 			setFavoritesList(favoriteList);
 		}
-
 		if (defaultZipcode) {
 			setDefaultZipcode(defaultZipcode);
 		}
