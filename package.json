@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@emotion/react": "^11.10.5",
 		"@emotion/styled": "^11.10.5",
+		"@googlemaps/js-api-loader": "^1.16.2",
 		"@mui/icons-material": "^5.10.16",
 		"@mui/material": "^5.10.17",
 		"@uploadthing/react": "^5.5.0",
