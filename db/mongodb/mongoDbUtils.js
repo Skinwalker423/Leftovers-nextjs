@@ -308,7 +308,7 @@ export async function findLocalPreppersWithZipcode(
 					description,
 					meals: [
 						{
-							id: meals?.id || null,
+							id: meals.id || null,
 							title: meals.title || null,
 							price: meals.price || null,
 							description: meals.description || null,

@@ -99,40 +99,42 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 					Local Meal Preppers in {defaultZipcode ? defaultZipcode : ''}
 				</Typography>
 				{preppersList.length > 0 ? (
-					<Box
-						display="flex"
-						justifyContent={'center'}
-						gap={4}
-						flexWrap={'wrap'}
-					>
-						{preppersList.map((prepper) => {
-							const avatar = 'https://i.pravatar.cc/300';
+					<Box display={'flex'} flexDirection={'column'}>
+						<Box
+							display="flex"
+							justifyContent={'center'}
+							gap={4}
+							flexWrap={'wrap'}
+						>
+							{preppersList.map((prepper) => {
+								const avatar = 'https://i.pravatar.cc/300';
 
-							const favorited =
-								favoritesList && favoritesList.includes(prepper.id)
-									? true
-									: false;
-							if (prepper.email !== userEmail) {
-								return (
-									<PrepperCard
-										isFavorited={favorited}
-										className={styles.prepCard}
-										key={prepper.id}
-										name={prepper.kitchenTitle}
-										email={prepper.email}
-										subTitle={prepper.name}
-										avatar={prepper.profileImgUrl || avatar}
-										kitchenImgUrl={prepper.kitchenImgUrl}
-										id={prepper.id}
-										userEmail={userEmail ? userEmail : ''}
-										description={prepper.description}
-										setMsg={setMsg}
-										setErrorMsg={setErrorMsg}
-										mealsServed={prepper.mealsServed}
-									/>
-								);
-							}
-						})}
+								const favorited =
+									favoritesList && favoritesList.includes(prepper.id)
+										? true
+										: false;
+								if (prepper.email !== userEmail) {
+									return (
+										<PrepperCard
+											isFavorited={favorited}
+											className={styles.prepCard}
+											key={prepper.id}
+											name={prepper.kitchenTitle}
+											email={prepper.email}
+											subTitle={prepper.name}
+											avatar={prepper.profileImgUrl || avatar}
+											kitchenImgUrl={prepper.kitchenImgUrl}
+											id={prepper.id}
+											userEmail={userEmail ? userEmail : ''}
+											description={prepper.description}
+											setMsg={setMsg}
+											setErrorMsg={setErrorMsg}
+											mealsServed={prepper.mealsServed}
+										/>
+									);
+								}
+							})}
+						</Box>
 						<Pagination
 							sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
 							size="large"
