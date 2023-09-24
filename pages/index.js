@@ -36,8 +36,6 @@ export async function getServerSideProps({ req, res }) {
 		client &&
 		(await findExistingUserEmail(client, session.user.email));
 
-	console.log('user in SSR', session);
-
 	const foundSession = session
 		? {
 				name: session.user?.name || null,

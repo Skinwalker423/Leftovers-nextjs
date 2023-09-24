@@ -5,8 +5,10 @@ import Box from '@mui/material/Box';
 
 const ValueMealList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
-
+	console.log(state);
 	const list = state.localPreppers.map((prepper) => {
+		console.log(prepper.meals);
+		if (!prepper.meals) return;
 		return prepper.meals.map(
 			({ id, title, price, qty, description, image }) => {
 				if (price === 5 && qty > 0 && prepper.email !== userEmail) {
@@ -41,7 +43,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 			justifyContent={'center'}
 			alignItems={'center'}
 		>
-			{list}
+			{list.length > 0 && list}
 		</Box>
 	);
 };

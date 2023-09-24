@@ -308,7 +308,7 @@ export async function findLocalPreppersWithZipcode(
 					description,
 					kitchenTitle,
 					kitchenImgUrl,
-					meals: meals.toString(),
+					meals: meals,
 					profileImgUrl,
 					savedProfileImages,
 					savedKitchenImages,
