@@ -291,6 +291,7 @@ export async function findLocalPreppersWithZipcode(
 				lastName,
 				email,
 				description,
+				meals,
 				kitchenTitle,
 				kitchenImgUrl,
 				profileImgUrl,
@@ -305,6 +306,16 @@ export async function findLocalPreppersWithZipcode(
 					email,
 					id: _id.toString(),
 					description,
+					meals: [
+						{
+							id: meals?.id || null,
+							title: meals.title || null,
+							price: meals.price || null,
+							description: meals.description || null,
+							image: meals?.image || null,
+							qty: meals.qty || null
+						}
+					],
 					kitchenTitle,
 					kitchenImgUrl,
 					profileImgUrl,
