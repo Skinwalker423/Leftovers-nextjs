@@ -133,6 +133,12 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 								);
 							}
 						})}
+						<Pagination
+							sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
+							size="large"
+							count={pages}
+							onChange={handleChange}
+						/>
 					</Box>
 				) : (
 					<Box
@@ -153,12 +159,6 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 						</Alert>
 					</Box>
 				)}
-				<Pagination
-					sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
-					size="large"
-					count={pages}
-					onChange={handleChange}
-				/>
 			</Box>
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} width="50%" />}
 			{errorMsg && (
