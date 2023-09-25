@@ -145,6 +145,7 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					zipCode={zipCode}
 				/>
 				<div id="searchResults" />
+
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"

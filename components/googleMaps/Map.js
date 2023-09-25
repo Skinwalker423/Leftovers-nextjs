@@ -4,7 +4,7 @@ import loader from '../../utils/GoogleMaps/googleMapsLoader';
 const Map = ({ address }) => {
 	const [map, setMap] = useState(null);
 	useEffect(() => {
-		loader.load().then(() => {
+		loader.importLibrary('maps').then(({ Map }) => {
 			const geocoder = new window.google.maps.Geocoder();
 			geocoder.geocode({ address }, (results, status) => {
 				if (status === 'OK') {
@@ -12,10 +12,11 @@ const Map = ({ address }) => {
 						center: results[0].geometry.location,
 						zoom: 16
 					};
-					const newMap = new window.google.maps.Map(
-						document.getElementById('map'),
-						mapOptions
-					);
+					const newMap = new Map(document.getElementById('map'), mapOptions);
+					// const newMap = new window.google.maps.Map(
+					// 	document.getElementById('map'),
+					// 	mapOptions
+					// );
 					const marker = new window.google.maps.Marker({
 						position: results[0].geometry.location,
 						map: newMap
