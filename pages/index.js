@@ -7,7 +7,6 @@ import { useColors } from '../hooks/useColors';
 import CategoryBanner from '../components/category/categoryBanner';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
 import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import LandingHeader from '../components/layout/header/landingHeader';
