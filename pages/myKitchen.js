@@ -168,6 +168,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 									src={kitchenImage || '/kitchen2.jpg'}
 									alt={`The kitchen of ${prepper.kitchenTitle}`}
 									priority
+									sizes={{ width: '150px', height: '150px' }}
 								/>
 							</Box>
 							<Box
