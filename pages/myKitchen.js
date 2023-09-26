@@ -30,6 +30,7 @@ import UpdateKitchenImage from '../components/UI/form/mykitchen/updateKitchenIma
 import MyKitchenBottomBar from '../components/layout/bottombar/myKitchenBottomBar';
 import ProfileSavedImagesForm from '../components/UI/form/mykitchen/profileSavedImages';
 import { updateProfileImageDb } from '../utils/myKitchen/updateProfileImageDB';
+import CircleIcon from '@mui/icons-material/Circle';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -223,12 +224,22 @@ const myKitchen = ({ userData, prepper, orders }) => {
 					<InfoCard title="Kitchen open/closed for meal orders">
 						<Typography
 							sx={{
+								display: 'flex',
+								alignItems: 'center',
+								gap: 1,
 								color: kitchenClosed
 									? colors.redAccent[400]
 									: colors.greenAccent[400]
 							}}
 							variant="h4"
 						>
+							<CircleIcon
+								sx={{
+									color: kitchenClosed
+										? colors.redAccent[400]
+										: colors.greenAccent[400]
+								}}
+							/>{' '}
 							{kitchenClosed ? 'Currently Closed' : 'Currently Open'}
 						</Typography>
 						<Button
