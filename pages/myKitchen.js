@@ -91,6 +91,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 		prepper.savedProfileImages
 	);
 	const [selectedImg, setSelectedImg] = useState(profileImage);
+	const [kitchenClosed, setKitchenClosed] = useState(prepper.isKitchenClosed);
 
 	const { colors } = useColors();
 	const theme = useTheme();
@@ -98,8 +99,14 @@ const myKitchen = ({ userData, prepper, orders }) => {
 
 	const currentUserEmail = userData?.email;
 
+	console.log('prepper', prepper.isKitchenClosed);
+
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
+	};
+
+	const handleKitchenOpenStatus = () => {
+		setKitchenClosed((prevStatus) => !prevStatus);
 	};
 
 	return (
@@ -213,6 +220,25 @@ const myKitchen = ({ userData, prepper, orders }) => {
 						</Box>
 					</InfoCard>
 
+					<InfoCard title="Kitchen open/closed for meal orders">
+						<Typography
+							sx={{
+								color: kitchenClosed
+									? colors.redAccent[400]
+									: colors.greenAccent[400]
+							}}
+							variant="h4"
+						>
+							{kitchenClosed ? 'Currently Closed' : 'Currently Open'}
+						</Typography>
+						<Button
+							color={kitchenClosed ? 'success' : 'error'}
+							variant="contained"
+							onClick={handleKitchenOpenStatus}
+						>
+							{kitchenClosed ? 'Open Kicthen' : 'Close for orders'}
+						</Button>
+					</InfoCard>
 					<InfoCard title="Kitchen Name">
 						<Typography variant="h4">{prepper.kitchenTitle}</Typography>
 						<UpdateKitchenForm
