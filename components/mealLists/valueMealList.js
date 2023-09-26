@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 
 const ValueMealList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
-	console.log(state);
+	console.log('state in values list', state);
 	const list = state.localPreppers.map((prepper) => {
 		console.log(prepper.meals);
 		if (!prepper.meals) return;
@@ -33,6 +33,8 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 			}
 		);
 	});
+
+	console.log('list', list);
 
 	return (
 		<Box

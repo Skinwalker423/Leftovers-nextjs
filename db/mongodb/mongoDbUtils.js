@@ -306,16 +306,16 @@ export async function findLocalPreppersWithZipcode(
 					email,
 					id: _id.toString(),
 					description,
-					meals: [
-						{
-							id: meals.id || null,
-							title: meals.title || null,
-							price: meals.price || null,
-							description: meals.description || null,
-							image: meals?.image || null,
-							qty: meals.qty || null
-						}
-					],
+					meals: meals.map((meal) => {
+						return {
+							id: meal.id || null,
+							title: meal.title || null,
+							price: meal.price || null,
+							description: meal.description || null,
+							image: meal?.image || null,
+							qty: meal.qty || null
+						};
+					}),
 					kitchenTitle,
 					kitchenImgUrl,
 					profileImgUrl,

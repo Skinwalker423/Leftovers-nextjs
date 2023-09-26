@@ -1,5 +1,7 @@
+//5 dollar meals not showing while not logged
 //add a sign in prepper page for the hours open
 //default zipcode
+//populate favorite preppers when Object Ids are replaced
 //logo text design
 //order details page
 //checkout items list fix description alignment
