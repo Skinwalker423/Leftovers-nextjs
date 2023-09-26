@@ -31,6 +31,7 @@ import MyKitchenBottomBar from '../components/layout/bottombar/myKitchenBottomBa
 import ProfileSavedImagesForm from '../components/UI/form/mykitchen/profileSavedImages';
 import { updateProfileImageDb } from '../utils/myKitchen/updateProfileImageDB';
 import CircleIcon from '@mui/icons-material/Circle';
+import { fetchKitchenOpenStatusDb } from '../utils/myKitchen/fetchKitchenOpenStatus';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -100,14 +101,29 @@ const myKitchen = ({ userData, prepper, orders }) => {
 
 	const currentUserEmail = userData?.email;
 
-	console.log('prepper', prepper.isKitchenClosed);
-
 	const handleShowMealBtn = () => {
 		setShowMeals((bool) => !bool);
 	};
 
-	const handleKitchenOpenStatus = () => {
-		setKitchenClosed((prevStatus) => !prevStatus);
+	const handleKitchenOpenStatus = async () => {
+		const currentStatus = kitchenClosed ? false : true;
+		try {
+			const res = await fetchKitchenOpenStatusDb(
+				currentUserEmail,
+				currentStatus
+			);
+			if (res.error) {
+				setError(res.error);
+				return;
+			}
+			if (res.message) {
+				setMsg(res.message);
+				console.log('kitchen status updated', res.message);
+				setKitchenClosed((prevStatus) => !prevStatus);
+			}
+		} catch (error) {
+			setError(error);
+		}
 	};
 
 	return (
@@ -244,6 +260,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 							{kitchenClosed ? 'Currently Closed' : 'Currently Open'}
 						</Typography>
 						<Button
+							type="button"
 							color={kitchenClosed ? 'success' : 'error'}
 							variant="contained"
 							onClick={handleKitchenOpenStatus}

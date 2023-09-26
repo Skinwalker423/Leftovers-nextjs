@@ -377,7 +377,7 @@ export async function updateKitchenTitle(client, userEmail, kitchenTitle) {
 	}
 }
 
-export async function updateKitchenOpenStatus(client, prepperEmail, status) {
+export async function updateKitchenOpenStatusDb(client, prepperEmail, status) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const document = await collection.updateOne(

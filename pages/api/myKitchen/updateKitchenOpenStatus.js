@@ -1,16 +1,17 @@
 import { connectMongoDb } from '../../../db/mongodb/mongoDbUtils';
+import { updateKitchenOpenStatusDb } from '../../../db/mongodb/mongoDbUtils';
 
 const updateKitchenOpenStatus = async (req, res) => {
 	if (req.method !== 'PATCH') {
 		return res.status(400).json({ error: 'Invalid request method' });
 	}
-	const body = JSON.parse(req.body);
+	const body = req.body;
 	const { status, email } = body;
 	console.log('status', status);
 
 	try {
 		const client = await connectMongoDb();
-		// const document = await updateKitchenTitle(client, email, kitchenTitle);
+		const document = await updateKitchenOpenStatusDb(client, email, status);
 
 		if (!document || !document.modifiedCount) {
 			res.status(500).json({ error: 'could not update kitchen open status' });
