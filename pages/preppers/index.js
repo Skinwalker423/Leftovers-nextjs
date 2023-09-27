@@ -96,7 +96,7 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 					textAlign={'center'}
 					variant="h1"
 				>
-					Local Meal Preppers in {defaultZipcode ? defaultZipcode : ''}
+					Local Meal Preppers {defaultZipcode ? `in ${defaultZipcode}` : ''}
 				</Typography>
 				{preppersList.length > 0 ? (
 					<Box display={'flex'} flexDirection={'column'}>
