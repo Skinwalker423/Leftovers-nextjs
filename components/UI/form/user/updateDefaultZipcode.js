@@ -99,7 +99,7 @@ const UpdateDefaultZipcodeForm = () => {
 						justifyContent: 'center',
 						alignItems: 'center',
 						gap: 0.5,
-						px: 2,
+						px: { xs: 1, sm: 2 },
 						py: 0.5,
 						cursor: 'pointer',
 						':hover': {
@@ -110,7 +110,7 @@ const UpdateDefaultZipcodeForm = () => {
 				>
 					<LocationOnIcon color="error" />
 					<Typography sx={{ color: colors.orangeAccent[100] }}>
-						{state.defaultZipcode || sessionUserZipcode || 'Set Zicode'}
+						{state.defaultZipcode || sessionUserZipcode || 'Zipcode'}
 					</Typography>
 				</Box>
 			</Tooltip>

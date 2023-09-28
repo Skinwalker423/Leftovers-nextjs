@@ -57,7 +57,7 @@ export async function getServerSideProps({ req, res }) {
 		props: {
 			favoriteList: session && user?.favorites ? user?.favorites : [],
 			foundSession,
-			localPreppersList: localPreppersList.length > 0 ? localPreppersList : []
+			localPreppersList: localPreppersList ? localPreppersList : []
 		}
 	};
 }
