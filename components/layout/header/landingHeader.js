@@ -16,7 +16,7 @@ const LandingHeader = ({
 }) => {
 	const { colors } = useColors();
 	return (
-		<Box position={'relative'} height={{ xs: '70vh', md: '85vh' }} width="100%">
+		<Box position={'relative'} height={{ xs: '65vh', md: '85vh' }} width="100%">
 			<Image
 				priority={true}
 				fill
@@ -27,7 +27,7 @@ const LandingHeader = ({
 				position={'relative'}
 				alignItems={'center'}
 				justifyContent={'center'}
-				top={'15%'}
+				top={{ xs: '5%', sm: '15%' }}
 				p={'1rem'}
 			>
 				<Typography
