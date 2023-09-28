@@ -25,6 +25,7 @@ import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
 import FavoriteList from '../components/prepperLists/favoriteList';
+import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -35,26 +36,37 @@ export async function getServerSideProps({ req, res }) {
 		client &&
 		(await findExistingUserEmail(client, session.user.email));
 
+	const defaultZipcode = session?.user?.defaultZipcode || null;
+
 	const foundSession = session
 		? {
 				name: session.user?.name || null,
 				image: session.user?.image || null,
 				email: session.user?.email || null,
-				defaultZipcode: session?.user?.defaultZipcode || null,
+				defaultZipcode,
 				favorites: user?.favorites || [],
 				id: session?.user?.id
 		  }
 		: null;
 
+	const localPreppersList =
+		defaultZipcode &&
+		(await findLocalPreppersWithZipcode(client, defaultZipcode));
+	console.log('local prepper list', localPreppersList);
 	return {
 		props: {
 			favoriteList: session && user?.favorites ? user?.favorites : [],
-			foundSession
+			foundSession,
+			localPreppersList: localPreppersList.length > 0 ? localPreppersList : []
 		}
 	};
 }
 
-export default function Home({ favoriteList, foundSession, errorServer }) {
+export default function Home({
+	favoriteList,
+	foundSession,
+	localPreppersList
+}) {
 	const [zipCode, setZipCode] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
 	const [isSearching, setIsSearching] = useState(false);
@@ -206,12 +218,8 @@ export default function Home({ favoriteList, foundSession, errorServer }) {
 					</Box>
 				)}
 
-				{(errorMsg.length > 0 || errorServer) && (
-					<ErrorAlert
-						width="50%"
-						error={errorMsg || errorServer}
-						setError={setErrorMsg}
-					/>
+				{errorMsg.length > 0 && (
+					<ErrorAlert width="50%" error={errorMsg} setError={setErrorMsg} />
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
