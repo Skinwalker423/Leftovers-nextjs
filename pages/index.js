@@ -52,7 +52,7 @@ export async function getServerSideProps({ req, res }) {
 	const localPreppersList =
 		defaultZipcode &&
 		(await findLocalPreppersWithZipcode(client, defaultZipcode));
-	console.log('local prepper list', localPreppersList);
+
 	return {
 		props: {
 			favoriteList: session && user?.favorites ? user?.favorites : [],
@@ -85,6 +85,12 @@ export default function Home({
 		}
 		if (defaultZipcode) {
 			setDefaultZipcode(defaultZipcode);
+		}
+		if (localPreppersList) {
+			dispatch({
+				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
+				payload: localPreppersList
+			});
 		}
 	}, []);
 
