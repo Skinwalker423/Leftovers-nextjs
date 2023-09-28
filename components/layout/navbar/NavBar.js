@@ -1,5 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { Box, Typography, IconButton, Tooltip, Button } from '@mui/material';
+import {
+	Box,
+	Typography,
+	IconButton,
+	Tooltip,
+	Button,
+	useTheme,
+	useMediaQuery
+} from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -32,6 +40,9 @@ const NavBar = () => {
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const { state } = useUserContext();
+
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
 	const cartItemsLength = state.userCartlist.length;
 
@@ -88,12 +99,8 @@ const NavBar = () => {
 					/>
 				</Link>
 
-				<Box display="flex" alignItems="center" gap={{ xs: 0, sm: 2 }}>
-					<Box
-						display={{ xs: 'none', lg: 'unset' }}
-						// width={{ sm: '15rem', md: '35rem' }}
-						// height="3.5rem"
-					>
+				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>
+					<Box display={{ xs: 'none', lg: 'unset' }}>
 						<nav style={{ width: '100%' }}>
 							<ul className={styles.linkListContainer}>
 								<NavItem title="Home" href="/" />
@@ -107,19 +114,23 @@ const NavBar = () => {
 							</ul>
 						</nav>
 					</Box>
+					{session && <UpdateDefaultZipcodeForm />}
 					<Box display={{ lg: 'none' }}>
 						<CollapsedNavMenu />
 					</Box>
 
-					{session && <UpdateDefaultZipcodeForm />}
-
 					<Tooltip title="darkmode">
 						<Box>
-							<IconButton onClick={handleDarkMode}>
+							<IconButton
+								size={matches ? 'small' : 'large'}
+								onClick={handleDarkMode}
+							>
 								{palette.mode === 'light' ? (
-									<DarkModeOutlinedIcon fontSize="large" />
+									<DarkModeOutlinedIcon
+										fontSize={matches ? 'medium' : 'large'}
+									/>
 								) : (
-									<DarkModeIcon fontSize="large" />
+									<DarkModeIcon fontSize={matches ? 'medium' : 'large'} />
 								)}
 							</IconButton>
 						</Box>
@@ -127,11 +138,18 @@ const NavBar = () => {
 					{session && (
 						<Tooltip title="notifications">
 							<Box>
-								<IconButton onClick={handleNotificationButton}>
+								<IconButton
+									size={matches ? 'small' : 'large'}
+									onClick={handleNotificationButton}
+								>
 									{showNotifictions ? (
-										<NotificationsIcon fontSize="large" />
+										<NotificationsIcon
+											fontSize={matches ? 'medium' : 'large'}
+										/>
 									) : (
-										<NotificationsNoneIcon fontSize="large" />
+										<NotificationsNoneIcon
+											fontSize={matches ? 'medium' : 'large'}
+										/>
 									)}
 								</IconButton>
 							</Box>
@@ -139,8 +157,13 @@ const NavBar = () => {
 					)}
 					<Tooltip title="meal cart">
 						<Box position={'relative'}>
-							<IconButton onClick={toggleDrawer}>
-								<ShoppingCartOutlinedIcon fontSize="large" />
+							<IconButton
+								size={matches ? 'small' : 'large'}
+								onClick={toggleDrawer}
+							>
+								<ShoppingCartOutlinedIcon
+									fontSize={matches ? 'medium' : 'large'}
+								/>
 							</IconButton>
 							{cartItemsLength > 0 && (
 								<Box
