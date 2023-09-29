@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CategoryPaginationHeader from '../category/categoryPaginationHeader';
 
 const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const { state } = useContext(UserContext);
@@ -46,32 +45,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
-			<Box
-				display={'flex'}
-				justifyContent={'space-between'}
-				alignItems={'center'}
-				px={10}
-			>
-				<Typography color={'secondary'} variant="h2">
-					Local Preppers
-				</Typography>
-				<Box
-					display={'flex'}
-					justifyContent={'flex-end'}
-					alignItems={'center'}
-					gap={5}
-				>
-					<Typography variant="h3">See All</Typography>
-					<Box display={'flex'}>
-						<IconButton size="large">
-							<ArrowBackIosIcon fontSize="large" />
-						</IconButton>
-						<IconButton size="large">
-							<ArrowForwardIosIcon fontSize="large" />
-						</IconButton>
-					</Box>
-				</Box>
-			</Box>
+			<CategoryPaginationHeader />
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
