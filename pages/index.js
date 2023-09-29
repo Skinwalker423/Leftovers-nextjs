@@ -178,11 +178,7 @@ export default function Home({
 				)}
 
 				{state.localPreppers.length !== 0 && (
-					<CategoryBanner
-						link="/"
-						title="$5 Meals"
-						bgColor={colors.greenAccent[700]}
-					>
+					<CategoryBanner link="/" bgColor={colors.greenAccent[700]}>
 						<ValueMealList userEmail={userEmail} setMsg={setMsg} />
 					</CategoryBanner>
 				)}

@@ -1,17 +1,22 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useColors } from '../../hooks/useColors';
 
-const CategoryPaginationHeader = () => {
+const CategoryPaginationHeader = ({ title = 'Title Here', color }) => {
+	const { colors } = useColors();
 	return (
 		<Box
 			display={'flex'}
 			justifyContent={'space-between'}
 			alignItems={'center'}
-			px={7}
+			px={10}
 		>
-			<Typography color={'secondary'} variant="h2">
-				Local Preppers
+			<Typography
+				sx={{ color: color ? color : colors.orangeAccent[400] }}
+				variant="h1"
+			>
+				{title}
 			</Typography>
 			<Box
 				display={'flex'}

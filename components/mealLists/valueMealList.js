@@ -2,9 +2,12 @@ import React, { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
 import FoodItemCard from '../Card/foodItemCard';
 import Box from '@mui/material/Box';
+import CategoryPaginationHeader from '../category/categoryPaginationHeader';
+import { useColors } from '../../hooks/useColors';
 
 const ValueMealList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
+	const { colors } = useColors();
 
 	const list = state.localPreppers.map((prepper) => {
 		if (!prepper.meals) return;
@@ -34,15 +37,21 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 	});
 
 	return (
-		<Box
-			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
-			display={'flex'}
-			flexDirection={{ xs: 'column', md: 'row' }}
-			flexWrap={{ xs: 'none', md: 'wrap' }}
-			justifyContent={'center'}
-			alignItems={'center'}
-		>
-			{list.length > 0 && list}
+		<Box display={'flex'} flexDirection={'column'}>
+			<CategoryPaginationHeader
+				title="$5 Meals"
+				color={colors.greenAccent[700]}
+			/>
+			<Box
+				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
+				display={'flex'}
+				flexDirection={{ xs: 'column', md: 'row' }}
+				flexWrap={{ xs: 'none', md: 'wrap' }}
+				justifyContent={'center'}
+				alignItems={'center'}
+			>
+				{list.length > 0 && list}
+			</Box>
 		</Box>
 	);
 };

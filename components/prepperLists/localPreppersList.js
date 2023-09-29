@@ -45,7 +45,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
-			<CategoryPaginationHeader />
+			<CategoryPaginationHeader title="Local Preppers" />
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
