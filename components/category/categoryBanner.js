@@ -18,6 +18,7 @@ const CategoryBanner = ({
 			alignItems={'center'}
 			justifyContent={'center'}
 			borderTop={`2px solid ${bgColor}`}
+			px={'15rem'}
 		>
 			<Link style={{ textDecoration: 'none' }} href={link}>
 				<Typography
