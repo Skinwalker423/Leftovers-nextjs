@@ -166,7 +166,7 @@ export default function Home({
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"
-						title="Local Preppers"
+						// title="Local Preppers"
 						bgColor={colors.orangeAccent[700]}
 					>
 						<LocalPreppersList

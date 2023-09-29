@@ -46,15 +46,30 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
-			<Box display={'flex'} justifyContent={'flex-end'}>
-				<Typography>See All</Typography>
-				<Box display={'flex'}>
-					<IconButton>
-						<ArrowBackIosIcon />
-					</IconButton>
-					<IconButton>
-						<ArrowForwardIosIcon />
-					</IconButton>
+			<Box
+				display={'flex'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+				px={10}
+			>
+				<Typography color={'secondary'} variant="h2">
+					Local Preppers
+				</Typography>
+				<Box
+					display={'flex'}
+					justifyContent={'flex-end'}
+					alignItems={'center'}
+					gap={5}
+				>
+					<Typography variant="h3">See All</Typography>
+					<Box display={'flex'}>
+						<IconButton size="large">
+							<ArrowBackIosIcon fontSize="large" />
+						</IconButton>
+						<IconButton size="large">
+							<ArrowForwardIosIcon fontSize="large" />
+						</IconButton>
+					</Box>
 				</Box>
 			</Box>
 			<Box
@@ -65,6 +80,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 				alignItems={'center'}
 				flexWrap={{ xs: 'wrap', md: 'wrap' }}
 				height={{ xs: '90%', md: '80%' }}
+				py={5}
 			>
 				{state.localPreppers && state.localPreppers.length !== 0 && preppers}
 			</Box>
