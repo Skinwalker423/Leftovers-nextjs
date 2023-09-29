@@ -135,12 +135,14 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 								}
 							})}
 						</Box>
-						<Pagination
-							sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
-							size="large"
-							count={pages}
-							onChange={handleChange}
-						/>
+						{pages > 1 && (
+							<Pagination
+								sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
+								size="large"
+								count={pages}
+								onChange={handleChange}
+							/>
+						)}
 					</Box>
 				) : (
 					<Box
