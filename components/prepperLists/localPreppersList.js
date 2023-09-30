@@ -5,24 +5,24 @@ import PrepperCard from '../Card/prepperCard';
 import CategoryPaginationHeader from '../category/categoryPaginationHeader';
 
 const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
+	const preppersPerPage = 3;
+
 	const { state } = useContext(UserContext);
 	const [slicedPreppers, setSlicedPreppers] = useState([]);
-	const [pag, setPag] = useState({ start: 0, end: 3 });
+	const [pag, setPag] = useState({ start: 0, end: preppersPerPage });
 
 	const length = state.localPreppers.length - 1;
-	const preppersPerPage = 3;
-	const disableNext = pag.end > length;
+	const disableNext = pag.end > length - 1;
 	const disablePrev = pag.start <= 0;
 
 	useEffect(() => {
 		const slicedList = state.localPreppers
-			.slice(pag.start, pag.end)
-			.filter((el) => el.email !== userEmail);
-		console.log('slice', slicedList);
+			.filter((el) => el.email !== userEmail)
+			.slice(pag.start, pag.end);
 		setSlicedPreppers(slicedList);
 	}, [pag]);
 
-	const setNewPagStart = () => {
+	const setNewPagNext = () => {
 		if (pag.end > length) {
 			return;
 		}
@@ -34,7 +34,18 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 			};
 		});
 	};
-	const setNewPagEnd = () => {};
+	const setNewPagPrev = () => {
+		if (pag.start <= 0) {
+			return;
+		}
+		setPag((prevPag) => {
+			return {
+				...prevPag,
+				start: prevPag.start - preppersPerPage,
+				end: prevPag.end - preppersPerPage
+			};
+		});
+	};
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
@@ -78,13 +89,15 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 				title="Local Preppers"
 				length={length}
 				resultsPerPage={preppersPerPage}
-				setNewPagStart={setNewPagStart}
+				setNewPagNext={setNewPagNext}
+				setNewPagPrev={setNewPagPrev}
 				disableNext={disableNext}
 				disablePrev={disablePrev}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
+				flexDirection={{ xs: 'column', sm: 'row' }}
 				gap={5}
 				justifyContent={'center'}
 				alignItems={'center'}

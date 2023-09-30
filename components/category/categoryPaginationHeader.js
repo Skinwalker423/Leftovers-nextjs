@@ -6,19 +6,19 @@ import { useColors } from '../../hooks/useColors';
 const CategoryPaginationHeader = ({
 	title = 'Title Here',
 	color,
-	setNewPagStart,
+	setNewPagNext,
+	setNewPagPrev,
 	disableNext,
 	disablePrev
 }) => {
 	const { colors } = useColors();
 
-	// const disableNext = pag.end > length;
-	// const disablePrev = pag.start < 0;
-
 	const handleNextPagination = () => {
-		setNewPagStart();
+		setNewPagNext();
 	};
-	const handlePrevPagination = () => {};
+	const handlePrevPagination = () => {
+		setNewPagPrev();
+	};
 
 	return (
 		<Box
