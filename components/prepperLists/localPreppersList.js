@@ -97,11 +97,10 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
-				flexDirection={{ xs: 'column', sm: 'row' }}
 				gap={5}
+				width={'100%'}
 				justifyContent={'center'}
 				alignItems={'center'}
-				flexWrap={{ xs: 'wrap', md: 'wrap' }}
 				height={{ xs: '90%', md: '80%' }}
 				py={5}
 			>
@@ -112,17 +111,3 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 };
 
 export default LocalPreppersList;
-
-{
-	/* <Box
-			sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
-			display={'flex'}
-			gap={5}
-			justifyContent={'center'}
-			alignItems={'center'}
-			flexWrap={{ xs: 'wrap', md: 'wrap' }}
-			height={{ xs: '90%', md: '80%' }}
-		>
-			{state.localPreppers && state.localPreppers.length !== 0 && preppers}
-		</Box> */
-}

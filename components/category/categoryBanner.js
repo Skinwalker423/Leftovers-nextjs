@@ -13,7 +13,6 @@ const CategoryBanner = ({ title, bgColor, children, link = '/' }) => {
 			alignItems={'center'}
 			justifyContent={'center'}
 			borderTop={`2px solid ${bgColor}`}
-			px={'15rem'}
 			py={5}
 		>
 			<Link style={{ textDecoration: 'none' }} href={link}>

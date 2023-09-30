@@ -23,7 +23,7 @@ const CategoryPaginationHeader = ({
 	return (
 		<Box
 			display={'flex'}
-			justifyContent={'space-between'}
+			justifyContent={'space-around'}
 			alignItems={'center'}
 			px={10}
 		>
