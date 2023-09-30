@@ -6,13 +6,9 @@ import { useColors } from '../../hooks/useColors';
 const CategoryPaginationHeader = ({
 	title = 'Title Here',
 	color,
-	pag,
-	pagStart,
-	pagEnd,
-	setPag,
-	length,
-	resultsPerPage,
-	setNewPagStart
+	setNewPagStart,
+	disableNext,
+	disablePrev
 }) => {
 	const { colors } = useColors();
 
@@ -45,10 +41,18 @@ const CategoryPaginationHeader = ({
 			>
 				<Typography variant="h3">See All</Typography>
 				<Box display={'flex'}>
-					<IconButton onClick={handlePrevPagination} size="large">
+					<IconButton
+						disabled={disablePrev}
+						onClick={handlePrevPagination}
+						size="large"
+					>
 						<ArrowBackIosIcon fontSize="large" />
 					</IconButton>
-					<IconButton onClick={handleNextPagination} size="large">
+					<IconButton
+						disabled={disableNext}
+						onClick={handleNextPagination}
+						size="large"
+					>
 						<ArrowForwardIosIcon fontSize="large" />
 					</IconButton>
 				</Box>

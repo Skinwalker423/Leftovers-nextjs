@@ -11,10 +11,10 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	const length = state.localPreppers.length - 1;
 	const preppersPerPage = 3;
-	console.log('pag in prepper list page', pag);
+	const disableNext = pag.end > length;
+	const disablePrev = pag.start <= 0;
 
 	useEffect(() => {
-		console.log('pag in use effect', pag);
 		const slicedList = state.localPreppers
 			.slice(pag.start, pag.end)
 			.filter((el) => el.email !== userEmail);
@@ -76,13 +76,11 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 		<Box display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
 				title="Local Preppers"
-				setPag={setPag}
-				pag={pag.start}
-				pagStart={pag.start}
-				pagEnd={pag.end}
 				length={length}
 				resultsPerPage={preppersPerPage}
 				setNewPagStart={setNewPagStart}
+				disableNext={disableNext}
+				disablePrev={disablePrev}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
