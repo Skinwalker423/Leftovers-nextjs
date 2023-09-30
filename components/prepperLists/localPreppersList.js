@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
 import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
@@ -6,10 +6,23 @@ import CategoryPaginationHeader from '../category/categoryPaginationHeader';
 
 const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const { state } = useContext(UserContext);
+	const [slicedPreppers, setSlicedPreppers] = useState([]);
+	const [pag, setPag] = useState({ start: 0, end: 3 });
+
+	const length = state.localPreppers.length;
+	const preppersPerPage = 3;
+
+	useEffect(() => {
+		const slicedList = state.localPreppers
+			.slice(pag.start, pag.end)
+			.filter((el) => el.email !== userEmail);
+		console.log('slice', slicedList);
+		setSlicedPreppers(slicedList);
+	}, [pag]);
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
-	const preppers = state.localPreppers.map(
+	const preppers = slicedPreppers.map(
 		({
 			id,
 			description,

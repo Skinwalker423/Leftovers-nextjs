@@ -3,8 +3,20 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useColors } from '../../hooks/useColors';
 
-const CategoryPaginationHeader = ({ title = 'Title Here', color }) => {
+const CategoryPaginationHeader = ({
+	title = 'Title Here',
+	color,
+	pag,
+	setPag,
+	length
+}) => {
 	const { colors } = useColors();
+
+	const handleNextPagination = () => {
+		setPag();
+	};
+	const handlePrevPagination = () => {};
+
 	return (
 		<Box
 			display={'flex'}
@@ -26,10 +38,18 @@ const CategoryPaginationHeader = ({ title = 'Title Here', color }) => {
 			>
 				<Typography variant="h3">See All</Typography>
 				<Box display={'flex'}>
-					<IconButton size="large">
+					<IconButton
+						disabled={true}
+						onClick={handlePrevPagination}
+						size="large"
+					>
 						<ArrowBackIosIcon fontSize="large" />
 					</IconButton>
-					<IconButton size="large">
+					<IconButton
+						disabled={true}
+						onClick={handleNextPagination}
+						size="large"
+					>
 						<ArrowForwardIosIcon fontSize="large" />
 					</IconButton>
 				</Box>
