@@ -8,12 +8,24 @@ const CategoryPaginationHeader = ({
 	color,
 	pag,
 	setPag,
-	length
+	length,
+	resultsPerPage
 }) => {
 	const { colors } = useColors();
 
+	// const disableNext = pag.end > length;
+	// const disablePrev = pag.start < 0;
+
+	console.log('pag', pag);
+
 	const handleNextPagination = () => {
-		setPag();
+		if (pag.end > length) {
+			return;
+		}
+		setPag((prevPag) => {
+			pag.start = prevPag.start + resultsPerPage;
+			pag.end = prevPag.end + resultsPerPage;
+		});
 	};
 	const handlePrevPagination = () => {};
 
@@ -38,18 +50,10 @@ const CategoryPaginationHeader = ({
 			>
 				<Typography variant="h3">See All</Typography>
 				<Box display={'flex'}>
-					<IconButton
-						disabled={true}
-						onClick={handlePrevPagination}
-						size="large"
-					>
+					<IconButton onClick={handlePrevPagination} size="large">
 						<ArrowBackIosIcon fontSize="large" />
 					</IconButton>
-					<IconButton
-						disabled={true}
-						onClick={handleNextPagination}
-						size="large"
-					>
+					<IconButton onClick={handleNextPagination} size="large">
 						<ArrowForwardIosIcon fontSize="large" />
 					</IconButton>
 				</Box>

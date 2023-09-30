@@ -9,7 +9,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const [slicedPreppers, setSlicedPreppers] = useState([]);
 	const [pag, setPag] = useState({ start: 0, end: 3 });
 
-	const length = state.localPreppers.length;
+	const length = state.localPreppers.length - 1;
 	const preppersPerPage = 3;
 
 	useEffect(() => {
@@ -58,7 +58,13 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
-			<CategoryPaginationHeader title="Local Preppers" />
+			<CategoryPaginationHeader
+				title="Local Preppers"
+				setPag={setPag}
+				pag={pag}
+				length={length}
+				resultsPerPage={preppersPerPage}
+			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
