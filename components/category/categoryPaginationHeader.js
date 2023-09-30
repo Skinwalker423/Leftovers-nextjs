@@ -7,25 +7,20 @@ const CategoryPaginationHeader = ({
 	title = 'Title Here',
 	color,
 	pag,
+	pagStart,
+	pagEnd,
 	setPag,
 	length,
-	resultsPerPage
+	resultsPerPage,
+	setNewPagStart
 }) => {
 	const { colors } = useColors();
 
 	// const disableNext = pag.end > length;
 	// const disablePrev = pag.start < 0;
 
-	console.log('pag', pag);
-
 	const handleNextPagination = () => {
-		if (pag.end > length) {
-			return;
-		}
-		setPag((prevPag) => {
-			pag.start = prevPag.start + resultsPerPage;
-			pag.end = prevPag.end + resultsPerPage;
-		});
+		setNewPagStart();
 	};
 	const handlePrevPagination = () => {};
 

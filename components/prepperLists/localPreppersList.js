@@ -11,14 +11,30 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 
 	const length = state.localPreppers.length - 1;
 	const preppersPerPage = 3;
+	console.log('pag in prepper list page', pag);
 
 	useEffect(() => {
+		console.log('pag in use effect', pag);
 		const slicedList = state.localPreppers
 			.slice(pag.start, pag.end)
 			.filter((el) => el.email !== userEmail);
 		console.log('slice', slicedList);
 		setSlicedPreppers(slicedList);
 	}, [pag]);
+
+	const setNewPagStart = () => {
+		if (pag.end > length) {
+			return;
+		}
+		setPag((prevPag) => {
+			return {
+				...prevPag,
+				start: prevPag.start + preppersPerPage,
+				end: prevPag.end + preppersPerPage
+			};
+		});
+	};
+	const setNewPagEnd = () => {};
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
@@ -61,9 +77,12 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 			<CategoryPaginationHeader
 				title="Local Preppers"
 				setPag={setPag}
-				pag={pag}
+				pag={pag.start}
+				pagStart={pag.start}
+				pagEnd={pag.end}
 				length={length}
 				resultsPerPage={preppersPerPage}
+				setNewPagStart={setNewPagStart}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
