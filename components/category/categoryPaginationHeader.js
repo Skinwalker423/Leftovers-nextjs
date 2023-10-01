@@ -16,10 +16,14 @@ const CategoryPaginationHeader = ({
 }) => {
 	if (!list) return;
 
-	console.log('list', list);
-
-	const { pag, disableNext, disablePrev, setNewPagNext, setNewPagPrev } =
-		useCustomPagination({ list, resultsPerPage });
+	const {
+		pag,
+		disableNext,
+		disablePrev,
+		setNewPagNext,
+		setNewPagPrev,
+		length
+	} = useCustomPagination({ list, resultsPerPage });
 
 	useEffect(() => {
 		if (!meals) {
@@ -29,6 +33,7 @@ const CategoryPaginationHeader = ({
 			setSlicedList(slicedList);
 		} else {
 			const slicedList = list.slice(pag.start, pag.end);
+
 			setSlicedList(slicedList);
 		}
 	}, [pag]);

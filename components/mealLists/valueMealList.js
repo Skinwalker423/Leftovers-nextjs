@@ -11,32 +11,56 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 
 	const [slicedValueMeals, setSlicedValueMeals] = useState([]);
 
-	const list = state.localPreppers.map((prepper) => {
+	let newList = [];
+	state.localPreppers.forEach((prepper) => {
 		if (!prepper.meals) return;
-		return prepper.meals.map(
-			({ id, title, price, qty, description, image }) => {
-				if (price === 5 && qty > 0 && prepper.email !== userEmail) {
-					return (
-						<FoodItemCard
-							key={id}
-							prepperEmail={prepper.email}
-							kitchen={prepper.kitchenTitle}
-							prepperId={prepper.id}
-							foodItem={title}
-							id={id}
-							price={price}
-							qty={qty}
-							description={description}
-							image={image}
-							setMsg={setMsg}
-							isKitchenClosed={prepper.isKitchenClosed}
-							showClosed={true}
-						/>
-					);
-				}
+		prepper.meals.forEach((meal) => {
+			if (meal.qty > 0 && meal.price === 5) {
+				newList.push({
+					...meal,
+					prepperEmail: prepper.email,
+					isKitchenClosed: prepper.isKitchenClosed,
+					kitchenTitle: prepper.kitchenTitle,
+					prepperId: prepper.id
+				});
 			}
-		);
+		});
 	});
+
+	const list = slicedValueMeals.map(
+		({
+			id,
+			title,
+			price,
+			qty,
+			description,
+			image,
+			prepperEmail,
+			kitchenTitle,
+			isKitchenClosed,
+			prepperId
+		}) => {
+			if (price === 5 && qty > 0) {
+				return (
+					<FoodItemCard
+						key={id}
+						prepperEmail={prepperEmail}
+						kitchen={kitchenTitle}
+						prepperId={prepperId}
+						foodItem={title}
+						id={id}
+						price={price}
+						qty={qty}
+						description={description}
+						image={image}
+						setMsg={setMsg}
+						isKitchenClosed={isKitchenClosed}
+						showClosed={true}
+					/>
+				);
+			}
+		}
+	);
 
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
@@ -44,9 +68,9 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 				title="$5 Meals"
 				color={colors.greenAccent[700]}
 				setSlicedList={setSlicedValueMeals}
-				list={list}
+				list={newList}
 				meals={true}
-				resultsPerPage={2}
+				resultsPerPage={3}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
@@ -56,7 +80,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 				justifyContent={'center'}
 				alignItems={'center'}
 			>
-				{slicedValueMeals.length > 0 && slicedValueMeals}
+				{list.length > 0 && list}
 			</Box>
 		</Box>
 	);

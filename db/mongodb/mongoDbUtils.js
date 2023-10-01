@@ -268,22 +268,27 @@ export async function removeMealFromPrepperListDb(client, userEmail, mealId) {
 	}
 }
 
-export async function findLocalPreppersWithZipcode(
+export async function findLocalPreppersWithZipcode({
 	client,
 	zipcode,
 	skip = 0,
-	limit = 10
-) {
+	limit = 10,
+	prepperEmail
+}) {
 	try {
 		const collection = client.db('leftovers').collection('preppers');
 		const data = await collection
-			.find({ 'location.zipcode': zipcode.toString() })
+			.find({
+				'location.zipcode': zipcode.toString(),
+				email: { $ne: prepperEmail }
+			})
 			.skip(skip)
 			.limit(limit)
 			.toArray();
 		if (!data) {
 			return [];
 		}
+
 		const mappedDoc = data.map(
 			({
 				_id,

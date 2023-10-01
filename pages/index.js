@@ -51,7 +51,11 @@ export async function getServerSideProps({ req, res }) {
 
 	const localPreppersList =
 		defaultZipcode &&
-		(await findLocalPreppersWithZipcode(client, defaultZipcode));
+		(await findLocalPreppersWithZipcode({
+			client,
+			zipcode: defaultZipcode,
+			prepperEmail: session.user?.email || null
+		}));
 
 	return {
 		props: {

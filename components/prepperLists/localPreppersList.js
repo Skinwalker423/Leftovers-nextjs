@@ -48,7 +48,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 		<Box display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
 				title="Local Preppers"
-				resultsPerPage={2}
+				resultsPerPage={3}
 				list={state.localPreppers}
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
