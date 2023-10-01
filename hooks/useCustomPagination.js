@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
 export const useCustomPagination = ({ list, resultsPerPage }) => {
-	console.log('list', list);
-
 	const [pag, setPag] = useState({ start: 0, end: resultsPerPage });
 	const length = list?.length - 1;
 	const disableNext = pag.end > length - 1;
