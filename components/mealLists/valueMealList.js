@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
 import FoodItemCard from '../Card/foodItemCard';
 import Box from '@mui/material/Box';
@@ -8,6 +8,8 @@ import { useColors } from '../../hooks/useColors';
 const ValueMealList = ({ userEmail, setMsg }) => {
 	const { state } = useContext(UserContext);
 	const { colors } = useColors();
+
+	const [slicedValueMeals, setSlicedValueMeals] = useState([]);
 
 	const list = state.localPreppers.map((prepper) => {
 		if (!prepper.meals) return;
@@ -41,6 +43,10 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 			<CategoryPaginationHeader
 				title="$5 Meals"
 				color={colors.greenAccent[700]}
+				setSlicedList={setSlicedValueMeals}
+				list={list}
+				meals={true}
+				resultsPerPage={2}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
@@ -50,7 +56,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 				justifyContent={'center'}
 				alignItems={'center'}
 			>
-				{list.length > 0 && list}
+				{slicedValueMeals.length > 0 && slicedValueMeals}
 			</Box>
 		</Box>
 	);

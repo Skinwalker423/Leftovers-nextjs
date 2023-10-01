@@ -11,18 +11,26 @@ const CategoryPaginationHeader = ({
 	list,
 	resultsPerPage,
 	setSlicedList,
-	userEmail
+	userEmail,
+	meals
 }) => {
 	if (!list) return;
+
+	console.log('list', list);
 
 	const { pag, disableNext, disablePrev, setNewPagNext, setNewPagPrev } =
 		useCustomPagination({ list, resultsPerPage });
 
 	useEffect(() => {
-		const slicedList = list
-			.filter((el) => el.email !== userEmail)
-			.slice(pag.start, pag.end);
-		setSlicedList(slicedList);
+		if (!meals) {
+			const slicedList = list
+				.filter((el) => el.email !== userEmail)
+				.slice(pag.start, pag.end);
+			setSlicedList(slicedList);
+		} else {
+			const slicedList = list.slice(pag.start, pag.end);
+			setSlicedList(slicedList);
+		}
 	}, [pag]);
 
 	const { colors } = useColors();
