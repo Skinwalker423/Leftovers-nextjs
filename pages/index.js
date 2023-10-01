@@ -125,7 +125,7 @@ export default function Home({
 			}, 5000);
 		} else {
 			dispatch({
-				type: ACTION_TYPES.SET_LOCALPREPPERS_LIST,
+				type: ACTION_TYPES.SET_SEARCHED_PREPPERS_LIST,
 				payload: findPreppers
 			});
 			setIsSearching(false);
