@@ -60,6 +60,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 				display={'flex'}
 				gap={5}
 				width={'100%'}
+				flexWrap={'wrap'}
 				justifyContent={'center'}
 				alignItems={'center'}
 				height={{ xs: '90%', md: '80%' }}
