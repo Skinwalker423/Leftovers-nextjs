@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
 import Box from '@mui/material/Box';
 import PrepperCard from '../Card/prepperCard';
+import CategoryPaginationHeader from '../category/categoryPaginationHeader';
+import { useColors } from '../../hooks/useColors';
 
 const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 	const avatar = 'https://i.pravatar.cc/300';
 	const { state } = useContext(UserContext);
+	const [slicedPreppers, setSlicedPreppers] = useState([]);
+	const { colors } = useColors();
 
 	return (
 		<Box
@@ -26,24 +30,33 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 				}
 			}}
 		>
-			{state.favorites.map((prepper) => {
-				return (
-					<PrepperCard
-						key={prepper.id}
-						isFavorited={true}
-						name={prepper.name}
-						avatar={prepper.profileImgUrl || avatar}
-						id={prepper.id}
-						userEmail={userEmail}
-						description={prepper.description}
-						kitchenImgUrl={prepper.kitchenImgUrl}
-						setErrorMsg={setErrorMsg}
-						setMsg={setMsg}
-						isKitchenClosed={prepper.isKitchenClosed}
-						mealsServed={prepper.mealsServed}
-					/>
-				);
-			})}
+			<CategoryPaginationHeader
+				title="Favorites"
+				resultsPerPage={3}
+				list={state.favorites}
+				setSlicedList={setSlicedPreppers}
+				userEmail={userEmail}
+				color={colors.blueAccent[700]}
+			/>
+			{slicedPreppers.length > 0 &&
+				slicedPreppers.map((prepper) => {
+					return (
+						<PrepperCard
+							key={prepper.id}
+							isFavorited={true}
+							name={prepper.name}
+							avatar={prepper.profileImgUrl || avatar}
+							id={prepper.id}
+							userEmail={userEmail}
+							description={prepper.description}
+							kitchenImgUrl={prepper.kitchenImgUrl}
+							setErrorMsg={setErrorMsg}
+							setMsg={setMsg}
+							isKitchenClosed={prepper.isKitchenClosed}
+							mealsServed={prepper.mealsServed}
+						/>
+					);
+				})}
 		</Box>
 	);
 };
