@@ -14,9 +14,13 @@ async function getLocalPreppers(req, res) {
 
 		try {
 			const client = await connectMongoDb();
-			const findPreppers = await findLocalPreppersWithZipcode(client, zip);
+			const findPreppers = await findLocalPreppersWithZipcode({
+				client,
+				zipcode: zip
+			});
 
 			if (findPreppers.length !== 0) {
+				console.log('found preppers', findPreppers);
 				res.status(200).json(findPreppers);
 			} else {
 				res

@@ -9,7 +9,7 @@ const CategoryPaginationHeader = ({
 	title = 'Title Here',
 	color,
 	list,
-	resultsPerPage,
+	resultsPerPage = 3,
 	setSlicedList,
 	userEmail,
 	meals
@@ -26,16 +26,9 @@ const CategoryPaginationHeader = ({
 	} = useCustomPagination({ list, resultsPerPage });
 
 	useEffect(() => {
-		if (!meals) {
-			const slicedList = list
-				.filter((el) => el.email !== userEmail)
-				.slice(pag.start, pag.end);
-			setSlicedList(slicedList);
-		} else {
-			const slicedList = list.slice(pag.start, pag.end);
+		const slicedList = list.slice(pag.start, pag.end);
 
-			setSlicedList(slicedList);
-		}
+		setSlicedList(slicedList);
 	}, [pag]);
 
 	const { colors } = useColors();
