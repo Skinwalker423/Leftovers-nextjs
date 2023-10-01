@@ -182,16 +182,12 @@ export default function Home({
 				)}
 
 				{state.localPreppers.length !== 0 && (
-					<CategoryBanner link="/" bgColor={colors.greenAccent[700]}>
+					<CategoryBanner bgColor={colors.greenAccent[700]}>
 						<ValueMealList userEmail={userEmail} setMsg={setMsg} />
 					</CategoryBanner>
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (
-					<CategoryBanner
-						link="/favorites"
-						title="Favorite Preppers"
-						bgColor={colors.blueAccent[700]}
-					>
+					<CategoryBanner bgColor={colors.blueAccent[700]}>
 						<FavoriteList
 							setErrorMsg={setErrorMsg}
 							setMsg={setMsg}
