@@ -1,4 +1,5 @@
 //continue front page pagination
+// banner responsiveness
 //add a sign in prepper page for the hours open
 //default zipcode
 //populate favorite preppers when Object Ids are replaced
