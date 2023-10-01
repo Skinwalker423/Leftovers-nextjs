@@ -21,7 +21,8 @@ export const ACTION_TYPES = {
 	REMOVE_PREPPER_FAVORITES: 'REMOVE_PREPPER_FAVORITES',
 	SET_FAVORITES_LIST: 'SET_FAVORITES_LIST',
 	SET_LOCALPREPPERS_LIST: 'SET_LOCALPREPPERS_LIST',
-	SET_DEFAULT_ZIPCODE: 'SET_DEFAULT_ZIPCODE'
+	SET_DEFAULT_ZIPCODE: 'SET_DEFAULT_ZIPCODE',
+	SET_SEARCHED_PREPPERS_LIST: 'SET_SEARCHED_PREPPERS_LIST'
 };
 
 const userReducer = (state, action) => {
@@ -69,6 +70,8 @@ const userReducer = (state, action) => {
 
 		case ACTION_TYPES.SET_LOCALPREPPERS_LIST:
 			return { ...state, localPreppers: action.payload };
+		case ACTION_TYPES.SET_SEARCHED_PREPPERS_LIST:
+			return { ...state, searchedPreppers: action.payload };
 		case ACTION_TYPES.SET_DEFAULT_ZIPCODE:
 			return { ...state, defaultZipcode: action.payload };
 
@@ -89,7 +92,8 @@ export const UserProvider = ({ children }) => {
 		cartTotalPrice: 0,
 		favorites: [],
 		localPreppers: [],
-		defaultZipcode: null
+		defaultZipcode: null,
+		searchedPreppers: []
 	};
 	const [state, dispatch] = useReducer(userReducer, initialState);
 	const [value, setValue] = useLocalStorage('cartlist', state.userCartlist);
