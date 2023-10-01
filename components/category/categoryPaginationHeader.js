@@ -2,15 +2,29 @@ import { Box, IconButton, Typography } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useColors } from '../../hooks/useColors';
+import { useCustomPagination } from '../../hooks/useCustomPagination';
+import { useEffect } from 'react';
 
 const CategoryPaginationHeader = ({
 	title = 'Title Here',
 	color,
-	setNewPagNext,
-	setNewPagPrev,
-	disableNext,
-	disablePrev
+	list,
+	resultsPerPage,
+	setSlicedList,
+	userEmail
 }) => {
+	if (!list) return;
+
+	const { pag, disableNext, disablePrev, setNewPagNext, setNewPagPrev } =
+		useCustomPagination({ list, resultsPerPage });
+
+	useEffect(() => {
+		const slicedList = list
+			.filter((el) => el.email !== userEmail)
+			.slice(pag.start, pag.end);
+		setSlicedList(slicedList);
+	}, [pag]);
+
 	const { colors } = useColors();
 
 	const handleNextPagination = () => {
