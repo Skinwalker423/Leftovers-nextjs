@@ -33,10 +33,11 @@ export async function getServerSideProps({ req, res }) {
 			};
 		}
 
-		const localPreppers = await findLocalPreppersWithZipcode(
+		const localPreppers = await findLocalPreppersWithZipcode({
 			client,
-			session?.user?.defaultZipcode
-		);
+			zipcode: session?.user?.defaultZipcode,
+			prepperEmail: session?.user?.email
+		});
 		const userEmail = session?.user?.email;
 		const userDefaultZipcode = session?.user?.defaultZipcode;
 		const userDocument =

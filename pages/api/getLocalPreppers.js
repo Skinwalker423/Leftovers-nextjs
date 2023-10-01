@@ -8,6 +8,7 @@ import {
 async function getLocalPreppers(req, res) {
 	if (req.method === 'POST') {
 		const zip = req.body.zipCode;
+		const email = req.body.prepperEmail || '';
 		if (!zip) {
 			return res.status(500).send({ error: 'no zipcode entered' });
 		}
@@ -16,7 +17,8 @@ async function getLocalPreppers(req, res) {
 			const client = await connectMongoDb();
 			const findPreppers = await findLocalPreppersWithZipcode({
 				client,
-				zipcode: zip
+				zipcode: zip,
+				prepperEmail: email
 			});
 
 			if (findPreppers.length !== 0) {

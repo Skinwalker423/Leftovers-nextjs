@@ -8,8 +8,6 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const { state } = useContext(UserContext);
 	const [slicedPreppers, setSlicedPreppers] = useState([]);
 
-	console.log(state.localPreppers);
-
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
 	const preppers = slicedPreppers.map(

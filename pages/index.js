@@ -112,7 +112,10 @@ export default function Home({
 		}
 
 		setErrorMsg('');
-		const findPreppers = await fetchLocalPreppers(zipCode);
+		const findPreppers = await fetchLocalPreppers({
+			zipCode,
+			prepperEmail: userEmail
+		});
 
 		if (findPreppers.error) {
 			setIsSearching(false);
