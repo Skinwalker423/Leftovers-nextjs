@@ -47,7 +47,9 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
-				title="Local Preppers"
+				title={`Local Preppers in ${
+					state.defaultZipcode ? state.defaultZipcode : 'area'
+				}`}
 				resultsPerPage={3}
 				list={state.localPreppers}
 				setSlicedList={setSlicedPreppers}
