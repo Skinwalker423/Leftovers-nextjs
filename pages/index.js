@@ -26,6 +26,7 @@ import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
 import FavoriteList from '../components/prepperLists/favoriteList';
 import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
+import SearchedList from '../components/prepperLists/searchedList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -170,6 +171,15 @@ export default function Home({
 				/>
 				<div id="searchResults" />
 
+				{state.searchedPreppers.length > 0 && (
+					<CategoryBanner bgColor={colors.redAccent[700]}>
+						<SearchedList
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+						/>
+					</CategoryBanner>
+				)}
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner
 						link="/preppers"

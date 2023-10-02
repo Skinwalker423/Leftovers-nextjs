@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
-import { Box } from '@mui/material';
+import { Box, colors } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
 import CategoryPaginationHeader from '../category/categoryPaginationHeader';
+import { useColors } from '../../hooks/useColors';
 
 const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 	const { state } = useContext(UserContext);
 	const [slicedPreppers, setSlicedPreppers] = useState([]);
+	const { colors } = useColors();
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
@@ -47,11 +49,12 @@ const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 	return (
 		<Box display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
-				title="Local Preppers"
+				title="Searched Preppers"
 				resultsPerPage={3}
 				list={state.searchedPreppers}
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
+				color={colors.redAccent[700]}
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
