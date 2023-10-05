@@ -29,6 +29,7 @@
 		"react-dom": "18.2.0",
 		"react-dropzone": "^14.2.3",
 		"react-google-button": "^0.7.2",
+		"react-responsive-carousel": "^3.2.23",
 		"uploadthing": "^5.5.0"
 	},
 	"devDependencies": {

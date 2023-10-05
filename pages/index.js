@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Box from '@mui/material/Box';
@@ -27,6 +29,7 @@ import CustomLoader from '../components/UI/Loader';
 import FavoriteList from '../components/prepperLists/favoriteList';
 import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
 import SearchedList from '../components/prepperLists/searchedList';
+import CategoryCarousel from '../components/category/categoryCarousel';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -170,7 +173,14 @@ export default function Home({
 					zipCode={zipCode}
 				/>
 				<div id="searchResults" />
-
+				{state.searchedPreppers.length > 0 && (
+					<CategoryCarousel
+						list={state.searchedPreppers}
+						title={'Local Preppers'}
+						setErrorMsg={setErrorMsg}
+						setMsg={setMsg}
+					/>
+				)}
 				{state.searchedPreppers.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
 						<SearchedList
