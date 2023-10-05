@@ -48,22 +48,35 @@ const CategoryCarousel = ({ list, title, setMsg, setErrorMsg }) => {
 	);
 
 	return (
-		<Box width={'100%'}>
-			<Typography variant="h1">{title}</Typography>
-			<Carousel
-				showThumbs={false}
-				// autoPlay
-				// interval={4000}
-				infiniteLoop
-				stopOnHover
-				showArrows={false}
-				showStatus={false}
-				width={'50%'}
+		<Box
+			width={'100%'}
+			display={'flex'}
+			justifyContent={'center'}
+			alignItems={'center'}
+			position={'relative'}
+		>
+			<Box
+				width={'500px'}
+				display={'flex'}
+				flexDirection={'column'}
+				justifyContent={'center'}
+				alignItems={'center'}
+				position={'relative'}
 			>
-				<Image src={'/pixzolo.jpg'} width={500} height={500} alt="pics" />
-				<Image src={'/kitchen2.jpg'} width={100} height={100} alt="pics" />
-				<Image src={'/art.jpg'} width={100} height={100} alt="pics" />
-			</Carousel>
+				<Typography variant="h1">{title}</Typography>
+				<Carousel
+					autoFocus
+					showThumbs={false}
+					// autoPlay
+					// interval={4000}
+					infiniteLoop
+					stopOnHover
+					showArrows={true}
+					showStatus={false}
+				>
+					{preppers}
+				</Carousel>
+			</Box>
 		</Box>
 	);
 };
