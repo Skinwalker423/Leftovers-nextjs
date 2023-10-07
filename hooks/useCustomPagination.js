@@ -46,6 +46,8 @@ export const useCustomPagination = ({ list }) => {
 		if (pag.end > length) {
 			return;
 		}
+		console.log('pag start', pag.start);
+		console.log('pag end', pag.end);
 
 		setPag((prevPag) => {
 			return {
@@ -54,18 +56,41 @@ export const useCustomPagination = ({ list }) => {
 				end: prevPag.end + resultsPerPage
 			};
 		});
+		console.log('pag start', pag.start);
+		console.log('pag end', pag.end);
 	};
 	const setNewPagPrev = () => {
 		if (pag.start <= 0) {
+			console.log('pag start', pag.start);
 			return;
 		}
+		console.log('pag start', pag.start);
+		console.log('pag end', pag.end);
 		setPag((prevPag) => {
 			return {
 				...prevPag,
-				start: prevPag.start - resultsPerPage,
-				end: prevPag.end - resultsPerPage
+				start:
+					prevPag.end > length && prevPag.start - 3 >= 0 && list.length > 2
+						? prevPag.start - resultsPerPage
+						: 0,
+				end:
+					prevPag.end > length &&
+					prevPag.end - 3 >= resultsPerPage &&
+					list.length > 2
+						? prevPag.end - 3
+						: resultsPerPage
 			};
 		});
+		// setPag((prevPag) => {
+		// 	return {
+		// 		...prevPag,
+		// 		start: prevPag.start - resultsPerPage,
+		// 		end: prevPag.end - resultsPerPage
+		// 	};
+		// });
+
+		console.log('pag start', pag.start);
+		console.log('pag end', pag.end);
 	};
 
 	return {
