@@ -17,9 +17,28 @@ export const useCustomPagination = ({ list }) => {
 		if (matches) {
 			console.log('1');
 			setResultsPerPage(1);
+			setPag((prevPag) => {
+				return {
+					...prevPag,
+					end: prevPag.start + 1 > length ? length : prevPag.start + 1
+				};
+			});
 		} else {
 			console.log('3');
 			setResultsPerPage(3);
+			setPag((prevPag) => {
+				return {
+					...prevPag,
+					start:
+						prevPag.end > length && prevPag.end - 3 >= 0 && list.length > 2
+							? prevPag.end - 3
+							: 0,
+					end:
+						prevPag.end > length && prevPag.end - 3 >= 0 && list.length > 2
+							? prevPag.end
+							: prevPag.start + 3
+				};
+			});
 		}
 	}, [matches]);
 
