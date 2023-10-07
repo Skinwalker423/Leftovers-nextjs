@@ -173,14 +173,14 @@ export default function Home({
 					zipCode={zipCode}
 				/>
 				<div id="searchResults" />
-				{/* {state.searchedPreppers.length > 0 && (
-					<CategoryCarousel
-						list={state.searchedPreppers}
-						title={'Local Preppers'}
-						setErrorMsg={setErrorMsg}
-						setMsg={setMsg}
-					/>
-				)} */}
+
+				<CategoryCarousel
+					list={state.localPreppers}
+					title={'Local Preppers'}
+					setErrorMsg={setErrorMsg}
+					setMsg={setMsg}
+				/>
+
 				{state.searchedPreppers.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
 						<SearchedList

@@ -113,6 +113,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				currentStatus
 			);
 			if (res.error) {
+				console.log('kitchen status updated', res.message);
 				setError(res.error);
 				return;
 			}
