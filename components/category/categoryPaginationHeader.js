@@ -50,7 +50,7 @@ const CategoryPaginationHeader = ({
 		>
 			<Typography
 				sx={{ color: color ? color : colors.orangeAccent[400] }}
-				variant="h2"
+				variant={'h2'}
 			>
 				{title}
 			</Typography>
