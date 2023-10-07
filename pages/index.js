@@ -174,13 +174,6 @@ export default function Home({
 				/>
 				<div id="searchResults" />
 
-				<CategoryCarousel
-					list={state.localPreppers}
-					title={'Local Preppers'}
-					setErrorMsg={setErrorMsg}
-					setMsg={setMsg}
-				/>
-
 				{state.searchedPreppers.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
 						<SearchedList

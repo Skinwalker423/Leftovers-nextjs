@@ -45,11 +45,12 @@ const CategoryPaginationHeader = ({
 			display={'flex'}
 			justifyContent={'space-around'}
 			alignItems={'center'}
+			flexDirection={{ xs: 'column', sm: 'row' }}
 			px={10}
 		>
 			<Typography
 				sx={{ color: color ? color : colors.orangeAccent[400] }}
-				variant="h1"
+				variant="h2"
 			>
 				{title}
 			</Typography>
@@ -57,14 +58,24 @@ const CategoryPaginationHeader = ({
 				display={'flex'}
 				justifyContent={'flex-end'}
 				alignItems={'center'}
-				gap={5}
+				gap={3}
 			>
 				<Typography variant="h3">See All</Typography>
-				<Box display={'flex'}>
+				<Box
+					display={'flex'}
+					justifyContent={'center'}
+					alignItems={'center'}
+					gap={3}
+				>
 					<IconButton
 						disabled={disablePrev}
 						onClick={handlePrevPagination}
 						size="large"
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
 					>
 						<ArrowBackIosIcon fontSize="large" />
 					</IconButton>

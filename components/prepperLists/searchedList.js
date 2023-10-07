@@ -50,7 +50,7 @@ const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 		<Box display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
 				title="Searched Preppers"
-				resultsPerPage={3}
+				resultsPerPage={1}
 				list={state.searchedPreppers}
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
