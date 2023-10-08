@@ -1,10 +1,20 @@
 import React from 'react';
-import { Box, IconButton, Typography, Tooltip, Paper } from '@mui/material';
+import {
+	Box,
+	IconButton,
+	Typography,
+	Tooltip,
+	Paper,
+	useTheme,
+	useMediaQuery
+} from '@mui/material';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { useColors } from '../../hooks/useColors';
 
 const TrophyLikesButton = ({ mealsServed }) => {
 	const { colors } = useColors();
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.only('sm'));
 
 	let awardColor = 'primary';
 
@@ -30,8 +40,14 @@ const TrophyLikesButton = ({ mealsServed }) => {
 					borderRadius: 5
 				}}
 			>
-				<WorkspacePremiumIcon color={awardColor} fontSize="large" />
-				<Typography color={colors.orangeAccent[900]} fontSize={'x-large'}>
+				<WorkspacePremiumIcon
+					color={awardColor}
+					fontSize={matches ? 'small' : 'large'}
+				/>
+				<Typography
+					color={colors.orangeAccent[900]}
+					fontSize={matches ? 'medium' : 'x-large'}
+				>
 					{mealsServed}
 				</Typography>
 			</Box>
