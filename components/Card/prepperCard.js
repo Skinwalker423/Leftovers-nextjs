@@ -188,8 +188,9 @@ export default function PrepperCard({
 				<CardActions
 					sx={{
 						display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center'
+						justifyContent: 'space-between',
+						alignItems: 'center',
+						gap: { sm: 2 }
 					}}
 					disableSpacing
 				>
@@ -220,7 +221,7 @@ export default function PrepperCard({
 						<Button
 							onClick={handleDetailsClick}
 							disabled={loading}
-							size="large"
+							size={matches ? 'small' : 'large'}
 							fontSize={'small'}
 							color="secondary"
 							sx={{
