@@ -59,9 +59,9 @@ const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}
 				display={'flex'}
-				gap={5}
+				gap={{ xs: 0, sm: 1, md: 3, lg: 5 }}
 				width={'100%'}
-				flexWrap={'wrap'}
+				// flexWrap={'wrap'}
 				justifyContent={'center'}
 				alignItems={'center'}
 				height={{ xs: '90%', md: '80%' }}
