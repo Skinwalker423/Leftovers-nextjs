@@ -24,8 +24,6 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 
 			<Box
 				display={'flex'}
-				flexDirection={{ xs: 'column', md: 'row' }}
-				flexWrap={'wrap'}
 				width={'100%'}
 				justifyContent={'center'}
 				alignItems={'center'}

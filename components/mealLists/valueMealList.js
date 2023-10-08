@@ -75,10 +75,9 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
 				display={'flex'}
-				flexDirection={{ xs: 'column', md: 'row' }}
-				flexWrap={{ xs: 'none', md: 'wrap' }}
 				justifyContent={'center'}
 				alignItems={'center'}
+				flexWrap={{ xs: 'unset', sm: 'wrap', md: 'unset' }}
 			>
 				{list.length > 0 && list}
 			</Box>

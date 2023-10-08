@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { UserContext } from '../../store/UserContext';
-import { Box, colors } from '@mui/material';
+import { Box } from '@mui/material';
 import PrepperCard from '../Card/prepperCard';
 import CategoryPaginationHeader from '../category/categoryPaginationHeader';
 import { useColors } from '../../hooks/useColors';
@@ -61,7 +61,6 @@ const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 				display={'flex'}
 				gap={{ xs: 0, sm: 1, md: 3, lg: 5 }}
 				width={'100%'}
-				// flexWrap={'wrap'}
 				justifyContent={'center'}
 				alignItems={'center'}
 				height={{ xs: '90%', md: '80%' }}
