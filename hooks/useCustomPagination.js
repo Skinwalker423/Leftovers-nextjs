@@ -24,7 +24,6 @@ export const useCustomPagination = ({ list }) => {
 				};
 			});
 		} else {
-			console.log('3');
 			setResultsPerPage(3);
 			setPag((prevPag) => {
 				return {
@@ -46,8 +45,6 @@ export const useCustomPagination = ({ list }) => {
 		if (pag.end > length) {
 			return;
 		}
-		console.log('pag start', pag.start);
-		console.log('pag end', pag.end);
 
 		setPag((prevPag) => {
 			return {
@@ -56,16 +53,12 @@ export const useCustomPagination = ({ list }) => {
 				end: prevPag.end + resultsPerPage
 			};
 		});
-		console.log('pag start', pag.start);
-		console.log('pag end', pag.end);
 	};
 	const setNewPagPrev = () => {
 		if (pag.start <= 0) {
-			console.log('pag start', pag.start);
 			return;
 		}
-		console.log('pag start', pag.start);
-		console.log('pag end', pag.end);
+
 		setPag((prevPag) => {
 			return {
 				...prevPag,
@@ -81,13 +74,6 @@ export const useCustomPagination = ({ list }) => {
 						: resultsPerPage
 			};
 		});
-		// setPag((prevPag) => {
-		// 	return {
-		// 		...prevPag,
-		// 		start: prevPag.start - resultsPerPage,
-		// 		end: prevPag.end - resultsPerPage
-		// 	};
-		// });
 
 		console.log('pag start', pag.start);
 		console.log('pag end', pag.end);
