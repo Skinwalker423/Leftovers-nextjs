@@ -17,7 +17,7 @@ import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
 import { useSession } from 'next-auth/react';
-import { Alert, Tooltip } from '@mui/material';
+import { Alert, Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import TrophyLikesButton from '../likes/trophyLikesButton';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -39,6 +39,9 @@ export default function PrepperCard({
 	const { colors } = useColors();
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
+
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.only('sm'));
 
 	const { data: session } = useSession();
 	const {
@@ -128,7 +131,7 @@ export default function PrepperCard({
 		<motion.div whileHover={{ scale: 1.05 }}>
 			<Card
 				sx={{
-					width: { xs: '20rem', sm: '15rem', md: '17rem', lg: '20rem' },
+					width: { xs: '20rem', sm: '15rem', md: '17.5rem', lg: '20rem' },
 					mx: '.5rem',
 					height: '100%',
 
@@ -185,7 +188,7 @@ export default function PrepperCard({
 				<CardActions
 					sx={{
 						display: 'flex',
-						justifyContent: 'space-between',
+						justifyContent: 'center',
 						alignItems: 'center'
 					}}
 					disableSpacing
@@ -197,9 +200,15 @@ export default function PrepperCard({
 								aria-label="add to favorites"
 							>
 								{favorited ? (
-									<FavoriteIcon fontSize="large" color="error" />
+									<FavoriteIcon
+										fontSize={matches ? 'small' : 'large'}
+										color="error"
+									/>
 								) : (
-									<FavoriteBorderOutlinedIcon fontSize="large" color="error" />
+									<FavoriteBorderOutlinedIcon
+										fontSize={matches ? 'small' : 'large'}
+										color="error"
+									/>
 								)}
 							</IconButton>
 						</Tooltip>
@@ -221,7 +230,7 @@ export default function PrepperCard({
 									border: `1px solid ${colors.gray[500]}`
 								},
 
-								width: '7rem',
+								width: { sm: '3rem', md: '6rem', lg: '7rem' },
 								height: '2.5rem',
 								border: `1px solid ${colors.orangeAccent[900]}`,
 								backgroundColor: loading ? colors.gray[500] : '',
@@ -234,7 +243,7 @@ export default function PrepperCard({
 								}
 							}}
 						>
-							{loading ? 'loading...' : 'View Details'}
+							{loading ? 'loading...' : 'View Kitchen'}
 						</Button>
 					</Link>
 				</CardActions>
