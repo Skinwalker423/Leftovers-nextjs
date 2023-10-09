@@ -64,3 +64,16 @@ export const incrementMealsServedDB = async (prepperEmail: string) => {
 		throw new Error(`problem updating meal status: ${error.message}`);
 	}
 };
+
+export const fetchOrderById = async (id: string) => {
+	try {
+		await connectToMongoDb();
+		const order = await Order.findOne({
+			id: id
+		});
+
+		return order;
+	} catch (error: any) {
+		throw new Error(`problem finding order: ${error.message}`);
+	}
+};
