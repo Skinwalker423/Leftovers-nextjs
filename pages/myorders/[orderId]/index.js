@@ -9,7 +9,7 @@ export async function getServerSideProps({ params }) {
 
 	return {
 		props: {
-			order: order.length ? order : []
+			order
 		}
 	};
 }

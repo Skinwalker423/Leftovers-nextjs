@@ -72,7 +72,16 @@ export const fetchOrderById = async (orderId: string) => {
 			_id: orderId
 		});
 
-		return order;
+		return {
+			id: order._id.toString(),
+			userEmail: order.userEmail,
+			created_at: order.created_at.toString(),
+			updated_at: order?.updated_at.toString(),
+			items: order.items,
+			total: order.total,
+			prepperEmail: order.prepperEmail,
+			mealStatus: order?.mealStatus || 'N/A'
+		};
 	} catch (error: any) {
 		throw new Error(`problem finding order: ${error.message}`);
 	}
