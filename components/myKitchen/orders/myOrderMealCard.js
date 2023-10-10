@@ -11,13 +11,12 @@ const MyOrderMealCard = ({ item }) => {
 		<Box
 			key={id}
 			display={'flex'}
-			flexDirection={{ xs: 'column', md: 'row' }}
 			border={`2px solid ${colors.primary[400]}`}
 			boxShadow={`10px 5px 5px ${colors.primary[400]}`}
+			width={'100%'}
 		>
 			<Box
 				display={'flex'}
-				flexDirection={'column'}
 				justifyContent={'space-evenly'}
 				width={'100%'}
 				px={5}
@@ -27,8 +26,10 @@ const MyOrderMealCard = ({ item }) => {
 				<Box
 					display={'flex'}
 					width={'100%'}
-					justifyContent={'space-between'}
-					alignItems={'center'}
+					justifyContent={{ xs: 'center', sm: 'space-between' }}
+					alignItems={{ xs: 'flex-start', sm: 'center' }}
+					flexDirection={{ xs: 'column', sm: 'row' }}
+					gap={2}
 				>
 					<Box>
 						<Typography
@@ -39,9 +40,9 @@ const MyOrderMealCard = ({ item }) => {
 							}}
 							variant="h4"
 						>
-							Price
+							Item
 						</Typography>
-						<Typography variant="h3">${price}</Typography>
+						<Typography variant="h3"> {foodItem}</Typography>
 					</Box>
 					<Box>
 						<Typography
@@ -56,48 +57,19 @@ const MyOrderMealCard = ({ item }) => {
 						</Typography>
 						<Typography variant="h3"> {qty}</Typography>
 					</Box>
-				</Box>
-				<Box>
-					<Typography
-						fontWeight={600}
-						sx={{
-							borderBottom: '1px solid black',
-							width: 'fit-content'
-						}}
-						variant="h4"
-					>
-						Item
-					</Typography>
-					<Typography variant="h3"> {foodItem}</Typography>
-				</Box>
-				<Box>
-					<Typography
-						fontWeight={600}
-						sx={{
-							borderBottom: '1px solid black',
-							width: 'fit-content'
-						}}
-						variant="h4"
-					>
-						Kitchen
-					</Typography>
-					<Link
-						style={{ textDecoration: 'none' }}
-						href={`/preppers/${prepperId}`}
-					>
+					<Box>
 						<Typography
-							variant="h3"
+							fontWeight={600}
 							sx={{
-								color: colors.orangeAccent[400],
-								textDecoration: 'none',
-								':hover': {
-									color: colors.orangeAccent[200]
-								}
+								borderBottom: '1px solid black',
+								width: 'fit-content'
 							}}
+							variant="h4"
 						>
-							{kitchen}
+							Price
 						</Typography>
-					</Link>
+						<Typography variant="h3">${price}</Typography>
+					</Box>
 				</Box>
 			</Box>
 		</Box>

@@ -38,11 +38,30 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 						</Typography>
 					</Box>
 				</Box>
+
 				<Box>
 					<Typography variant="h3">Order #</Typography>
 					<Link href={`/myorders/${id}`}>
 						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
 							{id}
+						</Typography>
+					</Link>
+				</Box>
+				<Box
+					px={2}
+					py={1}
+					border={`1px solid ${colors.orangeAccent[700]}`}
+					alignSelf={{ xs: 'unset', sm: 'center' }}
+				>
+					<Link
+						style={{ textDecoration: 'none', width: '100%' }}
+						href={`/myorders/${id}`}
+					>
+						<Typography
+							color={'secondary'}
+							fontSize={{ xs: 'medium', sm: 'large' }}
+						>
+							View Details
 						</Typography>
 					</Link>
 				</Box>

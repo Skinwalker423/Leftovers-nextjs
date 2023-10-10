@@ -4,7 +4,12 @@ import MyOrderMealCard from './myOrderMealCard';
 
 const MyOrderMealItems = ({ items }) => {
 	return (
-		<Box display={'flex'} flexDirection={'column'} gap={5}>
+		<Box
+			width={'100%'}
+			display={'flex'}
+			flexDirection={{ xs: 'column', md: 'row' }}
+			gap={5}
+		>
 			{items.length &&
 				items.map((item) => {
 					return <MyOrderMealCard key={item.id} item={item} />;
