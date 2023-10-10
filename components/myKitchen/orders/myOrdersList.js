@@ -1,7 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import MyOrderCard from './myOrderCard';
 
-const OrdersList = ({ myOrders, currentUserEmail }) => {
+const MyOrdersList = ({ myOrders, currentUserEmail }) => {
 	return (
 		<Box
 			display="flex"
@@ -28,4 +29,4 @@ const OrdersList = ({ myOrders, currentUserEmail }) => {
 	);
 };
 
-export default OrdersList;
+export default MyOrdersList;

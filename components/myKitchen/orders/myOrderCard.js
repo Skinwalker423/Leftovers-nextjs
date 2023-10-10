@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 import { useColors } from '../../../hooks/useColors';
 import Link from 'next/link';
 import { formatDateString } from '../../../utils/dates';
+import MyOrderMealItems from './myOrderMealItems';
 
-const OrderCard = ({ order, currentUserEmail, setMsg }) => {
+const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 	const { colors } = useColors();
 	const { id, items, created_at, total, prepperEmail, mealStatus } = order;
 	const newDate = formatDateString(created_at);
 
 	let statusColor = colors.orangeAccent[400];
-	if (status === 'fulfilled') {
+	if (mealStatus === 'fulfilled') {
 		statusColor = colors.greenAccent[400];
-	} else if (status === 'unfulfilled') {
+	} else if (mealStatus === 'unfulfilled') {
 		statusColor = colors.redAccent[400];
 	}
 
@@ -74,4 +75,4 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 	);
 };
 
-export default OrderCard;
+export default MyOrderCard;

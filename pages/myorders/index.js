@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { getServerSession } from 'next-auth/next';
 import { connectMongoDb } from '../../db/mongodb/mongoDbUtils';
 import { findAllOrdersByUserEmail } from '../../db/mongodb/mongoDbUtils';
-import OrdersList from '../../components/myKitchen/orders/ordersList';
+import MyOrdersList from '../../components/myKitchen/orders/myOrdersList';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -56,7 +56,7 @@ const MyOrders = ({ userData, orders }) => {
 			<Typography component={'h1'} fontSize={'5rem'}>
 				Orders
 			</Typography>
-			<OrdersList myOrders={orders} currentUserEmail={currentUserEmail} />
+			<MyOrdersList myOrders={orders} currentUserEmail={currentUserEmail} />
 		</Box>
 	);
 };
