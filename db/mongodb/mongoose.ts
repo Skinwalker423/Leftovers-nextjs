@@ -65,11 +65,11 @@ export const incrementMealsServedDB = async (prepperEmail: string) => {
 	}
 };
 
-export const fetchOrderById = async (id: string) => {
+export const fetchOrderById = async (orderId: string) => {
 	try {
 		await connectToMongoDb();
 		const order = await Order.findOne({
-			id: id
+			_id: orderId
 		});
 
 		return order;
