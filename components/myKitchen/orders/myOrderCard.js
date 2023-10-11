@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useColors } from '../../../hooks/useColors';
 import Link from 'next/link';
@@ -30,29 +30,31 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 				alignItems={'flex-start'}
 				mb={'2rem'}
 			>
-				<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
+				<Box
+					display={'flex'}
+					flex={1}
+					justifyContent={{ xs: 'flex-start', sm: 'space-between' }}
+					flexDirection={{ xs: 'column', sm: 'row' }}
+				>
+					<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
+						<Box>
+							<Typography variant="h3">Date</Typography>
+							<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
+								{newDate}
+							</Typography>
+						</Box>
+					</Box>
+
 					<Box>
-						<Typography variant="h3">Date</Typography>
-						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
-							{newDate}
-						</Typography>
+						<Typography variant="h3">Order #</Typography>
+						<Link href={`/myorders/${id}`}>
+							<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
+								{id}
+							</Typography>
+						</Link>
 					</Box>
 				</Box>
-
-				<Box>
-					<Typography variant="h3">Order #</Typography>
-					<Link href={`/myorders/${id}`}>
-						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
-							{id}
-						</Typography>
-					</Link>
-				</Box>
-				<Box
-					px={2}
-					py={1}
-					border={`1px solid ${colors.orangeAccent[700]}`}
-					alignSelf={{ xs: 'unset', sm: 'center' }}
-				>
+				<Button variant="outlined" color="secondary">
 					<Link
 						style={{ textDecoration: 'none', width: '100%' }}
 						href={`/myorders/${id}`}
@@ -64,7 +66,7 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 							View Details
 						</Typography>
 					</Link>
-				</Box>
+				</Button>
 			</Box>
 			<Box
 				display={'flex'}
