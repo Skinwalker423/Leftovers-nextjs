@@ -24,7 +24,7 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 		>
 			<Box
 				display={'flex'}
-				flexDirection={{ xs: 'column', sm: 'row' }}
+				flexDirection={'row'}
 				gap={{ xs: 2, sm: 1 }}
 				justifyContent={'space-between'}
 				alignItems={'flex-start'}
@@ -32,9 +32,10 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 			>
 				<Box
 					display={'flex'}
-					flex={1}
-					justifyContent={{ xs: 'flex-start', sm: 'space-between' }}
+					flex={4}
+					justifyContent={'flex-start'}
 					flexDirection={{ xs: 'column', sm: 'row' }}
+					gap={{ xs: 2, sm: 10 }}
 				>
 					<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
 						<Box>
@@ -54,7 +55,7 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 						</Link>
 					</Box>
 				</Box>
-				<Button variant="outlined" color="secondary">
+				<Button sx={{ flex: 1 }} variant="outlined" color="secondary">
 					<Link
 						style={{ textDecoration: 'none', width: '100%' }}
 						href={`/myorders/${id}`}
