@@ -3,8 +3,7 @@ import React from 'react';
 import { useColors } from '../../../hooks/useColors';
 
 const MyOrderMealCard = ({ item }) => {
-	const { description, foodItem, id, image, price, qty, prepperId, kitchen } =
-		item;
+	const { foodItem, id, price, qty } = item;
 	const { colors } = useColors();
 	return (
 		<Box

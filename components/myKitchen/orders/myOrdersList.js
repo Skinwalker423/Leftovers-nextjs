@@ -7,12 +7,12 @@ const MyOrdersList = ({ myOrders, currentUserEmail }) => {
 		<Box
 			display="flex"
 			flexDirection={'column'}
-			justifyContent={'center'}
+			justifyContent={'flex-start'}
 			alignItems={'center'}
 			height={'100%'}
 			width={{ xs: '100%', sm: '90%', md: '80%' }}
-			ml={{ xs: 0, sm: 7 }}
-			p={3}
+			px={3}
+			pb={3}
 			gap={5}
 		>
 			{myOrders.length > 0 &&
