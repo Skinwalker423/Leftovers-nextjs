@@ -66,7 +66,12 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 				border={`1px solid ${statusColor}`}
 			>
 				<Box display={'flex'} alignItems={'center'} gap={1}>
-					<Typography variant="h3">Status:</Typography>
+					<Typography
+						variant="h3"
+						sx={{ fontSize: { xs: 'medium', sm: 'large' } }}
+					>
+						Status:
+					</Typography>
 					<Typography
 						variant="span"
 						textAlign={'center'}
