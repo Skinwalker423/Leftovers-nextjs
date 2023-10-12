@@ -93,7 +93,7 @@ const MyOrderCard = ({ order }) => {
 				</Box>
 			</Box>
 			<MyOrderMealItems items={items} />
-			<Typography sx={{ mt: 2 }} variant="h2">
+			<Typography sx={{ mt: 2 }} variant="h3">
 				Total Cost:
 				<Typography sx={{ px: 2 }} variant="span" color={'secondary'}>
 					${total}
