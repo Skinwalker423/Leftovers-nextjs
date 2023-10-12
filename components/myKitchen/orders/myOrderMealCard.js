@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material';
-import Link from 'next/link';
 import React from 'react';
 import { useColors } from '../../../hooks/useColors';
 
@@ -12,7 +11,6 @@ const MyOrderMealCard = ({ item }) => {
 			key={id}
 			display={'flex'}
 			border={`2px solid ${colors.primary[400]}`}
-			boxShadow={`10px 5px 5px ${colors.primary[400]}`}
 			width={'100%'}
 		>
 			<Box
@@ -31,42 +29,39 @@ const MyOrderMealCard = ({ item }) => {
 					flexDirection={{ xs: 'column', sm: 'row' }}
 					gap={2}
 				>
-					<Box>
+					<Box display={'flex'} gap={1} alignItems={'center'}>
 						<Typography
 							fontWeight={600}
 							sx={{
-								borderBottom: '1px solid black',
 								width: 'fit-content'
 							}}
-							variant="h4"
+							variant="h3"
 						>
-							Item
+							Item:
 						</Typography>
 						<Typography variant="h3"> {foodItem}</Typography>
 					</Box>
-					<Box>
+					<Box display={'flex'} gap={1} alignItems={'center'}>
 						<Typography
 							fontWeight={600}
 							sx={{
-								borderBottom: '1px solid black',
 								width: 'fit-content'
 							}}
 							variant="h4"
 						>
-							QTY
+							QTY:
 						</Typography>
 						<Typography variant="h3"> {qty}</Typography>
 					</Box>
-					<Box>
+					<Box display={'flex'} gap={1} alignItems={'center'}>
 						<Typography
 							fontWeight={600}
 							sx={{
-								borderBottom: '1px solid black',
 								width: 'fit-content'
 							}}
 							variant="h4"
 						>
-							Price
+							Price:
 						</Typography>
 						<Typography variant="h3">${price}</Typography>
 					</Box>
