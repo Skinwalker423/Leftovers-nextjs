@@ -1,13 +1,13 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import { useColors } from '../../../hooks/useColors';
 import Link from 'next/link';
 import { formatDateString } from '../../../utils/dates';
 import MyOrderMealItems from './myOrderMealItems';
 
-const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
+const MyOrderCard = ({ order }) => {
 	const { colors } = useColors();
-	const { id, items, created_at, total, prepperEmail, mealStatus } = order;
+	const { id, items, created_at, total, mealStatus } = order;
 	const newDate = formatDateString(created_at);
 
 	let statusColor = colors.orangeAccent[400];
@@ -34,10 +34,10 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 					display={'flex'}
 					flex={4}
 					justifyContent={'flex-start'}
-					flexDirection={{ xs: 'column', sm: 'row' }}
-					gap={{ xs: 2, sm: 10 }}
+					flexDirection={{ xs: 'column', md: 'row' }}
+					gap={{ xs: 2, md: 10 }}
 				>
-					<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
+					<Box display={'flex'} gap={{ xs: 2, md: 5 }}>
 						<Box>
 							<Typography variant="h3">Date</Typography>
 							<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
@@ -93,6 +93,12 @@ const MyOrderCard = ({ order, currentUserEmail, setMsg }) => {
 				</Box>
 			</Box>
 			<MyOrderMealItems items={items} />
+			<Typography sx={{ mt: 2 }} variant="h2">
+				Total Cost:
+				<Typography sx={{ px: 2 }} variant="span" color={'secondary'}>
+					${total}
+				</Typography>
+			</Typography>
 		</Paper>
 	);
 };
