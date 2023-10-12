@@ -32,7 +32,12 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 				alignItems={'flex-start'}
 				mb={'2rem'}
 			>
-				<Box display={'flex'} gap={{ xs: 2, sm: 5 }}>
+				<Box
+					display={'flex'}
+					justifyContent={'space-between'}
+					gap={{ xs: 2, sm: 10 }}
+					width={{ xs: '100%', sm: 'unset' }}
+				>
 					<Box>
 						<Typography variant="h3">Date</Typography>
 						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
@@ -48,11 +53,8 @@ const OrderCard = ({ order, currentUserEmail, setMsg }) => {
 				</Box>
 				<Box>
 					<Typography variant="h3">Order #</Typography>
-					<Link href={`/myorders/${id}`}>
-						<Typography fontSize={{ xs: 'medium', sm: 'large' }}>
-							{id}
-						</Typography>
-					</Link>
+
+					<Typography fontSize={{ xs: 'medium', sm: 'large' }}>{id}</Typography>
 				</Box>
 			</Box>
 			<Box

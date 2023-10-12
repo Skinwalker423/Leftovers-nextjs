@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Box } from '@mui/material';
 import OrderCard from '../../../components/myKitchen/orders/orderCard';
 import { fetchOrderById } from '../../../db/mongodb/mongoose';
@@ -11,8 +12,6 @@ export async function getServerSideProps({ req, res, params }) {
 
 	const userEmail = session?.user?.email;
 
-	console.log('session', session);
-
 	if (!session) {
 		return {
 			redirect: {
@@ -23,7 +22,6 @@ export async function getServerSideProps({ req, res, params }) {
 	}
 
 	const order = await fetchOrderById(orderId);
-	console.log('order in ssr', order);
 
 	if (userEmail !== order.userEmail) {
 		return {
@@ -42,7 +40,22 @@ export async function getServerSideProps({ req, res, params }) {
 const OrderDetails = ({ order, userEmail }) => {
 	console.log('order', order);
 	return (
-		<Box>
+		<Box
+			display={'flex'}
+			justifyContent={'center'}
+			alignItems={{ xs: 'flex-start', sm: 'center' }}
+			width={'100%'}
+			px={2}
+			py={1}
+			height={'100vh'}
+		>
+			<Head>
+				<title>My Order Details</title>
+				<meta
+					name="description"
+					content="view the details of an order to learn more information"
+				/>
+			</Head>
 			<OrderCard order={order} currentUserEmail={userEmail} />
 		</Box>
 	);
