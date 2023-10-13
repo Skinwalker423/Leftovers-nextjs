@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import {
 	Box,
 	Typography,
@@ -36,10 +36,28 @@ const NavBar = () => {
 
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
-	const [showUserMenu, setShowUserMenu] = useState();
+	const [showUserMenu, setShowUserMenu] = useState(false);
 	const [showNotifictions, setShowNotifications] = useState(false);
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const { state } = useUserContext();
+	const userMenuRef = useRef();
+	const userMenuIconRef = useRef();
+
+	useEffect(() => {
+		const closeUserModal = (e) => {
+			if (userMenuIconRef.current.contains(e.target)) return;
+			if (showUserMenu && userMenuRef.current) {
+				if (!userMenuRef.current.contains(e.target)) {
+					setShowUserMenu(false);
+				}
+			}
+		};
+		const userMenuClose = document.addEventListener('click', closeUserModal);
+
+		return () => {
+			document.removeEventListener('click', closeUserModal);
+		};
+	}, [showUserMenu]);
 
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
@@ -194,7 +212,7 @@ const NavBar = () => {
 								</Box>
 							}
 						>
-							<IconButton onClick={handleUserIcon}>
+							<IconButton ref={userMenuIconRef} onClick={handleUserIcon}>
 								{userIcon ? (
 									<Image
 										style={{ borderRadius: '50%' }}
@@ -231,7 +249,11 @@ const NavBar = () => {
 							}
 						</Box>
 					)}
-					{showUserMenu && <UserMenu setShowUserMenu={setShowUserMenu} />}
+					{showUserMenu && (
+						<Box position={'absolute'} top={30} right={0} ref={userMenuRef}>
+							<UserMenu setShowUserMenu={setShowUserMenu} />
+						</Box>
+					)}
 					{showNotifictions && <NotificationMenu />}
 
 					<MealCartDrawer
