@@ -4,7 +4,6 @@ import {
 	Typography,
 	IconButton,
 	Tooltip,
-	Button,
 	useTheme,
 	useMediaQuery
 } from '@mui/material';
@@ -52,7 +51,7 @@ const NavBar = () => {
 				}
 			}
 		};
-		const userMenuClose = document.addEventListener('click', closeUserModal);
+		document.addEventListener('click', closeUserModal);
 
 		return () => {
 			document.removeEventListener('click', closeUserModal);
