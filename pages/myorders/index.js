@@ -53,7 +53,10 @@ const MyOrders = ({ userData, orders }) => {
 				<meta name="description" content="view all order history and details" />
 			</Head>
 
-			<Typography component={'h1'} fontSize={'5rem'}>
+			<Typography
+				component={'h1'}
+				sx={{ fontSize: { xs: '3rem', sm: '4rem', md: '5rem' } }}
+			>
 				Orders
 			</Typography>
 			<MyOrdersList myOrders={orders} currentUserEmail={currentUserEmail} />
