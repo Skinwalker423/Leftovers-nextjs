@@ -114,6 +114,7 @@ const NavBar = () => {
 						height={50}
 						alt="Leftovers icon"
 					/>
+					<Typography fontFamily={'charm'}>Leftovers</Typography>
 				</Link>
 
 				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>
