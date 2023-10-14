@@ -60,6 +60,7 @@ const NavBar = () => {
 
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
+	const mediumMatches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const cartItemsLength = state.userCartlist.length;
 
@@ -114,7 +115,7 @@ const NavBar = () => {
 						height={50}
 						alt="Leftovers icon"
 					/>
-					{
+					{!mediumMatches && (
 						<Typography
 							className={styles.logoText}
 							variant="h2"
@@ -122,7 +123,7 @@ const NavBar = () => {
 						>
 							Leftovers
 						</Typography>
-					}
+					)}
 				</Link>
 
 				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>
