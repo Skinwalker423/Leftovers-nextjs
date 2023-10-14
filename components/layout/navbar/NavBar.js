@@ -107,14 +107,22 @@ const NavBar = () => {
 				alignItems="center"
 				px={2}
 			>
-				<Link href={'/'}>
+				<Link className={styles.logoText} href={'/'}>
 					<Image
 						src="/icons8-connect.svg"
 						width={50}
 						height={50}
 						alt="Leftovers icon"
 					/>
-					<Typography fontFamily={'charm'}>Leftovers</Typography>
+					{
+						<Typography
+							className={styles.logoText}
+							variant="h2"
+							color={'secondary'}
+						>
+							Leftovers
+						</Typography>
+					}
 				</Link>
 
 				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>

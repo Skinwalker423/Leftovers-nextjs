@@ -1,3 +1,11 @@
+.logoText {
+	font-family: 'Charm', cursive;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	text-decoration: none;
+}
+
 .collapsedNavBar {
 	display: none;
 }
