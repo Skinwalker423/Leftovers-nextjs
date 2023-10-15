@@ -452,8 +452,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				</Box>
 			)}
 
-			{msg && <SuccessAlert width="100%" msg={msg} setMsg={setMsg} />}
-			{error && <ErrorAlert width="100%" error={error} setError={setError} />}
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+			{error && <ErrorAlert error={error} setError={setError} />}
 		</Box>
 	);
 };

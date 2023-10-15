@@ -165,10 +165,8 @@ const Home = ({ preppers, userEmail, favoritesList, defaultZipcode }) => {
 					</Box>
 				)}
 			</Box>
-			{msg && <SuccessAlert msg={msg} setMsg={setMsg} width="50%" />}
-			{errorMsg && (
-				<ErrorAlert error={errorMsg} setError={setErrorMsg} width="50%" />
-			)}
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+			{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
 		</Box>
 	);
 };
