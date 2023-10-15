@@ -51,7 +51,7 @@ export async function getStaticPaths() {
 const Prepper = ({ prepper }) => {
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
-	const [msg, setMsg] = useState('');
+	const [msg, setMsg] = useState('test fwefwe wefw few fw fw fw we we fewfwefw wfewf wf');
 	const { colors } = useColors();
 
 	const bannerImage = prepper?.kitchenImgUrl || '/art.jpg';
@@ -205,7 +205,7 @@ const Prepper = ({ prepper }) => {
 					<CustomLoader />
 				</Box>
 			)}
-			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
+			{msg && <SuccessAlert msg={msg} setMsg={setMsg} width="50rem" />}
 		</Box>
 	);
 };
