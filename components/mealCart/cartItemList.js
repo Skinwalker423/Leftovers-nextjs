@@ -20,7 +20,7 @@ const CartItemList = ({ checkout }) => {
 
 	return (
 		<Box
-			height={{ xs: '50vh', md: '80%' }}
+			height={{ xs: cartList.length ? '50vh' : '30vh', md: '80%' }}
 			width={'100%'}
 			display={'flex'}
 			overflow="auto"

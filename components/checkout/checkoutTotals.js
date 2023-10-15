@@ -22,8 +22,10 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 			flexDirection={'column'}
 			height="100vh"
 			alignItems="center"
-			justifyContent="space-evenly"
+			justifyContent="flex-start"
 			width="100%"
+			pt={{ xs: 3, md: 5 }}
+			gap={{ xs: 5, lg: 20 }}
 		>
 			<Box
 				width={'100%'}

@@ -6,7 +6,7 @@ import { useColors } from '../../hooks/useColors';
 const CheckoutList = () => {
 	const { colors } = useColors();
 	return (
-		<Box width={'100%'} p="20px" sx={{ backgroundColor: colors.primary[900] }}>
+		<Box width={'100%'} sx={{ backgroundColor: colors.primary[900] }}>
 			<CartItemList checkout={true} />
 		</Box>
 	);
