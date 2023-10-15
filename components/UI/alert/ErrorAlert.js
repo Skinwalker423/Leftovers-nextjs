@@ -1,8 +1,7 @@
 import React from 'react';
 import Alert from '@mui/material/Alert';
-import Typography from '@mui/material/Typography';
 
-const ErrorAlert = ({ error, setError, width = '100%' }) => {
+const ErrorAlert = ({ error, setError, width = '30rem' }) => {
 	return (
 		<Alert
 			onClose={() => {
@@ -13,15 +12,16 @@ const ErrorAlert = ({ error, setError, width = '100%' }) => {
 			variant="filled"
 			sx={{
 				position: 'fixed',
-				bottom: 0,
-				width: width,
-				fontSize: 'larger',
+				bottom: { xs: 0, sm: 10 },
+				right: { xs: 0, sm: 10 },
+				width: { xs: '100%', sm: width },
+				fontSize: { xs: 'medium', md: 'x-large' },
 				textAlign: 'center',
 				justifyContent: 'center',
 				zIndex: 150
 			}}
 		>
-			<Typography fontSize={'2rem'}>{error}</Typography>
+			{error}
 		</Alert>
 	);
 };

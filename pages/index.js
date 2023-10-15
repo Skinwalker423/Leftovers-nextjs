@@ -237,7 +237,7 @@ export default function Home({
 				)}
 
 				{errorMsg.length > 0 && (
-					<ErrorAlert width="50%" error={errorMsg} setError={setErrorMsg} />
+					<ErrorAlert error={errorMsg} setError={setErrorMsg} />
 				)}
 				{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 				{isSearching && <CustomLoader />}
