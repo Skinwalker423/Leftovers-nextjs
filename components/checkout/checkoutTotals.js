@@ -8,6 +8,10 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 	const { colors } = useColors();
 	const { userCartlist } = state;
 
+	const totalCost = Math.round(state.cartTotalPrice * 100) / 100;
+	const fees = !totalCost ? 0 : Math.round(totalCost * 0.1 * 100) / 100;
+	const total = !totalCost ? 0 : totalCost + fees;
+
 	const handlePayBtn = async () => {
 		await onPaymentClick();
 	};
@@ -23,37 +27,33 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 		>
 			<Box
 				width={'100%'}
-				px={20}
+				px={{ xs: 5, lg: 10, xl: 15 }}
+				py={2}
 				display={'flex'}
 				flexDirection={'column'}
+				justifyContent={'flex-start'}
 				gap={3}
 			>
 				<Typography
-					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h3"
+					sx={{ backgroundColor: colors.primary[400], p: 2 }}
+					variant="h4"
 				>
-					cost:
+					cost: ${totalCost}
 				</Typography>
-				<Divider />
+
 				<Typography
-					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h3"
+					sx={{ backgroundColor: colors.primary[400], p: 2 }}
+					variant="h4"
 				>
-					fees:
+					fees: ${fees}
 				</Typography>
-				<Divider />
+
+				<Divider sx={{ backgroundColor: colors.orangeAccent[700] }} />
 				<Typography
-					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h3"
+					sx={{ backgroundColor: colors.primary[400], p: 2 }}
+					variant="h4"
 				>
-					estimated taxes:
-				</Typography>
-				<Divider />
-				<Typography
-					sx={{ backgroundColor: colors.primary[400], p: 3 }}
-					variant="h3"
-				>
-					Total:
+					Total: ${total}
 				</Typography>
 			</Box>
 			<Box
@@ -80,7 +80,7 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 						Pay
 					</Button>
 					<Typography fontSize={'x-large'} textAlign={'end'}>
-						Total: ${Math.round(state.cartTotalPrice * 100) / 100}
+						Total: ${!total && userCartlist.length > 0 ? 'Free' : 0}
 					</Typography>
 				</Box>
 			</Box>
