@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../store/UserContext';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import CartItem from './cartItem';
 
 const CartItemList = ({ checkout }) => {
@@ -25,9 +25,13 @@ const CartItemList = ({ checkout }) => {
 			display={'flex'}
 			overflow="auto"
 			flexDirection="column"
-			justifyContent={checkout ? 'center' : 'flex-start'}
+			justifyContent={'flex-start'}
 		>
-			<Typography sx={{ my: '2em' }} textAlign={'center'} variant="h2">
+			<Typography
+				sx={{ mt: { xs: checkout ? '5rem' : '2rem', md: '2rem' } }}
+				textAlign={'center'}
+				variant="h2"
+			>
 				Meals
 			</Typography>
 			<Box
@@ -35,7 +39,9 @@ const CartItemList = ({ checkout }) => {
 					px: {
 						xs: '2em',
 						md: '5em'
-					}
+					},
+					height: '100%',
+					overflowY: 'auto'
 				}}
 			>
 				{cartList.length ? (
