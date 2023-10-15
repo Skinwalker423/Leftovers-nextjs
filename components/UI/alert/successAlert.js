@@ -1,8 +1,7 @@
 import React from 'react';
 import Alert from '@mui/material/Alert';
-import Typography from '@mui/material/Typography';
 
-const SuccessAlert = ({ msg, setMsg, width = '20rem' }) => {
+const SuccessAlert = ({ msg, setMsg, width = '30rem' }) => {
 	return (
 		<Alert
 			onClose={() => {
@@ -15,7 +14,7 @@ const SuccessAlert = ({ msg, setMsg, width = '20rem' }) => {
 				position: 'fixed',
 				bottom: { xs: 0, sm: 10 },
 				left: { xs: 0, sm: 10 },
-				width: { xs: '100%', sm: '30rem' },
+				width: { xs: '100%', sm: width },
 				fontSize: { xs: 'medium', md: 'larger' },
 				textAlign: 'center',
 				justifyContent: 'center',
@@ -23,7 +22,6 @@ const SuccessAlert = ({ msg, setMsg, width = '20rem' }) => {
 			}}
 		>
 			{msg}
-			{/* <Typography fontSize={'2rem'}>{msg}</Typography> */}
 		</Alert>
 	);
 };
