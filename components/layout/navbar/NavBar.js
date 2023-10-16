@@ -197,14 +197,18 @@ const NavBar = () => {
 										display={'flex'}
 										justifyContent={'center'}
 										alignItems={'center'}
-										bottom={0}
+										bottom={-3}
 										left={2}
+										p={1}
 										borderRadius={5}
 										backgroundColor={colors.orangeAccent[400]}
-										width={'1.5em'}
-										height={'1.5em'}
+										width={'1.1em'}
+										height={'1.1em'}
 									>
-										<Typography color={colors.primary[900]}>
+										<Typography
+											sx={{ fontSize: 'small' }}
+											color={colors.primary[900]}
+										>
 											{cartItemsLength}
 										</Typography>
 									</Box>
