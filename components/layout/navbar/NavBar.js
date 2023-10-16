@@ -191,25 +191,25 @@ const NavBar = () => {
 								<ShoppingCartOutlinedIcon
 									fontSize={matches ? 'medium' : 'large'}
 								/>
+								{cartItemsLength > 0 && (
+									<Box
+										position={'absolute'}
+										display={'flex'}
+										justifyContent={'center'}
+										alignItems={'center'}
+										bottom={0}
+										left={2}
+										borderRadius={5}
+										backgroundColor={colors.orangeAccent[400]}
+										width={'1.5em'}
+										height={'1.5em'}
+									>
+										<Typography color={colors.primary[900]}>
+											{cartItemsLength}
+										</Typography>
+									</Box>
+								)}
 							</IconButton>
-							{cartItemsLength > 0 && (
-								<Box
-									position={'absolute'}
-									display={'flex'}
-									justifyContent={'center'}
-									alignItems={'center'}
-									bottom={0}
-									left={2}
-									borderRadius={5}
-									backgroundColor={colors.orangeAccent[400]}
-									width={'1.5em'}
-									height={'1.5em'}
-								>
-									<Typography color={colors.primary[900]}>
-										{cartItemsLength}
-									</Typography>
-								</Box>
-							)}
 						</Box>
 					</Tooltip>
 					{session ? (
