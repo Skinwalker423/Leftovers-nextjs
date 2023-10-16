@@ -8,14 +8,13 @@ const CategoryBanner = ({ title, bgColor, children, link = '/' }) => {
 	return (
 		<Box
 			width={'100%'}
-			// height={{ xs: '65rem', sm: '40rem' }}
 			sx={{ overflow: 'auto' }}
 			alignItems={'center'}
 			justifyContent={'center'}
 			borderTop={`2px solid ${bgColor}`}
 			py={5}
 		>
-			<Link style={{ textDecoration: 'none' }} href={link}>
+			{/* <Link style={{ textDecoration: 'none' }} href={link}>
 				{title && (
 					<Typography
 						color={bgColor}
@@ -26,7 +25,7 @@ const CategoryBanner = ({ title, bgColor, children, link = '/' }) => {
 						{title}
 					</Typography>
 				)}
-			</Link>
+			</Link> */}
 			{children}
 		</Box>
 	);
