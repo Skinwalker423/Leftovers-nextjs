@@ -78,6 +78,7 @@ export default function PrepperCard({
 
 	async function handleAddFavBtn() {
 		setFavorited(true);
+		console.log('add fav func firing');
 		try {
 			const data = await addAndUpdateFavoritePreppers(
 				prepperDetails,
@@ -101,6 +102,8 @@ export default function PrepperCard({
 			timeOutError('no userEmail / prepper id found');
 			return;
 		}
+
+		console.log('check');
 		const newfavoritesList =
 			state.favorites && state.favorites.filter((prepper) => id !== prepper.id);
 		setFavorited(false);

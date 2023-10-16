@@ -43,7 +43,7 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Favorites = ({ favoriteList, userSession }) => {
-	const userEmail = userSession?.user?.email;
+	const userEmail = userSession?.email;
 	const { state, setFavoritesList } = useContext(UserContext);
 	const [msg, setMsg] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
@@ -134,7 +134,7 @@ const Favorites = ({ favoriteList, userSession }) => {
 								}}
 							>
 								<Typography textAlign={'center'} variant="h2">
-									No preppers available nearby.
+									No Favorites added.
 								</Typography>
 							</Alert>
 						</Box>
