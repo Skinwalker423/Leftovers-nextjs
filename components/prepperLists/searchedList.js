@@ -55,6 +55,7 @@ const SearchedList = ({ userEmail, setMsg, setErrorMsg }) => {
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
 				color={colors.redAccent[700]}
+				link="/"
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}

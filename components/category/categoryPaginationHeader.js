@@ -4,6 +4,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useColors } from '../../hooks/useColors';
 import { useCustomPagination } from '../../hooks/useCustomPagination';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 const CategoryPaginationHeader = ({
 	title = 'Title Here',
@@ -12,7 +13,8 @@ const CategoryPaginationHeader = ({
 	resultsPerPage = 3,
 	setSlicedList,
 	userEmail,
-	meals
+	meals,
+	link = '/'
 }) => {
 	if (!list) return;
 
@@ -48,12 +50,14 @@ const CategoryPaginationHeader = ({
 			flexDirection={{ xs: 'column', sm: 'row' }}
 			px={10}
 		>
-			<Typography
-				sx={{ color: color ? color : colors.orangeAccent[400] }}
-				variant={'h2'}
-			>
-				{title}
-			</Typography>
+			<Link style={{ textDecoration: 'none' }} href={link}>
+				<Typography
+					sx={{ color: color ? color : colors.orangeAccent[400] }}
+					variant={'h2'}
+				>
+					{title}
+				</Typography>
+			</Link>
 			<Box
 				display={'flex'}
 				justifyContent={'flex-end'}
