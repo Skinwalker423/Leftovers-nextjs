@@ -20,6 +20,7 @@ const FavoriteList = ({ favRow, userEmail, setMsg, setErrorMsg }) => {
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
 				color={colors.blueAccent[700]}
+				link="/favorites"
 			/>
 
 			<Box

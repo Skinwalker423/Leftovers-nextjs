@@ -1,9 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { useColors } from '../../hooks/useColors';
 
-const CategoryBanner = ({ title, bgColor, children, link = '/' }) => {
+const CategoryBanner = ({ bgColor, children }) => {
 	const { colors } = useColors();
 	return (
 		<Box
@@ -14,18 +13,6 @@ const CategoryBanner = ({ title, bgColor, children, link = '/' }) => {
 			borderTop={`2px solid ${bgColor}`}
 			py={5}
 		>
-			{/* <Link style={{ textDecoration: 'none' }} href={link}>
-				{title && (
-					<Typography
-						color={bgColor}
-						textAlign={'center'}
-						my=".75em"
-						variant="h1"
-					>
-						{title}
-					</Typography>
-				)}
-			</Link> */}
 			{children}
 		</Box>
 	);

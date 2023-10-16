@@ -54,6 +54,7 @@ const LocalPreppersList = ({ userEmail, setMsg, setErrorMsg }) => {
 				list={state.localPreppers}
 				setSlicedList={setSlicedPreppers}
 				userEmail={userEmail}
+				link="/preppers"
 			/>
 			<Box
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'auto' }}

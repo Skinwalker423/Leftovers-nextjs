@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import FavoriteList from '../components/prepperLists/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
-import { Alert, Box, Typography } from '@mui/material';
+import { Alert, Box, Pagination, Typography } from '@mui/material';
 import { UserContext } from '../store/UserContext';
 
 import {
@@ -11,6 +11,8 @@ import {
 } from '../db/mongodb/mongoDbUtils';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
+import PrepperCard from '../components/Card/prepperCard';
+import { useState } from 'react';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -43,6 +45,11 @@ export async function getServerSideProps({ req, res }) {
 const Favorites = ({ favoriteList, userSession }) => {
 	const userEmail = userSession?.user?.email;
 	const { state, setFavoritesList } = useContext(UserContext);
+	const [msg, setMsg] = useState('');
+	const [errorMsg, setErrorMsg] = useState('');
+	const itemsPerPages = 8;
+	const count = state.favorites.length;
+	const pages = Math.ceil(count / itemsPerPages);
 
 	useEffect(() => {
 		if (favoriteList) {
@@ -72,12 +79,66 @@ const Favorites = ({ favoriteList, userSession }) => {
 					display="flex"
 					gap="1rem"
 					flexWrap={'wrap'}
+					justifyContent={'center'}
 				>
-					<FavoriteList
-						userEmail={userEmail}
-						favRow={true}
-						favoriteList={state.favorites}
-					/>
+					{state.favorites.length > 0 ? (
+						<Box display={'flex'} flexDirection={'column'}>
+							<Box
+								display="flex"
+								justifyContent={'center'}
+								gap={4}
+								flexWrap={'wrap'}
+							>
+								{state.favorites.map((prepper) => {
+									const avatar = 'https://i.pravatar.cc/300';
+
+									return (
+										<PrepperCard
+											isFavorited={true}
+											key={prepper.id}
+											name={prepper.kitchenTitle}
+											email={prepper.email}
+											subTitle={prepper.name}
+											avatar={prepper.profileImgUrl || avatar}
+											kitchenImgUrl={prepper.kitchenImgUrl}
+											id={prepper.id}
+											userEmail={userEmail ? userEmail : ''}
+											description={prepper.description}
+											setMsg={setMsg}
+											setErrorMsg={setErrorMsg}
+											mealsServed={prepper.mealsServed}
+										/>
+									);
+								})}
+							</Box>
+							{pages > 1 && (
+								<Pagination
+									sx={{ display: 'flex', justifyContent: 'center', my: '2rem' }}
+									size="large"
+									count={pages}
+									onChange={handleChange}
+								/>
+							)}
+						</Box>
+					) : (
+						<Box
+							width={'100%'}
+							display={'flex'}
+							justifyContent={'center'}
+							alignItems={'center'}
+						>
+							<Alert
+								severity="error"
+								sx={{
+									width: '50%'
+								}}
+							>
+								<Typography textAlign={'center'} variant="h2">
+									No preppers available nearby.
+								</Typography>
+							</Alert>
+						</Box>
+					)}
 				</Box>
 			</Box>
 		</Box>

@@ -64,7 +64,9 @@ const CategoryPaginationHeader = ({
 				alignItems={'center'}
 				gap={3}
 			>
-				<Typography variant="h3">See All</Typography>
+				<Link style={{ textDecoration: 'none' }} href={link}>
+					<Typography variant="h3">See All</Typography>
+				</Link>
 				<Box
 					display={'flex'}
 					justifyContent={'center'}
