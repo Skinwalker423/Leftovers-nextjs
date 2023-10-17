@@ -28,7 +28,11 @@ export default function MyKitchenMealCard({
 	setSavedMealImages
 }) {
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
-	const [mealImage, setMealImage] = useState(defaultMealImg);
+	const devMealImg =
+		process.env.NODE_ENV === 'development'
+			? '/images/cooking/defaultMeal.jpg'
+			: defaultMealImg;
+	const [mealImage, setMealImage] = useState(devMealImg);
 
 	const { colors } = useColors();
 
@@ -49,7 +53,6 @@ export default function MyKitchenMealCard({
 	};
 
 	const handleOutOfStock = async () => {
-		//add banner to meal card
 		const data = await updateMealQtyInDb(prepperEmail, id, 0);
 		if (data.message) {
 			setMsg(data.message);
