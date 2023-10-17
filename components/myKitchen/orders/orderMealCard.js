@@ -8,6 +8,10 @@ const OrderMealCard = ({ item }) => {
 	const { description, foodItem, id, image, price, qty, prepperId, kitchen } =
 		item;
 	const { colors } = useColors();
+	const devMealImg =
+		process.env.NODE_ENV === 'development'
+			? '/images/cooking/defaultMeal.jpg'
+			: image;
 	return (
 		<Box
 			key={id}
@@ -22,7 +26,7 @@ const OrderMealCard = ({ item }) => {
 				height={{ xs: '15em', sm: '20em', md: '25em' }}
 			>
 				<Image
-					src={image}
+					src={devMealImg}
 					fill
 					priority
 					sizes={{ width: '100%', height: 'auto' }}
