@@ -56,6 +56,11 @@ const Prepper = ({ prepper }) => {
 
 	const bannerImage = prepper?.kitchenImgUrl || '/art.jpg';
 
+	const devBannerImg =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? '/art.jpg'
+			: prepper.kitchenImgUrl;
+
 	useEffect(() => {
 		if (prepper && prepper.meals) {
 			setMeals(prepper.meals);
@@ -103,7 +108,7 @@ const Prepper = ({ prepper }) => {
 				position={'relative'}
 				top={0}
 			>
-				<Image src={bannerImage} fill alt={prepper.kitchenTitle} priority />
+				<Image src={devBannerImg} fill alt={prepper.kitchenTitle} priority />
 			</Box>
 			<Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
 				<Box

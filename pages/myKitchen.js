@@ -77,10 +77,14 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper, orders }) => {
-	const devAvatar =
+	const devKitchenImg =
 		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
 			? '/art.jpg'
 			: prepper.kitchenImgUrl;
+	const devProfileImg =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? '/art.jpg'
+			: prepper.profileImgUrl;
 
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
@@ -89,8 +93,8 @@ const myKitchen = ({ userData, prepper, orders }) => {
 	const [meals, setMeals] = useState(prepper.meals);
 	const [selected, setSelected] = useState('Kitchen profile');
 	const [myOrders, setMyOrders] = useState(orders);
-	const [kitchenImage, setKitchenImage] = useState(prepper.kitchenImgUrl);
-	const [profileImage, setProfileImage] = useState(prepper.profileImgUrl);
+	const [kitchenImage, setKitchenImage] = useState(devKitchenImg);
+	const [profileImage, setProfileImage] = useState(devProfileImg);
 	const [savedMealImages, setSavedMealImages] = useState(
 		prepper.savedMealImages
 	);
