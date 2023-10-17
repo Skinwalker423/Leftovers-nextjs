@@ -83,7 +83,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 			: prepper.kitchenImgUrl;
 	const devProfileImg =
 		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
-			? '/art.jpg'
+			? 'https://i.pravatar.cc/300'
 			: prepper.profileImgUrl;
 
 	const [msg, setMsg] = useState('');
@@ -359,7 +359,7 @@ const myKitchen = ({ userData, prepper, orders }) => {
 						{profileImage || image ? (
 							<Image
 								alt={`avatar image of ${prepper.name}`}
-								src={profileImage || image}
+								src={devProfileImg || image}
 								width={100}
 								height={100}
 								priority
