@@ -77,6 +77,11 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const myKitchen = ({ userData, prepper, orders }) => {
+	const devAvatar =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? '/art.jpg'
+			: prepper.kitchenImgUrl;
+
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
 	const { email, image } = userData;

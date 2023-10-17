@@ -29,7 +29,7 @@ export default function MyKitchenMealCard({
 }) {
 	const defaultMealImg = image ? image : '/images/cooking/defaultMeal.jpg';
 	const devMealImg =
-		process.env.NODE_ENV === 'development'
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
 			? '/images/cooking/defaultMeal.jpg'
 			: defaultMealImg;
 	const [mealImage, setMealImage] = useState(devMealImg);

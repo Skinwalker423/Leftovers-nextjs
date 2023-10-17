@@ -51,11 +51,13 @@ export default function PrepperCard({
 	} = useContext(UserContext);
 
 	const devAvatar =
-		process.env.NODE_ENV === 'development'
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
 			? 'https://i.pravatar.cc/300'
 			: avatar;
 	const devKitchenImg =
-		process.env.NODE_ENV === 'development' ? '/kitchen2.jpg' : kitchenImgUrl;
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? '/kitchen2.jpg'
+			: kitchenImgUrl;
 
 	const timeOutMessage = (message = 'Message Here', timeout = 3000) => {
 		setMsg(message);
