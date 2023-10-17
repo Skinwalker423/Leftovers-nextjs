@@ -13,6 +13,7 @@ import GroupsOutlinedIcon from '@mui/icons-material/GroupsOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
 
@@ -28,6 +29,8 @@ export default function CollapsedNavMenu() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	console.log('session in collapsed menu', session);
 
 	return (
 		<div>
@@ -100,17 +103,25 @@ export default function CollapsedNavMenu() {
 						<Typography fontSize={'large'}>About</Typography>
 					</MenuItem>
 				</Link>
-				{router.asPath !== '/register' && (
-					<Link className={styles.link} href={'/register'}>
-						<MenuItem
-							sx={{ color: colors.orangeAccent[900], gap: 2 }}
-							onClick={handleClose}
-						>
-							<FoodBankOutlinedIcon fontSize={'large'} />
-							<Typography fontSize={'large'}>Register</Typography>
-						</MenuItem>
-					</Link>
-				)}
+
+				<Link className={styles.link} href={'/register'}>
+					<MenuItem
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
+						onClick={handleClose}
+					>
+						<HowToRegIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>Register</Typography>
+					</MenuItem>
+				</Link>
+				<Link className={styles.link} href={'/myKitchen'}>
+					<MenuItem
+						sx={{ color: colors.orangeAccent[900], gap: 2 }}
+						onClick={handleClose}
+					>
+						<FoodBankOutlinedIcon fontSize={'large'} />
+						<Typography fontSize={'large'}>MyKitchen</Typography>
+					</MenuItem>
+				</Link>
 			</Menu>
 		</div>
 	);
