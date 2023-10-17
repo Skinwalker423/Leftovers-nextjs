@@ -50,6 +50,13 @@ export default function PrepperCard({
 		state
 	} = useContext(UserContext);
 
+	const devAvatar =
+		process.env.NODE_ENV === 'development'
+			? 'https://i.pravatar.cc/300'
+			: avatar;
+	const devKitchenImg =
+		process.env.NODE_ENV === 'development' ? '/kitchen2.jpg' : kitchenImgUrl;
+
 	const timeOutMessage = (message = 'Message Here', timeout = 3000) => {
 		setMsg(message);
 		setTimeout(() => {
@@ -150,7 +157,7 @@ export default function PrepperCard({
 						>
 							<Image
 								style={{ objectFit: 'fill', borderRadius: '50%' }}
-								src={avatar}
+								src={devAvatar}
 								width={37}
 								height={37}
 								alt={`avatar for ${name}`}
@@ -172,7 +179,7 @@ export default function PrepperCard({
 				<CardMedia
 					component="img"
 					height="194"
-					image={kitchenImgUrl}
+					image={devKitchenImg}
 					alt={name}
 				/>
 				<CardContent>
