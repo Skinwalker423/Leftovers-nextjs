@@ -50,6 +50,11 @@ export default function FoodItemCard({
 	const isItemFromDifferentPrepper =
 		state.userCartlist.length > 0 && currentCartItemsPrepper !== prepperEmail;
 
+	const devMealImg =
+		process.env.NODE_ENV === 'development'
+			? '/images/cooking/defaultMeal.jpg'
+			: defaultMealImg;
+
 	const meal = {
 		id,
 		price,
@@ -90,7 +95,7 @@ export default function FoodItemCard({
 			>
 				<CardMedia
 					sx={{ height: '40%', width: 'auto' }}
-					image={defaultMealImg}
+					image={devMealImg}
 					title={foodItem}
 				/>
 				<Stack sx={{ height: '55%' }} justifyContent="space-between">
