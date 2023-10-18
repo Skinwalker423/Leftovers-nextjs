@@ -1,3 +1,4 @@
+//add isPrepper to session by using current user email
 //show errorAlert message on favorites
 //add a sign in prepper page for the hours open
 //populate favorite preppers when Object Ids are replaced

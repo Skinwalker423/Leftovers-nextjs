@@ -55,8 +55,6 @@ export default function FoodItemCard({
 			? '/images/cooking/defaultMeal.jpg'
 			: defaultMealImg;
 
-	console.log('devmeal pic', process.env.DEVELOPMENT_MODE);
-
 	const meal = {
 		id,
 		price,

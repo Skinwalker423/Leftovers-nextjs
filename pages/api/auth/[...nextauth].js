@@ -104,12 +104,16 @@ export const authOptions = {
 				const newUser = new User(userDetails);
 				//populate favorite preppers when Object Ids are replaced
 				await newUser.save();
+
 				session.user.id = newUser?._id.toString();
 				session.user.favorites = [];
 			} else {
+				const isPrepper = await Prepper.findOne({ email: foundUser.email });
+				console.log('foundPrepper', isPrepper);
 				session.user.id = foundUser._id.toString();
 				session.user.defaultZipcode = foundUser.defaultZipcode;
 				session.user.favorites = foundUser?.favorites || [];
+				session.user.isPrepper = !!isPrepper;
 			}
 
 			session.accessToken = token.accessToken;
