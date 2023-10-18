@@ -56,7 +56,7 @@ const signin = () => {
 			<Box
 				width={{ xs: '85%', sm: '70%', md: '90%' }}
 				display={'flex'}
-				height={{ xs: '95vh', md: '100vh' }}
+				height={'100%'}
 				justifyContent="space-around"
 				alignItems={'center'}
 				sx={{
@@ -79,7 +79,7 @@ const signin = () => {
 				>
 					<Box
 						width={'100%'}
-						bgcolor={colors.orangeAccent[800]}
+						bgcolor={colors.orangeAccent[400]}
 						height={dividerResponse === 'row' ? '1px' : '20em'}
 					/>
 					<Typography color={'primary'} variant="h4">
@@ -87,7 +87,7 @@ const signin = () => {
 					</Typography>
 					<Box
 						width={'100%'}
-						bgcolor={colors.orangeAccent[800]}
+						bgcolor={colors.orangeAccent[400]}
 						height={dividerResponse === 'row' ? '1px' : '20em'}
 					/>
 				</Box>

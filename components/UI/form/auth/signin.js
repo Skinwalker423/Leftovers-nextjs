@@ -78,12 +78,13 @@ const SignIn = () => {
 					md: '45%'
 				},
 				height: {
-					xs: '45vh',
+					xs: '100%',
 					md: '50vh'
 				},
 
 				px: { xs: 3, sm: 5, lg: 15 },
 				py: { xs: 3 },
+				mt: { xs: 5, sm: 0 },
 				boxShadow: 5,
 				border: `2px solid ${colors.orangeAccent[900]}`,
 
