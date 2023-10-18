@@ -31,6 +31,7 @@ export default function CollapsedNavMenu() {
 	};
 
 	console.log('session in collapsed menu', session);
+	const isPrepper = session?.user?.isPrepper;
 
 	return (
 		<div>
@@ -103,25 +104,27 @@ export default function CollapsedNavMenu() {
 						<Typography fontSize={'large'}>About</Typography>
 					</MenuItem>
 				</Link>
-
-				<Link className={styles.link} href={'/register'}>
-					<MenuItem
-						sx={{ color: colors.orangeAccent[900], gap: 2 }}
-						onClick={handleClose}
-					>
-						<HowToRegIcon fontSize={'large'} />
-						<Typography fontSize={'large'}>Register</Typography>
-					</MenuItem>
-				</Link>
-				<Link className={styles.link} href={'/myKitchen'}>
-					<MenuItem
-						sx={{ color: colors.orangeAccent[900], gap: 2 }}
-						onClick={handleClose}
-					>
-						<FoodBankOutlinedIcon fontSize={'large'} />
-						<Typography fontSize={'large'}>MyKitchen</Typography>
-					</MenuItem>
-				</Link>
+				{!isPrepper ? (
+					<Link className={styles.link} href={'/register'}>
+						<MenuItem
+							sx={{ color: colors.orangeAccent[900], gap: 2 }}
+							onClick={handleClose}
+						>
+							<HowToRegIcon fontSize={'large'} />
+							<Typography fontSize={'large'}>Register</Typography>
+						</MenuItem>
+					</Link>
+				) : (
+					<Link className={styles.link} href={'/myKitchen'}>
+						<MenuItem
+							sx={{ color: colors.orangeAccent[900], gap: 2 }}
+							onClick={handleClose}
+						>
+							<FoodBankOutlinedIcon fontSize={'large'} />
+							<Typography fontSize={'large'}>MyKitchen</Typography>
+						</MenuItem>
+					</Link>
+				)}
 			</Menu>
 		</div>
 	);
