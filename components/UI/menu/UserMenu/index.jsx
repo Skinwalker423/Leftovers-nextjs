@@ -15,6 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import LogoutIcon from '@mui/icons-material/Logout';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 
 const UserMenu = ({ setShowUserMenu }) => {
 	const { colors } = useColors();
@@ -26,7 +27,7 @@ const UserMenu = ({ setShowUserMenu }) => {
 
 	const userIcon = session?.user?.image;
 	const userEmail = session?.user?.email;
-	const userName = session?.user?.name;
+	const isPrepper = session?.user?.isPrepper;
 
 	const handleSignOut = () => {
 		signOut();
@@ -47,10 +48,16 @@ const UserMenu = ({ setShowUserMenu }) => {
 			label: 'My Orders',
 			href: '/myorders',
 			icon: <RestaurantIcon fontSize="large" color="secondary" />
+		},
+		{
+			label: 'My Kitchen',
+			href: '/myKitchen',
+			icon: <FoodBankOutlinedIcon fontSize="large" color="secondary" />
 		}
 	];
 
 	const linkList = linkListConfig.map(({ label, href, icon }) => {
+		if (label === 'My Kitchen' && !isPrepper) return;
 		return (
 			<Link
 				onClick={() => setShowUserMenu(false)}
