@@ -32,6 +32,7 @@ const NavBar = () => {
 	const { data: session } = useSession();
 	const userEmail = session?.user?.email;
 	const userIcon = session?.user?.image;
+	const isPrepper = session?.user?.isPrepper;
 
 	const { colors, palette } = useColors();
 	const { toggleColorMode } = useContext(ColorModeContext);
@@ -139,9 +140,11 @@ const NavBar = () => {
 								{session && <NavItem title="Favs" href="/favorites" />}
 								<NavItem title="About" href="/about" />
 
-								{session && <NavItem title="MyKitchen" href="/myKitchen" />}
-
-								<NavItem title="Register" href="/register" />
+								{isPrepper ? (
+									<NavItem title="MyKitchen" href="/myKitchen" />
+								) : (
+									<NavItem title="Register" href="/register" />
+								)}
 							</ul>
 						</nav>
 					</Box>
