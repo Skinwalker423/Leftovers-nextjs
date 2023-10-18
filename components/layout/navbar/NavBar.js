@@ -44,7 +44,11 @@ const NavBar = () => {
 
 	useEffect(() => {
 		const closeUserModal = (e) => {
-			if (userMenuIconRef.current.contains(e.target)) return;
+			if (
+				userMenuIconRef?.current &&
+				userMenuIconRef.current.contains(e.target)
+			)
+				return;
 			if (showUserMenu && userMenuRef.current) {
 				if (!userMenuRef.current.contains(e.target)) {
 					setShowUserMenu(false);

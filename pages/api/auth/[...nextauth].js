@@ -109,7 +109,6 @@ export const authOptions = {
 				session.user.favorites = [];
 			} else {
 				const isPrepper = await Prepper.findOne({ email: foundUser.email });
-				console.log('foundPrepper', isPrepper);
 				session.user.id = foundUser._id.toString();
 				session.user.defaultZipcode = foundUser.defaultZipcode;
 				session.user.favorites = foundUser?.favorites || [];
