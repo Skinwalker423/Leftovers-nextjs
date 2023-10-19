@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
-import RegistrationForm from '../components/UI/form/registration/registrationForm';
 import MyKitchenForm from '../components/UI/form/mykitchen/myKitchenForm';
 import SuccessAlert from '../components/UI/alert/successAlert';
 import ErrorAlert from '../components/UI/alert/ErrorAlert';
@@ -93,20 +91,7 @@ const Register = ({ userSession, error }) => {
 					setMsg={setMsg}
 				/>
 			)}
-			{/* {userSession ? (
-				<MyKitchenForm
-					title={'Prepper Registration'}
-					sessionEmail={!userSession ? null : userSession.email}
-					setErrorMsg={setErrorMsg}
-					setMsg={setMsg}
-				/>
-			) : (
-				<RegistrationForm
-					setErrorMsg={setErrorMsg}
-					setMsg={setMsg}
-					title={'Prepper Registration'}
-				/>
-			)} */}
+
 			{msg && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			{errorMsg && <ErrorAlert error={errorMsg} setError={setErrorMsg} />}
 		</Box>

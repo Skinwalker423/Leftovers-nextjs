@@ -67,11 +67,11 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<Typography textAlign={'center'} color={'secondary'} variant="h1">
 					Favorites
 				</Typography>
-				{!favoriteList.length && (
+				{/* {!favoriteList.length && (
 					<Alert sx={{ mt: '2em' }} color="warning">
 						<Typography variant="h1">No Favorites added</Typography>
 					</Alert>
-				)}
+				)} */}
 				<Box
 					width={'100%'}
 					height={'100%'}
@@ -81,7 +81,7 @@ const Favorites = ({ favoriteList, userSession }) => {
 					flexWrap={'wrap'}
 					justifyContent={'center'}
 				>
-					{state.favorites.length > 0 ? (
+					{count > 0 ? (
 						<Box display={'flex'} flexDirection={'column'}>
 							<Box
 								display="flex"
