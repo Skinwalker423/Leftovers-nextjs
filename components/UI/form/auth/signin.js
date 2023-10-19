@@ -4,7 +4,6 @@ import {
 	Paper,
 	Typography,
 	Button,
-	Divider,
 	TextField,
 	CircularProgress,
 	Alert
@@ -55,8 +54,6 @@ const SignIn = () => {
 				...data,
 				redirect: false
 			});
-
-			console.log('response from bad sign in', res);
 
 			if (!res.error) {
 				router.push('/');
