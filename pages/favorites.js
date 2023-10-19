@@ -63,15 +63,10 @@ const Favorites = ({ favoriteList, userSession }) => {
 				<title>Favorites</title>
 				<meta name="description" content="Your favorite preppers" />
 			</Head>
-			<Box position={'relative'} top={{ xs: 100, md: -50 }}>
+			<Box py={3}>
 				<Typography textAlign={'center'} color={'secondary'} variant="h1">
 					Favorites
 				</Typography>
-				{/* {!favoriteList.length && (
-					<Alert sx={{ mt: '2em' }} color="warning">
-						<Typography variant="h1">No Favorites added</Typography>
-					</Alert>
-				)} */}
 				<Box
 					width={'100%'}
 					height={'100%'}
@@ -126,11 +121,12 @@ const Favorites = ({ favoriteList, userSession }) => {
 							display={'flex'}
 							justifyContent={'center'}
 							alignItems={'center'}
+							px={2}
 						>
 							<Alert
 								severity="error"
 								sx={{
-									width: '50%'
+									width: { xs: '100%', sm: '75%', lg: '50%' }
 								}}
 							>
 								<Typography textAlign={'center'} variant="h2">
