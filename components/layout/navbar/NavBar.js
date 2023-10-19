@@ -66,6 +66,7 @@ const NavBar = () => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const mediumMatches = useMediaQuery(theme.breakpoints.down('md'));
+	const largeMatches = useMediaQuery(theme.breakpoints.down('lg'));
 
 	const cartItemsLength = state.userCartlist.length;
 
@@ -149,9 +150,7 @@ const NavBar = () => {
 						</nav>
 					</Box>
 					{session && <UpdateDefaultZipcodeForm />}
-					<Box display={{ lg: 'none' }}>
-						<CollapsedNavMenu />
-					</Box>
+					{largeMatches && <CollapsedNavMenu />}
 
 					<Tooltip title="darkmode">
 						<Box>

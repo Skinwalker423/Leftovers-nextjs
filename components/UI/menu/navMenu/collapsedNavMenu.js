@@ -30,7 +30,6 @@ export default function CollapsedNavMenu() {
 		setAnchorEl(null);
 	};
 
-	console.log('session in collapsed menu', session);
 	const isPrepper = session?.user?.isPrepper;
 
 	return (
