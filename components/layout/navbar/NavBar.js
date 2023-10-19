@@ -66,7 +66,7 @@ const NavBar = () => {
 	const theme = useTheme();
 	const matches = useMediaQuery(theme.breakpoints.down('sm'));
 	const mediumMatches = useMediaQuery(theme.breakpoints.down('md'));
-	const largeMatches = useMediaQuery(theme.breakpoints.down('lg'));
+	const largeMatches = useMediaQuery(theme.breakpoints.down('md'));
 
 	const cartItemsLength = state.userCartlist.length;
 
@@ -133,24 +133,27 @@ const NavBar = () => {
 				</Link>
 
 				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>
-					<Box display={{ xs: 'none', lg: 'unset' }}>
-						<nav style={{ width: '100%' }}>
-							<ul className={styles.linkListContainer}>
-								<NavItem title="Home" href="/" />
-								<NavItem title="Preppers" href="/preppers" />
-								{session && <NavItem title="Favs" href="/favorites" />}
-								<NavItem title="About" href="/about" />
+					{largeMatches ? (
+						<CollapsedNavMenu />
+					) : (
+						<Box>
+							<nav style={{ width: '100%' }}>
+								<ul className={styles.linkListContainer}>
+									<NavItem title="Home" href="/" />
+									<NavItem title="Preppers" href="/preppers" />
+									{session && <NavItem title="Favs" href="/favorites" />}
+									<NavItem title="About" href="/about" />
 
-								{isPrepper ? (
-									<NavItem title="MyKitchen" href="/myKitchen" />
-								) : (
-									<NavItem title="Register" href="/register" />
-								)}
-							</ul>
-						</nav>
-					</Box>
+									{isPrepper ? (
+										<NavItem title="MyKitchen" href="/myKitchen" />
+									) : (
+										<NavItem title="Register" href="/register" />
+									)}
+								</ul>
+							</nav>
+						</Box>
+					)}
 					{session && <UpdateDefaultZipcodeForm />}
-					{largeMatches && <CollapsedNavMenu />}
 
 					<Tooltip title="darkmode">
 						<Box>
