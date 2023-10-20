@@ -28,10 +28,6 @@ const UpdateDefaultZipcodeForm = () => {
 
 	const router = useRouter();
 
-	const currentPath = router.pathname;
-
-	console.log('current path', currentPath);
-
 	const { setDefaultZipcode, state } = useUserContext();
 	const { data: session } = useSession();
 
@@ -62,7 +58,6 @@ const UpdateDefaultZipcodeForm = () => {
 	const handleUpdateZipcodeForm = async (e) => {
 		e.preventDefault();
 		setIsFormLoading(true);
-		console.log('session user id after submitting form', sessionUserId);
 		const isValidZip = isValidZipCode(zipcode);
 
 		if (!isValidZip) {
