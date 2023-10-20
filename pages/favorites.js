@@ -1,10 +1,9 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import FavoriteList from '../components/prepperLists/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
 import { Alert, Box, Pagination, Typography } from '@mui/material';
 import { UserContext } from '../store/UserContext';
-
 import {
 	connectMongoDb,
 	findExistingUserEmail
@@ -12,7 +11,8 @@ import {
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import PrepperCard from '../components/Card/prepperCard';
-import { useState } from 'react';
+import SuccessAlert from '../components/UI/alert/successAlert';
+import ErrorAlert from '../components/UI/alert/ErrorAlert';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -137,6 +137,10 @@ const Favorites = ({ favoriteList, userSession }) => {
 					)}
 				</Box>
 			</Box>
+			{msg.length && <SuccessAlert msg={msg} setMsg={setMsg} />}
+			{errorMsg.length && (
+				<ErrorAlert setError={setErrorMsg} error={errorMsg} />
+			)}
 		</Box>
 	);
 };
