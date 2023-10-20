@@ -16,6 +16,7 @@ import { useUserContext } from '../../../../hooks/useUserContext';
 import { isValidZipCode } from '../../../../utils/form-validation';
 import { useSession } from 'next-auth/react';
 import { fetchUpdateUserZipcode } from '../../../../utils/users';
+import { useRouter } from 'next/router';
 
 const UpdateDefaultZipcodeForm = () => {
 	const [open, setOpen] = useState(false);
@@ -24,6 +25,12 @@ const UpdateDefaultZipcodeForm = () => {
 	const { colors } = useColors();
 	const [zipcode, setZipcode] = useState('');
 	const [msg, setMsg] = useState('');
+
+	const router = useRouter();
+
+	const currentPath = router.pathname;
+
+	console.log('current path', currentPath);
 
 	const { setDefaultZipcode, state } = useUserContext();
 	const { data: session } = useSession();
@@ -72,6 +79,7 @@ const UpdateDefaultZipcodeForm = () => {
 				setMsg(response.message);
 				handleClose();
 				setIsFormLoading(false);
+				router.reload();
 			} else {
 				setIsFormLoading(false);
 				setError('problem with the request');
