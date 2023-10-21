@@ -1,6 +1,8 @@
 import React from 'react';
 import { useColors } from '../../hooks/useColors';
-import { Box, Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
 import AboutNavLink from '../UI/button/aboutNavLink';
 
 const AboutBanner = ({

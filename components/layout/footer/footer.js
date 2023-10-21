@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Box, Container } from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
 import { useColors } from '../../../hooks/useColors';
 import Copyright from './copyright';
 import ProfessionalIconList from './ProfessionalIconList';

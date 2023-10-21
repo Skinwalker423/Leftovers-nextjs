@@ -1,10 +1,8 @@
-import React from 'react';
 import Head from 'next/head';
 import Footer from '../../components/layout/footer/footer';
 import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import PrivacyStatement from '../../components/about/policies/privacyStatement';
-import { useColors } from '../../hooks/useColors';
 import AboutBanner from '../../components/about/AboutBanner';
 
 export async function getStaticProps() {
@@ -14,7 +12,6 @@ export async function getStaticProps() {
 }
 
 const PrivacyPolicy = () => {
-	const { colors } = useColors();
 	return (
 		<Box width={'100%'}>
 			<Head>

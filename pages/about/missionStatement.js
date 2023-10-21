@@ -1,11 +1,9 @@
-import React from 'react';
 import Head from 'next/head';
 import Footer from '../../components/layout/footer/footer';
 import styles from '../../styles/Home.module.css';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PromoSection from '../../components/landingPagePromos/promoSection';
-import { useColors } from '../../hooks/useColors';
 import AboutBanner from '../../components/about/AboutBanner';
 
 export async function getStaticProps() {
@@ -15,7 +13,6 @@ export async function getStaticProps() {
 }
 
 const missionStatement = () => {
-	const { colors } = useColors();
 	return (
 		<Box width={'100%'}>
 			<Head>
