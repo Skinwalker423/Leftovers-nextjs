@@ -1,5 +1,4 @@
 import React, { useEffect, useContext, useState } from 'react';
-import FavoriteList from '../components/prepperLists/favoriteList';
 import fetchFavoritePreppers from '../utils/fetchFavoritePreppers';
 import Head from 'next/head';
 import { Alert, Box, Pagination, Typography } from '@mui/material';
