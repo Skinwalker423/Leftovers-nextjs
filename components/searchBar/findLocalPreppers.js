@@ -1,5 +1,8 @@
 import React from 'react';
-import { Box, FormControl, IconButton, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { useColors } from '../../hooks/useColors';
