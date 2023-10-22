@@ -166,7 +166,6 @@ export default function Home({
 			<Box>
 				<LandingHeader
 					title="Welcome to Leftovers!"
-					img="/ball-park.jpg"
 					handleZipChange={handleZipChange}
 					handleZipSearchForm={handleZipSearchForm}
 					errorMsg={errorMsg}

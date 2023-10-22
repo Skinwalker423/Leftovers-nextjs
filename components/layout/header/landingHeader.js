@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Stack from '@mui/material/Stack';
 import { useColors } from '../../../hooks/useColors';
 import FindLocalPreppersSearchBar from '../../searchBar/findLocalPreppers';
+import headerImg from '../../../public/ball-park.jpg';
 
 const LandingHeader = ({
 	title = 'Header goes here',
-	img = '/art.jpg',
 	handleZipChange,
 	handleZipSearchForm,
 	errorMsg,
@@ -20,7 +20,7 @@ const LandingHeader = ({
 			<Image
 				priority={true}
 				fill
-				src={img}
+				src={headerImg}
 				alt="landing page image of various popular American foods"
 			/>
 			<Stack
