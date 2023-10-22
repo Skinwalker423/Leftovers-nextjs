@@ -8,6 +8,7 @@ import {
 	useMediaQuery
 } from '@mui/material';
 import Image from 'next/image';
+import logo from '../../../public/icons8-connect.svg';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useColors } from '../../../hooks/useColors';
@@ -115,12 +116,7 @@ const NavBar = () => {
 				px={2}
 			>
 				<Link className={styles.logoText} href={'/'}>
-					<Image
-						src="/icons8-connect.svg"
-						width={50}
-						height={50}
-						alt="Leftovers icon"
-					/>
+					<Image src={logo} width={50} height={50} alt="Leftovers icon" />
 					{!mediumMatches && (
 						<Typography
 							className={styles.logoText}
