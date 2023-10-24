@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Box } from '@mui/material';
+import Image from 'next/image';
+import PrepperCard from '../../components/Card/prepperCard';
+import { mockDataContacts } from '../../db/mockData';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -22,11 +25,19 @@ export default function Directions() {
 			justifyContent={'center'}
 			alignItems={'center'}
 		>
-			<Box height={'200px'} width={'80%'}>
+			<Box
+				display={'flex'}
+				height={'100%'}
+				width={'100%'}
+				px={{ xs: 5, sm: 8, md: 10 }}
+				justifyContent={'center'}
+				alignItems={'flex-start'}
+				mt={10}
+			>
 				<Swiper
 					slidesPerView={1}
 					centeredSlides={false}
-					slidesPerGroupSkip={4}
+					slidesPerGroupSkip={0}
 					grabCursor={true}
 					keyboard={{
 						enabled: true
@@ -35,9 +46,13 @@ export default function Directions() {
 						769: {
 							slidesPerView: 2,
 							slidesPerGroup: 2
+						},
+						1024: {
+							slidesPerView: 3,
+							slidesPerGroup: 3
 						}
 					}}
-					scrollbar={true}
+					scrollbar={false}
 					navigation={true}
 					pagination={{
 						clickable: true
@@ -45,33 +60,13 @@ export default function Directions() {
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
 				>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-001.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-002.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-003.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-004.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-005.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-006.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-007.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-008.jpg" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<img src="https://cdn.magloft.com/github/swiper/images/page-009.jpg" />
-					</SwiperSlide>
+					{mockDataContacts.map(({ id, email, name, favorite }) => {
+						return (
+							<SwiperSlide key={id} title="Test 1">
+								<PrepperCard isFavorited={favorite} />
+							</SwiperSlide>
+						);
+					})}
 				</Swiper>
 			</Box>
 		</Box>
