@@ -52,7 +52,7 @@ export default function Directions() {
 							slidesPerView: 3,
 							slidesPerGroup: 3
 						},
-						1521: {
+						1621: {
 							slidesPerView: 4,
 							slidesPerGroup: 4
 						}
