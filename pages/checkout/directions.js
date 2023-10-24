@@ -47,15 +47,19 @@ export default function Directions() {
 							slidesPerView: 2,
 							slidesPerGroup: 2
 						},
-						1024: {
+
+						1201: {
 							slidesPerView: 3,
 							slidesPerGroup: 3
+						},
+						1521: {
+							slidesPerView: 4,
+							slidesPerGroup: 4
 						}
 					}}
 					scrollbar={false}
-					navigation={true}
-					pagination={{
-						clickable: true
+					navigation={{
+						enabled: true
 					}}
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
