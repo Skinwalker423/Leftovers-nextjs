@@ -4,6 +4,7 @@ import PrepperCard from '../../Card/prepperCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useUserContext } from '../../../hooks/useUserContext';
+import { useColors } from '../../../hooks/useColors';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -23,10 +24,14 @@ export default function CategoriesSlider({
 	setMsg,
 	setErrorMsg,
 	userEmail,
-	title = 'Title Here'
+	title = 'Title Here',
+	themeColor,
+	link = '/'
 }) {
 	const { state } = useUserContext();
 	const swiperRef = useRef();
+	const { colors } = useColors();
+
 	const handleNext = () => {
 		swiperRef.current?.slideNext();
 	};
@@ -41,8 +46,8 @@ export default function CategoriesSlider({
 			display={'flex'}
 			width={'100%'}
 			height={'100%'}
-			justifyContent={'space-evenly'}
 			alignItems={'center'}
+			justifyContent={'center'}
 			flexDirection={'column'}
 		>
 			<Box
@@ -50,18 +55,28 @@ export default function CategoriesSlider({
 				px={{ xs: 6, lg: 20 }}
 				width={'100%'}
 				display={'flex'}
-				justifyContent={'space-between'}
+				justifyContent={'space-around'}
 				alignItems={'center'}
 				flexDirection={{ xs: 'column', sm: 'row' }}
 				gap={{ xs: 2, sm: 0 }}
 			>
-				<Typography variant="h2">{title}</Typography>
+				<Typography
+					sx={{ color: themeColor || colors.primary[100] }}
+					variant="h2"
+				>
+					{title}
+				</Typography>
 				<Box display={'flex'} gap={2} alignItems={'center'}>
 					<Link
 						style={{ textDecoration: 'none', paddingRight: '1rem' }}
-						href={'/'}
+						href={link}
 					>
-						<Typography variant="h3">See All</Typography>
+						<Typography
+							sx={{ color: themeColor || colors.primary[100] }}
+							variant="h3"
+						>
+							See All
+						</Typography>
 					</Link>
 					<IconButton
 						onClick={handlePrev}

@@ -176,27 +176,27 @@ export default function Home({
 
 				{state.searchedPreppers.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
-						<CategoriesSlider list={state.searchedPreppers} />
-						{/* <SearchedList
+						<CategoriesSlider
+							title="Searched Preppers"
 							setMsg={setMsg}
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
-						/> */}
+							list={state.searchedPreppers}
+							themeColor={colors.redAccent[700]}
+						/>
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (
-					<CategoryBanner link="/preppers" bgColor={colors.orangeAccent[700]}>
+					<CategoryBanner bgColor={colors.orangeAccent[700]}>
 						<CategoriesSlider
+							title="Local Preppers"
 							setMsg={setMsg}
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
 							list={state.localPreppers}
+							themeColor={colors.orangeAccent[400]}
+							link="/preppers"
 						/>
-						{/* <LocalPreppersList
-							setMsg={setMsg}
-							setErrorMsg={setErrorMsg}
-							userEmail={userEmail}
-						/> */}
 					</CategoryBanner>
 				)}
 
