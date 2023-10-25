@@ -1,9 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { useColors } from '../../hooks/useColors';
 
 const CategoryBanner = ({ bgColor, children }) => {
-	const { colors } = useColors();
 	return (
 		<Box
 			width={'100%'}

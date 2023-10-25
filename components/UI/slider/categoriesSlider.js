@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import PrepperCard from '../../Card/prepperCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useUserContext } from '../../../hooks/useUserContext';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,6 +25,7 @@ export default function CategoriesSlider({
 	userEmail,
 	title = 'Title Here'
 }) {
+	const { state } = useUserContext();
 	const swiperRef = useRef();
 	const handleNext = () => {
 		swiperRef.current?.slideNext();
@@ -31,6 +33,8 @@ export default function CategoriesSlider({
 	const handlePrev = () => {
 		swiperRef.current?.slidePrev();
 	};
+
+	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
 	return (
 		<Box
@@ -59,8 +63,28 @@ export default function CategoriesSlider({
 					>
 						<Typography variant="h3">See All</Typography>
 					</Link>
-					<ArrowBackIosIcon onClick={handlePrev} />
-					<ArrowForwardIosIcon onClick={handleNext} />
+					<IconButton
+						onClick={handlePrev}
+						size="large"
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
+					>
+						<ArrowBackIosIcon fontSize="large" />
+					</IconButton>
+					<IconButton
+						onClick={handleNext}
+						size="large"
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center'
+						}}
+					>
+						<ArrowForwardIosIcon fontSize="large" />
+					</IconButton>
 				</Box>
 			</Box>
 			<Box
@@ -104,15 +128,74 @@ export default function CategoriesSlider({
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
 				>
-					{list.map(({ id, email, name, favorite }) => {
-						return (
-							<SwiperSlide key={id} title="Test 1">
-								<PrepperCard isFavorited={favorite} />
-							</SwiperSlide>
-						);
-					})}
+					{list.map(
+						({
+							id,
+							description,
+							kitchenTitle,
+							email,
+							kitchenImgUrl,
+							profileImgUrl,
+							mealsServed
+						}) => {
+							const favorited =
+								state.favorites && favoritesPrepId.includes(id) ? true : false;
+							return (
+								<SwiperSlide key={id}>
+									<PrepperCard
+										isFavorited={favorited}
+										name={kitchenTitle}
+										avatar={profileImgUrl || avatar}
+										id={id}
+										key={id}
+										description={description}
+										userEmail={userEmail}
+										setMsg={setMsg}
+										setErrorMsg={setErrorMsg}
+										kitchenImgUrl={kitchenImgUrl}
+										mealsServed={mealsServed}
+										email={email}
+									/>
+								</SwiperSlide>
+							);
+						}
+					)}
 				</Swiper>
 			</Box>
 		</Box>
 	);
 }
+
+// const preppers = slicedPreppers.map(
+// 	({
+// 		id,
+// 		description,
+// 		kitchenTitle,
+// 		email,
+// 		kitchenImgUrl,
+// 		profileImgUrl,
+// 		mealsServed
+// 	}) => {
+// 		const favorited =
+// 			state.favorites && favoritesPrepId.includes(id) ? true : false;
+
+// 		const avatar = 'https://i.pravatar.cc/300';
+// 		if (email !== userEmail) {
+// 			return (
+// 				<PrepperCard
+// 					isFavorited={favorited}
+// 					name={kitchenTitle}
+// 					avatar={profileImgUrl || avatar}
+// 					id={id}
+// 					key={id}
+// 					description={description}
+// 					userEmail={userEmail}
+// 					setMsg={setMsg}
+// 					setErrorMsg={setErrorMsg}
+// 					kitchenImgUrl={kitchenImgUrl}
+// 					mealsServed={mealsServed}
+// 				/>
+// 			);
+// 		}
+// 	}
+// );
