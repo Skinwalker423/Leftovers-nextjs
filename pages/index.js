@@ -30,6 +30,7 @@ import FavoriteList from '../components/prepperLists/favoriteList';
 import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
 import SearchedList from '../components/prepperLists/searchedList';
 import CategoryCarousel from '../components/category/categoryCarousel';
+import CategoriesSlider from '../components/UI/slider/categoriesSlider';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -175,11 +176,12 @@ export default function Home({
 
 				{state.searchedPreppers.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
-						<SearchedList
+						<CategoriesSlider list={state.searchedPreppers} />
+						{/* <SearchedList
 							setMsg={setMsg}
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
-						/>
+						/> */}
 					</CategoryBanner>
 				)}
 				{state.localPreppers.length !== 0 && (

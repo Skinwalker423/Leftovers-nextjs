@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Box } from '@mui/material';
-import PrepperCard from '../../components/Card/prepperCard';
-import { mockDataContacts } from '../../db/mockData';
+import { Box, Typography } from '@mui/material';
+import PrepperCard from '../../Card/prepperCard';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,14 +17,34 @@ import 'swiper/css/pagination';
 import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
 
 export default function CategoriesSlider({ list }) {
+	const swiperRef = useRef();
+	const handleNext = () => {
+		swiperRef.current?.slideNext();
+	};
+	const handlePrev = () => {
+		swiperRef.current?.slidePrev();
+	};
+
 	return (
 		<Box
 			display={'flex'}
 			width={'100%'}
-			height={'100vh'}
+			height={'100%'}
 			justifyContent={'center'}
 			alignItems={'center'}
+			flexDirection={'column'}
 		>
+			<Box display={'flex'} justifyContent={'space-between'}>
+				<Typography>Title Here</Typography>
+				<Box>
+					<div onClick={handlePrev} className="backArrow">
+						<ArrowBackIosIcon />
+					</div>
+					<div onClick={handleNext} className="nextArrow">
+						<ArrowForwardIosIcon />
+					</div>
+				</Box>
+			</Box>
 			<Box
 				display={'flex'}
 				height={'100%'}
@@ -34,6 +55,9 @@ export default function CategoriesSlider({ list }) {
 				mt={10}
 			>
 				<Swiper
+					onBeforeInit={(swiper) => {
+						swiperRef.current = swiper;
+					}}
 					slidesPerView={1}
 					centeredSlides={false}
 					slidesPerGroupSkip={0}
@@ -58,12 +82,12 @@ export default function CategoriesSlider({ list }) {
 					}}
 					scrollbar={false}
 					navigation={{
-						enabled: true
+						enabled: false
 					}}
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
 				>
-					{mockDataContacts.map(({ id, email, name, favorite }) => {
+					{list.map(({ id, email, name, favorite }) => {
 						return (
 							<SwiperSlide key={id} title="Test 1">
 								<PrepperCard isFavorited={favorite} />
