@@ -15,8 +15,15 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules';
+import Link from 'next/link';
 
-export default function CategoriesSlider({ list }) {
+export default function CategoriesSlider({
+	list,
+	setMsg,
+	setErrorMsg,
+	userEmail,
+	title = 'Title Here'
+}) {
 	const swiperRef = useRef();
 	const handleNext = () => {
 		swiperRef.current?.slideNext();
@@ -30,29 +37,39 @@ export default function CategoriesSlider({ list }) {
 			display={'flex'}
 			width={'100%'}
 			height={'100%'}
-			justifyContent={'center'}
+			justifyContent={'space-evenly'}
 			alignItems={'center'}
 			flexDirection={'column'}
 		>
-			<Box display={'flex'} justifyContent={'space-between'}>
-				<Typography>Title Here</Typography>
-				<Box>
-					<div onClick={handlePrev} className="backArrow">
-						<ArrowBackIosIcon />
-					</div>
-					<div onClick={handleNext} className="nextArrow">
-						<ArrowForwardIosIcon />
-					</div>
+			<Box
+				pb={3}
+				px={{ xs: 6, lg: 20 }}
+				width={'100%'}
+				display={'flex'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+				flexDirection={{ xs: 'column', sm: 'row' }}
+				gap={{ xs: 2, sm: 0 }}
+			>
+				<Typography variant="h2">{title}</Typography>
+				<Box display={'flex'} gap={2} alignItems={'center'}>
+					<Link
+						style={{ textDecoration: 'none', paddingRight: '1rem' }}
+						href={'/'}
+					>
+						<Typography variant="h3">See All</Typography>
+					</Link>
+					<ArrowBackIosIcon onClick={handlePrev} />
+					<ArrowForwardIosIcon onClick={handleNext} />
 				</Box>
 			</Box>
 			<Box
 				display={'flex'}
 				height={'100%'}
 				width={'100%'}
-				px={{ xs: 5, sm: 8, md: 10 }}
 				justifyContent={'center'}
 				alignItems={'flex-start'}
-				mt={10}
+				px={{ xs: 5, sm: 8, md: 10 }}
 			>
 				<Swiper
 					onBeforeInit={(swiper) => {

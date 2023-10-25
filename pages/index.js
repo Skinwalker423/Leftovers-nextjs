@@ -186,11 +186,17 @@ export default function Home({
 				)}
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner link="/preppers" bgColor={colors.orangeAccent[700]}>
-						<LocalPreppersList
+						<CategoriesSlider
 							setMsg={setMsg}
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
+							list={state.localPreppers}
 						/>
+						{/* <LocalPreppersList
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+						/> */}
 					</CategoryBanner>
 				)}
 
