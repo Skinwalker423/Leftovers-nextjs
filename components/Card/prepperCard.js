@@ -81,7 +81,10 @@ export default function PrepperCard({
 		name,
 		email,
 		description,
-		kitchenImgUrl
+		kitchenImgUrl: devKitchenImg,
+		profileImgUrl: devAvatar,
+		mealsServed,
+		kitchenTitle: name
 	};
 
 	async function handleAddFavBtn() {

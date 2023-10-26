@@ -41,7 +41,7 @@ export default function CategoriesSlider({
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
 
-	console.log('state inside slider', list);
+	if (!list.length) return;
 
 	return (
 		<Box
@@ -134,8 +134,8 @@ export default function CategoriesSlider({
 							slidesPerGroup: 3
 						},
 						1621: {
-							slidesPerView: 4,
-							slidesPerGroup: 4
+							slidesPerView: list.length < 4 ? list.length : 4,
+							slidesPerGroup: list.length < 4 ? list.length : 4
 						}
 					}}
 					scrollbar={false}
