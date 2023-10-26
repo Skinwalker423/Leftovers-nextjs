@@ -63,7 +63,7 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 	);
 
 	return (
-		<Box display={'flex'} flexDirection={'column'}>
+		<Box width={'100%'} display={'flex'} flexDirection={'column'}>
 			<CategoryPaginationHeader
 				title="$5 Meals"
 				color={colors.greenAccent[700]}
@@ -73,11 +73,13 @@ const ValueMealList = ({ userEmail, setMsg }) => {
 				resultsPerPage={3}
 			/>
 			<Box
+				width={'100%'}
 				sx={{ overflowX: { xs: 'hidden' }, overflowY: 'hidden' }}
 				display={'flex'}
-				justifyContent={'center'}
+				justifyContent={'space-between'}
 				alignItems={'center'}
-				flexWrap={{ xs: 'unset', sm: 'wrap', md: 'unset' }}
+				flexWrap={{ xs: 'unset', sm: 'wrap', md: 'nowrap' }}
+				gap={10}
 			>
 				{list.length > 0 && list}
 			</Box>

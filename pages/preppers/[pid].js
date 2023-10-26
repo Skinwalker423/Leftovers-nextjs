@@ -183,7 +183,9 @@ const Prepper = ({ prepper }) => {
 					height="100%"
 					justifyContent={'center'}
 					alignItems={'center'}
-					width={{ xs: '100%', lg: '70%' }}
+					width={'100%'}
+					gap={5}
+					py={5}
 				>
 					{meals.map(({ price, image, description, title, id, qty = 1 }) => {
 						return (

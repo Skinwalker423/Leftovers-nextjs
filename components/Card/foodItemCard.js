@@ -84,12 +84,11 @@ export default function FoodItemCard({
 	};
 
 	return (
-		<motion.div whileHover={{ scale: 1.1 }}>
+		<motion.div whileHover={{ scale: 1.02 }}>
 			<Card
 				sx={{
 					width: { xs: 325, lg: 375 },
 					height: '25rem',
-					m: '2rem',
 					backgroundColor: colors.primary[400]
 				}}
 			>
