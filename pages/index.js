@@ -31,6 +31,7 @@ import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
 import SearchedList from '../components/prepperLists/searchedList';
 import CategoryCarousel from '../components/category/categoryCarousel';
 import CategoriesSlider from '../components/UI/slider/categoriesSlider';
+import MealsSlider from '../components/UI/slider/mealsSlider';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -204,7 +205,16 @@ export default function Home({
 
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner bgColor={colors.greenAccent[700]}>
-						<ValueMealList userEmail={userEmail} setMsg={setMsg} />
+						<MealsSlider
+							title="Value Meals"
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+							list={state.localPreppers}
+							themeColor={colors.blueAccent[700]}
+							link="/favorites"
+						/>
+						{/* <ValueMealList userEmail={userEmail} setMsg={setMsg} /> */}
 					</CategoryBanner>
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (
@@ -218,11 +228,6 @@ export default function Home({
 							themeColor={colors.blueAccent[700]}
 							link="/favorites"
 						/>
-						{/* <FavoriteList
-							setErrorMsg={setErrorMsg}
-							setMsg={setMsg}
-							userEmail={userEmail}
-						/> */}
 					</CategoryBanner>
 				)}
 				{!session && !foundSession && (
