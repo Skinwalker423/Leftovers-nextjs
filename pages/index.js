@@ -88,6 +88,8 @@ export default function Home({
 	const userEmail = foundSession?.email || session?.user?.email;
 	const defaultZipcode = foundSession?.defaultZipcode;
 
+	console.log('local preps', state.localPreppers);
+
 	useEffect(() => {
 		if (favoriteList) {
 			setFavoritesList(favoriteList);
@@ -207,11 +209,20 @@ export default function Home({
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (
 					<CategoryBanner bgColor={colors.blueAccent[700]}>
-						<FavoriteList
+						<CategoriesSlider
+							title="Favorites"
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+							list={state.favorites}
+							themeColor={colors.blueAccent[700]}
+							link="/favorites"
+						/>
+						{/* <FavoriteList
 							setErrorMsg={setErrorMsg}
 							setMsg={setMsg}
 							userEmail={userEmail}
-						/>
+						/> */}
 					</CategoryBanner>
 				)}
 				{!session && !foundSession && (

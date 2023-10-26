@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import PrepperCard from '../../Card/prepperCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -40,6 +40,8 @@ export default function CategoriesSlider({
 	};
 
 	const favoritesPrepId = state.favorites.map(({ id }) => id);
+
+	console.log('state inside slider', list);
 
 	return (
 		<Box
@@ -153,6 +155,7 @@ export default function CategoriesSlider({
 							profileImgUrl,
 							mealsServed
 						}) => {
+							console.log('title', kitchenTitle);
 							const favorited =
 								state.favorites && favoritesPrepId.includes(id) ? true : false;
 							return (
@@ -160,7 +163,7 @@ export default function CategoriesSlider({
 									<PrepperCard
 										isFavorited={favorited}
 										name={kitchenTitle}
-										avatar={profileImgUrl || avatar}
+										avatar={profileImgUrl}
 										id={id}
 										key={id}
 										description={description}
