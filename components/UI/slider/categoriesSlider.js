@@ -125,13 +125,13 @@ export default function CategoriesSlider({
 					}}
 					breakpoints={{
 						769: {
-							slidesPerView: 2,
-							slidesPerGroup: 2
+							slidesPerView: list.length < 2 ? list.length : 2,
+							slidesPerGroup: list.length < 2 ? list.length : 2
 						},
 
 						1201: {
-							slidesPerView: 3,
-							slidesPerGroup: 3
+							slidesPerView: list.length < 3 ? list.length : 3,
+							slidesPerGroup: list.length < 3 ? list.length : 3
 						},
 						1621: {
 							slidesPerView: list.length < 4 ? list.length : 4,
