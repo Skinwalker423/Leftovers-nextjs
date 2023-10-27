@@ -189,6 +189,18 @@ export default function Home({
 						/>
 					</CategoryBanner>
 				)}
+				{state.searchedPreppers.length > 0 && (
+					<CategoryBanner bgColor={colors.redAccent[700]}>
+						<MealsSlider
+							title="Searched Value Meals"
+							setMsg={setMsg}
+							setErrorMsg={setErrorMsg}
+							userEmail={userEmail}
+							list={state.searchedPreppers}
+							themeColor={colors.redAccent[700]}
+						/>
+					</CategoryBanner>
+				)}
 				{state.localPreppers.length !== 0 && (
 					<CategoryBanner bgColor={colors.orangeAccent[700]}>
 						<CategoriesSlider
@@ -211,10 +223,9 @@ export default function Home({
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
 							list={state.localPreppers}
-							themeColor={colors.blueAccent[700]}
+							themeColor={colors.greenAccent[700]}
 							link="/favorites"
 						/>
-						{/* <ValueMealList userEmail={userEmail} setMsg={setMsg} /> */}
 					</CategoryBanner>
 				)}
 				{state.favorites.length !== 0 && (foundSession || session) && (
