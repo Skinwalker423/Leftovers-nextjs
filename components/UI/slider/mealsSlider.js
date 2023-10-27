@@ -40,7 +40,7 @@ export default function MealsSlider({
 		swiperRef.current?.slidePrev();
 	};
 
-	const favoritesPrepId = state.favorites.map(({ id }) => id);
+	// const favoritesPrepId = state.favorites.map(({ id }) => id);
 
 	if (!list.length) return;
 
@@ -113,6 +113,7 @@ export default function MealsSlider({
 				alignItems={'center'}
 				flexDirection={{ xs: 'column', sm: 'row' }}
 				gap={{ xs: 2, sm: 0 }}
+				pb={3}
 			>
 				<Typography
 					sx={{ color: themeColor || colors.primary[100] }}
@@ -162,6 +163,12 @@ export default function MealsSlider({
 				width={'100%'}
 				justifyContent={'center'}
 				alignItems={'center'}
+				maxWidth={'100%'}
+				maxHeight={'100%'}
+				minHeight={0}
+				minWidth={0}
+				px={{ xs: 0, md: 10 }}
+				pl={{ xs: 5, sm: 0 }}
 			>
 				<Swiper
 					onBeforeInit={(swiper) => {
@@ -176,17 +183,17 @@ export default function MealsSlider({
 					}}
 					breakpoints={{
 						769: {
-							slidesPerView: list.length < 2 ? list.length : 2,
-							slidesPerGroup: list.length < 2 ? list.length : 2
+							slidesPerView: newList.length < 2 ? newList.length : 2,
+							slidesPerGroup: newList.length < 2 ? newList.length : 2
 						},
 
 						1201: {
-							slidesPerView: list.length < 3 ? list.length : 3,
-							slidesPerGroup: list.length < 3 ? list.length : 3
+							slidesPerView: newList.length < 3 ? newList.length : 3,
+							slidesPerGroup: newList.length < 3 ? newList.length : 3
 						},
 						1621: {
-							slidesPerView: list.length < 4 ? list.length : 4,
-							slidesPerGroup: list.length < 4 ? list.length : 4,
+							slidesPerView: newList.length < 4 ? newList.length : 4,
+							slidesPerGroup: newList.length < 4 ? newList.length : 4,
 							spaceBetween: 0
 						}
 					}}
