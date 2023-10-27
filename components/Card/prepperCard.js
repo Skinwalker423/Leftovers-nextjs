@@ -144,7 +144,7 @@ export default function PrepperCard({
 		<motion.div whileHover={{ scale: 1.02 }}>
 			<Card
 				sx={{
-					width: { xs: '20rem', sm: '15rem', md: '17.5rem', lg: '23rem' },
+					width: { xs: '20rem', lg: '23rem' },
 					mx: '.5rem',
 					height: '100%',
 

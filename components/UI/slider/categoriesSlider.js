@@ -109,8 +109,12 @@ export default function CategoriesSlider({
 				height={'100%'}
 				width={'100%'}
 				justifyContent={'center'}
-				alignItems={'flex-start'}
+				alignItems={'center'}
 				px={{ xs: 5, sm: 8, md: 10 }}
+				maxWidth={'100%'}
+				maxHeight={'100%'}
+				minHeight={0}
+				minWidth={0}
 			>
 				<Swiper
 					onBeforeInit={(swiper) => {
@@ -155,7 +159,6 @@ export default function CategoriesSlider({
 							profileImgUrl,
 							mealsServed
 						}) => {
-							console.log('title', kitchenTitle);
 							const favorited =
 								state.favorites && favoritesPrepId.includes(id) ? true : false;
 							return (
@@ -183,37 +186,3 @@ export default function CategoriesSlider({
 		</Box>
 	);
 }
-
-// const preppers = slicedPreppers.map(
-// 	({
-// 		id,
-// 		description,
-// 		kitchenTitle,
-// 		email,
-// 		kitchenImgUrl,
-// 		profileImgUrl,
-// 		mealsServed
-// 	}) => {
-// 		const favorited =
-// 			state.favorites && favoritesPrepId.includes(id) ? true : false;
-
-// 		const avatar = 'https://i.pravatar.cc/300';
-// 		if (email !== userEmail) {
-// 			return (
-// 				<PrepperCard
-// 					isFavorited={favorited}
-// 					name={kitchenTitle}
-// 					avatar={profileImgUrl || avatar}
-// 					id={id}
-// 					key={id}
-// 					description={description}
-// 					userEmail={userEmail}
-// 					setMsg={setMsg}
-// 					setErrorMsg={setErrorMsg}
-// 					kitchenImgUrl={kitchenImgUrl}
-// 					mealsServed={mealsServed}
-// 				/>
-// 			);
-// 		}
-// 	}
-// );
