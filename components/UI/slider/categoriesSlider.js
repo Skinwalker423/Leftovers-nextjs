@@ -117,7 +117,7 @@ export default function CategoriesSlider({
 				minWidth={0}
 			>
 				<Swiper
-					style={{ width: '100%' }}
+					style={{ width: list.length < 3 ? '50%' : '100%' }}
 					onBeforeInit={(swiper) => {
 						swiperRef.current = swiper;
 					}}
