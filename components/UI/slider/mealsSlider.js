@@ -193,8 +193,7 @@ export default function MealsSlider({
 						},
 						1621: {
 							slidesPerView: newList.length < 4 ? newList.length : 4,
-							slidesPerGroup: newList.length < 4 ? newList.length : 4,
-							spaceBetween: 0
+							slidesPerGroup: newList.length < 4 ? newList.length : 4
 						}
 					}}
 					scrollbar={false}
