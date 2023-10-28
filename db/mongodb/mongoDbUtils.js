@@ -6,7 +6,6 @@ import { connectToMongoDb } from './mongoose';
 export async function connectMongoDb() {
 	const uri = `mongodb+srv://skinwalker423:${process.env.MONGO_DB_KEY}@cluster23.nlaxbsz.mongodb.net/leftovers?retryWrites=true&w=majority`;
 	const client = await MongoClient.connect(uri);
-	console.log('client connected');
 	return client;
 }
 export async function addDocToDb(client, collectionArg, doc) {
@@ -162,7 +161,7 @@ export async function findExistingUserEmail(client, email) {
 		if (!document) {
 			return null;
 		}
-		console.log('document', document);
+
 		const formattedDoc = {
 			id: document?._id.toString(),
 			email: document?.email,

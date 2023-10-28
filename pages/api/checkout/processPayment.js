@@ -1,6 +1,6 @@
 import {
 	connectMongoDb,
-	decrementMealQty,
+	decrementMealQty
 } from '../../../db/mongodb/mongoDbUtils';
 
 const processPayment = async (req, res) => {
@@ -8,7 +8,7 @@ const processPayment = async (req, res) => {
 		res.status(400).json({ error: 'Invalid request method' });
 	}
 	const body = req.body;
-	console.log(body);
+
 	const { mealId, email, qty } = body;
 
 	if (!mealId || !email) {
@@ -28,7 +28,6 @@ const processPayment = async (req, res) => {
 		res.status(200).json({ message: 'Successfully updated meal Qty' });
 		return;
 	} catch (err) {
-		console.log('error:', err);
 		res.status(500).json({ error: 'problem updating meal qty in db', err });
 	}
 };

@@ -59,7 +59,7 @@ const Prepper = ({ prepper }) => {
 	const devBannerImg =
 		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
 			? '/art.jpg'
-			: prepper.kitchenImgUrl;
+			: bannerImage;
 
 	useEffect(() => {
 		if (prepper && prepper.meals) {

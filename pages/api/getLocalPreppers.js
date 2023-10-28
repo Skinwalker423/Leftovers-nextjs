@@ -22,7 +22,6 @@ async function getLocalPreppers(req, res) {
 			});
 
 			if (findPreppers.length !== 0) {
-				console.log('found preppers', findPreppers);
 				res.status(200).json(findPreppers);
 			} else {
 				res

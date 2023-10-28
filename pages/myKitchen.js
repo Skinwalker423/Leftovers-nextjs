@@ -122,13 +122,12 @@ const myKitchen = ({ userData, prepper, orders }) => {
 				currentStatus
 			);
 			if (res.error) {
-				console.log('kitchen status updated', res.message);
 				setError(res.error);
 				return;
 			}
 			if (res.message) {
 				setMsg(res.message);
-				console.log('kitchen status updated', res.message);
+
 				setKitchenClosed((prevStatus) => !prevStatus);
 			}
 		} catch (error) {

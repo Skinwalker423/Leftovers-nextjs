@@ -15,7 +15,6 @@ export const useCustomPagination = ({ list }) => {
 
 	useEffect(() => {
 		if (matches) {
-			console.log('1');
 			setResultsPerPage(1);
 			setPag((prevPag) => {
 				return {
@@ -74,9 +73,6 @@ export const useCustomPagination = ({ list }) => {
 						: resultsPerPage
 			};
 		});
-
-		console.log('pag start', pag.start);
-		console.log('pag end', pag.end);
 	};
 
 	return {

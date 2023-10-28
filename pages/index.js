@@ -89,8 +89,6 @@ export default function Home({
 	const userEmail = foundSession?.email || session?.user?.email;
 	const defaultZipcode = foundSession?.defaultZipcode;
 
-	console.log('local preps', state.localPreppers);
-
 	useEffect(() => {
 		if (favoriteList) {
 			setFavoritesList(favoriteList);

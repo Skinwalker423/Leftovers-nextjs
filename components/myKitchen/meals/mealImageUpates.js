@@ -43,7 +43,6 @@ const MealImageUpatesOptions = ({
 					onClientUploadComplete={async (res) => {
 						// Do something with the response
 						const imgUrl = res[0].url;
-						console.log('image url', imgUrl);
 						setMealImage(imgUrl);
 						setSavedMealImages((prevImages) => [...prevImages, imgUrl]);
 						try {

@@ -84,7 +84,6 @@ const Favorites = ({ favoriteList, userSession }) => {
 								flexWrap={'wrap'}
 							>
 								{state.favorites.map((prepper) => {
-									console.log('preppers in favorites', prepper);
 									const avatar = 'https://i.pravatar.cc/300';
 
 									return (

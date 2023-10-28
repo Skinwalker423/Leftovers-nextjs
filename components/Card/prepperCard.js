@@ -89,7 +89,7 @@ export default function PrepperCard({
 
 	async function handleAddFavBtn() {
 		setFavorited(true);
-		console.log('add fav func firing');
+
 		try {
 			const data = await addAndUpdateFavoritePreppers(
 				prepperDetails,

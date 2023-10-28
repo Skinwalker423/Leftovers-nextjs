@@ -38,7 +38,6 @@ export async function getServerSideProps({ req, res, params }) {
 }
 
 const OrderDetails = ({ order, userEmail }) => {
-	console.log('order', order);
 	return (
 		<Box
 			display={'flex'}

@@ -7,7 +7,6 @@ const updateKitchenOpenStatus = async (req, res) => {
 	}
 	const body = req.body;
 	const { status, email } = body;
-	console.log('status', status);
 
 	try {
 		const client = await connectMongoDb();
