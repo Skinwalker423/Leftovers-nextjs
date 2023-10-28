@@ -1,8 +1,8 @@
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import { useColors } from '../../../hooks/useColors';
+import ProfessionalIconList from './professionalIconList';
 import Copyright from './copyright';
-import ProfessionalIconList from './ProfessionalIconList';
 import LogoTitle from './logoTitle';
 
 export default function Footer({ img = '/favicon.ico', title = 'Title' }) {

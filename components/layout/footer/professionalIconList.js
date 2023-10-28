@@ -12,21 +12,23 @@ const ProfessionalIconList = () => {
 	return (
 		<Box
 			display={'flex'}
-			justifyContent='space-evenly'
-			mt='50px'
-			alignItems={'center'}>
+			justifyContent="space-evenly"
+			mt="50px"
+			alignItems={'center'}
+		>
 			<IconLinkItem link={'https://www.facebook.com'}>
-				<FacebookIcon sx={{ color: colors.blueAccent[500] }} fontSize='large' />
+				<FacebookIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
 			</IconLinkItem>
 			<IconLinkItem link={'https://github.com/Skinwalker423'}>
-				<GitHubIcon fontSize='large' />
+				<GitHubIcon fontSize="large" />
 			</IconLinkItem>
 			<IconLinkItem link={'https://twitter.com/artgonzalez423'}>
-				<TwitterIcon sx={{ color: colors.blueAccent[500] }} fontSize='large' />
+				<TwitterIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
 			</IconLinkItem>
 			<IconLinkItem
-				link={'https://www.linkedin.com/in/luis-gonzalez-a33799235/'}>
-				<LinkedInIcon fontSize='large' />
+				link={'https://www.linkedin.com/in/luis-gonzalez-a33799235/'}
+			>
+				<LinkedInIcon fontSize="large" />
 			</IconLinkItem>
 		</Box>
 	);
