@@ -16,7 +16,7 @@ import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
-import useTheme from '@mui/material';
+import { useTheme } from '@mui/material';
 
 export default function CollapsedNavMenu() {
 	const router = useRouter();
