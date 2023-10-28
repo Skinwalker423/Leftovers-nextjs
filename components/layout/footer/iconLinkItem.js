@@ -3,7 +3,7 @@ import { IconButton } from '@mui/material';
 
 const IconLinkItem = ({ children, link }) => {
 	return (
-		<a target='_blank' rel='noopener noreferrer' href={link}>
+		<a target="_blank" rel="noopener noreferrer" href={link}>
 			<IconButton>{children}</IconButton>
 		</a>
 	);

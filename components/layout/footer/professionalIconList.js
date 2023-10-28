@@ -5,7 +5,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import IconLinkItem from './IconLinkItem';
+import IconLinkItem from './iconLinkItem';
 
 const ProfessionalIconList = () => {
 	const { colors } = useColors();

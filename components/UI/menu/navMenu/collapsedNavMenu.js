@@ -16,6 +16,7 @@ import FoodBankOutlinedIcon from '@mui/icons-material/FoodBankOutlined';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import { Typography } from '@mui/material';
 import { useSession } from 'next-auth/react';
+import useTheme from '@mui/material';
 
 export default function CollapsedNavMenu() {
 	const router = useRouter();
@@ -23,6 +24,8 @@ export default function CollapsedNavMenu() {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const { colors } = useColors();
 	const open = Boolean(anchorEl);
+	const theme = useTheme();
+	const matches = useMediaQuery(theme.breakpoints.only('sm'));
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};
