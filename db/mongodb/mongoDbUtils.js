@@ -123,6 +123,19 @@ export async function findExistingPrepperEmail(client, email) {
 			return null;
 		}
 
+		const mappedMeals = document.meals.map((meal) => {
+			return {
+				id: meal.id,
+				title: meal.title,
+				price: meal.price,
+				description: meal.description,
+				image: meal.image,
+				qty: meal.qty,
+				createdAt: meal.createdAt.toString(),
+				last_modified: meal.last_modified.toString()
+			};
+		});
+
 		const formattedDoc = {
 			id: document?._id.toString(),
 			email: document.email,
@@ -132,7 +145,7 @@ export async function findExistingPrepperEmail(client, email) {
 				state: document.location.state,
 				zipcode: document.location.zipcode
 			},
-			meals: document.meals,
+			meals: mappedMeals,
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
 			kitchenImgUrl: document?.kitchenImgUrl || '',
@@ -188,6 +201,19 @@ export async function findExistingPrepperWithId(client, id) {
 			return null;
 		}
 
+		const mappedMeals = document.meals.map((meal) => {
+			return {
+				id: meal.id,
+				title: meal.title,
+				price: meal.price,
+				description: meal.description,
+				image: meal.image,
+				qty: meal.qty,
+				createdAt: meal.createdAt.toString(),
+				last_modified: meal.last_modified.toString()
+			};
+		});
+
 		const formattedDoc = {
 			id: document?._id.toString(),
 			email: document.email,
@@ -197,7 +223,7 @@ export async function findExistingPrepperWithId(client, id) {
 				state: document.location.state,
 				zipcode: document.location.zipcode
 			},
-			meals: document.meals,
+			meals: mappedMeals,
 			description: document?.description,
 			kitchenTitle: document?.kitchenTitle,
 			kitchenImgUrl: document?.kitchenImgUrl || '',

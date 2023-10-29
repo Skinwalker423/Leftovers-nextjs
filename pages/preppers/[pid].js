@@ -18,7 +18,7 @@ import { useColors } from '../../hooks/useColors';
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
 	const client = await connectMongoDb();
-	const prepperData = await findExistingPrepperWithId(prepperId);
+	const prepperData = await findExistingPrepperWithId(client, prepperId);
 
 	if (!prepperData) {
 		return { notFound: true };
