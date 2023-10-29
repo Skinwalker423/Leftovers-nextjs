@@ -17,24 +17,19 @@ import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
+	const prepperData = await fetchPrepper(prepperId);
 
-	try {
-		const prepperData = await fetchPrepper(prepperId);
-
-		if (!prepperData) {
-			return { notFound: true };
-		}
-
-		return {
-			props: {
-				prepper: prepperData ? prepperData : []
-			},
-
-			revalidate: 60 // In seconds
-		};
-	} catch (err) {
+	if (!prepperData) {
 		return { notFound: true };
 	}
+
+	return {
+		props: {
+			prepper: prepperData ? prepperData : []
+		},
+
+		revalidate: 60 // In seconds
+	};
 }
 
 export async function getStaticPaths() {

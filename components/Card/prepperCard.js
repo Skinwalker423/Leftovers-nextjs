@@ -230,7 +230,11 @@ export default function PrepperCard({
 
 					<TrophyLikesButton mealsServed={mealsServed} />
 
-					<Link className={styles.link} href={`/preppers/${id}`}>
+					<Link
+						prefetch={false}
+						className={styles.link}
+						href={`/preppers/${id}`}
+					>
 						<Button
 							onClick={handleDetailsClick}
 							disabled={loading}

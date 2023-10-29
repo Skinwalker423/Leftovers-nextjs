@@ -1,21 +1,15 @@
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]';
 import React from 'react';
-import {
-	Box,
-	Divider,
-	Grid,
-	GridItem,
-	useTheme,
-	useMediaQuery,
-	Typography
-} from '@mui/material';
+import { Box, useTheme, useMediaQuery, Typography } from '@mui/material';
 import SignIn from '../components/UI/form/auth/signin';
 import SignUpForm from '../components/UI/form/auth/signup';
 import Head from 'next/head';
 import { useColors } from '../hooks/useColors';
 
-export async function getServerSideProps({ req }) {
-	const session = await getSession({ req });
+export async function getServerSideProps({ req, res }) {
+	const session = await getServerSession(req, res, authOptions);
+	console.log('session', session);
 
 	if (session) {
 		return {
