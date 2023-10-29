@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Typography, Alert, Divider } from '@mui/material';
 import CustomLoader from '../../components/UI/Loader';
-import { fetchPrepper } from '../../utils/fetchPrepper';
 import FoodItemCard from '../../components/Card/foodItemCard';
 import Head from 'next/head';
 import Image from 'next/image';
 import {
 	findAllInCollection,
-	connectMongoDb
+	connectMongoDb,
+	findExistingPrepperWithId
 } from '../../db/mongodb/mongoDbUtils';
 
 import SuccessAlert from '../../components/UI/alert/successAlert';
@@ -17,7 +17,8 @@ import { useColors } from '../../hooks/useColors';
 
 export async function getStaticProps({ params }) {
 	const prepperId = params.pid;
-	const prepperData = await fetchPrepper(prepperId);
+	const client = await connectMongoDb();
+	const prepperData = await findExistingPrepperWithId(prepperId);
 
 	if (!prepperData) {
 		return { notFound: true };
@@ -44,6 +45,7 @@ export async function getStaticPaths() {
 }
 
 const Prepper = ({ prepper }) => {
+	if (!prepper) return 'nothing here';
 	const router = useRouter();
 	const [meals, setMeals] = useState([]);
 	const [msg, setMsg] = useState('');
