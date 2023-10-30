@@ -17,9 +17,10 @@ import Image from 'next/image';
 import styles from './prepperCard.module.css';
 import { useColors } from '../../hooks/useColors';
 import { useSession } from 'next-auth/react';
-import { Tooltip, useMediaQuery, useTheme } from '@mui/material';
+import { Tooltip, useTheme } from '@mui/material';
 import { UserContext } from '../../store/UserContext';
 import TrophyLikesButton from '../likes/trophyLikesButton';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export default function PrepperCard({
 	avatar = 'https://i.pravatar.cc/300',

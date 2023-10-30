@@ -1,12 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
-import {
-	Box,
-	Typography,
-	IconButton,
-	Tooltip,
-	useTheme,
-	useMediaQuery
-} from '@mui/material';
+import { Box, Typography, IconButton, Tooltip, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Image from 'next/image';
 import logo from '../../../public/icons8-connect.svg';
 import Link from 'next/link';

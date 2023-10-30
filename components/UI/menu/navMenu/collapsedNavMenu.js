@@ -25,7 +25,6 @@ export default function CollapsedNavMenu() {
 	const { colors } = useColors();
 	const open = Boolean(anchorEl);
 	const theme = useTheme();
-	const matches = useMediaQuery(theme.breakpoints.only('sm'));
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
 	};

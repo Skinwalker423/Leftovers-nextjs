@@ -1,7 +1,8 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]';
 import React from 'react';
-import { Box, useTheme, useMediaQuery, Typography } from '@mui/material';
+import { Box, useTheme, Typography } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SignIn from '../components/UI/form/auth/signin';
 import SignUpForm from '../components/UI/form/auth/signup';
 import Head from 'next/head';

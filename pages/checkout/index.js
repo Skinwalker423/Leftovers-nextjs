@@ -1,13 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { createOrder } from '../../utils/orders/createOrder';
-import {
-	Box,
-	Divider,
-	Alert,
-	Typography,
-	useTheme,
-	useMediaQuery
-} from '@mui/material';
+import { Box, Divider, Alert, Typography, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import CheckoutList from '../../components/checkout/checkoutList';
 import CheckoutTotals from '../../components/checkout/checkoutTotals';
 import Head from 'next/head';

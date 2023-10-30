@@ -1,5 +1,6 @@
-import { useMediaQuery, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import React, { useState, useEffect } from 'react';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const useCustomPagination = ({ list }) => {
 	const [resultsPerPage, setResultsPerPage] = useState(3);

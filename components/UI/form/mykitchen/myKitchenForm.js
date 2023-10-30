@@ -6,9 +6,9 @@ import {
 	Typography,
 	Button,
 	CircularProgress,
-	useTheme,
-	useMediaQuery
+	useTheme
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import {
 	isValidZipCode,
 	validateEmail

@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-	Box,
-	IconButton,
-	Typography,
-	Tooltip,
-	Paper,
-	useTheme,
-	useMediaQuery
-} from '@mui/material';
+import { Box, Typography, Tooltip, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { useColors } from '../../hooks/useColors';
 

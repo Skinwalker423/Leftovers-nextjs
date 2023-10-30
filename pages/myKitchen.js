@@ -19,7 +19,8 @@ import {
 	findExistingPrepperEmail
 } from '../db/mongodb/mongoDbUtils';
 import MealsList from '../components/myKitchen/mealsList';
-import { Stack, useMediaQuery, useTheme } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import OrdersList from '../components/myKitchen/orders/ordersList';
 import { useColors } from '../hooks/useColors';
 import MyKitchenHeader from '../components/myKitchen/myKitchenHeader';
