@@ -5,11 +5,6 @@ import NotificationList from '../../components/notifications/notificationList';
 import { authOptions } from '../api/auth/[...nextauth]';
 import Head from 'next/head';
 import { getServerSession } from 'next-auth/next';
-import {
-	connectMongoDb,
-	findExistingPrepperEmail,
-	findExistingUserEmail
-} from '../../db/mongodb/mongoDbUtils';
 import { mockDataContacts } from '../../db/mockData';
 
 export async function getServerSideProps({ req, res }) {
@@ -24,36 +19,24 @@ export async function getServerSideProps({ req, res }) {
 		};
 	}
 
-	try {
-		const client = await connectMongoDb();
-		const prepperDb = await findExistingPrepperEmail(
-			client,
-			session.user.email
-		);
+	//create messages collection
+	//fetch messages from collection using session email
 
-		if (!prepperDb) {
-			const userDb = await findExistingUserEmail(client, session.user.email);
+	const messages = [];
 
-			return {
-				props: {
-					userData: userDb
-				}
-			};
+	const devList =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? mockDataContacts
+			: messages;
+
+	return {
+		props: {
+			fetchedMessages: devList
 		}
-
-		return {
-			props: {
-				userData: JSON.parse(JSON.stringify(prepperDb))
-			}
-		};
-	} catch (err) {
-		return {
-			notFound: true
-		};
-	}
+	};
 }
 
-const Messages = ({ userData, fetchedMessages }) => {
+const Messages = ({ fetchedMessages }) => {
 	const devList =
 		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
 			? mockDataContacts
