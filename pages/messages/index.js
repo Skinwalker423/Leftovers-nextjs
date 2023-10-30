@@ -10,6 +10,7 @@ import {
 	findExistingPrepperEmail,
 	findExistingUserEmail
 } from '../../db/mongodb/mongoDbUtils';
+import { mockDataContacts } from '../../db/mockData';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
@@ -52,7 +53,11 @@ export async function getServerSideProps({ req, res }) {
 	}
 }
 
-const Messages = ({ userData }) => {
+const Messages = ({ userData, fetchedMessages }) => {
+	const devList =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? mockDataContacts
+			: fetchedMessages;
 	return (
 		<Box
 			width={'100%'}
@@ -67,11 +72,11 @@ const Messages = ({ userData }) => {
 			</Head>
 			<Box py={'3em'}>
 				<Typography variant="h1" textAlign={'center'}>
-					{userData.email}
+					Messages
 				</Typography>
 			</Box>
 			<Box width={{ xs: '80%', lg: '65%', xl: '50%' }}>
-				<NotificationList />
+				<NotificationList list={devList} />
 			</Box>
 		</Box>
 	);

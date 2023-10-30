@@ -1,12 +1,10 @@
 import React from 'react';
 import { Box, MenuList } from '@mui/material';
-import { mockDataTeam } from '../../db/mockData';
 import NotificationItem from './notificationItem';
 
 const NotificationList = ({ list }) => {
 	if (!list) return;
-	const devList =
-		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true' ? mockDataTeam : list;
+
 	return (
 		<Box
 			height={'85%'}
@@ -14,7 +12,7 @@ const NotificationList = ({ list }) => {
 			sx={{ overflowY: 'auto', textDecoration: 'none' }}
 		>
 			<MenuList>
-				{devList.map(({ name, email, id }) => {
+				{list.map(({ name, email, id }) => {
 					return (
 						<NotificationItem
 							key={id}

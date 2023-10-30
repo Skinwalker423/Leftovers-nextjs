@@ -23,9 +23,15 @@ export async function getServerSideProps({ req, res, params }) {
 		};
 	}
 
+	const fetchedMessages = [];
+
+	const devList =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true'
+			? mockDataContacts
+			: fetchedMessages;
+
 	const messageDetails =
-		messageId &&
-		mockDataContacts.find((message) => message.id.toString() === messageId);
+		messageId && devList.find((message) => message.id.toString() === messageId);
 
 	try {
 		const client = await connectMongoDb();
