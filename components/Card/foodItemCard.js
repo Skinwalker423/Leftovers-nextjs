@@ -35,7 +35,8 @@ export default function FoodItemCard({
 	prepperId,
 	kitchen,
 	isKitchenClosed,
-	showClosed
+	showClosed,
+	isOnPrepperPage
 }) {
 	const [favorited, setFavorited] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -136,23 +137,26 @@ export default function FoodItemCard({
 									{description}
 								</Typography>
 							</Box>
-							<Box>
-								<Link
-									style={{ textDecoration: 'none' }}
-									href={`/preppers/${prepperId}`}
-								>
-									<Typography
-										sx={{
-											':hover': {
-												color: colors.blueAccent[300]
-											}
-										}}
-										color={colors.blueAccent[400]}
+							{isOnPrepperPage && (
+								<Box>
+									<Link
+										style={{ textDecoration: 'none' }}
+										href={`/preppers/${prepperId}`}
+										prefetch={false}
 									>
-										{kitchen}
-									</Typography>
-								</Link>
-							</Box>
+										<Typography
+											sx={{
+												':hover': {
+													color: colors.blueAccent[300]
+												}
+											}}
+											color={colors.blueAccent[400]}
+										>
+											{kitchen}
+										</Typography>
+									</Link>
+								</Box>
+							)}
 						</Box>
 						<Box mt={'.5em'}>
 							{qty == 0 || isItemFromDifferentPrepper ? (

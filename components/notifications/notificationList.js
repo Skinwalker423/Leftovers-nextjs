@@ -3,14 +3,18 @@ import { Box, MenuList } from '@mui/material';
 import { mockDataTeam } from '../../db/mockData';
 import NotificationItem from './notificationItem';
 
-const NotificationList = () => {
+const NotificationList = ({ list }) => {
+	if (!list) return;
+	const devList =
+		process.env.NEXT_PUBLIC_DEVELOPMENT_MODE === 'true' ? mockDataTeam : list;
 	return (
 		<Box
 			height={'85%'}
-			width='100%'
-			sx={{ overflowY: 'auto', textDecoration: 'none' }}>
+			width="100%"
+			sx={{ overflowY: 'auto', textDecoration: 'none' }}
+		>
 			<MenuList>
-				{mockDataTeam.map(({ name, email, id }) => {
+				{devList.map(({ name, email, id }) => {
 					return (
 						<NotificationItem
 							key={id}

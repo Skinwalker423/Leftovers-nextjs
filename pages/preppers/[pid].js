@@ -199,6 +199,7 @@ const Prepper = ({ prepper }) => {
 									prepperEmail={prepper.email}
 									kitchen={prepper.kitchenTitle}
 									isKitchenClosed={prepper.isKitchenClosed}
+									isOnPrepperPage={true}
 								/>
 							</Box>
 						);
