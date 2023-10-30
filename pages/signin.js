@@ -9,7 +9,6 @@ import { useColors } from '../hooks/useColors';
 
 export async function getServerSideProps({ req, res }) {
 	const session = await getServerSession(req, res, authOptions);
-	console.log('session', session);
 
 	if (session) {
 		return {

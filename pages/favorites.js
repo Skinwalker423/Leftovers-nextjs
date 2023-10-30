@@ -84,8 +84,6 @@ const Favorites = ({ favoriteList, userSession }) => {
 								flexWrap={'wrap'}
 							>
 								{state.favorites.map((prepper) => {
-									const avatar = 'https://i.pravatar.cc/300';
-
 									return (
 										<PrepperCard
 											isFavorited={true}
@@ -93,7 +91,7 @@ const Favorites = ({ favoriteList, userSession }) => {
 											name={prepper.kitchenTitle}
 											email={prepper.email}
 											subTitle={prepper.name}
-											avatar={prepper.profileImgUrl || avatar}
+											avatar={prepper.profileImgUrl}
 											kitchenImgUrl={prepper.kitchenImgUrl}
 											id={prepper.id}
 											userEmail={userEmail ? userEmail : ''}

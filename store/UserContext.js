@@ -1,6 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
-// import useTrackLocation from '../hooks/useTrackLocation';
 import {
 	addFavoritePrepperToDb,
 	removeFavoritePrepperToDb
