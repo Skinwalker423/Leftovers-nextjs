@@ -41,7 +41,11 @@ const ProfessionalIconList = () => {
 			alignItems={'center'}
 		>
 			{professionalListConfig.map(({ link, icon }) => {
-				return <IconLinkItem link={link}>{icon}</IconLinkItem>;
+				return (
+					<IconLinkItem key={link} link={link}>
+						{icon}
+					</IconLinkItem>
+				);
 			})}
 		</Box>
 	);
