@@ -79,15 +79,12 @@ const faq = () => {
 			</Head>
 			<AboutBanner header="FAQ" link="/about" linkTitle="Back to About" />
 			<Box
-				m={5}
 				p={5}
 				width={'100%'}
-				height={'100%'}
 				display={'flex'}
 				flexDirection={'column'}
-				justifyContent={'flex-start'}
+				justifyContent={'center'}
 				alignItems={'center'}
-				mx={'1.5em'}
 				textOverflow={'clip'}
 				gap={3}
 			>
