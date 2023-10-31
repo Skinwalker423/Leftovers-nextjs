@@ -9,6 +9,30 @@ import IconLinkItem from './iconLinkItem';
 
 const ProfessionalIconList = () => {
 	const { colors } = useColors();
+
+	const professionalListConfig = [
+		{
+			link: 'https://www.facebook.com',
+			icon: (
+				<FacebookIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
+			)
+		},
+		{
+			link: 'https://github.com/Skinwalker423',
+			icon: <GitHubIcon fontSize="large" />
+		},
+		{
+			link: 'https://twitter.com',
+			icon: (
+				<TwitterIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
+			)
+		},
+		{
+			link: 'https://www.linkedin.com',
+			icon: <LinkedInIcon fontSize="large" />
+		}
+	];
+
 	return (
 		<Box
 			display={'flex'}
@@ -16,20 +40,9 @@ const ProfessionalIconList = () => {
 			mt="50px"
 			alignItems={'center'}
 		>
-			<IconLinkItem link={'https://www.facebook.com'}>
-				<FacebookIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
-			</IconLinkItem>
-			<IconLinkItem link={'https://github.com/Skinwalker423'}>
-				<GitHubIcon fontSize="large" />
-			</IconLinkItem>
-			<IconLinkItem link={'https://twitter.com/artgonzalez423'}>
-				<TwitterIcon sx={{ color: colors.blueAccent[500] }} fontSize="large" />
-			</IconLinkItem>
-			<IconLinkItem
-				link={'https://www.linkedin.com/in/luis-gonzalez-a33799235/'}
-			>
-				<LinkedInIcon fontSize="large" />
-			</IconLinkItem>
+			{professionalListConfig.map(({ link, icon }) => {
+				return <IconLinkItem link={link}>{icon}</IconLinkItem>;
+			})}
 		</Box>
 	);
 };

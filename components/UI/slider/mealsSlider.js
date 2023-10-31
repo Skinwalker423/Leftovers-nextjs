@@ -195,9 +195,7 @@ export default function MealsSlider({
 						}
 					}}
 					scrollbar={false}
-					navigation={{
-						enabled: false
-					}}
+					navigation={false}
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
 				>
