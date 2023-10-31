@@ -200,6 +200,7 @@ const Prepper = ({ prepper }) => {
 									kitchen={prepper.kitchenTitle}
 									isKitchenClosed={prepper.isKitchenClosed}
 									isOnPrepperPage={true}
+									prepperId={prepperId}
 								/>
 							</Box>
 						);

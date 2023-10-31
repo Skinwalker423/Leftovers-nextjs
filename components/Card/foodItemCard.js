@@ -137,7 +137,7 @@ export default function FoodItemCard({
 									{description}
 								</Typography>
 							</Box>
-							{isOnPrepperPage && (
+							{!isOnPrepperPage && (
 								<Box>
 									<Link
 										style={{ textDecoration: 'none' }}
