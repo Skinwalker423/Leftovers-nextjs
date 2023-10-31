@@ -23,6 +23,7 @@ const joinTheCommunity = () => {
 					name="description"
 					content="Learn how to become a meal preparer from your home and start sharing your creations with your community"
 				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
 			</Head>
 			<AboutBanner
 				header="Join The Community"
@@ -30,17 +31,25 @@ const joinTheCommunity = () => {
 				linkTitle="Back to About"
 			/>
 			<Box
-				m={5}
 				display={'flex'}
 				flexDirection={'column'}
 				justifyContent={'center'}
 				alignItems={'center'}
-				mx={'1.5em'}
 				textOverflow={'clip'}
+				width={{ xs: '90vw', sm: '100vw' }}
+				my={5}
+				px={5}
 			>
 				<Typography variant="h2">What does it mean to be a prepper?</Typography>
 				<br />
-				<Typography fontSize={'large'} component={'p'} sx={{ width: '50em' }}>
+				<Typography
+					fontSize={'large'}
+					component={'p'}
+					sx={{
+						width: { xs: '22rem', sm: '30rem', md: '40rem', lg: '50rem' },
+						px: 2
+					}}
+				>
 					Velit sint laboris labore laboris dolore aute veniam quis. Id ex
 					pariatur incididunt consequat sunt ullamco id consequat. Adipisicing
 					qui cupidatat ipsum aliquip. Consectetur id ipsum anim ipsum do
@@ -48,7 +57,14 @@ const joinTheCommunity = () => {
 				</Typography>
 				<br />
 
-				<Typography fontSize={'large'} component={'p'} sx={{ width: '50em' }}>
+				<Typography
+					fontSize={'large'}
+					component={'p'}
+					sx={{
+						width: { xs: '22rem', sm: '30rem', md: '40rem', lg: '50rem' },
+						px: 2
+					}}
+				>
 					Est aliquip ipsum magna excepteur sit duis occaecat ea cillum. Id nisi
 					elit reprehenderit aute deserunt ullamco cillum do consectetur irure
 					do. Cillum qui non amet ea elit ut. Occaecat qui aliqua non labore in
@@ -58,7 +74,14 @@ const joinTheCommunity = () => {
 				<br />
 				<Typography variant="h2">What is required</Typography>
 				<br />
-				<Typography fontSize={'large'} component={'p'} sx={{ width: '50em' }}>
+				<Typography
+					fontSize={'large'}
+					component={'p'}
+					sx={{
+						width: { xs: '22rem', sm: '30rem', md: '40rem', lg: '50rem' },
+						px: 2
+					}}
+				>
 					Laboris id anim est sunt nulla sunt aliqua dolor eiusmod tempor magna
 					nulla quis duis. Est cupidatat duis ea nisi duis velit cillum magna
 					nostrud mollit do mollit. Dolor duis occaecat elit nisi nulla amet
@@ -71,7 +94,14 @@ const joinTheCommunity = () => {
 				<br />
 				<Typography variant="h2">Start Today!</Typography>
 				<br />
-				<Typography fontSize={'large'} component={'p'} sx={{ width: '50em' }}>
+				<Typography
+					fontSize={'large'}
+					component={'p'}
+					sx={{
+						width: { xs: '22rem', sm: '30rem', md: '40rem', lg: '50rem' },
+						px: 2
+					}}
+				>
 					Laboris id anim est sunt nulla sunt aliqua dolor eiusmod tempor magna
 					nulla quis duis. Est cupidatat duis ea nisi duis velit cillum magna
 					nostrud mollit do mollit. Dolor duis occaecat elit nisi nulla amet

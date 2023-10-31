@@ -100,7 +100,7 @@ const NavBar = () => {
 			top={0}
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
-			width="100%"
+			width="100vw"
 		>
 			<Box
 				width="100%"
