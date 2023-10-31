@@ -40,25 +40,24 @@ export default function MealsSlider({
 
 	// const favoritesPrepId = state.favorites.map(({ id }) => id);
 
-	if (!list.length) return;
+	// if (!list.length) return;
+	// let newList = [];
+	// list.forEach((prepper) => {
+	// 	if (!prepper.meals) return;
+	// 	prepper.meals.forEach((meal) => {
+	// 		if (meal.qty > 0 && meal.price === 5) {
+	// 			newList.push({
+	// 				...meal,
+	// 				prepperEmail: prepper.email,
+	// 				isKitchenClosed: prepper.isKitchenClosed,
+	// 				kitchenTitle: prepper.kitchenTitle,
+	// 				prepperId: prepper.id
+	// 			});
+	// 		}
+	// 	});
+	// });
 
-	let newList = [];
-	state.localPreppers.forEach((prepper) => {
-		if (!prepper.meals) return;
-		prepper.meals.forEach((meal) => {
-			if (meal.qty > 0 && meal.price === 5) {
-				newList.push({
-					...meal,
-					prepperEmail: prepper.email,
-					isKitchenClosed: prepper.isKitchenClosed,
-					kitchenTitle: prepper.kitchenTitle,
-					prepperId: prepper.id
-				});
-			}
-		});
-	});
-
-	const mealslist = newList.map(
+	const mealslist = list.map(
 		({
 			id,
 			title,
@@ -73,7 +72,7 @@ export default function MealsSlider({
 		}) => {
 			if (price === 5 && qty > 0) {
 				return (
-					<SwiperSlide key={id}>
+					<SwiperSlide style={{ width: 'fit-content' }} key={id}>
 						<FoodItemCard
 							key={id}
 							prepperEmail={prepperEmail}
@@ -181,17 +180,17 @@ export default function MealsSlider({
 					}}
 					breakpoints={{
 						769: {
-							slidesPerView: newList.length < 2 ? newList.length : 2,
-							slidesPerGroup: newList.length < 2 ? newList.length : 2
+							slidesPerView: list.length < 2 ? list.length : 2,
+							slidesPerGroup: list.length < 2 ? list.length : 2
 						},
 
 						1201: {
-							slidesPerView: newList.length < 3 ? newList.length : 3,
-							slidesPerGroup: newList.length < 3 ? newList.length : 3
+							slidesPerView: list.length < 3 ? list.length : 3,
+							slidesPerGroup: list.length < 3 ? list.length : 3
 						},
 						1621: {
-							slidesPerView: newList.length < 4 ? newList.length : 4,
-							slidesPerGroup: newList.length < 4 ? newList.length : 4
+							slidesPerView: list.length < 4 ? list.length : 4,
+							slidesPerGroup: list.length < 4 ? list.length : 4
 						}
 					}}
 					scrollbar={false}

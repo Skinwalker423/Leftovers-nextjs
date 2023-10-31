@@ -85,9 +85,34 @@ export default function Home({
 	const { data: session } = useSession();
 	const { state, dispatch, setFavoritesList, setDefaultZipcode } =
 		useContext(UserContext);
+	const [searchedValueList, setSearchedValueList] = useState([]);
 
 	const userEmail = foundSession?.email || session?.user?.email;
 	const defaultZipcode = foundSession?.defaultZipcode;
+
+	const getValueMeals = (prepperList) => {
+		if (!prepperList.length) return;
+		prepperList.forEach((prepper) => {
+			if (!prepper.meals) return;
+			let newList = [];
+			prepper.meals.forEach((meal) => {
+				if (meal.qty > 0 && meal.price === 5) {
+					newList.push({
+						...meal,
+						prepperEmail: prepper.email,
+						isKitchenClosed: prepper.isKitchenClosed,
+						kitchenTitle: prepper.kitchenTitle,
+						prepperId: prepper.id
+					});
+				}
+			});
+			setSearchedValueList(newList);
+		});
+	};
+
+	useEffect(() => {
+		getValueMeals(state.searchedPreppers);
+	}, [state.searchedPreppers]);
 
 	useEffect(() => {
 		if (favoriteList) {
@@ -107,6 +132,7 @@ export default function Home({
 	const handleZipSearchForm = async (e) => {
 		e.preventDefault();
 		setIsSearching(true);
+		setSearchedValueList([]);
 		const isValidZip = isValidZipCode(zipCode);
 		if (!isValidZip) {
 			setErrorMsg('Invalid zip code');
@@ -187,14 +213,14 @@ export default function Home({
 						/>
 					</CategoryBanner>
 				)}
-				{state.searchedPreppers.length > 0 && (
+				{state.searchedPreppers.length > 0 && searchedValueList.length > 0 && (
 					<CategoryBanner bgColor={colors.redAccent[700]}>
 						<MealsSlider
 							title="Searched Value Meals"
 							setMsg={setMsg}
 							setErrorMsg={setErrorMsg}
 							userEmail={userEmail}
-							list={state.searchedPreppers}
+							list={searchedValueList}
 							themeColor={colors.redAccent[700]}
 						/>
 					</CategoryBanner>
