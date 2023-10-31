@@ -10,6 +10,11 @@ import { SessionProvider } from 'next-auth/react';
 import UserProvider from '../store/UserContext';
 import Layout from './layout/layout';
 
+import 'swiper/css';
+import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 

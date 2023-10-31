@@ -218,8 +218,6 @@ export default function Home({
 						<MealsSlider
 							title="Value Meals"
 							setMsg={setMsg}
-							setErrorMsg={setErrorMsg}
-							userEmail={userEmail}
 							list={state.localPreppers}
 							themeColor={colors.greenAccent[700]}
 							link="/favorites"

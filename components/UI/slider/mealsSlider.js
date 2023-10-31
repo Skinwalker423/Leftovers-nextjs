@@ -23,8 +23,6 @@ import FoodItemCard from '../../Card/foodItemCard';
 export default function MealsSlider({
 	list,
 	setMsg,
-	setErrorMsg,
-	userEmail,
 	title = 'Title Here',
 	themeColor,
 	link = '/'

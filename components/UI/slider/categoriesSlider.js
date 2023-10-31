@@ -144,9 +144,7 @@ export default function CategoriesSlider({
 						}
 					}}
 					scrollbar={false}
-					navigation={{
-						enabled: false
-					}}
+					navigation={false}
 					modules={[Keyboard, Scrollbar, Navigation, Pagination]}
 					className="mySwiper"
 				>
