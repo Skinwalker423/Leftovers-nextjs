@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
-import PrepperCard from '../../Card/prepperCard';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useUserContext } from '../../../hooks/useUserContext';
@@ -27,7 +26,6 @@ export default function MealsSlider({
 	themeColor,
 	link = '/'
 }) {
-	const { state } = useUserContext();
 	const swiperRef = useRef();
 	const { colors } = useColors();
 
@@ -56,6 +54,8 @@ export default function MealsSlider({
 	// 		}
 	// 	});
 	// });
+
+	if (!list) return;
 
 	const mealslist = list.map(
 		({

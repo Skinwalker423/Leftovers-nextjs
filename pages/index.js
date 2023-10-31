@@ -86,15 +86,16 @@ export default function Home({
 	const { state, dispatch, setFavoritesList, setDefaultZipcode } =
 		useContext(UserContext);
 	const [searchedValueList, setSearchedValueList] = useState([]);
+	const [localValueList, setLocalValueList] = useState([]);
 
 	const userEmail = foundSession?.email || session?.user?.email;
 	const defaultZipcode = foundSession?.defaultZipcode;
 
 	const getValueMeals = (prepperList) => {
 		if (!prepperList.length) return;
+		let newList = [];
 		prepperList.forEach((prepper) => {
 			if (!prepper.meals) return;
-			let newList = [];
 			prepper.meals.forEach((meal) => {
 				if (meal.qty > 0 && meal.price === 5) {
 					newList.push({
@@ -106,13 +107,25 @@ export default function Home({
 					});
 				}
 			});
-			setSearchedValueList(newList);
 		});
+		return newList;
 	};
 
 	useEffect(() => {
-		getValueMeals(state.searchedPreppers);
+		if (state.searchedPreppers.length > 0) {
+			const list = getValueMeals(state.searchedPreppers);
+			if (!list) return;
+			setSearchedValueList(list);
+		}
 	}, [state.searchedPreppers]);
+	useEffect(() => {
+		if (state.localPreppers.length > 0) {
+			const locallist = getValueMeals(state.localPreppers);
+
+			if (!locallist) return;
+			setLocalValueList(locallist);
+		}
+	}, [state.localPreppers]);
 
 	useEffect(() => {
 		if (favoriteList) {
@@ -239,12 +252,12 @@ export default function Home({
 					</CategoryBanner>
 				)}
 
-				{state.localPreppers.length !== 0 && (
+				{state.localPreppers.length !== 0 && localValueList.length > 0 && (
 					<CategoryBanner bgColor={colors.greenAccent[700]}>
 						<MealsSlider
 							title="Value Meals"
 							setMsg={setMsg}
-							list={state.localPreppers}
+							list={localValueList}
 							themeColor={colors.greenAccent[700]}
 							link="/favorites"
 						/>
