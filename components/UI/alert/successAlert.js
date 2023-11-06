@@ -1,13 +1,13 @@
 import React from 'react';
 import Alert from '@mui/material/Alert';
 
-const SuccessAlert = ({ msg, setMsg, width = '30rem' }) => {
+const SuccessAlert = ({ msg, setMsg, width = '30rem', color = 'success' }) => {
 	return (
 		<Alert
 			onClose={() => {
 				setMsg('');
 			}}
-			color="success"
+			color={color}
 			severity="success"
 			variant="filled"
 			sx={{

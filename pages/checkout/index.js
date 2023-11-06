@@ -53,8 +53,8 @@ export async function getServerSideProps({ req, res }) {
 const Checkout = ({ foundSession, errorMsg }) => {
 	const { state, dispatch } = useContext(UserContext);
 	const { userCartlist, cartTotalPrice } = state;
-	const [msg, setMsg] = useState('test');
-	const [error, setError] = useState('');
+	const [msg, setMsg] = useState('');
+	const [error, setError] = useState('test');
 	const [loading, setLoading] = useState(false);
 	const [value, setValue] = useLocalStorage('cartlist', userCartlist);
 
@@ -155,6 +155,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 			<CheckoutTotals loading={loading} onPaymentClick={onPaymentClick} />
 			{(msg || loading) && (
 				<Alert
+					onClose={() => setMsg('')}
 					color={loading ? 'warning' : 'success'}
 					variant="filled"
 					sx={{
