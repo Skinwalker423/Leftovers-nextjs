@@ -82,7 +82,7 @@ const CheckoutTotals = ({ onPaymentClick, loading }) => {
 						Pay
 					</Button>
 					<Typography fontSize={'x-large'} textAlign={'end'}>
-						Total: ${!total && userCartlist.length > 0 ? 'Free' : 0}
+						Total: ${!total && userCartlist.length > 0 ? 'Free' : total}
 					</Typography>
 				</Box>
 			</Box>
