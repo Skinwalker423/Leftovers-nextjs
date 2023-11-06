@@ -42,7 +42,8 @@ const CartItemList = ({ checkout }) => {
 						md: '5em'
 					},
 					height: '100%',
-					overflowY: 'auto'
+					overflowY: 'auto',
+					width: '100%'
 				}}
 			>
 				{cartList.length ? (

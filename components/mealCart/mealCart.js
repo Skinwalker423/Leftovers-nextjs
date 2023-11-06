@@ -25,27 +25,31 @@ const MealCart = ({ setShowMealCart }) => {
 				width: '450px',
 				height: '450px',
 				overflowY: 'auto',
-				p: '20px',
-			}}>
+				p: '20px'
+			}}
+		>
 			<CartItemList />
 			<Box
 				sx={{
 					borderTop: `1px solid ${colors.orangeAccent[900]}`,
 					mt: '15px',
-					pt: '20px',
+					pt: '20px'
 				}}
 				display={'flex'}
-				width='100%'>
+				width="100%"
+			>
 				<Box
 					display={'flex'}
-					width='100%'
-					alignItems='center'
-					justifyContent='space-between'>
+					width="100%"
+					alignItems="center"
+					justifyContent="space-between"
+				>
 					<Link href={'/checkout'}>
 						<Button
 							onClick={handleCheckoutBtn}
-							variant='contained'
-							color='error'>
+							variant="contained"
+							color="error"
+						>
 							Checkout
 						</Button>
 					</Link>
