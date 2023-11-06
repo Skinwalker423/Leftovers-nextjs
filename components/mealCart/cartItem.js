@@ -31,12 +31,15 @@ const CartItem = ({ meal }) => {
 			my={'2em'}
 			borderTop={`1px solid ${colors.primary[100]}`}
 			height="100px"
+			gap={1}
 		>
 			<Box>
 				<Image src={img} alt={foodItem} width={50} height={50} />
 			</Box>
 			<Box maxHeight={50} overflow={'auto'}>
-				<Typography>{foodItem}</Typography>
+				<Typography fontSize={{ xs: 'small', sm: 'medium' }}>
+					{foodItem}
+				</Typography>
 			</Box>
 
 			<Stack textAlign={'center'}>
@@ -44,14 +47,18 @@ const CartItem = ({ meal }) => {
 					<KeyboardArrowUpIcon />
 				</IconButton>
 				<Box>
-					<Typography>{qty}</Typography>
+					<Typography fontSize={{ xs: 'small', sm: 'medium' }}>
+						{qty}
+					</Typography>
 				</Box>
 				<IconButton onClick={handleDecrementArrow}>
 					<KeyboardArrowDownIcon />
 				</IconButton>
 			</Stack>
 			<Box>
-				<Typography>${Math.round(price * qty * 100) / 100}</Typography>
+				<Typography fontSize={{ xs: 'small', sm: 'medium' }}>
+					${Math.round(price * qty * 100) / 100}
+				</Typography>
 			</Box>
 		</Box>
 	);

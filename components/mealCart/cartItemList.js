@@ -29,7 +29,9 @@ const CartItemList = ({ checkout }) => {
 			alignItems={'center'}
 		>
 			<Typography
-				sx={{ mt: { xs: checkout ? '1rem' : '2rem', md: '2rem' } }}
+				sx={{
+					mt: { xs: checkout && cartList.length ? '4rem' : '2rem', md: '2rem' }
+				}}
 				textAlign={'center'}
 				variant="h2"
 			>
