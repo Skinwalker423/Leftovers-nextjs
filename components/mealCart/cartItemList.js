@@ -26,9 +26,10 @@ const CartItemList = ({ checkout }) => {
 			overflow="auto"
 			flexDirection="column"
 			justifyContent={'flex-start'}
+			alignItems={'center'}
 		>
 			<Typography
-				sx={{ mt: { xs: checkout ? '5rem' : '2rem', md: '2rem' } }}
+				sx={{ mt: { xs: checkout ? '1rem' : '2rem', md: '2rem' } }}
 				textAlign={'center'}
 				variant="h2"
 			>

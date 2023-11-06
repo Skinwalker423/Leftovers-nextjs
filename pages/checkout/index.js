@@ -53,7 +53,7 @@ export async function getServerSideProps({ req, res }) {
 const Checkout = ({ foundSession, errorMsg }) => {
 	const { state, dispatch } = useContext(UserContext);
 	const { userCartlist, cartTotalPrice } = state;
-	const [msg, setMsg] = useState('');
+	const [msg, setMsg] = useState('test');
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [value, setValue] = useLocalStorage('cartlist', userCartlist);
@@ -133,6 +133,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	return (
 		<Box
 			display="flex"
+			position={'relative'}
 			width={'100%'}
 			height="100vh"
 			flexDirection={{ xs: 'column', md: 'row' }}
@@ -157,9 +158,9 @@ const Checkout = ({ foundSession, errorMsg }) => {
 					color={loading ? 'warning' : 'success'}
 					variant="filled"
 					sx={{
-						position: 'absolute',
+						position: 'fixed',
 						bottom: 0,
-						width: '100%',
+						width: { xs: '100%', sm: '75%', md: '50%' },
 						fontSize: 'larger',
 						textAlign: 'center',
 						justifyContent: 'center',
