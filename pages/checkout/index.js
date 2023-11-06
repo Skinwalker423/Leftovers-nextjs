@@ -14,6 +14,7 @@ import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth/next';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import SuccessAlert from '../../components/UI/alert/successAlert';
 
 export async function getServerSideProps({ req, res }) {
 	try {
@@ -54,7 +55,7 @@ const Checkout = ({ foundSession, errorMsg }) => {
 	const { state, dispatch } = useContext(UserContext);
 	const { userCartlist, cartTotalPrice } = state;
 	const [msg, setMsg] = useState('');
-	const [error, setError] = useState('test');
+	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [value, setValue] = useLocalStorage('cartlist', userCartlist);
 
@@ -154,24 +155,10 @@ const Checkout = ({ foundSession, errorMsg }) => {
 			/>
 			<CheckoutTotals loading={loading} onPaymentClick={onPaymentClick} />
 			{(msg || loading) && (
-				<Alert
-					onClose={() => setMsg('')}
+				<SuccessAlert
+					msg={loading ? 'Processing payment...' : msg}
 					color={loading ? 'warning' : 'success'}
-					variant="filled"
-					sx={{
-						position: 'fixed',
-						bottom: 0,
-						width: { xs: '100%', sm: '75%', md: '50%' },
-						fontSize: 'larger',
-						textAlign: 'center',
-						justifyContent: 'center',
-						zIndex: 50
-					}}
-				>
-					<Typography fontSize={'3rem'}>
-						{loading ? 'Processing payment...' : msg}
-					</Typography>
-				</Alert>
+				/>
 			)}
 
 			{(error || errorMsg) && (
