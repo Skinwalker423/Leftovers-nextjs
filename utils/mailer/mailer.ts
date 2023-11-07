@@ -23,26 +23,37 @@ export const sendEmail = async ({
 		await connectToMongoDb();
 
 		if (emailType === 'VERIFY') {
-			await User.findByIdAndUpdate(userId, {
-				verifyToken: hashedToken,
-				verifyTokenExpiry: Date.now() + 3600000
-			});
+			const updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{
+					verifyToken: hashedToken,
+					verifyTokenExpiry: Date.now() + 3600000
+				},
+				{ new: true }
+			);
+
+			if (!updatedUser.verifyToken) return;
 		} else if (emailType === 'RESET') {
-			await User.findByIdAndUpdate(userId, {
-				forgotPasswordToken: hashedToken,
-				forgotPasswordTokenExpiry: Date.now() + 3600000
-			});
+			const updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{
+					forgotPasswordToken: hashedToken,
+					forgotPasswordTokenExpiry: Date.now() + 3600000
+				},
+				{ new: true }
+			);
+			if (!updatedUser.forgotPasswordToken) return;
 		}
+
+		let transport = nodemailer.createTransport({
+			host: process.env.MAILTRAP_HOST,
+			port: 2525,
+			auth: {
+				user: process.env.MAILTRAP_USER,
+				pass: process.env.MAILTRAP_PASS
+			}
+		});
 	} catch (error: any) {
 		throw new Error(error.message);
 	}
-
-	let transport = nodemailer.createTransport({
-		host: process.env.MAILTRAP_HOST,
-		port: 2525,
-		auth: {
-			user: process.env.MAILTRAP_USER,
-			pass: process.env.MAILTRAP_PASS
-		}
-	});
 };
