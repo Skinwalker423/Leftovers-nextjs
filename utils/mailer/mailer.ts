@@ -53,6 +53,30 @@ export const sendEmail = async ({
 				pass: process.env.MAILTRAP_PASS
 			}
 		});
+
+		const mailOptions = {
+			from: 'skinwalker42398@gmail.com',
+			to: email,
+			subject:
+				emailType === 'VERIFY' ? 'Verify Your Email' : 'Reset your password',
+			html: `
+        <p>
+          Click the link to ${
+						emailType === 'VERIFY' ? 'verify your email' : 'reset your password'
+					}
+          <a href=${
+						process.env.NEXT_PUBLIC_BASE_URL
+					}/verifyemail/${hashedToken}>${
+				process.env.NEXT_PUBLIC_BASE_URL
+			}/verifyemail/${hashedToken}</a>
+        </p>
+      
+      `
+		};
+
+		const mailResponse = await transport.sendMail(mailOptions);
+
+		return mailResponse;
 	} catch (error: any) {
 		throw new Error(error.message);
 	}
