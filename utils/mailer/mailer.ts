@@ -66,9 +66,9 @@ export const sendEmail = async ({
 					}
           <a href=${
 						process.env.NEXT_PUBLIC_BASE_URL
-					}/verifyemail/${hashedToken}>${
+					}/verifytoken/${hashedToken}>${
 				process.env.NEXT_PUBLIC_BASE_URL
-			}/verifyemail/${hashedToken}</a>
+			}/verifytoken/${hashedToken}</a>
         </p>
       
       `
