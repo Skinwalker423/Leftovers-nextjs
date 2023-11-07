@@ -63,17 +63,7 @@ const SignUpForm = () => {
 				setErrorMsg(data.error);
 				setLoading(false);
 			} else {
-				// console.log('user id', data.user);
-				// const emailRes = await sendEmail({
-				// 	email,
-				// 	emailType: EmailTypes.VERIFY,
-				// 	userId: data.user._id.toString()
-				// });
-				// if (emailRes) {
-				// 	setMsg('Check your email to verify your account');
-				// } else {
-				// 	setErrorMsg('problem with sending email');
-				// }
+				setMsg(data.message);
 				signIn();
 			}
 		} catch (err) {
