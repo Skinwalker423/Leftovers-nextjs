@@ -50,7 +50,7 @@ const user = async (req, res) => {
 
 		const doc = await addDocToDb(client, 'users', userDetails);
 		client.close();
-		res.status(200).json({ message: 'Succesfully signed up!' });
+		res.status(200).json({ message: 'Succesfully signed up!', user: doc });
 	} catch (err) {
 		client.close();
 		res

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import User from '../../db/mongodb/models/userModel';
 import { connectToMongoDb } from '../../db/mongodb/mongoose';
 
-enum EmailTypes {
+export enum EmailTypes {
 	RESET = 'RESET',
 	VERIFY = 'VERIFY'
 }
@@ -66,9 +66,9 @@ export const sendEmail = async ({
 					}
           <a href=${
 						process.env.NEXT_PUBLIC_BASE_URL
-					}/verifytoken/${hashedToken}>${
+					}api/verifytoken/${hashedToken}>${
 				process.env.NEXT_PUBLIC_BASE_URL
-			}/verifytoken/${hashedToken}</a>
+			}api/verifytoken/${hashedToken}</a>
         </p>
       
       `

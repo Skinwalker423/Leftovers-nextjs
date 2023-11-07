@@ -8,11 +8,11 @@ import {
 	Alert
 } from '@mui/material';
 import { validateEmail } from '../../../../utils/form-validation';
-import { signIn } from 'next-auth/react';
 import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
+import { signIn } from 'next-auth/react';
 
-const SignUpForm = ({ title }) => {
+const SignUpForm = () => {
 	const { colors } = useColors();
 	const [errorMsg, setErrorMsg] = useState('');
 	const [msg, setMsg] = useState('');
@@ -45,9 +45,9 @@ const SignUpForm = ({ title }) => {
 		}
 
 		const formBody = {
-			email: emailRef.current.value,
-			password: passwordRef.current.value,
-			confirmPassword: confirmPasswordRef.current.value
+			email,
+			password,
+			confirmPassword
 		};
 		try {
 			const response = await fetch('/api/register/user', {
@@ -63,7 +63,17 @@ const SignUpForm = ({ title }) => {
 				setErrorMsg(data.error);
 				setLoading(false);
 			} else {
-				setMsg(data.message);
+				// console.log('user id', data.user);
+				// const emailRes = await sendEmail({
+				// 	email,
+				// 	emailType: EmailTypes.VERIFY,
+				// 	userId: data.user._id.toString()
+				// });
+				// if (emailRes) {
+				// 	setMsg('Check your email to verify your account');
+				// } else {
+				// 	setErrorMsg('problem with sending email');
+				// }
 				signIn();
 			}
 		} catch (err) {
