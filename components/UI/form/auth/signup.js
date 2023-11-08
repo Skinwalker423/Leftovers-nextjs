@@ -10,7 +10,8 @@ import {
 import { validateEmail } from '../../../../utils/form-validation';
 import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
-import { signIn } from 'next-auth/react';
+import { EmailTypes } from '../../../../utils/mailer/mailer.ts';
+import { requestEmailConfirmation } from '../../../../utils/mailer/requestEmailConfirmation.ts';
 
 const SignUpForm = () => {
 	const { colors } = useColors();
@@ -63,8 +64,17 @@ const SignUpForm = () => {
 				setErrorMsg(data.error);
 				setLoading(false);
 			} else {
-				setMsg(data.message);
-				signIn();
+				console.log('id', data._id.toString());
+				const emailRes = await requestEmailConfirmation({
+					email,
+					emailType: EmailTypes.VERIFY,
+					userId: data._id.toString()
+				});
+				if (emailRes) {
+					setMsg(data.message);
+				} else {
+					setErrorMsg('problem with sending email');
+				}
 			}
 		} catch (err) {
 			setErrorMsg(err);
