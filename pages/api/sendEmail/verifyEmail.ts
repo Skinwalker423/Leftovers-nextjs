@@ -8,8 +8,11 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method !== 'POST')
 		return res.status(400).json({ error: 'invalid request' });
 	const { email, userId, emailType } = req.body;
+
+	console.log('form body', req.body);
+
 	try {
-		const hashedToken = bcrypt.hash(userId.toString(), 10);
+		const hashedToken = await bcrypt.hash(userId.toString(), 10);
 
 		await connectToMongoDb();
 
@@ -22,7 +25,7 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 				{ new: true }
 			);
-
+			console.log('updated user', updatedUser);
 			if (!updatedUser.verifyToken) return;
 		} else if (emailType === 'RESET') {
 			const updatedUser = await User.findByIdAndUpdate(
@@ -64,12 +67,14 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 
       `
 		};
-
+		console.log('right before email response');
 		const mailResponse = await transport.sendMail(mailOptions);
 		console.log('mail response', mailResponse);
-		if (!mailResponse)
+		if (mailResponse.rejected.length)
 			return res.status(500).json({ error: 'problem sending mail' });
-		return res.status(200).json({ message: 'Successfully verified Email' });
+		return res
+			.status(200)
+			.json({ message: 'Check your email to verify your account' });
 	} catch (error: any) {
 		return res.status(500).json({ error: error.message });
 	}

@@ -12,6 +12,7 @@ import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
 import { EmailTypes } from '../../../../utils/mailer/mailer.ts';
 import { requestEmailConfirmation } from '../../../../utils/mailer/requestEmailConfirmation.ts';
+import { signIn } from 'next-auth/react';
 
 const SignUpForm = () => {
 	const { colors } = useColors();
@@ -59,25 +60,29 @@ const SignUpForm = () => {
 				body: JSON.stringify(formBody)
 			});
 			const data = await response.json();
-
+			console.log('data', data);
 			if (data.error) {
 				setErrorMsg(data.error);
 				setLoading(false);
 			} else {
-				console.log('id', data._id.toString());
+				console.log('id', data.user.insertedId);
 				const emailRes = await requestEmailConfirmation({
 					email,
 					emailType: EmailTypes.VERIFY,
-					userId: data._id.toString()
+					userId: data.user.insertedId
 				});
 				if (emailRes) {
-					setMsg(data.message);
+					setMsg(emailRes.message);
+					setLoading(false);
+					setTimeout(() => {
+						signIn();
+					}, 5000);
 				} else {
-					setErrorMsg('problem with sending email');
+					setErrorMsg('problem with sending email', emailRes.error);
 				}
 			}
 		} catch (err) {
-			setErrorMsg(err);
+			setErrorMsg(err.message);
 			setLoading(false);
 		}
 	};
