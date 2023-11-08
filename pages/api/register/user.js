@@ -31,7 +31,12 @@ const user = async (req, res) => {
 		password: hashedPassword,
 		name: null,
 		image: null,
-		createdAt: new Date()
+		createdAt: new Date(),
+		forgotPasswordToken: undefined,
+		forgotPasswordTokenExpiry: undefined,
+		verifyToken: undefined,
+		verifyTokenExpiry: undefined,
+		isVerified: false
 	};
 
 	try {
