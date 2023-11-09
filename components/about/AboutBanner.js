@@ -22,12 +22,13 @@ const AboutBanner = ({
 				justifyContent="space-evenly"
 				alignItems={'center'}
 			>
-				<Box my={'5rem'} position={'relative'}>
+				<Box position={'relative'}>
 					<Typography
 						fontWeight={800}
 						color={'secondary'}
 						fontSize={{ xs: '3em', sm: '4em', md: '5em' }}
 						variant="h1"
+						textAlign={'center'}
 					>
 						{header}
 					</Typography>
