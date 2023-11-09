@@ -34,7 +34,7 @@ const LandingHeader = ({
 					variant="h1"
 					lineHeight={{ xs: 'normal', md: 1.5 }}
 					fontWeight={900}
-					fontSize={{ xs: '4em', lg: '5em' }}
+					fontSize={{ xs: '3em', lg: '5em' }}
 					color={colors.orangeAccent[800]}
 					textAlign={'center'}
 					sx={{
@@ -46,10 +46,10 @@ const LandingHeader = ({
 				</Typography>
 				<Typography
 					textAlign={'center'}
-					maxWidth={{ xs: '17em', sm: '25em' }}
+					maxWidth={{ xs: 'full', sm: '25em' }}
 					fontWeight={600}
 					lineHeight={1.5}
-					fontSize={{ xs: 'large', md: '1.75em' }}
+					fontSize={{ xs: 'medium', md: '1.75em' }}
 					color={'white'}
 					sx={{
 						textShadow:
