@@ -60,9 +60,9 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 					}
           <a href=${
 						process.env.NEXT_PUBLIC_BASE_URL
-					}api/verifytoken/${hashedToken}>${
+					}/api/verifytoken/${hashedToken}>${
 				process.env.NEXT_PUBLIC_BASE_URL
-			}api/verifytoken/${hashedToken}</a>
+			}/api/verifytoken/${hashedToken}</a>
         </p>
 
       `
