@@ -101,13 +101,13 @@ const NavBar = () => {
 			zIndex={99}
 			backgroundColor={colors.primary[400]}
 			width="100vw"
+			px={3}
 		>
 			<Box
 				width="100%"
 				display="flex"
 				justifyContent="space-between"
 				alignItems="center"
-				px={2}
 			>
 				<Link className={styles.logoText} href={'/'}>
 					<Image src={logo} width={50} height={50} alt="Leftovers icon" />
@@ -122,7 +122,7 @@ const NavBar = () => {
 					)}
 				</Link>
 
-				<Box display="flex" alignItems="center" gap={{ xs: 1, sm: 2 }}>
+				<Box display="flex" alignItems="center">
 					{largeMatches ? (
 						<CollapsedNavMenu />
 					) : (
