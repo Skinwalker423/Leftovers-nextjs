@@ -41,7 +41,7 @@ const About = () => {
 					alignItems={'center'}
 					flexDirection={{ xs: 'column', md: 'row' }}
 				>
-					<Box position={'relative'}>
+					<Box>
 						<Typography
 							fontWeight={800}
 							color={'secondary'}
