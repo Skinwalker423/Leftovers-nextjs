@@ -1,7 +1,9 @@
 import React from 'react';
 import User from '../../db/mongodb/models/userModel';
 import { connectToMongoDb } from '../../db/mongodb/mongoose';
-import { Box, Button, Typography } from '@mui/material';
+import { Alert, Box, Button, Typography } from '@mui/material';
+import { requestEmailConfirmation } from '../../utils/mailer/requestEmailConfirmation';
+import { EmailTypes } from '../../utils/mailer/mailer';
 
 export async function getServerSideProps({ req, res, params: { userId } }) {
 	console.log('user id', userId);
@@ -21,10 +23,17 @@ export async function getServerSideProps({ req, res, params: { userId } }) {
 				}
 			};
 		}
+		console.log('user in server', newUser);
+
+		const formattedUser = {
+			id: newUser._id.toString(),
+			email: newUser.email,
+			isVerified: newUser?.isVerified
+		};
 
 		return {
 			props: {
-				user: newUser
+				user: formattedUser
 			}
 		};
 	} catch (error) {
@@ -43,14 +52,36 @@ const onboarding = ({ error, user }) => {
 
 	const handleVerifyEmail = async () => {
 		console.log('sending verification email');
+		const emailRes = await requestEmailConfirmation({
+			email: user.email,
+			emailType: EmailTypes.VERIFY,
+			userId: user.id
+		});
+		if (emailRes.error) {
+			console.log('problem with sending email', emailRes.error);
+		} else {
+			console.log('res message', emailRes.message);
+		}
 	};
 
 	return (
 		<Box>
 			<Typography variant="h1">Onboarding</Typography>
-			<Box>
-				<Button onClick={handleVerifyEmail}>Verify Email</Button>
-			</Box>
+			{user?.isVerified ? (
+				<Alert
+					sx={{
+						width: '100%',
+						fontSize: 'larger'
+					}}
+					severity="success"
+				>
+					Already Verified
+				</Alert>
+			) : (
+				<Box>
+					<Button onClick={handleVerifyEmail}>Verify Email</Button>
+				</Box>
+			)}
 		</Box>
 	);
 };
