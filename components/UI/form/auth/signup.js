@@ -13,6 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { EmailTypes } from '../../../../utils/mailer/mailer.ts';
 import { requestEmailConfirmation } from '../../../../utils/mailer/requestEmailConfirmation.ts';
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const SignUpForm = () => {
 	const { colors } = useColors();
@@ -22,6 +23,8 @@ const SignUpForm = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
+
+	const router = useRouter();
 
 	const handleSignUpFormSubmit = async (e) => {
 		e.preventDefault();
@@ -66,20 +69,7 @@ const SignUpForm = () => {
 				setLoading(false);
 			} else {
 				console.log('id', data.user.insertedId);
-				const emailRes = await requestEmailConfirmation({
-					email,
-					emailType: EmailTypes.VERIFY,
-					userId: data.user.insertedId
-				});
-				if (emailRes) {
-					setMsg(emailRes.message);
-					setLoading(false);
-					setTimeout(() => {
-						signIn();
-					}, 5000);
-				} else {
-					setErrorMsg('problem with sending email', emailRes.error);
-				}
+				router.push(`/onboarding/${data.user.insertedId}`);
 			}
 		} catch (err) {
 			setErrorMsg(err.message);

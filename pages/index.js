@@ -10,12 +10,10 @@ import CategoryBanner from '../components/category/categoryBanner';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from './api/auth/[...nextauth]';
 import { fetchLocalPreppers } from '../utils/fetchLocalPreppers';
-import LocalPreppersList from '../components/prepperLists/localPreppersList';
 import LandingHeader from '../components/layout/header/landingHeader';
 import { isValidZipCode } from '../utils/form-validation';
 import SuccessAlert from '../components/UI/alert/successAlert';
 import ErrorAlert from '../components/UI/alert/ErrorAlert';
-import ValueMealList from '../components/mealLists/valueMealList';
 import {
 	connectMongoDb,
 	findExistingUserEmail
@@ -26,10 +24,7 @@ import { ACTION_TYPES } from '../store/UserContext';
 import LandingCardList from '../components/landingPagePromos/LandingCardList';
 import PromoSection from '../components/landingPagePromos/promoSection';
 import CustomLoader from '../components/UI/Loader';
-import FavoriteList from '../components/prepperLists/favoriteList';
 import { findLocalPreppersWithZipcode } from '../db/mongodb/mongoDbUtils';
-import SearchedList from '../components/prepperLists/searchedList';
-import CategoryCarousel from '../components/category/categoryCarousel';
 import CategoriesSlider from '../components/UI/slider/categoriesSlider';
 import MealsSlider from '../components/UI/slider/mealsSlider';
 
