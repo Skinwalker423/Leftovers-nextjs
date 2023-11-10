@@ -94,16 +94,12 @@ const SignUpForm = () => {
 					xs: '100%',
 					md: '45%'
 				},
-				height: {
-					xs: '45vh',
-					sm: '50vh'
-				},
 
 				boxShadow: 5,
 				border: `2px solid ${colors.orangeAccent[900]}`
 			}}
 		>
-			<Typography pt={'.5em'} textAlign="center" variant="h1">
+			<Typography pt={'.5em'} textAlign="center" variant="h2">
 				Sign Up
 			</Typography>
 			<Box
@@ -184,6 +180,7 @@ const SignUpForm = () => {
 			>
 				{msg && (
 					<Alert
+						onClose={() => setMsg('')}
 						sx={{
 							width: '50%',
 							fontSize: 'larger'
@@ -195,6 +192,7 @@ const SignUpForm = () => {
 				)}
 				{errorMsg && (
 					<Alert
+						onClose={() => setErrorMsg('')}
 						sx={{
 							width: '50%',
 							fontSize: 'larger'
