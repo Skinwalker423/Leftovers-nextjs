@@ -146,9 +146,7 @@ const SignIn = () => {
 							onClose={() => {
 								setError('');
 							}}
-							color="error"
 							severity="error"
-							variant="filled"
 							sx={{
 								bottom: 0,
 								width: '100%',

@@ -92,7 +92,7 @@ const SignUpForm = () => {
 			sx={{
 				width: {
 					xs: '100%',
-					md: '45%'
+					md: '35%'
 				},
 
 				boxShadow: 5,
@@ -109,8 +109,7 @@ const SignUpForm = () => {
 				sx={{
 					px: {
 						xs: '2em',
-						md: '5em',
-						lg: '8em'
+						md: '5em'
 					}
 				}}
 			>
