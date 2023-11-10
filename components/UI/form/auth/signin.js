@@ -91,7 +91,7 @@ const SignIn = () => {
 				flexDirection: 'column'
 			}}
 		>
-			<Typography textAlign="center" variant="h1">
+			<Typography textAlign="center" variant="h2">
 				Sign In with Email
 			</Typography>
 			<form style={{ width: '100%' }} onSubmit={handleSignInCredentials}>
