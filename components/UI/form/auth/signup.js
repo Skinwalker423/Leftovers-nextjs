@@ -96,10 +96,12 @@ const SignUpForm = () => {
 				},
 
 				boxShadow: 5,
-				border: `2px solid ${colors.orangeAccent[900]}`
+				border: `2px solid ${colors.orangeAccent[900]}`,
+				mb: 5,
+				py: '2rem'
 			}}
 		>
-			<Typography pt={'.5em'} textAlign="center" variant="h2">
+			<Typography textAlign="center" variant="h2">
 				Sign Up
 			</Typography>
 			<Box
@@ -176,13 +178,15 @@ const SignUpForm = () => {
 				width={'100%'}
 				justifyContent="center"
 				alignItems="center"
-				mt="3em"
+				px={3}
+				height={'5rem'}
+				mt={5}
 			>
 				{msg && (
 					<Alert
 						onClose={() => setMsg('')}
 						sx={{
-							width: '50%',
+							width: '100%',
 							fontSize: 'larger'
 						}}
 						severity="success"
@@ -194,7 +198,7 @@ const SignUpForm = () => {
 					<Alert
 						onClose={() => setErrorMsg('')}
 						sx={{
-							width: '50%',
+							width: '100%',
 							fontSize: 'larger'
 						}}
 						severity="error"
