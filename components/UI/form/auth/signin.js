@@ -79,7 +79,7 @@ const SignIn = () => {
 					md: '50vh'
 				},
 
-				px: { xs: 3, sm: 5, lg: 15 },
+				px: { xs: 3, sm: 5, lg: 10, xl: 15 },
 				py: { xs: 3 },
 				mt: { xs: 5, sm: 0 },
 				boxShadow: 5,
