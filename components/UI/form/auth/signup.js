@@ -92,7 +92,9 @@ const SignUpForm = () => {
 			sx={{
 				width: {
 					xs: '100%',
-					md: '35%'
+					md: '45%',
+					lg: '40%',
+					xl: '35%'
 				},
 
 				boxShadow: 5,
