@@ -36,7 +36,7 @@ const signin = () => {
 			sx={{ backgroundImage: 'url("./art.jpg")', backgroundSize: 'cover' }}
 			display={'flex'}
 			justifyContent="center"
-			alignItems={'center'}
+			alignItems={'flex-start'}
 			width="100%"
 			minHeight={'100vh'}
 		>

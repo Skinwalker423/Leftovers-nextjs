@@ -10,9 +10,6 @@ import {
 import { validateEmail } from '../../../../utils/form-validation';
 import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
-import { EmailTypes } from '../../../../utils/mailer/mailer.ts';
-import { requestEmailConfirmation } from '../../../../utils/mailer/requestEmailConfirmation.ts';
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 const SignUpForm = () => {
@@ -170,8 +167,6 @@ const SignUpForm = () => {
 				justifyContent="center"
 				alignItems="center"
 				px={3}
-				height={'5rem'}
-				mt={5}
 			>
 				{msg && (
 					<Alert
