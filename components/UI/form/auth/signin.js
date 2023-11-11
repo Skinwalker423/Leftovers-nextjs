@@ -74,10 +74,6 @@ const SignIn = () => {
 					xs: '100%',
 					md: '45%'
 				},
-				height: {
-					xs: '100%',
-					md: '50vh'
-				},
 
 				px: { xs: 3, sm: 5, lg: 10, xl: 15 },
 				py: { xs: 3 },
@@ -122,7 +118,7 @@ const SignIn = () => {
 					/>
 				</Box>
 
-				<Box>
+				<Box pt={3}>
 					<Button
 						sx={{ my: 2, height: '4em' }}
 						variant="contained"
@@ -141,25 +137,25 @@ const SignIn = () => {
 							)}
 						</Typography>
 					</Button>
-					{error && (
-						<Alert
-							onClose={() => {
-								setError('');
-							}}
-							severity="error"
-							sx={{
-								bottom: 0,
-								width: '100%',
-								fontSize: 'larger',
-								textAlign: 'center',
-								justifyContent: 'center',
-								zIndex: 150
-							}}
-						>
-							{error}
-						</Alert>
-					)}
 				</Box>
+				{error && (
+					<Alert
+						onClose={() => {
+							setError('');
+						}}
+						severity="error"
+						sx={{
+							bottom: 0,
+							width: '100%',
+							fontSize: 'larger',
+							textAlign: 'center',
+							justifyContent: 'center',
+							zIndex: 150
+						}}
+					>
+						{error}
+					</Alert>
+				)}
 			</form>
 			<Box
 				width={'100%'}

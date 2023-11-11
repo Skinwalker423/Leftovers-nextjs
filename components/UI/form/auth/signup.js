@@ -139,9 +139,9 @@ const SignUpForm = () => {
 							fullWidth
 						/>
 					</Box>
-					<Box>
+					<Box pt={5}>
 						<Button
-							sx={{ mt: '3rem', height: '4em' }}
+							sx={{ height: '4em' }}
 							variant="contained"
 							fullWidth
 							color="success"
@@ -173,7 +173,8 @@ const SignUpForm = () => {
 						onClose={() => setMsg('')}
 						sx={{
 							width: '100%',
-							fontSize: 'larger'
+							fontSize: 'larger',
+							mt: 3
 						}}
 						severity="success"
 					>
@@ -185,7 +186,8 @@ const SignUpForm = () => {
 						onClose={() => setErrorMsg('')}
 						sx={{
 							width: '100%',
-							fontSize: 'larger'
+							fontSize: 'larger',
+							mt: 3
 						}}
 						severity="error"
 					>

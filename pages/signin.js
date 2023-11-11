@@ -52,7 +52,7 @@ const signin = () => {
 				display={'flex'}
 				height={'100%'}
 				justifyContent="space-around"
-				alignItems={'center'}
+				alignItems={'flex-start'}
 				sx={{
 					flexDirection: {
 						xs: 'column',
