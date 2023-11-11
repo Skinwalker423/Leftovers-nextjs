@@ -26,7 +26,10 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 				{ new: true }
 			);
 			console.log('updated user', updatedUser);
-			if (!updatedUser.verifyToken) return;
+			if (!updatedUser.verifyToken)
+				return res
+					.status(500)
+					.json({ error: 'Could not find and update user' });
 		} else if (emailType === 'RESET') {
 			const updatedUser = await User.findByIdAndUpdate(
 				userId,
@@ -36,7 +39,10 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 				{ new: true }
 			);
-			if (!updatedUser.forgotPasswordToken) return;
+			if (!updatedUser.forgotPasswordToken)
+				return res
+					.status(500)
+					.json({ error: 'Could not find and update user' });
 		}
 
 		let transport = nodemailer.createTransport({
