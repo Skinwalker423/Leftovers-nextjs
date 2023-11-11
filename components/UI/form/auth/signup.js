@@ -66,7 +66,10 @@ const SignUpForm = () => {
 				setLoading(false);
 			} else {
 				console.log('id', data.user.insertedId);
-				router.push(`/onboarding/${data.user.insertedId}`);
+				setMsg(data.message);
+				setTimeout(() => {
+					router.push(`/onboarding/${data.user.insertedId}`);
+				}, 3000);
 			}
 		} catch (err) {
 			setErrorMsg(err.message);

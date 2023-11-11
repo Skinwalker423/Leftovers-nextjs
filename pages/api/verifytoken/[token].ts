@@ -9,20 +9,22 @@ const verifyToken = async (req: NextApiRequest, res: NextApiResponse) => {
 
 	try {
 		await connectToMongoDb();
-		const foundUser = await User.findOne({
-			verifyToken: token,
-			verifyTokenExpiry: { $gt: new Date() }
-		});
+		const foundUser = await User.findOneAndUpdate(
+			{
+				verifyToken: token,
+				verifyTokenExpiry: { $gt: new Date() }
+			},
+			{
+				$set: {
+					isVerified: true,
+					verifyToken: null,
+					verifyTokenExpiry: null
+				}
+			}
+		);
 
 		if (!foundUser) return res.status(400).json({ error: 'User not found' });
-		console.log('found user before save', foundUser);
-		foundUser.isVerified = true;
-		foundUser.verifyToken = null;
-		foundUser.verifyTokenExpiry = null;
-
-		await foundUser.save();
-
-		console.log('found user after save', foundUser);
+		console.log('found user', foundUser);
 
 		return res.redirect(307, '/signin');
 	} catch (error: any) {

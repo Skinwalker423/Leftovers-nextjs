@@ -20,8 +20,10 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 			const updatedUser = await User.findByIdAndUpdate(
 				userId,
 				{
-					verifyToken: hashedToken,
-					verifyTokenExpiry: Date.now() + 3600000
+					$set: {
+						verifyToken: hashedToken,
+						verifyTokenExpiry: Date.now() + 3600000
+					}
 				},
 				{ new: true }
 			);
