@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import User from '../../db/mongodb/models/userModel';
 import { connectToMongoDb } from '../../db/mongodb/mongoose';
-import { Alert, Box, Button, Typography } from '@mui/material';
+import { Alert, Box, Button, Paper, Typography } from '@mui/material';
 import { requestEmailConfirmation } from '../../utils/mailer/requestEmailConfirmation';
 import { EmailTypes } from '../../utils/mailer/mailer';
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
+import Panel from '../../components/profile/panel';
 
 export async function getServerSideProps({ req, res, params: { userId } }) {
 	if (!userId) {
@@ -68,27 +69,55 @@ const onboarding = ({ user }) => {
 	};
 
 	return (
-		<Box width={'100%'} px={20} pt={5}>
-			<Box>
-				<Typography variant="h1">Onboarding</Typography>
-				{user?.isVerified ? (
-					<Alert
-						sx={{
-							width: '100%',
-							fontSize: 'larger'
-						}}
-						severity="success"
-					>
-						Already Verified
-					</Alert>
-				) : (
+		<Box
+			width={'100vw'}
+			height={'100%'}
+			px={{ xs: 2, sm: 5, md: 10, lg: 20 }}
+			py={5}
+		>
+			<Typography sx={{ pb: 5 }} textAlign={'center'} variant="h1">
+				Onboarding Profile
+			</Typography>
+			<Paper
+				sx={{
+					height: '100%',
+					width: '100%',
+					borderRadius: '5px',
+					px: { xs: 2, sm: 5 },
+					py: 2
+				}}
+			>
+				<Panel title="Email Verification Status">
+					{user?.isVerified ? (
+						<Alert
+							sx={{
+								width: '50%',
+								fontSize: 'larger'
+							}}
+							severity="success"
+							variant="filled"
+						>
+							Already Verified
+						</Alert>
+					) : (
+						<Box>
+							<Button variant="success" onClick={handleVerifyEmail}>
+								Verify Email
+							</Button>
+						</Box>
+					)}
+				</Panel>
+				<Panel title="Email">
 					<Box>
-						<Button variant="success" onClick={handleVerifyEmail}>
-							Verify Email
-						</Button>
+						<Typography>{user.email}</Typography>
 					</Box>
-				)}
-			</Box>
+				</Panel>
+				<Panel title="Name">
+					<Box>
+						<Typography>{user.name || 'N/A'}</Typography>
+					</Box>
+				</Panel>
+			</Paper>
 			{msg.length > 0 && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			{error.length > 0 && <ErrorAlert error={error} setError={setError} />}
 		</Box>
