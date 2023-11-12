@@ -6,7 +6,6 @@ import { requestEmailConfirmation } from '../../utils/mailer/requestEmailConfirm
 import { EmailTypes } from '../../utils/mailer/mailer';
 
 export async function getServerSideProps({ req, res, params: { userId } }) {
-	console.log('user id', userId);
 	if (!userId) {
 		return {
 			notFound: true
@@ -23,7 +22,6 @@ export async function getServerSideProps({ req, res, params: { userId } }) {
 				}
 			};
 		}
-		console.log('user in server', newUser);
 
 		const formattedUser = {
 			id: newUser._id.toString(),
@@ -79,7 +77,9 @@ const onboarding = ({ error, user }) => {
 				</Alert>
 			) : (
 				<Box>
-					<Button onClick={handleVerifyEmail}>Verify Email</Button>
+					<Button variant="success" onClick={handleVerifyEmail}>
+						Verify Email
+					</Button>
 				</Box>
 			)}
 		</Box>

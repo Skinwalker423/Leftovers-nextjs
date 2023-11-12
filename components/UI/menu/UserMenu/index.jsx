@@ -25,9 +25,12 @@ const UserMenu = ({ setShowUserMenu }) => {
 		return;
 	}
 
+	console.log('session', session);
+
 	const userIcon = session?.user?.image;
 	const userEmail = session?.user?.email;
 	const isPrepper = session?.user?.isPrepper;
+	const userId = session?.user?.id;
 
 	const handleSignOut = () => {
 		signOut();
@@ -36,7 +39,7 @@ const UserMenu = ({ setShowUserMenu }) => {
 	const linkListConfig = [
 		{
 			label: 'Profile',
-			href: '/',
+			href: `/onboarding/${userId}`,
 			icon: <AccountCircle fontSize="large" color="secondary" />
 		},
 		{
