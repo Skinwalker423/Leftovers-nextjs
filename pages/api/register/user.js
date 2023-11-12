@@ -36,7 +36,8 @@ const user = async (req, res) => {
 		forgotPasswordTokenExpiry: undefined,
 		verifyToken: undefined,
 		verifyTokenExpiry: undefined,
-		isVerified: false
+		isVerified: false,
+		defaultZipcode: null
 	};
 
 	try {

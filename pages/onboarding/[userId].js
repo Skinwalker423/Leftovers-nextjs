@@ -4,6 +4,8 @@ import { connectToMongoDb } from '../../db/mongodb/mongoose';
 import { Alert, Box, Button, Typography } from '@mui/material';
 import { requestEmailConfirmation } from '../../utils/mailer/requestEmailConfirmation';
 import { EmailTypes } from '../../utils/mailer/mailer';
+import SuccessAlert from '../../components/UI/alert/successAlert';
+import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 
 export async function getServerSideProps({ req, res, params: { userId } }) {
 	if (!userId) {
@@ -63,7 +65,7 @@ const onboarding = ({ error, user }) => {
 	};
 
 	return (
-		<Box>
+		<Box width={'100%'} px={20}>
 			<Typography variant="h1">Onboarding</Typography>
 			{user?.isVerified ? (
 				<Alert
