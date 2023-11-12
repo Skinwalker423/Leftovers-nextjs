@@ -24,7 +24,12 @@ const Panel = ({ children, title = 'Title here' }) => {
 				justifyContent={'space-between'}
 				width={'100%'}
 			>
-				<Typography variant="h3">{title}:</Typography>
+				<Typography
+					sx={{ fontSize: { xs: 'small', sm: 'large' } }}
+					variant="h4"
+				>
+					{title}:
+				</Typography>
 				{children}
 			</Box>
 		</Box>

@@ -7,6 +7,8 @@ import { EmailTypes } from '../../utils/mailer/mailer';
 import SuccessAlert from '../../components/UI/alert/successAlert';
 import ErrorAlert from '../../components/UI/alert/ErrorAlert';
 import Panel from '../../components/profile/panel';
+import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 export async function getServerSideProps({ req, res, params: { userId } }) {
 	if (!userId) {
@@ -31,7 +33,8 @@ export async function getServerSideProps({ req, res, params: { userId } }) {
 			email: newUser.email,
 			isVerified: newUser?.isVerified,
 			image: newUser?.image || '',
-			name: newUser?.name || ''
+			name: newUser?.name || '',
+			defaultZipcode: newUser?.defaultZipcode || ''
 		};
 
 		return {
@@ -47,10 +50,11 @@ export async function getServerSideProps({ req, res, params: { userId } }) {
 }
 
 const onboarding = ({ user }) => {
-	console.log('user', user);
-
 	const [msg, setMsg] = useState('');
 	const [error, setError] = useState('');
+
+	const { data: session } = useSession();
+	const isCurrrentUser = session && session.user.id === user.id;
 
 	const handleVerifyEmail = async () => {
 		console.log('sending verification email');
@@ -76,7 +80,7 @@ const onboarding = ({ user }) => {
 			py={5}
 		>
 			<Typography sx={{ pb: 5 }} textAlign={'center'} variant="h1">
-				Onboarding Profile
+				{isCurrrentUser ? 'Onboarding Profile' : 'Account Verification'}
 			</Typography>
 			<Paper
 				sx={{
@@ -84,10 +88,11 @@ const onboarding = ({ user }) => {
 					width: '100%',
 					borderRadius: '5px',
 					px: { xs: 2, sm: 5 },
-					py: 2
+					pb: 5,
+					pt: 1
 				}}
 			>
-				<Panel title="Email Verification Status">
+				<Panel title="Email Status">
 					{user?.isVerified ? (
 						<Alert
 							sx={{
@@ -100,23 +105,70 @@ const onboarding = ({ user }) => {
 							Already Verified
 						</Alert>
 					) : (
-						<Box>
-							<Button variant="success" onClick={handleVerifyEmail}>
+						<Box
+							display={'flex'}
+							flexDirection={{ xs: 'column', md: 'row' }}
+							alignItems={'center'}
+							gap={{ xs: 1, md: 3 }}
+						>
+							<Typography
+								sx={{ fontSize: { xs: 'small', sm: 'large' } }}
+								color={'error'}
+							>
+								Not Verified
+							</Typography>
+							<Button
+								variant="contained"
+								color="success"
+								onClick={handleVerifyEmail}
+							>
 								Verify Email
 							</Button>
 						</Box>
 					)}
 				</Panel>
-				<Panel title="Email">
-					<Box>
-						<Typography>{user.email}</Typography>
-					</Box>
-				</Panel>
-				<Panel title="Name">
-					<Box>
-						<Typography>{user.name || 'N/A'}</Typography>
-					</Box>
-				</Panel>
+				{isCurrrentUser && (
+					<Panel title="Forgot your password?">
+						<Button
+							variant="outlined"
+							color="error"
+							onClick={() => console.log('sending email verification')}
+						>
+							Reset Password
+						</Button>
+					</Panel>
+				)}
+				{isCurrrentUser && (
+					<Panel title="Email">
+						<Box>
+							<Typography>{user.email}</Typography>
+						</Box>
+					</Panel>
+				)}
+				{isCurrrentUser && (
+					<Panel title="Name">
+						<Box>
+							<Typography>{user.name || 'N/A'}</Typography>
+						</Box>
+					</Panel>
+				)}
+				{isCurrrentUser && (
+					<Panel title="Image">
+						{user?.image ? (
+							<Image
+								src={user.image}
+								width={40}
+								height={40}
+								alt={`user avatar image ${user.name || ''}`}
+							/>
+						) : (
+							'N/A'
+						)}
+					</Panel>
+				)}
+				{isCurrrentUser && (
+					<Panel title="Default Zipcode">{user.defaultZipcode || 'N/A'}</Panel>
+				)}
 			</Paper>
 			{msg.length > 0 && <SuccessAlert msg={msg} setMsg={setMsg} />}
 			{error.length > 0 && <ErrorAlert error={error} setError={setError} />}
