@@ -26,6 +26,7 @@ export default function CollapsedNavMenu() {
 	const open = Boolean(anchorEl);
 	const theme = useTheme();
 	const handleClick = (event) => {
+		console.log('clicked open');
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
@@ -48,7 +49,7 @@ export default function CollapsedNavMenu() {
 				</IconButton>
 			</Tooltip>
 			<Menu
-				sx={{ width: '50rem', display: { md: 'none' } }}
+				sx={{ width: '50rem', display: { lg: 'none' } }}
 				id="nav-menu"
 				aria-labelledby="nav-button"
 				anchorEl={anchorEl}
