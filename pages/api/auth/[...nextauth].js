@@ -95,9 +95,7 @@ export const authOptions = {
 			});
 
 			const userDetails = {
-				...session.user,
-				favorites: [],
-				defaultZipcode: null
+				...session.user
 			};
 
 			if (!foundUser) {

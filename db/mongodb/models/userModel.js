@@ -6,19 +6,29 @@ const UserSchema = new mongoose.Schema({
 		required: true,
 		unique: true
 	},
-	favorites: [
-		{
-			prepperId: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Prepper'
+	favorites: {
+		type: [
+			{
+				prepperId: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'Prepper'
+				}
 			}
-		}
-	],
-	password: {
-		type: String
+		],
+		default: []
 	},
-	name: String,
-	image: String,
+	password: {
+		type: String,
+		default: null
+	},
+	name: {
+		type: String,
+		default: null
+	},
+	image: {
+		type: String,
+		default: null
+	},
 	defaultZipcode: {
 		type: String,
 		length: 10,
@@ -28,10 +38,22 @@ const UserSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now()
 	},
-	forgotPasswordToken: String,
-	forgotPasswordTokenExpiry: Date,
-	verifyToken: String,
-	verifyTokenExpiry: Date,
+	forgotPasswordToken: {
+		type: String,
+		default: null
+	},
+	forgotPasswordTokenExpiry: {
+		type: Date,
+		default: null
+	},
+	verifyToken: {
+		type: String,
+		default: null
+	},
+	verifyTokenExpiry: {
+		type: Date,
+		default: null
+	},
 	isVerified: {
 		type: Boolean,
 		default: false
