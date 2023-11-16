@@ -34,7 +34,8 @@ export async function getServerSideProps({ req, res, params: { userId } }) {
 			isVerified: newUser?.isVerified,
 			image: newUser?.image || '',
 			name: newUser?.name || '',
-			defaultZipcode: newUser?.defaultZipcode || ''
+			defaultZipcode: newUser?.defaultZipcode || '',
+			password: !!newUser.password
 		};
 
 		return {
@@ -127,7 +128,7 @@ const onboarding = ({ user }) => {
 						</Box>
 					)}
 				</Panel>
-				{isCurrrentUser && (
+				{isCurrrentUser && user.password && (
 					<Panel title="Forgot your password?">
 						<Button
 							variant="outlined"
