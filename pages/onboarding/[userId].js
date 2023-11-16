@@ -58,17 +58,14 @@ const onboarding = ({ user }) => {
 	const isCurrrentUser = session && session.user.id === user.id;
 
 	const handleVerifyEmail = async () => {
-		console.log('sending verification email');
 		const emailRes = await requestEmailConfirmation({
 			email: user.email,
 			emailType: EmailTypes.VERIFY,
 			userId: user.id
 		});
 		if (emailRes.error) {
-			console.log('problem with sending email', emailRes.error);
 			setError(emailRes.error);
 		} else {
-			console.log('res message', emailRes.message);
 			setMsg(emailRes.message);
 		}
 	};
