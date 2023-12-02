@@ -24,10 +24,13 @@ export async function getServerSideProps({ req, res }) {
 			};
 		}
 
+		//redirect if user has not verified email
+
 		const userSession = {
 			name: session.user?.name || null,
 			image: session.user?.image || null,
-			email: session.user?.email || null
+			email: session.user?.email || null,
+			isVerified: session.user?.isVerified || false
 		};
 
 		const client = await connectMongoDb();

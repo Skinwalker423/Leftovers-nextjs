@@ -102,7 +102,6 @@ export const authOptions = {
 				const newUser = new User(userDetails);
 				//populate favorite preppers when Object Ids are replaced
 				await newUser.save();
-
 				session.user.id = newUser?._id.toString();
 				session.user.favorites = [];
 			} else {
@@ -111,9 +110,11 @@ export const authOptions = {
 				session.user.defaultZipcode = foundUser.defaultZipcode;
 				session.user.favorites = foundUser?.favorites || [];
 				session.user.isPrepper = !!isPrepper;
+				session.user.isVerified = foundUser?.isVerified;
 			}
 
 			session.accessToken = token.accessToken;
+
 			return session;
 		}
 	}
