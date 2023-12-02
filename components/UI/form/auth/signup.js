@@ -11,6 +11,7 @@ import { validateEmail } from '../../../../utils/form-validation';
 import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useRouter } from 'next/router';
+import { signIn } from 'next-auth/react';
 
 const SignUpForm = () => {
 	const { colors } = useColors();
@@ -65,11 +66,11 @@ const SignUpForm = () => {
 				setErrorMsg(data.error);
 				setLoading(false);
 			} else {
-				console.log('id', data.user.insertedId);
 				setMsg(data.message);
 				setTimeout(() => {
-					router.push(`/onboarding/${data.user.insertedId}`);
-				}, 3000);
+					setLoading(false);
+					signIn();
+				}, 1000);
 			}
 		} catch (err) {
 			setErrorMsg(err.message);
