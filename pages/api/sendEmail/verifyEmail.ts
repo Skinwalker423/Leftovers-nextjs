@@ -9,8 +9,6 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 		return res.status(400).json({ error: 'invalid request' });
 	const { email, userId, emailType } = req.body;
 
-	console.log('form body', req.body);
-
 	try {
 		const hashedToken = await bcrypt.hash(userId.toString(), 10);
 
@@ -27,7 +25,7 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 				},
 				{ new: true }
 			);
-			console.log('updated user', updatedUser);
+
 			if (!updatedUser.verifyToken)
 				return res
 					.status(500)
@@ -75,9 +73,9 @@ const verifyEmail = async (req: NextApiRequest, res: NextApiResponse) => {
 
       `
 		};
-		console.log('right before email response');
+
 		const mailResponse = await transport.sendMail(mailOptions);
-		console.log('mail response', mailResponse);
+
 		if (mailResponse.rejected.length)
 			return res.status(500).json({ error: 'problem sending mail' });
 		return res

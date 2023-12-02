@@ -26,7 +26,6 @@ export default function CollapsedNavMenu() {
 	const open = Boolean(anchorEl);
 	const theme = useTheme();
 	const handleClick = (event) => {
-		console.log('clicked open');
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
