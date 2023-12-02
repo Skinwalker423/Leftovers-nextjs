@@ -10,7 +10,6 @@ import {
 import { validateEmail } from '../../../../utils/form-validation';
 import { useColors } from '../../../../hooks/useColors';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
 
 const SignUpForm = () => {
@@ -21,8 +20,6 @@ const SignUpForm = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
-
-	const router = useRouter();
 
 	const handleSignUpFormSubmit = async (e) => {
 		e.preventDefault();
@@ -61,7 +58,7 @@ const SignUpForm = () => {
 				body: JSON.stringify(formBody)
 			});
 			const data = await response.json();
-			console.log('data', data);
+
 			if (data.error) {
 				setErrorMsg(data.error);
 				setLoading(false);

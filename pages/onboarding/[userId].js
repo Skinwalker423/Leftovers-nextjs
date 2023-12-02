@@ -90,7 +90,7 @@ const onboarding = ({ user }) => {
 					pt: 1
 				}}
 			>
-				<Panel title="Email Status">
+				<Panel title="Email Status: Verify your email to register as a prepper and access more features">
 					{user?.isVerified ? (
 						<Alert
 							sx={{
@@ -119,6 +119,12 @@ const onboarding = ({ user }) => {
 								variant="contained"
 								color="success"
 								onClick={handleVerifyEmail}
+								sx={{
+									fontSize: {
+										xs: '.75em',
+										sm: 'medium'
+									}
+								}}
 							>
 								Verify Email
 							</Button>

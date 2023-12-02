@@ -23,12 +23,13 @@ const Panel = ({ children, title = 'Title here' }) => {
 				alignItems={'center'}
 				justifyContent={'space-between'}
 				width={'100%'}
+				gap={1}
 			>
 				<Typography
 					sx={{ fontSize: { xs: 'small', sm: 'large' } }}
 					variant="h4"
 				>
-					{title}:
+					{title}
 				</Typography>
 				{children}
 			</Box>
