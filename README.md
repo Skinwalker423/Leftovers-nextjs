@@ -1,5 +1,12 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+The largest food sharing platform, where you can find local authentic meals being prepared by the community and shared to the community. Search for local participating meal preppers!
+
+![leftovers](https://github.com/Skinwalker423/Leftovers-nextjs/assets/85347852/ac5a9627-e073-48a1-9816-c0f61f5f11dd)
+
+
+https://leftovers23.vercel.app/
+
 ## Getting Started
 
 First, run the development server:
